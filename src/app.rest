@@ -1,0 +1,68 @@
+### CHAPTERS ROUTE
+GET https://us-central1-elearning-module-a887d.cloudfunctions.net/app/course/all-courses
+
+###LOCAL ROUTE
+GET http://localhost:5000/elearning-module-a887d/us-central1/app
+
+### CHAPTER ROUTE
+GET http://localhost:4000/chapter/63c6dcb384ed77a507aabe8a
+
+### LESSON ROUTE
+GET http://localhost:4000/lesson/63e4dec2b56fa7a9c95f4759
+
+### CHAPTERS ROUTE
+GET http://localhost:4000/unit/63c6888fbe060cd90882d38c
+
+
+### CHAPTERS ROUTE
+GET https://kapesha-warmup.herokuapp.com/unit/63c699d8ba70a7293a3fadca
+
+### FIND ALL STUDENTS
+GET http://localhost:4000/auth/all-students
+
+### REGISTER STUDENT
+GET http://localhost:4000/auth/all-tutors
+
+### REGISTER TUTOR
+POST http://localhost:4000/auth/register-admin
+Content-Type: application/json
+
+{
+    "firstName": "Catherine",
+    "surname":"Gathirwa",
+    "email":"categathirwa@gmail.com",
+    "password":"12345678",
+    "contact": "+23456765344"
+}
+
+### LOGIN TUTOR
+POST http://localhost:4000/auth/login
+Content-Type: application/json
+
+{
+    "firstName": "Catherine",
+    "password":"12345678"
+}
+
+
+### CREATE TOKEN
+POST http://localhost:4000/auth/create-token
+Content-Type: application/json
+
+{
+    "firstName": "Austin-2",
+    "password":"12345678"
+}
+
+### CREATE TOKEN
+GET http://localhost:4000/auth/all-admins
+Content-Type: application/json
+
+### CREATE TOKEN SCHEMA.
+POST http://localhost:4000/auth/create-token
+
+
+### CREATE TOKEN
+GET http://localhost:4000/auth/posts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJBdXN0aW4tMiIsInN1cm5hbWUiOiJOZGF1d2EiLCJyb2xlIjoidHV0b3IiLCJpYXQiOjE2NzQ5NDExNjksImV4cCI6MTY3NDk0MTQ2OX0.mikRurRYaGxGCGPfX5XITgAi5I39912oxKfWkKePbwI

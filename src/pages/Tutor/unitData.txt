@@ -1,0 +1,65 @@
+CASE 2 : WHEN THE UNIT HAS BEEN UPDATED WITH CHAPTERS AND RESPECTIVE LESSONS
+============================================================================
+
+{
+  "_id": "6451686c80db72e78c7b12e7",
+  "unitCode": "BTE 2134",
+  "unitName": "INTRODUCTION",
+  "unitType": "paid",
+  "unitDescription": "An overview of the course\n",
+  "unitChapters": [
+    {
+      "_id": "64688d21ba79cc8bfc4f63c3",
+      "chapterNumber": "6451686c80db72e78c7b12e7-1",
+      "chapterName": "HELLO",
+      "chapterDescription": "Wohoo!",
+      "chapterLessons": [
+        {
+          "_id": "64688dd8ba79cc8bfc4f63c9",
+          "lessonNumber": "64688d21ba79cc8bfc4f63c3-12",
+          "lessonName": "YESEEEE",
+          "lessonUrl": "baf280ccf37c662278800376ed1c7821.mpeg",
+          "lessonResources": [],
+          "__v": 0
+        },
+        {
+          "_id": "64688e81e4cb95e4d184177a",
+          "lessonNumber": "64688d21ba79cc8bfc4f63c3-2",
+          "lessonName": "YURE",
+          "lessonUrl": "b5f38665f2b3ce138acf3344576ab272.mp4",
+          "lessonResources": [],
+          "__v": 0
+        },
+        {
+          "_id": "6468918fe4cb95e4d184178a",
+          "lessonNumber": "64688d21ba79cc8bfc4f63c3-3",
+          "lessonName": "LESSON TYPE CORRECTED",
+          "lessonUrl": "1982d655351ec7abde4869fd4968f7a7.mp4",
+          "lessonResources": [],
+          "__v": 0
+        }
+      ],
+      "__v": 0
+    }
+  ],
+  "tutor": [
+    "644ff9cf672c00a1ab1782b4"
+  ],
+  "__v": 0
+}
+
+
+CASE 2 : WHEN THE UNIT IS YET TO BE UPDATED WITH CHAPTERS AND RESPECTIVE LESSONS
+=================================================================================
+{
+  "_id": "645b5145b4772d7347e22636",
+  "unitCode": "SMA 2138",
+  "unitName": "BASICS",
+  "unitType": "paid",
+  "unitDescription": "Basics to this course",
+  "unitChapters": [],
+  "tutor": [
+    "644ff9cf672c00a1ab1782b4"
+  ],
+  "__v": 0
+}
