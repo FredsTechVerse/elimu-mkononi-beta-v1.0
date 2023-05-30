@@ -1,4 +1,4 @@
-import QuillEditorTutor from "./QuillEditorTutor";
+import QuillEditor from "./QuillEditor";
 import TutorCardHome from "./TutorCardHome";
 import TutorSideBar from "./TutorSideBar";
 import VideoEmptyPoster from "./VideoEmptyPoster";
@@ -13,7 +13,7 @@ import PieChart from "./PieChart";
 import BarChart from "./BarChart";
 import LineChart from "./LineChart";
 export {
-  QuillEditorTutor,
+  QuillEditor,
   TutorCardHome,
   TutorSideBar,
   VideoEmptyPoster,

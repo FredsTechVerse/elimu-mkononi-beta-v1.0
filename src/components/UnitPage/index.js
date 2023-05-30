@@ -3,7 +3,6 @@ import ChapterCard from "./ChapterCard";
 import TutorCard from "./TutorCard";
 import UnitsCard from "./UnitsCard";
 import UnitNav from "./UnitNav";
-import QuillEditorStudent from "./QuillEditorStudent";
 import VideoJsPlayer from "./VideoJsPlayer";
 export {
   VideoComponent,
@@ -11,6 +10,5 @@ export {
   TutorCard,
   UnitsCard,
   UnitNav,
-  QuillEditorStudent,
   VideoJsPlayer,
 };

@@ -36,7 +36,6 @@ import {
   ChapterCard,
   UnitsCard,
   UnitNav,
-  QuillEditorStudent,
   TutorCard,
   VideoJsPlayer,
 } from "./UnitPage";
@@ -44,7 +43,7 @@ import {
 // TUTOR PAGE
 
 import {
-  QuillEditorTutor,
+  QuillEditor,
   TutorCardHome,
   TutorSideBar,
   VideoEmptyPoster,
@@ -109,8 +108,7 @@ export {
   TutorCard,
   UnitsCard,
   UnitNav,
-  QuillEditorTutor,
-  QuillEditorStudent,
+  QuillEditor,
   TutorSideBar,
   TutorCardHome,
   Footer,
