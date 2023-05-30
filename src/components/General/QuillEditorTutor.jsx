@@ -174,12 +174,16 @@ const QuillEditorTutor = () => {
   return (
     <div className="w-full flex flex-col gap-4">
       <div id="unit content" className="rounded-md">
-        <ReactQuill
-          value={content}
-          readOnly={!isEditorEnabled}
-          onChange={handleChange}
-          modules={quillModules}
-        />
+        {roles[0] !== "EM-202" ? (
+          <ReactQuill
+            value={content}
+            readOnly={!isEditorEnabled}
+            onChange={handleChange}
+            modules={quillModules}
+          />
+        ) : (
+          <div dangerouslySetInnerHTML={{ __html: content }} />
+        )}
       </div>
       <div className="flex w-full items-center justify-end gap-2">
         {!isEditorEnabled ? (
