@@ -12,6 +12,7 @@ const ContentPage = () => {
   const { unitID } = useParams();
   const [unitData, setUnitData] = useState(null);
   const [currentLesson, setCurrentLesson] = useState(null);
+  const [lessonType, setLessonType] = useState(null);
 
   useEffect(() => {
     fetchUnitData();
@@ -19,7 +20,12 @@ const ContentPage = () => {
 
   useEffect(() => {
     if (currentLesson !== null) {
-      lessonType(currentLesson.lessonUrl);
+      console.log(
+        `Current lesson data changed to ${JSON.stringify(
+          currentLesson
+        )} and a rerender automaitcally triggered.`
+      );
+      identifyAndUpdateLessonType(currentLesson?.lessonUrl);
     }
   }, [currentLesson]);
 
@@ -39,15 +45,13 @@ const ContentPage = () => {
   const updateCurrentLesson = (newLessonData) => {
     if (newLessonData !== null) {
       setCurrentLesson(newLessonData);
-      console.log(
-        `Current lesson data changed to ${JSON.stringify(currentLesson)}`
-      );
     }
   };
 
-  const lessonType = (lessonUrl) => {
-    if (lessonUrl !== null) {
+  const identifyAndUpdateLessonType = (lessonUrl) => {
+    if (lessonUrl) {
       const lessonType = lessonUrl.split(".")[1];
+      setLessonType(lessonType);
       return lessonType;
     }
   };
@@ -65,26 +69,35 @@ const ContentPage = () => {
               updateCurrentLesson={updateCurrentLesson}
             />
           </article>
-          <article className="phone:col-span-1 order-1 tablet:order-2 laptop:col-span-3 tablet:col-span-2 h-full laptop:overflow-y-auto flex px-2 flex-col rounded-lg pb-2">
-            <div className="w-full text-lg text-center text-white my-2 py-2 bg-primary rounded-lg">
-              NAVBAR WITH ICONS
-            </div>
-            <ContentSection
-              currentLesson={currentLesson}
-              lessonType={lessonType}
-            />
-            <div className="border-none border-slate-400 rounded-lg w-full">
-              <UnitNav />
-              <Outlet
-                context={{
-                  currentLesson,
-                  unitData,
-                  fetchUnitData: fetchUnitData,
-                  updateCurrentLesson: updateCurrentLesson,
-                }}
+
+          {lessonType === "mp4" ? (
+            <article className="phone:col-span-1 order-1 tablet:order-2 laptop:col-span-3 tablet:col-span-2 h-full laptop:overflow-y-auto flex px-2 flex-col rounded-lg pb-2">
+              <div className="w-full text-lg text-center text-white my-2 py-2 bg-primary rounded-lg">
+                NAVBAR WITH ICONS
+              </div>
+              <ContentSection
+                currentLessonUrl={currentLesson?.lessonUrl}
+                lessonName={currentLesson?.lessonName}
               />
-            </div>
-          </article>
+              <div className="border-none border-slate-400 rounded-lg w-full">
+                <UnitNav />
+                <Outlet
+                  context={{
+                    currentLesson: currentLesson,
+                    unitData: unitData,
+                    fetchUnitData: fetchUnitData,
+                    updateCurrentLesson: updateCurrentLesson,
+                  }}
+                />
+              </div>
+            </article>
+          ) : (
+            <article className="phone:col-span-1 order-1 tablet:order-2 laptop:col-span-3 tablet:col-span-2 h-full laptop:overflow-y-auto flex px-2 flex-col rounded-lg pb-2">
+              <div className="w-full h-full flex-row-centered">
+                <p className="text-center uppercase"> No content Present</p>
+              </div>
+            </article>
+          )}
         </main>
       );
     }

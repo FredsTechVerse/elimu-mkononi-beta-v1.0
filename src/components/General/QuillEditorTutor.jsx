@@ -7,7 +7,6 @@ import "react-quill/dist/quill.snow.css";
 
 const QuillEditorTutor = () => {
   const { currentLesson } = useOutletContext();
-  const [notesID, setNotesID] = useState(null);
   const [lessonID, setLessonID] = useState(null);
   // console.log(`Current Lesson Data : ${JSON.stringify(currentLesson)}`);
 
@@ -35,26 +34,6 @@ const QuillEditorTutor = () => {
       console.log(err);
     }
   };
-  // const fetchLessonData = async (lessonID) => {
-  //   try {
-  //     console.log("Commencing lesson data fetch");
-  //     const { data: lessonData } = await axios.get(`lesson/${lessonID}`);
-  //     console.log(lessonData.lessonNotes);
-  //     if (lessonData.lessonNotes) {
-  //       const { lessonNotes } = lessonData;
-  //       if (Object.keys(lessonNotes).length > 0) {
-  //         const { content, _id: notesID } = lessonNotes;
-  //         setContent(content);
-  //         setNewContent(content);
-  //         setNotesID(notesID);
-  //         return;
-  //       }
-  //     }
-  //     // Check if the lessonNotes array is empty.
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
 
   const enableEdit = () => {
     console.log("Enabling Editor");
@@ -86,7 +65,7 @@ const QuillEditorTutor = () => {
       console.log(`Updating the lesson Notes to ${newContent}`);
       // setContent(newContent);
       disableEdit();
-      handleUpdate(newContent, notesID);
+      handleUpdate(newContent, currentLesson?.lessonNotes);
       return;
     }
     console.log("Creating the lesson Notes");
@@ -188,19 +167,11 @@ const QuillEditorTutor = () => {
 
   useEffect(() => {
     if (currentLesson !== null) {
-      const { lessonUrl, lessonID, lessonName, lessonNotes, lessonResources } =
-        currentLesson;
-      setLessonID(lessonID);
-      console.log(`Original readOnly state ${readOnly}`);
-      if (lessonNotes) {
-        console.log(lessonNotes);
+      setLessonID(currentLesson?.lessonID);
+      if (currentLesson?.lessonNotes) {
         setIsEditorEnabled(false);
         setAreNotesPresent(true);
-        setNotesID(lessonNotes);
-        console.log(`NotesID ${notesID}`);
-        if (notesID !== null) {
-          fetchLessonNotes(notesID);
-        }
+        fetchLessonNotes(currentLesson?.lessonNotes);
       }
     } else {
       setReadOnly(true);

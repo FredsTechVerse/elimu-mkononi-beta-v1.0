@@ -68,19 +68,17 @@ const TutorAccordionItem = ({
             <li
               key={index}
               className="hover:bg-slate-500 bg-slate-300 text-black w-full px-3 py-2 my-0.5 capitalize rounded-md"
+              onClick={() => {
+                updateCurrentLesson({
+                  lessonID,
+                  lessonUrl,
+                  lessonName,
+                  lessonNotes,
+                  lessonResources,
+                });
+              }}
             >
-              <div
-                className="w-72 h-full flex gap-5 items-center"
-                onClick={() => {
-                  updateCurrentLesson({
-                    lessonID,
-                    lessonUrl,
-                    lessonName,
-                    lessonNotes,
-                    lessonResources,
-                  });
-                }}
-              >
+              <div className="flex flex-row items-center gap-5 justify-start">
                 {lesson.lessonType === "video" ? (
                   <span className="text-sm">
                     <BsCameraVideoFill />

@@ -1,7 +1,7 @@
 import QuillEditorTutor from "./QuillEditorTutor";
 import TutorCardHome from "./TutorCardHome";
 import TutorSideBar from "./TutorSideBar";
-import TutorCoverPage from "./TutorCoverPage";
+import VideoEmptyPoster from "./VideoEmptyPoster";
 import CommentsSection from "./CommentsSection";
 import ResourcesSection from "./ResourcesSection";
 import ReturnBackBtn from "./ReturnBackBtn";
@@ -16,7 +16,7 @@ export {
   QuillEditorTutor,
   TutorCardHome,
   TutorSideBar,
-  TutorCoverPage,
+  VideoEmptyPoster,
   CommentsSection,
   ResourcesSection,
   ReturnBackBtn,

@@ -30,7 +30,6 @@ const LogInForm = () => {
       const { data, status } = await axios.post("/auth/login", credentials);
 
       if (status === 200) {
-        console.log(`Auth Context set to ${JSON.stringify(data)}`);
         localStorage.setItem("user", JSON.stringify(data.user));
         localStorage.setItem("accessToken", data.accessToken);
         localStorage.setItem("refreshToken", data.refreshToken);
@@ -39,9 +38,8 @@ const LogInForm = () => {
       }
     } catch (err) {
       console.error(`Login Error : ${err.stack}`);
-      console.log(err);
       if (err.response) {
-        console.log("Status:", err.response.status); // outputs the status code (e.g. 404)
+        console.error("Status:", err.response.status); // outputs the status code (e.g. 404)
       }
       if (err.response && err.response.status === 401) {
         setMessage(ERRORS.VALIDATION_ERROR);
