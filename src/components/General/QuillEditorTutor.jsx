@@ -13,7 +13,7 @@ const QuillEditorTutor = () => {
   //Quill Editor Config
   const [readOnly, setReadOnly] = useState(true);
   const [content, setContent] = useState(null);
-  const [newContent, setNewContent] = useState(null);
+  const [originalContent, setOriginalContent] = useState(null);
   const [isEditorEnabled, setIsEditorEnabled] = useState(false);
   const [areNotesPresent, setAreNotesPresent] = useState(false);
 
@@ -26,64 +26,42 @@ const QuillEditorTutor = () => {
   const fetchLessonNotes = async (notesID) => {
     try {
       const { data: notesData } = await axios.get(`notes/${notesID}`);
-      console.log(notesData.content);
       setContent(notesData.content);
-      setNewContent(notesData.content);
-      console.log(areNotesPresent);
     } catch (err) {
       console.log(err);
     }
   };
 
   const enableEdit = () => {
-    console.log("Enabling Editor");
+    setOriginalContent(content); // Store the original content
     setReadOnly(false);
     setIsEditorEnabled(true);
-    console.log(`Read Only  New State ${readOnly}`);
-    console.log(`Is Editor Enabled ${isEditorEnabled}`);
   };
   const disableEdit = () => {
-    console.log("Disabling Editor");
     setReadOnly(true);
     setIsEditorEnabled(false);
-    console.log(`Is Editor Enabled ${isEditorEnabled}`);
   };
 
   const handleChange = useCallback((editorContent) => {
-    if (areNotesPresent) {
-      setNewContent(editorContent);
-      console.log(`New Content ${editorContent}`);
-    } else if (!areNotesPresent) {
-      setContent(editorContent);
-      console.log(`Original Content ${editorContent}`);
-    }
+    setContent(editorContent);
   }, []);
 
   const handleSave = () => {
     if (areNotesPresent) {
-      // We are dealing with an update.
-      console.log(`Updating the lesson Notes to ${newContent}`);
-      // setContent(newContent);
       disableEdit();
-      handleUpdate(newContent, currentLesson?.lessonNotes);
+      handleUpdate(content, currentLesson?.lessonNotes);
       return;
     }
-    console.log("Creating the lesson Notes");
     handleCreation(content, lessonID);
     disableEdit();
     return;
   };
+
   const handleCancel = () => {
-    if (areNotesPresent) {
-      setNewContent(null);
-      disableEdit();
-    } else if (!areNotesPresent) {
-      setContent(null);
-      disableEdit();
-    }
+    setContent(originalContent); // Restore the original content
+    setIsEditorEnabled(false);
   };
   const handleCreation = async (content, lessonID) => {
-    console.log(`Data to the DB ${JSON.stringify(content, lessonID)}`);
     const formData = new FormData();
     formData.append("lessonNotes", content);
     formData.append("lessonID", lessonID);
@@ -129,7 +107,6 @@ const QuillEditorTutor = () => {
     };
 
     try {
-      console.log(JSON.stringify(formData));
       const response = await axios.put("/notes/updateNotes", formData, config);
       const { status } = response;
 
@@ -172,18 +149,20 @@ const QuillEditorTutor = () => {
         setIsEditorEnabled(false);
         setAreNotesPresent(true);
         fetchLessonNotes(currentLesson?.lessonNotes);
+      } else {
+        setIsEditorEnabled(true);
+        setAreNotesPresent(false);
+        setOriginalContent(""); // Clear the original content when creating new notes
+        setContent(""); // Clear the content when creating new notes
       }
-    } else {
-      setReadOnly(true);
-      setAreNotesPresent(false);
     }
   }, [currentLesson]);
   return (
     <div className="w-full flex flex-col gap-4">
-      <div id="unit content" className=" rounded-md">
+      <div id="unit content" className="rounded-md">
         <ReactQuill
-          value={areNotesPresent ? newContent : content}
-          readOnly={readOnly}
+          value={content}
+          readOnly={!isEditorEnabled}
           onChange={handleChange}
           {...quillConfig}
         />

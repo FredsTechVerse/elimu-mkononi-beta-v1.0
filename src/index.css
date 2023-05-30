@@ -15,15 +15,15 @@
     
          /* Chrome, Edge, and Safari */
          *::-webkit-scrollbar {
-             width: 12px;
+             width: 8px;
          }
     
          *::-webkit-scrollbar-track {
-             @apply bg-slate-200 rounded-lg;
+             @apply bg-slate-100 rounded-lg;
          }
     
          *::-webkit-scrollbar-thumb {
-             @apply bg-slate-400 rounded-lg border-2 border-white;
+             @apply bg-slate-300 rounded-lg border-2 border-white;
          }
     
          * {
