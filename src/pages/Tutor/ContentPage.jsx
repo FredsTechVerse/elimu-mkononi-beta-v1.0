@@ -20,11 +20,6 @@ const ContentPage = () => {
 
   useEffect(() => {
     if (currentLesson !== null) {
-      console.log(
-        `Current lesson data changed to ${JSON.stringify(
-          currentLesson
-        )} and a rerender automaitcally triggered.`
-      );
       identifyAndUpdateLessonType(currentLesson?.lessonUrl);
     }
   }, [currentLesson]);

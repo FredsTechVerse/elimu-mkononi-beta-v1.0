@@ -9,6 +9,7 @@ const QuillEditorTutor = () => {
   const { currentLesson } = useOutletContext();
   const [lessonID, setLessonID] = useState(null);
   // console.log(`Current Lesson Data : ${JSON.stringify(currentLesson)}`);
+  const roles = JSON.parse(localStorage.getItem("roles"));
 
   //Quill Editor Config
   const [readOnly, setReadOnly] = useState(true);
@@ -16,6 +17,26 @@ const QuillEditorTutor = () => {
   const [originalContent, setOriginalContent] = useState(null);
   const [isEditorEnabled, setIsEditorEnabled] = useState(false);
   const [areNotesPresent, setAreNotesPresent] = useState(false);
+
+  let quillModules = {};
+
+  if (roles[0] === "EM-202" || "EM-203") {
+    // Tutor-specific modules
+    quillModules = {
+      toolbar: [
+        [{ header: [1, 2, false] }],
+        ["bold", "italic", "underline", "strike"],
+        [{ list: "ordered" }, { list: "bullet" }],
+        ["link"],
+        ["clean"],
+      ],
+    };
+  } else {
+    // Student-specific modules (hide toolbar)
+    quillModules = {
+      toolbar: false,
+    };
+  }
 
   // Alert Box Config
   const [response, setResponse] = useState(null);
@@ -79,6 +100,7 @@ const QuillEditorTutor = () => {
         setStatusTracker(true);
         setResponseTracker(true);
         disableEdit();
+        setAreNotesPresent(true);
         setTimeout(() => {
           setResponseTracker(false);
         }, 1200);
@@ -134,14 +156,6 @@ const QuillEditorTutor = () => {
     }
   };
 
-  const quillConfig = useMemo(
-    () => ({
-      className: "px-2 pb-2 h-full",
-      theme: "snow",
-    }),
-    []
-  );
-
   useEffect(() => {
     if (currentLesson !== null) {
       setLessonID(currentLesson?.lessonID);
@@ -150,7 +164,7 @@ const QuillEditorTutor = () => {
         setAreNotesPresent(true);
         fetchLessonNotes(currentLesson?.lessonNotes);
       } else {
-        setIsEditorEnabled(true);
+        setIsEditorEnabled(false);
         setAreNotesPresent(false);
         setOriginalContent(""); // Clear the original content when creating new notes
         setContent(""); // Clear the content when creating new notes
@@ -164,7 +178,7 @@ const QuillEditorTutor = () => {
           value={content}
           readOnly={!isEditorEnabled}
           onChange={handleChange}
-          {...quillConfig}
+          modules={quillModules}
         />
       </div>
       <div className="flex w-full items-center justify-end gap-2">
