@@ -30,7 +30,7 @@ const TutorAccordionItem = ({
       >
         {chapterName}
         <div className="flex gap-3 items-center justify-between">
-          {roles[0] === "EM-202" && (
+          {roles.includes("EM-202") && (
             <Link
               to={`/tutor/new-lesson/${chapterID}`}
               state={{ background: location }}

@@ -5,8 +5,7 @@ import { RiMenu3Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 const Navbar = ({ isNavOpen, showNavbar, hideNavbar }) => {
   const user = JSON.parse(localStorage.getItem("user"));
-  const roles = JSON.parse(localStorage.getItem("roles")) || ["EM-201"];
-
+  const roles = JSON.parse(localStorage.getItem("roles"));
   return (
     <div className="absolute top-0 flex justify-between backdrop-blur-md z-10 w-full p-3">
       <Link to="/">
@@ -26,8 +25,8 @@ const Navbar = ({ isNavOpen, showNavbar, hideNavbar }) => {
       <div className="phone:hidden laptop:flex relative items-center  capitalize">
         <div id="section-2" className=" h-full flex">
           <NavBtn to="/" text="Home" />
-          {roles[0] === "EM-202" && <NavBtn to="/tutor" text="Dashboard" />}
-          {roles[0] === "EM-203" && <NavBtn to="/admin" text="Dashboard" />}
+          {roles.includes("EM-202") && <NavBtn to="/tutor" text="Dashboard" />}
+          {roles.includes("EM-203") && <NavBtn to="/admin" text="Dashboard" />}
         </div>
 
         <div id="section-3" className={`${!user ? "flex" : "hidden"}`}>

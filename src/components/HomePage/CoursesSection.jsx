@@ -32,7 +32,7 @@ const CoursesSection = () => {
             return (
               <div
                 key={`course-${index}`}
-                className="relative flex flex-col justify-center items-center max-w-[300px] pb-3 hover:scale-105 ease-in-out duration-300  m-4 rounded-lg shadow-2xl shadow-gray-300 "
+                className="relative flex flex-col justify-center items-center max-w-[300px] pb-3 hover:scale-105 ease-in-out duration-300  m-4 rounded-lg shadow-lg shadow-slate-500 "
               >
                 <img
                   src={`https://us-central1-elearning-module-a887d.cloudfunctions.net/app/s3Direct/${course.courseImage}`}

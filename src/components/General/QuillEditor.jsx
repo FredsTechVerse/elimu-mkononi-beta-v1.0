@@ -19,7 +19,7 @@ const QuillEditor = () => {
 
   let quillModules = {};
 
-  if (roles[0] === "EM-202" || "EM-203") {
+  if (roles.includes("EM-202") || roles.includes("EM-203")) {
     // Tutor-specific modules
     quillModules = {
       toolbar: [
@@ -173,7 +173,7 @@ const QuillEditor = () => {
   return (
     <div className="w-full flex flex-col gap-4">
       <div id="unit content" className="rounded-md">
-        {roles[0] !== "EM-202" ? (
+        {roles.includes("EM-202") ? (
           <ReactQuill
             value={content}
             readOnly={!isEditorEnabled}

@@ -24,8 +24,8 @@ const NavbarSmall = ({ isNavOpen, hideNavbar }) => {
       <div id="section-2" className="h-full w-full flex-col-centered">
         <div id="section-2" className=" h-full flex-col-centered">
           <NavBtn to="/" text="Home" />
-          {roles[0] === "EM-202" && <NavBtn to="/tutor" text="Dashboard" />}
-          {roles[0] === "EM-203" && <NavBtn to="/admin" text="Dashboard" />}
+          {roles.includes("EM-202") && <NavBtn to="/tutor" text="Dashboard" />}
+          {roles.includes("EM-203") && <NavBtn to="/admin" text="Dashboard" />}
         </div>
       </div>
       {!user ? (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { UnitsCard, NavigateBtn, ReturnBackBtn } from "../../components";
 import axios from "../../axios";
 const UnitsOutline = () => {
@@ -27,7 +27,7 @@ const UnitsOutline = () => {
           <p className="text-white font-bold text-center phone:text-xl tablet:text-2xl laptop:text-4xl uppercase w-full h-full flex-row-centered backdrop-blur-md bg-black bg-opacity-10">
             {JSON.stringify(courseData) !== "{}" && courseData.courseTitle}
           </p>
-          {roles[0] === ("EM-203" || "EM-202" || "EM-201") && (
+          {(roles.includes("EM-202") || roles.includes("EM-203")) && (
             <div className="absolute bottom-3 left-1 flex items-center justify-end ">
               <NavigateBtn
                 destination="new-unit"

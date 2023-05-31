@@ -27,7 +27,9 @@ const TutorAccordion = ({ unitData, fetchUnitData, updateCurrentLesson }) => {
         <h1 className="pt-0.5">{unitData && unitData.unitName}</h1>
         <div
           className={` ${
-            roles[0] == "EM-202" || "EM-203" ? "flex" : "hidden"
+            roles.includes("EM-202") || roles.includes("EM-202")
+              ? "flex"
+              : "hidden"
           } items-center justify-between `}
         >
           <Link
