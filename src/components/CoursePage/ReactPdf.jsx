@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { Document, Page } from "react-pdf/dist/esm/entry.vite";
 import { GrNext, GrPrevious } from "react-icons/gr";
-import { Modal } from "../../components";
+import { ReactPdfModal } from "../../components";
 
 //CRUCIAL STYLING DEPENDENCIES
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
@@ -49,7 +49,7 @@ function ReactPdf({ pdfUrl }) {
     setPageNumber(1);
   }, [pdfUrl]);
   return (
-    <Modal isModalClosed={`Hell No we are active`}>
+    <ReactPdfModal isModalClosed={`Hell No we are active`}>
       <div className=" flex-col-centered">
         <Document
           className="flex border-2 border-primary "
@@ -57,6 +57,8 @@ function ReactPdf({ pdfUrl }) {
           onLoadSuccess={onDocumentLoadSuccess}
           loading="Document is loading please wait..."
           noData="No pdf has been specified."
+          error="Failed to load the pdf"
+          errorTimeout={10000}
         >
           <Page
             className="m-2"
@@ -89,7 +91,7 @@ function ReactPdf({ pdfUrl }) {
           </button>
         </div>
       </div>
-    </Modal>
+    </ReactPdfModal>
   );
 }
 

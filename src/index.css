@@ -74,7 +74,7 @@
         }
 
     .pattern{
-        background-image: url("./assets/background-pattern.webp");
+        background-image: url("./assets/homepage_1.jpg");
         background-repeat: no-repeat;
         background-size: cover;
     }
@@ -83,7 +83,6 @@
         background-image: url("./assets/homepage_1.jpg");
         background-repeat: no-repeat;
         background-size: cover;
-        height: 28rem;
     }
 
     label{

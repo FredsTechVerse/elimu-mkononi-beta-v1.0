@@ -13,27 +13,43 @@ const ContentPage = () => {
   const [unitData, setUnitData] = useState(null);
   const [currentLesson, setCurrentLesson] = useState(null);
   const [lessonType, setLessonType] = useState(null);
-
+  const [areChapters, setAreChaptersPresent] = useState(false);
+  const [formCompleted, setFormCompleted] = useState(false);
   useEffect(() => {
     fetchUnitData();
-  }, [unitID]);
+  }, [unitID, formCompleted]);
 
   useEffect(() => {
     if (currentLesson !== null) {
       identifyAndUpdateLessonType(currentLesson?.lessonUrl);
+      console.log(
+        `Updated current lesson data ${JSON.stringify(currentLesson)}`
+      );
     }
   }, [currentLesson]);
 
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    if (queryParams.get("formCompleted") === "true") {
+      setFormCompleted(true);
+    }
+  }, [location.search]);
   /**The unit data returned contains info about the chapters and their respective lessons  */
   const fetchUnitData = async () => {
     try {
       const { data, status } = await axios.get(`/unit/${unitID}`);
 
       if (status == 200) {
-        setUnitData(data);
+        if (data) {
+          console.log(data);
+          setUnitData(data);
+        }
+        if (data?.UnitChapters.length > 0) {
+          setAreChaptersPresent(true);
+        }
       }
     } catch (error) {
-      console.log(`Error while trying to fetch data ${JSON.stringify(error)}`);
+      console.error(error);
     }
   };
 

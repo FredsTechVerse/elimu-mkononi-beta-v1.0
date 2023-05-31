@@ -3,7 +3,7 @@ import { CustomNav, Button, Modal } from "../../components";
 import axios from "../../axios";
 import LoadingBtn from "./LoadingBtn";
 import { MdCancel } from "react-icons/md";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 const ChapterForm = () => {
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -16,7 +16,10 @@ const ChapterForm = () => {
   const [chapterName, setChapterName] = useState("");
   const [chapterDescription, setChapterDescription] = useState("");
   const [submit, setSubmit] = useState(false);
-
+  // TRACKING LOCATION
+  const location = useLocation();
+  console.log(location);
+  const from = location.state?.background?.pathname;
   //   A FUNCTION THAT CREATES OUR POST OBJECT
   async function createPostObject({
     chapterNumber,
@@ -41,8 +44,6 @@ const ChapterForm = () => {
         formData,
         config
       );
-      console.log(JSON.stringify(response));
-
       return response;
     } catch (err) {
       setSubmit(false);
@@ -65,13 +66,12 @@ const ChapterForm = () => {
     const { status } = result;
     if (status == 201) {
       setSubmit(true);
-      navigate(-1);
+      navigate(`${from}?formCompleted=true`);
     }
   };
 
   return (
     <Modal>
-      {" "}
       <div className="bg-slate-300  bg-opacity-50 flex flex-col justify-center items-center tablet:3/5 laptop:w-1/3 phone:w-full">
         <CustomNav text="Chapter Form" />
         <form className="form-styling">

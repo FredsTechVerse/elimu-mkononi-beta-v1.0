@@ -72,11 +72,11 @@ const DraftPage = () => {
 
   return (
     <div className=" w-full h-full flex-col-centered justify-start">
-      {/* <ReactPdf pdfUrl={pdfUrl} /> */}
+      <ReactPdf pdfUrl={pdfUrl} />
       {/* <S3Uploader /> */}
-      <div className="border-2 border-primary rounded-lg w-[700px] my-auto h-auto ">
+      {/* <div className="border-2 border-primary rounded-lg w-[700px] my-auto h-auto ">
         <VideoJsPlayer options={videoJsOptions} onReady={handlePlayerReady} />
-      </div>
+      </div> */}
       {/* <PieChart chartData={chartData} />
       <BarChart chartData={chartData} />
       <LineChart chartData={chartData} /> */}

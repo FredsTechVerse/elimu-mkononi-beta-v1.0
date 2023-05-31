@@ -6,19 +6,7 @@ const Modal = ({ children }) => {
     return () => (document.body.style.overflow = "unset");
   }, []);
 
-  const [isModalClosed, setIsModalClosed] = useState(false);
-
-  return (
-    <div className={`${isModalClosed ? "hidden" : "modal-overlay fixed"}`}>
-      <MdCancel
-        className="h-8 w-8 absolute top-2 right-2"
-        onClick={() => {
-          setIsModalClosed(true);
-        }}
-      />
-      {children}
-    </div>
-  );
+  return <div className="modal-overlay">{children}</div>;
 };
 
 export default Modal;

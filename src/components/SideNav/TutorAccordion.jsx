@@ -34,12 +34,7 @@ const TutorAccordion = ({ unitData, fetchUnitData, updateCurrentLesson }) => {
             to={`/tutor/new-chapter/${unitID}`}
             state={{ background: location }}
           >
-            <IoMdAdd
-              className="text-white text-2xl rounded-lg hover:bg-slate-100 hover:text-black hover:cursor-pointer"
-              onClick={() => {
-                fetchUnitData();
-              }}
-            />
+            <IoMdAdd className="text-white text-2xl rounded-lg hover:bg-slate-100 hover:text-black hover:cursor-pointer" />
           </Link>
 
           <BiRefresh
@@ -51,7 +46,7 @@ const TutorAccordion = ({ unitData, fetchUnitData, updateCurrentLesson }) => {
         </div>
       </div>
 
-      {unitData && unitData.unitChapters.length !== 0 ? (
+      {unitData && unitData.unitChapters.length > 0 ? (
         <div className="w-full bg-secondary">
           {unitData.unitChapters.map((chapter, index) => (
             <TutorAccordionItem

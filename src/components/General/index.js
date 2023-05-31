@@ -6,6 +6,7 @@ import CommentsSection from "./CommentsSection";
 import ResourcesSection from "./ResourcesSection";
 import ReturnBackBtn from "./ReturnBackBtn";
 import Modal from "./Modal";
+import ReactPdfModal from "./ReactPdfModal";
 import MyEditor from "./MyEditor";
 import ProgressBar from "./ProgressBar";
 import S3Uploader from "./S3Uploader";
@@ -20,6 +21,7 @@ export {
   CommentsSection,
   ResourcesSection,
   ReturnBackBtn,
+  ReactPdfModal,
   Modal,
   MyEditor,
   ProgressBar,

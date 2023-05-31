@@ -23,10 +23,10 @@ const UnitsOutline = () => {
   if (Object.keys(courseData).length > 0) {
     return (
       <div className="w-full h-full flex flex-col bg-slate-100 ">
-        <div className=" relative pattern h-48 flex items-center justify-center">
-          <div className="text-white font-bold text-center text-4xl uppercase w-full h-full flex-row-centered backdrop-blur-sm">
+        <div className=" relative pattern h-48 flex-row-centered">
+          <p className="text-white font-bold text-center phone:text-xl tablet:text-2xl laptop:text-4xl uppercase w-full h-full flex-row-centered backdrop-blur-md bg-black bg-opacity-10">
             {JSON.stringify(courseData) !== "{}" && courseData.courseTitle}
-          </div>
+          </p>
           {roles[0] === ("EM-203" || "EM-202" || "EM-201") && (
             <div className="absolute bottom-3 left-1 flex items-center justify-end ">
               <NavigateBtn
