@@ -28,7 +28,7 @@ import {
   QuillEditor,
   CommentsSection,
   ResourcesSection,
-  TutorAccordionSmall,
+  AccordionSmall,
 } from "./components";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Forbidden from "./pages/403";
@@ -81,7 +81,7 @@ function App() {
             {/* UNIT VIEW. [CHAPTERS & LESSONS] */}
             <Route exact path="/unit/:unitID" element={<ContentPage />}>
               <Route index element={<QuillEditor />} />
-              <Route exact path="nav" element={<TutorAccordionSmall />} />
+              <Route exact path="nav" element={<AccordionSmall />} />
               <Route exact path="comments" element={<CommentsSection />} />
               <Route exact path="resources" element={<ResourcesSection />} />
             </Route>
@@ -101,7 +101,7 @@ function App() {
         <Route element={<RequireAuth allowedRoles={["EM-202"]} />}>
           <Route exact path="/tutor/unit/:unitID" element={<ContentPage />}>
             <Route index element={<QuillEditor />} />
-            <Route exact path="nav" element={<TutorAccordionSmall />} />
+            <Route exact path="nav" element={<AccordionSmall />} />
             <Route exact path="comments" element={<CommentsSection />} />
             <Route exact path="resources" element={<ResourcesSection />} />
           </Route>

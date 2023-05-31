@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { AiFillHome } from "react-icons/ai";
-import TutorAccordionItem from "./TutorAccordionItem";
+import AccordionItem from "./AccordionItem";
 import { IoMdAdd } from "react-icons/io";
 import { BiRefresh } from "react-icons/bi";
 import { useLocation, Link } from "react-router-dom";
-const TutorAccordion = ({ unitData, fetchUnitData, updateCurrentLesson }) => {
+const Accordion = ({ unitData, fetchUnitData, updateCurrentLesson }) => {
   const roles = JSON.parse(localStorage.getItem("roles"));
   const location = useLocation();
   // USING THE CHAPTER ID WE CAN SHOW THE LESSONS.
@@ -27,7 +27,7 @@ const TutorAccordion = ({ unitData, fetchUnitData, updateCurrentLesson }) => {
         <h1 className="pt-0.5">{unitData && unitData.unitName}</h1>
         <div
           className={` ${
-            roles.includes("EM-202") || roles.includes("EM-202")
+            roles?.includes("EM-202") || roles?.includes("EM-202")
               ? "flex"
               : "hidden"
           } items-center justify-between `}
@@ -51,7 +51,7 @@ const TutorAccordion = ({ unitData, fetchUnitData, updateCurrentLesson }) => {
       {unitData && unitData.unitChapters.length > 0 ? (
         <div className="w-full bg-secondary">
           {unitData.unitChapters.map((chapter, index) => (
-            <TutorAccordionItem
+            <AccordionItem
               updateCurrentLesson={updateCurrentLesson}
               key={`chapter-${index}`}
               chapter={chapter}
@@ -70,4 +70,4 @@ const TutorAccordion = ({ unitData, fetchUnitData, updateCurrentLesson }) => {
   );
 };
 
-export default TutorAccordion;
+export default Accordion;

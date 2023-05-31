@@ -11,12 +11,7 @@ import { RiSlideshowFill } from "react-icons/ri";
 import { IoMdAdd } from "react-icons/io";
 
 // It should be having the chapter name & the lessons.
-const TutorAccordionItem = ({
-  chapter,
-  onToggle,
-  active,
-  updateCurrentLesson,
-}) => {
+const AccordionItem = ({ chapter, onToggle, active, updateCurrentLesson }) => {
   const location = useLocation();
   // console.log(`Chapter Data ${JSON.stringify(chapter)}`);
   const { _id: chapterID, chapterName, chapterLessons } = chapter;
@@ -30,7 +25,7 @@ const TutorAccordionItem = ({
       >
         {chapterName}
         <div className="flex gap-3 items-center justify-between">
-          {roles.includes("EM-202") && (
+          {roles?.includes("EM-202") && (
             <Link
               to={`/tutor/new-lesson/${chapterID}`}
               state={{ background: location }}
@@ -108,4 +103,4 @@ const TutorAccordionItem = ({
   );
 };
 
-export default TutorAccordionItem;
+export default AccordionItem;

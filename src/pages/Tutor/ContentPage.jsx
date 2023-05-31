@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
-  TutorAccordion,
+  Accordion,
   ReturnBackBtn,
   ContentSection,
   UnitNav,
@@ -72,7 +72,7 @@ const ContentPage = () => {
     return (
       <main className="grid phone:grid-cols-1 tablet:grid-cols-3 laptop:grid-cols-4 w-full h-screen  overflow-auto">
         <article className=" phone: hidden col-span-1 order-2 tablet:order-1  h-full tablet:flex flex-col rounded-lg laptop:overflow-y-auto px-2 ">
-          <TutorAccordion
+          <Accordion
             unitData={unitData}
             fetchUnitData={fetchUnitData}
             updateCurrentLesson={updateCurrentLesson}

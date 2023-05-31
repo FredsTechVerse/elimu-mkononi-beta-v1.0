@@ -1,9 +1,9 @@
 // GENERAL COMPONENTS
 import RequireAuth from "./RequireAuth";
 import AlertBox from "./AlertBox";
-import TutorAccordion from "./SideNav/TutorAccordion";
+import Accordion from "./SideNav/Accordion";
 import LogoutButton from "./LogoutButton";
-import TutorAccordionSmall from "./SideNav/TutorAccordionSmall";
+import AccordionSmall from "./SideNav/AccordionSmall";
 
 import {
   Navbar,
@@ -39,8 +39,6 @@ import {
   TutorCard,
   VideoJsPlayer,
 } from "./UnitPage";
-
-// TUTOR PAGE
 
 import {
   QuillEditor,
@@ -137,8 +135,8 @@ export {
   RequireAuth,
   StudentRegistrationForm,
   TutorRegistrationForm,
-  TutorAccordion,
-  TutorAccordionSmall,
+  Accordion,
+  AccordionSmall,
   AdminSectionTable,
   AdminRegistrationForm,
   UsersTableAlternative,

@@ -27,7 +27,7 @@ const UnitsOutline = () => {
           <p className="text-white font-bold text-center phone:text-xl tablet:text-2xl laptop:text-4xl uppercase w-full h-full flex-row-centered backdrop-blur-md bg-black bg-opacity-10">
             {JSON.stringify(courseData) !== "{}" && courseData.courseTitle}
           </p>
-          {(roles.includes("EM-202") || roles.includes("EM-203")) && (
+          {(roles?.includes("EM-202") || roles?.includes("EM-203")) && (
             <div className="absolute bottom-3 left-1 flex items-center justify-end ">
               <NavigateBtn
                 destination="new-unit"

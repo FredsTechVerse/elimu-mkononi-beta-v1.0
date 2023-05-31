@@ -40,7 +40,7 @@ const AdminRegistrationForm = () => {
             let { data } = await axios.post("/auth/register-admin", adminData);
             // Clearing out the inputs
             console.log(JSON.stringify(data));
-            setResponse("Tutor Registered Successfully");
+            setResponse("Admin Registered Successfully");
             setStatusTracker(true);
             setResponseTracker(true);
             setFName("");

@@ -10,9 +10,9 @@
 - React query will also go a long way with quering and caching data.
 - React hooks are asynchronous in nature. No wonder the weird null after console.logging but on second tutor accordion item click it works. We get old data which is equivalent to new data which hasn't changed hence the correct console.logging but when we click away to another items, the old data is exposed. **_Using useEffect hook and avoiding unecessary hooks will solve this problem well._**
 - Anything that is not in the useEffect runs twice due to react strict mode.
-  `(roles.includes("EM-203") || roles.includes("EM-202")` upgrade from `(roles[0] === "EM-203" || roles[0] === "EM-202"`
+  `(roles?.includes("EM-203") || roles?.includes("EM-202")` upgrade from `(roles[0] === "EM-203" || roles[0] === "EM-202"`
 
-- This code `(roles.includes("EM-202" || "EM-203")) ` is incorrect . Javascript excludes the second part.
+- This code `(roles?.includes("EM-202" || "EM-203")) ` is incorrect . Javascript excludes the second part.
 - If a prop is guaranteed to be there eg in localStortage.getItem()... Do not use the _optional chaining operator_
 - Checking if an object is empty `Object.keys(obj).length === 0`
 

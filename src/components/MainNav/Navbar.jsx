@@ -25,8 +25,8 @@ const Navbar = ({ isNavOpen, showNavbar, hideNavbar }) => {
       <div className="phone:hidden laptop:flex relative items-center  capitalize">
         <div id="section-2" className=" h-full flex">
           <NavBtn to="/" text="Home" />
-          {roles.includes("EM-202") && <NavBtn to="/tutor" text="Dashboard" />}
-          {roles.includes("EM-203") && <NavBtn to="/admin" text="Dashboard" />}
+          {roles?.includes("EM-202") && <NavBtn to="/tutor" text="Dashboard" />}
+          {roles?.includes("EM-203") && <NavBtn to="/admin" text="Dashboard" />}
         </div>
 
         <div id="section-3" className={`${!user ? "flex" : "hidden"}`}>

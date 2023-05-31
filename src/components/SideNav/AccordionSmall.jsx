@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { AiFillHome } from "react-icons/ai";
-import TutorAccordionItem from "./TutorAccordionItem";
+import AccordionItem from "./AccordionItem";
 import { IoMdAdd } from "react-icons/io";
 import { BiRefresh } from "react-icons/bi";
 import { useLocation, Link, useOutletContext } from "react-router-dom";
-const TutorAccordionSmall = () => {
+const AccordionSmall = () => {
   const { unitData, fetchUnitData, updateCurrentLesson } = useOutletContext();
   const roles = JSON.parse(localStorage.getItem("roles"));
   // console.log(JSON.stringify(roles));
@@ -58,7 +58,7 @@ const TutorAccordionSmall = () => {
 
         {unitData && unitData.unitChapters ? (
           unitData.unitChapters.map((chapter, index) => (
-            <TutorAccordionItem
+            <AccordionItem
               updateCurrentLesson={updateCurrentLesson}
               key={`chapter-${index}`}
               chapter={chapter}
@@ -74,4 +74,4 @@ const TutorAccordionSmall = () => {
   );
 };
 
-export default TutorAccordionSmall;
+export default AccordionSmall;
