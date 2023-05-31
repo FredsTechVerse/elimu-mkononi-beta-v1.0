@@ -37,11 +37,11 @@ const CoursesAdminPage = () => {
       <div className="w-full flex flex-col justify-start items-center ">
         <div className="grid-display gap-5">
           {coursesData &&
-            coursesData.map((course) => {
+            coursesData.map((course, courseIndex) => {
               const { _id, courseTitle, courseImage } = course;
               return (
                 <CourseAdminCard
-                  key={_id}
+                  key={courseIndex}
                   courseID={_id}
                   courseTitle={courseTitle}
                   courseImage={courseImage}

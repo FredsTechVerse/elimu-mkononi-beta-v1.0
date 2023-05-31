@@ -7,8 +7,8 @@ const NavBgBtn = ({ to, text }) => {
     <Link to={to} state={{ background: location }}>
       <div
         className={`${
-          text == "Log In" ? "border-2 border-white" : ""
-        } navbar-link capitalize bg-primary text-white `}
+          text == "Log In" && "border-2 border-white"
+        } navbar-link  `}
       >
         {text}
       </div>

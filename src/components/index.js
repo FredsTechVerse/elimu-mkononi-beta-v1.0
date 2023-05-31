@@ -20,6 +20,7 @@ import {
   TeamSection,
   HeroSection,
   TeamCard,
+  CourseCard,
 } from "./HomePage";
 import {
   ContentSection,
@@ -99,6 +100,7 @@ import {
 export {
   LogInForm,
   HomePageCard,
+  CourseCard,
   SubNav,
   CourseHeading,
   VideoComponent,

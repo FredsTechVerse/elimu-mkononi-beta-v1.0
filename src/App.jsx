@@ -47,7 +47,6 @@ function App() {
 
   return (
     <div className="flex w-full h-screen ">
-      {/* <IdleTimer> */}
       {/* When there is a background object in the state upon render/re-render of the app component,we imperatively declare the route/component to show for the first pair of routes. */}
       <Routes location={background || location}>
         {/* By setting it to the previous page, we hinder any updates hence it still renders the previous page. */}
@@ -187,7 +186,6 @@ function App() {
           />
         </Routes>
       )}
-      {/* </IdleTimer> */}
     </div>
   );
 }
