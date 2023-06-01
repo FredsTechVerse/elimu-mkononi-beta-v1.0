@@ -54,7 +54,7 @@ const AdminLayout = () => {
             <RiMenu3Fill />
           </div>
         </div>
-        <div className="debug">
+        <div>
           <Outlet />
         </div>
       </article>

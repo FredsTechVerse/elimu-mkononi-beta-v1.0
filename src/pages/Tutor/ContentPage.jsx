@@ -5,7 +5,7 @@ import {
   ContentSection,
   UnitNav,
 } from "../../components";
-import { Outlet, useParams, Link } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import axios from "../../axios";
 const ContentPage = () => {
   const roles = JSON.parse(localStorage.getItem("roles"));
@@ -68,8 +68,8 @@ const ContentPage = () => {
 
   if (Object.keys(unitData).length > 0) {
     return (
-      <main className="grid phone:grid-cols-1 tablet:grid-cols-3 laptop:grid-cols-4 w-full h-screen overflow-auto">
-        <article className=" phone:hidden col-span-1 order-2 tablet:order-1  h-full tablet:flex flex-col rounded-lg laptop:overflow-y-auto px-2 ">
+      <main className="phone:flex phone:flex-col tablet:grid tablet:grid-cols-3 laptop:grid-cols-4 w-full h-screen overflow-auto">
+        <article className=" col-span-1 order-2 tablet:order-1  h-full tablet:flex flex-col rounded-lg laptop:overflow-y-auto px-2 ">
           <Accordion
             unitData={unitData}
             fetchUnitData={fetchUnitData}
@@ -101,7 +101,9 @@ const ContentPage = () => {
         ) : (
           <article className="phone:col-span-1 order-1 tablet:order-2 laptop:col-span-3 tablet:col-span-2 h-full laptop:overflow-y-auto flex px-2 flex-col rounded-lg pb-2">
             <div className="w-full h-full flex-row-centered">
-              <p className="text-center uppercase"> No content Present</p>
+              <p className="text-center uppercase">
+                Content has not yet being selected{" "}
+              </p>
             </div>
           </article>
         )}
