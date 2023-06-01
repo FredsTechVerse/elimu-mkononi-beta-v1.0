@@ -21,9 +21,7 @@ import {
   RequireAuth,
   LogInForm,
   ResourceForm,
-  AdminRegistrationForm,
-  TutorRegistrationForm,
-  StudentRegistrationForm,
+  RegistrationForm,
   QuillEditor,
   CommentsSection,
   ResourcesSection,
@@ -63,7 +61,7 @@ function App() {
           <Route
             exact
             path="new-student"
-            element={<StudentRegistrationForm />}
+            element={<RegistrationForm role={"EM-201"} />}
           />
           {/* STUDENT ROUTES */}
           <Route
@@ -139,7 +137,7 @@ function App() {
           <Route
             exact
             path="/new-student"
-            element={<StudentRegistrationForm />}
+            element={<RegistrationForm role={"EM-201"} />}
           />
           <Route
             exact
@@ -171,17 +169,17 @@ function App() {
           <Route
             exact
             path="/admin/students/new-student"
-            element={<StudentRegistrationForm />}
+            element={<RegistrationForm role={"EM-201"} />}
           />
           <Route
             exact
             path="/admin/tutors/new-tutor"
-            element={<TutorRegistrationForm />}
+            element={<RegistrationForm role={"EM-202"} />}
           />
           <Route
             exact
             path="/admin/admins/new-admin"
-            element={<AdminRegistrationForm />}
+            element={<RegistrationForm role={"EM-203"} />}
           />
         </Routes>
       )}

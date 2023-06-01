@@ -29,32 +29,32 @@ const CTAButton = ({ contact, _id, fetchUsersData: fetchUsersData }) => {
   return (
     <div className="flex items-center justify-evenly w-48  border-none">
       <button
-        className="flex items-center justify-center   border-none hover:bg-rose-200  text-secondary w-8 h-8 rounded-full"
+        className="cta-btn group hover:border-green-500"
         onClick={() => {
           messageTenant(contact);
         }}
       >
-        <span className="text-slate-600 hover:text-primary">
+        <span className="text-slate-600 group-hover:text-green-500 text-xl">
           <BiMessageDetail />
         </span>
       </button>
       <button
-        className="flex items-center justify-center   border-none hover:bg-rose-200  text-secondary w-8 h-8 rounded-full"
+        className="cta-btn group hover:border-primary"
         onClick={() => {
           navigate(`/TenantsInformation/${_id}`);
         }}
       >
-        <span className="text-slate-600 hover:text-black">
+        <span className="text-slate-600 group-hover:text-primary text-2xl ">
           <AiFillEye />
         </span>
       </button>
       <button
-        className="flex items-center justify-center   border-none hover:bg-rose-200  text-secondary w-8 h-8 rounded-full"
+        className="cta-btn group hover:border-red-600"
         onClick={() => {
           deleteUser(_id);
         }}
       >
-        <span className="text-slate-600 hover:text-red-600">
+        <span className="text-slate-600 group-hover:text-red-600 text-2xl">
           <RiDeleteBin5Line />
         </span>
       </button>

@@ -6,8 +6,20 @@ const UsersDataTable = ({ users, fetchUsersData, role }) => {
     <div className="hidden laptop:block w-full px-3">
       <div className="flex items-center justify-start mb-1">
         <NavigateBtn
-          destination="new-tutor"
-          text="New tutor"
+          destination={
+            role === "EM-203"
+              ? "new-admin"
+              : role === "EM-202"
+              ? "new-tutor"
+              : "new-student"
+          }
+          text={
+            role === "EM-203"
+              ? "new admin"
+              : role === "EM-202"
+              ? "new tutor"
+              : "new student"
+          }
           icon="tenantIcon"
         />
       </div>
@@ -36,7 +48,7 @@ const UsersDataTable = ({ users, fetchUsersData, role }) => {
                 <tr
                   className={`${
                     index % 2 == 0 ? "bg-cyan-100  " : ""
-                  } cursor-pointer text-center`}
+                  } cursor-pointer text-center h-8`}
                   key={`tutor-${index}`}
                 >
                   <td>{`${index + 1}`}</td>

@@ -28,17 +28,9 @@ const UnitsOutline = () => {
             {JSON.stringify(courseData) !== "{}" && courseData.courseTitle}
           </p>
           {(roles?.includes("EM-202") || roles?.includes("EM-203")) && (
-            <div className="absolute bottom-3 left-1 flex items-center justify-end ">
-              <NavigateBtn
-                destination="new-unit"
-                text="New Unit"
-                icon="tenantIcon"
-              />
-              <NavigateBtn
-                destination="assign-unit"
-                text="Assign Unit"
-                icon="tenantIcon"
-              />
+            <div className="absolute bottom-3 left-1 flex gap-1">
+              <NavigateBtn destination="new-unit" text="New Unit" />
+              <NavigateBtn destination="assign-unit" text="Assign Unit" />
             </div>
           )}
         </div>

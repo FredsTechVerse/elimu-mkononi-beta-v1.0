@@ -62,10 +62,10 @@ const LogInForm = () => {
 
   return (
     <Modal>
-      <div className="bg-slate-300  bg-opacity-50 flex flex-col justify-center items-center phone:w-[285px] tablet:w-[400px]">
+      <div className="form-container-styling">
         <FormNavigation text="Log In" />
 
-        <form className="border-none flex-col px-5 phone:px-2 w-full phone:border-2  phone:rounded-b-md">
+        <form className="form-styling">
           <div className="input-wrap">
             <label htmlFor="surname">Username</label>
             <input
@@ -73,7 +73,7 @@ const LogInForm = () => {
               name="surname"
               placeholder="Your username is your first name"
               type="text"
-              className="input-styling w-full"
+              className="input-styling"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
@@ -86,7 +86,7 @@ const LogInForm = () => {
               name="password"
               placeholder="Password"
               type="password"
-              className="input-styling w-full"
+              className="input-styling"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />

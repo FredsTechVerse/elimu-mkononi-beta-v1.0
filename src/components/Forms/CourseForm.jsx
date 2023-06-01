@@ -110,11 +110,9 @@ const CourseForm = () => {
             response={response}
           />
           <div className="input-wrap">
-            <label htmlFor="course" className="w-full ">
-              Course Details
-            </label>
+            <label htmlFor="course">Course Details</label>
             <input
-              className="input-styling w-full"
+              className="input-styling"
               id="course"
               type="text"
               placeholder="Course Title"

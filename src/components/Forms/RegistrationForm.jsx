@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FormNavigation, Button, Modal, AlertBox } from "..";
 import axios from "../../axios";
 import { useNavigate } from "react-router-dom";
-const TutorRegistrationForm = () => {
+const RegistrationForm = ({ role }) => {
   const navigate = useNavigate();
 
   // DECLARATION OF OUR STATES
@@ -17,7 +17,7 @@ const TutorRegistrationForm = () => {
   const [responseTracker, setResponseTracker] = useState(false);
   const [statusTracker, setStatusTracker] = useState(true);
   const [response, setResponse] = useState("");
-  const registerTutor = async (e) => {
+  const registerUser = async (e) => {
     e.preventDefault();
     // Check if inputs are blank
     if (password !== null && cPassword !== null) {
@@ -26,7 +26,7 @@ const TutorRegistrationForm = () => {
       if (password === cPassword) {
         // Check for length,
         if (password.length >= 8) {
-          let tutorData = {
+          let userData = {
             firstName: fName,
             surname,
             password,
@@ -35,10 +35,24 @@ const TutorRegistrationForm = () => {
           };
 
           try {
-            let { data } = await axios.post("/auth/register-tutor", tutorData);
-            // Clearing out the inputs
-            console.log(JSON.stringify(data));
-            setResponse("Tutor Registered Successfully");
+            if (role === "EM-203") {
+              let { data } = await axios.post("/auth/register-admin", userData);
+              console.log(JSON.stringify(data));
+              return;
+            } else if (role === "EM-201") {
+              let { data } = await axios.post(
+                "/auth/register-student",
+                userData
+              );
+              console.log(`Student Data ${data}`);
+              setResponse("Student Registered Successfully");
+              return;
+            } else if (role === "EM-202") {
+              let { data } = await axios.post("/auth/register-tutor", userData);
+              console.log(`Tutor Data ${data}`);
+              setResponse("Tutor Registered Successfully");
+              return;
+            }
             setStatusTracker(true);
             setResponseTracker(true);
             setFName("");
@@ -91,21 +105,22 @@ const TutorRegistrationForm = () => {
 
   return (
     <Modal>
-      <div className="bg-slate-300  bg-opacity-50 flex flex-col justify-center items-center tablet:3/5 laptop:w-2/5 phone:w-full rounded-lg">
-        {/* CUSTOM NAVIGATION. */}
-        <FormNavigation text="Tutor Registration" />
-
-        {/* PROPOSED HEADER. */}
-        {/* We are doing it the react style. How then do we handle the multipart.form data from our form to our server? */}
-        <form className="border-none flex-col px-5 phone:px-2 w-full phone:border-2  phone:rounded-b-md">
-          {/* NAMES SECTION */}
-          <div className="flex flex-col justify-around  my-2">
-            <label htmlFor="contact" className="mb-1">
-              Names
-            </label>
-            <div className="flex flex-col">
+      <div className="form-container-styling">
+        <FormNavigation
+          text={
+            role === "EM-203"
+              ? "Admin Registration"
+              : role === "EM-202"
+              ? "Tutor Registration"
+              : "Student Registration"
+          }
+        />
+        <form className="form-styling">
+          <div className="input-wrap">
+            <label htmlFor="contact">Names</label>
+            <div className="input-wrap">
               <input
-                className=" phone:my-1 px-4   bg-white-200 appearance-none py-2 border-2 rounded text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple placeholder:text-sm"
+                className="input-styling"
                 id="fName"
                 type="Text"
                 placeholder="First Name"
@@ -117,7 +132,7 @@ const TutorRegistrationForm = () => {
               ></input>
 
               <input
-                className=" phone:my-1 px-4   bg-white-200 appearance-none py-2 border-2 rounded text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple placeholder:text-sm"
+                className="input-styling"
                 id="lName"
                 type="Text"
                 placeholder="Last Name"
@@ -130,21 +145,19 @@ const TutorRegistrationForm = () => {
             </div>
           </div>
           {/* CONTACT SECTION */}
-          <div className="flex flex-col my-5">
-            <div className=" flex flex-col w-full  phone:my-1  phone:flex-col  ">
-              <label htmlFor="contact" className="mb-1 mr-3">
-                Contact
-              </label>
-              <div className="flex phone:w-full phone:">
+          <div className="input-wrap">
+            <div className="input-wrap">
+              <label htmlFor="contact">Contact</label>
+              <div className="flex phone:flex-col tablet:flex-row">
                 <input
-                  className="px-4  w-1/4 bg-white-200 appearance-none py-2 border-2 rounded text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple placeholder:text-sm"
+                  className="input-styling w-16"
                   type="Text"
                   required
                   value="+254"
                   readOnly
                 />
                 <input
-                  className="px-4 w-3/4 bg-white-200 appearance-none py-2 border-2 rounded text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple placeholder:text-sm"
+                  className="input-styling w-48"
                   id="contact"
                   type="Number"
                   placeholder="Safaricom No."
@@ -156,15 +169,10 @@ const TutorRegistrationForm = () => {
                 />
               </div>
             </div>
-            <div className=" w-full  h-full phone:my-1  my-2  flex flex-col ">
-              <label
-                htmlFor="email"
-                className="phone:pl-0 pl-3 w-1/5 mr-2 h-full flex  py-1"
-              >
-                Email
-              </label>
+            <div className="input-wrap">
+              <label htmlFor="email">Email</label>
               <input
-                className="phone:w-full phone:my-1 px-4  w- bg-white-200 appearance-none py-2 border-2 rounded text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple placeholder:text-sm"
+                className="input-styling"
                 id="email"
                 type="email"
                 placeholder="E-mail Address"
@@ -179,42 +187,31 @@ const TutorRegistrationForm = () => {
 
           {/* PASSWORD SECTION */}
 
-          <div className="flex flex-col  justify-start  my-2 w-full ">
-            <label
-              htmlFor="password"
-              className="pl-3 w-24 mr-2 flex  phone:justify-start phone:pl-0 py-1 phone:w-full"
-            >
-              Password
-            </label>
-            <div className="flex flex-col w-full">
-              <div>
-                <input
-                  className=" phone:mx-0 phone:my-1 px-4  w-1/2 bg-white-200 appearance-none py-2 border-2 rounded text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple placeholder:text-sm"
-                  id="password"
-                  type="password"
-                  placeholder="Enter Password"
-                  value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
-                  required
-                />
-              </div>
+          <div className="input-wrap">
+            <label htmlFor="password">Password</label>
+            <input
+              className="input-styling"
+              id="password"
+              type="password"
+              placeholder="Enter Password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              required
+            />
 
-              <div>
-                <input
-                  className="phone:mx-0 phone:my-1 px-4  w-1/2 bg-white-200 appearance-none py-2 border-2 rounded text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple placeholder:text-sm"
-                  id="CPassword"
-                  type="password"
-                  placeholder="Confirm Password"
-                  value={cPassword}
-                  onChange={(e) => {
-                    setCPassword(e.target.value);
-                  }}
-                  required
-                />
-              </div>
-            </div>
+            <input
+              className="input-styling"
+              id="CPassword"
+              type="password"
+              placeholder="Confirm Password"
+              value={cPassword}
+              onChange={(e) => {
+                setCPassword(e.target.value);
+              }}
+              required
+            />
           </div>
           {/* THE ALERT BOX */}
           <AlertBox
@@ -223,12 +220,12 @@ const TutorRegistrationForm = () => {
             response={response}
           />
 
-          <div className="flex flex-col justify-center items-center w-full mt-8 ">
+          <div className="cta-wrap">
             <Button
               type="button"
               text="register"
               onClick={(e) => {
-                registerTutor(e);
+                registerUser(e);
               }}
             />
           </div>
@@ -238,4 +235,4 @@ const TutorRegistrationForm = () => {
   );
 };
 
-export default TutorRegistrationForm;
+export default RegistrationForm;

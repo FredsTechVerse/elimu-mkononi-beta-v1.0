@@ -19,16 +19,14 @@ import {
   UnitsCard,
   AdminCard,
   CourseAdminCard,
-  UsersCard,
+  UserCard,
   UsersTableAlternative,
 } from "./Cards";
 
 import { BarChart, LineChart, PieChart } from "./Charts";
 
 import {
-  StudentRegistrationForm,
-  TutorRegistrationForm,
-  AdminRegistrationForm,
+  RegistrationForm,
   LogInForm,
   CourseForm,
   ChapterForm,
@@ -128,12 +126,10 @@ export {
   CTAUnitButtonAdmin,
   AdminNavItem,
   RequireAuth,
-  StudentRegistrationForm,
-  TutorRegistrationForm,
   Accordion,
   AccordionSmall,
   AccordionItem,
-  AdminRegistrationForm,
+  RegistrationForm,
   UsersTableAlternative,
   ContentSection,
   AudioPlayer,
@@ -164,6 +160,6 @@ export {
   PieChart,
   BarChart,
   LineChart,
-  UsersCard,
+  UserCard,
   UnitsOutline,
 };

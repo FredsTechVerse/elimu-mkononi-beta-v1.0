@@ -1,7 +1,5 @@
-import StudentRegistrationForm from "./StudentRegistrationForm.jsx";
-import TutorRegistrationForm from "./TutorRegistrationForm.jsx";
-import AdminRegistrationForm from "../Forms/AdminRegistrationForm.jsx";
-import LogInForm from "./LogInForm.jsx";
+import RegistrationForm from "./RegistrationForm";
+import LogInForm from "./LogInForm";
 import ChapterForm from "./ChapterForm";
 import CourseForm from "./CourseForm";
 import LessonForm from "./LessonForm";
@@ -10,9 +8,7 @@ import UnitForm from "./UnitForm";
 
 export {
   LogInForm,
-  StudentRegistrationForm,
-  TutorRegistrationForm,
-  AdminRegistrationForm,
+  RegistrationForm,
   ResourceForm,
   ChapterForm,
   CourseForm,

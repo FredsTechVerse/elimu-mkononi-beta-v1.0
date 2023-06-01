@@ -1,7 +1,7 @@
 import React from "react";
 import { CTAButton, StatusPill } from "..";
 
-const UsersCard = ({ user, fetchUsersData, userKey, role }) => {
+const UserCard = ({ user, fetchUsersData, userKey, role }) => {
   let numberOfUnits = (role) => {
     if (role === "EM-202") {
       return user.units?.length;
@@ -33,4 +33,4 @@ const UsersCard = ({ user, fetchUsersData, userKey, role }) => {
   );
 };
 
-export default UsersCard;
+export default UserCard;

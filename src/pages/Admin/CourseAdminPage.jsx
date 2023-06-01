@@ -25,11 +25,7 @@ const CoursesAdminPage = () => {
   return (
     <div className="flex flex-col align-center relative shadow-md phone:rounded-lg w-full h-full pt-2 px-4">
       <div className="flex w-full items-center justify-end mb-3 pr-1">
-        <NavigateBtn
-          destination="new-course"
-          text="New Course"
-          icon="tenantIcon"
-        />
+        <NavigateBtn destination="new-course" text="New Course" />
       </div>
 
       <PageTitle text="list of courses" />

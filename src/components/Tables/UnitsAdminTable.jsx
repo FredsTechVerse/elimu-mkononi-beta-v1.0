@@ -206,11 +206,7 @@ const UnitsAdminTable = () => {
     <>
       <div className="flex flex-col align-center relative shadow-md phone:rounded-lg w-full h-full py-2 ">
         <div className="flex w-full items-center justify-end mb-3 pr-1">
-          <NavigateBtn
-            destination="new-tutor"
-            text="New Unit"
-            icon="tenantIcon"
-          />
+          <NavigateBtn destination="new-tutor" text="New Unit" />
         </div>
         <div className="w-full overflow-x-auto">
           <table className="w-full bg-cyan-50">
