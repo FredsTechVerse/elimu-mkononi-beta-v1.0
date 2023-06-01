@@ -1,50 +1,62 @@
 import React, { useState } from "react";
 import { useOutletContext, Outlet } from "react-router-dom";
 import { AiFillFilePdf } from "react-icons/ai";
-import { NavBgBtn } from "..";
+import { NavBgBtn, S3Uploader } from "..";
 import axios from "../../axios";
 const ResourcesSection = () => {
   const { lessonID, lessonResources } = useOutletContext();
-  console.log(`List of lesson resources ID'S ${lessonResources}`);
+  const { fileName, setFileName } = useState("");
+  // console.log(`List of lesson resources ID'S ${lessonResources}`);
   const [lessonData, setLessonData] = useState({});
-  const fetchLesson = async (lessonID) => {
+
+  const saveResourceToDB = async ({ resourceName }) => {
     try {
-      const { data, status } = await axios.get("/lesson/lessonID", {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      if (status === 200) {
-        setLessonData(data);
+      const formData = new FormData();
+      formData.append("lessonID", lessonID);
+      formData.append("resourceName", resourceName);
+      formData.append("resouceUrl", resourceUrl); //Jackpot. Defines our fieldname which is crawled by multer to pick out this file for upload.
+
+      const config = {
+        headers: { "Content-Type": "application/json" },
+      };
+
+      const response = await axios.post(
+        "/lesson/new-resource",
+        formData,
+        config
+      );
+      const { status } = response;
+
+      if (status === 201) {
+        setResponse("Data saved successfully to DB.");
+        setStatusTracker(true);
+        setResponseTracker(true);
+        setTimeout(() => {
+          setResponseTracker(false);
+          navigate(-1);
+        }, 1200);
       }
-    } catch (error) {
-      if (error.response.status === 403) {
-        // handleLogout();
-        console.log("You are forbidden from accessing the given resources.");
+    } catch (err) {
+      if (err.message === "Request failed with status code 400") {
+        setResponse("An error occured while uploading the file to the backend");
+        setStatusTracker(false);
+        setResponseTracker(true);
+        setTimeout(() => {
+          setResponseTracker(false);
+        }, 2500);
       } else {
-        console.log(error.response.status);
+        console.log(err);
       }
     }
   };
 
-  const fetchResources = async (resourceID) => {
-    try {
-      const { data, status } = await axios.get(`/resources/${resourceID}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      if (status === 200) {
-        setResourcesData(data);
-      }
-    } catch (error) {
-      if (error.response.status === 403) {
-        // handleLogout();
-        console.log("You are forbidden from accessing the given resources.");
-      } else {
-        console.log(error.response.status);
-      }
-    }
+  const verifyUpload = () => {
+    setUploadSucess(true);
+  };
+
+  const updateFileName = (fileName) => {
+    console.log(`Filename ${fileName}`);
+    setFileName(fileName);
   };
 
   if (lessonResources?.length > 0) {
@@ -65,12 +77,10 @@ const ResourcesSection = () => {
   } else {
     return (
       <div className="flex-col-centered w-full h-full bg-slate-200 rounded-lg">
-        <p>
-          There are no new resources. Kindly add a new resource by clicking the
-          button below.
-        </p>
-        ;
-        <NavBgBtn to="new-resource" text="New Resource" />
+        <S3Uploader
+          verifyUpload={verifyUpload}
+          updateFileName={updateFileName}
+        />
       </div>
     );
   }
