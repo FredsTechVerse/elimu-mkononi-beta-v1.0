@@ -16,6 +16,9 @@
 - If a prop is guaranteed to be there eg in localStortage.getItem()... Do not use the _optional chaining operator_
 - Checking if an object is empty `Object.keys(obj).length === 0`
 
+- The handle logout is called cause i pass the function instead of the refence. Therefore , ` onClick={() => {handleLogout()}}` should be replaced by ` onClick={handleLogout}`
+- Styling react-icons as text is neater!
+
 ### WEEK OBJECTIVES
 
 - Building the resources section to handle pdf & additional audio documents.

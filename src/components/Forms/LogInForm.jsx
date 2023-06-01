@@ -62,7 +62,7 @@ const LogInForm = () => {
 
   return (
     <Modal>
-      <div className="bg-slate-300  bg-opacity-50 flex flex-col justify-cs items-center tablet:3/5 laptop:w-2/5 phone:w-[350px]">
+      <div className="bg-slate-300  bg-opacity-50 flex flex-col justify-center items-center phone:w-[285px] tablet:w-[400px]">
         <FormNavigation text="Log In" />
 
         <form className="border-none flex-col px-5 phone:px-2 w-full phone:border-2  phone:rounded-b-md">

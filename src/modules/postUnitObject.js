@@ -1,5 +1,4 @@
 import axios from "../axios";
-
 //   A FUNCTION THAT CREATES OUR POST OBJECT
 //==========================================
 

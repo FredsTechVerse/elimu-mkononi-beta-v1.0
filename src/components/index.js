@@ -1,18 +1,15 @@
 import {
-  Navbar,
-  NavbarSmall,
-  Search,
-  CourseNav,
-  NavBtn,
-  UnitNav,
-  NavBgBtn,
-  Accordion,
-  AccordionItem,
-  AccordionSmall,
-  AdminSideBar,
-  FormNavigation,
-} from "./Navigation";
-import { Button, LoadingBtn, LogoutButton } from "./Buttons";
+  Button,
+  LoadingBtn,
+  LogoutBtn,
+  AdminButton,
+  AdminNavItem,
+  CTAButton,
+  NavigateBtn,
+  CTAUnitButtonAdmin,
+  HomeBtn,
+} from "./Buttons";
+
 import {
   ChapterCard,
   CourseCard,
@@ -20,20 +17,14 @@ import {
   TeamCard,
   TutorCard,
   UnitsCard,
+  AdminCard,
+  CourseAdminCard,
+  UsersCard,
+  UsersTableAlternative,
 } from "./Cards";
 
 import { BarChart, LineChart, PieChart } from "./Charts";
 
-import {
-  TutorCardHome,
-  TutorSideBar,
-  Modal,
-  ReturnBackBtn,
-  MyEditor,
-  ProgressBar,
-  AlertBox,
-  RequireAuth,
-} from "./General";
 import {
   StudentRegistrationForm,
   TutorRegistrationForm,
@@ -47,16 +38,16 @@ import {
 } from "./Forms";
 
 import {
-  CommentsSection,
-  ResourcesSection,
-  CoursesSection,
-  ContentSection,
-  CourseHeading,
-  TeamSection,
-  HeroSection,
-  Footer,
-  UnitsOutline,
-} from "./Sections";
+  TutorCardHome,
+  TutorSideBar,
+  Modal,
+  ReturnBackBtn,
+  MyEditor,
+  ProgressBar,
+  AlertBox,
+  RequireAuth,
+} from "./General";
+
 import {
   QuillEditor,
   ReactPdfModal,
@@ -66,27 +57,40 @@ import {
   VideoComponent,
   VideoJsPlayer,
 } from "./MediaHandlers";
-import { VideoEmptyPoster } from "./Skeletons";
 
 import {
-  AdminButton,
-  AdminCard,
-  PaymentsTable,
-  StudentsTable,
-  NavigateBtn,
-  StatusPill,
-  CTAButton,
-  UsersDataTable,
-  StudentsAdminTable,
-  CourseAdminCard,
+  Navbar,
+  NavbarSmall,
+  Search,
+  CourseNav,
+  NavBtn,
+  UnitNav,
+  NavBgBtn,
+  Accordion,
+  AccordionItem,
+  AccordionSmall,
+  AdminSideBar,
+  FormNavigation,
+} from "./Navigation";
+
+import { StatusPill } from "./Pills";
+
+import {
+  CommentsSection,
+  ResourcesSection,
+  CoursesSection,
+  ContentSection,
+  CourseHeading,
+  TeamSection,
+  HeroSection,
+  Footer,
+  UnitsOutline,
   PageTitle,
-  UnitsAdminTable,
-  CTAUnitButtonAdmin,
-  AdminNavItem,
-  AdminSectionTable,
-  UsersTableAlternative,
-  UsersCard,
-} from "./AdminPage";
+} from "./Sections";
+
+import { VideoEmptyPoster } from "./Skeletons";
+
+import { PaymentsTable, UnitsAdminTable, UsersDataTable } from "./Tables";
 
 export {
   LogInForm,
@@ -113,12 +117,10 @@ export {
   AdminButton,
   AdminCard,
   PaymentsTable,
-  StudentsTable,
   NavigateBtn,
   StatusPill,
   UsersDataTable,
   CTAButton,
-  StudentsAdminTable,
   PageTitle,
   Button,
   UnitsAdminTable,
@@ -131,7 +133,6 @@ export {
   Accordion,
   AccordionSmall,
   AccordionItem,
-  AdminSectionTable,
   AdminRegistrationForm,
   UsersTableAlternative,
   ContentSection,
@@ -144,7 +145,7 @@ export {
   ResourcesSection,
   ReactPdfModal,
   ReturnBackBtn,
-  LogoutButton,
+  LogoutBtn,
   LoadingBtn,
   Navbar,
   Search,
@@ -152,6 +153,7 @@ export {
   NavbarSmall,
   NavBtn,
   NavBgBtn,
+  HomeBtn,
   Modal,
   TeamCard,
   MyEditor,

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AiFillHome } from "react-icons/ai";
-import { AccordionItem } from "../../components";
+import { AccordionItem, HomeBtn } from "../../components";
 import { IoMdAdd } from "react-icons/io";
 import { BiRefresh } from "react-icons/bi";
 import { useLocation, Link, useOutletContext } from "react-router-dom";
@@ -23,12 +23,7 @@ const AccordionSmall = () => {
     <div className="flex flex-col items-center">
       <div className="w-full h-full bg-slate-200 m-1 rounded-lg list-none ">
         <div className="flex items-center justify-between w-full px-2 py-2 font-bold text-lg text-slate-200 bg-primary text-center gap-4 rounded-t-lg">
-          <Link to="/">
-            <span className="text-white text-2xl flex items-center justify-center">
-              <AiFillHome />
-            </span>
-          </Link>
-
+          <HomeBtn />
           <h1>{unitData && unitData.unitName}</h1>
           <div className="flex items-center justify-between w-16">
             <Link

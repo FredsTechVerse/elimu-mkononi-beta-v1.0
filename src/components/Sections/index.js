@@ -7,6 +7,7 @@ import TeamSection from "./TeamSection";
 import HeroSection from "./HeroSection";
 import Footer from "./Footer";
 import UnitsOutline from "./UnitsOutline";
+import PageTitle from "./PageTitle";
 export {
   CommentsSection,
   ResourcesSection,
@@ -17,4 +18,5 @@ export {
   HeroSection,
   Footer,
   UnitsOutline,
+  PageTitle,
 };

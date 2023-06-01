@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { LogoutButton, NavBtn, NavBgBtn } from "../../components";
+import { LogoutBtn, NavBtn, NavBgBtn } from "../../components";
 
 import { RiMenu3Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
@@ -34,7 +34,7 @@ const Navbar = ({ isNavOpen, showNavbar, hideNavbar }) => {
           <NavBgBtn to="/log-in" text="Log In" />
         </div>
         <div id="section-3" className={`${!user ? "hidden" : "flex"}`}>
-          <LogoutButton />
+          <LogoutBtn />
         </div>
       </div>
     </div>

@@ -25,11 +25,15 @@ const TutorsPageAdmin = () => {
     return (
       <div className=" w-full flex-col-centered">
         <PageTitle text="tutor's summary" />
-        {/* One of this has to dissapear depending on the time . So they will dissappear internally */}
-        <UsersDataTable usersData={usersData} fetchUsersData={fetchUsersData} />
-        <UsersTableAlternative
-          usersData={usersData}
+        <UsersDataTable
+          users={usersData}
           fetchUsersData={fetchUsersData}
+          role={"EM-202"}
+        />
+        <UsersTableAlternative
+          users={usersData}
+          fetchUsersData={fetchUsersData}
+          role={"EM-202"}
         />
       </div>
     );

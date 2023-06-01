@@ -1,17 +1,13 @@
 import React from "react";
 import { CTAButton, StatusPill } from "..";
 
-const UsersCard = ({ userData, fetchUsersData, userKey }) => {
-  console.log(`User Key is ${userKey}`);
-  let {
-    firstName: fName,
-    surname: lName,
-    units,
-    email,
-    status,
-    _id,
-  } = userData;
-  let numberOfUnits = units.length;
+const UsersCard = ({ user, fetchUsersData, userKey, role }) => {
+  let numberOfUnits = (role) => {
+    if (role === "EM-202") {
+      return user.units?.length;
+    }
+    return "N/A";
+  };
   return (
     <div
       className={` ${
@@ -20,14 +16,18 @@ const UsersCard = ({ userData, fetchUsersData, userKey }) => {
     >
       <div className="flex items-center justify-between w-full text-lg px-2 ">
         <p className="capitalize w-full">
-          <span>{fName}</span> {"  "}
-          <span>{lName}</span>
+          <span>{user.firstName}</span>
+          <span>{user.surname}</span>
         </p>
-        <StatusPill status={status} />
+        <StatusPill status={user.status} />
       </div>
       <div className="flex items-center justify-between w-full">
-        <span>Units : {numberOfUnits}</span>
-        <CTAButton _id={_id} contact={email} fetchUsersData={fetchUsersData} />
+        {role === "EM-202" && <span>Units : {numberOfUnits(role)}</span>}
+        <CTAButton
+          _id={user._id}
+          contact={user.email}
+          fetchUsersData={fetchUsersData}
+        />
       </div>
     </div>
   );

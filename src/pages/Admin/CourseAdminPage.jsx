@@ -32,7 +32,7 @@ const CoursesAdminPage = () => {
         />
       </div>
 
-      <PageTitle text="courses summary" />
+      <PageTitle text="list of courses" />
 
       <div className="w-full flex flex-col justify-start items-center ">
         <div className="grid-display gap-5">

@@ -1,7 +1,7 @@
 import React from "react";
 import { StatusPill, CTAButton, NavigateBtn } from "..";
 
-const UsersDataTable = ({ usersData, fetchUsersData }) => {
+const UsersDataTable = ({ users, fetchUsersData, role }) => {
   return (
     <div className="hidden laptop:block w-full px-3">
       <div className="flex items-center justify-start mb-1">
@@ -18,23 +18,20 @@ const UsersDataTable = ({ usersData, fetchUsersData }) => {
             <th className=" w-12  ">No</th>
             <th className=" w-48">F Name</th>
             <th className=" w-48">L Name</th>
-            <th className=" w-36">Units</th>
+            {role === "EM-202" && <th className=" w-36">Units</th>}
             <th className=" w-36">Status</th>
             <th className=" w-48">CTA</th>
           </tr>
         </thead>
         <tbody>
-          {usersData &&
-            usersData.map((tutor, index) => {
-              let {
-                firstName: fName,
-                surname: lName,
-                units,
-                email,
-                status,
-                _id,
-              } = tutor;
-              let numberOfUnits = units.length;
+          {users &&
+            users.map((user, index) => {
+              let numberOfUnits = (role) => {
+                if (role === "EM-202") {
+                  return user.units?.length;
+                }
+                return null;
+              };
               return (
                 <tr
                   className={`${
@@ -43,16 +40,16 @@ const UsersDataTable = ({ usersData, fetchUsersData }) => {
                   key={`tutor-${index}`}
                 >
                   <td>{`${index + 1}`}</td>
-                  <td>{fName}</td>
-                  <td>{lName}</td>
-                  <td>{numberOfUnits}</td>
+                  <td>{user.firstName}</td>
+                  <td>{user.surname}</td>
+                  {role === "EM-202" && <td>{numberOfUnits(role)}</td>}
                   <td className="pt-1.5 flex-row-centered">
-                    <StatusPill status={status} />
+                    <StatusPill status={user.status} />
                   </td>
                   <td>
                     <CTAButton
-                      _id={_id}
-                      contact={email}
+                      _id={user._id}
+                      contact={user.email}
                       fetchUsersData={fetchUsersData}
                     />
                   </td>

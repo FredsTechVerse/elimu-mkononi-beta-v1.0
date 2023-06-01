@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  AdminCard,
-  UnitsAdminTable,
-  PageTitle,
-  Footer,
-} from "../../components";
+import { AdminCard } from "../../components";
 import { tutorIcon, coursesIcon, studentsIcon, lessonIcon } from "../../assets";
 
 const AdminDashboard = () => {
@@ -23,9 +18,12 @@ const AdminDashboard = () => {
         id="table"
         className="w-full flex flex-col jusitfy-start items-center"
       >
-        <PageTitle text="units summary" />
-
-        <UnitsAdminTable />
+        {/* <PageTitle text="units summary" /> */}
+        <p className="text-center bg-rose-400 rounded-lg p-3">
+          Find an alternative way of displaying units data on the dashboard.
+          Simplistic beauty.
+        </p>
+        {/* <UnitsAdminTable /> */}
       </div>
     </div>
   );

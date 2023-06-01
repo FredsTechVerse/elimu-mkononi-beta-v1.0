@@ -46,7 +46,7 @@ function App() {
   // }
 
   return (
-    <div className="flex w-full h-screen ">
+    <div className="flex w-full h-screen">
       {/* When there is a background object in the state upon render/re-render of the app component,we imperatively declare the route/component to show for the first pair of routes. */}
       <Routes location={background || location}>
         {/* By setting it to the previous page, we hinder any updates hence it still renders the previous page. */}
@@ -112,7 +112,7 @@ function App() {
         </Route>
 
         {/* ADMIN ROUTES */}
-        <Route element={<RequireAuth allowedRoles={["EM-203", "EM-202"]} />}>
+        <Route element={<RequireAuth allowedRoles={["EM-203"]} />}>
           <Route exact path="/admin" element={<AdminLayout />}>
             <Route index element={<AdminDashboard />} />
             <Route exact path="course-form" element={<CourseForm />} />

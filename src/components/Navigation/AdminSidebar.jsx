@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import Students from "../../assets/students.png";
 import Tutors from "../../assets/tutor-1.png";
 import Courses from "../../assets/courses-icon.png";
+import person_3 from "../../assets/person_3.jpg";
+import { LogoutBtn, HomeBtn } from "../../components";
 import { BsChevronRight } from "react-icons/bs";
 import { IoMdCloseCircle } from "react-icons/io";
 
@@ -15,9 +17,16 @@ const lists = [
 ];
 
 const AdminSidebar = ({ closeSideBar }) => {
-  // const userData = useContext(UserdataContext);
   return (
-    <div className="relative flex flex-col items-center justify-start h-full w-full bg-slate-200 z-5">
+    <div className="relative flex flex-col items-center justify-start h-full w-full bg-slate-200 z-5 px-2">
+      <div className="absolute flex items-center justify-between w-full p-2">
+        <div className="  phone:hidden tablet:block">
+          <HomeBtn />
+        </div>
+        <div className=" phone:hidden tablet:block">
+          <LogoutBtn />
+        </div>
+      </div>
       <div
         className="absolute top-5 right-5 text-3xl tablet:hidden"
         onClick={() => {
@@ -28,8 +37,8 @@ const AdminSidebar = ({ closeSideBar }) => {
       </div>
       <div className="flex-col-centered pt-5">
         <img
-          src="https://source.unsplash.com/100x100/?portrait"
-          alt=""
+          src={person_3}
+          alt="Profile Picture"
           className="w-[170px] h-[170px] rounded-full dark:bg-gray-500"
         />
         <div className="name capitalize mt-4 font-bold text-3xl">

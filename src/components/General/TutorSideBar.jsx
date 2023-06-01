@@ -1,10 +1,11 @@
 import React from "react";
 import { IoMdCloseCircle } from "react-icons/io";
+import Person_3 from "../../assets/person_3.jpg";
 const TutorSideBar = ({ tutor, closeSideBar }) => {
   return (
     <div className="relative h-full w-full bg-slate-200">
       <div
-        className="absolute top-5 right-5 text-3xl tablet:hidden"
+        className="relative top-0 right-2 tablet:hidden"
         onClick={() => {
           closeSideBar();
         }}
@@ -12,10 +13,7 @@ const TutorSideBar = ({ tutor, closeSideBar }) => {
         <IoMdCloseCircle />
       </div>
       <div className="flex-col-centered pt-5">
-        <img
-          src="https://source.unsplash.com/100x100/?portrait"
-          className="avatar rounded-full w-[170px] h-[170px]"
-        ></img>
+        <img src={Person_3} className=" rounded-full w-[170px] h-[170px]"></img>
         <div className="name capitalize mt-4 font-bold text-3xl">
           {tutor && `${tutor.firstName} ${tutor.surname}`}
         </div>
