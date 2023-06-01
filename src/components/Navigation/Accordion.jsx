@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AiFillHome } from "react-icons/ai";
-import AccordionItem from "./AccordionItem";
+import { AccordionItem } from "../../components";
 import { IoMdAdd } from "react-icons/io";
 import { BiRefresh } from "react-icons/bi";
 import { useLocation, Link } from "react-router-dom";

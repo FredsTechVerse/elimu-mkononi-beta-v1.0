@@ -6,10 +6,7 @@ import {
   Footer,
 } from "../../components";
 import { tutorIcon, coursesIcon, studentsIcon, lessonIcon } from "../../assets";
-// import tutorIcon from "../../assets/tutor-icon.png";
-// import coursesIcon from "../../assets/courses-icon.png";
-// import studentsIcon from "../../assets/students-icon.png";
-// import lessonIcon from "../../assets/lesson-icon.png";
+
 const AdminDashboard = () => {
   return (
     <div id="main" className="w-full h-full flex-col-centered justify-start">

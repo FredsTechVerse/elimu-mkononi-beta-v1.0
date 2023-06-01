@@ -1,7 +1,6 @@
 import React from "react";
 import Tutor1 from "../../assets/tutor-1.png";
 import Tutor2 from "../../assets/tutor-2.png";
-import { FaTwitter, FaLinkedin } from "react-icons/fa";
 import { TeamCard } from "..";
 const tutors = [
   {

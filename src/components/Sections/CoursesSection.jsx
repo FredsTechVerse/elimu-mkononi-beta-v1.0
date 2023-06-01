@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { CourseCard } from "../../components";
-
+import { CourseCard } from "..";
 import axios from "../../axios";
 
 const CoursesSection = () => {

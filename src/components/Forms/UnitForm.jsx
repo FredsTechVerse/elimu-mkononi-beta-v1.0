@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "../../axios";
-import { CustomNav, Button } from "../../components";
+import { FormNavigation, Button, LoadingBtn } from "../../components";
 import { postObject } from "../../modules/postUnitObject";
-import LoadingBtn from "./LoadingBtn";
 const UnitForm = () => {
   const navigate = useNavigate();
   const [tutors, setTutors] = useState([]);
@@ -48,14 +47,12 @@ const UnitForm = () => {
     {
       status == 201 && navigate(-1);
     }
-
-    console.log(result); //Returns to as the response from backend manifested under the data object.
   };
 
   return (
     <div className="modal-overlay">
       <div className="w-3/5">
-        <CustomNav text="unit form" />
+        <FormNavigation text="unit form" />
         {/* PROPOSED HEADER. */}
         <form encType="multipart/form-data" className="form-styling">
           {/* DROPDOWN */}

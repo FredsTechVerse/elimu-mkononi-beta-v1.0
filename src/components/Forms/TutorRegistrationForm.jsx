@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { CustomNav, Button, Modal } from "..";
-import AlertBox from "../AlertBox";
+import { FormNavigation, Button, Modal, AlertBox } from "..";
 import axios from "../../axios";
-import { MdCancel } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 const TutorRegistrationForm = () => {
   const navigate = useNavigate();
@@ -95,7 +93,7 @@ const TutorRegistrationForm = () => {
     <Modal>
       <div className="bg-slate-300  bg-opacity-50 flex flex-col justify-center items-center tablet:3/5 laptop:w-2/5 phone:w-full rounded-lg">
         {/* CUSTOM NAVIGATION. */}
-        <CustomNav text="Tutor Registration" />
+        <FormNavigation text="Tutor Registration" />
 
         {/* PROPOSED HEADER. */}
         {/* We are doing it the react style. How then do we handle the multipart.form data from our form to our server? */}
@@ -191,7 +189,7 @@ const TutorRegistrationForm = () => {
             <div className="flex flex-col w-full">
               <div>
                 <input
-                  className=" phone:mx-0 w-full phone:my-1 px-4  w-1/2 bg-white-200 appearance-none py-2 border-2 rounded text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple placeholder:text-sm"
+                  className=" phone:mx-0 phone:my-1 px-4  w-1/2 bg-white-200 appearance-none py-2 border-2 rounded text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple placeholder:text-sm"
                   id="password"
                   type="password"
                   placeholder="Enter Password"
@@ -205,7 +203,7 @@ const TutorRegistrationForm = () => {
 
               <div>
                 <input
-                  className="w-full phone:mx-0 phone:my-1 px-4  w-1/2 bg-white-200 appearance-none py-2 border-2 rounded text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple placeholder:text-sm"
+                  className="phone:mx-0 phone:my-1 px-4  w-1/2 bg-white-200 appearance-none py-2 border-2 rounded text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple placeholder:text-sm"
                   id="CPassword"
                   type="password"
                   placeholder="Confirm Password"

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
-  CustomNav,
+  FormNavigation,
   Modal,
   Button,
   AlertBox,
@@ -97,7 +97,7 @@ const ResourceForm = () => {
   return (
     <Modal>
       <div className="bg-slate-300  bg-opacity-50 flex flex-col justify-center items-center tablet:3/5 laptop:w-1/3 phone:w-3/4">
-        <CustomNav text="RESOURCE FORM" />
+        <FormNavigation text="RESOURCE FORM" />
         <form encType="multipart/form-data" className="form-styling">
           <AlertBox
             responseTracker={responseTracker}

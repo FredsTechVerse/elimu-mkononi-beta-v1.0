@@ -12,7 +12,6 @@ import {
   UsersLayout,
   AdminSection,
   DraftPage,
-  UnitsOutline,
 } from "./pages";
 import {
   CourseForm,
@@ -29,6 +28,7 @@ import {
   CommentsSection,
   ResourcesSection,
   AccordionSmall,
+  UnitsOutline,
 } from "./components";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Forbidden from "./pages/403";
@@ -152,7 +152,6 @@ function App() {
             path="/tutor/unit/:unitID/resources/new-resource"
             element={<ResourceForm />}
           />
-          {/* <Route exact path="/admin/new-unit" element={<UnitForm />} /> */}
           <Route
             exact
             path="/tutor/new-lesson/:chapterID"
@@ -189,5 +188,5 @@ function App() {
     </div>
   );
 }
-
+``;
 export default App;

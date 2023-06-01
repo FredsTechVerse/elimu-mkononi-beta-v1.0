@@ -14,7 +14,7 @@ const lists = [
   { name: "Admin", link: "/admin/admins", icon: Tutors },
 ];
 
-export const Sidebar = ({ closeSideBar }) => {
+const AdminSidebar = ({ closeSideBar }) => {
   // const userData = useContext(UserdataContext);
   return (
     <div className="relative flex flex-col items-center justify-start h-full w-full bg-slate-200 z-5">
@@ -61,3 +61,5 @@ export const Sidebar = ({ closeSideBar }) => {
     </div>
   );
 };
+
+export default AdminSidebar;

@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import {
-  CustomNav,
+  FormNavigation,
   Modal,
   Button,
   AlertBox,
   S3Uploader,
 } from "../../components";
 import axios from "../../axios";
-import LoadingBtn from "./LoadingBtn";
-import { MdCancel } from "react-icons/md";
 import { useParams, useNavigate } from "react-router-dom";
 
 const LessonForm = () => {
@@ -111,7 +109,7 @@ const LessonForm = () => {
   return (
     <Modal>
       <div className="bg-slate-300  bg-opacity-50 flex flex-col justify-center items-center tablet:3/5 laptop:w-1/3 phone:w-full">
-        <CustomNav text="Lesson Form" />
+        <FormNavigation text="Lesson Form" />
         <form
           encType="multipart/form-data"
           className="form-styling"

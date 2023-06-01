@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { MdCancel } from "react-icons/md";
-import { LogoutButton, NavBtn, NavBgBtn } from "..";
+import { LogoutButton, NavBtn, NavBgBtn } from "../../components";
 
 const NavbarSmall = ({ isNavOpen, hideNavbar }) => {
   const roles = JSON.parse(localStorage.getItem("roles")) || ["EM-201"];

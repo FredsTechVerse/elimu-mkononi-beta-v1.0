@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { CustomNav, Button, Modal } from "../../components";
+import { FormNavigation, Button, Modal, LoadingBtn } from "../../components";
 import axios from "../../axios";
-import LoadingBtn from "./LoadingBtn";
-import { MdCancel } from "react-icons/md";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 const ChapterForm = () => {
   useEffect(() => {
@@ -73,7 +71,7 @@ const ChapterForm = () => {
   return (
     <Modal>
       <div className="bg-slate-300  bg-opacity-50 flex flex-col justify-center items-center tablet:3/5 laptop:w-1/3 phone:w-full">
-        <CustomNav text="Chapter Form" />
+        <FormNavigation text="Chapter Form" />
         <form className="form-styling">
           {/* FILE */}
           <div className="input-wrap">

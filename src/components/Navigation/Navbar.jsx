@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { LogoutButton, NavBtn, NavBgBtn } from "..";
+import { LogoutButton, NavBtn, NavBgBtn } from "../../components";
 
 import { RiMenu3Line } from "react-icons/ri";
 import { Link } from "react-router-dom";

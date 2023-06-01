@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { MdCancel } from "react-icons/md";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "../../axios";
-import { AlertBox, CustomNav, Modal, Button } from "..";
+import { AlertBox, FormNavigation, Modal, Button } from "..";
 const LogInForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -62,8 +62,8 @@ const LogInForm = () => {
 
   return (
     <Modal>
-      <div className="bg-slate-300  bg-opacity-50 flex flex-col justify-cs items-center tablet:3/5 laptop:w-2/5 phone:w-full">
-        <CustomNav text="Log In" />
+      <div className="bg-slate-300  bg-opacity-50 flex flex-col justify-cs items-center tablet:3/5 laptop:w-2/5 phone:w-[350px]">
+        <FormNavigation text="Log In" />
 
         <form className="border-none flex-col px-5 phone:px-2 w-full phone:border-2  phone:rounded-b-md">
           <div className="input-wrap">

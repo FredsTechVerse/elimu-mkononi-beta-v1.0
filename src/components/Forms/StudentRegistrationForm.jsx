@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { CustomNav, Button, Modal } from "..";
-import AlertBox from "../AlertBox";
+import { FormNavigation, Button, Modal, AlertBox } from "..";
 import axios from "../../axios";
-import { MdCancel } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 const studentRegistrationForm = () => {
   const navigate = useNavigate();
@@ -97,7 +95,7 @@ const studentRegistrationForm = () => {
   return (
     <Modal>
       <div className="bg-slate-300  bg-opacity-50 flex flex-col justify-center items-center tablet:3/5 laptop:w-2/5 phone:w-full">
-        <CustomNav text="Student Registration" />
+        <FormNavigation text="Student Registration" />
         <form className="border-none flex-col px-5 phone:px-2 w-full phone:border-2  phone:rounded-b-md">
           {/* NAMES SECTION */}
           <div className="flex flex-col justify-around  my-2">

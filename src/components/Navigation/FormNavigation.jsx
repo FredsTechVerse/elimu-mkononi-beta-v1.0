@@ -1,7 +1,7 @@
 import React from "react";
 import { MdCancel } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-const CustomNav = ({ text }) => {
+const FormNavigation = ({ text }) => {
   const navigate = useNavigate();
   return (
     <div className=" relative w-full flex justify-center items-center text-lg font-bold text-white uppercase  px-2 py-5  rounded-t-md">
@@ -13,4 +13,4 @@ const CustomNav = ({ text }) => {
   );
 };
 
-export default CustomNav;
+export default FormNavigation;

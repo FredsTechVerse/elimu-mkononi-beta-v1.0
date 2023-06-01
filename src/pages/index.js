@@ -3,11 +3,11 @@ import UsersLayout from "./UsersPage/UsersLayout";
 import TutorPage from "./Tutor/TutorPage";
 import ContentPage from "./Tutor/ContentPage";
 import TutorUnitsPage from "./Tutor/TutorUnitsPage";
-import AdminLayout from "./Admin/AdminLayout";
-import AdminDashboard from "./Admin/AdminDashboard";
 import StudentsPageAdmin from "./Admin/StudentsPageAdmin";
-import UnitsOutline from "./Admin/UnitsOutline";
+import UnitsOutline from "../components/Sections/UnitsOutline";
 import TutorsPageAdmin from "./Admin/TutorsPageAdmin";
+import AdminDashboard from "./Admin/AdminDashboard";
+import AdminLayout from "./Admin/AdminLayout";
 import CourseAdminPage from "./Admin/CourseAdminPage";
 import TutorLayoutPage from "./Tutor/TutorLayout";
 import AdminSection from "./Admin/AdminSection";
@@ -22,9 +22,9 @@ export {
   TutorsPageAdmin,
   CourseAdminPage,
   TutorLayoutPage,
-  AdminLayout,
   UsersLayout,
   AdminSection,
+  AdminLayout,
   DraftPage,
   UnitsOutline,
 };

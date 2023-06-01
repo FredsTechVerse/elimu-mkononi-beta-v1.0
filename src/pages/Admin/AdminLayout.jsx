@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import { Sidebar } from "../../components/Admin/Sidebar";
+import { AdminSideBar } from "../../components";
 import { RiMenu3Fill } from "react-icons/ri";
 import axios from "../../axios";
 const AdminLayout = () => {
@@ -41,10 +41,10 @@ const AdminLayout = () => {
           sideBarOpen ? "flex" : "hidden"
         }   w-full h-full absolute tablet:col-span-1 tablet:relative tablet:flex tablet:flex-col laptop:overflow-y-auto `}
       >
-        <Sidebar closeSideBar={closeSideBar} />
+        <AdminSideBar closeSideBar={closeSideBar} />
       </article>
       <article className="w-full laptop:col-span-3 h-full laptop:overflow-y-auto flex px-2 flex-col rounded-lg pb-2">
-        <div className="flex px-2 items-center justify-end w-full text-lg text-center text-white my-2 py-2 bg-primary rounded-lg">
+        {/* <div className="flex px-2 items-center justify-end w-full text-lg text-center text-white my-2 py-2 bg-primary rounded-lg">
           <div
             onClick={() => {
               openSideBar();
@@ -53,8 +53,8 @@ const AdminLayout = () => {
           >
             <RiMenu3Fill />
           </div>
-        </div>
-        <Outlet context={"Hello"} />
+        </div> */}
+        <Outlet />
       </article>
     </main>
   );

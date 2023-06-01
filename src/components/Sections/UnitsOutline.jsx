@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { UnitsCard, NavigateBtn, ReturnBackBtn } from "../../components";
+import { UnitsCard, NavigateBtn, ReturnBackBtn } from "..";
 import axios from "../../axios";
 const UnitsOutline = () => {
   const { courseId } = useParams();

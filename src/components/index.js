@@ -1,82 +1,73 @@
-// GENERAL COMPONENTS
-import RequireAuth from "./RequireAuth";
-import AlertBox from "./AlertBox";
-import Accordion from "./SideNav/Accordion";
-import LogoutButton from "./LogoutButton";
-import AccordionSmall from "./SideNav/AccordionSmall";
-
 import {
   Navbar,
   NavbarSmall,
   Search,
   CourseNav,
   NavBtn,
-  NavBgBtn,
-} from "./MainNav";
-// COURSE PAGE COMPONENTS
-import {
-  HomePageCard,
-  CoursesSection,
-  TeamSection,
-  HeroSection,
-  TeamCard,
-  CourseCard,
-} from "./HomePage";
-import {
-  ContentSection,
-  CourseHeading,
-  SubNav,
-  AudioPlayer,
-  PdfViewer,
-  ReactPdf,
-} from "./CoursePage";
-
-// UNIT PAGE COMPONENTS
-import {
-  VideoComponent,
-  ChapterCard,
-  UnitsCard,
   UnitNav,
+  NavBgBtn,
+  Accordion,
+  AccordionItem,
+  AccordionSmall,
+  AdminSideBar,
+  FormNavigation,
+} from "./Navigation";
+import { Button, LoadingBtn, LogoutButton } from "./Buttons";
+import {
+  ChapterCard,
+  CourseCard,
+  HomePageCard,
+  TeamCard,
   TutorCard,
-  VideoJsPlayer,
-} from "./UnitPage";
+  UnitsCard,
+} from "./Cards";
+
+import { BarChart, LineChart, PieChart } from "./Charts";
 
 import {
-  QuillEditor,
   TutorCardHome,
   TutorSideBar,
-  VideoEmptyPoster,
-  CommentsSection,
-  ResourcesSection,
   Modal,
-  ReactPdfModal,
   ReturnBackBtn,
   MyEditor,
   ProgressBar,
-  S3Uploader,
-  PieChart,
-  BarChart,
-  LineChart,
+  AlertBox,
+  RequireAuth,
 } from "./General";
 import {
+  StudentRegistrationForm,
+  TutorRegistrationForm,
+  AdminRegistrationForm,
+  LogInForm,
   CourseForm,
   ChapterForm,
   LessonForm,
   UnitForm,
-  CustomNav,
   ResourceForm,
-  Button,
 } from "./Forms";
 
-// LOGINS-REGISTRATION COMPONENTS.
 import {
-  LogInForm,
-  StudentRegistrationForm,
-  TutorRegistrationForm,
-  AdminRegistrationForm,
-} from "./Credentials";
+  CommentsSection,
+  ResourcesSection,
+  CoursesSection,
+  ContentSection,
+  CourseHeading,
+  TeamSection,
+  HeroSection,
+  Footer,
+  UnitsOutline,
+} from "./Sections";
+import {
+  QuillEditor,
+  ReactPdfModal,
+  S3Uploader,
+  AudioPlayer,
+  ReactPdf,
+  VideoComponent,
+  VideoJsPlayer,
+} from "./MediaHandlers";
+import { VideoEmptyPoster } from "./Skeletons";
 
-import Footer from "./Footer";
 import {
   AdminButton,
   AdminCard,
@@ -101,10 +92,10 @@ export {
   LogInForm,
   HomePageCard,
   CourseCard,
-  SubNav,
   CourseHeading,
   VideoComponent,
-  CustomNav,
+  AdminSideBar,
+  FormNavigation,
   ChapterCard,
   TutorCard,
   UnitsCard,
@@ -139,12 +130,12 @@ export {
   TutorRegistrationForm,
   Accordion,
   AccordionSmall,
+  AccordionItem,
   AdminSectionTable,
   AdminRegistrationForm,
   UsersTableAlternative,
   ContentSection,
   AudioPlayer,
-  PdfViewer,
   VideoEmptyPoster,
   CoursesSection,
   TeamSection,
@@ -154,6 +145,7 @@ export {
   ReactPdfModal,
   ReturnBackBtn,
   LogoutButton,
+  LoadingBtn,
   Navbar,
   Search,
   CourseNav,
@@ -171,4 +163,5 @@ export {
   BarChart,
   LineChart,
   UsersCard,
+  UnitsOutline,
 };

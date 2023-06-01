@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useOutletContext, Outlet } from "react-router-dom";
 import { AiFillFilePdf } from "react-icons/ai";
-import { NavBgBtn } from "../../components";
+import { NavBgBtn } from "..";
 import axios from "../../axios";
 const ResourcesSection = () => {
   const { lessonID, lessonResources } = useOutletContext();
