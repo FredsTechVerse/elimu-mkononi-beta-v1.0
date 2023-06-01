@@ -11,7 +11,13 @@ import { RiSlideshowFill } from "react-icons/ri";
 import { IoMdAdd } from "react-icons/io";
 
 // It should be having the chapter name & the lessons.
-const AccordionItem = ({ chapter, onToggle, active, updateCurrentLesson }) => {
+const AccordionItem = ({
+  chapter,
+  onToggle,
+  active,
+  updateCurrentLesson,
+  closeSideBar,
+}) => {
   const location = useLocation();
   // console.log(`Chapter Data ${JSON.stringify(chapter)}`);
   const { _id: chapterID, chapterName, chapterLessons } = chapter;
@@ -30,9 +36,9 @@ const AccordionItem = ({ chapter, onToggle, active, updateCurrentLesson }) => {
               to={`/tutor/new-lesson/${chapterID}`}
               state={{ background: location }}
             >
-              <span className="text-2xl">
+              <div onClick={closeSideBar} className="text-2xl">
                 <IoMdAdd />
-              </span>
+              </div>
             </Link>
           )}
 
@@ -64,6 +70,7 @@ const AccordionItem = ({ chapter, onToggle, active, updateCurrentLesson }) => {
               key={index}
               className="hover:bg-slate-500 bg-slate-300 text-black w-full px-3 py-2 my-0.5 capitalize rounded-md"
               onClick={() => {
+                closeSideBar();
                 updateCurrentLesson({
                   lessonID,
                   lessonUrl,

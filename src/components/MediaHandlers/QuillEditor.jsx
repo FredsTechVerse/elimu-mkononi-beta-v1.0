@@ -173,7 +173,7 @@ const QuillEditor = () => {
   return (
     <div className="w-full flex flex-col gap-4">
       <div id="unit content" className="rounded-md">
-        {roles?.includes("EM-202") ? (
+        {roles?.includes("EM-202") || roles?.includes("EM-203") ? (
           <ReactQuill
             value={content}
             readOnly={!isEditorEnabled}
@@ -181,7 +181,10 @@ const QuillEditor = () => {
             modules={quillModules}
           />
         ) : (
-          <div dangerouslySetInnerHTML={{ __html: content }} />
+          <div
+            dangerouslySetInnerHTML={{ __html: content }}
+            className="p-5 text-center bg-slate-100 rounded-lg"
+          />
         )}
       </div>
       <div className="flex w-full items-center justify-end gap-2">

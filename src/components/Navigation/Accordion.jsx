@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { AccordionItem } from "../../components";
-import { IoMdAdd } from "react-icons/io";
+import { IoMdAdd, IoMdCloseCircle } from "react-icons/io";
 import { BiRefresh } from "react-icons/bi";
 import { useLocation, Link } from "react-router-dom";
-const Accordion = ({ unitData, fetchUnitData, updateCurrentLesson }) => {
+const Accordion = ({
+  unitData,
+  fetchUnitData,
+  updateCurrentLesson,
+  closeSideBar,
+}) => {
   const roles = JSON.parse(localStorage.getItem("roles"));
   const location = useLocation();
   // USING THE CHAPTER ID WE CAN SHOW THE LESSONS.
@@ -18,33 +23,45 @@ const Accordion = ({ unitData, fetchUnitData, updateCurrentLesson }) => {
   };
 
   return (
-    <div className="flex flex-col items-center h-full">
-      <div className="flex items-center justify-between w-full px-2 py-2 font-bold text-md text-slate-200 bg-primary text-center gap-4 rounded-t-lg">
-        <Link to="/">
-          <AiFillHome className="text-white text-xl flex items-center justify-center" />
-        </Link>
-
-        <h1 className="pt-0.5">{unitData && unitData.unitName}</h1>
-        <div
-          className={` ${
-            roles?.includes("EM-202") || roles?.includes("EM-202")
-              ? "flex"
-              : "hidden"
-          } items-center justify-between `}
-        >
-          <Link
-            to={`/tutor/new-chapter/${unitID}`}
-            state={{ background: location }}
-          >
-            <IoMdAdd className="text-white text-2xl rounded-lg hover:bg-slate-100 hover:text-black hover:cursor-pointer" />
+    <div className="relative z-10 flex flex-col items-center h-full bg-slate-100 overflow-auto">
+      <div className="flex items-center justify-between w-full px-2 py-2 font-bold text-md text-slate-200 bg-primary text-center gap-4 ">
+        <div>
+          <Link to="/">
+            <AiFillHome className="text-white text-xl flex items-center justify-center" />
           </Link>
+        </div>
 
-          <BiRefresh
-            className="text-white text-2xl rounded-lg hover:bg-slate-100 hover:text-black hover:cursor-pointer"
+        {unitData && unitData.unitName}
+        <div className="flex gap-1">
+          <div
+            className={` ${
+              roles?.includes("EM-202") || roles?.includes("EM-202")
+                ? "flex"
+                : "hidden"
+            } gap-1 `}
+          >
+            <Link
+              to={`/tutor/new-chapter/${unitID}`}
+              state={{ background: location }}
+            >
+              <IoMdAdd className="text-white text-3xl rounded-lg hover:bg-slate-100 hover:text-black hover:cursor-pointer" />
+            </Link>
+
+            <BiRefresh
+              className="text-white text-3xl rounded-lg hover:bg-slate-100 hover:text-black hover:cursor-pointer"
+              onClick={() => {
+                fetchUnitData();
+              }}
+            />
+          </div>
+          <div
+            className="tablet:hidden text-3xl"
             onClick={() => {
-              fetchUnitData();
+              closeSideBar();
             }}
-          />
+          >
+            <IoMdCloseCircle />
+          </div>
         </div>
       </div>
 
@@ -56,6 +73,7 @@ const Accordion = ({ unitData, fetchUnitData, updateCurrentLesson }) => {
               key={`chapter-${index}`}
               chapter={chapter}
               onToggle={() => handleToggle(index)}
+              closeSideBar={closeSideBar}
               active={clicked === index}
             />
           ))}
