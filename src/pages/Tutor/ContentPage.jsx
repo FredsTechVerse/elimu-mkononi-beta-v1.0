@@ -66,12 +66,10 @@ const ContentPage = () => {
     }
   };
 
-  // For admin on the ground i want him to be given the real situation on the ground .
   if (Object.keys(unitData).length > 0) {
-    //THE TUTOR & ADMIN SHOULD BE ABLE TO SEE THE SITUATION AS IT IS ON THE GROUND.
     return (
-      <main className="grid phone:grid-cols-1 tablet:grid-cols-3 laptop:grid-cols-4 w-full h-screen  overflow-auto">
-        <article className=" phone: hidden col-span-1 order-2 tablet:order-1  h-full tablet:flex flex-col rounded-lg laptop:overflow-y-auto px-2 ">
+      <main className="grid phone:grid-cols-1 tablet:grid-cols-3 laptop:grid-cols-4 w-full h-screen overflow-auto">
+        <article className=" phone:hidden col-span-1 order-2 tablet:order-1  h-full tablet:flex flex-col rounded-lg laptop:overflow-y-auto px-2 ">
           <Accordion
             unitData={unitData}
             fetchUnitData={fetchUnitData}
