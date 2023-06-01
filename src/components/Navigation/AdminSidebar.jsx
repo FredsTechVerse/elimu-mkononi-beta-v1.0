@@ -20,21 +20,24 @@ const AdminSidebar = ({ closeSideBar }) => {
   return (
     <div className="relative flex flex-col items-center justify-start h-full w-full bg-slate-200 z-5 px-2">
       <div className="absolute flex items-center justify-between w-full p-2">
-        <div className="  phone:hidden tablet:block">
-          <HomeBtn />
+        <div className="flex">
+          <div>
+            <HomeBtn />
+          </div>
+          <div>
+            <LogoutBtn />
+          </div>
         </div>
-        <div className=" phone:hidden tablet:block">
-          <LogoutBtn />
+        <div
+          className="text-4xl flex-row-centered tablet:hidden"
+          onClick={() => {
+            closeSideBar();
+          }}
+        >
+          <IoMdCloseCircle />
         </div>
       </div>
-      <div
-        className="absolute top-5 right-5 text-3xl tablet:hidden"
-        onClick={() => {
-          closeSideBar();
-        }}
-      >
-        <IoMdCloseCircle />
-      </div>
+
       <div className="flex-col-centered pt-5">
         <img
           src={person_3}

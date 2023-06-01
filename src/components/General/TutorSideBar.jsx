@@ -3,9 +3,9 @@ import { IoMdCloseCircle } from "react-icons/io";
 import Person_3 from "../../assets/person_3.jpg";
 const TutorSideBar = ({ tutor, closeSideBar }) => {
   return (
-    <div className="relative h-full w-full bg-slate-200">
+    <div className="relative h-full w-full flex flex-col bg-slate-200">
       <div
-        className="relative top-0 right-2 tablet:hidden"
+        className="absolute top-4 right-4 tablet:hidden text-4xl"
         onClick={() => {
           closeSideBar();
         }}
