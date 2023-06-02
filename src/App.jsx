@@ -7,8 +7,6 @@ import {
   AdminDashboard,
   StudentsPageAdmin,
   TutorsPageAdmin,
-  TutorLayoutPage,
-  AdminLayout,
   UsersLayout,
   AdminSection,
   DraftPage,
@@ -27,6 +25,7 @@ import {
   ResourcesSection,
   AccordionSmall,
   UnitsOutline,
+  Layout,
 } from "./components";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Forbidden from "./pages/403";
@@ -87,7 +86,7 @@ function App() {
 
         {/* TUTOR ROUTES */}
         <Route element={<RequireAuth allowedRoles={["EM-202"]} />}>
-          <Route exact path="/tutor" element={<TutorLayoutPage />}>
+          <Route exact path="/tutor" element={<Layout role="EM-202" />}>
             <Route index element={<TutorPage />} />
             <Route exact path="units" element={<TutorUnitsPage />} />
             <Route exact path="chapter" element={<ChapterForm />} />
@@ -111,7 +110,7 @@ function App() {
 
         {/* ADMIN ROUTES */}
         <Route element={<RequireAuth allowedRoles={["EM-203"]} />}>
-          <Route exact path="/admin" element={<AdminLayout />}>
+          <Route exact path="/admin" element={<Layout role="EM-203" />}>
             <Route index element={<AdminDashboard />} />
             <Route exact path="course-form" element={<CourseForm />} />
             <Route exact path="unit-form" element={<UnitForm />} />

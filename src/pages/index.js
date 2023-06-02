@@ -7,9 +7,7 @@ import StudentsPageAdmin from "./Admin/StudentsPageAdmin";
 import UnitsOutline from "../components/Sections/UnitsOutline";
 import TutorsPageAdmin from "./Admin/TutorsPageAdmin";
 import AdminDashboard from "./Admin/AdminDashboard";
-import AdminLayout from "./Admin/AdminLayout";
 import CourseAdminPage from "./Admin/CourseAdminPage";
-import TutorLayoutPage from "./Tutor/TutorLayout";
 import AdminSection from "./Admin/AdminSection";
 import DraftPage from "./DraftPage";
 export {
@@ -21,10 +19,8 @@ export {
   StudentsPageAdmin,
   TutorsPageAdmin,
   CourseAdminPage,
-  TutorLayoutPage,
   UsersLayout,
   AdminSection,
-  AdminLayout,
   DraftPage,
   UnitsOutline,
 };

@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import { AdminSideBar } from "../../components";
 import { RiMenu3Fill } from "react-icons/ri";
 import axios from "../../axios";
-const AdminLayout = () => {
+const Layout = () => {
   const [sideBarOpen, setSideBarOpen] = useState(false);
   const [adminData, setAdminData] = useState(null);
 
@@ -62,4 +62,4 @@ const AdminLayout = () => {
   );
 };
 
-export default AdminLayout;
+export default Layout;

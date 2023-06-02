@@ -83,6 +83,7 @@ import {
   Footer,
   UnitsOutline,
   PageTitle,
+  Layout,
 } from "./Sections";
 
 import { VideoSkeleton, UnitSkeleton, CourseSkeleton } from "./Skeletons";
@@ -166,4 +167,5 @@ export {
   UserCard,
   UnitsOutline,
   UnitSkeleton,
+  Layout,
 };
