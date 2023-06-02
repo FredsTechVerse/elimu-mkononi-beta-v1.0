@@ -16,7 +16,7 @@ const TutorSideBar = ({ tutor, closeSideBar }) => {
           </div>
         </div>
         <div
-          className="text-4xl flex-row-centered tablet:hidden"
+          className="text-4xl flex-row-centered laptop:hidden"
           onClick={() => {
             closeSideBar();
           }}

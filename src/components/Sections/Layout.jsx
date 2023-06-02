@@ -14,9 +14,7 @@ const Layout = ({ role }) => {
   const closeSideBar = () => {
     setSideBarOpen(false);
   };
-  const toggleSideBar = () => {
-    setSideBarOpen(!sideBarOpen);
-  };
+
   useEffect(() => {
     fetchUserDetails();
   }, []);
@@ -41,7 +39,6 @@ const Layout = ({ role }) => {
           },
         });
         if (status === 200) {
-          console.log(data);
           setUserData(data);
         }
       }
@@ -74,7 +71,7 @@ const Layout = ({ role }) => {
             {role === "EM-203" ? "Admin Heading" : "Tutor Heading"}
           </h1>
           <div
-            onClick={toggleSideBar}
+            onClick={openSideBar}
             className={`text-2xl w-10 h-10 border-2 border-primary rounded-full flex-col-centered laptop:hidden`}
           >
             <RiMenu3Fill />

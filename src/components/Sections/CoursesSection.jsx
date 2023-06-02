@@ -31,7 +31,7 @@ const CoursesSection = () => {
     >
       <h3 className="text-6xl font-bold text-center mt-3">Get Started</h3>
       <p className="mb-6 text-center">Explore the courses</p>
-      <div className="flex-col-centered w-full debug pb-6">
+      <div className="flex-col-centered w-full pb-6">
         {coursesData?.length > 0 && !fetchingCourses ? (
           <div className="grid-lg">
             {coursesData &&
@@ -47,7 +47,7 @@ const CoursesSection = () => {
                 );
               })}
           </div>
-        ) : fetchingCourses === "true" ? (
+        ) : fetchingCourses ? (
           <div className="grid-lg">
             <CourseSkeleton />
             <CourseSkeleton />
