@@ -56,7 +56,7 @@ const AdminSidebar = ({ closeSideBar }) => {
           return (
             <Link to={list.link} key={index}>
               <li
-                className="flex justify-between hover:bg-primary  hover:text-white text-dark border-2 border-primary rounded-md px-2 w-64 py-1.5"
+                className="flex justify-between hover:bg-primary  hover:text-white text-dark border-2 border-primary rounded-md px-2 w-56 py-1.5"
                 onClick={() => {
                   closeSideBar();
                 }}
