@@ -1,3 +1,6 @@
+### RESOURCES ROUTE 
+GET http://localhost:3000/resources/all-resources
+
 ### CHAPTERS ROUTE
 GET https://us-central1-elearning-module-a887d.cloudfunctions.net/app/course/all-courses
 

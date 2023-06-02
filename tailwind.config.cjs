@@ -22,6 +22,17 @@ module.exports = {
       "2xl": "1536px",
     },
     extend: {
+      theme: {
+        extend: {
+          keyframes: {
+            shimmer: {
+              "100%": {
+                transform: "translateX(100%)",
+              },
+            },
+          },
+        },
+      },
       colors: {
         transparent: "transparent",
         current: "currentColor",

@@ -24,7 +24,7 @@ const UsersTableAlternative = ({ users, fetchUsersData, role }) => {
         />
       </div>
       <div className="flex-col-centered">
-        <div className="grid-display tablet:grid-cols-1 p-2 ">
+        <div className="grid-sm">
           {users.length > 0 &&
             users.map((userData, userIndex) => {
               return (

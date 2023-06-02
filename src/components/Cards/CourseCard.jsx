@@ -1,26 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const CourseCard = ({ course }) => {
+const CourseCard = ({ courseID, courseImage, courseTitle }) => {
   return (
-    <div className="relative flex flex-col justify-center items-center max-w-[300px] pb-3 hover:scale-105 ease-in-out duration-300  m-4 rounded-lg shadow-lg shadow-slate-300 ">
+    <div className="flex flex-col justify-center items-center max-w-sm mx-auto hover:scale-105 ease-in-out duration-300">
       <img
-        src={`https://us-central1-elearning-module-a887d.cloudfunctions.net/app/s3Direct/${course.courseImage}`}
-        className="bg-gray-300 h-48 w-full rounded-t-lg"
-        alt=""
-      />
-      <div className="absolute w-16 h-6 top-0 left-0 bg-green-500 text-white rounded-tl-lg flex-row-centered">
-        $ 45
-      </div>
-      <div className="flex flex-col justify-start items-start gap-2 w-full p-2">
-        <h1 className="text-gray-800 text-start font-bold text-xl capitalize ">
-          {course.courseTitle}
-        </h1>
-        <p className="text-md">45 hours</p>
-        <div className="flex-row-centered w-full">
-          <Link to={`course/${course._id}`}>
-            <button className=" bg-gray-800 text-xs text-white px-4 py-2 rounded capitalize hover:bg-gray-700">
-              View course <span></span>
+        src={`https://us-central1-elearning-module-a887d.cloudfunctions.net/app/s3Direct/${courseImage}`}
+        alt="course image"
+        className="bg-gray-300 h-48 lg:w-56 w-48 rounded-lg shadow-md bg-cover bg-center"
+      ></img>
+      <div className="w-44  md:w-64 bg-white -mt-10 shadow-lg rounded-lg overflow-hidden">
+        <div className="py-2 text-center font-bold uppercase tracking-wide text-gray-800">
+          {courseTitle}
+        </div>
+        <div className="flex items-center justify-center py-2 px-3 bg-gray-400">
+          <Link to={courseID}>
+            <button className=" bg-gray-800 text-xs text-white px-2 py-1 font-semibold rounded uppercase hover:bg-gray-700 w-full">
+              View the course
             </button>
           </Link>
         </div>

@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { CourseCard } from "..";
+import { CourseCard, CourseSkeleton } from "..";
 import axios from "../../axios";
 
 const CoursesSection = () => {
   const [coursesData, setCoursesData] = useState([]);
+  const [fetchingCourses, setFetchingCourses] = useState(false);
+  const fetchCoursesData = async () => {
+    try {
+      setFetchingCourses(true);
+      const { data: coursesData } = await axios.get("/course/all-courses");
+      setCoursesData(coursesData);
+      setTimeout(() => {
+        setFetchingCourses(false);
+      }, 800);
+    } catch (error) {
+      console.error(error);
+      setTimeout(() => {
+        setFetchingCourses(false);
+      }, 800);
+    }
+  };
   useEffect(() => {
-    const fetchCoursesData = async () => {
-      try {
-        const { data: coursesData } = await axios.get("/course/all-courses");
-        setCoursesData(coursesData);
-      } catch (error) {
-        // There is need to handle the network error accordingly.
-        console.error(error);
-      }
-    };
-
     fetchCoursesData();
   }, []);
 
@@ -25,12 +31,33 @@ const CoursesSection = () => {
     >
       <h3 className="text-6xl font-bold text-center mt-3">Get Started</h3>
       <p className="mb-6 text-center">Explore the courses</p>
-      <div className="flex-col-centered w-full pb-6">
-        <div className="grid-display p-2">
-          {coursesData.map((course, courseIndex) => {
-            return <CourseCard key={courseIndex} course={course} />;
-          })}
-        </div>
+      <div className="flex-col-centered w-full debug pb-6">
+        {coursesData?.length > 0 && !fetchingCourses ? (
+          <div className="grid-lg">
+            {coursesData &&
+              coursesData.map((course, courseIndex) => {
+                const { _id, courseTitle, courseImage } = course;
+                return (
+                  <CourseCard
+                    key={courseIndex}
+                    courseID={_id}
+                    courseTitle={courseTitle}
+                    courseImage={courseImage}
+                  />
+                );
+              })}
+          </div>
+        ) : fetchingCourses === "true" ? (
+          <div className="grid-lg">
+            <CourseSkeleton />
+            <CourseSkeleton />
+            <CourseSkeleton />
+          </div>
+        ) : (
+          <p className=" h-full text-center bg-red-600 bg-opacity-40">
+            No courses have been found
+          </p>
+        )}
       </div>
       <div className="custom-shape-divider-bottom-1679516065">
         <svg

@@ -18,7 +18,6 @@ import {
   TutorCard,
   UnitsCard,
   AdminCard,
-  CourseAdminCard,
   UserCard,
   UsersTableAlternative,
 } from "./Cards";
@@ -86,14 +85,17 @@ import {
   PageTitle,
 } from "./Sections";
 
-import { VideoEmptyPoster } from "./Skeletons";
+import { VideoSkeleton, UnitSkeleton, CourseSkeleton } from "./Skeletons";
 
 import { PaymentsTable, UnitsAdminTable, UsersDataTable } from "./Tables";
+
+import { PriceTag, DurationTag } from "./Tags";
 
 export {
   LogInForm,
   HomePageCard,
   CourseCard,
+  CourseSkeleton,
   CourseHeading,
   VideoComponent,
   AdminSideBar,
@@ -117,12 +119,13 @@ export {
   PaymentsTable,
   NavigateBtn,
   StatusPill,
+  PriceTag,
+  DurationTag,
   UsersDataTable,
   CTAButton,
   PageTitle,
   Button,
   UnitsAdminTable,
-  CourseAdminCard,
   CTAUnitButtonAdmin,
   AdminNavItem,
   RequireAuth,
@@ -133,7 +136,7 @@ export {
   UsersTableAlternative,
   ContentSection,
   AudioPlayer,
-  VideoEmptyPoster,
+  VideoSkeleton,
   CoursesSection,
   TeamSection,
   HeroSection,
@@ -162,4 +165,5 @@ export {
   LineChart,
   UserCard,
   UnitsOutline,
+  UnitSkeleton,
 };

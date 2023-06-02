@@ -1,7 +1,6 @@
 import axios from "../axios";
 //   A FUNCTION THAT CREATES OUR POST OBJECT
 //==========================================
-
 const postObject = async ({
   course,
   tutor,

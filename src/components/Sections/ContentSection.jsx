@@ -1,5 +1,5 @@
 import React from "react";
-import { VideoComponent, VideoEmptyPoster } from "../../components";
+import { VideoComponent, VideoSkeleton } from "../../components";
 const ContentSection = ({ currentLessonUrl, lessonName }) => {
   if (currentLessonUrl) {
     return (
@@ -13,7 +13,7 @@ const ContentSection = ({ currentLessonUrl, lessonName }) => {
   } else {
     return (
       <div className="w-full text-center text-white flex flex-col justify-start text-3xl font-extrabold">
-        <VideoEmptyPoster />
+        <VideoSkeleton />
       </div>
     );
   }

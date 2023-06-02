@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 const UnitsCard = ({ number, heading, summary, unitId }) => {
   return (
-    <article className="hover:cursor-pointer chapter max-w-[350px] bg-white h-[180px] flex flex-col gap-2  pt-3 rounded-md shadow-lg shadow-slate-400 ">
-      <section className=" pl-4 px-2 flex items-center justify-start gap-3 ">
-        <div className="w-12 h-12  rounded-full bg-primary  flex-row-centered text-white ">
+    <article className="hover:cursor-pointer chapter w-80 bg-white h-48 flex flex-col gap-2  pt-3 rounded-md shadow-lg shadow-slate-300 ">
+      <section className="px-2 flex items-center justify-start gap-3 ">
+        <div className="ml-4 w-12 h-12  rounded-full bg-primary  flex-row-centered text-white ">
           <span className="font-extraLight">{number}</span>
         </div>
         <h1 className="uppercase text-xl font-extrabold">{heading}</h1>

@@ -149,7 +149,10 @@
     .modal-overlay{
         @apply  fixed inset-0 bg-black bg-opacity-40 backdrop-blur-lg flex flex-col-centered z-10 overflow-auto
     }
-    .grid-display {
-     @apply  grid phone:grid-cols-1 tablet:grid-cols-3 laptop:grid-cols-4
+    .grid-lg {
+     @apply  grid phone:grid-cols-1 tablet:grid-cols-3 laptop:grid-cols-4 gap-4 p-4
     } 
+    .grid-sm {
+             @apply grid phone:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-2 p-3
+    }
 }
