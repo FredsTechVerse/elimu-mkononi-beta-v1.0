@@ -14,10 +14,9 @@ const UserCard = ({ user, fetchUsersData, userKey, role }) => {
         userKey === "odd" && "bg-cyan-100"
       } flex laptop:hidden flex-col justify-evenly items-center w-[280px] py-2 rounded-lg my-0.5 shadow-md shadow-slate-300 space-y-1 px-3`}
     >
-      <div className="flex items-center justify-between w-full text-lg px-2 ">
+      <div className="flex items-center justify-between w-full text-lg ">
         <p className="capitalize w-full">
-          <span>{user.firstName}</span>
-          <span>{user.surname}</span>
+          <span>{user.firstName}</span> <span>{user.surname}</span>
         </p>
         <StatusPill status={user.status} />
       </div>

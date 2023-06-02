@@ -8,7 +8,7 @@ const NavigateBtn = ({ text, destination }) => {
     <Link to={destination} state={{ background: location }}>
       <div
         className={`
-      capitalize flex-row-centered gap-1 text-secondary bg-primary w-32 rounded-md h-10 shadow-sm shadow-slate-200 px-0.5 `}
+      capitalize flex-row-centered gap-1 text-secondary bg-primary w-32 rounded-full h-10 shadow-sm shadow-slate-200 px-0.5 `}
       >
         {text}
         <span className="text-secondary text-lg">
