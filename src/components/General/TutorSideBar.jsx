@@ -1,16 +1,28 @@
 import React from "react";
 import { IoMdCloseCircle } from "react-icons/io";
 import Person_3 from "../../assets/person_3.jpg";
+import { LogoutBtn, HomeBtn } from "../../components";
+
 const TutorSideBar = ({ tutor, closeSideBar }) => {
   return (
-    <div className="relative h-full w-full flex flex-col bg-slate-200">
-      <div
-        className="absolute top-4 right-4 tablet:hidden text-4xl"
-        onClick={() => {
-          closeSideBar();
-        }}
-      >
-        <IoMdCloseCircle />
+    <div className="relative h-full w-full tablet:w-72 laptop:w-full flex flex-col bg-slate-200">
+      <div className="absolute flex items-center justify-between w-full p-2">
+        <div className="flex">
+          <div>
+            <HomeBtn />
+          </div>
+          <div>
+            <LogoutBtn />
+          </div>
+        </div>
+        <div
+          className="text-4xl flex-row-centered tablet:hidden"
+          onClick={() => {
+            closeSideBar();
+          }}
+        >
+          <IoMdCloseCircle />
+        </div>
       </div>
       <div className="flex-col-centered pt-5">
         <img src={Person_3} className=" rounded-full w-[170px] h-[170px]"></img>
