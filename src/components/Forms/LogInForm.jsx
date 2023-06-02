@@ -26,7 +26,14 @@ const LogInForm = () => {
     e.preventDefault();
 
     try {
-      const credentials = { firstName, password };
+      const trimmedFirstName = firstName.trim();
+      const trimmedPassword = password.trim();
+
+      const credentials = {
+        firstName: trimmedFirstName,
+        password: trimmedPassword,
+      };
+      // const credentials = { firstName, password };
       const { data, status } = await axios.post("/auth/login", credentials);
 
       if (status === 200) {

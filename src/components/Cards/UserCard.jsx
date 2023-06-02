@@ -12,7 +12,7 @@ const UserCard = ({ user, fetchUsersData, userKey, role }) => {
     <div
       className={` ${
         userKey === "odd" && "bg-cyan-100"
-      } flex laptop:hidden flex-col justify-evenly items-center w-[300px] py-2 rounded-lg my-0.5 shadow-md shadow-slate-300 space-y-1 px-3`}
+      } flex laptop:hidden flex-col justify-evenly items-center w-[280px] py-2 rounded-lg my-0.5 shadow-md shadow-slate-300 space-y-1 px-3`}
     >
       <div className="flex items-center justify-between w-full text-lg px-2 ">
         <p className="capitalize w-full">
