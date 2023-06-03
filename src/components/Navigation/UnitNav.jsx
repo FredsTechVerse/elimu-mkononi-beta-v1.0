@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 const UnitNav = () => {
   return (
-    <div className="navigation flex flex-row w-full justify-start gap-10 items-center px-4 bg-primary text-dark py-3 mb-3 text-sm text-white rounded-lg ">
+    <div className="navigation flex flex-row w-full justify-start gap-10 items-center px-4 text-dark py-3 mb-3 text-sm text-white rounded-lg ">
       <div className="flex tablet:hidden">
         <Link to="nav">
           <div className="tab cursor-pointer group">
@@ -27,5 +27,4 @@ const UnitNav = () => {
     </div>
   );
 };
-
 export default UnitNav;

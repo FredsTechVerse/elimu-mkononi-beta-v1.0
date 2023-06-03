@@ -1,35 +1,35 @@
-# elearning-beta-1.0
+# ELEARNING BETA V1.0
 
-### DISCLAIMER
+### EXTENDING APP FUNCTIONALITY BY MAKING USE OF AVAILABLE TECHNOLOGIES
 
-Chatgpt is a powerful tool but it is outsourcing its data from the internet.It will be misleading at times hence the need to crosscheck for one's self.
-However , it's a great tool to kick start the projects.
+- For comments and questions they will be send via email and a discord channel set up to handle / grow the community. No need of doing this on my end. Have cta-buttons after the lesson notes to lead to this sections.If any questions are there.... Or if the user has a comment.... Well the comments can be stored inside the database. But Questions will be answered via email.This eliminates lots of complexities.
+- Extend functionalities of this website using available technologies instead of trying to recreate them. eg. Lecturers can be posting notes , arranging their sessions here etc
 
-### DISCOVERIES.
+### KEY THINGS I HAVE LEARNT.
 
+- **_Use react hooks sparingly. Their asynchronous nature can be decieving at time eg The useState hook which takes some time to update long after console.log has been fired._**
 - In react-pdf the worker seems to be the issue.
-- Do not trust all the garbage you pick from gpt. Making such dum errors.
-- Here is how to implement [skeletons](https://dev.to/jobpick/how-to-create-a-skeleton-loader-in-tailwindcss-38gh)
+- How to implement [skeletons](https://dev.to/jobpick/how-to-create-a-skeleton-loader-in-tailwindcss-38gh)
 - Use React query for quering and caching data. Complements axios as well!
 - React hooks are **_asynchronous_** in nature. No wonder the console was returning null and on second trial. Returning the data which apparently is the old data which changes when we update state to something else as with the case with the accordion.
-- **_Using useEffect hook and avoiding unecessary hooks will help us avoid lots unecessary issues_**
 - Anything that is not in the useEffect runs twice due to react strict mode.Hence the double console.logs().
-  `(roles?.includes("EM-203") || roles?.includes("EM-202")` upgrade from `(roles[0] === "EM-203" || roles[0] === "EM-202"`
-
+  Solution : use`(roles?.includes("EM-203") || roles?.includes("EM-202")` instead of `(roles[0] === "EM-203" || roles[0] === "EM-202"`
 - This code `(roles?.includes("EM-202" || "EM-203")) ` is incorrect . Javascript excludes the second part.
 - If a prop is guaranteed to be there eg in `localStortage.getItem()`... No need for _optional chaining operator_
-- You can check if an object is empty using `Object.keys(obj).length === 0`
+- Check if an object is empty using `Object.keys(obj).length === 0`
 - For arrays,checking for length is better than checking if null.
 - The handle logout is called because i pass the function instead of the refence. Therefore , ` onClick={() => {handleLogout()}}` should be replaced by ` onClick={handleLogout}`
-- Styling react-icons as text is neater and is what i have been doing!
-- Simply set up the \_redirects file inside the public folder and add the following line : `/*    /index.html  200`
-
-### WEEK OBJECTIVES
-
-- Building the resources section to handle pdf & additional audio documents.
-- Look for sustainable audio renderer.
+- To refresh dynamic routes , set up the \_redirects file inside the public folder and add the following line : `/*    /index.html  200`. It works like magic.
+  Chatgpt is a powerful tool but it is outsourcing its data from the internet.It will be misleading at times hence the need to crosscheck for one's self.
+  However , it's a great tool to kick start the projects.
 
 ### PERFOMANCE OPTIMIZATION
 
-- Caching to avoid unecessary rerenders or data fetches especially when my data is not changing.
-- Improving the audio player to be responsive to the controls.
+- Building the resources section to handle pdf & additional audio documents.
+- Caching to cut on data fetches and save time.
+- Effecting audio player that does not misbehave.
+- Socials to be displayed absolutely as with my portfolio.
+
+### WHERE THIS APP CAN BE USED
+
+- This website will serve as a good reference point to all class notes and past papers issued. Our elearning platform is shitty i give you that for a fact... Find means ama reasons why a lecturer would want to use our application.... For one , having all your resources organized on the fly.... Resource handle page can emanate from this.

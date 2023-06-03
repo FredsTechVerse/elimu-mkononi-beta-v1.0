@@ -19,7 +19,7 @@ const HomePage = () => {
           hideNavbar={hideNavbar}
         />
         <CoursesSection />
-        <TeamSection />
+        {/* <TeamSection /> */}
       </div>
     </>
   );

@@ -39,10 +39,10 @@ import {
   TutorSideBar,
   Modal,
   ReturnBackBtn,
-  MyEditor,
   ProgressBar,
   AlertBox,
   RequireAuth,
+  FancyLine,
 } from "./General";
 
 import {
@@ -156,7 +156,6 @@ export {
   HomeBtn,
   Modal,
   TeamCard,
-  MyEditor,
   ProgressBar,
   ReactPdf,
   S3Uploader,

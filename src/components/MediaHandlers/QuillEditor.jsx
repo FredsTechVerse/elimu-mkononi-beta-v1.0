@@ -5,7 +5,7 @@ import axios from "../../axios";
 import "react-quill/dist/quill.snow.css";
 
 const QuillEditor = () => {
-  const { currentLesson } = useOutletContext();
+  const { currentLesson, lessonName } = useOutletContext();
   const [lessonID, setLessonID] = useState(null);
   // console.log(`Current Lesson Data : ${JSON.stringify(currentLesson)}`);
   const roles = JSON.parse(localStorage.getItem("roles"));
@@ -172,6 +172,7 @@ const QuillEditor = () => {
   }, [currentLesson]);
   return (
     <div className="w-full flex flex-col gap-4">
+      <h1 className="uppercase">{lessonName}</h1>
       <div id="unit content" className="rounded-md">
         {roles?.includes("EM-202") || roles?.includes("EM-203") ? (
           <ReactQuill
@@ -187,7 +188,13 @@ const QuillEditor = () => {
           />
         )}
       </div>
-      <div className="flex w-full items-center justify-end gap-2">
+      <div
+        className={`${
+          roles?.includes("EM-202") || roles?.includes("EM-203")
+            ? "flex"
+            : "hidden"
+        } w-full items-center justify-end gap-2`}
+      >
         {!isEditorEnabled ? (
           <button
             className="h-8 w-24 bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full"
