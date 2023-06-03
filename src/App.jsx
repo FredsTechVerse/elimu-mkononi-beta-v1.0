@@ -10,6 +10,8 @@ import {
   UsersLayout,
   AdminSection,
   DraftPage,
+  CourseAdminPage,
+  Forbidden,
 } from "./pages";
 import {
   CourseForm,
@@ -28,9 +30,6 @@ import {
   Layout,
 } from "./components";
 import { Routes, Route, useLocation } from "react-router-dom";
-import Forbidden from "./pages/403";
-import CoursesAdminPage from "./pages/Admin/CourseAdminPage";
-
 function App() {
   const location = useLocation();
   const background = location.state && location.state.background; //If the first param is true , then the second param is assigned.Just like conditional operators.
@@ -122,7 +121,7 @@ function App() {
               element={<StudentsPageAdmin />}
             ></Route>
             <Route exact path="courses">
-              <Route index element={<CoursesAdminPage />}></Route>
+              <Route index element={<CourseAdminPage />}></Route>
               <Route exact path=":courseId" element={<UnitsOutline />}></Route>
             </Route>
           </Route>

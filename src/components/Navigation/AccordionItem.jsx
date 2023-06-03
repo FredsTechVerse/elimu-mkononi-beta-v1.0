@@ -25,10 +25,7 @@ const AccordionItem = ({
   const contentEl = useRef(); //Used to interact with the dom accordigly.
   return (
     <li className="accordion_item">
-      <button
-        className="button  px-2 border-t-1 border-slate-300"
-        onClick={onToggle}
-      >
+      <button className="button  px-2 text-sm " onClick={onToggle}>
         {chapterName}
         <div className="flex gap-3 items-center justify-between">
           {roles?.includes("EM-202") && (

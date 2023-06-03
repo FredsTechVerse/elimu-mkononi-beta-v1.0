@@ -167,4 +167,5 @@ export {
   UnitsOutline,
   UnitSkeleton,
   Layout,
+  FancyLine,
 };

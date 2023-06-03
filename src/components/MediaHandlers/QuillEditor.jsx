@@ -1,11 +1,12 @@
 import ReactQuill from "react-quill";
 import React, { useState, useCallback, useMemo, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
+import { FancyLine } from "../../components";
 import axios from "../../axios";
 import "react-quill/dist/quill.snow.css";
 
 const QuillEditor = () => {
-  const { currentLesson, lessonName } = useOutletContext();
+  const { currentLesson } = useOutletContext();
   const [lessonID, setLessonID] = useState(null);
   // console.log(`Current Lesson Data : ${JSON.stringify(currentLesson)}`);
   const roles = JSON.parse(localStorage.getItem("roles"));
@@ -119,6 +120,8 @@ const QuillEditor = () => {
     }
   };
 
+  console.log(currentLesson?.lessonName);
+
   const handleUpdate = async (content, notesID) => {
     const formData = new FormData();
     formData.append("lessonNotes", content);
@@ -171,8 +174,11 @@ const QuillEditor = () => {
     }
   }, [currentLesson]);
   return (
-    <div className="w-full flex flex-col gap-4">
-      <h1 className="uppercase">{lessonName}</h1>
+    <div className="w-full flex flex-col p-2 ">
+      <div className="uppercase text-black font-bold text-2xl">
+        <p>{currentLesson?.lessonName}</p>
+        <FancyLine size="sm" />
+      </div>
       <div id="unit content" className="rounded-md">
         {roles?.includes("EM-202") || roles?.includes("EM-203") ? (
           <ReactQuill
@@ -184,7 +190,7 @@ const QuillEditor = () => {
         ) : (
           <div
             dangerouslySetInnerHTML={{ __html: content }}
-            className="p-5 text-center bg-slate-100 rounded-lg"
+            className=" text-start"
           />
         )}
       </div>

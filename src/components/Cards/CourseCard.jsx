@@ -14,7 +14,7 @@ const CourseCard = ({ courseID, courseImage, courseTitle }) => {
           {courseTitle}
         </div>
         <div className="flex items-center justify-center py-2 px-3 bg-gray-400">
-          <Link to={courseID}>
+          <Link to={`/course/${courseID}`}>
             <button className=" bg-gray-800 text-xs text-white px-2 py-1 font-semibold rounded uppercase hover:bg-gray-700 w-full">
               View the course
             </button>

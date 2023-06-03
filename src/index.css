@@ -15,11 +15,11 @@
     
          /* Chrome, Edge, and Safari */
          *::-webkit-scrollbar {
-             width: 8px;
+             width: 6px;
          }
     
          *::-webkit-scrollbar-track {
-             @apply bg-slate-100 opacity-0 rounded-lg;
+             @apply bg-slate-100 bg-opacity-0 rounded-lg;
          }
     
          *::-webkit-scrollbar-thumb {
