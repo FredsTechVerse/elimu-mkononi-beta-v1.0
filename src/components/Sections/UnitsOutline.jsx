@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { UnitsCard, UnitSkeleton, NavigateBtn, ReturnBackBtn } from "..";
+import { UnitCard, UnitSkeleton, NavigateBtn, ReturnBackBtn } from "..";
 import axios from "../../axios";
 const UnitsOutline = () => {
   const { courseId } = useParams();
@@ -49,12 +49,12 @@ const UnitsOutline = () => {
               {courseData.units.map((unit, index) => {
                 const { unitName, unitDescription, _id } = unit;
                 return (
-                  <UnitsCard
-                    unitId={_id}
+                  <UnitCard
+                    unitID={_id}
                     key={index}
-                    number={`${index + 1}`}
-                    heading={unitName}
-                    summary={unitDescription}
+                    unitNumber={`${index + 1}`}
+                    unitName={unitName}
+                    unitDescription={unitDescription}
                   />
                 );
               })}

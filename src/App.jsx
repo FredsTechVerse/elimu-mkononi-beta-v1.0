@@ -12,7 +12,8 @@ import {
   DraftPage,
   CourseAdminPage,
   Forbidden,
-} from "./pages";
+  UnitOverview,
+} from "./containers";
 import {
   CourseForm,
   ChapterForm,
@@ -74,6 +75,11 @@ function App() {
               element={<UnitsOutline />}
             ></Route>
             {/* UNIT VIEW. [CHAPTERS & LESSONS] */}
+            <Route
+              exact
+              path="/unit-overview/:unitID"
+              element={<UnitOverview />}
+            />
             <Route exact path="/unit/:unitID" element={<ContentPage />}>
               <Route index element={<QuillEditor />} />
               <Route exact path="nav" element={<AccordionSmall />} />

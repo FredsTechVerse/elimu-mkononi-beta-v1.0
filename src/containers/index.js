@@ -11,6 +11,7 @@ import CourseAdminPage from "./Admin/CourseAdminPage";
 import AdminSection from "./Admin/AdminSection";
 import DraftPage from "./DraftPage";
 import Forbidden from "./Forbidden";
+import UnitOverview from "./UnitOverview";
 export {
   HomePage,
   TutorPage,
@@ -25,4 +26,5 @@ export {
   DraftPage,
   UnitsOutline,
   Forbidden,
+  UnitOverview,
 };

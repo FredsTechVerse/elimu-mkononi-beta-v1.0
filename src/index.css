@@ -153,6 +153,6 @@
      @apply  grid phone:grid-cols-1 tablet:grid-cols-3 laptop:grid-cols-4 gap-4 p-4
     } 
     .grid-sm {
-             @apply grid phone:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-2 p-3
+             @apply grid phone:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-3 p-3
     }
 }

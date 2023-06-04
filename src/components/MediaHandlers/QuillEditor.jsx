@@ -120,8 +120,6 @@ const QuillEditor = () => {
     }
   };
 
-  console.log(currentLesson?.lessonName);
-
   const handleUpdate = async (content, notesID) => {
     const formData = new FormData();
     formData.append("lessonNotes", content);
@@ -176,8 +174,7 @@ const QuillEditor = () => {
   return (
     <div className="w-full flex flex-col p-2 ">
       <div className="uppercase text-black font-bold text-2xl">
-        <p>{currentLesson?.lessonName}</p>
-        <FancyLine size="sm" />
+        {/* <FancyLine size="sm" /> */}
       </div>
       <div id="unit content" className="rounded-md">
         {roles?.includes("EM-202") || roles?.includes("EM-203") ? (
@@ -199,11 +196,11 @@ const QuillEditor = () => {
           roles?.includes("EM-202") || roles?.includes("EM-203")
             ? "flex"
             : "hidden"
-        } w-full items-center justify-end gap-2`}
+        } w-full items-center justify-end gap-2 my-2`}
       >
         {!isEditorEnabled ? (
           <button
-            className="h-8 w-24 bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full"
+            className="h-8 w-36 mx-auto bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full"
             onClick={() => {
               enableEdit();
             }}
@@ -211,7 +208,7 @@ const QuillEditor = () => {
             {!areNotesPresent ? "Add Notes" : "Edit Notes"}
           </button>
         ) : (
-          <>
+          <div className="mx-auto flex-row-centered gap-2">
             <button
               className="h-8 w-24 bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full"
               onClick={() => {
@@ -228,7 +225,7 @@ const QuillEditor = () => {
             >
               Cancel
             </button>
-          </>
+          </div>
         )}
       </div>
     </div>

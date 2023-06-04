@@ -2,7 +2,7 @@ import ChapterCard from "./ChapterCard";
 import HomePageCard from "./HomePageCard";
 import TeamCard from "./TeamCard";
 import TutorCard from "./TutorCard";
-import UnitsCard from "./UnitsCard";
+import UnitCard from "./UnitCard";
 import AdminCard from "./AdminCard";
 import CourseCard from "./CourseCard";
 import UserCard from "./UserCard";
@@ -12,7 +12,7 @@ export {
   HomePageCard,
   TeamCard,
   TutorCard,
-  UnitsCard,
+  UnitCard,
   AdminCard,
   CourseCard,
   UserCard,

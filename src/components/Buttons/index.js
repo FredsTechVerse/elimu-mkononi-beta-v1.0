@@ -7,6 +7,7 @@ import NavigateBtn from "./NavigateBtn";
 import CTAUnitButtonAdmin from "./CTAUnitButtonAdmin";
 import LogoutBtn from "./LogoutBtn";
 import HomeBtn from "./HomeBtn";
+import MenuBtn from "./MenuBtn";
 export {
   Button,
   LoadingBtn,
@@ -17,4 +18,5 @@ export {
   CTAUnitButtonAdmin,
   LogoutBtn,
   HomeBtn,
+  MenuBtn,
 };

@@ -4,9 +4,10 @@ import {
   ReturnBackBtn,
   ContentSection,
   UnitNav,
+  LogoutBtn,
+  MenuBtn,
 } from "../../components";
 import { Outlet, useParams } from "react-router-dom";
-import { RiMenu3Fill } from "react-icons/ri";
 import axios from "../../axios";
 const ContentPage = () => {
   const roles = JSON.parse(localStorage.getItem("roles"));
@@ -14,7 +15,7 @@ const ContentPage = () => {
   const [unitData, setUnitData] = useState({});
   const [currentLesson, setCurrentLesson] = useState(null);
   const [lessonType, setLessonType] = useState(null);
-  const [areChapters, setAreChaptersPresent] = useState(false);
+  const [areChaptersPresent, setAreChaptersPresent] = useState(false);
   const [formCompleted, setFormCompleted] = useState(false);
   const [sideBarOpen, setSideBarOpen] = useState(false);
 
@@ -94,23 +95,22 @@ const ContentPage = () => {
         </article>
 
         <article className="w-full laptop:col-span-3 tablet:col-span-2 h-full overflow-y-auto flex px-2 flex-col rounded-lg pb-2">
-          <div className="w-full text-lg text-center text-white my-2 py-2 bg-primary rounded-lg ">
-            <div
-              onClick={openSideBar}
-              className={`${
-                sideBarOpen ? "hidden" : "block"
-              } absolute right-2 text-2xl  border-none  flex-col-centered px-2 tablet:hidden `}
-            >
-              <RiMenu3Fill />
-            </div>
-            NAVBAR WITH ICONS
+          {/* LESSON HEADING */}
+          <div className="w-full text-lg text-center text-white my-2 py-1 bg-primary rounded-lg ">
+            <MenuBtn openSideBar={openSideBar} sideBarOpen={sideBarOpen} />
+            {/* <div className="debug inline">
+              <LogoutBtn />
+            </div> */}
+            <p className="inline">{currentLesson?.lessonName}</p>
           </div>
           {lessonType === "mp4" ? (
             <>
+              {/* LESSON VIDEO */}
               <ContentSection
                 currentLessonUrl={currentLesson?.lessonUrl}
                 lessonName={currentLesson?.lessonName}
               />
+              {/* LESSON RESOURCES */}
               <div className="border-none border-slate-400 rounded-lg w-full">
                 <UnitNav />
                 <Outlet

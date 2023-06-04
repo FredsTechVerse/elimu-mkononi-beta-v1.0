@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { CourseCard, CourseSkeleton } from "..";
+import { CourseCard, CourseSkeleton, PageTitle } from "..";
 import axios from "../../axios";
 
 const CoursesSection = () => {
@@ -27,10 +27,9 @@ const CoursesSection = () => {
   return (
     <div
       id="courses"
-      className="courses relative  p-2 w-full text-slate-900 bg-white"
+      className="courses relative  p-2 w-full text-slate-900 bg-white "
     >
-      <h3 className="text-6xl font-bold text-center mt-3">Get Started</h3>
-      <p className="mb-6 text-center">Explore the courses</p>
+      <PageTitle text="list of courses" />
       <div className="flex-col-centered w-full pb-6">
         {coursesData?.length > 0 && !fetchingCourses ? (
           <div className="grid-lg">

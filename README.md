@@ -23,6 +23,24 @@
   Chatgpt is a powerful tool but it is outsourcing its data from the internet.It will be misleading at times hence the need to crosscheck for one's self.
   However , it's a great tool to kick start the projects.
 
+  ### INDEXED NAVIGATION
+
+- I can simply get away with a for loop for looping over my chapter array , finding index of specific chapter that i need and be a headstart for teh content section which should never be called while my chapter is empty.... The unit overview page should ensure of this..... Code sample : -
+  `const chapterNameToFind = "REW";
+
+// Find the index of the chapter
+const chapters = data.unitChapters;
+let chapterIndex = -1;
+
+for (let i = 0; i < chapters.length; i++) {
+if (chapters[i].chapterName === chapterNameToFind) {
+chapterIndex = i;
+break;
+}
+}`
+
+As i break out to the dashboard , I will recap on :- Array methods and context as i get to implement indexed course navigation....
+
 ### PERFOMANCE OPTIMIZATION
 
 - Building the resources section to handle pdf & additional audio documents.

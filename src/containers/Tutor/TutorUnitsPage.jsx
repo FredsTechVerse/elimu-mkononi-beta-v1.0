@@ -1,5 +1,5 @@
 import React from "react";
-import { UnitsCard } from "../../components";
+import { UnitCard } from "../../components";
 const TutorUnitsPage = () => {
   return (
     <div className="w-full relative h-full flex flex-col ">
@@ -12,7 +12,7 @@ const TutorUnitsPage = () => {
         {/* When this is absolute the parent collapses. */}
         <div className="relative top-[-70px] w-full h-full px-20 ">
           <main className="relative main-content grid grid-cols-2 gap-10">
-            <UnitsCard
+            <UnitCard
               number={"01"}
               heading={"Thermodynamics"}
               summary={
@@ -20,21 +20,21 @@ const TutorUnitsPage = () => {
               }
             />
 
-            <UnitsCard
+            <UnitCard
               number={"02"}
               heading={"Solid Mechanics"}
               summary={
                 "Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore dolorem nam ipsum doloribus nihil pariatur fugi"
               }
             />
-            <UnitsCard
+            <UnitCard
               number={"03"}
               heading={"Engineering Materials"}
               summary={
                 "Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore dolorem nam ipsum doloribus nihil pariatur fugi"
               }
             />
-            <UnitsCard
+            <UnitCard
               number={"04"}
               heading={"Calculus 2"}
               summary={

@@ -21,12 +21,13 @@ const HeroSection = ({ isNavOpen, showNavbar, hideNavbar }) => {
             dolor esse deleniti? Sequi nemo dolore asperiores omnis natus,
             repudiandae,
           </p>
-          <a
+          {/* <a
             href="#courses"
             className="button w-36 bg-primary text-white hover:bg-purple-500 flex-row-centered rounded-md my-5"
           >
             <p className="capitalize">Get Started</p>
-          </a>
+          </a> */}
+
           <div className="custom-shape-divider-bottom-1679515507">
             <svg
               data-name="Layer 1"

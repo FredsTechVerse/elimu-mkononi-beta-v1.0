@@ -21,7 +21,7 @@ const UnitNav = () => {
       <Link to="resources">
         <div className="tab cursor-pointer group">
           <div className="capitalize">Resources</div>
-          <div className=" line h-1 rounded-md bg-slate-200  w-4 group-hover:w-full transition-all  "></div>
+          <div className="line h-1 rounded-md bg-slate-200  w-4 group-hover:w-full transition-all  "></div>
         </div>
       </Link>
     </div>

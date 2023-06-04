@@ -8,6 +8,7 @@ import {
   NavigateBtn,
   CTAUnitButtonAdmin,
   HomeBtn,
+  MenuBtn,
 } from "./Buttons";
 
 import {
@@ -16,7 +17,7 @@ import {
   HomePageCard,
   TeamCard,
   TutorCard,
-  UnitsCard,
+  UnitCard,
   AdminCard,
   UserCard,
   UsersTableAlternative,
@@ -103,7 +104,7 @@ export {
   FormNavigation,
   ChapterCard,
   TutorCard,
-  UnitsCard,
+  UnitCard,
   UnitNav,
   QuillEditor,
   TutorSideBar,
@@ -168,4 +169,5 @@ export {
   UnitSkeleton,
   Layout,
   FancyLine,
+  MenuBtn,
 };

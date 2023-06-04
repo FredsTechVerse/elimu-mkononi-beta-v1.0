@@ -33,18 +33,18 @@ const Accordion = ({
 
         {unitData && unitData.unitName}
         <div className="flex gap-1">
-          <div
-            className={` ${
-              roles?.includes("EM-202") || roles?.includes("EM-202")
-                ? "flex"
-                : "hidden"
-            } gap-1 `}
-          >
+          <div className={` gap-1 `}>
             <Link
               to={`/tutor/new-chapter/${unitID}`}
               state={{ background: location }}
             >
-              <IoMdAdd className="text-white text-3xl rounded-lg hover:bg-slate-100 hover:text-black hover:cursor-pointer" />
+              <IoMdAdd
+                className={`${
+                  roles?.includes("EM-202") || roles?.includes("EM-202")
+                    ? "flex"
+                    : "hidden"
+                } text-white text-3xl rounded-lg hover:bg-slate-100 hover:text-black hover:cursor-pointer`}
+              />
             </Link>
 
             <BiRefresh
