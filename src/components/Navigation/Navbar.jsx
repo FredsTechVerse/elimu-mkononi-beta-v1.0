@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { LogoutBtn, NavBtn, NavBgBtn } from "../../components";
+import { LogoutBtn, NavBtn, NavBgBtn, Tooltip } from "../../components";
 
 import { RiMenu3Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
@@ -24,17 +24,33 @@ const Navbar = ({ isNavOpen, showNavbar, hideNavbar }) => {
       {/* ACTUAL NAVBAR */}
       <div className="phone:hidden laptop:flex relative items-center  capitalize">
         <div id="section-2" className=" h-full flex">
-          <NavBtn to="/" text="Home" />
-          {roles?.includes("EM-202") && <NavBtn to="/tutor" text="Dashboard" />}
-          {roles?.includes("EM-203") && <NavBtn to="/admin" text="Dashboard" />}
+          <Tooltip tooltip="Home">
+            <NavBtn to="/" text="Home" />
+          </Tooltip>
+          {roles?.includes("EM-202") && (
+            <Tooltip tooltip="Dashborad">
+              <NavBtn to="/tutor" text="Dashboard" />
+            </Tooltip>
+          )}
+          {roles?.includes("EM-203") && (
+            <Tooltip tooltip="Dashborad">
+              <NavBtn to="/admin" text="Dashboard" />
+            </Tooltip>
+          )}
         </div>
 
         <div id="section-3" className={`${!user ? "flex" : "hidden"}`}>
-          <NavBgBtn to="/new-student" text="Register" />
-          <NavBgBtn to="/log-in" text="Log In" />
+          <Tooltip tooltip="Register">
+            <NavBgBtn to="/new-student" text="Register" />
+          </Tooltip>
+          <Tooltip tooltip="Login">
+            <NavBgBtn to="/log-in" text="Log In" />
+          </Tooltip>
         </div>
         <div id="section-3" className={`${!user ? "hidden" : "flex"}`}>
-          <LogoutBtn />
+          <Tooltip tooltip="Logout">
+            <LogoutBtn />
+          </Tooltip>
         </div>
       </div>
     </div>

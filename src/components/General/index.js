@@ -6,7 +6,7 @@ import RequireAuth from "./RequireAuth";
 import Modal from "./Modal";
 import ProgressBar from "./ProgressBar";
 import FancyLine from "./FancyLine";
-
+import Tooltip from "./Tooltip";
 export {
   AlertBox,
   TutorCardHome,
@@ -16,4 +16,5 @@ export {
   Modal,
   ProgressBar,
   FancyLine,
+  Tooltip,
 };

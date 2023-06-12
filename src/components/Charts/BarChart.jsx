@@ -1,4 +1,3 @@
-// components/BarChart.js
 import { Bar } from "react-chartjs-2";
 const BarChart = ({ chartData }) => {
   return (

@@ -5,7 +5,7 @@ const LogoutBtn = () => {
   return (
     <div
       onClick={handleLogout}
-      className="w-11 h-11 bg-white border-2 inline border-primary rounded-full text-md flex-row-centered hover:bg-primary cursor-pointer hover:text-white mx-2 "
+      className="w-12 h-12 bg-transparent border-2 border-primary rounded-full text-md flex-row-centered cursor-pointer hover:text-white hover:border-white mx-2"
     >
       <FiLogOut />
     </div>

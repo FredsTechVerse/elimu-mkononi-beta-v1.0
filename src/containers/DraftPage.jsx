@@ -6,6 +6,7 @@ import {
   PieChart,
   BarChart,
   LineChart,
+  ComparisonChart,
 } from "../components";
 
 // CHART.JS CONFIGS
@@ -19,7 +20,7 @@ const pdfUrl =
 const DraftPage = () => {
   const playerRef = React.useRef(null);
 
-  // CREATING A PIE CHART CONFIGS
+  // CREATING A  CHART CONFIGS
   const [chartData, setChartData] = useState({
     labels: Data.map((data) => data.year),
     datasets: [
@@ -33,12 +34,12 @@ const DraftPage = () => {
           "#f3ba2f",
           "#2a71d0",
         ],
-        borderColor: "black",
+        borderColor: "white",
         borderWidth: 2,
       },
     ],
   });
-  // END OF PIE CHART CONFIGS
+  // END OF CHART CONFIGS
 
   // VIDEOJS CONFIGS
   const videoJsOptions = {
@@ -72,14 +73,28 @@ const DraftPage = () => {
 
   return (
     <div className=" w-full h-full flex-col-centered justify-start">
-      <ReactPdf pdfUrl={pdfUrl} />
+      {/* <ReactPdf pdfUrl={pdfUrl} /> */}
       {/* <S3Uploader /> */}
       {/* <div className="border-2 border-primary rounded-lg w-[700px] my-auto h-auto ">
         <VideoJsPlayer options={videoJsOptions} onReady={handlePlayerReady} />
       </div> */}
-      {/* <PieChart chartData={chartData} />
-      <BarChart chartData={chartData} />
-      <LineChart chartData={chartData} /> */}
+      {/* <div className="debug w-full grid grid-cols-2">
+        <div className="w-48 h-48">
+          <PieChart chartData={chartData} />
+        </div>
+        <div className="w-48 h-48">
+          <BarChart chartData={chartData} />
+        </div>
+        <div className="w-48 h-48">
+          <LineChart chartData={chartData} />
+        </div>
+        <div className="w-48 h-48">
+          <ComparisonChart />
+        </div>
+      </div> */}
+      <div className="w-[650px]">
+        <ComparisonChart />
+      </div>
     </div>
   );
 };

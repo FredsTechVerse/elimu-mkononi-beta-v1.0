@@ -33,7 +33,7 @@ import {
 import { Routes, Route, useLocation } from "react-router-dom";
 function App() {
   const location = useLocation();
-  const background = location.state && location.state.background; //If the first param is true , then the second param is assigned.Just like conditional operators.
+  const background = location.state && location.state.background;
   // console.log(import.meta.env.VITE_APP_BASE);
   // AUTHENTICATION REFERENCE.
   // {
@@ -44,37 +44,29 @@ function App() {
 
   return (
     <div className="flex w-full h-screen">
-      {/* When there is a background object in the state upon render/re-render of the app component,we imperatively declare the route/component to show for the first pair of routes. */}
       <Routes location={background || location}>
-        {/* By setting it to the previous page, we hinder any updates hence it still renders the previous page. */}
-        {/* Student Protected Routes */}
+        {/* GENERAL ROUTES */}
         <Route exact path="*" element={<Forbidden />}></Route>
         <Route exact path="forbidden" element={<Forbidden />} />
         <Route path="/log-in" element={<LogInForm />} />
         <Route path="/draft" element={<DraftPage />} />
-
-        {/* Should trigger a redirect to the dashboard. */}
         <Route element={<UsersLayout />}>
-          {/* GENERAL ROUTES */}
           <Route exact path="/" element={<HomePage />}></Route>
           <Route
             exact
             path="new-student"
             element={<RegistrationForm role={"EM-201"} />}
           />
-          {/* STUDENT ROUTES */}
           <Route
             element={
               <RequireAuth allowedRoles={["EM-201", "EM-202", "EM-203"]} />
             }
           >
-            {/* COURSE VIEW [UNITS] */}
             <Route
               exact
               path="/course/:courseId"
               element={<UnitsOutline />}
             ></Route>
-            {/* UNIT VIEW. [CHAPTERS & LESSONS] */}
             <Route
               exact
               path="/unit-overview/:unitID"

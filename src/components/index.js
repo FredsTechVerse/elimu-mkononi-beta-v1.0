@@ -23,7 +23,7 @@ import {
   UsersTableAlternative,
 } from "./Cards";
 
-import { BarChart, LineChart, PieChart } from "./Charts";
+import { BarChart, LineChart, PieChart, ComparisonChart } from "./Charts";
 
 import {
   RegistrationForm,
@@ -44,6 +44,7 @@ import {
   AlertBox,
   RequireAuth,
   FancyLine,
+  Tooltip,
 } from "./General";
 
 import {
@@ -161,6 +162,7 @@ export {
   ReactPdf,
   S3Uploader,
   VideoJsPlayer,
+  ComparisonChart,
   PieChart,
   BarChart,
   LineChart,
@@ -170,4 +172,5 @@ export {
   Layout,
   FancyLine,
   MenuBtn,
+  Tooltip,
 };

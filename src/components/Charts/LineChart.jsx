@@ -8,6 +8,7 @@ function LineChart({ chartData }) {
       <Line
         data={chartData}
         options={{
+          responsive: true,
           plugins: {
             title: {
               display: true,
