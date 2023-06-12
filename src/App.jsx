@@ -64,7 +64,7 @@ function App() {
           >
             <Route
               exact
-              path="/course/:courseId"
+              path="/course/:courseID"
               element={<UnitsOutline />}
             ></Route>
             <Route
@@ -120,7 +120,7 @@ function App() {
             ></Route>
             <Route exact path="courses">
               <Route index element={<CourseAdminPage />}></Route>
-              <Route exact path=":courseId" element={<UnitsOutline />}></Route>
+              <Route exact path=":courseID" element={<UnitsOutline />}></Route>
             </Route>
           </Route>
         </Route>
@@ -159,7 +159,7 @@ function App() {
 
           <Route
             exact
-            path="/admin/courses/:courseId/new-unit"
+            path="/admin/courses/:courseID/new-unit"
             element={<UnitForm />}
           />
           <Route

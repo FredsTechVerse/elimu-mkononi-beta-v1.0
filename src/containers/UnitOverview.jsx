@@ -1,54 +1,49 @@
-import React, { useEffect, useState } from "react";
 import { Outlet, useParams } from "react-router-dom";
-import { ChapterCard, PageTitle } from "../components";
-import axios from "../axios";
+import { ChapterCard, PageTitle, UnitSkeleton } from "../components";
+import { useQuery } from "@tanstack/react-query";
+import { fetchUnitData } from "../api/get";
 const UnitOverview = () => {
   const { unitID } = useParams();
-  const [unitData, setUnitData] = useState({});
-  const [isFetchComplete, setIsFetchComplete] = useState(false);
 
-  useEffect(() => {
-    fetchUnitData();
-  }, [unitID]);
-  const fetchUnitData = async () => {
-    try {
-      const { data, status } = await axios.get(`/unit/${unitID}`);
-      setIsFetchComplete(true);
-      if (status == 200 && data) {
-        console.log(JSON.stringify(data));
-        setUnitData(data);
-      }
-    } catch (error) {
-      setIsFetchComplete(true);
-      console.error(error);
-    }
-  };
-
+  const unitQuery = useQuery({
+    queryKey: ["unitData", unitID],
+    queryFn: () => fetchUnitData(unitID),
+  });
   return (
-    <div>
+    <div className="flex-col-centered debug">
+      <div className=" relative pattern h-72 w-full flex-row-centered">
+        <p className="text-white font-bold text-center phone:text-xl tablet:text-2xl laptop:text-4xl uppercase w-full h-full flex-row-centered backdrop-blur-md bg-black bg-opacity-10">
+          {unitQuery?.data && unitQuery?.data?.unitCode}
+        </p>
+      </div>
       <PageTitle text="list of chapters" />
-      {isFetchComplete && unitData && unitData.unitChapters.length > 0 ? (
-        <div className="flex-col-centered">
-          <div className="grid-sm">
-            {unitData.unitChapters.map((chapter, index) => (
-              <ChapterCard
-                key={index}
-                unitID={unitID}
-                chapterID={chapter?._id}
-                chapterNumber={`${index + 1}`}
-                chapterName={chapter?.chapterName}
-              />
-            ))}
-          </div>
+      {unitQuery.status === "loading" ? (
+        <div className="grid-sm w-full h-full overflow-hidden">
+          <UnitSkeleton />
+          <UnitSkeleton />
+          <UnitSkeleton />
         </div>
-      ) : !isFetchComplete ? (
-        <div className="flex-col-centered text-center py-3 px-2 bg-slate-300 m-2 rounded-lg">
-          Skeleton will be displayed here!
-        </div>
+      ) : unitQuery.status === "error" ? (
+        <p className="bg-red-300 rounded-lg p-4">{unitQuery.error.message}</p>
       ) : (
-        <div className="flex-col-centered text-center py-3 px-2 bg-rose-300 m-2 rounded-lg">
-          This unit has no content yet.Put button for tutor or admin to add
-          content.
+        <div className="flex-col-centered">
+          {unitQuery?.data?.unitChapters.length > 0 ? (
+            <div className="grid-sm">
+              {unitQuery?.data?.unitChapters.map((chapter, index) => (
+                <ChapterCard
+                  key={index}
+                  unitID={unitID}
+                  chapterID={chapter?._id}
+                  chapterNumber={`${index + 1}`}
+                  chapterName={chapter?.chapterName}
+                />
+              ))}
+            </div>
+          ) : (
+            <p className="bg-blue-300 rounded-lg p-4 text-center">
+              The unit has not yet been populated
+            </p>
+          )}
         </div>
       )}
     </div>

@@ -1,28 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { CourseCard, CourseSkeleton, PageTitle } from "..";
-import axios from "../../axios";
-
+import { fetchCoursesData } from "../../api/get";
+import { useQuery } from "@tanstack/react-query";
 const CoursesSection = () => {
-  const [coursesData, setCoursesData] = useState([]);
-  const [fetchingCourses, setFetchingCourses] = useState(false);
-  const fetchCoursesData = async () => {
-    try {
-      setFetchingCourses(true);
-      const { data: coursesData } = await axios.get("/course/all-courses");
-      setCoursesData(coursesData);
-      setTimeout(() => {
-        setFetchingCourses(false);
-      }, 800);
-    } catch (error) {
-      console.error(error);
-      setTimeout(() => {
-        setFetchingCourses(false);
-      }, 800);
-    }
-  };
-  useEffect(() => {
-    fetchCoursesData();
-  }, []);
+  const coursesQuery = useQuery({
+    queryKey: ["courseData"],
+    queryFn: fetchCoursesData,
+  });
 
   return (
     <div
@@ -30,47 +14,41 @@ const CoursesSection = () => {
       className="courses relative  p-2 w-full text-slate-900 bg-white "
     >
       <PageTitle text="list of courses" />
-      <div className="flex-col-centered w-full pb-6">
-        {coursesData?.length > 0 && !fetchingCourses ? (
-          <div className="grid-lg">
-            {coursesData &&
-              coursesData.map((course, courseIndex) => {
-                const { _id, courseTitle, courseImage } = course;
-                return (
-                  <CourseCard
-                    key={courseIndex}
-                    courseID={_id}
-                    courseTitle={courseTitle}
-                    courseImage={courseImage}
-                  />
-                );
-              })}
-          </div>
-        ) : fetchingCourses ? (
-          <div className="grid-lg">
-            <CourseSkeleton />
-            <CourseSkeleton />
-            <CourseSkeleton />
-          </div>
-        ) : (
-          <p className=" h-full text-center bg-red-600 bg-opacity-40">
-            No courses have been found
-          </p>
-        )}
-      </div>
-      <div className="custom-shape-divider-bottom-1679516065">
-        <svg
-          data-name="Layer 1"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1200 120"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M1200 0L0 0 598.97 114.72 1200 0z"
-            className="shape-fill"
-          ></path>
-        </svg>
-      </div>
+
+      {coursesQuery.status === "loading" ? (
+        <div className="grid-lg">
+          <CourseSkeleton />
+          <CourseSkeleton />
+          <CourseSkeleton />
+          <CourseSkeleton />
+          <CourseSkeleton />
+          <CourseSkeleton />
+        </div>
+      ) : coursesQuery.status === "error" ? (
+        <p className="bg-red-300 rounded-lg p-4">
+          {JSON.stringify(coursesQuery.error.message)}
+        </p>
+      ) : (
+        <div className="grid-lg">
+          {coursesQuery?.data.length > 0 ? (
+            coursesQuery.data.map((course, courseIndex) => {
+              const { _id, courseTitle, courseImage } = course;
+              return (
+                <CourseCard
+                  key={courseIndex}
+                  courseID={_id}
+                  courseTitle={courseTitle}
+                  courseImage={courseImage}
+                />
+              );
+            })
+          ) : (
+            <p className=" h-full text-center bg-blue-300 bg-opacity-40">
+              No courses have been found
+            </p>
+          )}
+        </div>
+      )}
     </div>
   );
 };

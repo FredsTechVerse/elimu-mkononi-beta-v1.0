@@ -9,7 +9,7 @@ const postObject = async ({
   unitDescription,
 }) => {
   const formData = {
-    courseId: course,
+    courseID: course,
     tutorId: tutor,
     unitCode: unitCode,
     unitName: unitName,

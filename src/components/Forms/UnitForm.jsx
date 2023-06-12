@@ -22,7 +22,7 @@ const UnitForm = () => {
     return () => (document.body.style.overflow = "unset");
   }, []);
   // DECLARATION OF VARIABLES
-  const { courseId } = useParams();
+  const { courseID } = useParams();
   // const [course, setCourse] = useState(`${courses[0].courseTitle}`);
   const [tutor, setTutor] = useState();
   const [unitCode, setUnitCode] = useState("");
@@ -37,7 +37,7 @@ const UnitForm = () => {
     setSubmit(true);
     // Create our post object.
     const { status } = await postObject({
-      course: courseId,
+      course: courseID,
       tutor: tutor,
       unitCode,
       unitName,
