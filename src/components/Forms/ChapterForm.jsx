@@ -15,7 +15,7 @@ const ChapterForm = () => {
   const [chapterNumber, setChapterNumber] = useState("");
   const [chapterName, setChapterName] = useState("");
   const [chapterDescription, setChapterDescription] = useState("");
-  const [submit, setSubmit] = useState(false);
+  const [isFormSubmitted, setIsFormSubmittted] = useState(false);
   // TRACKING LOCATION
   const location = useLocation();
   const from = location.state?.background?.pathname;
@@ -32,6 +32,7 @@ const ChapterForm = () => {
 
   const fileUploadHandler = async (e) => {
     e.preventDefault();
+    setIsFormSubmittted(true);
     createChapterMutation.mutate({
       unitID: unitID,
       chapterNumber: `${unitID}-${chapterNumber}`,
@@ -87,7 +88,7 @@ const ChapterForm = () => {
           </div>
           {/* CTA BUTTONS */}
           <div className="cta-wrap ">
-            {!submit ? (
+            {!isFormSubmitted ? (
               <Button type="button" text="Save" onClick={fileUploadHandler} />
             ) : (
               <LoadingBtn action="Uploading" />
