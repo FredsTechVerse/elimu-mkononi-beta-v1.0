@@ -25,7 +25,7 @@ const ContentPage = () => {
 
   useEffect(() => {
     if (currentLesson !== null) {
-      identifyAndUpdateLessonType(currentLesson?.lessonUrl);
+      setLessonType(identifyLessonType(currentLesson?.lessonUrl));
       console.log(
         `Updated current lesson data ${JSON.stringify(currentLesson)}`
       );
@@ -46,6 +46,8 @@ const ContentPage = () => {
   const closeSideBar = () => {
     setSideBarOpen(false);
   };
+
+  console.log(`Original Data ${JSON.stringify(currentLesson)}`);
 
   const fetchUnitData = async () => {
     try {
@@ -70,12 +72,9 @@ const ContentPage = () => {
     }
   };
 
-  const identifyAndUpdateLessonType = (lessonUrl) => {
-    if (lessonUrl) {
-      const lessonType = lessonUrl.split(".")[1];
-      setLessonType(lessonType);
-      return lessonType;
-    }
+  const identifyLessonType = (lessonUrl) => {
+    const lessonType = lessonUrl.split(".")[1];
+    return lessonType;
   };
 
   if (Object.keys(unitData).length > 0) {
@@ -103,12 +102,17 @@ const ContentPage = () => {
             </div> */}
             <p className="inline">{currentLesson?.lessonName}</p>
           </div>
-          {lessonType === "mp4" ? (
+          {currentLesson && lessonType === "mp4" ? (
             <>
               {/* LESSON VIDEO */}
               <ContentSection
-                currentLessonUrl={currentLesson?.lessonUrl}
+                lessonIndex={currentLesson?.lessonIndex}
+                chapterIndex={currentLesson?.chapterIndex}
                 lessonName={currentLesson?.lessonName}
+                updateCurrentLesson={updateCurrentLesson}
+                currentLessonData={currentLesson}
+                // currentLessonUrl={currentLesson?.lessonUrl}
+                // lessonName={currentLesson?.lessonName}
               />
               {/* LESSON RESOURCES */}
               <div className="border-none border-slate-400 rounded-lg w-full">
