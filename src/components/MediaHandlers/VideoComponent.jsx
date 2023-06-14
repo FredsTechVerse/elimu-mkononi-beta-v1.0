@@ -31,7 +31,6 @@ const VideoComponent = ({ src, currentLesson, title, updateCurrentLesson }) => {
       <video
         className="w-full aspect-video rounded-lg shadow-lg shadow-slate-500 "
         src={src}
-        autoPlay={true}
         onPlay={onPlay}
         onPause={onPause}
         onEnded={onVideoEnd}
