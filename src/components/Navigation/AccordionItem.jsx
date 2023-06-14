@@ -16,13 +16,16 @@ const AccordionItem = ({
   onToggle,
   active,
   updateCurrentLesson,
+  chapterIndex,
   closeSideBar,
+  unitData,
 }) => {
   const location = useLocation();
   // console.log(`Chapter Data ${JSON.stringify(chapter)}`);
   const { _id: chapterID, chapterName, chapterLessons } = chapter;
   const roles = JSON.parse(localStorage.getItem("roles"));
-  const contentEl = useRef(); //Used to interact with the dom accordigly.
+  const contentEl = useRef(); //Used to interact with the dom accordigly
+
   return (
     <li className="accordion_item">
       <button className="button  px-2 text-sm " onClick={onToggle}>
@@ -53,7 +56,7 @@ const AccordionItem = ({
             : { height: "0px" }
         }
       >
-        {chapterLessons.map((lesson, index) => {
+        {chapterLessons.map((lesson, lessonIndex) => {
           const {
             _id: lessonID,
             lessonUrl,
@@ -64,17 +67,17 @@ const AccordionItem = ({
 
           return (
             <li
-              key={index}
+              key={lessonIndex}
               className="hover:bg-slate-500 bg-slate-300 text-black w-full px-3 py-2 my-0.5 capitalize rounded-md"
               onClick={() => {
-                closeSideBar();
                 updateCurrentLesson({
-                  lessonID,
-                  lessonUrl,
-                  lessonName,
-                  lessonNotes,
-                  lessonResources,
+                  ...unitData?.unitChapters[chapterIndex]?.chapterLessons[
+                    lessonIndex
+                  ],
+                  lessonIndex: lessonIndex,
+                  chapterIndex: chapterIndex,
                 });
+                closeSideBar();
               }}
             >
               <div className="flex flex-row items-center gap-5 justify-start">

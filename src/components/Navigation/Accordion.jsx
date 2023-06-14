@@ -67,14 +67,16 @@ const Accordion = ({
 
       {unitData && unitData.unitChapters.length > 0 ? (
         <div className="w-full bg-secondary">
-          {unitData.unitChapters.map((chapter, index) => (
+          {unitData.unitChapters.map((chapter, chapterIndex) => (
             <AccordionItem
+              unitData={unitData}
               updateCurrentLesson={updateCurrentLesson}
-              key={`chapter-${index}`}
+              key={`chapter-${chapterIndex}`}
               chapter={chapter}
-              onToggle={() => handleToggle(index)}
+              chapterIndex={chapterIndex}
+              onToggle={() => handleToggle(chapterIndex)}
               closeSideBar={closeSideBar}
-              active={clicked === index}
+              active={clicked === chapterIndex}
             />
           ))}
         </div>
