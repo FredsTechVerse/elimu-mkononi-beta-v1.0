@@ -1,93 +1,44 @@
 import React, { useState } from "react";
-import {
-  FormNavigation,
-  Modal,
-  Button,
-  AlertBox,
-  S3Uploader,
-} from "../../components";
-import axios from "../../axios";
+import { FormNavigation, Modal, Button, S3Uploader } from "../../components";
 import { useNavigate } from "react-router-dom";
+import { createCourse } from "../../api/postData";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const CourseForm = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
   // FORM CONFIGURATIONS
   //=========================
   const [courseTitle, setCourseTitle] = useState("");
-  const [returnReason, setReturnReason] = useState("");
   const [uploadSuccess, setUploadSucess] = useState(false);
   const [fileName, setFileName] = useState(null);
-  //ALERT BOX CONFIGURATIONS
-  //=========================
-  const [response, setResponse] = useState(null);
-  const [responseTracker, setResponseTracker] = useState(null);
-  const [statusTracker, setStatusTracker] = useState(null);
 
-  const savingFileToDB = async ({ imageUrl }) => {
-    try {
-      console.log(`Image URL: ${imageUrl}`);
-      let courseData = {
-        courseTitle,
-        courseImage: imageUrl,
-      };
+  const createCourseMutation = useMutation({
+    mutationFn: createCourse,
+    onSuccess: (data) => {
+      console.log(data);
+      queryClient.setQueryData(["courses", data._id], data);
+      queryClient.invalidateQueries(["courses"], { exact: true });
+      console.log("Course data has been successfully saved");
+      navigate(-1);
+    },
+  });
 
-      const config = {
-        headers: { "Content-Type": "application/json" },
-      };
-
-      const response = await axios.post(
-        "/course/new-course",
-        courseData,
-        config
-      );
-
-      const { status } = response;
-
-      if (status === 201) {
-        setResponse("Course has been successfully updated.");
-        setStatusTracker(true);
-        setResponseTracker(true);
-        setTimeout(() => {
-          setResponseTracker(false);
-        }, 2500);
-        navigate(-1);
-        setReturnReason("Operation Successfull");
-        return;
-      }
-    } catch (err) {
-      if (err.message === "Request failed with status code 400") {
-        setResponse("This record already exists.");
-        setStatusTracker(false);
-        setResponseTracker(true);
-        setTimeout(() => {
-          setResponseTracker(false);
-        }, 2500);
-      } else {
-        console.log(err);
-      }
+  const saveCourse = async (e) => {
+    e.preventDefault();
+    if (isFormValid) {
+      createCourseMutation.mutate({
+        courseTitle: courseTitle,
+        courseImage: fileName,
+      });
     }
   };
-
-  const validateForm = () => {
-    if (courseTitle !== null) {
+  const isFormValid = () => {
+    if (courseTitle !== null && uploadSuccess) {
       return true;
     }
     return false;
-  };
-
-  const saveCourse = async (e) => {
-    try {
-      // Prevent default behaviour of our form of refreshing page.
-      e.preventDefault();
-      const validation = validateForm();
-      if (validation && uploadSuccess) {
-        console.log("Saving course to db");
-        savingFileToDB({ imageUrl: fileName });
-      }
-    } catch (err) {
-      console.log("Error occured during upload process.");
-      console.log(err);
-    }
   };
 
   const verifyUpload = () => {
@@ -104,11 +55,11 @@ const CourseForm = () => {
       <div className="bg-slate-300  bg-opacity-50 flex flex-col justify-center items-center tablet:3/5 laptop:w-1/3 phone:w-3/4">
         <FormNavigation text="COURSE FORM" />
         <form encType="multipart/form-data" className="form-styling">
-          <AlertBox
+          {/* <AlertBox
             responseTracker={responseTracker}
             statusTracker={statusTracker}
             response={response}
-          />
+          /> */}
           <div className="input-wrap">
             <label htmlFor="course">Course Details</label>
             <input

@@ -1,5 +1,4 @@
-import axios from "../../axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   NavigateBtn,
   CourseCard,
@@ -13,7 +12,7 @@ import { useQuery } from "@tanstack/react-query";
 const CoursesAdminPage = () => {
   const roles = JSON.parse(localStorage.getItem("roles"));
   const coursesQuery = useQuery({
-    queryKey: ["courseData"],
+    queryKey: ["courses"],
     queryFn: fetchCoursesData,
   });
   return (

@@ -5,10 +5,8 @@ import {
   ContentPage,
   TutorUnitsPage,
   AdminDashboard,
-  StudentsPageAdmin,
-  TutorsPageAdmin,
+  UsersPage,
   UsersLayout,
-  AdminSection,
   DraftPage,
   CourseAdminPage,
   Forbidden,
@@ -111,13 +109,7 @@ function App() {
             <Route index element={<AdminDashboard />} />
             <Route exact path="course-form" element={<CourseForm />} />
             <Route exact path="unit-form" element={<UnitForm />} />
-            <Route exact path="admins" element={<AdminSection />} />
-            <Route exact path="tutors" element={<TutorsPageAdmin />}></Route>
-            <Route
-              exact
-              path="students"
-              element={<StudentsPageAdmin />}
-            ></Route>
+            <Route exact path=":role" element={<UsersPage />}></Route>
             <Route exact path="courses">
               <Route index element={<CourseAdminPage />}></Route>
               <Route exact path=":courseID" element={<UnitsOutline />}></Route>

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { CourseCard, CourseSkeleton, PageTitle } from "..";
 import { fetchCoursesData } from "../../api/get";
 import { useQuery } from "@tanstack/react-query";
 const CoursesSection = () => {
   const coursesQuery = useQuery({
-    queryKey: ["courseData"],
+    queryKey: ["courses"],
     queryFn: fetchCoursesData,
   });
 

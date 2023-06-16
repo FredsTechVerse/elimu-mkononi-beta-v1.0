@@ -5,7 +5,7 @@ import { BiMessageDetail } from "react-icons/bi";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { AiFillEye } from "react-icons/ai";
 const CTAButton = ({ contact, _id, fetchUsersData: fetchUsersData }) => {
-  console.log(`Users ID ${_id}`);
+  // console.log(`Users ID ${_id}`);
   let navigate = useNavigate();
   // My work in the front-end is simply to make the axios request to the backend ili ifanye haki
   const deleteUser = async (_id) => {
