@@ -51,6 +51,7 @@ const CoursesSection = () => {
             <CourseSkeleton />
             <CourseSkeleton />
             <CourseSkeleton />
+            <CourseSkeleton />
           </div>
         ) : (
           <p className=" h-full text-center bg-red-600 bg-opacity-40">

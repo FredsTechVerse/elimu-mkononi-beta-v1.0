@@ -1,4 +1,4 @@
-import Button from "./Button";
+import SubmitButton from "./SubmitButton";
 import LoadingBtn from "./LoadingBtn";
 import AdminButton from "./AdminButton";
 import AdminNavItem from "./AdminNavItem";
@@ -9,7 +9,7 @@ import LogoutBtn from "./LogoutBtn";
 import HomeBtn from "./HomeBtn";
 import MenuBtn from "./MenuBtn";
 export {
-  Button,
+  SubmitButton,
   LoadingBtn,
   AdminButton,
   AdminNavItem,

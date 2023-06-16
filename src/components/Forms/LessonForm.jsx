@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   FormNavigation,
   Modal,
-  Button,
+  SubmitButton,
   AlertBox,
   S3Uploader,
 } from "../../components";
@@ -108,7 +108,7 @@ const LessonForm = () => {
 
   return (
     <Modal>
-      <div className="bg-slate-300  bg-opacity-50 flex flex-col justify-center items-center tablet:3/5 laptop:w-1/3 phone:w-full">
+      <div className="form-wrap h-[450px]">
         <FormNavigation text="Lesson Form" />
         <form
           encType="multipart/form-data"
@@ -157,12 +157,12 @@ const LessonForm = () => {
           {/* CTA BUTTONS */}
           <div className="cta-wrap">
             {/* {uploadSuccess ? (
-              <Button type="button" text="Save" onClick={saveLesson} />
+              <SubmitButton type="button" text="Save" onClick={saveLesson} />
             ) : (
               <LoadingBtn action="Uploading" />
             )} */}
 
-            <Button type="button" text="Save" onClick={saveLesson} />
+            <SubmitButton type="button" text="Save" onClick={saveLesson} />
           </div>
         </form>
       </div>

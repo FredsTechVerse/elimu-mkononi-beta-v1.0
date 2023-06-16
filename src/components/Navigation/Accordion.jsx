@@ -23,14 +23,8 @@ const Accordion = ({
   };
 
   return (
-    <div className="relative z-10 flex flex-col items-center h-full bg-slate-100 overflow-auto">
-      <div className="flex items-center justify-between w-full px-2 py-2 font-bold text-md text-slate-200 bg-primary text-center gap-4 ">
-        <div>
-          <Link to="/">
-            <AiFillHome className="text-white text-xl flex items-center justify-center" />
-          </Link>
-        </div>
-
+    <div className="relative z-10 flex flex-col items-center h-full bg-slate-100 max-h-screen">
+      <div className="flex items-center justify-between w-full px-2 py-2 font-bold text-md text-slate-200 bg-primary text-center ">
         {unitData && unitData.unitName}
         <div className="flex gap-1">
           <div className={` gap-1 `}>
@@ -66,7 +60,7 @@ const Accordion = ({
       </div>
 
       {unitData && unitData.unitChapters.length > 0 ? (
-        <div className="w-full bg-secondary">
+        <div className="w-full bg-secondary max-h-full overflow-auto">
           {unitData.unitChapters.map((chapter, chapterIndex) => (
             <AccordionItem
               unitData={unitData}

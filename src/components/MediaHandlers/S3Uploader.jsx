@@ -52,7 +52,7 @@ const S3Uploader = ({ verifyUpload, updateFileName }) => {
   };
 
   return (
-    <div className="flex flex-row justify-center items-center w-full p-4">
+    <div className="flex flex-row justify-center items-center w-72 tablet:w-[360px] mt-2 ">
       {percentCompleted ? (
         <div className="flex flex-col w-full h-48 bg-slate-200 rounded-lg  text-center items-center justify-center">
           {!uploadSuccess ? (
@@ -65,28 +65,23 @@ const S3Uploader = ({ verifyUpload, updateFileName }) => {
           )}
         </div>
       ) : (
-        <div className="w-full">
-          <Dropzone onDrop={handleDrop}>
-            {({ getRootProps, getInputProps }) => (
-              <div
-                {...getRootProps()}
-                className="dropzone flex flex-col w-full h-48  bg-slate-200 rounded-lg  text-center items-center justify-center"
+        <Dropzone onDrop={handleDrop}>
+          {({ getRootProps, getInputProps }) => (
+            <div
+              {...getRootProps()}
+              className="dropzone flex flex-col w-full bg-slate-200 rounded-lg  text-center items-center justify-center h-36 bg-opacity-60"
+            >
+              <input {...getInputProps()}></input>
+              <p className="mb-2 text-center">Drag and drop a file here</p>
+              <button
+                type="button"
+                className="bg-primary text-white w-32 h-8 rounded-full"
               >
-                <input
-                  className="border-2 border-red-300"
-                  {...getInputProps()}
-                ></input>
-                <p className="mb-2 text-center">Drag and drop a file here</p>
-                <button
-                  type="button"
-                  className="bg-primary text-white w-40 py-1.5 rounded-full"
-                >
-                  Select File
-                </button>
-              </div>
-            )}
-          </Dropzone>
-        </div>
+                Select File
+              </button>
+            </div>
+          )}
+        </Dropzone>
       )}
     </div>
   );

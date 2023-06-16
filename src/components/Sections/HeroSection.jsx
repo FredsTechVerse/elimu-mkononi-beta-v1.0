@@ -1,6 +1,5 @@
 import React from "react";
-import { Button, Navbar, NavbarSmall } from "..";
-import { BsFillArrowDownCircleFill } from "react-icons/bs";
+import { Navbar, NavbarSmall } from "../../components";
 const HeroSection = ({ isNavOpen, showNavbar, hideNavbar }) => {
   return (
     <div className="homepage w-full h-[90vh]">
@@ -21,12 +20,6 @@ const HeroSection = ({ isNavOpen, showNavbar, hideNavbar }) => {
             dolor esse deleniti? Sequi nemo dolore asperiores omnis natus,
             repudiandae,
           </p>
-          {/* <a
-            href="#courses"
-            className="button w-36 bg-primary text-white hover:bg-purple-500 flex-row-centered rounded-md my-5"
-          >
-            <p className="capitalize">Get Started</p>
-          </a> */}
 
           <div className="custom-shape-divider-bottom-1679515507">
             <svg

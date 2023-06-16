@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { UnitCard, UnitSkeleton, NavigateBtn, ReturnBackBtn } from "..";
 import axios from "../../axios";
-const UnitsOutline = () => {
+const CourseOverview = () => {
   const { courseId } = useParams();
   const roles = JSON.parse(localStorage.getItem("roles"));
   const [courseData, setCourseData] = useState({});
@@ -28,20 +28,21 @@ const UnitsOutline = () => {
 
   return (
     <div className="w-full h-full flex flex-col bg-slate-100 ">
-      <div className=" relative pattern h-48 flex-row-centered">
+      <div className="relative pattern h-[300px] flex-row-centered">
         <p className="text-white font-bold text-center phone:text-xl tablet:text-2xl laptop:text-4xl uppercase w-full h-full flex-row-centered backdrop-blur-md bg-black bg-opacity-10">
           {JSON.stringify(courseData) !== "{}" && courseData.courseTitle}
         </p>
         {(roles?.includes("EM-202") || roles?.includes("EM-203")) && (
-          <div className="absolute bottom-3 left-1 flex gap-1">
+          <div className="absolute top-1 right-1 flex gap-1">
             <NavigateBtn destination="new-unit" text="New Unit" />
             <NavigateBtn destination="assign-unit" text="Assign Unit" />
           </div>
         )}
+        <div className="absolute h-2 bg-white w-full bottom-0 rounded-t-full"></div>
       </div>
       <div className="flex flex-col items-center justify-center py-2 w-full h-full overflow-auto">
-        <div className="w-full h-full flex-col-centered p-4 ">
-          <div className="text-2xl font-bold text-slate-500 my-2 font-sans">
+        <div className="w-full h-full flex flex-col items-center px-4 ">
+          <div className="text-2xl font-bold text-slate-500 my-2 font-sans justify-center items-center">
             LIST OF UNITS
           </div>
           {courseData?.units?.length > 0 && !fetchingUnits ? (
@@ -61,15 +62,15 @@ const UnitsOutline = () => {
             </div>
           ) : fetchingUnits === true ? (
             <div className="grid-sm w-full h-full overflow-hidden">
-              <UnitSkeleton />
-              <UnitSkeleton />
-              <UnitSkeleton />
+              {Array.from({ length: 3 }).map((_, index) => (
+                <UnitSkeleton key={index} />
+              ))}
             </div>
           ) : (
-            <p className="h-full text-center">
-              This course is yet to be populated
+            <div className="text-center flex-col-centered py-3 px-5 bg-rose-300 m-2 rounded-lg  ">
+              <p>This course is yet to be populated </p>
               <ReturnBackBtn />
-            </p>
+            </div>
           )}
         </div>
       </div>
@@ -77,4 +78,4 @@ const UnitsOutline = () => {
   );
 };
 
-export default UnitsOutline;
+export default CourseOverview;

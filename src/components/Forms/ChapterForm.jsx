@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { FormNavigation, Button, Modal, LoadingBtn } from "../../components";
+import {
+  FormNavigation,
+  SubmitButton,
+  Modal,
+  LoadingBtn,
+} from "../../components";
 import axios from "../../axios";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 const ChapterForm = () => {
@@ -70,11 +75,11 @@ const ChapterForm = () => {
 
   return (
     <Modal>
-      <div className="bg-slate-300  bg-opacity-50 flex flex-col justify-center items-center tablet:3/5 laptop:w-1/3 phone:w-full">
+      <div className="form-wrap h-[400px]">
         <FormNavigation text="Chapter Form" />
         <form className="form-styling">
           {/* FILE */}
-          <div className="input-wrap">
+          <div className="input-wrap gap-2">
             <label htmlFor="cNumber" className="w-full ">
               Chapter Details
             </label>
@@ -101,8 +106,7 @@ const ChapterForm = () => {
               required
             ></input>
 
-            <input
-              className="input-styling"
+            <textarea
               id="lName"
               type="Text"
               placeholder="Description"
@@ -111,12 +115,16 @@ const ChapterForm = () => {
                 setChapterDescription(e.target.value);
               }}
               required
-            ></input>
+            ></textarea>
           </div>
           {/* CTA BUTTONS */}
           <div className="cta-wrap ">
             {!submit ? (
-              <Button type="button" text="Save" onClick={fileUploadHandler} />
+              <SubmitButton
+                type="button"
+                text="Save"
+                onClick={fileUploadHandler}
+              />
             ) : (
               <LoadingBtn action="Uploading" />
             )}

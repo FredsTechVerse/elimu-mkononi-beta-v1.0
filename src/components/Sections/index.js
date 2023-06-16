@@ -6,7 +6,7 @@ import CourseHeading from "./CourseHeading";
 import TeamSection from "./TeamSection";
 import HeroSection from "./HeroSection";
 import Footer from "./Footer";
-import UnitsOutline from "./UnitsOutline";
+import CourseOverview from "./CourseOverview";
 import PageTitle from "./PageTitle";
 import Layout from "./Layout";
 export {
@@ -18,7 +18,7 @@ export {
   TeamSection,
   HeroSection,
   Footer,
-  UnitsOutline,
+  CourseOverview,
   PageTitle,
   Layout,
 };

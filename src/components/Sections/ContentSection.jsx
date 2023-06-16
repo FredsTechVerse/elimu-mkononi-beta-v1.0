@@ -6,6 +6,7 @@ const ContentSection = ({ currentLessonData, updateCurrentLesson }) => {
       <div className="w-full text-center text-white flex flex-col justify-start text-3xl font-extrabold">
         <VideoComponent
           // src={`http://localhost:5000/elearning-module-a887d/us-central1/app/s3Direct/${currentLessonData?.lessonUrl}`}
+          // src={`http://localhost:4000/s3Direct/${currentLessonData?.lessonUrl}`}
           src={`https://us-central1-elearning-module-a887d.cloudfunctions.net/app/s3Direct/${currentLessonData?.lessonUrl}`}
           title={currentLessonData?.lessonName}
           currentLesson={currentLessonData}

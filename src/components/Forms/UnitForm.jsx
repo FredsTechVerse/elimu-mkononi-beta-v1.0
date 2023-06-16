@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "../../axios";
-import { FormNavigation, Button, LoadingBtn } from "../../components";
+import { FormNavigation, SubmitButton, LoadingBtn } from "../../components";
 import { postObject } from "../../modules/postUnitObject";
 const UnitForm = () => {
   const navigate = useNavigate();
@@ -51,7 +51,7 @@ const UnitForm = () => {
 
   return (
     <div className="modal-overlay">
-      <div className="w-3/5">
+      <div className="form-wrap">
         <FormNavigation text="unit form" />
         {/* PROPOSED HEADER. */}
         <form encType="multipart/form-data" className="form-styling">
@@ -131,7 +131,11 @@ const UnitForm = () => {
 
           <div className="cta-wrap">
             {!submit ? (
-              <Button type="button" text="Save" onClick={fileUploadHandler} />
+              <SubmitButton
+                type="button"
+                text="Save"
+                onClick={fileUploadHandler}
+              />
             ) : (
               <LoadingBtn action="Uploading" />
             )}

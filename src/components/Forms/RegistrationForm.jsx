@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FormNavigation, Button, Modal, AlertBox } from "..";
+import { FormNavigation, SubmitButton, Modal, AlertBox } from "..";
 import axios from "../../axios";
 import { useNavigate } from "react-router-dom";
 const RegistrationForm = ({ role }) => {
@@ -21,7 +21,6 @@ const RegistrationForm = ({ role }) => {
     e.preventDefault();
     // Check if inputs are blank
     if (password !== null && cPassword !== null) {
-      console.log(`${password} vs ${cPassword}`);
       // Check if they match
       if (password === cPassword) {
         // Check for length,
@@ -68,6 +67,7 @@ const RegistrationForm = ({ role }) => {
             }, 2000);
           } catch (error) {
             setStatusTracker(false);
+            console.log(error);
             console.log(error.response.data.message.message);
             setResponse(
               `[${error.response.data.message.name}] ${error.response.data.message.message}`
@@ -105,7 +105,7 @@ const RegistrationForm = ({ role }) => {
 
   return (
     <Modal>
-      <div className="form-container-styling">
+      <div className="form-wrap h-[550px]">
         <FormNavigation
           text={
             role === "EM-203"
@@ -115,7 +115,7 @@ const RegistrationForm = ({ role }) => {
               : "Student Registration"
           }
         />
-        <form className="form-styling">
+        <form className="form-styling" onSubmit={registerUser}>
           <div className="input-wrap">
             <label htmlFor="contact">Names</label>
             <div className="input-wrap">
@@ -148,7 +148,7 @@ const RegistrationForm = ({ role }) => {
           <div className="input-wrap">
             <div className="input-wrap">
               <label htmlFor="contact">Contact</label>
-              <div className="flex phone:flex-col tablet:flex-row">
+              <div className="flex phone:gap-3 tablet:gap-2">
                 <input
                   className="input-styling w-16"
                   type="Text"
@@ -157,7 +157,7 @@ const RegistrationForm = ({ role }) => {
                   readOnly
                 />
                 <input
-                  className="input-styling w-48"
+                  className="input-styling phone:w-52  tablet:w-72"
                   id="contact"
                   type="Number"
                   placeholder="Safaricom No."
@@ -221,13 +221,7 @@ const RegistrationForm = ({ role }) => {
           />
 
           <div className="cta-wrap">
-            <Button
-              type="button"
-              text="register"
-              onClick={(e) => {
-                registerUser(e);
-              }}
-            />
+            <SubmitButton type="submit" text="register" />
           </div>
         </form>
       </div>

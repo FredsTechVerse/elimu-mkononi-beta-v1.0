@@ -1,5 +1,5 @@
 import {
-  Button,
+  SubmitButton,
   LoadingBtn,
   LogoutBtn,
   AdminButton,
@@ -83,7 +83,7 @@ import {
   TeamSection,
   HeroSection,
   Footer,
-  UnitsOutline,
+  CourseOverview,
   PageTitle,
   Layout,
 } from "./Sections";
@@ -127,7 +127,7 @@ export {
   UsersDataTable,
   CTAButton,
   PageTitle,
-  Button,
+  SubmitButton,
   UnitsAdminTable,
   CTAUnitButtonAdmin,
   AdminNavItem,
@@ -167,7 +167,7 @@ export {
   BarChart,
   LineChart,
   UserCard,
-  UnitsOutline,
+  CourseOverview,
   UnitSkeleton,
   Layout,
   FancyLine,

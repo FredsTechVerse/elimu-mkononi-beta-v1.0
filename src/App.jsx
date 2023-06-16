@@ -27,7 +27,7 @@ import {
   CommentsSection,
   ResourcesSection,
   AccordionSmall,
-  UnitsOutline,
+  CourseOverview,
   Layout,
 } from "./components";
 import { Routes, Route, useLocation } from "react-router-dom";
@@ -65,7 +65,7 @@ function App() {
             <Route
               exact
               path="/course/:courseId"
-              element={<UnitsOutline />}
+              element={<CourseOverview />}
             ></Route>
             <Route
               exact
@@ -120,7 +120,11 @@ function App() {
             ></Route>
             <Route exact path="courses">
               <Route index element={<CourseAdminPage />}></Route>
-              <Route exact path=":courseId" element={<UnitsOutline />}></Route>
+              <Route
+                exact
+                path=":courseId"
+                element={<CourseOverview />}
+              ></Route>
             </Route>
           </Route>
         </Route>

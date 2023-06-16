@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {
   FormNavigation,
   Modal,
-  Button,
+  SubmitButton,
   AlertBox,
   S3Uploader,
 } from "../../components";
@@ -96,7 +96,7 @@ const ResourceForm = () => {
 
   return (
     <Modal>
-      <div className="bg-slate-300  bg-opacity-50 flex flex-col justify-center items-center tablet:3/5 laptop:w-1/3 phone:w-3/4">
+      <div className="form-wrap">
         <FormNavigation text="RESOURCE FORM" />
         <form encType="multipart/form-data" className="form-styling">
           <AlertBox
@@ -128,7 +128,7 @@ const ResourceForm = () => {
           </div>
           {/* CTA BUTTONS */}
           <div className="cta-wrap">
-            <Button
+            <SubmitButton
               type="button"
               text="Add Course"
               onClick={(e) => {

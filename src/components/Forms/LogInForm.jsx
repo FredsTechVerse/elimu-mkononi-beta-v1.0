@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { MdCancel } from "react-icons/md";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "../../axios";
-import { AlertBox, FormNavigation, Modal, Button } from "..";
+import { AlertBox, FormNavigation, Modal, SubmitButton } from "..";
 const LogInForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -69,16 +69,16 @@ const LogInForm = () => {
 
   return (
     <Modal>
-      <div className="form-container-styling">
+      <div className="form-wrap h-[320px]">
         <FormNavigation text="Log In" />
 
-        <form className="form-styling">
+        <form className="form-styling" onSubmit={handleSubmit}>
           <div className="input-wrap">
             <label htmlFor="surname">Username</label>
             <input
               id="email"
               name="surname"
-              placeholder="Your username is your first name"
+              placeholder="Type first name "
               type="text"
               className="input-styling"
               value={firstName}
@@ -104,22 +104,16 @@ const LogInForm = () => {
             statusTracker={statusTracker}
             response={message}
           />
-          <div className="w-full flex-row-centered">
-            <Button
-              type="button"
-              text="Log In"
-              onClick={(e) => {
-                handleSubmit(e);
-              }}
-            />
+          <div className="cta-wrap ">
+            <SubmitButton type="submit" text="Log In" />
           </div>
 
-          <p className="mt-2 text-center text-sm text-white ">
+          <p className="mt-1 text-center text-sm text-white ">
             <span>Not registered?</span>
-            <span className="mx-2">
+            <span className="mx-2 text-black">
               <Link
                 to={"/new-student"}
-                className="font-medium text-indigo-700 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="font-medium text-slate-800 hover:text-indigo-500 focus:outline-none focus:ring-2"
               >
                 Sign up
               </Link>

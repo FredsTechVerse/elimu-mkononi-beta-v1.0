@@ -4,7 +4,7 @@ import TutorPage from "./Tutor/TutorPage";
 import ContentPage from "./Tutor/ContentPage";
 import TutorUnitsPage from "./Tutor/TutorUnitsPage";
 import StudentsPageAdmin from "./Admin/StudentsPageAdmin";
-import UnitsOutline from "../components/Sections/UnitsOutline";
+import CourseOverview from "../components/Sections/CourseOverview";
 import TutorsPageAdmin from "./Admin/TutorsPageAdmin";
 import AdminDashboard from "./Admin/AdminDashboard";
 import CourseAdminPage from "./Admin/CourseAdminPage";
@@ -24,7 +24,7 @@ export {
   UsersLayout,
   AdminSection,
   DraftPage,
-  UnitsOutline,
+  CourseOverview,
   Forbidden,
   UnitOverview,
 };

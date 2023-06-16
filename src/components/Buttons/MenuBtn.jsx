@@ -6,7 +6,7 @@ const MenuBtn = ({ openSideBar, sideBarOpen }) => {
       onClick={openSideBar}
       className={`${
         sideBarOpen ? "hidden" : "block"
-      } text-2xl  border-none  flex-col-centered px-2 tablet:hidden `}
+      } text-xl  border-none  flex-col-centered px-2 tablet:hidden `}
     >
       <RiMenu3Fill />
     </div>

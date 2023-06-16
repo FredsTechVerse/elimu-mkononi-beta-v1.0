@@ -2,12 +2,15 @@ import React from "react";
 const VideoComponent = ({ src, currentLesson, title, updateCurrentLesson }) => {
   let { lessonIndex, chapterIndex } = currentLesson;
 
+  // const onVideoEnd = () => {
+  //   updateCurrentLesson({
+  //     ...unitData?.unitChapters[chapterIndex]?.chapterLessons[lessonIndex + 1],
+  //     lessonIndex: lessonIndex + 1,
+  //     chapterIndex: chapterIndex + 1,
+  //   });
+  // };
   const onVideoEnd = () => {
-    updateCurrentLesson({
-      ...unitData?.unitChapters[chapterIndex]?.chapterLessons[lessonIndex + 1],
-      lessonIndex: lessonIndex + 1,
-      chapterIndex: chapterIndex + 1,
-    });
+    console.log("Video ended");
   };
 
   const onError = () => {
@@ -31,11 +34,11 @@ const VideoComponent = ({ src, currentLesson, title, updateCurrentLesson }) => {
       <video
         className="w-full aspect-video rounded-lg shadow-lg shadow-slate-500 "
         src={src}
-        onPlay={onPlay}
-        onPause={onPause}
-        onEnded={onVideoEnd}
-        onLoadedData={onLoadedData}
-        onError={onError}
+        // onPlay={onPlay}
+        // onPause={onPause}
+        // onEnded={onVideoEnd}
+        // onLoadedData={onLoadedData}
+        // onError={onError}
         controls
       >
         This video is not supported by your browser.

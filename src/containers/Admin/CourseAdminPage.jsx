@@ -56,12 +56,9 @@ const CoursesAdminPage = () => {
           </div>
         ) : fetchingCourses ? (
           <div className="grid-lg">
-            <CourseSkeleton />
-            <CourseSkeleton />
-            <CourseSkeleton />
-            <CourseSkeleton />
-            <CourseSkeleton />
-            <CourseSkeleton />
+            {Array.from({ length: 8 }).map((_, index) => (
+              <CourseSkeleton key={index} />
+            ))}
           </div>
         ) : (
           <p className=" h-full text-center bg-red-600 bg-opacity-40">

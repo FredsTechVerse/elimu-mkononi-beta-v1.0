@@ -4,13 +4,12 @@ import {
   ReturnBackBtn,
   ContentSection,
   UnitNav,
-  LogoutBtn,
+  HomeBtn,
   MenuBtn,
 } from "../../components";
 import { Outlet, useParams } from "react-router-dom";
 import axios from "../../axios";
 const ContentPage = () => {
-  const roles = JSON.parse(localStorage.getItem("roles"));
   const { unitID } = useParams();
   const [unitData, setUnitData] = useState({});
   const [currentLesson, setCurrentLesson] = useState(null);
@@ -95,12 +94,15 @@ const ContentPage = () => {
 
         <article className="w-full laptop:col-span-3 tablet:col-span-2 h-full overflow-y-auto flex px-2 flex-col rounded-lg pb-2">
           {/* LESSON HEADING */}
-          <div className="w-full text-lg text-center text-white my-2 py-1 bg-primary rounded-lg ">
-            <MenuBtn openSideBar={openSideBar} sideBarOpen={sideBarOpen} />
+          <div className=" flex w-full text-lg text-center text-white my-2 py-1 bg-primary rounded-lg justify-between px-2 ">
             {/* <div className="debug inline">
               <LogoutBtn />
             </div> */}
-            <p className="inline">{currentLesson?.lessonName}</p>
+            <span>{currentLesson?.lessonName}</span>
+            <div className="flex-row-centered gap-1">
+              <HomeBtn />
+              <MenuBtn openSideBar={openSideBar} sideBarOpen={sideBarOpen} />
+            </div>
           </div>
           {currentLesson && lessonType === "mp4" ? (
             <>
