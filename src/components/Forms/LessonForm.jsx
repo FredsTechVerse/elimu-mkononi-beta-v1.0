@@ -67,7 +67,7 @@ const LessonForm = () => {
 
   return (
     <Modal>
-      <div className="form-wrap h-[450px]">
+      <div className="form-wrap h-[470px]">
         <FormNavigation text="Lesson Form" />
         <form
           encType="multipart/form-data"

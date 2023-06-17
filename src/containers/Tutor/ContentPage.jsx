@@ -39,7 +39,11 @@ const ContentPage = () => {
   };
 
   if (unitDataQuery.status === "loading") {
-    return <p className="p-4 bg-blue-400 rounded-lg">Unit Data is Loading</p>;
+    return (
+      <p className="flex-col-centered text-center py-3 px-2 bg-blue-400 m-2 rounded-lg h-24 max-w-36 mx-auto my-auto">
+        Unit Data is Loading
+      </p>
+    );
   }
 
   if (unitDataQuery.status === "error") {

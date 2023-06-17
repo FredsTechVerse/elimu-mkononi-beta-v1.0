@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, NavbarSmall } from "../../components";
+import { Navbar, NavbarSmall, PageTitle } from "../../components";
 const HeroSection = ({ isNavOpen, showNavbar, hideNavbar }) => {
   return (
     <div className="homepage w-full h-[90vh]">
@@ -20,20 +20,7 @@ const HeroSection = ({ isNavOpen, showNavbar, hideNavbar }) => {
             dolor esse deleniti? Sequi nemo dolore asperiores omnis natus,
             repudiandae,
           </p>
-
-          <div className="custom-shape-divider-bottom-1679515507">
-            <svg
-              data-name="Layer 1"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1200 120"
-              preserveAspectRatio="none"
-            >
-              <path
-                d="M598.97 114.72L0 0 0 120 1200 120 1200 0 598.97 114.72z"
-                className="shape-fill"
-              ></path>
-            </svg>
-          </div>
+          <div className="absolute h-7  bg-white w-full bottom-0 rounded-t-full"></div>
         </div>
       </div>
     </div>

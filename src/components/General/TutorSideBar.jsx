@@ -7,13 +7,9 @@ const TutorSideBar = ({ tutor, closeSideBar }) => {
   return (
     <div className="relative h-full w-full tablet:w-72 laptop:w-full flex flex-col bg-slate-200">
       <div className="absolute flex items-center justify-between w-full p-2">
-        <div className="flex">
-          <div>
-            <HomeBtn />
-          </div>
-          <div>
-            <LogoutBtn />
-          </div>
+        <div className="flex gap-2">
+          <HomeBtn />
+          <LogoutBtn />
         </div>
         <div
           className="text-4xl flex-row-centered laptop:hidden"

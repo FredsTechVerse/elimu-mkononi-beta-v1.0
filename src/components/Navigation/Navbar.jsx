@@ -7,7 +7,7 @@ const Navbar = ({ isNavOpen, showNavbar, hideNavbar }) => {
   const user = JSON.parse(localStorage.getItem("user"));
   const roles = JSON.parse(localStorage.getItem("roles"));
   return (
-    <div className="absolute top-0 flex justify-between backdrop-blur-md z-10 w-full p-3">
+    <div className="absolute top-0 flex justify-between  z-10 w-full p-3">
       <Link to="/">
         <div id="section-1" className="text-white font-bold text-2xl font-sans">
           E-LEARNING
@@ -24,9 +24,6 @@ const Navbar = ({ isNavOpen, showNavbar, hideNavbar }) => {
       {/* ACTUAL NAVBAR */}
       <div className="phone:hidden laptop:flex relative items-center  capitalize">
         <div id="section-2" className=" h-full flex">
-          <Tooltip tooltip="Home">
-            <NavBtn to="/" text="Home" />
-          </Tooltip>
           {roles?.includes("EM-202") && (
             <Tooltip tooltip="Dashborad">
               <NavBtn to="/tutor" text="Dashboard" />
@@ -41,7 +38,7 @@ const Navbar = ({ isNavOpen, showNavbar, hideNavbar }) => {
 
         <div id="section-3" className={`${!user ? "flex" : "hidden"}`}>
           <Tooltip tooltip="Register">
-            <NavBgBtn to="/new-student" text="Register" />
+            <NavBgBtn to="/new-student" text="register" />
           </Tooltip>
           <Tooltip tooltip="Login">
             <NavBgBtn to="/log-in" text="Log In" />

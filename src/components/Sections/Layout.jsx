@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { TutorSideBar, AdminSideBar } from "../../components";
+import { TutorSideBar, AdminSideBar, PageTitle } from "../../components";
 import { handleLogout } from "../../modules/handleLogout";
 import { RiMenu3Fill } from "react-icons/ri";
 import axios from "../../axios";
@@ -65,18 +65,12 @@ const Layout = ({ role }) => {
       </article>
       <article className="w-full h-full flex px-2 flex-col rounded-lg pb-2 laptop:col-span-3 overflow-y-auto ">
         <div
-          className={`flex px-2 items-center justify-end w-full text-lg text-center text-white my-2 py-2 bg-primary rounded-lg`}
+          onClick={openSideBar}
+          className={`fixed top-2 right-5 text-2xl w-10 h-10 border-2 border-primary rounded-full flex-col-centered laptop:hidden`}
         >
-          <h1 className="uppercase text-center">
-            {role === "EM-203" ? "Admin Heading" : "Tutor Heading"}
-          </h1>
-          <div
-            onClick={openSideBar}
-            className={`text-2xl w-10 h-10 border-2 border-primary rounded-full flex-col-centered laptop:hidden`}
-          >
-            <RiMenu3Fill />
-          </div>
+          <RiMenu3Fill />
         </div>
+        {role === "EM-202" && <PageTitle text="Units you handle" />}
         <Outlet context={userData} />
       </article>
     </main>

@@ -25,7 +25,6 @@ const fetchUsersData = async (role) => {
 
 const fetchUnitData = async (unitID) => {
   const { data: unitData } = await axios.get(`/unit/${unitID}`);
-  console.log(`Unit Data fetched ${JSON.stringify(unitData)}`);
   return unitData;
 };
 

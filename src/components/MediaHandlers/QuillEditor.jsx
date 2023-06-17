@@ -106,7 +106,7 @@ const QuillEditor = () => {
         }, 1200);
       }
     } catch (err) {
-      if (err.message === "Request failed with status code 400") {
+      if (err.message === "Request failed with status code 500") {
         setResponse("Something went wrong. Please try again.");
         setSubmit(true);
         setStatusTracker(false);

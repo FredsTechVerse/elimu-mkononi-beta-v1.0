@@ -1,5 +1,6 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { Tooltip } from "../../components";
 import {
   BsChevronRight,
   BsChevronDown,
@@ -36,9 +37,14 @@ const AccordionItem = ({
               to={`/tutor/new-lesson/${chapterID}`}
               state={{ background: location }}
             >
-              <div onClick={closeSideBar} className="text-2xl">
-                <IoMdAdd />
-              </div>
+              <Tooltip tooltip="Add lesson">
+                <div
+                  onClick={closeSideBar}
+                  className="text-2xl hover:bg-slate-100 hover:text-black rounded-full"
+                >
+                  <IoMdAdd />
+                </div>
+              </Tooltip>
             </Link>
           )}
 

@@ -15,7 +15,7 @@ const ChapterCard = ({ chapterNumber, chapterName, chapterID, unitID }) => {
           quis!
         </p>
         <Link to={`/unit/${unitID}`} state={{ chapterID: chapterID }}>
-          <div className="ml-auto  flex-row-centered gap-1 w-32 bg-primary  text-white h-8 rounded-br-md rounded-tl-md">
+          <div className="ml-auto  flex-row-centered gap-1 w-32 bg-primary   text-white h-8 rounded-br-md rounded-tl-md">
             <p className="text-sm">Start Learning</p>
             <span>{`>`}</span>
           </div>

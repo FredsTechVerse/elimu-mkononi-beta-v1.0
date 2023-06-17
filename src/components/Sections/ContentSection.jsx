@@ -34,8 +34,8 @@ const ContentSection = ({
     );
   }
   return (
-    <div className="w-full h-full flex-col-centered bg-slate-400 bg-opacity-30 rounded-lg p-3">
-      <p className="text-center uppercase py-3 rounded-lg">
+    <div className="w-full h-full flex-col-centered bg-transparent rounded-lg p-3">
+      <p className="text-center py-5 px-3 rounded-lg bg-blue-200">
         No lesson has been selected. Open sidebar to select a lesson and get
         started.
       </p>

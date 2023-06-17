@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AiFillHome } from "react-icons/ai";
-import { AccordionItem } from "../../components";
+import { AccordionItem, HomeBtn, Tooltip } from "../../components";
 import { IoMdAdd, IoMdCloseCircle } from "react-icons/io";
 import { BiRefresh } from "react-icons/bi";
 import { useLocation, Link } from "react-router-dom";
@@ -19,22 +19,25 @@ const Accordion = ({ unitData, updateCurrentLesson, closeSideBar }) => {
 
   return (
     <div className="relative z-10 flex flex-col items-center h-full bg-slate-100 max-h-screen">
-      <div className="flex items-center justify-between w-full px-2 py-2 font-bold text-md text-slate-200 bg-primary text-center ">
+      <div className="flex items-center justify-between w-full px-2 py-2 font-bold text-md text-slate-200 bg-primary text-center">
+        <HomeBtn />
         {unitData && unitData.unitName}
         <div className="flex gap-1">
           <div className={` gap-1 `}>
-            <Link
-              to={`/tutor/new-chapter/${unitID}`}
-              state={{ background: location }}
-            >
-              <IoMdAdd
-                className={`${
-                  roles?.includes("EM-202") || roles?.includes("EM-202")
-                    ? "flex"
-                    : "hidden"
-                } text-white text-3xl rounded-lg hover:bg-slate-100 hover:text-black hover:cursor-pointer`}
-              />
-            </Link>
+            <Tooltip text="Add Chapter">
+              <Link
+                to={`/tutor/new-chapter/${unitID}`}
+                state={{ background: location }}
+              >
+                <IoMdAdd
+                  className={`${
+                    roles?.includes("EM-202") || roles?.includes("EM-202")
+                      ? "flex"
+                      : "hidden"
+                  } text-white text-3xl rounded-lg hover:bg-slate-100 hover:text-black hover:cursor-pointer`}
+                />
+              </Link>
+            </Tooltip>
           </div>
           <div
             className="tablet:hidden text-3xl"

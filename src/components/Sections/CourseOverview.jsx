@@ -1,6 +1,11 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { UnitCard, UnitSkeleton, NavigateBtn } from "../../components";
+import {
+  UnitCard,
+  UnitSkeleton,
+  NavigateBtn,
+  PageTitle,
+} from "../../components";
 import { useQuery } from "@tanstack/react-query";
 import { fetchCourseData } from "../../api/get";
 const CourseOverview = () => {
@@ -23,14 +28,12 @@ const CourseOverview = () => {
             <NavigateBtn destination="assign-unit" text="Assign Unit" />
           </div>
         )}
-        <div className="absolute h-2 bg-white w-full bottom-0 rounded-t-full"></div>
+        <div className="absolute h-7 bg-slate-100 w-full bottom-0 rounded-t-full">
+          <PageTitle text="Units in this course" />
+        </div>
       </div>
-      <div className="flex flex-col items-center justify-center py-2 w-full h-full overflow-auto">
+      <div className="flex flex-col items-center justify-center pt-6 w-full h-full overflow-auto">
         <div className="w-full h-full flex flex-col items-center px-4 ">
-          <div className="text-2xl font-bold text-slate-500 my-2 font-sans justify-center items-center">
-            LIST OF UNITS
-          </div>
-
           {courseQuery.status === "loading" ? (
             <div className="grid-sm w-full h-full overflow-hidden">
               {Array.from({ length: 3 }).map((_, index) => (

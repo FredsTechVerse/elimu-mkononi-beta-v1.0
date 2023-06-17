@@ -11,7 +11,7 @@ const CoursesSection = () => {
   return (
     <div
       id="courses"
-      className="courses relative  p-2 w-full text-slate-900 bg-white "
+      className="courses relative  px-2 w-full text-slate-900 bg-white "
     >
       <PageTitle text="list of courses" />
 

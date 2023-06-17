@@ -12,7 +12,7 @@ const UnitOverview = () => {
   });
 
   return (
-    <div className="flex-col-centered justify-start ">
+    <div className="flex-col-centered justify-start bg-slate-100 ">
       <div className=" relative pattern h-56 w-full flex-row-centered">
         <p className="text-white font-bold text-center phone:text-xl tablet:text-2xl laptop:text-4xl uppercase w-full h-full flex-row-centered backdrop-blur-md bg-black bg-opacity-10 flex-row-centered gap-4">
           <span>{unitQuery?.data?.unitCode}</span>
@@ -26,7 +26,7 @@ const UnitOverview = () => {
             />
           </div>
         )}
-        <div className="absolute h-2 bg-white w-full bottom-0 rounded-t-full"></div>
+        <div className="absolute h-7 bg-slate-100 w-full bottom-0 rounded-t-full"></div>
       </div>
       <h1 className="uppercase font-extrabold text-3xl text-slate-700 ml-3 mb-2 w-full text-center">
         What the unit entails

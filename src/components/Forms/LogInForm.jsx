@@ -41,15 +41,15 @@ const LogInForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isFormValid) {
+    if (isFormValid()) {
+      console.log("Submitting data");
       const trimmedFirstName = firstName.trim();
       const trimmedPassword = password.trim();
 
-      const credentials = {
+      authorizeLogin.mutate({
         firstName: trimmedFirstName,
         password: trimmedPassword,
-      };
-      authorizeLogin.mutate(credentials);
+      });
       return;
     }
     console.log("Form is not valid");
