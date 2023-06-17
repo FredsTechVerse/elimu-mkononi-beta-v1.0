@@ -51,3 +51,7 @@ As i break out to the dashboard , I will recap on :- Array methods and context a
 ### WHERE THIS APP CAN BE USED
 
 - This website will serve as a good reference point to all class notes and past papers issued. Our elearning platform is shitty i give you that for a fact... Find means ama reasons why a lecturer would want to use our application.... For one , having all your resources organized on the fly.... Resource handle page can emanate from this.
+
+### USING REACT QUERY
+
+- Its almost as if it is handling state for me! Coz once i update my chapter data, i also update my local copy hence the changes refelecting instataneously.

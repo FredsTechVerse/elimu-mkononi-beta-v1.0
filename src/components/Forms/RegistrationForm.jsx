@@ -1,10 +1,16 @@
-import React, { useState } from "react";
-import { FormNavigation, SubmitButton, Modal, AlertBox } from "..";
-import axios from "../../axios";
+import React, { useState, useEffect } from "react";
+import { FormNavigation, Button, Modal } from "../../components";
 import { useNavigate } from "react-router-dom";
+import { registerUser } from "../../api/postData";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 const RegistrationForm = ({ role }) => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => (document.body.style.overflow = "unset");
+  }, []);
   // DECLARATION OF OUR STATES
   //==========================
   const [fName, setFName] = useState(null);
@@ -14,92 +20,39 @@ const RegistrationForm = ({ role }) => {
   const [password, setPassword] = useState(null);
   const [cPassword, setCPassword] = useState(null);
 
-  const [responseTracker, setResponseTracker] = useState(false);
-  const [statusTracker, setStatusTracker] = useState(true);
-  const [response, setResponse] = useState("");
-  const registerUser = async (e) => {
+  const isFormValid = () => {
+    if (
+      password !== null &&
+      cPassword !== null &&
+      password === cPassword &&
+      password.length >= 8
+    ) {
+      return true;
+    }
+    return false;
+  };
+  const createUserMutation = useMutation({
+    mutationFn: registerUser,
+    onSuccess: (data) => {
+      console.log(
+        `User has been successfully registered ${JSON.stringify(data)}`
+      );
+      queryClient.invalidateQueries(["tutors"], { exact: true });
+      navigate(-1);
+    },
+  });
+  const saveUser = async (e) => {
     e.preventDefault();
-    // Check if inputs are blank
-    if (password !== null && cPassword !== null) {
-      // Check if they match
-      if (password === cPassword) {
-        // Check for length,
-        if (password.length >= 8) {
-          let userData = {
-            firstName: fName,
-            surname,
-            password,
-            contact: `254${contact}`,
-            email,
-          };
 
-          try {
-            if (role === "EM-203") {
-              let { data } = await axios.post("/auth/register-admin", userData);
-              console.log(JSON.stringify(data));
-              return;
-            } else if (role === "EM-201") {
-              let { data } = await axios.post(
-                "/auth/register-student",
-                userData
-              );
-              console.log(`Student Data ${data}`);
-              setResponse("Student Registered Successfully");
-              return;
-            } else if (role === "EM-202") {
-              let { data } = await axios.post("/auth/register-tutor", userData);
-              console.log(`Tutor Data ${data}`);
-              setResponse("Tutor Registered Successfully");
-              return;
-            }
-            setStatusTracker(true);
-            setResponseTracker(true);
-            setFName("");
-            setSurname("");
-            setEmail("");
-            setContact("");
-            setPassword("");
-            setCPassword("");
-
-            setTimeout(() => {
-              setResponseTracker(false);
-              navigate(-1);
-            }, 2000);
-          } catch (error) {
-            setStatusTracker(false);
-            console.log(error);
-            console.log(error.response.data.message.message);
-            setResponse(
-              `[${error.response.data.message.name}] ${error.response.data.message.message}`
-            );
-            setResponseTracker(true);
-            setTimeout(() => {
-              setResponseTracker(false);
-            }, 4500);
-          }
-        } else {
-          setStatusTracker(false);
-          setResponse(`Password should be eight digits.`);
-          setResponseTracker(true);
-          setTimeout(() => {
-            setResponseTracker(false);
-          }, 4500);
-        }
-      } else {
-        setStatusTracker(false);
-        setResponse(`The passwords entered do not match!`);
-        setResponseTracker(true);
-        setTimeout(() => {
-          setResponseTracker(false);
-        }, 3000);
-      }
-    } else {
-      setStatusTracker(false);
-      setResponse(`Password fields cannot be left blank!`);
-      setResponseTracker(true);
-      setTimeout(() => {
-        setResponseTracker(false);
-      }, 3000);
+    if (isFormValid()) {
+      createUserMutation.mutate({
+        firstName: fName,
+        surname,
+        password,
+        contact: `254${contact}`,
+        email,
+        role,
+      });
     }
   };
 
@@ -213,15 +166,14 @@ const RegistrationForm = ({ role }) => {
               required
             />
           </div>
-          {/* THE ALERT BOX */}
-          <AlertBox
-            responseTracker={responseTracker}
-            statusTracker={statusTracker}
-            response={response}
-          />
-
           <div className="cta-wrap">
-            <SubmitButton type="submit" text="register" />
+            <Button
+              type="button"
+              text="register"
+              onClick={(e) => {
+                saveUser(e);
+              }}
+            />
           </div>
         </form>
       </div>

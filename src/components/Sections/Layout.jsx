@@ -43,7 +43,7 @@ const Layout = ({ role }) => {
         }
       }
     } catch (error) {
-      if (error.response.status === 403) {
+      if (error?.response?.status === 403) {
         handleLogout();
       } else {
         console.log(error.response.status);

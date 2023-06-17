@@ -1,5 +1,4 @@
-import axios from "../../axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   NavigateBtn,
   CourseCard,
@@ -7,29 +6,15 @@ import {
   PageTitle,
 } from "../../components";
 
+import { fetchCoursesData } from "../../api/get";
+import { useQuery } from "@tanstack/react-query";
+
 const CoursesAdminPage = () => {
-  const [coursesData, setCoursesData] = useState([]);
-  const [fetchingCourses, setFetchingCourses] = useState(false);
   const roles = JSON.parse(localStorage.getItem("roles"));
-  const fetchCoursesData = async () => {
-    try {
-      setFetchingCourses(true);
-      const { data } = await axios.get("/course/all-courses");
-      console.log(`Course Data ${JSON.stringify(data)}`);
-      setCoursesData(data);
-      setTimeout(() => {
-        setFetchingCourses(false);
-      }, 800);
-    } catch (error) {
-      console.error(error);
-      setTimeout(() => {
-        setFetchingCourses(false);
-      }, 800);
-    }
-  };
-  useEffect(() => {
-    fetchCoursesData();
-  }, []);
+  const coursesQuery = useQuery({
+    queryKey: ["courses"],
+    queryFn: fetchCoursesData,
+  });
   return (
     <div className="flex flex-col align-center relative phone:rounded-lg w-full h-full pt-2 px-4">
       <div className="flex w-full items-center justify-end mb-3 pr-1">
@@ -39,10 +24,23 @@ const CoursesAdminPage = () => {
       <PageTitle text="list of courses" />
 
       <div className="w-full flex-col-centered justify-start">
-        {coursesData?.length > 0 && !fetchingCourses ? (
+        {coursesQuery.status === "loading" ? (
           <div className="grid-lg">
-            {coursesData &&
-              coursesData.map((course, courseIndex) => {
+            <CourseSkeleton />
+            <CourseSkeleton />
+            <CourseSkeleton />
+            <CourseSkeleton />
+            <CourseSkeleton />
+            <CourseSkeleton />
+          </div>
+        ) : coursesQuery.status === "error" ? (
+          <p className="bg-red-300 rounded-lg p-4">
+            {JSON.stringify(coursesQuery.error.message)}
+          </p>
+        ) : (
+          <div className="grid-lg">
+            {coursesQuery?.data.length > 0 ? (
+              coursesQuery.data.map((course, courseIndex) => {
                 const { _id, courseTitle, courseImage } = course;
                 return (
                   <CourseCard
@@ -52,22 +50,13 @@ const CoursesAdminPage = () => {
                     courseImage={courseImage}
                   />
                 );
-              })}
+              })
+            ) : (
+              <p className=" h-full text-center bg-blue-300 bg-opacity-40">
+                No courses have been found
+              </p>
+            )}
           </div>
-        ) : fetchingCourses ? (
-          <div className="grid-lg">
-            {Array.from({ length: 8 }).map((_, index) => (
-              <CourseSkeleton key={index} />
-            ))}
-          </div>
-        ) : (
-          <p className=" h-full text-center bg-red-600 bg-opacity-40">
-            No courses have been found
-            {roles.includes("EM-202") ||
-              (roles.includes("EM-203") && (
-                <NavigateBtn destination="new-course" text="New Course" />
-              ))}
-          </p>
         )}
       </div>
     </div>

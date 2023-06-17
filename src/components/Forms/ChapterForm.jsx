@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
-import {
-  FormNavigation,
-  SubmitButton,
-  Modal,
-  LoadingBtn,
-} from "../../components";
-import axios from "../../axios";
+import { FormNavigation, Button, Modal, LoadingBtn } from "../../components";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createChapter } from "../../api/postData";
+
 const ChapterForm = () => {
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -18,59 +15,30 @@ const ChapterForm = () => {
   const [chapterNumber, setChapterNumber] = useState("");
   const [chapterName, setChapterName] = useState("");
   const [chapterDescription, setChapterDescription] = useState("");
-  const [submit, setSubmit] = useState(false);
+  const [isFormSubmitted, setIsFormSubmittted] = useState(false);
   // TRACKING LOCATION
   const location = useLocation();
-  console.log(location);
   const from = location.state?.background?.pathname;
-  //   A FUNCTION THAT CREATES OUR POST OBJECT
-  async function createPostObject({
-    chapterNumber,
-    chapterName,
-    chapterDescription,
-  }) {
-    // ALTERNATIVE A : FANCY WAY OF CREATING OUR NORMAL OBJECT
-    //=========================================================
-    const formData = new FormData();
-    formData.append("unitID", unitID);
-    formData.append("chapterNumber", `${unitID}-${chapterNumber}`);
-    formData.append("chapterName", chapterName);
-    formData.append("chapterDescription", chapterDescription);
-    const config = {
-      headers: { "Content-Type": "application/json" },
-    };
 
-    try {
-      setSubmit(true);
-      const response = await axios.post(
-        "/chapter/new-chapter",
-        formData,
-        config
-      );
-      return response;
-    } catch (err) {
-      setSubmit(false);
-      let { data } = err.response;
-      console.log(JSON.stringify(data));
-      // Display the error as you will
-      return err;
-    }
-  }
+  const queryClient = useQueryClient();
+  const createChapterMutation = useMutation({
+    mutationFn: createChapter,
+    onSuccess: (data) => {
+      queryClient.setQueryData(["chapter", unitID], data);
+      queryClient.invalidateQueries(["chapter"], { exact: true });
+      navigate(from);
+    },
+  });
 
   const fileUploadHandler = async (e) => {
     e.preventDefault();
-
-    // Create our post object.
-    const result = await createPostObject({
-      chapterNumber,
-      chapterName,
-      chapterDescription,
+    setIsFormSubmittted(true);
+    createChapterMutation.mutate({
+      unitID: unitID,
+      chapterNumber: `${unitID}-${chapterNumber}`,
+      chapterName: chapterName,
+      chapterDescription: chapterDescription,
     });
-    const { status } = result;
-    if (status == 201) {
-      setSubmit(true);
-      navigate(`${from}?formCompleted=true`);
-    }
   };
 
   return (
@@ -119,12 +87,8 @@ const ChapterForm = () => {
           </div>
           {/* CTA BUTTONS */}
           <div className="cta-wrap ">
-            {!submit ? (
-              <SubmitButton
-                type="button"
-                text="Save"
-                onClick={fileUploadHandler}
-              />
+            {!isFormSubmitted ? (
+              <Button type="button" text="Save" onClick={fileUploadHandler} />
             ) : (
               <LoadingBtn action="Uploading" />
             )}

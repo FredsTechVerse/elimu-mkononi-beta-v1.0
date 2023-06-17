@@ -5,10 +5,8 @@ import {
   ContentPage,
   TutorUnitsPage,
   AdminDashboard,
-  StudentsPageAdmin,
-  TutorsPageAdmin,
+  UsersPage,
   UsersLayout,
-  AdminSection,
   DraftPage,
   CourseAdminPage,
   Forbidden,
@@ -26,7 +24,6 @@ import {
   QuillEditor,
   CommentsSection,
   ResourcesSection,
-  AccordionSmall,
   CourseOverview,
   Layout,
 } from "./components";
@@ -34,7 +31,6 @@ import { Routes, Route, useLocation } from "react-router-dom";
 function App() {
   const location = useLocation();
   const background = location.state && location.state.background;
-  // console.log(import.meta.env.VITE_APP_BASE);
   // AUTHENTICATION REFERENCE.
   // {
   //   student:"EM-201",
@@ -64,7 +60,7 @@ function App() {
           >
             <Route
               exact
-              path="/course/:courseId"
+              path="/course/:courseID"
               element={<CourseOverview />}
             ></Route>
             <Route
@@ -74,7 +70,6 @@ function App() {
             />
             <Route exact path="/unit/:unitID" element={<ContentPage />}>
               <Route index element={<QuillEditor />} />
-              <Route exact path="nav" element={<AccordionSmall />} />
               <Route exact path="comments" element={<CommentsSection />} />
               <Route exact path="resources" element={<ResourcesSection />} />
             </Route>
@@ -94,7 +89,6 @@ function App() {
         <Route element={<RequireAuth allowedRoles={["EM-202"]} />}>
           <Route exact path="/tutor/unit/:unitID" element={<ContentPage />}>
             <Route index element={<QuillEditor />} />
-            <Route exact path="nav" element={<AccordionSmall />} />
             <Route exact path="comments" element={<CommentsSection />} />
             <Route exact path="resources" element={<ResourcesSection />} />
           </Route>
@@ -111,20 +105,10 @@ function App() {
             <Route index element={<AdminDashboard />} />
             <Route exact path="course-form" element={<CourseForm />} />
             <Route exact path="unit-form" element={<UnitForm />} />
-            <Route exact path="admins" element={<AdminSection />} />
-            <Route exact path="tutors" element={<TutorsPageAdmin />}></Route>
-            <Route
-              exact
-              path="students"
-              element={<StudentsPageAdmin />}
-            ></Route>
+            <Route exact path=":role" element={<UsersPage />}></Route>
             <Route exact path="courses">
               <Route index element={<CourseAdminPage />}></Route>
-              <Route
-                exact
-                path=":courseId"
-                element={<CourseOverview />}
-              ></Route>
+              <Route exact path=":courseID" element={<UnitsOutline />}></Route>
             </Route>
           </Route>
         </Route>
@@ -163,7 +147,7 @@ function App() {
 
           <Route
             exact
-            path="/admin/courses/:courseId/new-unit"
+            path="/admin/courses/:courseID/new-unit"
             element={<UnitForm />}
           />
           <Route

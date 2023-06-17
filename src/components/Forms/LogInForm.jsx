@@ -1,31 +1,47 @@
-import React, { useState } from "react";
-import { MdCancel } from "react-icons/md";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import axios from "../../axios";
-import { AlertBox, FormNavigation, Modal, SubmitButton } from "..";
+import { FormNavigation, Modal, Button } from "..";
+import { useMutation } from "@tanstack/react-query";
+import { loginUser } from "../../api/postData";
+import { handleError } from "../../api/errorHandling";
 const LogInForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => (document.body.style.overflow = "unset");
+  }, []);
+
   const from = location.state?.from?.pathname || "/";
   // Login Credentials.
   const [firstName, setFirstName] = useState("");
   const [password, setPassword] = useState("");
-  // Alert Box Configurations
-  const [statusTracker, setStatusTracker] = useState(false);
-  const [responseTracker, setResponseTracker] = useState(false);
-  const [message, setMessage] = useState("");
 
-  const ERRORS = {
-    NETWORK_ERROR: "Network error. Please try again later.",
-    SERVER_ERROR: "Server error. Please try again later.",
-    VALIDATION_ERROR: "Invalid username or password.",
-    BLANK_ERROR: "User not found",
+  const authorizeLogin = useMutation({
+    mutationFn: loginUser,
+    onSuccess: (data) => {
+      localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("accessToken", data.accessToken);
+      localStorage.setItem("refreshToken", data.refreshToken);
+      localStorage.setItem("roles", JSON.stringify(data.roles));
+      navigate(from, { replace: true });
+    },
+    onError: (error) => {
+      handleError(error);
+    },
+  });
+
+  const isFormValid = () => {
+    if (firstName !== null && password !== null) {
+      return true;
+    }
+    return false;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    try {
+    if (isFormValid) {
       const trimmedFirstName = firstName.trim();
       const trimmedPassword = password.trim();
 
@@ -33,38 +49,10 @@ const LogInForm = () => {
         firstName: trimmedFirstName,
         password: trimmedPassword,
       };
-      // const credentials = { firstName, password };
-      const { data, status } = await axios.post("/auth/login", credentials);
-
-      if (status === 200) {
-        localStorage.setItem("user", JSON.stringify(data.user));
-        localStorage.setItem("accessToken", data.accessToken);
-        localStorage.setItem("refreshToken", data.refreshToken);
-        localStorage.setItem("roles", JSON.stringify(data.roles));
-        navigate(from, { replace: true });
-      }
-    } catch (err) {
-      console.error(`Login Error : ${err.stack}`);
-      if (err.response) {
-        console.error("Status:", err.response.status); // outputs the status code (e.g. 404)
-      }
-      if (err.response && err.response.status === 401) {
-        setMessage(ERRORS.VALIDATION_ERROR);
-      } else if (err.response && err.response.status === 404) {
-        setMessage(ERRORS.BLANK_ERROR);
-      } else if (err.message === "Network Error") {
-        setMessage(ERRORS.NETWORK_ERROR);
-      } else {
-        setMessage(ERRORS.SERVER_ERROR);
-      }
-
-      setStatusTracker(false);
-      setResponseTracker(true);
-
-      setTimeout(() => {
-        setResponseTracker(false);
-      }, 3000);
+      authorizeLogin.mutate(credentials);
+      return;
     }
+    console.log("Form is not valid");
   };
 
   return (
@@ -99,13 +87,14 @@ const LogInForm = () => {
             />
           </div>
 
-          <AlertBox
-            responseTracker={responseTracker}
-            statusTracker={statusTracker}
-            response={message}
-          />
-          <div className="cta-wrap ">
-            <SubmitButton type="submit" text="Log In" />
+          <div className="w-full flex-row-centered">
+            <Button
+              type="button"
+              text="Log In"
+              onClick={(e) => {
+                handleSubmit(e);
+              }}
+            />
           </div>
 
           <p className="mt-1 text-center text-sm text-white ">
