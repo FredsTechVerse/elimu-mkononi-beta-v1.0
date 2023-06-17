@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { FormNavigation, Modal, Button, S3Uploader } from "../../components";
+import {
+  FormNavigation,
+  Modal,
+  SubmitButton,
+  S3Uploader,
+} from "../../components";
 import { useNavigate } from "react-router-dom";
 import { createCourse } from "../../api/postData";
 import { useMutation, useQueryClient } from "@tanstack/react-query";

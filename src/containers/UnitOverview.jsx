@@ -1,9 +1,10 @@
 import { Outlet, useParams } from "react-router-dom";
-import { ChapterCard, PageTitle, UnitSkeleton } from "../components";
+import { ChapterCard, PageTitle, UnitSkeleton, NavBgBtn } from "../components";
 import { useQuery } from "@tanstack/react-query";
 import { fetchUnitData } from "../api/get";
 const UnitOverview = () => {
   const { unitID } = useParams();
+  const roles = JSON.parse(localStorage.getItem("roles"));
 
   const unitQuery = useQuery({
     queryKey: ["unitData", unitID],
@@ -11,7 +12,7 @@ const UnitOverview = () => {
   });
 
   return (
-    <div className="flex-col-centered justify-start min-h-screen">
+    <div className="flex-col-centered justify-start ">
       <div className=" relative pattern h-56 w-full flex-row-centered">
         <p className="text-white font-bold text-center phone:text-xl tablet:text-2xl laptop:text-4xl uppercase w-full h-full flex-row-centered backdrop-blur-md bg-black bg-opacity-10 flex-row-centered gap-4">
           <span>{unitQuery?.data?.unitCode}</span>
@@ -20,11 +21,12 @@ const UnitOverview = () => {
         {(roles?.includes("EM-202") || roles?.includes("EM-203")) && (
           <div className="absolute top-1 right-1 flex gap-1">
             <NavBgBtn
-              to={`/tutor/new-chapter/${unitData?._id}`}
+              to={`/tutor/new-chapter/${unitQuery?.data?._id}`}
               text="Add Chapter"
             />
           </div>
         )}
+        <div className="absolute h-2 bg-white w-full bottom-0 rounded-t-full"></div>
       </div>
       <h1 className="uppercase font-extrabold text-3xl text-slate-700 ml-3 mb-2 w-full text-center">
         What the unit entails

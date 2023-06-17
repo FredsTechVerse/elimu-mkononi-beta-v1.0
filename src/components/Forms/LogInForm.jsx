@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { FormNavigation, Modal, Button } from "..";
+import { FormNavigation, Modal, SubmitButton } from "..";
 import { useMutation } from "@tanstack/react-query";
 import { loginUser } from "../../api/postData";
 import { handleError } from "../../api/errorHandling";
@@ -88,7 +88,7 @@ const LogInForm = () => {
           </div>
 
           <div className="w-full flex-row-centered">
-            <Button
+            <SubmitButton
               type="button"
               text="Log In"
               onClick={(e) => {

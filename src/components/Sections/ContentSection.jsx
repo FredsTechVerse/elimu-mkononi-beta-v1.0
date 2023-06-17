@@ -18,10 +18,7 @@ const ContentSection = ({
           <span>{currentLesson?.lessonName}</span>
         </div>
         {/* LESSON VIDEO */}
-        <VideoSection
-          currentLessonUrl={currentLesson?.lessonUrl}
-          lessonName={currentLesson?.lessonName}
-        />
+        <VideoSection currentLesson={currentLesson} />
         {/* LESSON RESOURCES */}
         <div className="border-none border-slate-400 rounded-lg w-full">
           <UnitNav />

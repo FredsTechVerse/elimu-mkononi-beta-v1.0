@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FormNavigation, Button, Modal } from "../../components";
+import { FormNavigation, SubmitButton, Modal } from "../../components";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../../api/postData";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -167,7 +167,7 @@ const RegistrationForm = ({ role }) => {
             />
           </div>
           <div className="cta-wrap">
-            <Button
+            <SubmitButton
               type="button"
               text="register"
               onClick={(e) => {

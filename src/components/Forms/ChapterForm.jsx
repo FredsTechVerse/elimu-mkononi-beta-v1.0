@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { FormNavigation, Button, Modal, LoadingBtn } from "../../components";
+import {
+  FormNavigation,
+  SubmitButton,
+  Modal,
+  LoadingBtn,
+} from "../../components";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { handleError } from "../../api/errorHandling";
 import { createChapter } from "../../api/postData";
 
 const ChapterForm = () => {
@@ -25,12 +31,14 @@ const ChapterForm = () => {
     mutationFn: createChapter,
     onSuccess: (data) => {
       queryClient.setQueryData(["chapter", unitID], data);
-      queryClient.invalidateQueries(["chapter"], { exact: true });
+      queryClient.invalidateQueries(["unitData"], { exact: true });
       navigate(from);
     },
+    onError: (error) => handleError(error),
   });
 
   const fileUploadHandler = async (e) => {
+    console.log("Saving the data");
     e.preventDefault();
     setIsFormSubmittted(true);
     createChapterMutation.mutate({
@@ -87,11 +95,11 @@ const ChapterForm = () => {
           </div>
           {/* CTA BUTTONS */}
           <div className="cta-wrap ">
-            {!isFormSubmitted ? (
-              <Button type="button" text="Save" onClick={fileUploadHandler} />
-            ) : (
-              <LoadingBtn action="Uploading" />
-            )}
+            <SubmitButton
+              type="button"
+              text="Save"
+              onClick={fileUploadHandler}
+            />
           </div>
         </form>
       </div>

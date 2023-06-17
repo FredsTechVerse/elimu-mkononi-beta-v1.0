@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { FormNavigation, Button, LoadingBtn } from "../../components";
+import { FormNavigation, SubmitButton } from "../../components";
 import { fetchUsersData } from "../../api/get";
 import { createUnit } from "../../api/postData";
 import { handleError } from "../../api/errorHandling";
@@ -145,7 +145,7 @@ const UnitForm = () => {
           {/* CTA BUTTONS */}
 
           <div className="cta-wrap">
-            <Button type="button" text="Save" onClick={saveUnit} />
+            <SubmitButton type="button" text="Save" onClick={saveUnit} />
           </div>
         </form>
       </div>

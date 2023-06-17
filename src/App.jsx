@@ -108,7 +108,11 @@ function App() {
             <Route exact path=":role" element={<UsersPage />}></Route>
             <Route exact path="courses">
               <Route index element={<CourseAdminPage />}></Route>
-              <Route exact path=":courseID" element={<UnitsOutline />}></Route>
+              <Route
+                exact
+                path=":courseID"
+                element={<CourseOverview />}
+              ></Route>
             </Route>
           </Route>
         </Route>

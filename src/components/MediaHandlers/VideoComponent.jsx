@@ -1,7 +1,5 @@
 import React from "react";
 const VideoComponent = ({ src, currentLesson, title, updateCurrentLesson }) => {
-  let { lessonIndex, chapterIndex } = currentLesson;
-
   // const onVideoEnd = () => {
   //   updateCurrentLesson({
   //     ...unitData?.unitChapters[chapterIndex]?.chapterLessons[lessonIndex + 1],
