@@ -1,51 +1,61 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "../../axios";
 import { FormNavigation, Button, LoadingBtn } from "../../components";
-import { postObject } from "../../modules/postUnitObject";
+import { fetchUsersData } from "../../api/get";
+import { createUnit } from "../../api/postData";
+import { handleError } from "../../api/errorHandling";
+import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 const UnitForm = () => {
   const navigate = useNavigate();
-  const [tutors, setTutors] = useState([]);
+  const queryClient = useQueryClient();
 
-  // LOADS COURSES DATA WHEN COMPONENT LOADS.
-  const fetchTutorsData = async () => {
-    try {
-      const { data } = await axios.get("/auth/all-tutors");
-      setTutors(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const tutorsQuery = useQuery({
+    queryKey: ["tutors"],
+    queryFn: () => fetchUsersData("EM-202"),
+  });
+
+  const createUnitMutation = useMutation({
+    mutationFn: createUnit,
+    onSuccess: (data) => {
+      queryClient.setQueryData(["units", data._id], data);
+      queryClient.invalidateQueries(["units"], { exact: true });
+      navigate(-1);
+    },
+    onError: (error) => handleError(error),
+  });
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
-    fetchTutorsData();
     return () => (document.body.style.overflow = "unset");
   }, []);
   // DECLARATION OF VARIABLES
   const { courseID } = useParams();
-  // const [course, setCourse] = useState(`${courses[0].courseTitle}`);
   const [tutor, setTutor] = useState();
   const [unitCode, setUnitCode] = useState("");
   const [unitName, setUnitName] = useState("");
   const [unitDescription, setUnitDescription] = useState("");
-  const [submit, setSubmit] = useState();
 
-  // SUBMITS INFO.
-  //==============
-  const fileUploadHandler = async (e) => {
+  const isFormValid = () => {
+    if (
+      tutor !== null &&
+      unitCode !== null &&
+      unitName !== null &&
+      unitDescription !== null
+    ) {
+      return true;
+    }
+    return false;
+  };
+  const saveUnit = async (e) => {
     e.preventDefault();
-    setSubmit(true);
-    // Create our post object.
-    const { status } = await postObject({
-      course: courseID,
-      tutor: tutor,
-      unitCode,
-      unitName,
-      unitDescription,
-    });
-
-    {
-      status == 201 && navigate(-1);
+    if (isFormValid) {
+      createUnitMutation.mutate({
+        course: courseID,
+        tutor: tutor,
+        unitCode: unitCode,
+        unitName: unitName,
+        unitDescription: unitDescription,
+      });
     }
   };
 
@@ -72,15 +82,20 @@ const UnitForm = () => {
               <option selected className="text-grey">
                 Choose a tutor
               </option>
-              {tutors &&
-                tutors.map((tutor, index) => {
+              {tutorsQuery?.data ? (
+                tutorsQuery?.data.map((tutor, index) => {
                   const { _id: tutorId, firstName, surname } = tutor;
                   return (
                     <option key={`tutor-${index}`} value={tutorId}>
                       {`${firstName} ${surname}`}
                     </option>
                   );
-                })}
+                })
+              ) : (
+                <p className="bg-rose-500 px-2 py-1 rounded-lg">
+                  No tutor data found
+                </p>
+              )}
             </select>
           </div>
           {/* FILE */}
@@ -130,11 +145,7 @@ const UnitForm = () => {
           {/* CTA BUTTONS */}
 
           <div className="cta-wrap">
-            {!submit ? (
-              <Button type="button" text="Save" onClick={fileUploadHandler} />
-            ) : (
-              <LoadingBtn action="Uploading" />
-            )}
+            <Button type="button" text="Save" onClick={saveUnit} />
           </div>
         </form>
       </div>

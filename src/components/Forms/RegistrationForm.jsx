@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FormNavigation, Button, Modal } from "../../components";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../../api/postData";
@@ -6,6 +6,11 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 const RegistrationForm = ({ role }) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => (document.body.style.overflow = "unset");
+  }, []);
   // DECLARATION OF OUR STATES
   //==========================
   const [fName, setFName] = useState(null);

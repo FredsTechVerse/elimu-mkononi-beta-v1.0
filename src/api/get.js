@@ -11,24 +11,21 @@ const fetchCourseData = async (courseID) => {
 };
 
 const fetchUsersData = async (role) => {
-  console.log(`The role that has been passed ${role}`);
   if (role === "EM-203") {
-    let { data } = await axios.get("/auth/all-admins");
-    return data;
+    let { data: adminData } = await axios.get("/auth/all-admins");
+    return adminData;
   } else if (role === "EM-201") {
-    let { data } = await axios.get("/auth/all-students");
-    console.log(`Student Data ${data}`);
-    return data;
+    let { data: studentData } = await axios.get("/auth/all-students");
+    return studentData;
   } else if (role === "EM-202") {
-    let { data } = await axios.get("/auth/all-tutors");
-    console.log(`Tutor Data ${data}`);
-    return data;
+    let { data: tutorData } = await axios.get("/auth/all-tutors");
+    return tutorData;
   }
 };
 
 const fetchUnitData = async (unitID) => {
-  console.log(unitID);
   const { data: unitData } = await axios.get(`/unit/${unitID}`);
+  console.log(`Unit Data fetched ${JSON.stringify(unitData)}`);
   return unitData;
 };
 

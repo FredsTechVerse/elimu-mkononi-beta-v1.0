@@ -10,8 +10,8 @@ const UnitOverview = () => {
     queryFn: () => fetchUnitData(unitID),
   });
   return (
-    <div className="flex-col-centered debug">
-      <div className=" relative pattern h-72 w-full flex-row-centered">
+    <div className="flex-col-centered justify-start min-h-screen">
+      <div className=" relative pattern h-56 w-full flex-row-centered">
         <p className="text-white font-bold text-center phone:text-xl tablet:text-2xl laptop:text-4xl uppercase w-full h-full flex-row-centered backdrop-blur-md bg-black bg-opacity-10">
           {unitQuery?.data && unitQuery?.data?.unitCode}
         </p>

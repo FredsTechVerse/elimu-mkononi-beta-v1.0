@@ -6,79 +6,45 @@ import {
   AlertBox,
   S3Uploader,
 } from "../../components";
-import axios from "../../axios";
 import { useParams, useNavigate } from "react-router-dom";
-
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createLesson } from "../../api/postData";
 const LessonForm = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const { chapterID } = useParams();
+  // Prevents the scroll behaviour of our page
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => (document.body.style.overflow = "unset");
   }, []);
-  const { chapterID } = useParams();
 
   //Form Variables
   const [lessonName, setLessonName] = useState("");
   const [lessonNumber, setLessonNumber] = useState("");
-
-  // Alert Box Config
-  const [response, setResponse] = useState(null);
-  const [responseTracker, setResponseTracker] = useState(null);
-  const [statusTracker, setStatusTracker] = useState(null);
-
   //Dropzone Config
   const [uploadSuccess, setUploadSucess] = useState(false);
   const [fileName, setFileName] = useState(null);
-
   const verifyUpload = () => {
     setUploadSucess(true);
   };
-
   const updateFileName = (fileName) => {
-    console.log(`Filename ${fileName}`);
     setFileName(fileName);
   };
-
-  const saveLessonToDB = async ({ lessonNumber, lessonName, lessonUrl }) => {
-    try {
-      const formData = new FormData();
-      formData.append("chapterID", chapterID);
-      formData.append("lessonNumber", `${chapterID}-${lessonNumber}`);
-      formData.append("lessonName", lessonName);
-      formData.append("lessonUrl", lessonUrl); //Jackpot. Defines our fieldname which is crawled by multer to pick out this file for upload.
-
-      const config = {
-        headers: { "Content-Type": "application/json" },
-      };
-
-      const response = await axios.post("/lesson/new-lesson", formData, config);
-      const { status } = response;
-
-      if (status === 201) {
-        setResponse("Data saved successfully to DB.");
-        setStatusTracker(true);
-        setResponseTracker(true);
-        setTimeout(() => {
-          setResponseTracker(false);
-          navigate(-1);
-        }, 1200);
-      }
-    } catch (err) {
-      if (err.message === "Request failed with status code 400") {
-        setResponse("An error occured while uploading the file to the backend");
-        setStatusTracker(false);
-        setResponseTracker(true);
-        setTimeout(() => {
-          setResponseTracker(false);
-        }, 2500);
-      } else {
-        console.log(err);
-      }
-    }
-  };
-
-  const validateForm = () => {
-    if (lessonName !== null && lessonNumber !== null && fileName !== null) {
+  const createLessonMutation = useMutation({
+    mutationFn: createLesson,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["unitData"], { exact: true });
+      navigate(-1);
+    },
+  });
+  const isFormValid = () => {
+    if (
+      lessonName !== null &&
+      lessonNumber !== null &&
+      fileName !== null &&
+      uploadSuccess
+    ) {
       return true;
     }
     console.log("Validation Failed.");
@@ -89,21 +55,14 @@ const LessonForm = () => {
     // Prevents default behaviour of our form
     e.preventDefault();
     // Fetches a signedUrl
-    const isFormValid = validateForm();
-    if (isFormValid == true) {
-      saveLessonToDB({
+    if (isFormValid) {
+      createLessonMutation.mutate({
         lessonNumber: lessonNumber,
         lessonName: lessonName,
         lessonUrl: fileName,
+        chapterID: chapterID,
       });
-      return;
     }
-    setResponse("Kindly fill all details correctly.");
-    setStatusTracker(false);
-    setResponseTracker(true);
-    setTimeout(() => {
-      setResponseTracker(false);
-    }, 2500);
   };
 
   return (
@@ -115,11 +74,6 @@ const LessonForm = () => {
           className="form-styling"
           text="Lesson form"
         >
-          <AlertBox
-            responseTracker={responseTracker}
-            statusTracker={statusTracker}
-            response={response}
-          />
           {/* FILE */}
           <div className="input-wrap">
             <label htmlFor="lNumber" className="w-full ">

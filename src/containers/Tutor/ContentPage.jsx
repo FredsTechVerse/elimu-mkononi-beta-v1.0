@@ -1,75 +1,35 @@
 import React, { useEffect, useState } from "react";
-import {
-  Accordion,
-  ReturnBackBtn,
-  ContentSection,
-  UnitNav,
-  LogoutBtn,
-  MenuBtn,
-} from "../../components";
-import { Outlet, useParams } from "react-router-dom";
-import axios from "../../axios";
+import { Accordion, ContentSection } from "../../components";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { fetchUnitData } from "../../api/get";
 const ContentPage = () => {
-  const roles = JSON.parse(localStorage.getItem("roles"));
   const { unitID } = useParams();
-  const [unitData, setUnitData] = useState({});
   const [currentLesson, setCurrentLesson] = useState(null);
   const [lessonType, setLessonType] = useState(null);
-  const [areChaptersPresent, setAreChaptersPresent] = useState(false);
-  const [formCompleted, setFormCompleted] = useState(false);
   const [sideBarOpen, setSideBarOpen] = useState(false);
-
-  useEffect(() => {
-    fetchUnitData();
-  }, [unitID, formCompleted]);
-
   useEffect(() => {
     if (currentLesson !== null) {
       identifyAndUpdateLessonType(currentLesson?.lessonUrl);
-      console.log(
-        `Updated current lesson data ${JSON.stringify(currentLesson)}`
-      );
     }
   }, [currentLesson]);
 
-  useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-    if (queryParams.get("formCompleted") === "true") {
-      setFormCompleted(true);
-    }
-  }, [location.search]);
+  const unitDataQuery = useQuery({
+    queryKey: ["unitData", unitID],
+    queryFn: () => fetchUnitData(unitID),
+  });
 
   const openSideBar = () => {
     setSideBarOpen(true);
   };
-
   const closeSideBar = () => {
     setSideBarOpen(false);
   };
-
-  const fetchUnitData = async () => {
-    try {
-      const { data, status } = await axios.get(`/unit/${unitID}`);
-
-      if (status == 200) {
-        if (data) {
-          setUnitData(data);
-        }
-        if (data?.UnitChapters?.length > 0) {
-          setAreChaptersPresent(true);
-        }
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   const updateCurrentLesson = (newLessonData) => {
     if (newLessonData !== null) {
       setCurrentLesson(newLessonData);
     }
   };
-
   const identifyAndUpdateLessonType = (lessonUrl) => {
     if (lessonUrl) {
       const lessonType = lessonUrl.split(".")[1];
@@ -78,85 +38,45 @@ const ContentPage = () => {
     }
   };
 
-  if (Object.keys(unitData).length > 0) {
-    return (
-      <main className="flex relative tablet:grid  tablet:grid-cols-3 laptop:grid-cols-4 w-full h-screen">
-        <article
-          className={` ${
-            sideBarOpen ? "block" : "hidden"
-          }   w-full h-full absolute tablet:relative tablet:block  tablet:col-span-1 `}
-        >
-          <Accordion
-            unitData={unitData}
-            fetchUnitData={fetchUnitData}
-            updateCurrentLesson={updateCurrentLesson}
-            closeSideBar={closeSideBar}
-          />
-        </article>
+  if (unitDataQuery.status === "loading") {
+    return <p className="p-4 bg-blue-400 rounded-lg">Unit Data is Loading</p>;
+  }
 
-        <article className="w-full laptop:col-span-3 tablet:col-span-2 h-full overflow-y-auto flex px-2 flex-col rounded-lg pb-2">
-          {/* LESSON HEADING */}
-          <div className="w-full text-lg text-center text-white my-2 py-1 bg-primary rounded-lg ">
-            <MenuBtn openSideBar={openSideBar} sideBarOpen={sideBarOpen} />
-            {/* <div className="debug inline">
-              <LogoutBtn />
-            </div> */}
-            <p className="inline">{currentLesson?.lessonName}</p>
-          </div>
-          {lessonType === "mp4" ? (
-            <>
-              {/* LESSON VIDEO */}
-              <ContentSection
-                currentLessonUrl={currentLesson?.lessonUrl}
-                lessonName={currentLesson?.lessonName}
-              />
-              {/* LESSON RESOURCES */}
-              <div className="border-none border-slate-400 rounded-lg w-full">
-                <UnitNav />
-                <Outlet
-                  context={{
-                    currentLesson: currentLesson,
-                    unitData: unitData,
-                    fetchUnitData: fetchUnitData,
-                    updateCurrentLesson: updateCurrentLesson,
-                  }}
-                />
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="w-full h-full flex-col-centered bg-slate-400 bg-opacity-30 rounded-lg p-3">
-                <p className="text-center uppercase py-3 rounded-lg">
-                  No lesson has been selected. Open sidebar to select a lesson
-                  and get started.
-                </p>
-                <button
-                  onClick={openSideBar}
-                  className="text-lg capitalize px-2 w-36 m-3 py-2 rounded-md bg-primary hover:bg-purple-600 text-white text-center tablet:hidden"
-                >
-                  Open SideBar
-                </button>
-              </div>
-            </>
-          )}
-        </article>
-      </main>
-    );
-  } else if (Object.keys(unitData).length === 0) {
+  if (unitDataQuery.status === "error") {
     return (
-      <div className="w-full h-screen flex-col-centered">
-        This unit is yet to be populated
-        <ReturnBackBtn />
-      </div>
-    );
-  } else {
-    return (
-      <div className="w-full h-screen flex-col-centered">
-        Something wrong happened
-        <ReturnBackBtn />
-      </div>
+      <p className="bg-red-300 rounded-lg p-4">
+        {JSON.stringify(unitDataQuery.error.message)}
+      </p>
     );
   }
+
+  return (
+    <main className="flex relative tablet:grid  tablet:grid-cols-3 laptop:grid-cols-4 w-full h-screen">
+      <article
+        className={` ${
+          sideBarOpen ? "block" : "hidden"
+        }   w-full h-full absolute tablet:relative tablet:block  tablet:col-span-1 `}
+      >
+        <Accordion
+          unitData={unitDataQuery.data}
+          fetchUnitData={fetchUnitData}
+          updateCurrentLesson={updateCurrentLesson}
+          closeSideBar={closeSideBar}
+        />
+      </article>
+
+      <article className="w-full laptop:col-span-3 tablet:col-span-2 h-full overflow-y-auto flex px-2 flex-col rounded-lg pb-2">
+        <ContentSection
+          lessonType={lessonType}
+          currentLesson={currentLesson}
+          unitData={unitDataQuery.data}
+          sideBarOpen={sideBarOpen}
+          openSideBar={openSideBar}
+          updateCurrentLesson={updateCurrentLesson}
+        />
+      </article>
+    </main>
+  );
 };
 
 export default ContentPage;

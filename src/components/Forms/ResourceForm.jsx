@@ -1,87 +1,40 @@
 import React, { useState } from "react";
-import {
-  FormNavigation,
-  Modal,
-  Button,
-  AlertBox,
-  S3Uploader,
-} from "../../components";
-import axios from "../../axios";
+import { FormNavigation, Modal, Button, S3Uploader } from "../../components";
 import { useNavigate } from "react-router-dom";
-
+import { createResource } from "../../api/postData";
+import { useMutation } from "@tanstack/react-query";
+import { handleError } from "../../api/errorHandling";
 const ResourceForm = () => {
   const navigate = useNavigate();
   // FORM CONFIGURATIONS
   //=========================
   const [resourceName, setResourceName] = useState("");
   const [uploadSuccess, setUploadSucess] = useState(false);
-  //ALERT BOX CONFIGURATIONS
-  //=========================
-  const [response, setResponse] = useState(null);
-  const [responseTracker, setResponseTracker] = useState(null);
-  const [statusTracker, setStatusTracker] = useState(null);
 
-  const savingFileToDB = async ({ resourceUrl }) => {
-    try {
-      console.log(`Image URL: ${resourceUrl}`);
-      let resourceData = {
-        resourceName,
-        resourceUrl: resourceUrl,
-      };
+  const saveResource = useMutation({
+    mutationFn: createResource,
+    onSuccess: (data) => {
+      navigate(-1);
+    },
+    onError: (error) => {
+      handleError(error);
+    },
+  });
 
-      const config = {
-        headers: { "Content-Type": "application/json" },
-      };
-
-      const response = await axios.post(
-        "/resources/new-resource",
-        resourceData,
-        config
-      );
-
-      const { status } = response;
-
-      if (status === 201) {
-        setResponse("Course has been successfully updated.");
-        setStatusTracker(true);
-        setResponseTracker(true);
-        setTimeout(() => {
-          setResponseTracker(false);
-        }, 2500);
-        navigate(-1);
-        setReturnReason("Operation Successfull");
-        return;
-      }
-    } catch (err) {
-      if (err.message === "Request failed with status code 400") {
-        setResponse("Error occured on the server.");
-        setStatusTracker(false);
-        setResponseTracker(true);
-        setTimeout(() => {
-          setResponseTracker(false);
-        }, 2500);
-      } else {
-        console.log(err);
-      }
-    }
-  };
-
-  const validateForm = () => {
-    if (resourceName !== null) {
+  const isFormValid = () => {
+    if (resourceName !== null && uploadSuccess) {
       return true;
     }
     return false;
   };
 
-  const saveResource = async (e) => {
-    try {
-      e.preventDefault();
-      const validation = validateForm();
-      if (validation && uploadSuccess) {
-        savingFileToDB({ resourceUrl: resourceName });
-      }
-    } catch (err) {
-      console.log(err);
+  const handleSave = async (e) => {
+    e.preventDefault();
+    if (isFormValid) {
+      saveResource.mutate({
+        resourceName: resourceName,
+        resourceUrl: resourceName,
+      });
     }
   };
 
@@ -99,11 +52,6 @@ const ResourceForm = () => {
       <div className="bg-slate-300  bg-opacity-50 flex flex-col justify-center items-center tablet:3/5 laptop:w-1/3 phone:w-3/4">
         <FormNavigation text="RESOURCE FORM" />
         <form encType="multipart/form-data" className="form-styling">
-          <AlertBox
-            responseTracker={responseTracker}
-            statusTracker={statusTracker}
-            response={response}
-          />
           <div className="input-wrap">
             <label htmlFor="course" className="w-full ">
               File Details
@@ -132,7 +80,7 @@ const ResourceForm = () => {
               type="button"
               text="Add Course"
               onClick={(e) => {
-                saveResource(e);
+                handleSave(e);
               }}
             />
           </div>

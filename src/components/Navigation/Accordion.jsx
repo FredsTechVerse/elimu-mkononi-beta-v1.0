@@ -4,12 +4,7 @@ import { AccordionItem } from "../../components";
 import { IoMdAdd, IoMdCloseCircle } from "react-icons/io";
 import { BiRefresh } from "react-icons/bi";
 import { useLocation, Link } from "react-router-dom";
-const Accordion = ({
-  unitData,
-  fetchUnitData,
-  updateCurrentLesson,
-  closeSideBar,
-}) => {
+const Accordion = ({ unitData, updateCurrentLesson, closeSideBar }) => {
   const roles = JSON.parse(localStorage.getItem("roles"));
   const location = useLocation();
   // USING THE CHAPTER ID WE CAN SHOW THE LESSONS.
@@ -46,13 +41,6 @@ const Accordion = ({
                 } text-white text-3xl rounded-lg hover:bg-slate-100 hover:text-black hover:cursor-pointer`}
               />
             </Link>
-
-            <BiRefresh
-              className="text-white text-3xl rounded-lg hover:bg-slate-100 hover:text-black hover:cursor-pointer"
-              onClick={() => {
-                fetchUnitData();
-              }}
-            />
           </div>
           <div
             className="tablet:hidden text-3xl"

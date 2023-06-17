@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FormNavigation, Modal, Button, S3Uploader } from "../../components";
 import { useNavigate } from "react-router-dom";
 import { createCourse } from "../../api/postData";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-
+import { handleError } from "../../api/errorHandling";
 const CourseForm = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => (document.body.style.overflow = "unset");
+  }, []);
   // FORM CONFIGURATIONS
   //=========================
   const [courseTitle, setCourseTitle] = useState("");
@@ -17,12 +21,12 @@ const CourseForm = () => {
   const createCourseMutation = useMutation({
     mutationFn: createCourse,
     onSuccess: (data) => {
-      console.log(data);
       queryClient.setQueryData(["courses", data._id], data);
       queryClient.invalidateQueries(["courses"], { exact: true });
       console.log("Course data has been successfully saved");
       navigate(-1);
     },
+    onError: (error) => handleError(error),
   });
 
   const saveCourse = async (e) => {
@@ -46,7 +50,6 @@ const CourseForm = () => {
   };
 
   const updateFileName = (fileName) => {
-    console.log(fileName);
     setFileName(fileName);
   };
 

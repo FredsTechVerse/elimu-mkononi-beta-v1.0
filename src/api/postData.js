@@ -1,11 +1,33 @@
 import axios from "../axios";
 
-async function createChapter({
+const loginUser = async ({ firstName, password }) => {
+  const credentials = { firstName, password };
+  const config = {
+    headers: { "Content-Type": "application/json" },
+  };
+  const { data } = await axios.post("/auth/login", credentials, config);
+  return data;
+};
+
+const createResource = async ({ resourceName, resourceUrl }) => {
+  const resourceData = { resourceName, resourceUrl };
+  const config = {
+    headers: { "Content-Type": "application/json" },
+  };
+  const { data } = await axios.post(
+    "/resources/new-resource",
+    resourceData,
+    config
+  );
+
+  return data;
+};
+const createChapter = async ({
   chapterNumber,
   chapterName,
   chapterDescription,
   unitID,
-}) {
+}) => {
   let chapterData = {
     unitID,
     chapterNumber,
@@ -27,8 +49,50 @@ async function createChapter({
   );
   console.log(JSON.stringify(data));
   return data;
-}
+};
 
+const createUnit = async ({
+  course,
+  tutor,
+  unitCode,
+  unitName,
+  unitDescription,
+}) => {
+  const unitData = {
+    courseID: course,
+    tutorId: tutor,
+    unitCode: unitCode,
+    unitName: unitName,
+    unitDescription: unitDescription,
+  };
+
+  const config = {
+    headers: { "Content-Type": "application/json" },
+  };
+
+  const { data } = await axios.post("/unit/new-unit", unitData, config);
+  return data;
+};
+const createLesson = async ({
+  lessonNumber,
+  lessonName,
+  lessonUrl,
+  chapterID,
+}) => {
+  const lessonData = {
+    chapterID,
+    lessonNumber: `${chapterID}-${lessonNumber}`,
+    lessonName,
+    lessonUrl,
+  };
+
+  const config = {
+    headers: { "Content-Type": "application/json" },
+  };
+
+  const { data } = await axios.post("/lesson/new-lesson", lessonData, config);
+  return data;
+};
 const registerUser = async ({
   firstName,
   surname,
@@ -67,4 +131,12 @@ const createCourse = async ({ courseTitle, courseImage }) => {
   return data;
 };
 
-export { createChapter, createCourse, registerUser };
+export {
+  createChapter,
+  createCourse,
+  registerUser,
+  createLesson,
+  loginUser,
+  createResource,
+  createUnit,
+};
