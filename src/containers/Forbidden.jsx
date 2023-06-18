@@ -1,4 +1,3 @@
-import React from "react";
 import Forbid from "../assets/403-Forbidden.gif";
 
 function Forbidden() {

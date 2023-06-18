@@ -151,7 +151,7 @@
         @apply uppercase outline-none  hover:bg-primary  hover:text-white text-black font-bold flex justify-between w-full items-center py-3 px-4 cursor-pointer
     }
     .navbar-link {
-        @apply text-white text-sm capitalize w-36 h-10 flex-row-centered px-4 hover:bg-white hover:text-black rounded-full
+        @apply text-white text-sm capitalize w-32 h-8 mx-1 flex-row-centered px-4 hover:bg-white hover:text-black rounded-full
     }
     .modal-overlay{
         @apply  fixed inset-0 bg-black bg-opacity-40 backdrop-blur-lg flex flex-col-centered z-10 overflow-auto

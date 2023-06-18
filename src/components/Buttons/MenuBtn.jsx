@@ -1,4 +1,3 @@
-import React from "react";
 import { RiMenu3Fill } from "react-icons/ri";
 const MenuBtn = ({ openSideBar, sideBarOpen }) => {
   return (

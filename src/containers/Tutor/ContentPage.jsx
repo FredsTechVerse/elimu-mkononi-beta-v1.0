@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Accordion, ContentSection } from "../../components";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { fetchUnitData } from "../../api/get";
+import { fetchUnitData } from "../../controllers/fetchData";
 const ContentPage = () => {
   const { unitID } = useParams();
   const [currentLesson, setCurrentLesson] = useState(null);

@@ -1,4 +1,3 @@
-import React from "react";
 import { MdCancel } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 const FormNavigation = ({ text }) => {

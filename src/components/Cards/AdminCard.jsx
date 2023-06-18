@@ -1,5 +1,3 @@
-import React from "react";
-
 const AdminCard = ({ Icon, Text, Number }) => {
   return (
     <div className="text flex justify-start items-center gap-7 max-w-[450px] border-2 border-primary h-48 rounded-md pl-5 ">

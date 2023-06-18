@@ -1,5 +1,3 @@
-import React from "react";
-
 const CourseHeading = () => {
   return (
     <div className="heading">

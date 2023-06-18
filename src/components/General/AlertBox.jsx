@@ -1,26 +1,35 @@
-import React from "react";
+import { useEffect } from "react";
+import { useAlertBoxContext } from "../../context/AlertBoxContext";
+const AlertBox = () => {
+  const { alertBoxData, setAlertBoxData } = useAlertBoxContext();
+  console.log(alertBoxData);
+  useEffect(() => {
+    if (alertBoxData?.isResponse) {
+      const timeoutId = setTimeout(() => {
+        setAlertBoxData((prevAlertBoxData) => ({
+          ...prevAlertBoxData,
+          isResponse: false,
+        }));
+      }, alertBoxData.timeout);
 
-const AlertBox = ({ responseTracker, statusTracker, response }) => {
-  return (
-    <div>
-      {responseTracker ? (
-        <p
-          className={`${
-            statusTracker
-              ? " bg-green-300 border-green-600"
-              : " bg-red-300 border-red-600"
-          } relative top-2 right-5 text-stone-600 text-center p-4 border-l-4`}
-        >
-          {response}
-         
-        </p>
-      ) : (
-       <div className="hidden">
-
-       </div>
-      )}
-    </div>
-  );
+      return () => clearTimeout(timeoutId);
+    }
+  }, [alertBoxData, setAlertBoxData]);
+  if (alertBoxData?.isResponse === true) {
+    return (
+      <p
+        className={`${
+          alertBoxData?.color === "success"
+            ? " bg-green-300 border-green-600 text-green-900"
+            : " bg-red-300 border-red-600 text-red-900"
+        } absolute top-2 right-5 text-center p-4 border-l-4 rounded-lg debug`}
+      >
+        {alertBoxData?.response}
+      </p>
+    );
+  } else {
+    return null;
+  }
 };
 
 export default AlertBox;

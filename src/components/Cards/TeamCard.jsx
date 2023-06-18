@@ -1,5 +1,3 @@
-import React from "react";
-
 const TeamCard = ({ tutor }) => {
   return (
     <div className="flex phone:flex-col laptop:flex-row justify-center items-center  phone:w-[310px] laptop:w-1/2 ">

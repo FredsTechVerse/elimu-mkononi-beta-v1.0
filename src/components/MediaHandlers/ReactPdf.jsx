@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Document, Page } from "react-pdf/dist/esm/entry.vite";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import { ReactPdfModal } from "../../components";

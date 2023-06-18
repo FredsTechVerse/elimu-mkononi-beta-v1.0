@@ -1,4 +1,3 @@
-import React from "react";
 const Footer = () => {
   return (
     <p className="text-lg flex-col-centered py-2 font-bold text-slate-500 text-center">

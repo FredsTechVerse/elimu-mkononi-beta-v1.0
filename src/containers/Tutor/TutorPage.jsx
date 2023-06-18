@@ -1,4 +1,3 @@
-import React from "react";
 // We should send the access token to get the tutor data.
 import { TutorCardHome } from "../../components";
 import { useOutletContext } from "react-router-dom";

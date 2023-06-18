@@ -1,4 +1,3 @@
-import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { MdCancel } from "react-icons/md";
 import { LogoutBtn, NavBtn, NavBgBtn } from "../../components";

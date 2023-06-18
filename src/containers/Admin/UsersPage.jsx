@@ -1,10 +1,9 @@
-import React from "react";
 import {
   UsersDataTable,
   PageTitle,
   UsersTableAlternative,
 } from "../../components";
-import { fetchUsersData } from "../../api/get";
+import { fetchUsersData } from "../../controllers/fetchData";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 

@@ -1,4 +1,3 @@
-import React from "react";
 import Tutor1 from "../../assets/tutor-1.png";
 import Tutor2 from "../../assets/tutor-2.png";
 import { TeamCard } from "..";

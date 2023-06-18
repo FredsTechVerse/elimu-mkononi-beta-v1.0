@@ -1,4 +1,3 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 import {
   UnitCard,
@@ -7,7 +6,7 @@ import {
   PageTitle,
 } from "../../components";
 import { useQuery } from "@tanstack/react-query";
-import { fetchCourseData } from "../../api/get";
+import { fetchCourseData } from "../../controllers/fetchData";
 const CourseOverview = () => {
   const { courseID } = useParams();
   const roles = JSON.parse(localStorage.getItem("roles"));

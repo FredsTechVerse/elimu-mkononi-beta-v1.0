@@ -1,4 +1,3 @@
-import React from "react";
 import {
   NavigateBtn,
   CourseCard,
@@ -6,7 +5,7 @@ import {
   PageTitle,
 } from "../../components";
 
-import { fetchCoursesData } from "../../api/get";
+import { fetchCoursesData } from "../../controllers/fetchData";
 import { useQuery } from "@tanstack/react-query";
 
 const CoursesAdminPage = () => {

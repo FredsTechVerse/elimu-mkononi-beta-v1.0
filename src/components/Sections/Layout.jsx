@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { TutorSideBar, AdminSideBar, PageTitle } from "../../components";
-import { handleLogout } from "../../modules/handleLogout";
+import { handleLogout } from "../../controllers/handleLogout";
 import { RiMenu3Fill } from "react-icons/ri";
 import axios from "../../axios";
 const Layout = ({ role }) => {

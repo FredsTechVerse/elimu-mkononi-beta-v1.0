@@ -6,9 +6,9 @@ import {
   S3Uploader,
 } from "../../components";
 import { useNavigate } from "react-router-dom";
-import { createCourse } from "../../api/postData";
+import { createCourse } from "../../controllers/postData";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { handleError } from "../../api/errorHandling";
+import { handleError } from "../../controllers/handleErrors";
 const CourseForm = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();

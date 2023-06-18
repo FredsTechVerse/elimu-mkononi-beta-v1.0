@@ -1,5 +1,3 @@
-import React from "react";
-
 const SubmitButton = ({ text, type, onClick }) => {
   return (
     <button

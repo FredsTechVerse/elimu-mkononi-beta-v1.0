@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { AccordionItem, HomeBtn, Tooltip } from "../../components";
 import { IoMdAdd, IoMdCloseCircle } from "react-icons/io";

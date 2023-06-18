@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FormNavigation, Modal, SubmitButton } from "..";
 import { useMutation } from "@tanstack/react-query";
-import { loginUser } from "../../api/postData";
-import { handleError } from "../../api/errorHandling";
+import { loginUser } from "../../controllers/postData";
+import { handleError } from "../../controllers/handleErrors";
 const LogInForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
+  const formRef = useRef(null);
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => (document.body.style.overflow = "unset");
@@ -38,6 +38,22 @@ const LogInForm = () => {
     }
     return false;
   };
+
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.key === "Enter" || e.type === "submit") {
+        handleSubmit(e);
+      }
+    };
+    if (formRef.current) {
+      formRef.current.addEventListener("submit", handleKeyPress);
+    }
+    return () => {
+      if (formRef.current) {
+        formRef.current.removeEventListener("submit", handleKeyPress);
+      }
+    };
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -89,7 +105,7 @@ const LogInForm = () => {
 
           <div className="w-full flex-row-centered">
             <SubmitButton
-              type="button"
+              type="submit"
               text="Log In"
               onClick={(e) => {
                 handleSubmit(e);

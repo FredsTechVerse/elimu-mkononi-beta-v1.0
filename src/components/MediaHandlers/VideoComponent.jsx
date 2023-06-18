@@ -1,4 +1,3 @@
-import React from "react";
 const VideoComponent = ({ src, currentLesson, title, updateCurrentLesson }) => {
   // const onVideoEnd = () => {
   //   updateCurrentLesson({

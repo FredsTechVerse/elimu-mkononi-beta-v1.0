@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   FormNavigation,
   Modal,
@@ -6,9 +6,9 @@ import {
   S3Uploader,
 } from "../../components";
 import { useNavigate } from "react-router-dom";
-import { createResource } from "../../api/postData";
+import { createResource } from "../../controllers/postData";
 import { useMutation } from "@tanstack/react-query";
-import { handleError } from "../../api/errorHandling";
+import { handleError } from "../../controllers/handleErrors";
 const ResourceForm = () => {
   const navigate = useNavigate();
   // FORM CONFIGURATIONS

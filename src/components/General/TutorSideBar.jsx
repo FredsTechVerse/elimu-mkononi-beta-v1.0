@@ -1,4 +1,3 @@
-import React from "react";
 import { IoMdCloseCircle } from "react-icons/io";
 import Person_3 from "../../assets/person_3.jpg";
 import { LogoutBtn, HomeBtn } from "../../components";

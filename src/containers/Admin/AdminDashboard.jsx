@@ -1,4 +1,3 @@
-import React from "react";
 import { AdminCard } from "../../components";
 import { tutorIcon, coursesIcon, studentsIcon, lessonIcon } from "../../assets";
 

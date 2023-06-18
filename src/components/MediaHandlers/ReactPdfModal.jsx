@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { MdCancel } from "react-icons/md";
 const ReactPdfModal = ({ children }) => {
   useLayoutEffect(() => {

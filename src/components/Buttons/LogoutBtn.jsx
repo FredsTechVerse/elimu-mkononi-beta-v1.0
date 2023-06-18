@@ -1,6 +1,5 @@
-import React from "react";
 import { FiLogOut } from "react-icons/fi";
-import { handleLogout } from "../../modules/handleLogout";
+import { handleLogout } from "../../controllers/handleLogout";
 const LogoutBtn = () => {
   return (
     <div

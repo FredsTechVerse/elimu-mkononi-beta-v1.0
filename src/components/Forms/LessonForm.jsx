@@ -8,7 +8,7 @@ import {
 } from "../../components";
 import { useParams, useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createLesson } from "../../api/postData";
+import { createLesson } from "../../controllers/postData";
 const LessonForm = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();

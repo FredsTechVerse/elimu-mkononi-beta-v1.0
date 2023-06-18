@@ -1,7 +1,7 @@
 import { Outlet, useParams } from "react-router-dom";
 import { ChapterCard, PageTitle, UnitSkeleton, NavBgBtn } from "../components";
 import { useQuery } from "@tanstack/react-query";
-import { fetchUnitData } from "../api/get";
+import { fetchUnitData } from "../controllers/fetchData";
 const UnitOverview = () => {
   const { unitID } = useParams();
   const roles = JSON.parse(localStorage.getItem("roles"));

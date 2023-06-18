@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FormNavigation, SubmitButton, Modal } from "../../components";
 import { useNavigate } from "react-router-dom";
-import { registerUser } from "../../api/postData";
+import { registerUser } from "../../controllers/postData";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 const RegistrationForm = ({ role }) => {
   const navigate = useNavigate();

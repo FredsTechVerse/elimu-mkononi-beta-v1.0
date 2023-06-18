@@ -7,8 +7,8 @@ import {
 } from "../../components";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { handleError } from "../../api/errorHandling";
-import { createChapter } from "../../api/postData";
+import { handleError } from "../../controllers/handleErrors";
+import { createChapter } from "../../controllers/postData";
 
 const ChapterForm = () => {
   useEffect(() => {

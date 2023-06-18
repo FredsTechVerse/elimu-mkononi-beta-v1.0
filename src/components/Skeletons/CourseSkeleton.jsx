@@ -1,5 +1,3 @@
-import React from "react";
-
 const CourseSkeleton = () => {
   return (
     <div className="flex flex-col justify-center items-center max-w-sm mx-auto hover:scale-105 ease-in-out duration-300 animate-pulse">

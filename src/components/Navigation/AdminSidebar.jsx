@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import Students from "../../assets/students.png";
 import Tutors from "../../assets/tutor-1.png";
