@@ -16,7 +16,7 @@ const CourseOverview = () => {
   });
 
   return (
-    <div className="w-full h-full flex flex-col bg-slate-100 ">
+    <div className="w-full h-full flex flex-col bg-slate-100 overflow-auto ">
       <div className="relative pattern h-[300px] flex-row-centered">
         <p className="text-white font-bold text-center phone:text-xl tablet:text-2xl laptop:text-4xl uppercase w-full h-full flex-row-centered backdrop-blur-md bg-black bg-opacity-10">
           {courseQuery?.data && courseQuery?.data?.courseTitle}
@@ -31,7 +31,7 @@ const CourseOverview = () => {
           <PageTitle text="Units in this course" />
         </div>
       </div>
-      <div className="flex flex-col items-center justify-center pt-6 w-full h-full overflow-auto">
+      <div className="flex flex-col items-center justify-center pt-6 w-full h-full">
         <div className="w-full h-full flex flex-col items-center px-4 ">
           {courseQuery.status === "loading" ? (
             <div className="grid-sm w-full h-full overflow-hidden">
