@@ -104,13 +104,7 @@ const LogInForm = () => {
           </div>
 
           <div className="w-full flex-row-centered">
-            <SubmitButton
-              type="submit"
-              text="Log In"
-              onClick={(e) => {
-                handleSubmit(e);
-              }}
-            />
+            <SubmitButton type="submit" text="Log In" />
           </div>
 
           <p className="mt-1 text-center text-sm text-white ">

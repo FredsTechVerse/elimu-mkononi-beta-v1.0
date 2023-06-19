@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FormNavigation, SubmitButton, Modal } from "../../components";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../../controllers/postData";
@@ -6,19 +6,37 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 const RegistrationForm = ({ role }) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const formRef = useRef(null);
+
+  // DECLARATION OF OUR STATES
+  //==========================
+  const [fName, setFName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [contact, setContact] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [cPassword, setCPassword] = useState("");
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => (document.body.style.overflow = "unset");
   }, []);
-  // DECLARATION OF OUR STATES
-  //==========================
-  const [fName, setFName] = useState(null);
-  const [surname, setSurname] = useState(null);
-  const [contact, setContact] = useState(null);
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
-  const [cPassword, setCPassword] = useState(null);
+
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.key === "Enter" || e.type === "submit") {
+        saveUser(e);
+      }
+    };
+    if (formRef.current) {
+      formRef.current.addEventListener("submit", handleKeyPress);
+    }
+    return () => {
+      if (formRef.current) {
+        formRef.current.removeEventListener("submit", handleKeyPress);
+      }
+    };
+  }, []);
 
   const isFormValid = () => {
     if (
@@ -43,7 +61,6 @@ const RegistrationForm = ({ role }) => {
   });
   const saveUser = async (e) => {
     e.preventDefault();
-
     if (isFormValid()) {
       createUserMutation.mutate({
         firstName: fName,
@@ -68,7 +85,7 @@ const RegistrationForm = ({ role }) => {
               : "Student Registration"
           }
         />
-        <form className="form-styling" onSubmit={registerUser}>
+        <form className="form-styling" onSubmit={saveUser}>
           <div className="input-wrap">
             <label htmlFor="contact">Names</label>
             <div className="input-wrap">
@@ -167,13 +184,7 @@ const RegistrationForm = ({ role }) => {
             />
           </div>
           <div className="cta-wrap">
-            <SubmitButton
-              type="button"
-              text="register"
-              onClick={(e) => {
-                saveUser(e);
-              }}
-            />
+            <SubmitButton type="submit" text="register" />
           </div>
         </form>
       </div>

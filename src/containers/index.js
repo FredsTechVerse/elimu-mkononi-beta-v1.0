@@ -10,6 +10,7 @@ import CourseAdminPage from "./Admin/CourseAdminPage";
 import DraftPage from "./DraftPage";
 import Forbidden from "./Forbidden";
 import UnitOverview from "./UnitOverview";
+import NotFound from "./NotFound";
 export {
   HomePage,
   TutorPage,
@@ -23,4 +24,5 @@ export {
   CourseOverview,
   Forbidden,
   UnitOverview,
+  NotFound,
 };

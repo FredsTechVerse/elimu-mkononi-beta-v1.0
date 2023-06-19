@@ -1,5 +1,5 @@
 import { IoMdCloseCircle } from "react-icons/io";
-import Person_3 from "../../assets/person_3.jpg";
+import { profile } from "../../assets";
 import { LogoutBtn, HomeBtn } from "../../components";
 
 const TutorSideBar = ({ tutor, closeSideBar }) => {
@@ -20,7 +20,7 @@ const TutorSideBar = ({ tutor, closeSideBar }) => {
         </div>
       </div>
       <div className="flex-col-centered pt-5">
-        <img src={Person_3} className=" rounded-full w-[170px] h-[170px]"></img>
+        <img src={profile} className=" rounded-full w-[170px] h-[170px]"></img>
         <div className="name capitalize mt-4 font-bold text-3xl">
           {tutor && `${tutor.firstName} ${tutor.surname}`}
         </div>

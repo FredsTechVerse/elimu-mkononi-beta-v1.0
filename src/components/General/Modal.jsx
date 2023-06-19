@@ -1,5 +1,4 @@
-import { useLayoutEffect, useState } from "react";
-import { MdCancel } from "react-icons/md";
+import { useLayoutEffect } from "react";
 const Modal = ({ children }) => {
   useLayoutEffect(() => {
     document.body.style.overflow = "hidden";

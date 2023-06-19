@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   FormNavigation,
   SubmitButton,
@@ -11,10 +11,6 @@ import { handleError } from "../../controllers/handleErrors";
 import { createChapter } from "../../controllers/postData";
 
 const ChapterForm = () => {
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => (document.body.style.overflow = "unset");
-  }, []);
   // A link will be used to redirect us to this particular point.
   const navigate = useNavigate();
   const { unitID } = useParams();
@@ -22,6 +18,28 @@ const ChapterForm = () => {
   const [chapterName, setChapterName] = useState("");
   const [chapterDescription, setChapterDescription] = useState("");
   const [isFormSubmitted, setIsFormSubmittted] = useState(false);
+  const formRef = useRef(null);
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => (document.body.style.overflow = "unset");
+  }, []);
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.key === "Enter" || e.type === "submit") {
+        fileUploadHandler(e);
+      }
+    };
+    if (formRef.current) {
+      formRef.current.addEventListener("submit", handleKeyPress);
+    }
+    return () => {
+      if (formRef.current) {
+        formRef.current.removeEventListener("submit", handleKeyPress);
+      }
+    };
+  }, []);
+
   // TRACKING LOCATION
   const location = useLocation();
   const from = location.state?.background?.pathname;
@@ -38,7 +56,6 @@ const ChapterForm = () => {
   });
 
   const fileUploadHandler = async (e) => {
-    console.log("Saving the data");
     e.preventDefault();
     setIsFormSubmittted(true);
     createChapterMutation.mutate({
@@ -53,7 +70,7 @@ const ChapterForm = () => {
     <Modal>
       <div className="form-wrap h-[400px]">
         <FormNavigation text="Chapter Form" />
-        <form className="form-styling">
+        <form className="form-styling" onSubmit={fileUploadHandler}>
           {/* FILE */}
           <div className="input-wrap gap-2">
             <label htmlFor="cNumber" className="w-full ">
@@ -95,11 +112,7 @@ const ChapterForm = () => {
           </div>
           {/* CTA BUTTONS */}
           <div className="cta-wrap ">
-            <SubmitButton
-              type="button"
-              text="Save"
-              onClick={fileUploadHandler}
-            />
+            <SubmitButton type="submit" text="Save" />
           </div>
         </form>
       </div>

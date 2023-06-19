@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   FormNavigation,
   Modal,
   SubmitButton,
-  AlertBox,
   S3Uploader,
 } from "../../components";
 import { useParams, useNavigate } from "react-router-dom";
@@ -13,10 +12,26 @@ const LessonForm = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { chapterID } = useParams();
+  const formRef = useRef();
   // Prevents the scroll behaviour of our page
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => (document.body.style.overflow = "unset");
+  }, []);
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.key === "Enter" || e.type === "submit") {
+        saveLesson(e);
+      }
+    };
+    if (formRef.current) {
+      formRef.current.addEventListener("submit", handleKeyPress);
+    }
+    return () => {
+      if (formRef.current) {
+        formRef.current.removeEventListener("submit", handleKeyPress);
+      }
+    };
   }, []);
 
   //Form Variables
@@ -73,6 +88,7 @@ const LessonForm = () => {
           encType="multipart/form-data"
           className="form-styling"
           text="Lesson form"
+          onSubmit={saveLesson}
         >
           {/* FILE */}
           <div className="input-wrap">
@@ -110,13 +126,7 @@ const LessonForm = () => {
           </div>
           {/* CTA BUTTONS */}
           <div className="cta-wrap">
-            {/* {uploadSuccess ? (
-              <SubmitButton type="button" text="Save" onClick={saveLesson} />
-            ) : (
-              <LoadingBtn action="Uploading" />
-            )} */}
-
-            <SubmitButton type="button" text="Save" onClick={saveLesson} />
+            <SubmitButton type="submit" text="Save" />
           </div>
         </form>
       </div>

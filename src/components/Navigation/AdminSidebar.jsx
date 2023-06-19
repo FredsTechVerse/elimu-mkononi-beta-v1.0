@@ -1,18 +1,15 @@
 import { Link } from "react-router-dom";
-import Students from "../../assets/students.png";
-import Tutors from "../../assets/tutor-1.png";
-import Courses from "../../assets/courses-icon.png";
-import person_3 from "../../assets/person_3.jpg";
 import { LogoutBtn, HomeBtn } from "../../components";
 import { BsChevronRight } from "react-icons/bs";
 import { IoMdCloseCircle } from "react-icons/io";
+import { profile } from "../../assets";
 
 const lists = [
-  { name: "Dashboard", link: "/admin/", icon: Students },
-  { name: "Students", link: "/admin/students", icon: Students },
-  { name: "Tutors", link: "/admin/tutors", icon: Tutors },
-  { name: "Courses", link: "/admin/courses", icon: Courses },
-  { name: "Admin", link: "/admin/admins", icon: Tutors },
+  { name: "Dashboard", link: "/admin/" },
+  { name: "Students", link: "/admin/students" },
+  { name: "Tutors", link: "/admin/tutors" },
+  { name: "Courses", link: "/admin/courses" },
+  { name: "Admin", link: "/admin/admins" },
 ];
 
 const AdminSidebar = ({ closeSideBar }) => {
@@ -39,7 +36,7 @@ const AdminSidebar = ({ closeSideBar }) => {
 
       <div className="flex-col-centered pt-5">
         <img
-          src={person_3}
+          src={profile}
           alt="Profile Picture"
           className="w-[170px] h-[170px] rounded-full dark:bg-gray-500"
         />

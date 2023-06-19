@@ -1,5 +1,5 @@
-import { Outlet, useParams } from "react-router-dom";
-import { ChapterCard, PageTitle, UnitSkeleton, NavBgBtn } from "../components";
+import { useParams } from "react-router-dom";
+import { ChapterCard, UnitSkeleton, NavBgBtn } from "../components";
 import { useQuery } from "@tanstack/react-query";
 import { fetchUnitData } from "../controllers/fetchData";
 const UnitOverview = () => {
@@ -13,8 +13,8 @@ const UnitOverview = () => {
 
   return (
     <div className="flex-col-centered justify-start bg-slate-100 ">
-      <div className=" relative pattern h-56 w-full flex-row-centered">
-        <p className="text-white font-bold text-center phone:text-xl tablet:text-2xl laptop:text-4xl uppercase w-full h-full flex-row-centered backdrop-blur-md bg-black bg-opacity-10 flex-row-centered gap-4">
+      <div className="relative pattern h-56 w-full flex-row-centered">
+        <p className="text-white font-bold text-center phone:text-xl tablet:text-2xl laptop:text-4xl uppercase w-full h-full flex-row-centered backdrop-blur-md bg-black bg-opacity-20 flex-row-centered gap-4">
           <span>{unitQuery?.data?.unitCode}</span>
           <span>{unitQuery?.data?.unitName}</span>
         </p>

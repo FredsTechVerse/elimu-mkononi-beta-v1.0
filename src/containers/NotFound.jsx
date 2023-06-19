@@ -1,13 +1,13 @@
 import React from "react";
 
-const Forbidden = () => {
+const NotFound = () => {
   return (
     <div className="w-full h-screen uppercase flex-col-centered">
       <p className="uppercase text-slate-600 font-bold text-2xl">
-        Action by user has been forbidden
+        Page not not found
       </p>
     </div>
   );
 };
 
-export default Forbidden;
+export default NotFound;

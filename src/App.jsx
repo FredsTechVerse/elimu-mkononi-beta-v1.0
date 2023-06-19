@@ -11,6 +11,7 @@ import {
   CourseAdminPage,
   Forbidden,
   UnitOverview,
+  NotFound,
 } from "./containers";
 import {
   CourseForm,
@@ -42,7 +43,7 @@ function App() {
     <div className="flex w-full h-screen">
       <Routes location={background || location}>
         {/* GENERAL ROUTES */}
-        <Route exact path="*" element={<Forbidden />}></Route>
+        <Route exact path="*" element={<NotFound />}></Route>
         <Route exact path="forbidden" element={<Forbidden />} />
         <Route path="/log-in" element={<LogInForm />} />
         <Route path="/draft" element={<DraftPage />} />
@@ -100,7 +101,7 @@ function App() {
         </Route>
 
         {/* ADMIN ROUTES */}
-        <Route element={<RequireAuth allowedRoles={["EM-203"]} />}>
+        <Route element={<RequireAuth allowedRoles={["EM-203,EM-201"]} />}>
           <Route exact path="/admin" element={<Layout role="EM-203" />}>
             <Route index element={<AdminDashboard />} />
             <Route exact path="course-form" element={<CourseForm />} />

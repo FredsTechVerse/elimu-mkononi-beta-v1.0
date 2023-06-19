@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   FormNavigation,
   Modal,
@@ -12,11 +12,29 @@ import { handleError } from "../../controllers/handleErrors";
 const CourseForm = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const formRef = useRef(null);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => (document.body.style.overflow = "unset");
   }, []);
+
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.key === "Enter" || e.type === "submit") {
+        saveCourse(e);
+      }
+    };
+    if (formRef.current) {
+      formRef.current.addEventListener("submit", handleKeyPress);
+    }
+    return () => {
+      if (formRef.current) {
+        formRef.current.removeEventListener("submit", handleKeyPress);
+      }
+    };
+  }, []);
+
   // FORM CONFIGURATIONS
   //=========================
   const [courseTitle, setCourseTitle] = useState("");
@@ -62,7 +80,11 @@ const CourseForm = () => {
     <Modal>
       <div className="form-wrap h-[380px]">
         <FormNavigation text="COURSE FORM" />
-        <form encType="multipart/form-data" className="form-styling">
+        <form
+          encType="multipart/form-data"
+          className="form-styling"
+          onSubmit={saveCourse}
+        >
           {/* <AlertBox
             responseTracker={responseTracker}
             statusTracker={statusTracker}
@@ -90,13 +112,7 @@ const CourseForm = () => {
           </div>
           {/* CTA BUTTONS */}
           <div className="cta-wrap">
-            <SubmitButton
-              type="button"
-              text="Add Course"
-              onClick={(e) => {
-                saveCourse(e);
-              }}
-            />
+            <SubmitButton type="submit" text="Add Course" />
           </div>
         </form>
       </div>

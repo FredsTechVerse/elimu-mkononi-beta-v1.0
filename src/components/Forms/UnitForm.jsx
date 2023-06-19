@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { FormNavigation, SubmitButton } from "../../components";
 import { fetchUsersData } from "../../controllers/fetchData";
@@ -8,6 +8,7 @@ import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 const UnitForm = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const formRef = useRef(null);
 
   const tutorsQuery = useQuery({
     queryKey: ["tutors"],
@@ -28,6 +29,23 @@ const UnitForm = () => {
     document.body.style.overflow = "hidden";
     return () => (document.body.style.overflow = "unset");
   }, []);
+
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.key === "Enter" || e.type === "submit") {
+        saveUnit(e);
+      }
+    };
+    if (formRef.current) {
+      formRef.current.addEventListener("submit", handleKeyPress);
+    }
+    return () => {
+      if (formRef.current) {
+        formRef.current.removeEventListener("submit", handleKeyPress);
+      }
+    };
+  }, []);
+
   // DECLARATION OF VARIABLES
   const { courseID } = useParams();
   const [tutor, setTutor] = useState();
@@ -64,7 +82,11 @@ const UnitForm = () => {
       <div className="form-wrap">
         <FormNavigation text="unit form" />
         {/* PROPOSED HEADER. */}
-        <form encType="multipart/form-data" className="form-styling">
+        <form
+          encType="multipart/form-data"
+          className="form-styling"
+          onSubmit={saveUnit}
+        >
           {/* DROPDOWN */}
           <div className="flex flex-col">
             <label
@@ -143,9 +165,8 @@ const UnitForm = () => {
             ></textarea>
           </div>
           {/* CTA BUTTONS */}
-
           <div className="cta-wrap">
-            <SubmitButton type="button" text="Save" onClick={saveUnit} />
+            <SubmitButton type="submit" text="Save" />
           </div>
         </form>
       </div>

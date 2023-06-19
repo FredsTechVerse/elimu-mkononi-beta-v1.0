@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   FormNavigation,
   Modal,
@@ -16,9 +16,25 @@ const ResourceForm = () => {
   const [resourceName, setResourceName] = useState("");
   const [uploadSuccess, setUploadSucess] = useState(false);
 
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (e.key === "Enter" || e.type === "submit") {
+        handleSave(e);
+      }
+    };
+    if (formRef.current) {
+      formRef.current.addEventListener("submit", handleKeyPress);
+    }
+    return () => {
+      if (formRef.current) {
+        formRef.current.removeEventListener("submit", handleKeyPress);
+      }
+    };
+  }, []);
+
   const saveResource = useMutation({
     mutationFn: createResource,
-    onSuccess: (data) => {
+    onSuccess: () => {
       navigate(-1);
     },
     onError: (error) => {
@@ -56,7 +72,11 @@ const ResourceForm = () => {
     <Modal>
       <div className="form-wrap">
         <FormNavigation text="RESOURCE FORM" />
-        <form encType="multipart/form-data" className="form-styling">
+        <form
+          encType="multipart/form-data"
+          className="form-styling"
+          onSubmit={handleSave}
+        >
           <div className="input-wrap">
             <label htmlFor="course" className="w-full ">
               File Details
@@ -81,13 +101,7 @@ const ResourceForm = () => {
           </div>
           {/* CTA BUTTONS */}
           <div className="cta-wrap">
-            <SubmitButton
-              type="button"
-              text="Add Course"
-              onClick={(e) => {
-                handleSave(e);
-              }}
-            />
+            <SubmitButton type="submit" text="Add Course" />
           </div>
         </form>
       </div>

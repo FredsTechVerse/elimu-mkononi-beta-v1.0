@@ -1,6 +1,5 @@
 import SubmitButton from "./SubmitButton";
 import LoadingBtn from "./LoadingBtn";
-import AdminButton from "./AdminButton";
 import AdminNavItem from "./AdminNavItem";
 import CTAButton from "./CTAButton";
 import NavigateBtn from "./NavigateBtn";
@@ -11,7 +10,6 @@ import MenuBtn from "./MenuBtn";
 export {
   SubmitButton,
   LoadingBtn,
-  AdminButton,
   AdminNavItem,
   CTAButton,
   NavigateBtn,
