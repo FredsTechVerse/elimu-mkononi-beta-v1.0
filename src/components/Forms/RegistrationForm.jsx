@@ -55,7 +55,9 @@ const RegistrationForm = ({ role }) => {
       console.log(
         `User has been successfully registered ${JSON.stringify(data)}`
       );
-      queryClient.invalidateQueries(["tutors"], { exact: true });
+      queryClient.invalidateQueries(["tutors", "admins", "students"], {
+        exact: true,
+      });
       navigate(-1);
     },
   });
@@ -184,7 +186,7 @@ const RegistrationForm = ({ role }) => {
             />
           </div>
           <div className="cta-wrap">
-            <SubmitButton type="submit" text="register" />
+            <SubmitButton disabled={false} type="submit" text="register" />
           </div>
         </form>
       </div>

@@ -17,14 +17,13 @@ const CourseOverview = () => {
 
   return (
     <div className="w-full h-full flex flex-col bg-slate-100 overflow-auto ">
-      <div className="relative pattern h-[300px] flex-row-centered">
+      <div className="relative pattern h-60 w-full">
         <p className="text-white font-bold text-center phone:text-xl tablet:text-2xl laptop:text-4xl uppercase w-full h-full flex-row-centered backdrop-blur-md bg-black bg-opacity-10">
           {courseQuery?.data && courseQuery?.data?.courseTitle}
         </p>
         {(roles?.includes("EM-202") || roles?.includes("EM-203")) && (
           <div className="absolute top-1 right-1 flex gap-1">
             <NavigateBtn destination="new-unit" text="New Unit" />
-            <NavigateBtn destination="assign-unit" text="Assign Unit" />
           </div>
         )}
         <div className="absolute h-7 bg-slate-100 w-full bottom-0 rounded-t-full">

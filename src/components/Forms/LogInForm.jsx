@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { FormNavigation, Modal, SubmitButton } from "..";
+import { FormNavigation, Modal, SubmitButton, AlertBox } from "..";
 import { useMutation } from "@tanstack/react-query";
 import { loginUser } from "../../controllers/postData";
 import { handleError } from "../../controllers/handleErrors";
+import { useAlertBoxContext } from "../../context/AlertBoxContext";
 const LogInForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const formRef = useRef(null);
+  const { updateAlertBoxData } = useAlertBoxContext();
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => (document.body.style.overflow = "unset");
@@ -25,6 +28,12 @@ const LogInForm = () => {
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("refreshToken", data.refreshToken);
       localStorage.setItem("roles", JSON.stringify(data.roles));
+      updateAlertBoxData({
+        response: "You have signed in successfully",
+        isResponse: true,
+        status: "success",
+        timeout: 4500,
+      });
       navigate(from, { replace: true });
     },
     onError: (error) => {
@@ -58,7 +67,6 @@ const LogInForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isFormValid()) {
-      console.log("Submitting data");
       const trimmedFirstName = firstName.trim();
       const trimmedPassword = password.trim();
 
@@ -89,7 +97,6 @@ const LogInForm = () => {
               onChange={(e) => setFirstName(e.target.value)}
             />
           </div>
-
           <div className="input-wrap">
             <label htmlFor="password">Password</label>
             <input
@@ -102,11 +109,9 @@ const LogInForm = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-
           <div className="w-full flex-row-centered">
             <SubmitButton type="submit" text="Log In" />
           </div>
-
           <p className="mt-1 text-center text-sm text-white ">
             <span>Not registered?</span>
             <span className="mx-2 text-black">

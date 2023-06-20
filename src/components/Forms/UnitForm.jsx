@@ -78,8 +78,8 @@ const UnitForm = () => {
   };
 
   return (
-    <div className="modal-overlay">
-      <div className="form-wrap">
+    <div className="modal-overlay ">
+      <div className="form-wrap h-[500px]">
         <FormNavigation text="unit form" />
         {/* PROPOSED HEADER. */}
         <form
@@ -99,7 +99,7 @@ const UnitForm = () => {
             <select
               value={tutor}
               onChange={(e) => setTutor(e.target.value)}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  "
+              className="input-styling  mb-5"
             >
               <option selected className="text-grey">
                 Choose a tutor
@@ -153,7 +153,6 @@ const UnitForm = () => {
               Unit Description
             </label>
             <textarea
-              className="input-styling"
               id="description"
               type="text"
               placeholder="What is the unit about?"

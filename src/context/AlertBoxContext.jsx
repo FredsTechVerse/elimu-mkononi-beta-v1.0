@@ -9,14 +9,25 @@ export const useAlertBoxContext = () => {
 // ASSING CONTEXT A VALUE
 export const AlertBoxContextProvider = ({ children }) => {
   const [alertBoxData, setAlertBoxData] = useState({
-    color: "success",
-    isResponse: true,
-    response: "Something",
-    timeout: 0,
+    status: null,
+    isResponse: false,
+    response: null,
+    timeout: null,
   });
 
+  const updateAlertBoxData = ({ response, isResponse, status, timeout }) => {
+    setAlertBoxData({
+      response,
+      isResponse,
+      status,
+      timeout,
+    });
+  };
+
   return (
-    <AlertBoxContext.Provider value={{ alertBoxData, setAlertBoxData }}>
+    <AlertBoxContext.Provider
+      value={{ alertBoxData, setAlertBoxData, updateAlertBoxData }}
+    >
       {children}
     </AlertBoxContext.Provider>
   );

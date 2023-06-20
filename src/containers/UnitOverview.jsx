@@ -13,9 +13,9 @@ const UnitOverview = () => {
 
   return (
     <div className="flex-col-centered justify-start bg-slate-100 ">
-      <div className="relative pattern h-56 w-full flex-row-centered">
-        <p className="text-white font-bold text-center phone:text-xl tablet:text-2xl laptop:text-4xl uppercase w-full h-full flex-row-centered backdrop-blur-md bg-black bg-opacity-20 flex-row-centered gap-4">
-          <span>{unitQuery?.data?.unitCode}</span>
+      <div className="relative pattern h-60 w-full">
+        <p className="text-white font-bold text-left phone:text-xl tablet:text-2xl laptop:text-4xl uppercase w-full h-full flex-row-centered backdrop-blur-md bg-black bg-opacity-20 flex-row-centered gap-4">
+          <span>{unitQuery?.data?.unitCode}</span> -
           <span>{unitQuery?.data?.unitName}</span>
         </p>
         {(roles?.includes("EM-202") || roles?.includes("EM-203")) && (
@@ -28,9 +28,10 @@ const UnitOverview = () => {
         )}
         <div className="absolute h-7 bg-slate-100 w-full bottom-0 rounded-t-full"></div>
       </div>
-      <h1 className="uppercase font-extrabold text-3xl text-slate-700 ml-3 mb-2 w-full text-center">
+      <h1 className="uppercase font-extrabold text-2xl text-slate-700 ml-3 mb-2 w-full text-left">
         What the unit entails
       </h1>
+      x
       <ul className="list-decimal w-full px-10 text-lg mb-5">
         <li>
           Elements of a measurement system: Accuracy, precision, sensitivity of

@@ -9,11 +9,13 @@ import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { handleError } from "../../controllers/handleErrors";
 import { createChapter } from "../../controllers/postData";
+import { useAlertBoxContext } from "../../context/AlertBoxContext";
 
 const ChapterForm = () => {
   // A link will be used to redirect us to this particular point.
   const navigate = useNavigate();
   const { unitID } = useParams();
+  const { updateAlertBoxData } = useAlertBoxContext();
   const [chapterNumber, setChapterNumber] = useState("");
   const [chapterName, setChapterName] = useState("");
   const [chapterDescription, setChapterDescription] = useState("");
@@ -50,6 +52,12 @@ const ChapterForm = () => {
     onSuccess: (data) => {
       queryClient.setQueryData(["chapter", unitID], data);
       queryClient.invalidateQueries(["unitData"], { exact: true });
+      updateAlertBoxData({
+        response: "Chapter has been successfully saved",
+        isResponse: true,
+        status: "success",
+        timeout: 4500,
+      });
       navigate(from);
     },
     onError: (error) => handleError(error),

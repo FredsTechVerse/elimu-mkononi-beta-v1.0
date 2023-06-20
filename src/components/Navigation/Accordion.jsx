@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { AiFillHome } from "react-icons/ai";
 import { AccordionItem, HomeBtn, Tooltip } from "../../components";
 import { IoMdAdd, IoMdCloseCircle } from "react-icons/io";
-import { BiRefresh } from "react-icons/bi";
 import { useLocation, Link } from "react-router-dom";
 const Accordion = ({ unitData, updateCurrentLesson, closeSideBar }) => {
   const roles = JSON.parse(localStorage.getItem("roles"));
@@ -18,7 +16,7 @@ const Accordion = ({ unitData, updateCurrentLesson, closeSideBar }) => {
   };
 
   return (
-    <div className="relative z-10 flex flex-col items-center h-full bg-slate-100 max-h-screen">
+    <div className="relative z-10 flex flex-col items-center h-full bg-slate-100 max-h-screen ">
       <div className="flex items-center justify-between w-full px-2 py-2 font-bold text-md text-slate-200 bg-primary text-center">
         <HomeBtn />
         {unitData && unitData.unitName}
@@ -51,7 +49,7 @@ const Accordion = ({ unitData, updateCurrentLesson, closeSideBar }) => {
       </div>
 
       {unitData && unitData.unitChapters.length > 0 ? (
-        <div className="w-full bg-secondary max-h-full overflow-auto">
+        <div className="w-full bg-secondary h-full overflow-y-auto ">
           {unitData.unitChapters.map((chapter, chapterIndex) => (
             <AccordionItem
               unitData={unitData}

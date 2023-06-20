@@ -27,11 +27,14 @@ import {
   ResourcesSection,
   CourseOverview,
   Layout,
+  AlertBox,
 } from "./components";
 import { Routes, Route, useLocation } from "react-router-dom";
 function App() {
   const location = useLocation();
   const background = location.state && location.state.background;
+  const roles = localStorage.getItem("roles");
+  console.log(roles);
   // AUTHENTICATION REFERENCE.
   // {
   //   student:"EM-201",
@@ -41,6 +44,8 @@ function App() {
 
   return (
     <div className="flex w-full h-screen">
+      <AlertBox />
+
       <Routes location={background || location}>
         {/* GENERAL ROUTES */}
         <Route exact path="*" element={<NotFound />}></Route>
@@ -101,7 +106,7 @@ function App() {
         </Route>
 
         {/* ADMIN ROUTES */}
-        <Route element={<RequireAuth allowedRoles={["EM-203,EM-201"]} />}>
+        <Route element={<RequireAuth allowedRoles={["EM-203", "EM-201"]} />}>
           <Route exact path="/admin" element={<Layout role="EM-203" />}>
             <Route index element={<AdminDashboard />} />
             <Route exact path="course-form" element={<CourseForm />} />
@@ -152,7 +157,7 @@ function App() {
 
           <Route
             exact
-            path="/admin/courses/:courseID/new-unit"
+            path="/course/:courseID/new-unit"
             element={<UnitForm />}
           />
           <Route

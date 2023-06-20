@@ -51,9 +51,11 @@ const CoursesAdminPage = () => {
                 );
               })
             ) : (
-              <p className=" h-full text-center bg-blue-300 bg-opacity-40">
-                No courses have been found
-              </p>
+              <div className=" w-full h-full">
+                <p className=" h-full text-center bg-blue-300 bg-opacity-40 rounded-lg">
+                  No courses have been found
+                </p>
+              </div>
             )}
           </div>
         )}

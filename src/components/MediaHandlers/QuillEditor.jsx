@@ -1,14 +1,12 @@
 import ReactQuill from "react-quill";
-import { useState, useCallback, useMemo, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
-import { FancyLine } from "../../components";
 import axios from "../../axios";
 import "react-quill/dist/quill.snow.css";
 
 const QuillEditor = () => {
   const { currentLesson } = useOutletContext();
-  const [lessonID, setLessonID] = useState(null);
-  // console.log(`Current Lesson Data : ${JSON.stringify(currentLesson)}`);
+  const { _id: lessonID } = currentLesson;
   const roles = JSON.parse(localStorage.getItem("roles"));
 
   //Quill Editor Config
@@ -158,7 +156,6 @@ const QuillEditor = () => {
 
   useEffect(() => {
     if (currentLesson !== null) {
-      setLessonID(currentLesson?.lessonID);
       if (currentLesson?.lessonNotes) {
         setIsEditorEnabled(false);
         setAreNotesPresent(true);
@@ -173,10 +170,7 @@ const QuillEditor = () => {
   }, [currentLesson]);
   return (
     <div className="w-full flex flex-col p-2 ">
-      <div className="uppercase text-black font-bold text-2xl">
-        {/* <FancyLine size="sm" /> */}
-      </div>
-      <div id="unit content" className="rounded-md">
+      <div id="unit content" className="mt-3">
         {roles?.includes("EM-202") || roles?.includes("EM-203") ? (
           <ReactQuill
             value={content}

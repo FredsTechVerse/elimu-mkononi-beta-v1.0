@@ -12,15 +12,15 @@ const ContentSection = ({
     return (
       <div className="w-full">
         {/* LESSON NAV */}
-        <div className="w-full text-lg text-center text-white my-2 py-1 bg-primary rounded-lg ">
-          <MenuBtn openSideBar={openSideBar} sideBarOpen={sideBarOpen} />
-          <span>{currentLesson?.lessonName}</span>
-        </div>
+        <UnitNav
+          lessonName={currentLesson?.lessonName}
+          openSideBar={openSideBar}
+          sideBarOpen={sideBarOpen}
+        />
         {/* LESSON VIDEO */}
         <VideoSection currentLesson={currentLesson} />
         {/* LESSON RESOURCES */}
         <div className="border-none border-slate-400 rounded-lg w-full">
-          <UnitNav />
           <Outlet
             context={{
               unitData: unitData,

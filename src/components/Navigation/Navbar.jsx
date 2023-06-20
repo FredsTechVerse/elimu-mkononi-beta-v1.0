@@ -25,7 +25,7 @@ const Navbar = ({ isNavOpen, showNavbar, hideNavbar }) => {
       <div className="phone:hidden laptop:flex relative items-center  capitalize">
         <div id="section-2" className=" h-full flex">
           {roles?.includes("EM-202") && (
-            <Tooltip tooltip="Dashborad">
+            <Tooltip tooltip="Dashboard">
               <NavBtn to="/tutor" text="Dashboard" />
             </Tooltip>
           )}

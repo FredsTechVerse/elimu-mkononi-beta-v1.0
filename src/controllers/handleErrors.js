@@ -1,25 +1,61 @@
+import { useAlertBoxContext } from "../context/AlertBoxContext";
 const ERRORS = {
   NETWORK_ERROR: "Network error. Please try again later.",
   SERVER_ERROR: "Server error. Please try again later.",
   AUTHORIZATION_ERROR: "Invalid username or password.",
-  BLANK_ERROR: "User not found",
+  BLANK_ERROR: "The resource / user does not exist",
   DUPLICATION_ERROR: "This document already exists!",
 };
 
 const handleError = (error) => {
-  console.log(error);
+  console.log("Error currently being handled");
+  const { alertBoxData, updateAlertBoxData } = useAlertBoxContext();
+  console.log(alertBoxData);
+  const timeout = 3500;
+  const status = status;
+  console.log(error.response.status);
   if (error.response && error.response.status === 400) {
-    console.log(ERRORS.AUTHORIZATION_ERROR);
+    updateAlertBoxData({
+      response: ERRORS.AUTHORIZATION_ERROR,
+      isResponse: true,
+      status: status,
+      timeout: timeout,
+    });
   } else if (error.response && error.response.status === 401) {
-    console.log(ERRORS.AUTHORIZATION_ERROR);
+    updateAlertBoxData({
+      response: ERRORS.AUTHORIZATION_ERROR,
+      isResponse: true,
+      status: status,
+      timeout: timeout,
+    });
   } else if (error.response && error.response.status === 404) {
-    console.log(ERRORS.BLANK_ERROR);
+    updateAlertBoxData({
+      response: ERRORS.BLANK_ERROR,
+      isResponse: true,
+      status: status,
+      timeout: timeout,
+    });
   } else if (error.response && error.response.status === 409) {
-    console.log(ERRORS.DUPLICATION_ERROR);
+    updateAlertBoxData({
+      response: ERRORS.DUPLICATION_ERROR,
+      isResponse: true,
+      status: status,
+      timeout: timeout,
+    });
   } else if (error.message === "Network Error") {
-    console.log(ERRORS.NETWORK_ERROR);
+    updateAlertBoxData({
+      response: ERRORS.NETWORK_ERROR,
+      isResponse: true,
+      status: status,
+      timeout: timeout,
+    });
   } else {
-    console.log(ERRORS.SERVER_ERROR);
+    updateAlertBoxData({
+      response: ERRORS.SERVER_ERROR,
+      isResponse: true,
+      status: status,
+      timeout: timeout,
+    });
   }
 };
 

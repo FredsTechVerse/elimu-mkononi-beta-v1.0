@@ -29,7 +29,7 @@ const AccordionItem = ({
 
   return (
     <li className="accordion_item">
-      <button className="button  px-2 text-sm " onClick={onToggle}>
+      <button className="button px-2 text-sm " onClick={onToggle}>
         {chapterName}
         <div className="flex gap-3 items-center justify-between">
           {roles?.includes("EM-202") && (

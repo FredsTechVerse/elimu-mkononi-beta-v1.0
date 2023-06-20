@@ -1,12 +1,12 @@
 import axios from "../axios";
 
 const loginUser = async ({ firstName, password }) => {
-  console.log("Loggin in the user");
   const credentials = { firstName, password };
   const config = {
     headers: { "Content-Type": "application/json" },
   };
   const { data } = await axios.post("/auth/login", credentials, config);
+  console.log(JSON.stringify(data));
   return data;
 };
 

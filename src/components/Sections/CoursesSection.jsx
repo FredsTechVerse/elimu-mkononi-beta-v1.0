@@ -42,7 +42,7 @@ const CoursesSection = () => {
               );
             })
           ) : (
-            <p className=" h-full text-center bg-blue-300 bg-opacity-40">
+            <p className=" mx-auto my-auto h-full text-center bg-blue-300 bg-opacity-40">
               No courses have been found
             </p>
           )}
