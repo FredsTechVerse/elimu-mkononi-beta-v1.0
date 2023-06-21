@@ -18,9 +18,11 @@ const CourseOverview = () => {
   return (
     <div className="w-full h-full flex flex-col bg-slate-100 overflow-auto ">
       <div className="relative pattern h-60 w-full">
-        <p className="text-white font-bold text-center phone:text-xl tablet:text-2xl laptop:text-4xl uppercase w-full h-full flex-row-centered backdrop-blur-md bg-black bg-opacity-10">
-          {courseQuery?.data && courseQuery?.data?.courseTitle}
-        </p>
+        <div className="flex flex-col items-start justify-center w-full h-full flex-row-centered backdrop-blur-md bg-black bg-opacity-20">
+          <p className="mx-auto text-white  font-bold  phone:text-xl tablet:text-2xl laptop:text-4xl uppercase">
+            {courseQuery?.data && courseQuery?.data?.courseTitle}
+          </p>
+        </div>
         {(roles?.includes("EM-202") || roles?.includes("EM-203")) && (
           <div className="absolute top-1 right-1 flex gap-1">
             <NavigateBtn destination="new-unit" text="New Unit" />

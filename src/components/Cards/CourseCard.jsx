@@ -6,9 +6,9 @@ const CourseCard = ({ courseID, courseImage, courseTitle }) => {
       <img
         src={`https://us-central1-elearning-module-a887d.cloudfunctions.net/app/s3Direct/${courseImage}`}
         alt="course image"
-        className="bg-gray-300 h-44 w-56 laptop:w-72 laptop:h-64 rounded-lg shadow-md bg-cover bg-center"
+        className="bg-gray-300 w-full h-72 tablet:h-64 laptop:w-72 laptop:h-72 rounded-lg shadow-md bg-cover bg-center"
       ></img>
-      <div className="-mt-10 w-36 tablet:w-36 laptop:w-60 bg-white  shadow-lg rounded-lg overflow-hidden">
+      <div className="-mt-10 w-56 tablet:w-36 laptop:w-60 bg-white  shadow-lg rounded-lg overflow-hidden">
         <div className="p-1 text-center text-sm font-bold uppercase tracking-wide text-gray-800">
           {courseTitle}
         </div>

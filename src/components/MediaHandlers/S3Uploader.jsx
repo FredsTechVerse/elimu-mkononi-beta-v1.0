@@ -56,12 +56,12 @@ const S3Uploader = ({ verifyUpload, updateFileName }) => {
       {percentCompleted ? (
         <div className="flex flex-col w-full h-48 bg-slate-200 rounded-lg  text-center items-center justify-center">
           {!uploadSuccess ? (
-            <>
-              <p> Your file is uploading .... Please wait.</p>
+            <div className="flex flex-col-centered gap-5 p-3">
+              <p> Your file is uploading,please wait.</p>
               <ProgressBar progress={percentCompleted} />
-            </>
+            </div>
           ) : (
-            <p>Upload has been completed successfully !</p>
+            <p>Upload has been completed!</p>
           )}
         </div>
       ) : (

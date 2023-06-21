@@ -9,8 +9,8 @@ const NavBgBtn = ({ to, text }) => {
           text == "Log In"
             ? "border-2 border-white navbar-link"
             : text === "register"
-            ? "navbar-link"
-            : "capitalize flex-row-centered gap-1 text-secondary bg-primary w-32 rounded-full h-8  px-0.5"
+            ? "navbar-link bg-white text-black"
+            : "capitalize flex-row-centered gap-1 text-black bg-white w-32 rounded-full h-8  px-0.5"
         }
       >
         {text}

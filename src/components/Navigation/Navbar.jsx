@@ -7,7 +7,7 @@ const Navbar = ({ isNavOpen, showNavbar, hideNavbar }) => {
   const user = JSON.parse(localStorage.getItem("user"));
   const roles = JSON.parse(localStorage.getItem("roles"));
   return (
-    <div className="absolute top-0 flex justify-between  z-10 w-full pl-4 pr-2 py-2 backdrop-blur-md rounded-full m-2">
+    <div className="absolute top-0 flex justify-between  z-10 w-full pl-4 pr-2 py-2 rounded-full m-2">
       <Link to="/">
         <div id="section-1" className="text-white font-bold text-2xl font-sans">
           E-LEARNING
@@ -46,7 +46,7 @@ const Navbar = ({ isNavOpen, showNavbar, hideNavbar }) => {
         </div>
         <div id="section-3" className={`${!user ? "hidden" : "flex"}`}>
           <Tooltip tooltip="Logout">
-            <LogoutBtn />
+            <LogoutBtn position="navbar" />
           </Tooltip>
         </div>
       </div>

@@ -85,11 +85,6 @@ const CourseForm = () => {
           className="form-styling"
           onSubmit={saveCourse}
         >
-          {/* <AlertBox
-            responseTracker={responseTracker}
-            statusTracker={statusTracker}
-            response={response}
-          /> */}
           <div className="input-wrap">
             <label htmlFor="course">Course Details</label>
             <input
@@ -105,10 +100,16 @@ const CourseForm = () => {
             />
           </div>
           <div className="input-wrap">
-            <S3Uploader
-              verifyUpload={verifyUpload}
-              updateFileName={updateFileName}
-            />
+            {fileName && uploadSuccess ? (
+              <S3Uploader
+                verifyUpload={verifyUpload}
+                updateFileName={updateFileName}
+              />
+            ) : (
+              <div className="flex flex-col w-full h-48 bg-slate-200 rounded-lg  text-center items-center justify-center">
+                <p>Upload successfull!</p>
+              </div>
+            )}
           </div>
           {/* CTA BUTTONS */}
           <div className="cta-wrap">

@@ -18,11 +18,10 @@ const NavbarSmall = ({ isNavOpen, hideNavbar }) => {
           hideNavbar();
         }}
       >
-        <MdCancel className="text-black text-4xl" />
+        <MdCancel className="w-8 h-8 text-black text-4xl" />
       </button>
       <div id="section-2" className="h-full w-full flex-col-centered">
         <div id="section-2" className=" h-full flex-col-centered">
-          <NavBtn to="/" text="Home" />
           {roles?.includes("EM-202") && <NavBtn to="/tutor" text="Dashboard" />}
           {roles?.includes("EM-203") && <NavBtn to="/admin" text="Dashboard" />}
         </div>
@@ -33,8 +32,8 @@ const NavbarSmall = ({ isNavOpen, hideNavbar }) => {
           <NavBgBtn to="/log-in" text="Log In" />
         </div>
       ) : (
-        <div id="section-3" className="flex-row-centered w-full">
-          <LogoutBtn />
+        <div id="section-3" className="flex-row-centered w-full mt-2">
+          <LogoutBtn position="navbar" />
         </div>
       )}
     </div>
