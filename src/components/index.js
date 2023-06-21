@@ -20,6 +20,7 @@ import {
   AdminCard,
   UserCard,
   UsersTableAlternative,
+  TestBox,
 } from "./Cards";
 
 import { BarChart, LineChart, PieChart, ComparisonChart } from "./Charts";
@@ -171,4 +172,5 @@ export {
   FancyLine,
   MenuBtn,
   Tooltip,
+  TestBox,
 };

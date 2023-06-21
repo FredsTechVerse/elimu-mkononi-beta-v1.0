@@ -7,6 +7,7 @@ import AdminCard from "./AdminCard";
 import CourseCard from "./CourseCard";
 import UserCard from "./UserCard";
 import UsersTableAlternative from "./UsersTableAlternative";
+import TestBox from "./TestBox";
 export {
   ChapterCard,
   HomePageCard,
@@ -17,4 +18,5 @@ export {
   CourseCard,
   UserCard,
   UsersTableAlternative,
+  TestBox,
 };
