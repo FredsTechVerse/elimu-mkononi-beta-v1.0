@@ -23,7 +23,7 @@ const UsersPage = () => {
   const userRole = assignUserRole();
 
   const tutorsQuery = useQuery({
-    queryKey: [role],
+    queryKey: [userRole],
     queryFn: () => fetchUsersData(userRole),
   });
 

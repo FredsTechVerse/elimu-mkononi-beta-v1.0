@@ -14,6 +14,7 @@ export default {
       colors: {
         primary: "#006adb",
         secondary: "#F0F7FF",
+        card: "#F1F1F1",
       },
     },
   },

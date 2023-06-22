@@ -1,7 +1,9 @@
-const SubmitButton = ({ text, type, disabled }) => {
+const SubmitButton = ({ text, type, disabled = false }) => {
   return (
     <button
-      className="text-lg capitalize w-48 m-3 h-9 rounded-full bg-primary hover:bg-purple-600 text-white text-center"
+      className={`text-lg capitalize w-48 m-3 h-9 rounded-full text-white text-center ${
+        disabled ? "bg-blue-400" : " bg-primary  hover:bg-purple-600"
+      }`}
       type={type}
       disabled={disabled}
     >

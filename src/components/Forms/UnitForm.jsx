@@ -5,10 +5,13 @@ import { fetchUsersData } from "../../controllers/fetchData";
 import { createUnit } from "../../controllers/postData";
 import { handleError } from "../../controllers/handleErrors";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
+import { useAlertBoxContext } from "../../context/AlertBoxContext";
+
 const UnitForm = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const formRef = useRef(null);
+  const { updateAlertBoxData } = useAlertBoxContext();
 
   const tutorsQuery = useQuery({
     queryKey: ["tutors"],
@@ -20,9 +23,17 @@ const UnitForm = () => {
     onSuccess: (data) => {
       queryClient.setQueryData(["units", data._id], data);
       queryClient.invalidateQueries(["units"], { exact: true });
+      updateAlertBoxData({
+        response: "Unit saved successfully",
+        isResponse: true,
+        status: "success",
+        timeout: 3000,
+      });
       navigate(-1);
     },
-    onError: (error) => handleError(error),
+    onError: (error) => {
+      handleError(error, updateAlertBoxData);
+    },
   });
 
   useEffect(() => {
@@ -165,7 +176,12 @@ const UnitForm = () => {
           </div>
           {/* CTA BUTTONS */}
           <div className="cta-wrap">
-            <SubmitButton type="submit" text="Save" />
+            <SubmitButton
+              type="submit"
+              text={
+                createUnitMutation?.status === "loading" ? "Saving" : "Save"
+              }
+            />
           </div>
         </form>
       </div>

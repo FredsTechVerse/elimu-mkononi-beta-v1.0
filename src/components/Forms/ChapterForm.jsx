@@ -53,14 +53,16 @@ const ChapterForm = () => {
       queryClient.setQueryData(["chapter", unitID], data);
       queryClient.invalidateQueries(["unitData"], { exact: true });
       updateAlertBoxData({
-        response: "Chapter has been successfully saved",
+        response: "Chapter saved successfully ",
         isResponse: true,
         status: "success",
         timeout: 4500,
       });
       navigate(from);
     },
-    onError: (error) => handleError(error),
+    onError: (error) => {
+      handleError(error, updateAlertBoxData);
+    },
   });
 
   const fileUploadHandler = async (e) => {
@@ -120,7 +122,12 @@ const ChapterForm = () => {
           </div>
           {/* CTA BUTTONS */}
           <div className="cta-wrap ">
-            <SubmitButton type="submit" text="Save" />
+            <SubmitButton
+              type="submit"
+              text={
+                createChapterMutation?.status === "loading" ? "Saving" : "Save"
+              }
+            />
           </div>
         </form>
       </div>

@@ -3,10 +3,14 @@ import { FormNavigation, SubmitButton, Modal } from "../../components";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../../controllers/postData";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useAlertBoxContext } from "../../context/AlertBoxContext";
+import { handleError } from "../../controllers/handleErrors";
+
 const RegistrationForm = ({ role }) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const formRef = useRef(null);
+  const { updateAlertBoxData } = useAlertBoxContext();
 
   // DECLARATION OF OUR STATES
   //==========================
@@ -52,13 +56,20 @@ const RegistrationForm = ({ role }) => {
   const createUserMutation = useMutation({
     mutationFn: registerUser,
     onSuccess: (data) => {
-      console.log(
-        `User has been successfully registered ${JSON.stringify(data)}`
-      );
-      queryClient.invalidateQueries(["tutors", "admins", "students"], {
+      queryClient.setQueryData([role, data._id], data);
+      queryClient.invalidateQueries([role], {
         exact: true,
       });
+      updateAlertBoxData({
+        response: "User registered successfully",
+        isResponse: true,
+        status: "success",
+        timeout: 3000,
+      });
       navigate(-1);
+    },
+    onError: (error) => {
+      handleError(error, updateAlertBoxData);
     },
   });
   const saveUser = async (e) => {
@@ -186,7 +197,14 @@ const RegistrationForm = ({ role }) => {
             />
           </div>
           <div className="cta-wrap">
-            <SubmitButton disabled={false} type="submit" text="register" />
+            <SubmitButton
+              type="submit"
+              text={
+                createUserMutation?.status === "loading"
+                  ? "Registering"
+                  : "Register"
+              }
+            />
           </div>
         </form>
       </div>

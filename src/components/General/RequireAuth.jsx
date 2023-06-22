@@ -3,7 +3,6 @@ import { Outlet, Navigate, useLocation } from "react-router-dom";
 const RequireAuth = ({ allowedRoles }) => {
   const roles = JSON.parse(localStorage.getItem("roles"));
   const location = useLocation();
-  console.log(roles);
 
   return roles?.find((role) => allowedRoles?.includes(role)) ? (
     <Outlet />

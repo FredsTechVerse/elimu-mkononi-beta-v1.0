@@ -29,15 +29,15 @@ const LogInForm = () => {
       localStorage.setItem("refreshToken", data.refreshToken);
       localStorage.setItem("roles", JSON.stringify(data.roles));
       updateAlertBoxData({
-        response: "You have signed in successfully",
+        response: "You have logged in successfully",
         isResponse: true,
         status: "success",
-        timeout: 4500,
+        timeout: 3000,
       });
       navigate(from, { replace: true });
     },
     onError: (error) => {
-      handleError(error);
+      handleError(error, updateAlertBoxData);
     },
   });
 
@@ -110,7 +110,12 @@ const LogInForm = () => {
             />
           </div>
           <div className="w-full flex-row-centered">
-            <SubmitButton type="submit" text="Log In" />
+            <SubmitButton
+              type="submit"
+              text={
+                authorizeLogin?.status === "loading" ? "Logging in" : "Log In"
+              }
+            />
           </div>
           <p className="mt-1 text-center text-sm text-white ">
             <span>Not registered?</span>

@@ -1,6 +1,6 @@
 const ProgressBar = ({ progress }) => {
   return (
-    <div className="progressBar flex-col-centered w-full h-1.5 rounded-full px-2">
+    <div className="w-full h-2 rounded-full  bg-white ">
       <div
         className={`${
           progress === 100 ? "hidden" : "flex"

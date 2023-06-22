@@ -21,6 +21,7 @@ import {
   UserCard,
   UsersTableAlternative,
   TestBox,
+  CourseCardV2,
 } from "./Cards";
 
 import { BarChart, LineChart, PieChart, ComparisonChart } from "./Charts";
@@ -173,4 +174,5 @@ export {
   MenuBtn,
   Tooltip,
   TestBox,
+  CourseCardV2,
 };

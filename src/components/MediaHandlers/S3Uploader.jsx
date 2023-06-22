@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Dropzone from "react-dropzone";
 import axios from "../../axios";
 import { ProgressBar } from "..";
 
 const S3Uploader = ({ verifyUpload, updateFileName }) => {
   const [percentCompleted, setPercentCompleted] = useState(0);
-  const [uploadSuccess, setUploadSuccess] = useState(false);
   //  Simply tracks our progress from the config object.
   const trackProgress = (progressEvent) => {
     const percentCompleted = Math.round(
@@ -14,11 +13,10 @@ const S3Uploader = ({ verifyUpload, updateFileName }) => {
     setPercentCompleted(percentCompleted);
     if (percentCompleted == 100) {
       verifyUpload();
-      setTimeout(() => {
-        setPercentCompleted(0);
-      }, 1200);
+      setPercentCompleted(0);
     }
   };
+
   const handleDrop = async (acceptedFiles) => {
     try {
       // The acceptedFiles is a cabinet box containing our files all arranged in order from first to last.
@@ -50,26 +48,20 @@ const S3Uploader = ({ verifyUpload, updateFileName }) => {
       console.error("Error uploading file.", error);
     }
   };
-
   return (
-    <div className="flex flex-row justify-center items-center w-72 tablet:w-[360px] mt-2 ">
+    <div className="h-36 w-72 tablet:w-[360px] mt-2 bg-slate-200  bg-opacity-60 rounded-lg ">
       {percentCompleted ? (
-        <div className="flex flex-col w-full h-48 bg-slate-200 rounded-lg  text-center items-center justify-center">
-          {!uploadSuccess ? (
-            <div className="flex flex-col-centered gap-5 p-3">
-              <p> Your file is uploading,please wait.</p>
-              <ProgressBar progress={percentCompleted} />
-            </div>
-          ) : (
-            <p>Upload has been completed!</p>
-          )}
+        <div className="flex flex-col-centered gap-5 p-3 w-full h-full ">
+          <p> Uploading file ...</p>
+          <ProgressBar progress={percentCompleted} />
+          <div>{percentCompleted} % complete </div>
         </div>
       ) : (
         <Dropzone onDrop={handleDrop}>
           {({ getRootProps, getInputProps }) => (
             <div
               {...getRootProps()}
-              className="dropzone flex flex-col w-full bg-slate-200 rounded-lg  text-center items-center justify-center h-36 bg-opacity-60"
+              className="dropzone flex-col-centered w-full h-full "
             >
               <input {...getInputProps()}></input>
               <p className="mb-2 text-center">Drag and drop a file here</p>

@@ -33,8 +33,6 @@ import { Routes, Route, useLocation } from "react-router-dom";
 function App() {
   const location = useLocation();
   const background = location.state && location.state.background;
-  const roles = localStorage.getItem("roles");
-  console.log(roles);
   // AUTHENTICATION REFERENCE.
   // {
   //   student:"EM-201",

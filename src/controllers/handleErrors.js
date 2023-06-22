@@ -1,4 +1,3 @@
-import { useAlertBoxContext } from "../context/AlertBoxContext";
 const ERRORS = {
   NETWORK_ERROR: "Network error. Please try again later.",
   SERVER_ERROR: "Server error. Please try again later.",
@@ -7,13 +6,9 @@ const ERRORS = {
   DUPLICATION_ERROR: "This document already exists!",
 };
 
-const handleError = (error) => {
-  console.log("Error currently being handled");
-  const { alertBoxData, updateAlertBoxData } = useAlertBoxContext();
-  console.log(alertBoxData);
-  const timeout = 3500;
-  const status = status;
-  console.log(error.response.status);
+const handleError = (error, updateAlertBoxData) => {
+  const timeout = 2500;
+  const status = error.status;
   if (error.response && error.response.status === 400) {
     updateAlertBoxData({
       response: ERRORS.AUTHORIZATION_ERROR,
