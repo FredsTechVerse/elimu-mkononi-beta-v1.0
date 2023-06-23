@@ -39,16 +39,11 @@ const createChapter = async ({
     headers: { "Content-Type": "application/json" },
   };
 
-  console.log(
-    ` Chapter Data going to the database ${JSON.stringify(chapterData)}`
-  );
-
   const { data } = await axios.post(
     "/chapter/new-chapter",
     chapterData,
     config
   );
-  console.log(JSON.stringify(data));
   return data;
 };
 

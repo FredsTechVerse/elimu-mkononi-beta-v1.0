@@ -17,6 +17,10 @@ const handleError = (error, updateAlertBoxData) => {
       timeout: timeout,
     });
   } else if (error.response && error.response.status === 401) {
+    // I need to destructure futher the response it can be a token or a jwt if token expired we need to renew our token silently and retry request.
+    console.log(
+      `Unauthorized error response ${JSON.stringify(error.response)}`
+    );
     updateAlertBoxData({
       response: ERRORS.AUTHORIZATION_ERROR,
       isResponse: true,

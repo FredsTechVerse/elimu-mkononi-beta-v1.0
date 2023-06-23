@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { loginUser } from "../../controllers/postData";
 import { handleError } from "../../controllers/handleErrors";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
+import axios from "../../axios";
 const LogInForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -28,6 +29,9 @@ const LogInForm = () => {
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("refreshToken", data.refreshToken);
       localStorage.setItem("roles", JSON.stringify(data.roles));
+      axios.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${data.accessToken}`;
       updateAlertBoxData({
         response: "You have logged in successfully",
         isResponse: true,

@@ -51,7 +51,7 @@ const ChapterForm = () => {
     mutationFn: createChapter,
     onSuccess: (data) => {
       queryClient.setQueryData(["chapter", unitID], data);
-      queryClient.invalidateQueries(["unitData"], { exact: true });
+      queryClient.invalidateQueries(["unitData"]);
       updateAlertBoxData({
         response: "Chapter saved successfully ",
         isResponse: true,

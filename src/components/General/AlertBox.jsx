@@ -22,7 +22,7 @@ const AlertBox = () => {
           alertBoxData?.status === "success"
             ? "border-green-600 bg-green-300"
             : "border-red-600  bg-red-300"
-        } text-slate-700 border-0 border-l-8 absolute top-2 tablet:right-3 rounded-md z-50 p-1 w-full tablet:w-72 flex flex-col`}
+        } text-slate-700 border-0 border-l-8 fixed top-2 tablet:right-3 rounded-md z-50 p-1 w-full tablet:w-80 flex flex-col`}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +30,7 @@ const AlertBox = () => {
           viewBox="0 0 24 24"
           stroke-width="1.5"
           stroke="currentColor"
-          className="ml-auto w-5 h-5 text-slate-600 hover:text-slate-900"
+          className="absolute top-1 right-1 ml-auto w-5 h-5 text-slate-600 hover:text-slate-900"
           onClick={() => {
             setAlertBoxData((prevData) => ({
               ...prevData,
@@ -78,7 +78,9 @@ const AlertBox = () => {
               </svg>
             )}
           </span>
-          <span className="p-2">{alertBoxData?.response}</span>
+          <span className="px-2 text-sm tablet:text-md">
+            {alertBoxData?.response}
+          </span>
         </p>
       </div>
     );
