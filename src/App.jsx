@@ -47,7 +47,7 @@ function App() {
     <div className="flex w-full h-screen">
       <Suspense
         fallback={
-          <div className="fixed w-screen h-screen flex-col-centered ">
+          <div className="fixed w-screen h-screen flex-col-centered bg-primary ">
             <p className="flex-col-centered text-slate-300 text-4xl">
               ELIMU MKONONI
             </p>

@@ -5,15 +5,11 @@ import { useOutletContext } from "react-router-dom";
 const TutorPage = () => {
   const tutorData = useOutletContext();
   return (
-    <div className="flex flex-col items-start justify-start w-full h-full ">
-      <div className="w-full max-h-full overflow-y-auto py-3 px-4 grid phone:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-10 ">
+    <div className="flex flex-col items-center justify-center w-full h-full overflow-y-auto overflow-x-hidden ">
+      <div className="w-full tablet:w-4/5 laptop:w-2/3 h-full  py-3 px-4 grid phone:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-4 ">
         {tutorData &&
           tutorData.units.map((unit, index) => {
-            return (
-              <>
-                <TutorCardHome key={`unit-${index}`} unit={unit} />
-              </>
-            );
+            return <TutorCardHome key={`unit-${index}`} unit={unit} />;
           })}
       </div>
     </div>

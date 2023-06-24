@@ -9,6 +9,7 @@ import {
   HomeBtn,
   MenuBtn,
   BackBtn,
+  DashboardUserButton,
 } from "./Buttons";
 
 import {
@@ -39,7 +40,6 @@ import {
 
 import {
   TutorCardHome,
-  TutorSideBar,
   Modal,
   ReturnBackBtn,
   ProgressBar,
@@ -47,6 +47,7 @@ import {
   RequireAuth,
   FancyLine,
   Tooltip,
+  UserProfile,
 } from "./General";
 
 import {
@@ -68,7 +69,6 @@ import {
   NavBgBtn,
   Accordion,
   AccordionItem,
-  AdminSideBar,
   FormNavigation,
 } from "./Navigation";
 
@@ -102,15 +102,14 @@ export {
   CourseSkeleton,
   CourseHeading,
   VideoComponent,
-  AdminSideBar,
   FormNavigation,
   ChapterCard,
   TutorCard,
   UnitCard,
   UnitNav,
   QuillEditor,
-  TutorSideBar,
   TutorCardHome,
+  UserProfile,
   Footer,
   ContentSection,
   CourseForm,
@@ -131,6 +130,7 @@ export {
   SubmitButton,
   UnitsAdminTable,
   CTAUnitButtonAdmin,
+  DashboardUserButton,
   AdminNavItem,
   RequireAuth,
   Accordion,
