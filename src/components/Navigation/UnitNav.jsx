@@ -19,7 +19,7 @@ const UnitNav = ({ openSideBar, sideBarOpen, lessonName }) => {
           </div>
         </Link>
       </div>
-      <MenuBtn />
+      <MenuBtn openSideBar={openSideBar} sideBarOpen={sideBarOpen} />
     </div>
   );
 };

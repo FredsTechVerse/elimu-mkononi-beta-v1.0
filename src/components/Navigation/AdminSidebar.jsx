@@ -13,7 +13,7 @@ const lists = [
 
 const AdminSidebar = ({ closeSideBar }) => {
   return (
-    <div className="relative flex flex-col items-center justify-start h-full w-full tablet:w-72 laptop:w-full bg-slate-200 z-5 px-2">
+    <div className="relative flex flex-col items-center justify-start h-full w-full  bg-slate-200 z-5 px-2">
       <div className="absolute flex items-center justify-between w-full p-2">
         <div className="flex">
           <div>

@@ -8,7 +8,7 @@ const MenuBtn = ({ openSideBar, sideBarOpen }) => {
         sideBarOpen ? "hidden" : "block"
       } text-xl  border-none  flex-col-centered px-2 tablet:hidden `}
     >
-      <Bars3BottomRightIcon className="icon-styling" />
+      <Bars3BottomRightIcon className="icon-styling text-white" />
     </div>
   );
 };

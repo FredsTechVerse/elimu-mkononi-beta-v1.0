@@ -69,13 +69,14 @@ const ContentPage = () => {
         />
       </article>
 
-      <article className="w-full laptop:col-span-3 tablet:col-span-2 h-full overflow-y-auto flex px-2 flex-col rounded-lg pb-2">
+      <article className="w-full laptop:col-span-3 tablet:col-span-2 h-full overflow-y-auto flex  flex-col  ">
         <ContentSection
           lessonType={lessonType}
           currentLesson={currentLesson}
           unitData={unitDataQuery.data}
           sideBarOpen={sideBarOpen}
           openSideBar={openSideBar}
+          unitID={unitID}
           updateCurrentLesson={updateCurrentLesson}
         />
       </article>

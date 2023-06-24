@@ -12,7 +12,7 @@ const UnitCard = ({ unitNumber, unitName, unitDescription, unitID }) => {
         <p className="text-dark text-md w-full h-full px-4 mt-3">
           {unitDescription}
         </p>
-        <Link to={`/unit-overview/${unitID}`}>
+        <Link to={`/unit/${unitID}`}>
           <div className="flex-row-centered gap-1 w-32 laptop:w-40 bg-primary  text-white h-8 rounded-br-md rounded-tl-md ml-auto">
             <p>Learn More</p>
             <span>{`>`}</span>

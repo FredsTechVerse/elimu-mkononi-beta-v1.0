@@ -4,7 +4,7 @@ import { LogoutBtn, HomeBtn } from "../../components";
 
 const TutorSideBar = ({ tutor, closeSideBar }) => {
   return (
-    <div className="relative h-full w-full tablet:w-72 laptop:w-full flex flex-col bg-slate-200">
+    <div className="relative h-full w-full flex flex-col bg-slate-200">
       <div className="absolute flex items-center justify-between w-full p-2">
         <div className="flex gap-2">
           <HomeBtn />

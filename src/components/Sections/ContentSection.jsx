@@ -1,4 +1,5 @@
 import { VideoSection, UnitNav, MenuBtn } from "../../components";
+import { UnitOverview } from "../../containers";
 import { Outlet } from "react-router-dom";
 const ContentSection = ({
   currentLesson,
@@ -7,10 +8,11 @@ const ContentSection = ({
   lessonType,
   openSideBar,
   sideBarOpen,
+  unitID,
 }) => {
   if (lessonType === "mp4") {
     return (
-      <div className="w-full">
+      <div className="w-full px-1">
         {/* LESSON NAV */}
         <UnitNav
           lessonName={currentLesson?.lessonName}
@@ -33,17 +35,12 @@ const ContentSection = ({
     );
   }
   return (
-    <div className="w-full h-full flex-col-centered bg-transparent rounded-lg p-3">
-      <p className="text-center py-5 px-3 rounded-lg bg-blue-200">
-        No lesson has been selected. Open sidebar to select a lesson and get
-        started.
-      </p>
-      <button
-        onClick={openSideBar}
-        className="text-lg capitalize px-2 w-36 m-3 py-2 rounded-md bg-primary hover:bg-purple-600 text-white text-center tablet:hidden"
-      >
-        Open SideBar
-      </button>
+    <div className="w-full h-full flex-col-centered bg-transparent px-2">
+      <UnitOverview
+        openSideBar={openSideBar}
+        sideBarOpen={sideBarOpen}
+        unitID={unitID}
+      />
     </div>
   );
 };

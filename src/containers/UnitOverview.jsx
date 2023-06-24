@@ -1,9 +1,13 @@
-import { useParams } from "react-router-dom";
-import { ChapterCard, UnitSkeleton, NavBgBtn, BackBtn } from "../components";
+import {
+  ChapterCard,
+  UnitSkeleton,
+  NavBgBtn,
+  BackBtn,
+  MenuBtn,
+} from "../components";
 import { useQuery } from "@tanstack/react-query";
 import { fetchUnitData } from "../controllers/fetchData";
-const UnitOverview = () => {
-  const { unitID } = useParams();
+const UnitOverview = ({ openSideBar, sideBarOpen, unitID }) => {
   const roles = JSON.parse(localStorage.getItem("roles"));
 
   const unitQuery = useQuery({
@@ -12,33 +16,22 @@ const UnitOverview = () => {
   });
 
   return (
-    <div className="flex-col-centered justify-start bg-slate-100 ">
-      <div className="relative pattern h-60 w-full">
-        <div className="flex flex-col items-start justify-center w-full h-full flex-row-centered backdrop-blur-md bg-black bg-opacity-20">
-          <p className="mx-auto text-white  font-bold  phone:text-xl tablet:text-2xl laptop:text-4xl uppercase">
-            <span>{unitQuery?.data?.unitCode}</span>{" "}
-            <span>{`${unitQuery?.data?.unitName} - list of chapters`}</span>
+    <div className="flex-col-centered justify-start w-full h-full pt-1">
+      <div className="relative pattern h-42 w-full phone:rounded-[16px] tablet:rounded-b-[16px] ">
+        <div className="flex flex-col items-center justify-center w-full h-full  backdrop-blur-md bg-black bg-opacity-20 phone:rounded-[16px] laptop:rounded-b-[16px]">
+          <div className={`absolute top-2 left-2  tablet:hidden flex gap-1`}>
+            <BackBtn />
+          </div>
+          <div className="absolute top-2 right-2 flex gap-2">
+            <MenuBtn openSideBar={openSideBar} sideBarOpen={sideBarOpen} />
+          </div>
+          <p className="text-white my-14  font-bold  phone:text-xl tablet:text-2xl laptop:text-4xl uppercase">
+            Course Outline
           </p>
         </div>
-        {(roles?.includes("EM-202") || roles?.includes("EM-203")) && (
-          <>
-            <div className="absolute top-2 right-2 flex gap-1">
-              <NavBgBtn
-                to={`/tutor/new-chapter/${unitQuery?.data?._id}`}
-                text="Add Chapter"
-              />
-            </div>
-            <div className="absolute top-2 left-2 flex gap-1">
-              <BackBtn />
-            </div>
-          </>
-        )}
-        <div className="absolute h-7 bg-slate-100 w-full bottom-0 rounded-t-full"></div>
       </div>
-      <h1 className="uppercase font-extrabold text-lg text-slate-700 pl-4 mb-2 w-full text-left ">
-        What the unit entails
-      </h1>
-      <ul className="list-decimal w-full px-10 text-md mb-5">
+
+      <ul className="list-decimal w-full  px-8 py-3 phone:text-sm laptop:text-lg">
         <li>
           Elements of a measurement system: Accuracy, precision, sensitivity of
           instrument.
@@ -74,38 +67,12 @@ const UnitOverview = () => {
           plays
         </li>
       </ul>
-      <h1 className="uppercase font-extrabold text-lg text-slate-700 pl-4 mb-2 w-full text-left">
-        Chapter Breakdown
-      </h1>
-      {unitQuery.status === "loading" ? (
-        <div className="grid-sm w-full h-full overflow-hidden">
-          <UnitSkeleton />
-          <UnitSkeleton />
-          <UnitSkeleton />
-        </div>
-      ) : unitQuery.status === "error" ? (
-        <p className="bg-red-300 rounded-lg p-4">{unitQuery.error.message}</p>
-      ) : (
-        <div className="flex-col-centered">
-          {unitQuery?.data?.unitChapters.length > 0 ? (
-            <div className="grid-sm">
-              {unitQuery?.data?.unitChapters.map((chapter, index) => (
-                <ChapterCard
-                  key={index}
-                  unitID={unitID}
-                  chapterID={chapter?._id}
-                  chapterNumber={`${index + 1}`}
-                  chapterName={chapter?.chapterName}
-                />
-              ))}
-            </div>
-          ) : (
-            <p className="bg-blue-300 rounded-lg p-4 text-center">
-              The unit has not yet been populated
-            </p>
-          )}
-        </div>
-      )}
+
+      <div className="w-full flex-row-centered ">
+        <button className="h-10 w-52 text-white bg-primary hover:bg-blue-900 rounded-md m-3">
+          Start Learning
+        </button>
+      </div>
     </div>
   );
 };
