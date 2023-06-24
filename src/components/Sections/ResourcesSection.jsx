@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useOutletContext, Outlet } from "react-router-dom";
-import { AiFillFilePdf } from "react-icons/ai";
+import { DocumentTextIcon } from "@heroicons/react/24/solid";
 import { NavBgBtn, S3Uploader } from "..";
 import axios from "../../axios";
 const ResourcesSection = () => {
@@ -65,7 +65,8 @@ const ResourcesSection = () => {
         {lessonData?.lessonResources.map((resource, resourceIndex) => {
           return (
             <li className="" key={resourceIndex}>
-              <AiFillFilePdf /> {resource.resourceName}
+              <DocumentTextIcon className="icon-styling" />{" "}
+              {resource.resourceName}
             </li>
           );
         })}

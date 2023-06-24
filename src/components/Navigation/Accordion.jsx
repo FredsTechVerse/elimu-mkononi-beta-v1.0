@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { AccordionItem, HomeBtn, Tooltip } from "../../components";
-import { IoMdAdd, IoMdCloseCircle } from "react-icons/io";
+import { AccordionItem, BackBtn, Tooltip } from "../../components";
+import { PlusIcon, XCircleIcon } from "@heroicons/react/24/solid";
 import { useLocation, Link } from "react-router-dom";
 const Accordion = ({ unitData, updateCurrentLesson, closeSideBar }) => {
   const roles = JSON.parse(localStorage.getItem("roles"));
@@ -17,33 +17,33 @@ const Accordion = ({ unitData, updateCurrentLesson, closeSideBar }) => {
 
   return (
     <div className="relative z-10 flex flex-col items-center h-full bg-slate-100 max-h-screen ">
-      <div className="flex items-center justify-between w-full px-2 py-2 font-bold text-md text-slate-200 bg-primary text-center">
-        <HomeBtn />
+      <div className="flex items-center justify-between w-full px-2 h-12  font-bold text-md text-slate-200 bg-primary text-center">
+        <BackBtn />
         {unitData && unitData.unitName}
-        <div className="flex gap-1">
-          <div className={` gap-1 `}>
-            <Tooltip text="Add Chapter">
+        <div className={` flex-row-centered gap-1 `}>
+          <Tooltip text="Add Chapter">
+            <div
+              className={`${
+                roles?.includes("EM-202") || roles?.includes("EM-202")
+                  ? "flex"
+                  : "hidden"
+              } hover:border-2 hover:border-white rounded-full `}
+            >
               <Link
                 to={`/tutor/new-chapter/${unitID}`}
                 state={{ background: location }}
               >
-                <IoMdAdd
-                  className={`${
-                    roles?.includes("EM-202") || roles?.includes("EM-202")
-                      ? "flex"
-                      : "hidden"
-                  } text-white text-3xl rounded-lg hover:bg-slate-100 hover:text-black hover:cursor-pointer`}
-                />
+                <PlusIcon className="text-white m-0.5 hover:cursor-pointer w-6 h-6" />
               </Link>
-            </Tooltip>
-          </div>
+            </div>
+          </Tooltip>
           <div
-            className="tablet:hidden text-3xl"
+            className="text-white m-1 hover:cursor-pointer w-7 h-7 tablet:hidden"
             onClick={() => {
               closeSideBar();
             }}
           >
-            <IoMdCloseCircle />
+            <XCircleIcon className="icon-styling" />
           </div>
         </div>
       </div>

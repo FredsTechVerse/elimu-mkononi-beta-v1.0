@@ -3,37 +3,6 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { LazyLoad } from "./modules/LazyLoad";
 import "./App.css";
 
-// import {
-//   HomePage,
-//   TutorPage,
-//   ContentPage,
-//   TutorUnitsPage,
-//   AdminDashboard,
-//   UsersPage,
-//   UsersLayout,
-//   DraftPage,
-//   CourseAdminPage,
-//   Forbidden,
-//   UnitOverview,
-//   NotFound,
-// } from "./containers";
-// import {
-//   CourseForm,
-//   ChapterForm,
-//   LessonForm,
-//   UnitForm,
-//   RequireAuth,
-//   LogInForm,
-//   ResourceForm,
-//   RegistrationForm,
-//   QuillEditor,
-//   CommentsSection,
-//   ResourcesSection,
-//   CourseOverview,
-//   Layout,
-//   AlertBox,
-// } from "./components";
-
 // COMPONENTS
 const CourseForm = LazyLoad("CourseForm");
 const ChapterForm = LazyLoad("ChapterForm");
@@ -76,7 +45,15 @@ function App() {
 
   return (
     <div className="flex w-full h-screen">
-      <Suspense fallback={<div> Component is loading</div>}>
+      <Suspense
+        fallback={
+          <div className="fixed w-screen h-screen flex-col-centered ">
+            <p className="flex-col-centered text-slate-300 text-4xl">
+              ELIMU MKONONI
+            </p>
+          </div>
+        }
+      >
         <AlertBox />
         <Routes location={background || location}>
           {/* GENERAL ROUTES */}

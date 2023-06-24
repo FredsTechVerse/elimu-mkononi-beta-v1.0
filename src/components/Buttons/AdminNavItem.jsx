@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import { BsChevronRight } from "react-icons/bs";
+import { ChevronRightIcon } from "@heroicons/react/24/solid";
 const AdminNavItem = ({ to, text }) => {
   return (
     <Link to={to}>
       <div className="button debug ">
         {text}
         <span className="text-xl">
-          <BsChevronRight />
+          <ChevronRightIcon className="icon-styling" />
         </span>
       </div>
     </Link>

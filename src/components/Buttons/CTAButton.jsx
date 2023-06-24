@@ -1,8 +1,7 @@
 import axios from "../../axios";
 import { useNavigate } from "react-router-dom";
-import { BiMessageDetail } from "react-icons/bi";
-import { RiDeleteBin5Line } from "react-icons/ri";
-import { AiFillEye } from "react-icons/ai";
+import { EnvelopeIcon, EyeIcon, TrashIcon } from "@heroicons/react/24/solid";
+
 const CTAButton = ({ contact, _id, fetchUsersData: fetchUsersData }) => {
   // console.log(`Users ID ${_id}`);
   let navigate = useNavigate();
@@ -34,7 +33,7 @@ const CTAButton = ({ contact, _id, fetchUsersData: fetchUsersData }) => {
         }}
       >
         <span className="text-slate-600 group-hover:text-green-500 text-xl">
-          <BiMessageDetail />
+          <EnvelopeIcon className="icon-styling" />
         </span>
       </button>
       <button
@@ -44,7 +43,7 @@ const CTAButton = ({ contact, _id, fetchUsersData: fetchUsersData }) => {
         }}
       >
         <span className="text-slate-600 group-hover:text-primary text-2xl ">
-          <AiFillEye />
+          <EyeIcon className="icon-styling" />
         </span>
       </button>
       <button
@@ -54,7 +53,7 @@ const CTAButton = ({ contact, _id, fetchUsersData: fetchUsersData }) => {
         }}
       >
         <span className="text-slate-600 group-hover:text-red-600 text-2xl">
-          <RiDeleteBin5Line />
+          <TrashIcon className="icon-styling" />
         </span>
       </button>
     </div>

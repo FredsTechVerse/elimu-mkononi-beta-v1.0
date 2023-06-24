@@ -125,6 +125,7 @@ const ResourceForm = () => {
             <SubmitButton
               type="submit"
               disabled={uploadSuccess ? false : true}
+              submitting={saveResource?.isLoading}
               text={saveResource?.status === "loading" ? "Saving" : "Save"}
             />
           </div>

@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { LogoutBtn, NavBtn, NavBgBtn, Tooltip } from "../../components";
 
-import { RiMenu3Line } from "react-icons/ri";
+import { Bars3BottomRightIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 const Navbar = ({ isNavOpen, showNavbar, hideNavbar }) => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -19,7 +18,7 @@ const Navbar = ({ isNavOpen, showNavbar, hideNavbar }) => {
           showNavbar();
         }}
       >
-        <RiMenu3Line className="text-white text-3xl" />
+        <Bars3BottomRightIcon className="text-white text-3xl" />
       </button>
       {/* ACTUAL NAVBAR */}
       <div className="phone:hidden laptop:flex relative items-center  capitalize">

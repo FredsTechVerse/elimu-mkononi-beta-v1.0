@@ -164,6 +164,7 @@ const LessonForm = () => {
             <SubmitButton
               disabled={uploadSuccess ? false : true}
               type="submit"
+              submitting={createLessonMutation?.isLoading}
               text={
                 createLessonMutation?.status === "loading"
                   ? "Adding Lesson"

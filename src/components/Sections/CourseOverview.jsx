@@ -4,6 +4,7 @@ import {
   UnitSkeleton,
   NavigateBtn,
   PageTitle,
+  BackBtn,
 } from "../../components";
 import { useQuery } from "@tanstack/react-query";
 import { fetchCourseData } from "../../controllers/fetchData";
@@ -16,26 +17,33 @@ const CourseOverview = () => {
   });
 
   return (
-    <div className="w-full h-full flex flex-col bg-slate-100 overflow-auto ">
+    <div className="w-full flex flex-col bg-slate-100">
       <div className="relative pattern h-60 w-full">
         <div className="flex flex-col items-start justify-center w-full h-full flex-row-centered backdrop-blur-md bg-black bg-opacity-20">
           <p className="mx-auto text-white  font-bold  phone:text-xl tablet:text-2xl laptop:text-4xl uppercase">
-            {courseQuery?.data && courseQuery?.data?.courseTitle}
+            {courseQuery?.data &&
+              `${courseQuery?.data?.courseTitle} - LIST OF
+            UNITS `}
           </p>
         </div>
         {(roles?.includes("EM-202") || roles?.includes("EM-203")) && (
-          <div className="absolute top-1 right-1 flex gap-1">
-            <NavigateBtn destination="new-unit" text="New Unit" />
-          </div>
+          <>
+            <div className="absolute top-2 right-2 flex gap-1">
+              <NavigateBtn destination="new-unit" text="New Unit" />
+            </div>
+            <div className="absolute top-2 left-2 flex gap-1">
+              <BackBtn />
+            </div>
+          </>
         )}
         <div className="absolute h-7 bg-slate-100 w-full bottom-0 rounded-t-full">
-          <PageTitle text="Units in this course" />
+          {/* <PageTitle text="Units in this course" /> */}
         </div>
       </div>
-      <div className="flex flex-col items-center justify-center pt-6 w-full h-full">
-        <div className="w-full h-full flex flex-col items-center px-4 ">
+      <div className="flex flex-col items-center justify-center pt-6 w-full">
+        <div className="w-full h-full flex flex-col items-center px-2 ">
           {courseQuery.status === "loading" ? (
-            <div className="grid-sm w-full h-full overflow-hidden">
+            <div className="grid-sm w-full">
               {Array.from({ length: 3 }).map((_, index) => (
                 <UnitSkeleton key={index} />
               ))}
@@ -45,7 +53,7 @@ const CourseOverview = () => {
               {courseQuery.error.message}
             </p>
           ) : (
-            <div className="grid-sm w-full h-full overflow-auto ">
+            <div className="grid-sm w-full ">
               {courseQuery.data.units.length > 0 ? (
                 courseQuery?.data?.units.map((unit, index) => {
                   const { unitName, unitDescription, _id } = unit;

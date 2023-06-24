@@ -1,8 +1,10 @@
 import axios from "../../axios";
 import { useNavigate } from "react-router-dom";
-import { BiMessageDetail } from "react-icons/bi";
-import { RiDeleteBin5Line } from "react-icons/ri";
-import { AiFillEye } from "react-icons/ai";
+import {
+  ChatBubbleBottomCenterIcon,
+  PencilIcon,
+  TrashIcon,
+} from "@heroicons/react/24/solid";
 const CTAUnitButtonAdmin = ({ contact, _id }) => {
   let navigate = useNavigate();
   // My work in the front-end is simply to make the axios request to the backend ili ifanye haki
@@ -29,7 +31,7 @@ const CTAUnitButtonAdmin = ({ contact, _id }) => {
         }}
       >
         <span>
-          <AiFillEye />
+          <PencilIcon className="icon-styling" />
         </span>
       </button>
       <button
@@ -39,7 +41,7 @@ const CTAUnitButtonAdmin = ({ contact, _id }) => {
         }}
       >
         <span>
-          <RiDeleteBin5Line />
+          <TrashIcon className="icon-styling" />
         </span>
       </button>
     </div>

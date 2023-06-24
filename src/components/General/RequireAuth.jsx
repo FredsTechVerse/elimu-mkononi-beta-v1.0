@@ -2,13 +2,17 @@ import { Outlet, Navigate, useLocation } from "react-router-dom";
 
 const RequireAuth = ({ allowedRoles }) => {
   const roles = JSON.parse(localStorage.getItem("roles"));
+
   const location = useLocation();
   function hasJWT() {
     let flag = false;
-    localStorage.getItem("accessToken") ? (flag = true) : (flag = false);
+    const accessToken = localStorage.getItem("accessToken");
+    console.log(`Fetching access token from locals storage ${accessToken}`);
+    accessToken ? (flag = true) : (flag = false);
+
     return flag;
   }
-  console.log(`Does the user have JWT ${hasJWT()}`);
+  console.log(`Require auth kicked in.Access Token: ${hasJWT()}`);
   return roles?.find((role) => allowedRoles?.includes(role)) && hasJWT() ? (
     <Outlet />
   ) : roles ? (

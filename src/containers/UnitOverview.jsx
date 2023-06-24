@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { ChapterCard, UnitSkeleton, NavBgBtn } from "../components";
+import { ChapterCard, UnitSkeleton, NavBgBtn, BackBtn } from "../components";
 import { useQuery } from "@tanstack/react-query";
 import { fetchUnitData } from "../controllers/fetchData";
 const UnitOverview = () => {
@@ -16,17 +16,22 @@ const UnitOverview = () => {
       <div className="relative pattern h-60 w-full">
         <div className="flex flex-col items-start justify-center w-full h-full flex-row-centered backdrop-blur-md bg-black bg-opacity-20">
           <p className="mx-auto text-white  font-bold  phone:text-xl tablet:text-2xl laptop:text-4xl uppercase">
-            <span>{unitQuery?.data?.unitCode}</span> -
-            <span>{unitQuery?.data?.unitName}</span>
+            <span>{unitQuery?.data?.unitCode}</span>{" "}
+            <span>{`${unitQuery?.data?.unitName} - list of chapters`}</span>
           </p>
         </div>
         {(roles?.includes("EM-202") || roles?.includes("EM-203")) && (
-          <div className="absolute top-1 right-1 flex gap-1">
-            <NavBgBtn
-              to={`/tutor/new-chapter/${unitQuery?.data?._id}`}
-              text="Add Chapter"
-            />
-          </div>
+          <>
+            <div className="absolute top-2 right-2 flex gap-1">
+              <NavBgBtn
+                to={`/tutor/new-chapter/${unitQuery?.data?._id}`}
+                text="Add Chapter"
+              />
+            </div>
+            <div className="absolute top-2 left-2 flex gap-1">
+              <BackBtn />
+            </div>
+          </>
         )}
         <div className="absolute h-7 bg-slate-100 w-full bottom-0 rounded-t-full"></div>
       </div>

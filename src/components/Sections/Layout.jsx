@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { TutorSideBar, AdminSideBar, PageTitle } from "../../components";
 import { handleLogout } from "../../controllers/handleLogout";
-import { RiMenu3Fill } from "react-icons/ri";
+import { Bars3BottomRightIcon } from "@heroicons/react/24/solid";
 import axios from "../../axios";
 const Layout = ({ role }) => {
   const [sideBarOpen, setSideBarOpen] = useState(false);
@@ -68,7 +68,7 @@ const Layout = ({ role }) => {
           onClick={openSideBar}
           className={`fixed top-2 right-5 text-2xl w-10 h-10 border-2 border-primary rounded-full flex-col-centered laptop:hidden`}
         >
-          <RiMenu3Fill />
+          <Bars3BottomRightIcon className="icon-styling " />
         </div>
         {role === "EM-202" && <PageTitle text="Units you handle" />}
         <Outlet context={userData} />

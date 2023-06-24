@@ -1,4 +1,5 @@
-import { RiMenu3Fill } from "react-icons/ri";
+import { Bars3BottomRightIcon } from "@heroicons/react/24/solid";
+
 const MenuBtn = ({ openSideBar, sideBarOpen }) => {
   return (
     <div
@@ -7,7 +8,7 @@ const MenuBtn = ({ openSideBar, sideBarOpen }) => {
         sideBarOpen ? "hidden" : "block"
       } text-xl  border-none  flex-col-centered px-2 tablet:hidden `}
     >
-      <RiMenu3Fill />
+      <Bars3BottomRightIcon className="icon-styling" />
     </div>
   );
 };

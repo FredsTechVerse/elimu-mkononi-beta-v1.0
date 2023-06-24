@@ -1,5 +1,6 @@
 import { useLayoutEffect, useState } from "react";
-import { MdCancel } from "react-icons/md";
+import { XMarkIcon } from "@heroicons/react/24/solid";
+
 const ReactPdfModal = ({ children }) => {
   useLayoutEffect(() => {
     document.body.style.overflow = "hidden";
@@ -10,7 +11,7 @@ const ReactPdfModal = ({ children }) => {
 
   return (
     <div className={`${isModalClosed ? "hidden" : "modal-overlay fixed"}`}>
-      <MdCancel
+      <XMarkIcon
         className="h-8 w-8 absolute top-2 right-2"
         onClick={() => {
           setIsModalClosed(true);

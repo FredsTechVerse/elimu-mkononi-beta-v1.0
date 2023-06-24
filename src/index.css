@@ -73,6 +73,10 @@
             fill: #FFFFFF;
         }
 
+        .icon-styling{
+            @apply text-slate-500 m-0.5 hover:cursor-pointer w-6 h-6
+        }
+
     .pattern{
         background-image: url("./assets/education_pattern_1.jpg"); 
         background-repeat: no-repeat;

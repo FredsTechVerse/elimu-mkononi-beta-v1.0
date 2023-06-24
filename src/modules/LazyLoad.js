@@ -31,8 +31,10 @@ const componentPaths = {
 
 export function LazyLoad(componentName) {
   const componentPath = componentPaths[componentName];
-  return lazy(async () => {
-    const component = await import(componentPath /* @vite-ignore */);
-    return component;
-  });
+
+  if (!componentPath) {
+    throw new Error(`Component path not found for ${componentName}`);
+  }
+
+  return lazy(() => import(componentPath /* @vite-ignore */));
 }

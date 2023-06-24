@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { LogoutBtn, HomeBtn } from "../../components";
-import { BsChevronRight } from "react-icons/bs";
-import { IoMdCloseCircle } from "react-icons/io";
+import { XCircleIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import { profile } from "../../assets";
 
 const lists = [
@@ -30,7 +29,7 @@ const AdminSidebar = ({ closeSideBar }) => {
             closeSideBar();
           }}
         >
-          <IoMdCloseCircle />
+          <XCircleIcon className="icon-styling " />
         </div>
       </div>
 
@@ -47,19 +46,19 @@ const AdminSidebar = ({ closeSideBar }) => {
           Admin
         </div>
       </div>
-      <ul className="py-2 my-1 flex flex-col items-center justify-start gap-2 w-full">
+      <ul className="py-2 px-1 flex flex-col items-center justify-start gap-2 w-full">
         {lists.map((list, index) => {
           return (
-            <Link to={list.link} key={index}>
+            <Link to={list.link} key={index} className="w-full">
               <li
-                className="flex justify-between hover:bg-primary  hover:text-white text-dark border-2 border-primary rounded-md px-2 w-56 py-1.5"
+                className="flex justify-between hover:bg-primary  hover:text-white text-dark  rounded-md px-2 w-full py-1.5 "
                 onClick={() => {
                   closeSideBar();
                 }}
               >
                 <span key={index}>{list.name}</span>
                 <span className="text-xl ml-auto">
-                  <BsChevronRight />
+                  <ChevronRightIcon className="icon-styling  hover:text-white" />
                 </span>
               </li>
             </Link>

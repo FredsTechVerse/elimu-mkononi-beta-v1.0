@@ -30,7 +30,7 @@ const AlertBox = () => {
           viewBox="0 0 24 24"
           stroke-width="1.5"
           stroke="currentColor"
-          className="absolute top-1 right-1 ml-auto w-5 h-5 text-slate-600 hover:text-slate-900"
+          className="absolute top-1 right-1 ml-auto w-4 h-4 text-slate-600 hover:text-slate-900"
           onClick={() => {
             setAlertBoxData((prevData) => ({
               ...prevData,

@@ -8,6 +8,7 @@ import {
   CTAUnitButtonAdmin,
   HomeBtn,
   MenuBtn,
+  BackBtn,
 } from "./Buttons";
 
 import {
@@ -55,7 +56,6 @@ import {
   AudioPlayer,
   ReactPdf,
   VideoComponent,
-  VideoJsPlayer,
 } from "./MediaHandlers";
 
 import {
@@ -156,12 +156,12 @@ export {
   NavBtn,
   NavBgBtn,
   HomeBtn,
+  BackBtn,
   Modal,
   TeamCard,
   ProgressBar,
   ReactPdf,
   S3Uploader,
-  VideoJsPlayer,
   ComparisonChart,
   PieChart,
   BarChart,

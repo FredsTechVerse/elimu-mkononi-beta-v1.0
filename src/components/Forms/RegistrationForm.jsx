@@ -199,6 +199,7 @@ const RegistrationForm = ({ role }) => {
           <div className="cta-wrap">
             <SubmitButton
               type="submit"
+              submitting={createUserMutation?.isLoading}
               text={
                 createUserMutation?.status === "loading"
                   ? "Registering"

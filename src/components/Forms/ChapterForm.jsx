@@ -124,6 +124,7 @@ const ChapterForm = () => {
           <div className="cta-wrap ">
             <SubmitButton
               type="submit"
+              submitting={createChapterMutation?.isLoading}
               text={
                 createChapterMutation?.status === "loading" ? "Saving" : "Save"
               }

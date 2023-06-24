@@ -22,7 +22,7 @@ const LogInForm = () => {
   const [firstName, setFirstName] = useState("");
   const [password, setPassword] = useState("");
 
-  const authorizeLogin = useMutation({
+  const createLoginMutation = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
       localStorage.setItem("user", JSON.stringify(data.user));
@@ -74,7 +74,7 @@ const LogInForm = () => {
       const trimmedFirstName = firstName.trim();
       const trimmedPassword = password.trim();
 
-      authorizeLogin.mutate({
+      createLoginMutation.mutate({
         firstName: trimmedFirstName,
         password: trimmedPassword,
       });
@@ -115,9 +115,12 @@ const LogInForm = () => {
           </div>
           <div className="w-full flex-row-centered">
             <SubmitButton
+              submitting={createLoginMutation?.isLoading}
               type="submit"
               text={
-                authorizeLogin?.status === "loading" ? "Logging in" : "Log In"
+                createLoginMutation?.status === "loading"
+                  ? "Logging in"
+                  : "Log In"
               }
             />
           </div>

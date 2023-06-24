@@ -1,4 +1,4 @@
-import { CourseCard, CourseSkeleton, PageTitle } from "..";
+import { CourseCard, CourseCardV2, CourseSkeleton, PageTitle } from "..";
 import { fetchCoursesData } from "../../controllers/fetchData";
 import { useQuery } from "@tanstack/react-query";
 const CoursesSection = () => {
@@ -33,7 +33,7 @@ const CoursesSection = () => {
             coursesQuery.data.map((course, courseIndex) => {
               const { _id, courseTitle, courseImage } = course;
               return (
-                <CourseCard
+                <CourseCardV2
                   key={courseIndex}
                   courseID={_id}
                   courseTitle={courseTitle}

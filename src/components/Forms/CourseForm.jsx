@@ -141,6 +141,7 @@ const CourseForm = () => {
           <div className="cta-wrap">
             <SubmitButton
               type="submit"
+              submitting={createCourseMutation?.isLoading}
               text={
                 createCourseMutation?.status === "loading"
                   ? "Adding course"

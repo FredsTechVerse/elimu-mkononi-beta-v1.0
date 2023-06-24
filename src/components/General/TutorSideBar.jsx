@@ -1,4 +1,4 @@
-import { IoMdCloseCircle } from "react-icons/io";
+import { XMarkIcon } from "@heroicons/react/24/solid";
 import { profile } from "../../assets";
 import { LogoutBtn, HomeBtn } from "../../components";
 
@@ -16,7 +16,7 @@ const TutorSideBar = ({ tutor, closeSideBar }) => {
             closeSideBar();
           }}
         >
-          <IoMdCloseCircle />
+          <XMarkIcon className="icon-styling" />
         </div>
       </div>
       <div className="flex-col-centered pt-5">

@@ -1,4 +1,4 @@
-import { FiLogOut } from "react-icons/fi";
+import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/solid";
 import { handleLogout } from "../../controllers/handleLogout";
 const LogoutBtn = ({ position = "sidebar" }) => {
   return (
@@ -7,10 +7,14 @@ const LogoutBtn = ({ position = "sidebar" }) => {
       className={`${
         position === "navbar"
           ? "border-2 border-white navbar-link"
-          : "w-8 h-8 border-2 border-primary rounded-full text-md flex-row-centered hover:bg-primary cursor-pointer hover:text-white"
+          : "border-white rounded-full text-md flex-row-centered hover:bg-border-2 cursor-pointer"
       }`}
     >
-      {position === "navbar" ? "Logout" : <FiLogOut />}
+      {position === "navbar" ? (
+        "Logout"
+      ) : (
+        <ArrowRightOnRectangleIcon className="h-5 w-5 m-1.5 text-slate-900" />
+      )}
     </div>
   );
 };

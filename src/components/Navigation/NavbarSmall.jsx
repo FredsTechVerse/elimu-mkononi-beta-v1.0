@@ -1,5 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
-import { MdCancel } from "react-icons/md";
+import { XCircleIcon } from "@heroicons/react/24/solid";
 import { LogoutBtn, NavBtn, NavBgBtn } from "../../components";
 
 const NavbarSmall = ({ isNavOpen, hideNavbar }) => {
@@ -18,7 +17,7 @@ const NavbarSmall = ({ isNavOpen, hideNavbar }) => {
           hideNavbar();
         }}
       >
-        <MdCancel className="w-8 h-8 text-black text-4xl" />
+        <XCircleIcon className="w-8 h-8 text-black text-4xl" />
       </button>
       <div id="section-2" className="h-full w-full flex-col-centered">
         <div id="section-2" className=" h-full flex-col-centered">

@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import { Document, Page } from "react-pdf/dist/esm/entry.vite";
-import { GrNext, GrPrevious } from "react-icons/gr";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+
 import { ReactPdfModal } from "../../components";
 
 //CRUCIAL STYLING DEPENDENCIES
@@ -76,7 +77,7 @@ function ReactPdf({ pdfUrl }) {
             disabled={pageNumber <= 1}
             onClick={previousPage}
           >
-            <GrPrevious />
+            <ChevronLeftIcon className="icon-styling" />
           </button>
           <p className=" mx-4">
             Page {pageNumber || (numPages ? 1 : "--")} of {numPages || "--"}
@@ -87,7 +88,7 @@ function ReactPdf({ pdfUrl }) {
             disabled={pageNumber >= numPages}
             onClick={nextPage}
           >
-            <GrNext />
+            <ChevronRightIcon className="icon-styling" />
           </button>
         </div>
       </div>

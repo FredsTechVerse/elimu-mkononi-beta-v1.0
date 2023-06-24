@@ -178,6 +178,7 @@ const UnitForm = () => {
           <div className="cta-wrap">
             <SubmitButton
               type="submit"
+              submitting={createUnitMutation?.isLoading}
               text={
                 createUnitMutation?.status === "loading" ? "Saving" : "Save"
               }

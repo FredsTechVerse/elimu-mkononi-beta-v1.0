@@ -2,14 +2,17 @@ import { useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Tooltip } from "../../components";
 import {
-  BsChevronRight,
-  BsChevronDown,
-  BsMusicNoteBeamed,
-  BsFileEarmarkPdf,
-  BsCameraVideoFill,
-} from "react-icons/bs";
-import { RiSlideshowFill } from "react-icons/ri";
-import { IoMdAdd } from "react-icons/io";
+  ChevronRightIcon,
+  ChevronDownIcon,
+  MusicalNoteIcon,
+  DocumentTextIcon,
+  ClipboardDocumentListIcon,
+  PlayCircleIcon,
+  CodeBracketIcon,
+  CogIcon,
+  WalletIcon,
+  PlusIcon,
+} from "@heroicons/react/24/solid";
 
 // It should be having the chapter name & the lessons.
 const AccordionItem = ({
@@ -27,9 +30,20 @@ const AccordionItem = ({
   const roles = JSON.parse(localStorage.getItem("roles"));
   const contentEl = useRef(); //Used to interact with the dom accordigly
 
+  const identifyLessonType = (lessonUrl) => {
+    if (lessonUrl) {
+      const lessonType = lessonUrl.split(".")[1];
+      return lessonType;
+    }
+    return "undefined";
+  };
+
   return (
     <li className="accordion_item">
-      <button className="button px-2 text-sm " onClick={onToggle}>
+      <button
+        className="button px-2 text-sm flex items-center "
+        onClick={onToggle}
+      >
         {chapterName}
         <div className="flex gap-3 items-center justify-between">
           {roles?.includes("EM-202") && (
@@ -40,16 +54,20 @@ const AccordionItem = ({
               <Tooltip tooltip="Add lesson">
                 <div
                   onClick={closeSideBar}
-                  className="text-2xl hover:bg-slate-100 hover:text-black rounded-full"
+                  className="w-8 h-8 hover:border-white hover:border-2 rounded-full"
                 >
-                  <IoMdAdd />
+                  <PlusIcon className="icon-styling" />
                 </div>
               </Tooltip>
             </Link>
           )}
 
           <span className="text-xl">
-            {active ? <BsChevronDown /> : <BsChevronRight />}
+            {active ? (
+              <ChevronDownIcon className="icon-styling" />
+            ) : (
+              <ChevronRightIcon className="icon-styling" />
+            )}
           </span>
         </div>
       </button>
@@ -63,14 +81,7 @@ const AccordionItem = ({
         }
       >
         {chapterLessons.map((lesson, lessonIndex) => {
-          const {
-            _id: lessonID,
-            lessonUrl,
-            lessonName,
-            lessonNotes,
-            lessonResources,
-          } = lesson;
-
+          console.log(lesson);
           return (
             <li
               key={lessonIndex}
@@ -87,21 +98,21 @@ const AccordionItem = ({
               }}
             >
               <div className="flex flex-row items-center gap-5 justify-start">
-                {lesson.lessonType === "video" ? (
+                {identifyLessonType(lesson.lessonUrl) === "mp4" ? (
                   <span className="text-sm">
-                    <BsCameraVideoFill />
+                    <PlayCircleIcon className="icon-styling text-slate-800" />
                   </span>
-                ) : lesson.lessonType === "audio" ? (
+                ) : identifyLessonType(lesson.lessonUrl) === "mp3" ? (
                   <span className="text-sm">
-                    <BsMusicNoteBeamed />
+                    <MusicalNoteIcon className="icon-styling text-slate-800" />
                   </span>
-                ) : lesson.lessonType === "pdf " ? (
+                ) : identifyLessonType(lesson.lessonUrl) === "pdf " ? (
                   <span className="text-sm">
-                    <BsFileEarmarkPdf />
+                    <DocumentTextIcon className="icon-styling  text-slate-800" />
                   </span>
                 ) : (
                   <span className="text-sm">
-                    <RiSlideshowFill />
+                    <WalletIcon className="icon-styling text-slate-800" />
                   </span>
                 )}
 
