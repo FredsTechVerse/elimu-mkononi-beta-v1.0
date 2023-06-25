@@ -6,12 +6,12 @@ const AdminDashboard = () => {
       id="main"
       className="w-full flex flex-col justify-start bg-slate-100 p-2"
     >
-      <div className="w-full p-5 grid phone:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-5 m-3 debug">
-        <div className="phone:col-span-1 phone:row-span-2  tablet:row-start-2 tablet:col-start-1 tablet:col-span-2 laptop:col-start-3 laptop:row-start-1 laptop:col-span-1 laptop:row-span-3 debug">
+      <div className="w-full p-5 grid phone:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-5 m-3">
+        <div className="phone:col-span-1 phone:row-span-2  tablet:row-start-2 tablet:col-start-1 tablet:col-span-2 laptop:col-start-3 laptop:row-start-1 laptop:col-span-1 laptop:row-span-3 ">
           <UserProfile />
         </div>
-        <div className="greetings col-start-1 col-span-2 row-span-1 debug flex-row-centered bg-slate-300 rounded-xl h-48 flex">
-          <div className="w-2/3 h-full">
+        <div className="greetings col-start-1 col-span-2 row-span-1 flex-row-centered rounded-xl h-48 flex">
+          <div className="w-2/3 h-full bg-slate-300 rounded-xl">
             <h1 className="text-slate-900 font-bold text-lg uppercase w-full h-12 flex-row-centered ">
               GREETINGS
             </h1>
