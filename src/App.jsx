@@ -21,7 +21,7 @@ const AlertBox = LazyLoad("AlertBox");
 
 // CONTAINERS
 const HomePage = LazyLoad("HomePage");
-const TutorPage = LazyLoad("TutorPage");
+const TutorDashboard = LazyLoad("TutorDashboard");
 const ContentPage = LazyLoad("ContentPage");
 const TutorUnitsPage = LazyLoad("TutorUnitsPage");
 const AdminDashboard = LazyLoad("AdminDashboard");
@@ -47,8 +47,8 @@ function App() {
     <div className="flex w-full h-screen">
       <Suspense
         fallback={
-          <div className="fixed w-screen h-screen flex-col-centered bg-primary ">
-            <p className="flex-col-centered text-slate-300 text-4xl">
+          <div className="fixed w-screen h-screen flex-col-centered bg-slate-300 ">
+            <p className="phone:text-2xl tablet:text-4xl laptop:text-6xl uppercase font-bold font-sans text-slate-700">
               ELIMU MKONONI
             </p>
           </div>
@@ -94,7 +94,7 @@ function App() {
           {/* TUTOR ROUTES */}
           <Route element={<RequireAuth allowedRoles={["EM-202"]} />}>
             <Route exact path="/tutor" element={<Layout role="EM-202" />}>
-              <Route index element={<TutorPage />} />
+              <Route index element={<TutorDashboard />} />
               <Route exact path="units" element={<TutorUnitsPage />} />
               <Route exact path="chapter" element={<ChapterForm />} />
               <Route exact path="lesson" element={<LessonForm />} />

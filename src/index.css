@@ -161,9 +161,9 @@
         @apply  fixed inset-0 bg-black bg-opacity-40 backdrop-blur-lg flex flex-col-centered z-10 overflow-auto
     }
     .grid-lg {
-     @apply  grid phone:grid-cols-1 tablet:grid-cols-3 laptop:grid-cols-4 gap-4 p-4
+     @apply  grid phone:grid-cols-1 tablet:grid-cols-3 laptop:grid-cols-4 gap-3 p-4 place-items-center
     } 
     .grid-sm {
-             @apply grid phone:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-3 p-3
+             @apply grid phone:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-3 p-3 place-items-center
     }
 }

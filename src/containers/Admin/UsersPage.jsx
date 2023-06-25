@@ -40,7 +40,11 @@ const UsersPage = () => {
       />
 
       {tutorsQuery.status === "loading" ? (
-        <p>Tutor Data is loading.Please wait...</p>
+        <div className="w-full h-full flex-row-centered bg-slate-300">
+          <p className=" flex-col-centered text-center text-slate-700 py-3 px-2 m-2 rounded-lg h-24 ">
+            User Data is Loading
+          </p>
+        </div>
       ) : tutorsQuery.status === "error" ? (
         <p className="bg-red-300 rounded-lg p-4">
           {JSON.stringify(tutorsQuery.error.message)}

@@ -16,7 +16,7 @@ const Accordion = ({ unitData, updateCurrentLesson, closeSideBar }) => {
   };
 
   return (
-    <div className="relative z-10 flex flex-col items-center h-full bg-slate-100 max-h-screen ">
+    <div className="relative z-10 flex flex-col items-center  bg-slate-100 h-screen ">
       <div className="flex items-center justify-between w-full px-2 h-12  font-bold text-md text-slate-200 bg-primary text-center">
         <BackBtn />
         {unitData && unitData.unitName}
@@ -49,7 +49,7 @@ const Accordion = ({ unitData, updateCurrentLesson, closeSideBar }) => {
       </div>
 
       {unitData && unitData.unitChapters.length > 0 ? (
-        <div className="w-full bg-secondary h-full overflow-y-auto ">
+        <div className="w-full bg-secondary h-full overflow-auto debug  ">
           {unitData.unitChapters.map((chapter, chapterIndex) => (
             <AccordionItem
               unitData={unitData}

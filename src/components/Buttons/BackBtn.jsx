@@ -10,7 +10,7 @@ const BackBtn = () => {
         navigate(-1);
       }}
     >
-      <ArrowLeftIcon className="h-5 w-5 m-1.5 text-slate-900" />
+      <ArrowLeftIcon className="h-5 w-5 m-1.5 text-white" />
     </div>
   );
 };

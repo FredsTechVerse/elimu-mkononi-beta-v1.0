@@ -28,7 +28,7 @@ const CoursesSection = () => {
           {JSON.stringify(coursesQuery.error.message)}
         </p>
       ) : (
-        <div className="grid-lg">
+        <div className="grid-lg tablet:grid-cols-2 laptop:grid-cols-4 tablet:gap-6   ">
           {coursesQuery?.data.length > 0 ? (
             coursesQuery.data.map((course, courseIndex) => {
               const { _id, courseTitle, courseImage } = course;

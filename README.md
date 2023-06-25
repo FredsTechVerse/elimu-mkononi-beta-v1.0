@@ -9,6 +9,7 @@
 
 - **_react hooks are asynchronous nature. Use them sparingly. They can take time to update no wonder the null console.log on useState_**
 - To refresh dynamic routes , set up the \_redirects file inside the public folder and add the following line : `/*    /index.html  200`. It works like magic.
+- Let the browser do the scrolling for a whole page if you only need a section that might be a different story
 - Horizontal scroll issue might be as a result of 2 scrolls
 - A grid is responsive by nature. Do not bother constraining its children's width... Will do so automatically!
 - How to implement [skeletons](https://dev.to/jobpick/how-to-create-a-skeleton-loader-in-tailwindcss-38gh)

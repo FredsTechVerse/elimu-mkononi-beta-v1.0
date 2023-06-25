@@ -31,7 +31,7 @@ const UnitOverview = ({ openSideBar, sideBarOpen, unitID }) => {
         </div>
       </div>
 
-      <ul className="list-decimal w-full  px-8 py-3 phone:text-sm laptop:text-lg">
+      <ul className="list-decimal w-full  px-10 py-3 phone:text-sm laptop:text-lg pt-5">
         <li>
           Elements of a measurement system: Accuracy, precision, sensitivity of
           instrument.
@@ -69,7 +69,7 @@ const UnitOverview = ({ openSideBar, sideBarOpen, unitID }) => {
       </ul>
 
       <div className="w-full flex-row-centered ">
-        <button className="h-10 w-52 text-white bg-primary hover:bg-blue-900 rounded-md m-3">
+        <button className="h-12 w-72 text-white bg-primary hover:bg-blue-900 rounded-md m-3">
           Start Learning
         </button>
       </div>

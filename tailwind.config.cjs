@@ -6,8 +6,9 @@ export default {
     screens: {
       phone: "300px",
       tablet: "568px",
-      laptop: "1024px",
-      desktop: "1280px",
+      // laptop: "1024px",
+      // desktop: "1280px",
+      laptop: "1280px",
       "2xl": "1536px",
     },
     extend: {
@@ -15,6 +16,9 @@ export default {
         primary: "#006adb",
         secondary: "#F0F7FF",
         card: "#F1F1F1",
+      },
+      aspectRatio: {
+        "2/3": "2 / 3",
       },
     },
   },

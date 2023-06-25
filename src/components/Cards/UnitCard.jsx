@@ -3,7 +3,7 @@ const UnitCard = ({ unitNumber, unitName, unitDescription, unitID }) => {
   return (
     <article className="hover:cursor-pointer w-full  laptop:h-44  h-40 bg-white flex flex-col gap-2  pt-2 rounded-xl shadow-lg shadow-slate-300 ">
       <section className="px-2 flex items-center justify-start gap-3 ">
-        <div className="ml-4 w-10 h-10  rounded-full bg-primary  flex-row-centered text-white ">
+        <div className="ml-4 w-10 h-10  rounded-full bg-slate-600  flex-row-centered text-white ">
           <span className="font-extraLight">{unitNumber}</span>
         </div>
         <h1 className="uppercase text-xl font-extrabold">{unitName}</h1>
@@ -13,7 +13,7 @@ const UnitCard = ({ unitNumber, unitName, unitDescription, unitID }) => {
           {unitDescription}
         </p>
         <Link to={`/unit/${unitID}`}>
-          <div className="flex-row-centered gap-1 w-32 laptop:w-40 bg-primary  text-white h-8 rounded-br-md rounded-tl-md ml-auto">
+          <div className="flex-row-centered gap-1 w-32 laptop:w-40 bg-slate-600 hover:bg-slate-800  text-white h-8 rounded-br-md rounded-tl-md ml-auto">
             <p>Learn More</p>
             <span>{`>`}</span>
           </div>

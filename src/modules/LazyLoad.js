@@ -16,7 +16,7 @@ const componentPaths = {
   Layout: "../components/Sections/Layout.jsx",
   AlertBox: "../components/General/AlertBox.jsx",
   HomePage: "../containers/HomePage.jsx",
-  TutorPage: "../containers/Tutor/TutorPage.jsx",
+  TutorDashboard: "../containers/Tutor/TutorDashboard.jsx",
   ContentPage: "../containers/Tutor/ContentPage.jsx",
   TutorUnitsPage: "../containers/Tutor/TutorUnitsPage.jsx",
   AdminDashboard: "../containers/Admin/AdminDashboard.jsx",
