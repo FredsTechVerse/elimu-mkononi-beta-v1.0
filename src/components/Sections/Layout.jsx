@@ -45,8 +45,8 @@ const Layout = ({ role }) => {
   return (
     <main className="flex relative w-full h-screen px-2 flex-col rounded-lg pb-2 laptop:col-span-3 overflow-y-auto">
       <div className="flex-row-centered gap-2 fixed top-2 left-3">
-        <BackBtn />
-        <HomeBtn />
+        <BackBtn isDark={true} />
+        <HomeBtn isDark={true} />
       </div>
 
       {/* {role === "EM-202" && <PageTitle text="Units you handle" />} */}
