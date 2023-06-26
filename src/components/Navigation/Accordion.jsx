@@ -49,7 +49,7 @@ const Accordion = ({ unitData, updateCurrentLesson, closeSideBar }) => {
       </div>
 
       {unitData && unitData.unitChapters.length > 0 ? (
-        <div className="w-full bg-secondary h-full overflow-auto debug  ">
+        <div className="w-full bg-secondary h-full overflow-auto   ">
           {unitData.unitChapters.map((chapter, chapterIndex) => (
             <AccordionItem
               unitData={unitData}
