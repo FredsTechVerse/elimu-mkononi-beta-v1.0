@@ -12,16 +12,16 @@ const Navbar = ({ isNavOpen, showNavbar, hideNavbar }) => {
           E-LEARNING
         </div>
       </Link>
-      <button
+      {/* <button
         className={`${isNavOpen ? "hidden" : "flex"} laptop:hidden`}
         onClick={() => {
           showNavbar();
         }}
       >
         <Bars3BottomRightIcon className="text-white text-3xl" />
-      </button>
+      </button> */}
       {/* ACTUAL NAVBAR */}
-      <div className="phone:hidden laptop:flex relative items-center  capitalize">
+      <div className="relative flex phone:flex-col tablet:flex-row phone:gap-2 items-center  capitalize">
         <div id="section-2" className=" h-full flex">
           {roles?.includes("EM-202") && (
             <Tooltip tooltip="Dashboard">
@@ -29,13 +29,18 @@ const Navbar = ({ isNavOpen, showNavbar, hideNavbar }) => {
             </Tooltip>
           )}
           {roles?.includes("EM-203") && (
-            <Tooltip tooltip="Dashborad">
+            <Tooltip tooltip="Dashboard">
               <NavBtn to="/admin" text="Dashboard" />
             </Tooltip>
           )}
         </div>
 
-        <div id="section-3" className={`${!user ? "flex" : "hidden"}`}>
+        <div
+          id="section-3"
+          className={`${
+            !user ? "flex phone:flex-col phone:gap-2 tablet:flex-row" : "hidden"
+          }`}
+        >
           <Tooltip tooltip="Register">
             <NavBgBtn to="/new-student" text="register" />
           </Tooltip>
