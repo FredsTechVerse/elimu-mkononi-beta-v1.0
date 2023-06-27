@@ -1,5 +1,4 @@
-import { lazy } from "react";
-
+import React, { lazy } from "react";
 const componentPaths = {
   CourseForm: "../components/Forms/CourseForm.jsx",
   ChapterForm: "../components/Forms/ChapterForm.jsx",
@@ -28,7 +27,6 @@ const componentPaths = {
   UnitOverview: "../containers/UnitOverview.jsx",
   NotFound: "../containers/NotFound.jsx",
 };
-
 export function LazyLoad(componentName) {
   const componentPath = componentPaths[componentName];
 
