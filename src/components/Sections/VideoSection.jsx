@@ -1,3 +1,4 @@
+import React from "react";
 import { VideoComponent, VideoSkeleton } from "..";
 const VideoSection = ({ currentLesson }) => {
   if (currentLesson?.lessonUrl) {

@@ -1,4 +1,4 @@
-import { FC, ReactNode, useRef } from "react";
+import React, { FC, ReactNode, useRef } from "react";
 
 const ToolTip = ({ children, tooltip }) => {
   const tooltipRef = useRef(null);

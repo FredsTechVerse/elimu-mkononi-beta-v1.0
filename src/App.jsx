@@ -80,7 +80,7 @@ function App() {
         fallback={
           <div className="fixed w-screen h-screen flex-col-centered bg-slate-300 ">
             <p className="phone:text-2xl tablet:text-4xl laptop:text-6xl uppercase font-bold font-sans text-slate-700">
-              ELIMU MKONONI
+              ELIMU MKONONI APP
             </p>
           </div>
         }
@@ -123,6 +123,7 @@ function App() {
           </Route>
 
           {/* TUTOR ROUTES */}
+
           <Route element={<RequireAuth allowedRoles={["EM-202"]} />}>
             <Route exact path="/tutor" element={<Layout role="EM-202" />}>
               <Route index element={<TutorDashboard />} />
@@ -165,6 +166,7 @@ function App() {
         </Routes>
 
         {/* SECOND PAIR OF ROUTES. */}
+
         {background && (
           <Routes>
             <Route path="/log-in" element={<LogInForm />} />

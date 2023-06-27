@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
 const AdminNavItem = ({ to, text }) => {

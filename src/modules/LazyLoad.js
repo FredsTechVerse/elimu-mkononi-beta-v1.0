@@ -1,4 +1,4 @@
-import React, { lazy } from "react";
+import { lazy } from "@loadable/component";
 const componentPaths = {
   CourseForm: "../components/Forms/CourseForm.jsx",
   ChapterForm: "../components/Forms/ChapterForm.jsx",
@@ -33,6 +33,7 @@ export function LazyLoad(componentName) {
   if (!componentPath) {
     throw new Error(`Component path not found for ${componentName}`);
   }
+  return lazy(() => import(componentPath));
 
-  return lazy(() => import(componentPath /* @vite-ignore */));
+  // return lazy(() => import.meta.glob(componentPath, { eager: true }));
 }

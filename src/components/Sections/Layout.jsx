@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { PageTitle, HomeBtn, BackBtn } from "../../components";
 import { handleLogout } from "../../controllers/handleLogout";

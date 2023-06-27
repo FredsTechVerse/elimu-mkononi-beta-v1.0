@@ -1,3 +1,4 @@
+import React from "react";
 import { StatusPill, CTAButton, NavigateBtn } from "..";
 
 const UsersDataTable = ({ users, fetchUsersData, role }) => {

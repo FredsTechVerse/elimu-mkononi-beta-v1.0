@@ -1,3 +1,4 @@
+import React from "react";
 import { StatusPill, CTAUnitButtonAdmin, NavigateBtn } from "..";
 const UnitsAdminTable = () => {
   const unitsData = [

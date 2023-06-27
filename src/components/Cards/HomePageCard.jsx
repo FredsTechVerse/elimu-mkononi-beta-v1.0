@@ -1,3 +1,5 @@
+import React from "react";
+
 const HomePageCard = ({ heading, text, src }) => {
   // heading = 'lorem ipsum'
   //  src = HomeImage;

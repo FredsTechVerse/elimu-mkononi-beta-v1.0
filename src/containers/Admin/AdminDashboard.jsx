@@ -1,3 +1,4 @@
+import React from "react";
 import { AdminCard, DashboardUserButton, UserProfile } from "../../components";
 import { Square3Stack3DIcon } from "@heroicons/react/24/solid";
 const AdminDashboard = () => {

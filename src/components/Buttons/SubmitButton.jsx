@@ -1,3 +1,5 @@
+import React from "react";
+
 const SubmitButton = ({ text, type, disabled = false }) => {
   return (
     <button

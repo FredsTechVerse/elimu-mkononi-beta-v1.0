@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react";
+import React, { useLayoutEffect } from "react";
 const Modal = ({ children }) => {
   useLayoutEffect(() => {
     document.body.style.overflow = "hidden";

@@ -1,3 +1,4 @@
+import React from "react";
 import { LogoutBtn, NavBtn, NavBgBtn, Tooltip } from "../../components";
 
 import { Bars3BottomRightIcon } from "@heroicons/react/24/solid";

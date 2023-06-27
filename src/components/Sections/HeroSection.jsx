@@ -1,3 +1,4 @@
+import React from "react";
 import { Navbar, NavbarSmall, PageTitle } from "../../components";
 const HeroSection = ({ isNavOpen, showNavbar, hideNavbar }) => {
   return (

@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function LoadingBtn({ action }) {
   return (
     <button

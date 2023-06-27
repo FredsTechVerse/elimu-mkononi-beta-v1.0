@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 
 const AlertBox = () => {

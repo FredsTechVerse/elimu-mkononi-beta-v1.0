@@ -1,3 +1,4 @@
+import React from "react";
 import { XCircleIcon } from "@heroicons/react/24/solid";
 import { LogoutBtn, NavBtn, NavBgBtn } from "../../components";
 

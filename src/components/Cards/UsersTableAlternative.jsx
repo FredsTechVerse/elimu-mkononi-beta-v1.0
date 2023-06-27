@@ -1,3 +1,4 @@
+import React from "react";
 import { UserCard, NavigateBtn } from "../../components";
 
 const UsersTableAlternative = ({ users, fetchUsersData, role }) => {

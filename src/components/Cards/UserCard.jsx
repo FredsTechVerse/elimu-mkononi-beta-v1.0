@@ -1,3 +1,5 @@
+import React from "react";
+
 import { CTAButton, StatusPill } from "..";
 
 const UserCard = ({ user, fetchUsersData, userKey, role }) => {

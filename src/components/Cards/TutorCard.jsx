@@ -1,3 +1,5 @@
+import React from "react";
+
 const TutorCard = () => {
   return (
     <article className="w-full flex-col-center  shadow-lg shadow-slate-400 bg-white rounded-lg px-3 pt-2 pb-10 ">

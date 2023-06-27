@@ -1,3 +1,5 @@
+import React from "react";
+
 import { Bars3BottomRightIcon } from "@heroicons/react/24/solid";
 
 const MenuBtn = ({ openSideBar, sideBarOpen }) => {

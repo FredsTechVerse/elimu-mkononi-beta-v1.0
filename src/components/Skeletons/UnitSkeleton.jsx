@@ -1,3 +1,4 @@
+import React from "react";
 const UnitSkeleton = () => {
   return (
     <article className="bg-white w-[280px] laptop:w-[400px] h-40 flex flex-col gap-2  pt-3 rounded-md animate-pulse ">

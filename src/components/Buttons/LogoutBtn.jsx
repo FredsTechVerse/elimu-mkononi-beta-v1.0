@@ -1,3 +1,5 @@
+import React from "react";
+
 import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/solid";
 import { handleLogout } from "../../controllers/handleLogout";
 const LogoutBtn = ({ position = "sidebar" }) => {

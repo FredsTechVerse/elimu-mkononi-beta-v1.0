@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { Document, Page } from "react-pdf/dist/esm/entry.vite";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 

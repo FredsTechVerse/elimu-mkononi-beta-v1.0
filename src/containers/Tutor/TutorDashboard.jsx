@@ -1,4 +1,4 @@
-// We should send the access token to get the tutor data.
+import React from "react";
 import {
   TutorCardHome,
   UserProfile,

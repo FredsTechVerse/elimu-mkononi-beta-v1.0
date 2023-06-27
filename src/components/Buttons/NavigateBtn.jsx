@@ -1,3 +1,5 @@
+import React from "react";
+
 import { Link, useLocation } from "react-router-dom";
 const NavigateBtn = ({ text, destination }) => {
   const location = useLocation();
