@@ -9,6 +9,7 @@ import LogoutBtn from "./LogoutBtn";
 import HomeBtn from "./HomeBtn";
 import MenuBtn from "./MenuBtn";
 import BackBtn from "./BackBtn";
+import NavPageBtn from "./NavPageBtn";
 export {
   SubmitButton,
   LoadingBtn,
@@ -21,4 +22,5 @@ export {
   HomeBtn,
   MenuBtn,
   BackBtn,
+  NavPageBtn,
 };

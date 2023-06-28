@@ -82,6 +82,11 @@
         background-repeat: no-repeat;
         background-size: cover;
     }
+     .pattern-2 {
+              background-image: url("./assets/homepage001.jpg");
+              background-repeat: no-repeat;
+              background-size: cover;
+          }
 
     .homepage{
         background-image: url("./assets/education_pattern_1.jpg");

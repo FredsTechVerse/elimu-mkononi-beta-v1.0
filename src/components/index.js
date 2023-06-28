@@ -10,6 +10,7 @@ import {
   MenuBtn,
   BackBtn,
   DashboardUserButton,
+  NavPageBtn,
 } from "./Buttons";
 
 import {
@@ -157,6 +158,7 @@ export {
   NavBgBtn,
   HomeBtn,
   BackBtn,
+  NavPageBtn,
   Modal,
   TeamCard,
   ProgressBar,
