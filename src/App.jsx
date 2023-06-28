@@ -1,68 +1,53 @@
-import React, { Suspense } from "react";
+import React, { Suspense, lazy } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-import { LazyLoad } from "./modules/LazyLoad";
 import "./App.css";
 
-// COMPONENTS
-const CourseForm = LazyLoad("CourseForm");
-const AlertBox = LazyLoad("AlertBox");
-const ChapterForm = LazyLoad("ChapterForm");
-const LessonForm = LazyLoad("LessonForm");
-const UnitForm = LazyLoad("UnitForm");
-const RequireAuth = LazyLoad("RequireAuth");
-const LogInForm = LazyLoad("LogInForm");
-const ResourceForm = LazyLoad("ResourceForm");
-const RegistrationForm = LazyLoad("RegistrationForm");
-const QuillEditor = LazyLoad("QuillEditor");
-const CommentsSection = LazyLoad("CommentsSection");
-const ResourcesSection = LazyLoad("ResourcesSection");
-const CourseOverview = LazyLoad("CourseOverview");
-const Layout = LazyLoad("Layout");
+import {
+  HomePage,
+  ContentPage,
+  Forbidden,
+  UnitOverview,
+  CourseOverview,
+  NotFound,
+} from "./containers";
+import {
+  RequireAuth,
+  LogInForm,
+  RegistrationForm,
+  ResourcesSection,
+  Layout,
+  AlertBox,
+} from "./components";
 
-// CONTAINERS;
-const HomePage = LazyLoad("HomePage");
-const TutorDashboard = LazyLoad("TutorDashboard");
-const ContentPage = LazyLoad("ContentPage");
-const TutorUnitsPage = LazyLoad("TutorUnitsPage");
-const AdminDashboard = LazyLoad("AdminDashboard");
-const UsersPage = LazyLoad("UsersPage");
-const UsersLayout = LazyLoad("UsersLayout");
-const DraftPage = LazyLoad("DraftPage");
-const CourseAdminPage = LazyLoad("CourseAdminPage");
-const Forbidden = LazyLoad("Forbidden");
-const UnitOverview = LazyLoad("UnitOverview");
-const NotFound = LazyLoad("NotFound");
-
-// import {
-//   HomePage,
-//   ContentPage,
-//   TutorUnitsPage,
-//   AdminDashboard,
-//   UsersPage,
-//   UsersLayout,
-//   DraftPage,
-//   CourseAdminPage,
-//   Forbidden,
-//   UnitOverview,
-//   CourseOverview,
-//   NotFound,
-//   TutorDashboard,
-// } from "./containers";
-// import {
-//   CourseForm,
-//   ChapterForm,
-//   LessonForm,
-//   UnitForm,
-//   RequireAuth,
-//   LogInForm,
-//   ResourceForm,
-//   RegistrationForm,
-//   QuillEditor,
-//   CommentsSection,
-//   ResourcesSection,
-//   Layout,
-//   AlertBox,
-// } from "./components";
+// LAZY LOADED COMPONENTS.
+const CourseForm = lazy(() => import("./components/Forms/CourseForm.jsx"));
+const ChapterForm = lazy(() => import("./components/Forms/ChapterForm.jsx"));
+const LessonForm = lazy(() => import("./components/Forms/LessonForm.jsx"));
+const UnitForm = lazy(() => import("./components/Forms/UnitForm.jsx"));
+const ResourceForm = lazy(() => import("./components/Forms/ResourceForm.jsx"));
+const QuillEditor = lazy(() =>
+  import("./components/MediaHandlers/QuillEditor.jsx")
+);
+const CommentsSection = lazy(() =>
+  import("./components/Sections/CommentsSection.jsx")
+);
+const TutorDashboard = lazy(() =>
+  import("./containers/Tutor/TutorDashboard.jsx")
+);
+const TutorUnitsPage = lazy(() =>
+  import("./containers/Tutor/TutorUnitsPage.jsx")
+);
+const AdminDashboard = lazy(() =>
+  import("./containers/Admin/AdminDashboard.jsx")
+);
+const UsersPage = lazy(() => import("./containers/Admin/UsersPage.jsx"));
+const UsersLayout = lazy(() =>
+  import("./containers/UsersPage/UsersLayout.jsx")
+);
+const DraftPage = lazy(() => import("./containers/DraftPage.jsx"));
+const CourseAdminPage = lazy(() =>
+  import("./containers/Admin/CourseAdminPage.jsx")
+);
 
 function App() {
   const location = useLocation();
