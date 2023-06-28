@@ -34,6 +34,4 @@ export function LazyLoad(componentName) {
     throw new Error(`Component path not found for ${componentName}`);
   }
   return lazy(() => import(componentPath));
-
-  // return lazy(() => import.meta.glob(componentPath, { eager: true }));
 }

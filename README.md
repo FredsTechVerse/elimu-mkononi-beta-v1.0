@@ -30,6 +30,8 @@
 - Caching to cut on data fetches and save time.
 - Effecting audio & video player that does not misbehave.
 - Socials to be displayed absolutely as with my portfolio.
+- We can use useCallback to memoize functions and memo to memoize props all in an effort to hinder updates mostly cause by updating the parent components..
+  Rebuilding it means even its functions change address causing even the children to rerender which can be solved by memoizing funtions using useCallback whose format is the same as useEffect in that we will have to put a dependency array at its end which will have nothing.
 
 ### WHERE THIS APP CAN BE USED
 
@@ -38,3 +40,9 @@
 ### USING REACT QUERY
 
 - Its almost as if it is handling state for me! Coz once i update my chapter data, i also update my local copy hence the changes refelecting instataneously.
+
+### CODE SPLITTING
+
+- I am currently experiencing screen freeze and just too many barriers which can be solved by putting code splitting according to role..... With a tutor , the student and admin pages do not need to be loaded at first render...
+- There must be a way to carry this optimization in react using vite.... Moving to a new metaframework for this is just too expensive....
+- I need to find a balance as to what i code split and what i load at first render..... Coz remember even react-query has its way of showing skeletons while loading.

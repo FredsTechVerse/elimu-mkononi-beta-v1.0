@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
-// import { LazyLoad } from "./modules/LazyLoad";
 import "./App.css";
 
 import {
@@ -46,15 +45,6 @@ function App() {
 
   return (
     <div className="flex w-full h-screen">
-      {/* <Suspense
-        fallback={
-          <div className="fixed w-screen h-screen flex-col-centered bg-slate-300 ">
-            <p className="phone:text-2xl tablet:text-4xl laptop:text-6xl uppercase font-bold font-sans text-slate-700">
-              ELIMU MKONONI APP
-            </p>
-          </div>
-        }
-      > */}
       <AlertBox />
       <Routes location={background || location}>
         {/* GENERAL ROUTES */}
@@ -189,7 +179,6 @@ function App() {
           />
         </Routes>
       )}
-      {/* </Suspense> */}
     </div>
   );
 }
