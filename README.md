@@ -46,3 +46,61 @@
 - I am currently experiencing screen freeze and just too many barriers which can be solved by putting code splitting according to role..... With a tutor , the student and admin pages do not need to be loaded at first render...
 - There must be a way to carry this optimization in react using vite.... Moving to a new metaframework for this is just too expensive....
 - I need to find a balance as to what i code split and what i load at first render..... Coz remember even react-query has its way of showing skeletons while loading.
+
+### HOW TO UPLOAD YOUTUBE VIDEO FROM FRONTEND USING THE ACCESS TOKEN OBTAINED VIA THE BACKEND BY SWAPPING CODE GENERATED WITH AN ACCESS TOKEN.
+
+import axios from "axios";
+
+const uploadVideo = async (accessToken, videoFile, title, description) => {
+try {
+const url = "https://www.googleapis.com/upload/youtube/v3/videos";
+
+    const headers = {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    };
+
+    const metadata = {
+      snippet: {
+        title: title,
+        description: description,
+      },
+      status: {
+        privacyStatus: "private",
+      },
+    };
+
+    const response = await axios.post(url, metadata, {
+      headers: headers,
+      params: {
+        uploadType: "resumable",
+        part: "snippet,status",
+      },
+    });
+
+    // Get the location header from the response
+    const location = response.headers.location;
+
+    // Upload the video file using a PUT request
+    await axios.put(location, videoFile, {
+      headers: {
+        "Content-Type": videoFile.type,
+      },
+    });
+
+    console.log("Video uploaded successfully");
+    // Handle success and display a success message to the user
+
+} catch (error) {
+console.error("Error uploading video:", error);
+// Handle error and display an error message to the user
+}
+};
+
+// Example usage:
+const accessToken = "<access_token>";
+const videoFile = document.getElementById("video-file").files[0];
+const title = "My Video Title";
+const description = "My Video Description";
+
+uploadVideo(accessToken, videoFile, title, description);
