@@ -3,7 +3,7 @@ import {
   FormNavigation,
   Modal,
   SubmitButton,
-  S3Uploader,
+  YoutubeUploader,
 } from "../../components";
 import { useParams, useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -133,9 +133,10 @@ const LessonForm = () => {
           </div>
           <div className="input-wrap ">
             {!uploadSuccess ? (
-              <S3Uploader
+              <YoutubeUploader
                 verifyUpload={verifyUpload}
                 updateFileName={updateFileName}
+                videoTitle={lessonName}
               />
             ) : (
               <div className="h-36 w-72 tablet:w-[360px] mt-2 bg-slate-200  bg-opacity-60 rounded-lg flex flex-col items-center gap-2 py-2 ">

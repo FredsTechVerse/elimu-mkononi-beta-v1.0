@@ -104,3 +104,14 @@ const title = "My Video Title";
 const description = "My Video Description";
 
 uploadVideo(accessToken, videoFile, title, description);
+
+- The access token will be decyphered in its own page then a redirect to another page happens....
+
+### SENDING AND INTEPRETING STATUS AND ANY DATA FROM BACKEND
+
+- Its straightforward..... What we send to the frontend will be found inside the response object under the data.
+  eg if we send ` res.status(201).json({ signedUrl, Key });` We shall destructure this props from the response.data as `const { signedUrl, Key } = response.data`
+  Usually we start by breaking out the data and status (if needed) from the response object as
+  `const { data,status } = await axios.post("/s3Direct/", formData, config);`
+
+- Remember there are only two major sides to requests and responses..... For requests , our crucial information is in the `req.body` whereas for responses , our crucial information is in the `res.data`

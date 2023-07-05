@@ -1,56 +1,84 @@
 import React from "react";
-const axios = require("axios");
+import axios from "axios";
 
-// Configuration
-const accessToken = "YOUR_ACCESS_TOKEN";
-const videoTitle = "My Video Title";
-const videoDescription = "My Video Description";
-const videoFile = "/path/to/video/file.mp4";
-const videoTags = ["tag1", "tag2", "tag3"];
-// Video metadata
-const videoMetadata = {
-  snippet: {
-    title: videoTitle,
-    description: videoDescription,
-    tags: videoTags,
-  },
-  status: {
-    privacyStatus: "private", // Set the privacy status as desired
-  },
-};
-
-// Video upload function
-async function uploadVideo() {
+const uploadVideo = async (accessToken, videoFile, title, description) => {
   try {
-    // Step 1: Initialize the video upload
-    const initUploadResponse = await axios.post(
-      "https://www.googleapis.com/upload/youtube/v3/videos?part=snippet,status",
-      videoMetadata,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const tokenEndpoint = "https://oauth2.googleapis.com/token";
+    const clientId = process.env.CLIENT_ID;
+    const clientSecret = process.env.CLIENT_SECRET;
+    const redirectUri = process.env.REDIRECT_URI;
+    const videoUploadUrl =
+      "https://www.googleapis.com/upload/youtube/v3/videos";
 
-    // Step 2: Upload video content
-    const videoUrl = initUploadResponse.data.uploadLocation;
-    const videoData = await axios.put(videoUrl, videoFile, {
-      headers: {
-        "Content-Type": "video/*",
+    const videoUploadHeaders = {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    };
+    const fetchAccessToken = async () => {
+      const { code: accessTokenCode } = req.query;
+      const { data: accessToken } = await axios.post(tokenEndpoint, {
+        code: accessTokenCode,
+        client_id: clientId,
+        client_secret: clientSecret,
+        redirect_uri: redirectUri,
+        grant_type: "authorization_code",
+      });
+      return accessToken;
+    };
+
+    const metadata = {
+      snippet: {
+        title: title,
+        description: description,
+      },
+      status: {
+        privacyStatus: "private",
+      },
+    };
+
+    // Fetches the access token code.
+    const { data: authorizationUrl } = await axios.get(
+      "http://localhost:5000/elearning-module-a887d/us-central1/app/oAuth/authorizationUrl"
+    );
+    console.log(`Authorization Url ${authorizationUrl}`);
+    // We auto redirect to the authorization page where we get some authorization code which we can exchange for
+    // an access token via :
+
+    const accessToken = fetchAccessToken();
+
+    const response = await axios.post(videoUploadUrl, metadata, {
+      headers: videoUploadHeaders,
+      params: {
+        uploadType: "resumable",
+        part: "snippet,status",
       },
     });
 
-    console.log("Video uploaded successfully!");
-    console.log("Video ID:", initUploadResponse.data.id);
-  } catch (error) {
-    console.error("Error uploading video:", error.message);
-  }
-}
+    // Get the location header from the response
+    const location = response.headers.location;
 
-// Call the upload function
-uploadVideo();
+    // Upload the video file using a PUT request
+    await axios.put(location, videoFile, {
+      headers: {
+        "Content-Type": videoFile.type,
+      },
+    });
+
+    console.log("Video uploaded successfully");
+    // Handle success and display a success message to the user
+  } catch (error) {
+    console.error("Error uploading video:", error);
+    // Handle error and display an error message to the user
+  }
+};
+
+// Example usage:
+const accessToken = "<access_token>";
+const videoFile = document.getElementById("video-file").files[0];
+const title = "My Video Title";
+const description = "My Video Description";
+
+uploadVideo(accessToken, videoFile, title, description);
 
 const videoUploader = () => {
   return <div>videoUploader</div>;

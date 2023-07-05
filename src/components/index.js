@@ -58,6 +58,7 @@ import {
   AudioPlayer,
   ReactPdf,
   VideoComponent,
+  YoutubeUploader,
 } from "./MediaHandlers";
 
 import {
@@ -164,6 +165,7 @@ export {
   ProgressBar,
   ReactPdf,
   S3Uploader,
+  YoutubeUploader,
   ComparisonChart,
   PieChart,
   BarChart,

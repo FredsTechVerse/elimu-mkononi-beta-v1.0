@@ -4,6 +4,7 @@ import AudioPlayer from "./AudioPlayer";
 import ReactPdf from "./ReactPdf";
 import S3Uploader from "./S3Uploader";
 import VideoComponent from "./VideoComponent";
+import YoutubeUploader from "./YoutubeUploader";
 export {
   QuillEditor,
   ReactPdfModal,
@@ -11,4 +12,5 @@ export {
   AudioPlayer,
   ReactPdf,
   VideoComponent,
+  YoutubeUploader,
 };
