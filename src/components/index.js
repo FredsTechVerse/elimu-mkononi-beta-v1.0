@@ -59,6 +59,7 @@ import {
   ReactPdf,
   VideoComponent,
   YoutubeUploader,
+  VideoPlayer,
 } from "./MediaHandlers";
 
 import {
@@ -173,6 +174,7 @@ export {
   UserCard,
   CourseOverview,
   UnitSkeleton,
+  VideoPlayer,
   Layout,
   FancyLine,
   MenuBtn,

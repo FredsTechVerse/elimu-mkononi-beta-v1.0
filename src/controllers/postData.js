@@ -74,12 +74,14 @@ const createLesson = async ({
   lessonName,
   lessonUrl,
   chapterID,
+  thumbnails,
 }) => {
   const lessonData = {
     chapterID,
     lessonNumber: `${chapterID}-${lessonNumber}`,
     lessonName,
     lessonUrl,
+    thumbnails,
   };
 
   const config = {

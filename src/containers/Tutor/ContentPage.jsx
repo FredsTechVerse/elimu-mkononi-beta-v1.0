@@ -42,7 +42,7 @@ const ContentPage = () => {
     return (
       <div className="fixed w-full h-screen flex-row-centered bg-slate-300">
         <p className=" flex-col-centered text-center py-3 px-2 m-2 rounded-lg h-24 text-slate-700 text-3xl  ">
-          Unit Data is Loading
+          Unit Data is Loading.... Use a skeleton here it is really needed.
         </p>
       </div>
     );

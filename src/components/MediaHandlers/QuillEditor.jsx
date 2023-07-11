@@ -35,7 +35,6 @@ const QuillEditor = () => {
       toolbar: false,
     };
   }
-
   // Alert Box Config
   const [response, setResponse] = useState(null);
   const [responseTracker, setResponseTracker] = useState(null);

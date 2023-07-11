@@ -8,12 +8,10 @@ const RequireAuth = ({ allowedRoles }) => {
   function hasJWT() {
     let flag = false;
     const accessToken = localStorage.getItem("accessToken");
-    console.log(`Fetching access token from locals storage ${accessToken}`);
     accessToken ? (flag = true) : (flag = false);
 
     return flag;
   }
-  console.log(`Require auth kicked in.Access Token: ${hasJWT()}`);
   return roles?.find((role) => allowedRoles?.includes(role)) && hasJWT() ? (
     <Outlet />
   ) : roles ? (

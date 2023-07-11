@@ -11,6 +11,7 @@ import DraftPage from "./DraftPage";
 import Forbidden from "./Forbidden";
 import UnitOverview from "./UnitOverview";
 import NotFound from "./NotFound";
+import TokenExchange from "./TokenExchange";
 export {
   HomePage,
   TutorDashboard,
@@ -25,4 +26,5 @@ export {
   Forbidden,
   UnitOverview,
   NotFound,
+  TokenExchange,
 };

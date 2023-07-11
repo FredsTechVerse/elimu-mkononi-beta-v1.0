@@ -1,14 +1,14 @@
 import React from "react";
-import { VideoComponent, VideoSkeleton } from "..";
+import { VideoComponent, VideoSkeleton, VideoPlayer } from "..";
 const VideoSection = ({ currentLesson }) => {
   if (currentLesson?.lessonUrl) {
     return (
       <div className="w-full text-center text-white flex flex-col justify-start text-3xl font-extrabold">
-        <VideoComponent
-          src={`https://us-central1-elearning-module-a887d.cloudfunctions.net/app/s3Direct/${currentLesson?.lessonUrl}`}
-          // src={`http://localhost:5000/elearning-module-a887d/us-central1/app/s3Direct/${currentLesson?.lessonUrl}`}
+        {/* <VideoComponent
           title={currentLesson?.lessonName}
-        />
+          src="https://youtu.be/Xur1awpUN9Y"
+        /> */}
+        <VideoPlayer title={currentLesson?.lessonName} />
       </div>
     );
   } else {

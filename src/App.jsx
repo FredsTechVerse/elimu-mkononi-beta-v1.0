@@ -16,6 +16,7 @@ import {
   CourseOverview,
   NotFound,
   TutorDashboard,
+  TokenExchange,
 } from "./containers";
 import {
   CourseForm,
@@ -52,6 +53,8 @@ function App() {
         <Route exact path="forbidden" element={<Forbidden />} />
         <Route path="/log-in" element={<LogInForm />} />
         <Route path="/draft" element={<DraftPage />} />
+        <Route path="/fetchToken" element={<TokenExchange />} />
+
         <Route element={<UsersLayout />}>
           <Route exact path="/" element={<HomePage />}></Route>
           <Route
@@ -90,6 +93,11 @@ function App() {
             <Route exact path="units" element={<TutorUnitsPage />} />
             <Route exact path="chapter" element={<ChapterForm />} />
             <Route exact path="lesson" element={<LessonForm />} />
+            <Route
+              exact
+              path="new-lesson/:chapterID"
+              element={<LessonForm />}
+            />
           </Route>
         </Route>
 

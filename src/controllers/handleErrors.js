@@ -7,6 +7,7 @@ const ERRORS = {
 };
 
 const handleError = (error, updateAlertBoxData) => {
+  console.log(error);
   const timeout = 2500;
   const status = error.status;
   if (error.response && error.response.status === 400) {

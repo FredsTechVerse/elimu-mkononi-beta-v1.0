@@ -81,7 +81,7 @@ const AccordionItem = ({
         }
       >
         {chapterLessons.map((lesson, lessonIndex) => {
-          console.log(lesson);
+          // console.log(lesson);
           return (
             <li
               key={lessonIndex}

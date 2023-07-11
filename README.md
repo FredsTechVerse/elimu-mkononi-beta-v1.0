@@ -1,3 +1,19 @@
+### QUICK TODOS
+
+- Make the urls one word with many slashes..... camelCase or hiphen-separated doesn't work well out here!
+
+### UPLOADING VIDEOS TO YOUTUBE DEMISTIFIED
+
+Wow! It is really not hard!
+There are only three major aspects to it:-
+
+- We need a headers , body/metadata and then we wait for the response.
+- As for the header , we only need to pass the access token and the content type which is application/json
+- As for the body , we need to pass the snippet and status which are objects with their own properties.
+- As for the response , we need to get the location header from the response and then upload the video file using a PUT request.
+- The location header is the url that we will use to upload the video file.
+- The video file is uploaded as a binary file.
+
 ### EXTENDING APP FUNCTIONALITY BY MAKING USE OF AVAILABLE TECHNOLOGIES
 
 - There is no need of reinventing the wheel for technologies that are out there.
@@ -6,6 +22,8 @@
 - SMS can be used for crucial services eg rapid payment responses.
 
 ### KEY THINGS I HAVE LEARNT.
+
+- Finishing takes a great deal of courgage..... I am terrified of fixing the last bit of the puzzle into place.... Video streaming with the youtube data api.
 
 - **_react hooks are asynchronous nature. Use them sparingly. They can take time to update no wonder the null console.log on useState_**
 - To refresh dynamic routes , set up the \_redirects file inside the public folder and add the following line : `/*    /index.html  200`. It works like magic.

@@ -17,11 +17,22 @@ const LessonForm = () => {
   const formRef = useRef();
   const { updateAlertBoxData } = useAlertBoxContext();
 
+  //Form Variables
+  const [lessonName, setLessonName] = useState("");
+  const [lessonNumber, setLessonNumber] = useState("");
+  //Dropzone Config
+  const [uploadSuccess, setUploadSucess] = useState(false);
+  const [lessonUrl, setLessonUrl] = useState("Test URL");
+  const [thumbnails, setThumbnails] = useState({});
   // Prevents the scroll behaviour of our page
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => (document.body.style.overflow = "unset");
   }, []);
+
+  useEffect(() => {
+    console.log(`Thumbnails changed ${JSON.stringify(thumbnails)}`);
+  }, [thumbnails]);
   useEffect(() => {
     const handleKeyPress = (e) => {
       if (e.key === "Enter" || e.type === "submit") {
@@ -38,18 +49,22 @@ const LessonForm = () => {
     };
   }, []);
 
-  //Form Variables
-  const [lessonName, setLessonName] = useState("");
-  const [lessonNumber, setLessonNumber] = useState("");
-  //Dropzone Config
-  const [uploadSuccess, setUploadSucess] = useState(false);
-  const [fileName, setFileName] = useState(null);
   const verifyUpload = () => {
     setUploadSucess(true);
   };
-  const updateFileName = (fileName) => {
-    setFileName(fileName);
+  const updateFileInfo = ({ thumbnails, title, localized, publishedAt }) => {
+    console.log(
+      `Youtube info i can utilize ${JSON.stringify({
+        thumbnails,
+        // title,
+        // localized,
+        // publishedAt,
+      })}`
+    );
+    // Here is where i need to fetch the lesson url and append it accordingly.
+    setThumbnails({ ...thumbnails });
   };
+
   const createLessonMutation = useMutation({
     mutationFn: createLesson,
     onSuccess: () => {
@@ -70,7 +85,7 @@ const LessonForm = () => {
     if (
       lessonName !== null &&
       lessonNumber !== null &&
-      fileName !== null &&
+      lessonUrl !== null &&
       uploadSuccess
     ) {
       return true;
@@ -87,8 +102,9 @@ const LessonForm = () => {
       createLessonMutation.mutate({
         lessonNumber: lessonNumber,
         lessonName: lessonName,
-        lessonUrl: fileName,
+        lessonUrl: lessonUrl,
         chapterID: chapterID,
+        thumbnails: thumbnails,
       });
     }
   };
@@ -135,7 +151,7 @@ const LessonForm = () => {
             {!uploadSuccess ? (
               <YoutubeUploader
                 verifyUpload={verifyUpload}
-                updateFileName={updateFileName}
+                updateFileInfo={updateFileInfo}
                 videoTitle={lessonName}
               />
             ) : (
