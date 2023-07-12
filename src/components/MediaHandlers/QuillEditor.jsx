@@ -1,10 +1,13 @@
 import ReactQuill from "react-quill";
 import React, { useState, useCallback, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
-import axios from "../../axios";
+import { useAlertBoxContext } from "../../context/AlertBoxContext";
+import { fetchLessonNotes } from "../../controllers/fetchData";
+import { useQuery } from "@tanstack/react-query";
 import "react-quill/dist/quill.snow.css";
 
 const QuillEditor = () => {
+  const { updateAlertBoxData } = useAlertBoxContext();
   const { currentLesson } = useOutletContext();
   const { _id: lessonID } = currentLesson;
   const roles = JSON.parse(localStorage.getItem("roles"));
@@ -15,6 +18,11 @@ const QuillEditor = () => {
   const [originalContent, setOriginalContent] = useState(null);
   const [isEditorEnabled, setIsEditorEnabled] = useState(false);
   const [areNotesPresent, setAreNotesPresent] = useState(false);
+
+  const notesQuery = useQuery({
+    queryKey: [notes, notesID],
+    queryFn: fetchLessonNotes,
+  });
 
   let quillModules = {};
 
@@ -40,15 +48,6 @@ const QuillEditor = () => {
   const [responseTracker, setResponseTracker] = useState(null);
   const [statusTracker, setStatusTracker] = useState(null);
   const [submit, setSubmit] = useState(false);
-
-  const fetchLessonNotes = async (notesID) => {
-    try {
-      const { data: notesData } = await axios.get(`notes/${notesID}`);
-      setContent(notesData.content);
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   const enableEdit = () => {
     setOriginalContent(content); // Store the original content
@@ -94,23 +93,12 @@ const QuillEditor = () => {
 
       if (status === 201) {
         setResponse("Data saved successfully to DB.");
-        setStatusTracker(true);
-        setResponseTracker(true);
         disableEdit();
         setAreNotesPresent(true);
-        setTimeout(() => {
-          setResponseTracker(false);
-        }, 1200);
       }
     } catch (err) {
       if (err.message === "Request failed with status code 500") {
         setResponse("Something went wrong. Please try again.");
-        setSubmit(true);
-        setStatusTracker(false);
-        setResponseTracker(true);
-        setTimeout(() => {
-          setResponseTracker(false);
-        }, 2500);
       } else {
         console.log(err);
       }

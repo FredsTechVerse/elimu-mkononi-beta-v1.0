@@ -95,9 +95,7 @@ const LessonForm = () => {
   };
 
   const saveLesson = async (e) => {
-    // Prevents default behaviour of our form
     e.preventDefault();
-    // Fetches a signedUrl
     if (isFormValid) {
       createLessonMutation.mutate({
         lessonNumber: lessonNumber,

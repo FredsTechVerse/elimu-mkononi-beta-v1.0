@@ -10,6 +10,11 @@ const fetchCourseData = async (courseID) => {
   return courseData;
 };
 
+const fetchLessonNotes = async (notesID) => {
+  const { data: notesData } = await axios.get(`notes/${notesID}`);
+  return notesData.content;
+};
+
 const fetchUsersData = async (role) => {
   if (role === "EM-203") {
     let { data: adminData } = await axios.get("/auth/all-admins");
@@ -28,4 +33,10 @@ const fetchUnitData = async (unitID) => {
   return unitData;
 };
 
-export { fetchCoursesData, fetchCourseData, fetchUnitData, fetchUsersData };
+export {
+  fetchCoursesData,
+  fetchCourseData,
+  fetchUnitData,
+  fetchUsersData,
+  fetchLessonNotes,
+};
