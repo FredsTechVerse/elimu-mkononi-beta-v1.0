@@ -1,4 +1,5 @@
 import axios from "../axios";
+
 const ERRORS = {
   NETWORK_ERROR: "Network error. Please try again later.",
   SERVER_ERROR: "Server error. Please try again later.",
@@ -8,7 +9,7 @@ const ERRORS = {
   INVALID_TOKEN: "Your token is invalid!",
 };
 
-const renewToken = () => {
+const renewToken = async () => {
   try {
     const refreshToken = localStorage.getItem("refreshToken");
 
@@ -18,26 +19,26 @@ const renewToken = () => {
     const config = {
       headers: { "Content-Type": "application/json" },
     };
-    const { data: refreshTokenData } = axios.post(
+    const { data: refreshTokenData } = await axios.post(
       "/auth/refresh-token",
       body,
       config
     );
     localStorage.setItem("accessToken", refreshTokenData.newAccessToken);
+    window.location.reload();
   } catch (err) {
-    console.log("An error occured while renewing the access token");
+    console.log(
+      `An error occured while renewing the access token ${JSON.stringify(err)}`
+    );
   }
 };
 
 const handleError = (error, updateAlertBoxData) => {
-  console.log({ status: error.response.status, error: error });
   let response = "No response has been specified";
   if (error.response && error.response.status === 400) {
     response = ERRORS.AUTHORIZATION_ERROR;
   } else if (error.response && error.response.status === 401) {
-    console.log(`Sema kimemana ! ${JSON.stringify(error.response)}`);
     if (error.response.data.message === "Token expired") {
-      console.log("Token has expired, there is a need to renew it");
       renewToken();
     } else if (error.response.statusText === "Unauthorized") {
       response = ERRORS.AUTHORIZATION_ERROR;
