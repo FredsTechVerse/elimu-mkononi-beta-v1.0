@@ -7,6 +7,9 @@
 - There is a function inbuild for handling axios error no need for try catch block
 - There is a function inbuilt when everything is successful
 
+- queryFn using fetches make it easy to intergrate skeletons and error messages.The functions is automatically called when we involve the error and data props later down in the code.
+- Everythis is within the code. However if no skeletons are involved , i can use the useEffect hook which runs once under the `   userDataQuery.refetch();` method
+
 ### UPLOADING VIDEOS TO YOUTUBE DEMISTIFIED
 
 Wow! It is really not hard!
@@ -18,6 +21,20 @@ There are only three major aspects to it:-
 - As for the response , we need to get the location header from the response and then upload the video file using a PUT request.
 - The location header is the url that we will use to upload the video file.
 - The video file is uploaded as a binary file.
+
+- There is a handy one line snippet for making fetches and also allows for additional configs `const courseQuery = useQuery(['courseData', courseID], () => fetchCourseData(courseID), {
+  onError: (error) => {
+    handleError(error, updateAlertBoxData);
+    // Perform additional actions or handle errors here
+  },
+}); ` transformed to be const courseQuery = useQuery(['courseData', courseID], () => fetchCourseData(courseID), {
+  onError: (error) => {
+  handleError(error, updateAlertBoxData);
+  // Perform additional actions or handle errors here
+  },
+  });`
+
+  The keys , function and additional parameters are separated just as with the axios request methods.....
 
 ### EXTENDING APP FUNCTIONALITY BY MAKING USE OF AVAILABLE TECHNOLOGIES
 

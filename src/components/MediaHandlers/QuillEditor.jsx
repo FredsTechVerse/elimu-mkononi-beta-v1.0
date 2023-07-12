@@ -12,9 +12,7 @@ const QuillEditor = () => {
   const { updateAlertBoxData } = useAlertBoxContext();
   const queryClient = useQueryClient();
   const { currentLesson } = useCurrentLessonContext();
-  const { _id: lessonID } = currentLesson;
   const roles = JSON.parse(localStorage.getItem("roles"));
-  console.log(currentLesson);
   //Quill Editor Config
   const [readOnly, setReadOnly] = useState(true);
   const [content, setContent] = useState(null);
@@ -119,11 +117,12 @@ const QuillEditor = () => {
   };
 
   useEffect(() => {
+    console.log("Notes changing is refreshing well!");
     if (currentLesson !== null) {
       if (currentLesson?.lessonNotes) {
         setIsEditorEnabled(false);
         setAreNotesPresent(true);
-        notesQuery();
+        notesQuery.refetch();
       } else {
         setIsEditorEnabled(false);
         setAreNotesPresent(false);

@@ -1,4 +1,6 @@
 import axios from "../axios";
+import { handleLogout } from "../controllers/handleLogout";
+const accessToken = localStorage.getItem("accessToken");
 
 const fetchCoursesData = async () => {
   const { data: coursesData } = await axios.get("/course/all-courses");
@@ -13,6 +15,24 @@ const fetchCourseData = async (courseID) => {
 const fetchLessonNotes = async (notesID) => {
   const { data: notesData } = await axios.get(`notes/${notesID}`);
   return notesData.content;
+};
+
+const fetchUserDetails = async (role) => {
+  if ((role = "EM-202")) {
+    const { data: tutorData } = await axios.get("/auth/tutor", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return tutorData;
+  } else if ((role = "EM-203")) {
+    const { data: adminData } = await axios.get("/auth/admin", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return adminData;
+  }
 };
 
 const fetchUsersData = async (role) => {
@@ -39,4 +59,5 @@ export {
   fetchUnitData,
   fetchUsersData,
   fetchLessonNotes,
+  fetchUserDetails,
 };

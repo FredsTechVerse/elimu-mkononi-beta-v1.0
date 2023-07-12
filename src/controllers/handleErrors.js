@@ -31,17 +31,16 @@ const renewToken = () => {
 
 const handleError = (error, updateAlertBoxData) => {
   console.log({ status: error.response.status, error: error });
-  console.log("Kuna makosa kidogo imetokea");
-  const response = "No response has been specified";
+  let response = "No response has been specified";
   if (error.response && error.response.status === 400) {
     response = ERRORS.AUTHORIZATION_ERROR;
   } else if (error.response && error.response.status === 401) {
-    console.log(`Sema kimemana ! ${JSON.stringify(err.response)}`);
-    if (error.response.message === "Token expired") {
-      console.log("Token has expired ,There is need to renew it");
+    console.log(`Sema kimemana ! ${JSON.stringify(error.response)}`);
+    if (error.response.data.message === "Token expired") {
+      console.log("Token has expired, there is a need to renew it");
       renewToken();
-    } else if (error.response.message === "Invalid Token") {
-      response = error.response.message;
+    } else if (error.response.statusText === "Unauthorized") {
+      response = ERRORS.AUTHORIZATION_ERROR;
     } else {
       response = ERRORS.AUTHORIZATION_ERROR;
     }

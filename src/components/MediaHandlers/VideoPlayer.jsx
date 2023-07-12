@@ -1,6 +1,9 @@
 import React from "react";
 import ReactPlayer from "react-player/youtube";
 const VideoPlayer = ({ src, title }) => {
+  useEffect(() => {
+    console.log("Video section is changing well");
+  }, []);
   return (
     <div className="w-full aspect-video rounded-lg shadow-lg shadow-slate-500 ">
       <ReactPlayer

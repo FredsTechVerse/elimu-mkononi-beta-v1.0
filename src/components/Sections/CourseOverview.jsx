@@ -9,13 +9,22 @@ import {
 } from "../../components";
 import { useQuery } from "@tanstack/react-query";
 import { fetchCourseData } from "../../controllers/fetchData";
+import { handleError } from "../../controllers/handleErrors";
+import { useAlertBoxContext } from "../../context/AlertBoxContext";
 const CourseOverview = () => {
   const { courseID } = useParams();
+  const { updateAlertBoxData } = useAlertBoxContext();
   const roles = JSON.parse(localStorage.getItem("roles"));
-  const courseQuery = useQuery({
-    queryKey: ["courseData", courseID],
-    queryFn: () => fetchCourseData(courseID),
-  });
+
+  const courseQuery = useQuery(
+    ["courseData", courseID],
+    () => fetchCourseData(courseID),
+    {
+      onError: (error) => {
+        handleError(error, updateAlertBoxData);
+      },
+    }
+  );
 
   return (
     <div className="w-full flex flex-col bg-slate-100 h-full">
