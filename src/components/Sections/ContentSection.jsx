@@ -3,15 +3,16 @@ import React from "react";
 import { VideoSection, UnitNav, MenuBtn } from "../../components";
 import { UnitOverview } from "../../containers";
 import { Outlet } from "react-router-dom";
+import { useCurrentLessonContext } from "../../context/currentLessonContext";
 const ContentSection = ({
-  currentLesson,
   unitData,
-  updateCurrentLesson,
   lessonType,
   openSideBar,
   sideBarOpen,
   unitID,
 }) => {
+  const { currentLesson } = useCurrentLessonContext();
+
   if (lessonType === "mp4") {
     return (
       <div className="w-full px-1">
@@ -22,14 +23,12 @@ const ContentSection = ({
           sideBarOpen={sideBarOpen}
         />
         {/* LESSON VIDEO */}
-        <VideoSection currentLesson={currentLesson} />
+        <VideoSection />
         {/* LESSON RESOURCES */}
         <div className="border-none border-slate-400 rounded-lg w-full">
           <Outlet
             context={{
               unitData: unitData,
-              currentLesson: currentLesson,
-              updateCurrentLesson: updateCurrentLesson,
             }}
           />
         </div>

@@ -6,30 +6,26 @@ import {
   ChevronDownIcon,
   MusicalNoteIcon,
   DocumentTextIcon,
-  ClipboardDocumentListIcon,
   PlayCircleIcon,
-  CodeBracketIcon,
-  CogIcon,
   WalletIcon,
   PlusIcon,
 } from "@heroicons/react/24/solid";
+import { useCurrentLessonContext } from "../../context/currentLessonContext";
 
 // It should be having the chapter name & the lessons.
 const AccordionItem = ({
   chapter,
   onToggle,
   active,
-  updateCurrentLesson,
   chapterIndex,
   closeSideBar,
   unitData,
 }) => {
   const location = useLocation();
-  // console.log(`Chapter Data ${JSON.stringify(chapter)}`);
   const { _id: chapterID, chapterName, chapterLessons } = chapter;
   const roles = JSON.parse(localStorage.getItem("roles"));
   const contentEl = useRef(); //Used to interact with the dom accordigly
-
+  const { updateCurrentLesson } = useCurrentLessonContext();
   const identifyLessonType = (lessonUrl) => {
     if (lessonUrl) {
       const lessonType = lessonUrl.split(".")[1];
@@ -81,7 +77,6 @@ const AccordionItem = ({
         }
       >
         {chapterLessons.map((lesson, lessonIndex) => {
-          // console.log(lesson);
           return (
             <li
               key={lessonIndex}

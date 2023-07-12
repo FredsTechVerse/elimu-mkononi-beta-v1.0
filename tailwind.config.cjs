@@ -3,6 +3,9 @@ export default {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
 
   theme: {
+    fontFamily: {
+      primary: ["Lexend Deca", "sans-serif"],
+    },
     screens: {
       phone: "300px",
       tablet: "568px",

@@ -3,15 +3,18 @@ import React, { useState, useCallback, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import { fetchLessonNotes } from "../../controllers/fetchData";
-import { useQuery } from "@tanstack/react-query";
+import { useCurrentLessonContext } from "../../context/currentLessonContext";
+import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
+import { createNotes, updateNotes } from "../../controllers/postData";
 import "react-quill/dist/quill.snow.css";
 
 const QuillEditor = () => {
   const { updateAlertBoxData } = useAlertBoxContext();
-  const { currentLesson } = useOutletContext();
+  const queryClient = useQueryClient();
+  const { currentLesson } = useCurrentLessonContext();
   const { _id: lessonID } = currentLesson;
   const roles = JSON.parse(localStorage.getItem("roles"));
-
+  console.log(currentLesson);
   //Quill Editor Config
   const [readOnly, setReadOnly] = useState(true);
   const [content, setContent] = useState(null);
@@ -20,8 +23,42 @@ const QuillEditor = () => {
   const [areNotesPresent, setAreNotesPresent] = useState(false);
 
   const notesQuery = useQuery({
-    queryKey: [notes, notesID],
-    queryFn: fetchLessonNotes,
+    queryKey: ["notes", currentLesson?.lessonNotes],
+    queryFn: () => fetchLessonNotes(currentLesson?.lessonNotes),
+  });
+
+  const createNotesMutation = useMutation({
+    mutationFn: createNotes,
+    onSuccess: (data) => {
+      queryClient.setQueryData(["notes", data._id], data);
+      queryClient.invalidateQueries(["notes"], { exact: true });
+      updateAlertBoxData({
+        response: "Lesson Notes have been saved",
+        isResponse: true,
+        status: "success",
+        timeout: 2500,
+      });
+    },
+    onError: (error) => {
+      handleError(error, updateAlertBoxData);
+    },
+  });
+
+  const updateNotesMutation = useMutation({
+    mutationFn: updateNotes,
+    onSuccess: (data) => {
+      queryClient.setQueryData(["notes", data._id], data);
+      queryClient.invalidateQueries(["notes"], { exact: true });
+      updateAlertBoxData({
+        response: "Lesson Notes have been updated",
+        isResponse: true,
+        status: "success",
+        timeout: 2500,
+      });
+    },
+    onError: (error) => {
+      handleError(error, updateAlertBoxData);
+    },
   });
 
   let quillModules = {};
@@ -43,11 +80,6 @@ const QuillEditor = () => {
       toolbar: false,
     };
   }
-  // Alert Box Config
-  const [response, setResponse] = useState(null);
-  const [responseTracker, setResponseTracker] = useState(null);
-  const [statusTracker, setStatusTracker] = useState(null);
-  const [submit, setSubmit] = useState(false);
 
   const enableEdit = () => {
     setOriginalContent(content); // Store the original content
@@ -66,10 +98,17 @@ const QuillEditor = () => {
   const handleSave = () => {
     if (areNotesPresent) {
       disableEdit();
-      handleUpdate(content, currentLesson?.lessonNotes);
+      updateNotesMutation.mutate({
+        lessonNotes: content,
+        notesID: currentLesson?.lessonNotes,
+      });
       return;
     }
-    handleCreation(content, lessonID);
+    handleNotesCreation(content, currentLesson?._id);
+    createNotesMutation.mutate({
+      lessonNotes: content,
+      lessonID: currentLesson?._id,
+    });
     disableEdit();
     return;
   };
@@ -78,75 +117,13 @@ const QuillEditor = () => {
     setContent(originalContent); // Restore the original content
     setIsEditorEnabled(false);
   };
-  const handleCreation = async (content, lessonID) => {
-    const formData = new FormData();
-    formData.append("lessonNotes", content);
-    formData.append("lessonID", lessonID);
-
-    const config = {
-      headers: { "Content-Type": "application/json" },
-    };
-
-    try {
-      const response = await axios.post("/notes/newNotes", formData, config);
-      const { status } = response;
-
-      if (status === 201) {
-        setResponse("Data saved successfully to DB.");
-        disableEdit();
-        setAreNotesPresent(true);
-      }
-    } catch (err) {
-      if (err.message === "Request failed with status code 500") {
-        setResponse("Something went wrong. Please try again.");
-      } else {
-        console.log(err);
-      }
-    }
-  };
-
-  const handleUpdate = async (content, notesID) => {
-    const formData = new FormData();
-    formData.append("lessonNotes", content);
-    formData.append("notesID", notesID);
-    const config = {
-      headers: { "Content-Type": "application/json" },
-    };
-
-    try {
-      const response = await axios.put("/notes/updateNotes", formData, config);
-      const { status } = response;
-
-      if (status === 202) {
-        setResponse("Lesson Notes have been successfully updated");
-        setStatusTracker(true);
-        setResponseTracker(true);
-        disableEdit();
-        setTimeout(() => {
-          setResponseTracker(false);
-        }, 1200);
-      }
-    } catch (err) {
-      if (err.message === "Request failed with status code 400") {
-        setResponse("Something went wrong. Please try again.");
-        setSubmit(true);
-        setStatusTracker(false);
-        setResponseTracker(true);
-        setTimeout(() => {
-          setResponseTracker(false);
-        }, 2500);
-      } else {
-        console.log(err);
-      }
-    }
-  };
 
   useEffect(() => {
     if (currentLesson !== null) {
       if (currentLesson?.lessonNotes) {
         setIsEditorEnabled(false);
         setAreNotesPresent(true);
-        fetchLessonNotes(currentLesson?.lessonNotes);
+        notesQuery();
       } else {
         setIsEditorEnabled(false);
         setAreNotesPresent(false);
@@ -156,7 +133,7 @@ const QuillEditor = () => {
     }
   }, [currentLesson]);
   return (
-    <div className="w-full flex flex-col p-2 ">
+    <div className="w-full flex flex-col p-2 border-none ">
       <div id="unit content" className="mt-3">
         {roles?.includes("EM-202") || roles?.includes("EM-203") ? (
           <ReactQuill

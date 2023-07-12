@@ -3,9 +3,11 @@ import { Accordion, ContentSection } from "../../components";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { fetchUnitData } from "../../controllers/fetchData";
+import { useCurrentLessonContext } from "../../context/currentLessonContext";
 const ContentPage = () => {
   const { unitID } = useParams();
-  const [currentLesson, setCurrentLesson] = useState(null);
+  const { currentLesson } = useCurrentLessonContext();
+
   const [lessonType, setLessonType] = useState(null);
   const [sideBarOpen, setSideBarOpen] = useState(false);
   useEffect(() => {
@@ -25,11 +27,7 @@ const ContentPage = () => {
   const closeSideBar = () => {
     setSideBarOpen(false);
   };
-  const updateCurrentLesson = (newLessonData) => {
-    if (newLessonData !== null) {
-      setCurrentLesson(newLessonData);
-    }
-  };
+
   const identifyAndUpdateLessonType = (lessonUrl) => {
     if (lessonUrl) {
       const lessonType = lessonUrl.split(".")[1];
@@ -66,7 +64,6 @@ const ContentPage = () => {
         <Accordion
           unitData={unitDataQuery.data}
           fetchUnitData={fetchUnitData}
-          updateCurrentLesson={updateCurrentLesson}
           closeSideBar={closeSideBar}
         />
       </article>
@@ -74,12 +71,10 @@ const ContentPage = () => {
       <article className="w-full laptop:col-span-3 tablet:col-span-2 h-full overflow-y-auto flex  flex-col  ">
         <ContentSection
           lessonType={lessonType}
-          currentLesson={currentLesson}
           unitData={unitDataQuery.data}
           sideBarOpen={sideBarOpen}
           openSideBar={openSideBar}
           unitID={unitID}
-          updateCurrentLesson={updateCurrentLesson}
         />
       </article>
     </main>

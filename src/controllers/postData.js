@@ -119,13 +119,39 @@ const createCourse = async ({ courseTitle, courseImage }) => {
     courseTitle,
     courseImage,
   };
-
   const config = {
     headers: { "Content-Type": "application/json" },
   };
 
   const { data } = await axios.post("course/new-course", courseData, config);
-  console.log(`CourseData created ${JSON.stringify(data)}`);
+  return data;
+};
+
+const createNotes = async (content, lessonID) => {
+  const config = {
+    headers: { "Content-Type": "application/json" },
+  };
+
+  const notesData = {
+    lessonNotes: content,
+    lessonID: lessonID,
+  };
+
+  const { data } = await axios.post("/notes/newNotes", notesData, config);
+  return data;
+};
+
+const updateNotes = async (content, notesID) => {
+  const config = {
+    headers: { "Content-Type": "application/json" },
+  };
+
+  const notesData = {
+    lessonNotes: content,
+    notesID: notesID,
+  };
+
+  const { data } = await axios.put("/notes/updateNotes", notesData, config);
   return data;
 };
 
@@ -137,4 +163,6 @@ export {
   loginUser,
   createResource,
   createUnit,
+  createNotes,
+  updateNotes,
 };

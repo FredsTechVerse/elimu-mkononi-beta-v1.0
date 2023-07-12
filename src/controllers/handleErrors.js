@@ -1,62 +1,69 @@
+import axios from "../axios";
 const ERRORS = {
   NETWORK_ERROR: "Network error. Please try again later.",
   SERVER_ERROR: "Server error. Please try again later.",
   AUTHORIZATION_ERROR: "Invalid username or password.",
   BLANK_ERROR: "The resource / user does not exist",
   DUPLICATION_ERROR: "This document already exists!",
+  INVALID_TOKEN: "Your token is invalid!",
+};
+
+const renewToken = () => {
+  try {
+    const refreshToken = localStorage.getItem("refreshToken");
+
+    const body = {
+      refreshToken: refreshToken,
+    };
+    const config = {
+      headers: { "Content-Type": "application/json" },
+    };
+    const { data: refreshTokenData } = axios.post(
+      "/auth/refresh-token",
+      body,
+      config
+    );
+    localStorage.setItem("accessToken", refreshTokenData.newAccessToken);
+  } catch (err) {
+    console.log("An error occured while renewing the access token");
+  }
 };
 
 const handleError = (error, updateAlertBoxData) => {
-  console.log(error);
-  const timeout = 2500;
-  const status = error.status;
+  console.log({ status: error.response.status, error: error });
+  console.log("Kuna makosa kidogo imetokea");
+  const response = "No response has been specified";
   if (error.response && error.response.status === 400) {
-    updateAlertBoxData({
-      response: ERRORS.AUTHORIZATION_ERROR,
-      isResponse: true,
-      status: status,
-      timeout: timeout,
-    });
+    response = ERRORS.AUTHORIZATION_ERROR;
   } else if (error.response && error.response.status === 401) {
-    // I need to destructure futher the response it can be a token or a jwt if token expired we need to renew our token silently and retry request.
-    console.log(
-      `Unauthorized error response ${JSON.stringify(error.response)}`
-    );
-    updateAlertBoxData({
-      response: ERRORS.AUTHORIZATION_ERROR,
-      isResponse: true,
-      status: status,
-      timeout: timeout,
-    });
+    console.log(`Sema kimemana ! ${JSON.stringify(err.response)}`);
+    if (error.response.message === "Token expired") {
+      console.log("Token has expired ,There is need to renew it");
+      renewToken();
+    } else if (error.response.message === "Invalid Token") {
+      response = error.response.message;
+    } else {
+      response = ERRORS.AUTHORIZATION_ERROR;
+    }
+  } else if (error.response && error.response.status === 403) {
+    response = error.response.message;
   } else if (error.response && error.response.status === 404) {
-    updateAlertBoxData({
-      response: ERRORS.BLANK_ERROR,
-      isResponse: true,
-      status: status,
-      timeout: timeout,
-    });
+    response = ERRORS.BLANK_ERROR;
   } else if (error.response && error.response.status === 409) {
-    updateAlertBoxData({
-      response: ERRORS.DUPLICATION_ERROR,
-      isResponse: true,
-      status: status,
-      timeout: timeout,
-    });
+    response = ERRORS.DUPLICATION_ERROR;
   } else if (error.message === "Network Error") {
-    updateAlertBoxData({
-      response: ERRORS.NETWORK_ERROR,
-      isResponse: true,
-      status: status,
-      timeout: timeout,
-    });
+    response = ERRORS.NETWORK_ERROR;
   } else {
-    updateAlertBoxData({
-      response: ERRORS.SERVER_ERROR,
-      isResponse: true,
-      status: status,
-      timeout: timeout,
-    });
+    response = ERRORS.SERVER_ERROR;
   }
+
+  console.log("Tushafika mwisho");
+  updateAlertBoxData({
+    response: response,
+    isResponse: true,
+    status: "error",
+    timeout: 2500,
+  });
 };
 
 export { handleError };

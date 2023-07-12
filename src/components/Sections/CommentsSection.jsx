@@ -1,8 +1,8 @@
 import React from "react";
-
+import { useCurrentLessonContext } from "../../context/currentLessonContext";
 import { useOutletContext } from "react-router-dom";
 const CommentsSection = () => {
-  const { currentLesson } = useOutletContext();
+  const { currentLesson } = useCurrentLessonContext();
 
   return (
     <div className="w-full h-full flex-row-centered text-black">

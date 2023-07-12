@@ -1,12 +1,9 @@
 import React, { useContext, createContext, useState } from "react";
-// CREATE CONTEXT
 const AlertBoxContext = createContext();
 
-// EXPOSING CONTEXT
 export const useAlertBoxContext = () => {
   return useContext(AlertBoxContext);
 };
-// ASSING CONTEXT A VALUE
 export const AlertBoxContextProvider = ({ children }) => {
   const [alertBoxData, setAlertBoxData] = useState({
     status: null,
@@ -24,9 +21,18 @@ export const AlertBoxContextProvider = ({ children }) => {
     });
   };
 
+  const initializeAlertBox = () => {
+    setAlertBoxData({
+      status: null,
+      isResponse: false,
+      response: null,
+      timeout: null,
+    });
+  };
+
   return (
     <AlertBoxContext.Provider
-      value={{ alertBoxData, setAlertBoxData, updateAlertBoxData }}
+      value={{ alertBoxData, updateAlertBoxData, initializeAlertBox }}
     >
       {children}
     </AlertBoxContext.Provider>

@@ -4,7 +4,7 @@
 
 @layer components {
     * {
-        @apply m-0 p-0 box-border font-serif
+        @apply m-0 p-0 box-border font-primary
     }
 
          /* Firefox */
@@ -26,10 +26,6 @@
              @apply bg-primary border-none bg-opacity-30;
         }
     
-         * {
-             @apply font-sans;
-         }
-
     /* custom shape */
         .custom-shape-divider-bottom-1679515507 {
             position: absolute;

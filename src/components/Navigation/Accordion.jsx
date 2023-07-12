@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AccordionItem, BackBtn, Tooltip } from "../../components";
 import { PlusIcon, XCircleIcon } from "@heroicons/react/24/solid";
 import { useLocation, Link } from "react-router-dom";
-const Accordion = ({ unitData, updateCurrentLesson, closeSideBar }) => {
+const Accordion = ({ unitData, closeSideBar }) => {
   const roles = JSON.parse(localStorage.getItem("roles"));
   const location = useLocation();
   // USING THE CHAPTER ID WE CAN SHOW THE LESSONS.
@@ -53,7 +53,6 @@ const Accordion = ({ unitData, updateCurrentLesson, closeSideBar }) => {
           {unitData.unitChapters.map((chapter, chapterIndex) => (
             <AccordionItem
               unitData={unitData}
-              updateCurrentLesson={updateCurrentLesson}
               key={`chapter-${chapterIndex}`}
               chapter={chapter}
               chapterIndex={chapterIndex}

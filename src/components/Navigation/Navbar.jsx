@@ -1,10 +1,7 @@
 import React from "react";
 import { LogoutBtn, NavBtn, NavBgBtn, Tooltip } from "../../components";
-
-import { Bars3BottomRightIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
-const Navbar = ({ isNavOpen, showNavbar, hideNavbar }) => {
-  const user = JSON.parse(localStorage.getItem("user"));
+const Navbar = () => {
   const roles = JSON.parse(localStorage.getItem("roles"));
   return (
     <div className="absolute top-0 flex justify-between  z-10 w-full pl-4 pr-2 py-2 rounded-full m-2">
@@ -13,14 +10,7 @@ const Navbar = ({ isNavOpen, showNavbar, hideNavbar }) => {
           E-LEARNING
         </div>
       </Link>
-      {/* <button
-        className={`${isNavOpen ? "hidden" : "flex"} laptop:hidden`}
-        onClick={() => {
-          showNavbar();
-        }}
-      >
-        <Bars3BottomRightIcon className="text-white text-3xl" />
-      </button> */}
+
       {/* ACTUAL NAVBAR */}
       <div className="relative flex phone:flex-col tablet:flex-row phone:gap-2 items-center  capitalize">
         <div id="section-2" className=" h-full flex">
@@ -39,7 +29,9 @@ const Navbar = ({ isNavOpen, showNavbar, hideNavbar }) => {
         <div
           id="section-3"
           className={`${
-            !user ? "flex phone:flex-col phone:gap-2 tablet:flex-row" : "hidden"
+            !roles
+              ? "flex phone:flex-col phone:gap-2 tablet:flex-row"
+              : "hidden"
           }`}
         >
           <Tooltip tooltip="Register">
@@ -49,7 +41,7 @@ const Navbar = ({ isNavOpen, showNavbar, hideNavbar }) => {
             <NavBgBtn to="/log-in" text="Log In" />
           </Tooltip>
         </div>
-        <div id="section-3" className={`${!user ? "hidden" : "flex"}`}>
+        <div id="section-3" className={`${!roles ? "hidden" : "flex"}`}>
           <Tooltip tooltip="Logout">
             <LogoutBtn position="navbar" />
           </Tooltip>

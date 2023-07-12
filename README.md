@@ -2,6 +2,11 @@
 
 - Make the urls one word with many slashes..... camelCase or hiphen-separated doesn't work well out here!
 
+### USING USEQURY
+
+- There is a function inbuild for handling axios error no need for try catch block
+- There is a function inbuilt when everything is successful
+
 ### UPLOADING VIDEOS TO YOUTUBE DEMISTIFIED
 
 Wow! It is really not hard!

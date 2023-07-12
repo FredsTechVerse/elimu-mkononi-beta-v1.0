@@ -35,7 +35,7 @@ const LessonForm = () => {
   }, [thumbnails]);
   useEffect(() => {
     const handleKeyPress = (e) => {
-      if (e.key === "Enter" || e.type === "submit") {
+      if (e.key === "Enter" || e.typpe === "submit") {
         saveLesson(e);
       }
     };
