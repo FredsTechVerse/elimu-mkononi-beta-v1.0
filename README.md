@@ -1,3 +1,15 @@
+### TO CONSIDER TOMMORROW
+
+- Tweak grid accordinly and remember that we start counting from 1 and not from 0 when positioning items in a grid.
+- Let the last doughnut be of the most complicated data so that i could be able to break it down easily according to courses.
+- Interchange quick actions with detailed pie chart for continuity.
+- Polish up on skeleton dimensions.
+- Update post and get queries to only retry once and also to retry fetching data once.
+- Optimize form buttons to show loading state with a spinner , change color of quick action buttons.
+- Fetch video url after uploading video to youtube inorder to save it in my db.
+
+- Optimize notes logic , make sure they work in harmony with video , finalize on the ui and release the software into the world for them to see and comment.
+
 ### PERFOMANCE OPTIMIZATION
 
 - Building the resources section to handle pdf & additional audio documents.

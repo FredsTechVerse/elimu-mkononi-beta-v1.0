@@ -4,6 +4,7 @@ import {
   UserProfile,
   DashboardUserButton,
   NavPageBtn,
+  DoughnutChart,
 } from "../../components";
 import { useOutletContext } from "react-router-dom";
 
@@ -54,10 +55,17 @@ const TutorDashboard = () => {
             </div>
           </div>
         </div>
-        {tutorData &&
+
+        <div className="h-full col-span-2 debug"></div>
+        <div className="flex-col-centered debug col-span-1">
+          <DoughnutChart />
+          <div className="w-full h-52 bg-slate-300"></div>
+        </div>
+
+        {/* {tutorData &&
           tutorData.units.map((unit, index) => {
             return <TutorCardHome key={`unit-${index}`} unit={unit} />;
-          })}
+          })} */}
       </div>
     </div>
   );

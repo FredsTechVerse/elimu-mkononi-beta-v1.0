@@ -48,6 +48,7 @@ const AccordionItem = ({
               state={{ background: location }}
             >
               <Tooltip tooltip="Add lesson">
+                z{" "}
                 <div
                   onClick={closeSideBar}
                   className="w-8 h-8 hover:border-white hover:border-2 rounded-full"

@@ -1,21 +1,39 @@
 import React from "react";
 import {
-  AdminCard,
+  TutorCardHome,
+  UserProfile,
   DashboardUserButton,
   NavPageBtn,
-  UserProfile,
-  AddBtn,
+  DoughnutChart,
 } from "../../components";
-import { Square3Stack3DIcon } from "@heroicons/react/24/solid";
+import { useOutletContext } from "react-router-dom";
+
 const AdminDashboard = () => {
+  const tutorData = useOutletContext();
   return (
-    <div
-      id="main"
-      className="w-full flex flex-col justify-start items-center bg-slate-100 tablet:p-2"
-    >
-      <div className="w-full phone:p-0 tablet:p-5 grid  grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 gap-5 m-3">
-        <div className="greetings col-start-1 phone:col-span-1 tablet:col-span-2 row-span-1 flex-row-centered rounded-xl h-48 flex">
-          <div className="w-full tablet:w-2/3 h-full  rounded-xl pattern-2 text-white">
+    <div className="w-full pt-2 h-full grid phone:grid-cols-1 tablet:grid-cols-3 laptop:grid-cols-4 gap-5 ">
+      <div className="col-span-1 row-span-2 tablet:row-span-1 h-full  rounded-xl">
+        <div className="phone:hidden tablet:flex flex-col items-start justify-center phone:col-span-1 phone:row-span-2  tablet:row-start-2 tablet:col-start-1 tablet:col-span-2 laptop:col-start-3 laptop:row-start-1 laptop:col-span-1 laptop:row-span-3 ">
+          <UserProfile />
+          <div className="controls w-full h-full flex-col-centered gap-2 bg-slate-200">
+            <div className="h-12 w-full flex-row-centered text-white rounded-lg bg-primary rounded-ms">
+              View Students
+            </div>
+            <div className="h-12 w-full flex-row-centered text-white rounded-lg bg-primary rounded-ms">
+              View Tutors
+            </div>
+            <div className="h-12 w-full flex-row-centered text-white rounded-lg bg-primary rounded-ms">
+              View Course
+            </div>
+            <div className="h-12 w-full flex-row-centered text-white rounded-lg bg-primary rounded-ms">
+              View Admins
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="h-full overflow-auto grid col-span-1 tablet:col-span-2 laptop:col-span-3 tablet:grid-cols-2 laptop:grid-cols-3 gap-4">
+        <div className="greetings col-start-1 col-span-1 tablet:col-span-2 laptop:col-span-3 row-span-1  flex-row-centered rounded-xl h-48 flex">
+          <div className="w-full tablet:w-2/3 h-full bg-slate-400 text-white rounded-xl flex-col-centered">
             <h1 className=" font-bold text-lg uppercase w-full h-12 flex-row-centered ">
               GREETINGS
             </h1>
@@ -25,42 +43,38 @@ const AdminDashboard = () => {
             </p>
           </div>
 
-          <div className="hidden w-full tablet:flex tablet:w-1/3 flex-col justify-evenly  rounded-xl h-full gap-2 p-2">
-            <NavPageBtn page="students" />
-            <NavPageBtn page="tutors" />
-            <NavPageBtn page="admins" />
-            <NavPageBtn page="courses" />
-          </div>
+          <div className=" phone:hidden phone:col-span-1 tablet:flex tablet:w-1/3 flex-col justify-evenly  rounded-xl h-full gap-2 m-2 bg-slate-400"></div>
         </div>
-        <div className="phone:hidden phone:col-span-1 phone:row-span-2  tablet:row-start-2 tablet:col-start-1 tablet:col-span-2 laptop:col-start-3 laptop:row-start-1 laptop:col-span-1 laptop:row-span-3 ">
-          <UserProfile />
+        <div className="flex-row-centered gap-5 col-span-1">
+          <DoughnutChart />
+          <div className="h-24 bg-slate-300"></div>
         </div>
-
-        <AdminCard Number="100" Text="Students" />
-        <AdminCard Number="10" Text="Tutors" />
-        <AdminCard Number="300" Text="Lessons" />
-        <AdminCard Icon={Square3Stack3DIcon} Number="20" Text="Courses" />
-      </div>
-      <div className="w-full phone:flex-col-centered tablet:flex-row-centered h-[420px]">
-        <div className="w-full tablet:w-2/3 h-full rounded-xl bg-slate-300"></div>
-        <div className="controls w-full tablet:w-1/3 h-full flex-col-centered">
-          <h1 className="text-slate-900 font-bold text-lg uppercase w-full h-12 flex-row-centered ">
-            Quick Actions
+        <div className="flex-row-centered gap-5 col-span-1 ">
+          <DoughnutChart />
+          <div className="h-24 bg-slate-300"></div>
+        </div>
+        <div className="flex-col-centered gap-2 col-span-1  rounded-lg p-8 ">
+          <h1 className="text-slate-900 font-bold text-lg text-center capitalize mt-3 w-full h-12 flex-row-centered  ">
+            Quick Access Controls
           </h1>
-
-          <div className=" phone:hidden tablet:grid gap-1 laptop:gap-5 p-5 aspect-video  tablet:grid-cols-2  place-item-center  w-full">
-            <AddBtn users="students" user="student" />
-            <AddBtn users="tutors" user="tutor" />
-            <AddBtn users="admins" user="admin" />
-            <AddBtn users="courses" user="course" />
-          </div>
-          <div className=" phone:grid tablet:hidden gap-1 laptop:gap-5 p-5 aspect-video grid phone:grid-cols-3 tablet:grid-cols-2 place-item-center w-full">
-            <AddBtn users="students" user="student" />
-            <AddBtn users="tutors" user="tutor" />
-            <AddBtn users="admins" user="admin" />
-            <AddBtn users="courses" user="course" />
+          <div className=" gap-1 laptop:gap-3 p-2 aspect-video grid tablet:grid-cols-2 place-item-center h-full w-full">
+            <DashboardUserButton user="chapter" />
+            <DashboardUserButton user="lesson" />
+            <DashboardUserButton user="resource" />
+            <DashboardUserButton user="information" />
           </div>
         </div>
+
+        <div className="h-full col-span-2 debug "></div>
+        <div className="flex-col-centered  gap-5 p-2 col-span-1">
+          <DoughnutChart />
+          <div className="w-full h-52 bg-slate-300 rounded-lg"></div>
+        </div>
+
+        {/* {tutorData &&
+          tutorData.units.map((unit, index) => {
+            return <TutorCardHome key={`unit-${index}`} unit={unit} />;
+          })} */}
       </div>
     </div>
   );

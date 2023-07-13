@@ -15,18 +15,6 @@ const DoughnutChart = () => {
         backgroundColor: ["red", "green", "blue"],
         borderColor: ["red", "green", "blue"],
       },
-      {
-        label: "Poll",
-        data: [40, 30, 80],
-        backgroundColor: ["gray", "orange", "pink"],
-        borderColor: ["red", "green", "blue"],
-      },
-      {
-        label: "Poll",
-        data: [24, 72, 45],
-        backgroundColor: ["gray", "orange", "pink"],
-        borderColor: ["red", "green", "blue"],
-      },
     ],
   };
 
@@ -35,7 +23,7 @@ const DoughnutChart = () => {
     borderWidth: 1,
     spacing: 5,
     circumference: 360,
-    cutout: "70%",
+    cutout: "75%",
     animation: { animateScale: true, animateRotate: true },
 
     plugins: {
