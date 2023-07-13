@@ -1,3 +1,5 @@
+# ELIMU MKONONI
+
 ### TO CONSIDER TOMMORROW
 
 - Tweak grid accordinly and remember that we start counting from 1 and not from 0 when positioning items in a grid.
@@ -22,29 +24,29 @@
 
 - Router state has always been simply an object... You know that basic container with a key and a value which in my case was as simple as assigning a background `{ background: location }` and once present in the state activating the second set of routes.
 
-- Finishing takes a great deal of courgage..... I am terrified of fixing the last bit of the puzzle into place.... Video streaming with the youtube data api.
-
 - **_react hooks are asynchronous nature. Use them sparingly. They can take time to update no wonder the null console.log on useState_**
 - To refresh dynamic routes , set up the \_redirects file inside the public folder and add the following line : `/*    /index.html  200`. It works like magic.
-- Let the browser do the scrolling for a whole page if you only need a section that might be a different story
+- Let the browser do the scrolling for a whole page if you only need a section that might be a different story.
 - Horizontal scroll issue might be as a result of 2 scrolls
-- A grid is responsive by nature. Do not bother constraining its children's width... Will do so automatically!
-- Use React query for quering and caching data. Complements axios as well!
+- A grid is responsive by nature. Do not bother constraining its children's width...
 - Anything that is not in the useEffect runs twice due to react strict mode.Hence the double console.logs() and this is normal.
-- Solution : use`(roles?.includes("EM-203") || roles?.includes("EM-202")` instead of `(roles[0] === "EM-203" || roles[0] === "EM-202"`
-- This code `(roles?.includes("EM-202" || "EM-203")) ` is incorrect . Javascript excludes the second part.
+- Fetching an element in an arrya using `(roles?.includes("EM-203") || roles?.includes("EM-202")` instead of `(roles[0] === "EM-203" || roles[0] === "EM-202"` is bettter
+- Never do javascript comparisons like this `(roles?.includes("EM-202" || "EM-203")) ` . Javascript excludes the second part hence causing an error interms of expected behaviour.
 - How to check if an object is empty`Object.keys(obj).length === 0`
-- For arrays,checking for length is better than checking if null.
+- For arrays,check for length instead of checking if null.
 - The handle logout is called because i pass the function instead of the refence. Therefore , ` onClick={() => {handleLogout()}}` should be replaced by ` onClick={handleLogout}`
-- CHATGPT is not there yet ... I have to complement / verify is brainstorming ideas with the real world. Google!
-
-**INDEXED NAVIGATION** I can simply get away with a for loop for looping over my chapter array.
 
 ### USING USEQUERY
 
-- Suitable for handling any post and get requests.
-- Eliminates the need for a try catch statements as it has its own eventHandlers for handling errors and loading states. eg onError , onLoading , onSuccess
-- I like using the one line syntax when doing my fetches which follows the following rule of thumb , we have an array of keys , followed by the function in action and additional configs at the very end eg
+- Suitable for handling any post and get requests in that it complements axios giving it superpowers as :-
+
+  - It eliminates the need for a try catch statements as it has its own eventHandlers for handling errors and loading states. eg onError , onLoading , onSuccess
+  - Integrating skeletons has never been easier as we know exactly when our data is loading.
+  - Error handling has also been simplified where we can use the `onError((error)=>{})`or the `isError` if we are just interested in the current state.
+  - queryFn using fetches make it easy to intergrate skeletons and error messages.The functions is automatically called when we involve the error and data props later down in the code.
+  - We also get instant updates when we use it to make a post request.
+
+- I enjoy using the one line syntax when doing my fetches which follows the following rule of thumb , we have an array of keys , followed by the function in action and additional configs at the very end eg
   `const courseQuery = useQuery(
 ["courseData", courseID],
 () => fetchCourseData(courseID),
@@ -54,17 +56,14 @@ handleError(error, updateAlertBoxData);
       },
     }
 );`
-- Integrating skeletons has never been easier as we know exactly when our data is loading.
-- Error handling has also been simplified where we can use the `onError((error)=>{})`or the `isError` if we are just interested in the current state.
-- queryFn using fetches make it easy to intergrate skeletons and error messages.The functions is automatically called when we involve the error and data props later down in the code.
+
 - Everythis is within the code. However if no skeletons are involved , i can use the useEffect hook which runs once under the `   userDataQuery.refetch();` method
-- We also get instant updates when we use it to make a post request.
 
 ### HOW TO USE CHART JS
 
 - With multiple datasets , we can have multiple charts in one chart eg With the three datasets , we have 3 charts inside one chart with additional props to define how things will look.
 
-- Here are the steps :-
+- Here are the steps to integrate charts easily :-
 
 1. Install the react-chartjs-2 package `yarn add chart.js react-chartjs-2`
 
@@ -115,12 +114,11 @@ borderColor: ["red", "green", "blue"],
 ],
 };
 
-- Speaking of options , they are all straight forward , those that need embedding zinajionyesha tu eg `animation.animateScale` and `animation.animateRotate`
+- Speaking of options , those that need embedding are well defined eg `animation.animateScale` and `animation.animateRotate`
 
 ### HOW TO UPLOAD VIDEOS VIA THE YOUTUBE DATA API
 
-Wow! It is really not hard!
-There are only three major aspects to it:-
+There are three major aspects to it:-
 
 - We need a headers , body/metadata and then we wait for the response.
 - As for the header , we only pass the access token and the content type which is application/json
@@ -129,19 +127,6 @@ There are only three major aspects to it:-
 - In summary we make a post request to get the location url then make a put request to upload the resource to the specified location url. This really bring back the vibe of a presigned url .... We can think of the location url as a presigned url
 - Therefore we first of all get the presigned url then paste data to this url.
 - The keys , function and additional parameters are separated just as with the axios request methods.....
-
-### EXTENDING APP FUNCTIONALITY BY MAKING USE OF AVAILABLE TECHNOLOGIES
-
-- There is no need of reinventing the wheel for technologies that are out there.
-- For comments and questions they will be send via email and a discord channel set up to handle / grow the community.
-- Email is the best and the cheapest mode of communication that i can use extensively for password reset , verification of credentials , user login , frequent updates and communication.
-- SMS can be used for crucial services eg rapid payment responses.
-
-### CODE SPLITTING
-
-- I am currently experiencing screen freeze and just too many barriers which can be solved by putting code splitting according to role..... With a tutor , the student and admin pages do not need to be loaded at first render...
-- There must be a way to carry this optimization in react using vite.... Moving to a new metaframework for this is just too expensive....
-- I need to find a balance as to what i code split and what i load at first render..... Coz remember even react-query has its way of showing skeletons while loading.
 
 ### HOW TO UPLOAD YOUTUBE VIDEO FROM FRONTEND USING THE ACCESS TOKEN OBTAINED VIA THE BACKEND BY SWAPPING CODE GENERATED WITH AN ACCESS TOKEN.
 
@@ -202,6 +187,19 @@ const description = "My Video Description";
 uploadVideo(accessToken, videoFile, title, description);
 
 - The access token will be decyphered in its own page then a redirect to another page happens....
+
+### EXTENDING APP FUNCTIONALITY BY MAKING USE OF AVAILABLE TECHNOLOGIES
+
+- There is no need of reinventing the wheel for technologies that are out there.
+- For comments and questions they will be send via email and a discord channel set up to handle / grow the community.
+- Email is the best and the cheapest mode of communication that i can use extensively for password reset , verification of credentials , user login , frequent updates and communication.
+- SMS can be used for crucial services eg rapid payment responses.
+
+### CODE SPLITTING
+
+- I am currently experiencing screen freeze and just too many barriers which can be solved by putting code splitting according to role..... With a tutor , the student and admin pages do not need to be loaded at first render...
+- There must be a way to carry this optimization in react using vite.... Moving to a new metaframework for this is just too expensive....
+- I need to find a balance as to what i code split and what i load at first render..... Coz remember even react-query has its way of showing skeletons while loading.
 
 ### SENDING AND INTEPRETING STATUS AND ANY DATA FROM BACKEND
 
