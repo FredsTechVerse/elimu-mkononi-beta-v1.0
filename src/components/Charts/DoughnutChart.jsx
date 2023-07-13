@@ -15,6 +15,18 @@ const DoughnutChart = () => {
         backgroundColor: ["red", "green", "blue"],
         borderColor: ["red", "green", "blue"],
       },
+      {
+        label: "Poll",
+        data: [40, 30, 80],
+        backgroundColor: ["gray", "orange", "pink"],
+        borderColor: ["red", "green", "blue"],
+      },
+      {
+        label: "Poll",
+        data: [24, 72, 45],
+        backgroundColor: ["gray", "orange", "pink"],
+        borderColor: ["red", "green", "blue"],
+      },
     ],
   };
 
@@ -32,11 +44,11 @@ const DoughnutChart = () => {
     },
   };
   return (
-    <div className="w-56 aspect-square flex-row-centered relative">
+    <div className="w-64 aspect-square flex-row-centered relative">
       <Doughnut data={chartData} options={options}></Doughnut>
       <div className="absolute flex-col-centered">
-        <div>Users</div>
-        <div>45</div>
+        <div className="font-extralight text-xs">Total Users</div>
+        <div className="text-2xl font-bold">45</div>
       </div>
     </div>
   );

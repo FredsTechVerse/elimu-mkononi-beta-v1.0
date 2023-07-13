@@ -1,12 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import {
-  UnitCard,
-  UnitSkeleton,
-  NavigateBtn,
-  PageTitle,
-  BackBtn,
-} from "../../components";
+import { UnitCard, UnitSkeleton, NavigateBtn, BackBtn } from "../../components";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchCourseData } from "../../controllers/fetchData";
 import { handleError } from "../../controllers/handleErrors";
