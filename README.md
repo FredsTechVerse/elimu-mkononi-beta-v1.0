@@ -130,6 +130,7 @@ There are three major aspects to it:-
 
 ### HOW TO UPLOAD YOUTUBE VIDEO FROM FRONTEND USING THE ACCESS TOKEN OBTAINED VIA THE BACKEND BY SWAPPING CODE GENERATED WITH AN ACCESS TOKEN.
 
+`
 import axios from "axios";
 
 const uploadVideo = async (accessToken, videoFile, title, description) => {
@@ -185,6 +186,8 @@ const title = "My Video Title";
 const description = "My Video Description";
 
 uploadVideo(accessToken, videoFile, title, description);
+
+`
 
 - The access token will be decyphered in its own page then a redirect to another page happens....
 
