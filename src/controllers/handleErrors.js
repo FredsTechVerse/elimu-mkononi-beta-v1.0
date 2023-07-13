@@ -56,12 +56,15 @@ const handleError = (error, updateAlertBoxData) => {
   } else {
     response = ERRORS.SERVER_ERROR;
   }
-  updateAlertBoxData({
-    response: response,
-    isResponse: true,
-    status: "error",
-    timeout: 2500,
-  });
+
+  if (response !== "No response has been specified") {
+    updateAlertBoxData({
+      response: response,
+      isResponse: true,
+      status: "error",
+      timeout: 2500,
+    });
+  }
 };
 
 export { handleError };

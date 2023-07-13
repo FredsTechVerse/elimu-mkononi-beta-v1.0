@@ -16,7 +16,7 @@ const CoursesSection = () => {
       <PageTitle text="list of courses" />
 
       {coursesQuery.status === "loading" ? (
-        <div className="grid-lg">
+        <div className="grid-lg tablet:grid-cols-2 laptop:grid-cols-4 tablet:gap-6 ">
           <CourseSkeleton />
           <CourseSkeleton />
           <CourseSkeleton />

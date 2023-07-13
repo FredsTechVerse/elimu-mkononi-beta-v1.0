@@ -1,7 +1,7 @@
 import React from "react";
 const CourseSkeleton = () => {
   return (
-    <div className="flex flex-col justify-start items-center max-w-sm mx-auto hover:scale-105 ease-in-out duration-300 animate-pulse">
+    <div className=" flex flex-col items-center w-full h-full  rounded-xl m-3 bg-white animate-pulse">
       <div className="bg-gray-300 w-full h-[220px] tablet:h-[180px] laptop:h-[220px]  rounded-t-xl object-cover  bg-cover bg-center"></div>
       <p className="text-sm tablet:text-xs laptop:text-sm font-bold flex-row-centered bg-slate-500 text-white capitalize px-4 h-8 pt-0.5 mt-[203px] tablet:mt-[165px] laptop:mt-[203px]  absolute  text-center rounded-full "></p>
 
