@@ -1,9 +1,9 @@
 import React from "react";
-import { TestBox, CourseCardV2 } from "../components";
+import { DoughnutChart } from "../components";
 const DraftPage = () => {
   return (
-    <div className="debug w-full">
-      <CourseCardV2 />
+    <div className=" w-full">
+      <DoughnutChart />
     </div>
   );
 };

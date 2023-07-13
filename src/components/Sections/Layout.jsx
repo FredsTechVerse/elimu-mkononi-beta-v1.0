@@ -6,7 +6,6 @@ import { useQuery } from "@tanstack/react-query";
 
 const Layout = ({ role }) => {
   const [userData, setUserData] = useState(null);
-
   const userDataQuery = useQuery(["user"], () => fetchUserDetails(role), {
     onSuccess: (data) => {
       setUserData(data);

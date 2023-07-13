@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Accordion, ContentSection } from "../../components";
+import {
+  Accordion,
+  ContentSection,
+  AccordionSkeleton,
+  ContentSectionSkeleton,
+} from "../../components";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { fetchUnitData } from "../../controllers/fetchData";
@@ -38,11 +43,19 @@ const ContentPage = () => {
 
   if (unitDataQuery.status === "loading") {
     return (
-      <div className="fixed w-full h-screen flex-row-centered bg-slate-300">
-        <p className=" flex-col-centered text-center py-3 px-2 m-2 rounded-lg h-24 text-slate-700 text-3xl  ">
-          Unit Data is Loading.... Use a skeleton here it is really needed.
-        </p>
-      </div>
+      <main className="flex relative tablet:grid  tablet:grid-cols-3 laptop:grid-cols-4 w-full h-screen">
+        <article
+          className={` ${
+            sideBarOpen ? "block" : "hidden"
+          }   w-full h-full absolute tablet:relative tablet:block  tablet:col-span-1 `}
+        >
+          <AccordionSkeleton />
+        </article>
+
+        <article className="w-full laptop:col-span-3 tablet:col-span-2 h-full overflow-y-auto flex  flex-col  ">
+          <ContentSectionSkeleton />
+        </article>
+      </main>
     );
   }
 

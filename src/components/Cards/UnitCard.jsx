@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 const UnitCard = ({ unitNumber, unitName, unitDescription, unitID }) => {
   return (
-    <article className="hover:cursor-pointer w-full  laptop:h-44  h-40 bg-white flex flex-col gap-2  pt-2 rounded-xl shadow-lg shadow-slate-300 ">
+    <article className="hover:cursor-pointer w-full  laptop:h-44  h-40 flex flex-col gap-2  pt-2 rounded-xl shadow-lg shadow-slate-300 ">
       <section className="px-2 flex items-center justify-start gap-3 ">
         <div className="ml-4 w-10 h-10  rounded-full bg-slate-600  flex-row-centered text-white ">
           <span className="font-extraLight">{unitNumber}</span>

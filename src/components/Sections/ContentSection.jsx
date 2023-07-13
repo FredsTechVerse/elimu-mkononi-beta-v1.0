@@ -16,15 +16,12 @@ const ContentSection = ({
   if (lessonType === "mp4") {
     return (
       <div className="w-full px-1">
-        {/* LESSON NAV */}
         <UnitNav
           lessonName={currentLesson?.lessonName}
           openSideBar={openSideBar}
           sideBarOpen={sideBarOpen}
         />
-        {/* LESSON VIDEO */}
         <VideoSection />
-        {/* LESSON RESOURCES */}
         <div className="border-none border-slate-400 rounded-lg w-full">
           <Outlet
             context={{

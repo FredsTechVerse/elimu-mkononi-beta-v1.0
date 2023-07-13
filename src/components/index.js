@@ -28,7 +28,13 @@ import {
   CourseCardV2,
 } from "./Cards";
 
-import { BarChart, LineChart, PieChart, ComparisonChart } from "./Charts";
+import {
+  BarChart,
+  LineChart,
+  PieChart,
+  ComparisonChart,
+  DoughnutChart,
+} from "./Charts";
 
 import {
   RegistrationForm,
@@ -93,7 +99,15 @@ import {
   Layout,
 } from "./Sections";
 
-import { VideoSkeleton, UnitSkeleton, CourseSkeleton } from "./Skeletons";
+import {
+  VideoSkeleton,
+  UnitSkeleton,
+  CourseSkeleton,
+  AccordionSkeleton,
+  TableSkeleton,
+  TableAlternativeSkeleton,
+  ContentSectionSkeleton,
+} from "./Skeletons";
 
 import { PaymentsTable, UnitsAdminTable, UsersDataTable } from "./Tables";
 
@@ -173,6 +187,7 @@ export {
   PieChart,
   BarChart,
   LineChart,
+  DoughnutChart,
   UserCard,
   CourseOverview,
   UnitSkeleton,
@@ -183,4 +198,8 @@ export {
   Tooltip,
   TestBox,
   CourseCardV2,
+  AccordionSkeleton,
+  TableSkeleton,
+  TableAlternativeSkeleton,
+  ContentSectionSkeleton,
 };
