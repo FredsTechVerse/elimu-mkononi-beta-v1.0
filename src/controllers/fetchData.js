@@ -1,5 +1,4 @@
 import axios from "../axios";
-import { handleLogout } from "../controllers/handleLogout";
 const accessToken = localStorage.getItem("accessToken");
 
 const fetchCoursesData = async () => {

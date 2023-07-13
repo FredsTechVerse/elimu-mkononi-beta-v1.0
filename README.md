@@ -45,6 +45,8 @@ There are only three major aspects to it:-
 
 ### KEY THINGS I HAVE LEARNT.
 
+- Router state has always been simply an object... You know that basic container with a key and a value which in my case was as simple as assigning a background `{ background: location }` and once present in the state activating the second set of routes.
+
 - Finishing takes a great deal of courgage..... I am terrified of fixing the last bit of the puzzle into place.... Video streaming with the youtube data api.
 
 - **_react hooks are asynchronous nature. Use them sparingly. They can take time to update no wonder the null console.log on useState_**

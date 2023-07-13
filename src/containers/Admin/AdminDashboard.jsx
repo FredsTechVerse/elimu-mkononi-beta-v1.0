@@ -4,6 +4,7 @@ import {
   DashboardUserButton,
   NavPageBtn,
   UserProfile,
+  AddBtn,
 } from "../../components";
 import { Square3Stack3DIcon } from "@heroicons/react/24/solid";
 const AdminDashboard = () => {
@@ -25,18 +26,10 @@ const AdminDashboard = () => {
           </div>
 
           <div className="hidden w-full tablet:flex tablet:w-1/3 flex-col justify-evenly  rounded-xl h-full gap-2 p-2">
-            <div className="h-full w-full flex-row-centered text-white rounded-lg bg-primary rounded-ms">
-              View Students
-            </div>
-            <div className="h-full w-full flex-row-centered text-white rounded-lg bg-primary rounded-ms">
-              View Tutors
-            </div>
-            <div className="h-full w-full flex-row-centered text-white rounded-lg bg-primary rounded-ms">
-              View Course
-            </div>
-            <div className="h-full w-full flex-row-centered text-white rounded-lg bg-primary rounded-ms">
-              View Admins
-            </div>
+            <NavPageBtn page="students" />
+            <NavPageBtn page="tutors" />
+            <NavPageBtn page="admins" />
+            <NavPageBtn page="courses" />
           </div>
         </div>
         <div className="phone:hidden phone:col-span-1 phone:row-span-2  tablet:row-start-2 tablet:col-start-1 tablet:col-span-2 laptop:col-start-3 laptop:row-start-1 laptop:col-span-1 laptop:row-span-3 ">
@@ -55,22 +48,17 @@ const AdminDashboard = () => {
             Quick Actions
           </h1>
 
-          <div className=" phone:hidden tablet:grid gap-1 laptop:gap-5 p-5 aspect-video  tablet:grid-cols-2 laptop:grid-cols-3 place-item-center  w-full">
-            <DashboardUserButton user="tutor" />
-            <DashboardUserButton user="student" />
-            <DashboardUserButton user="admin" />
-            <DashboardUserButton user="course" />
-            <DashboardUserButton user="unit" />
-            <DashboardUserButton user="chapter" />
-            <DashboardUserButton user="lesson" />
-            <DashboardUserButton user="resource" />
-            <DashboardUserButton user="information" />
+          <div className=" phone:hidden tablet:grid gap-1 laptop:gap-5 p-5 aspect-video  tablet:grid-cols-2  place-item-center  w-full">
+            <AddBtn users="students" user="student" />
+            <AddBtn users="tutors" user="tutor" />
+            <AddBtn users="admins" user="admin" />
+            <AddBtn users="courses" user="course" />
           </div>
-          <div className=" phone:grid tablet:hidden gap-1 laptop:gap-5 p-5 aspect-video grid phone:grid-cols-3 tablet:grid-cols-2 laptop:grid-cols-3 place-item-center w-full">
-            <NavPageBtn page="students" />
-            <NavPageBtn page="tutors" />
-            <NavPageBtn page="admins" />
-            <NavPageBtn page="courses" />
+          <div className=" phone:grid tablet:hidden gap-1 laptop:gap-5 p-5 aspect-video grid phone:grid-cols-3 tablet:grid-cols-2 place-item-center w-full">
+            <AddBtn users="students" user="student" />
+            <AddBtn users="tutors" user="tutor" />
+            <AddBtn users="admins" user="admin" />
+            <AddBtn users="courses" user="course" />
           </div>
         </div>
       </div>

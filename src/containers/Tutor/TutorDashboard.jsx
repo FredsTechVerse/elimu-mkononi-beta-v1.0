@@ -58,15 +58,6 @@ const TutorDashboard = () => {
           tutorData.units.map((unit, index) => {
             return <TutorCardHome key={`unit-${index}`} unit={unit} />;
           })}
-        <h1 className="text-slate-900 font-bold text-lg uppercase w-full h-12 phone:flex-row-centered tablet:hidden ">
-          Quick Actions
-        </h1>
-        <div className=" phone:grid tablet:hidden gap-1 laptop:gap-5 p-5 aspect-video grid phone:grid-cols-3 tablet:grid-cols-2 laptop:grid-cols-3 place-item-center w-full">
-          <NavPageBtn page="students" />
-          <NavPageBtn page="tutors" />
-          <NavPageBtn page="admins" />
-          <NavPageBtn page="courses" />
-        </div>
       </div>
     </div>
   );

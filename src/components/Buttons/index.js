@@ -10,7 +10,9 @@ import HomeBtn from "./HomeBtn";
 import MenuBtn from "./MenuBtn";
 import BackBtn from "./BackBtn";
 import NavPageBtn from "./NavPageBtn";
+import AddBtn from "./AddBtn";
 export {
+  AddBtn,
   SubmitButton,
   LoadingBtn,
   AdminNavItem,

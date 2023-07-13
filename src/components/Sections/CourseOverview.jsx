@@ -7,7 +7,7 @@ import {
   PageTitle,
   BackBtn,
 } from "../../components";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchCourseData } from "../../controllers/fetchData";
 import { handleError } from "../../controllers/handleErrors";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
@@ -15,6 +15,7 @@ const CourseOverview = () => {
   const { courseID } = useParams();
   const { updateAlertBoxData } = useAlertBoxContext();
   const roles = JSON.parse(localStorage.getItem("roles"));
+  const queryClient = useQueryClient();
 
   const courseQuery = useQuery(
     ["courseData", courseID],
@@ -22,6 +23,9 @@ const CourseOverview = () => {
     {
       onError: (error) => {
         handleError(error, updateAlertBoxData);
+        // Once any error occur it would be nice to trigger a refetch
+        // queryClient.invalidateQueries("courseData");
+        // courseQuery.refetch();
       },
     }
   );

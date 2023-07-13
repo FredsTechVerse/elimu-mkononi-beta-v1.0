@@ -1,4 +1,5 @@
 import {
+  AddBtn,
   SubmitButton,
   LoadingBtn,
   LogoutBtn,
@@ -99,6 +100,7 @@ import { PaymentsTable, UnitsAdminTable, UsersDataTable } from "./Tables";
 import { PriceTag, DurationTag } from "./Tags";
 
 export {
+  AddBtn,
   LogInForm,
   HomePageCard,
   CourseCard,

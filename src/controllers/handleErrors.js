@@ -56,8 +56,6 @@ const handleError = (error, updateAlertBoxData) => {
   } else {
     response = ERRORS.SERVER_ERROR;
   }
-
-  console.log("Tushafika mwisho");
   updateAlertBoxData({
     response: response,
     isResponse: true,
