@@ -5,36 +5,35 @@ import {
   DashboardUserButton,
   NavPageBtn,
   DoughnutChart,
+  PieChart,
 } from "../../components";
 import { useOutletContext } from "react-router-dom";
 
 const AdminDashboard = () => {
   const tutorData = useOutletContext();
   return (
-    <div className="w-full pt-2 h-full grid phone:grid-cols-1 tablet:grid-cols-3 laptop:grid-cols-4 gap-5 ">
-      <div className="col-span-1 row-span-2 tablet:row-span-1 h-full  rounded-xl">
-        <div className="phone:hidden tablet:flex flex-col items-start justify-center phone:col-span-1 phone:row-span-2  tablet:row-start-2 tablet:col-start-1 tablet:col-span-2 laptop:col-start-3 laptop:row-start-1 laptop:col-span-1 laptop:row-span-3 ">
-          <UserProfile />
-          <div className="controls w-full h-full flex-col-centered gap-2 bg-slate-200">
-            <div className="h-12 w-full flex-row-centered text-white rounded-lg bg-primary rounded-ms">
-              View Students
-            </div>
-            <div className="h-12 w-full flex-row-centered text-white rounded-lg bg-primary rounded-ms">
-              View Tutors
-            </div>
-            <div className="h-12 w-full flex-row-centered text-white rounded-lg bg-primary rounded-ms">
-              View Course
-            </div>
-            <div className="h-12 w-full flex-row-centered text-white rounded-lg bg-primary rounded-ms">
-              View Admins
-            </div>
+    <div className="h-screen w-full py-2 flex p-1 ">
+      <div className="w-1/4 flex flex-col h-full justify-between p-2">
+        <UserProfile />
+        <div className="controls w-full h-full flex-col-centered gap-2 ">
+          <div className="h-12 w-full flex-row-centered text-white rounded-lg bg-primary rounded-ms">
+            View Students
+          </div>
+          <div className="h-12 w-full flex-row-centered text-white rounded-lg bg-primary rounded-ms">
+            View Tutors
+          </div>
+          <div className="h-12 w-full flex-row-centered text-white rounded-lg bg-primary rounded-ms">
+            View Course
+          </div>
+          <div className="h-12 w-full flex-row-centered text-white rounded-lg bg-primary rounded-ms">
+            View Admins
           </div>
         </div>
       </div>
-      <div className="h-full overflow-auto grid col-span-1 tablet:col-span-2 laptop:col-span-3 tablet:grid-cols-2 laptop:grid-cols-3 gap-4">
-        <div className="greetings col-start-1 col-span-1 tablet:col-span-2 laptop:col-span-3 row-span-1  flex-row-centered rounded-xl h-48 flex">
-          <div className="w-full tablet:w-2/3 h-full bg-slate-400 text-white rounded-xl flex-col-centered">
-            <h1 className=" font-bold text-lg uppercase w-full h-12 flex-row-centered ">
+      <div className="w-3/4  flex flex-col justify-start gap- h-full overflow-auto ">
+        <div className="w-full flex flex-row justify-between items-center   gap-5">
+          <div className="w-2/3 bg-slate-300 rounded-xl h-40 flex-col-centered ">
+            <h1 className="font-bold text-lg uppercase w-full h-12 flex-row-centered ">
               GREETINGS
             </h1>
             <p className="text-center text-lg px-4">
@@ -42,39 +41,49 @@ const AdminDashboard = () => {
               Delectus, sint.
             </p>
           </div>
+          <div className="h-full w-1/3 flex-col-centered gap-1 rounded-lg bg-slate-300 "></div>
+        </div>
+        <div className="flex w-full gap-5">
+          <div className="w-2/3 flex flex-col gap-2 ">
+            <div className="w-full flex justify-evenly ">
+              <div className="w-1/2 gap-5 border-blue-400 flex-col-centered p-2">
+                <div className="col-span-1 row-span-1">
+                  <DoughnutChart />
+                </div>
+                <div className="w-full rounded-lg h-16 bg-slate-300"></div>
+              </div>
+              <div className="w-1/2 gap-5 border-blue-400 flex-col-centered p-2">
+                <div className="col-span-1 row-span-1">
+                  <DoughnutChart />
+                </div>
+                <div className="w-full rounded-lg h-16 bg-slate-300"></div>
+              </div>
+            </div>
 
-          <div className=" phone:hidden phone:col-span-1 tablet:flex tablet:w-1/3 flex-col justify-evenly  rounded-xl h-full gap-2 m-2 bg-slate-400"></div>
-        </div>
-        <div className="flex-row-centered gap-5 col-span-1">
-          <DoughnutChart />
-          <div className="h-24 bg-slate-300"></div>
-        </div>
-        <div className="flex-row-centered gap-5 col-span-1 ">
-          <DoughnutChart />
-          <div className="h-24 bg-slate-300"></div>
-        </div>
-        <div className="flex-col-centered gap-2 col-span-1  rounded-lg p-8 ">
-          <h1 className="text-slate-900 font-bold text-lg text-center capitalize mt-3 w-full h-12 flex-row-centered  ">
-            Quick Access Controls
-          </h1>
-          <div className=" gap-1 laptop:gap-3 p-2 aspect-video grid tablet:grid-cols-2 place-item-center h-full w-full">
-            <DashboardUserButton user="chapter" />
-            <DashboardUserButton user="lesson" />
-            <DashboardUserButton user="resource" />
-            <DashboardUserButton user="information" />
+            <div className="graph aspect-video bg-slate-200 rounded-xl"></div>
+          </div>
+          <div className="w-1/3 ">
+            <div className="flex flex-col justify-evenly items-center gap-5 py-5 ">
+              <div className="h-1/3">
+                <PieChart />
+              </div>
+              <div className="w-full   bg-slate-300 rounded-lg h-64"></div>
+              <div className="w-full h-1/3  flex-col-centered gap-1 rounded-lg  ">
+                <h1 className="text-slate-900 font-bold text-lg text-center capitalize mt-3 w-full h-12 flex-row-centered  ">
+                  Quick Access Controls
+                </h1>
+                <div className="gap-2 p-2 grid grid-cols-2  h-full w-full">
+                  <DashboardUserButton user="chapter" />
+                  <DashboardUserButton user="lesson" />
+                  <DashboardUserButton user="resource" />
+                  <DashboardUserButton user="information" />
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-slate-300 rounded-xl"></div>
           </div>
         </div>
-
-        <div className="h-full col-span-2 debug "></div>
-        <div className="flex-col-centered  gap-5 p-2 col-span-1">
-          <DoughnutChart />
-          <div className="w-full h-52 bg-slate-300 rounded-lg"></div>
-        </div>
-
-        {/* {tutorData &&
-          tutorData.units.map((unit, index) => {
-            return <TutorCardHome key={`unit-${index}`} unit={unit} />;
-          })} */}
       </div>
     </div>
   );
