@@ -3,7 +3,7 @@ import { UnitCard } from "../../components";
 const TutorUnitsPage = () => {
   return (
     <div className="w-full relative h-full flex flex-col ">
-      <header className="bg-slate-400 h-[300px] relative flex items-center justify-center">
+      <header className="bg-slate-300 h-[300px] relative flex items-center justify-center">
         <h1 className="text-white font-bold text-center text-4xl uppercase">
           DISCRETE MATHEMATICS
         </h1>

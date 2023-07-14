@@ -74,6 +74,14 @@ handleError(error, updateAlertBoxData);
 
 5. We are set to go `<Doughnut data={chartJsData} options={options}  />`
 
+- Use the sandbox to fetch any chart source code that you would like to use eg
+  [LineChart](https://codesandbox.io/s/github/reactchartjs/react-chartjs-2/tree/master/sandboxes/line/default?from-embed=&file=/App.tsx:36-148)
+
+  - [DoughnutChart](https://codesandbox.io/s/github/reactchartjs/react-chartjs-2/tree/master/sandboxes/doughnut/default?from-embed=&file=/App.tsx:217-242)
+  - [BarChart]{https://codesandbox.io/s/github/reactchartjs/react-chartjs-2/tree/master/sandboxes/bar/vertical?from-embed=&file=/App.tsx:613-975}
+
+  - The area chart differs from the line chart in that it has a filler component.
+
 - Here is an example of the options and chartData objects that you will ever need :-
   const options = {
   borderRadius: 10,

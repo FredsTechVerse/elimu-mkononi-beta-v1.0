@@ -30,7 +30,7 @@ const DoughnutChart = () => {
     },
   };
   return (
-    <div className="h-60 aspect-square flex-row-centered relative ">
+    <div className="h-48 laptop:h-60 aspect-square flex-row-centered relative ">
       <Pie data={chartData} options={options}></Pie>
       <div className="absolute flex-col-centered">
         <div className="font-extralight text-xs">Total Users</div>

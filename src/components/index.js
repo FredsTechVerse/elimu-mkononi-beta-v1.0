@@ -32,8 +32,9 @@ import {
   BarChart,
   LineChart,
   PieChart,
-  ComparisonChart,
   DoughnutChart,
+  AreaChart,
+  MultiLineChart,
 } from "./Charts";
 
 import {
@@ -183,10 +184,11 @@ export {
   ReactPdf,
   S3Uploader,
   YoutubeUploader,
-  ComparisonChart,
   PieChart,
   BarChart,
   LineChart,
+  AreaChart,
+  MultiLineChart,
   DoughnutChart,
   UserCard,
   CourseOverview,
