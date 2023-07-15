@@ -6,6 +6,7 @@ import { QuillEditorSkeleton } from "../../components";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { fetchLessonNotes } from "../../controllers/fetchData";
 import { createNotes, updateNotes } from "../../controllers/postData";
+import { handleError } from "../../controllers/handleErrors";
 import "react-quill/dist/quill.snow.css";
 
 const QuillEditor = () => {
@@ -38,15 +39,16 @@ const QuillEditor = () => {
       retry: 1,
       onError: (error) => {
         handleError(error, updateAlertBoxData);
-        queryClient.invalidateQueries(["notes", currentLesson?.lessonNotes]);
+        // queryClient.invalidateQueries(["notes"]);
       },
-      onSuccess: (data) => {
-        if (data) {
-          setOriginalContent(data);
-          setNewContent(data);
+      onSuccess: (savedNotes) => {
+        console.log(savedNotes);
+        if (savedNotes) {
+          setOriginalContent(savedNotes);
+          setNewContent(savedNotes);
+          setContent(savedNotes);
           setAreNotesPresent(false);
         }
-        setContent("No notes are present");
         setAreNotesPresent(false);
       },
     }
@@ -56,7 +58,7 @@ const QuillEditor = () => {
     mutationFn: createNotes,
     onSuccess: (data) => {
       queryClient.setQueryData(["notes", data._id], data);
-      queryClient.invalckidateQueries(["notes"], { exact: true });
+      queryClient.invalidateQueries(["notes"], { exact: true });
       updateAlertBoxData({
         response: "Lesson Notes have been saved",
         isResponse: true,
@@ -66,10 +68,10 @@ const QuillEditor = () => {
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
-      createNotesMutation.mutate({
-        lessonNotes: content,
-        lessonID: currentLesson?._id,
-      });
+      // createNotesMutation.mutate({
+      //   lessonNotes: content,
+      //   lessonID: currentLesson?._id,
+      // });
     },
   });
 
@@ -88,16 +90,17 @@ const QuillEditor = () => {
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
-      updateNotesMutation.mutate({
-        lessonNotes: content,
-        notesID: currentLesson?.lessonNotes,
-      });
+      // updateNotesMutation.mutate({
+      //   lessonNotes: content,
+      //   notesID: currentLesson?.lessonNotes,
+      // });
     },
   });
 
   const handleChange = useCallback((editorContent) => {
+    console.log(editorContent);
+    setContent(editorContent);
     setNewContent(editorContent);
-    setContent(newContent);
   }, []);
   const enableEdit = () => {
     setIsEditorEnabled(true);
@@ -107,20 +110,20 @@ const QuillEditor = () => {
   };
 
   const handleSave = () => {
+    disableEdit();
+
+    console.log(`Content while saving data ${JSON.stringify(content)}`);
     if (areNotesPresent) {
-      disableEdit();
       updateNotesMutation.mutate({
         lessonNotes: content,
         notesID: currentLesson?.lessonNotes,
       });
       return;
     }
-    handleNotesCreation(content, currentLesson?._id);
     createNotesMutation.mutate({
       lessonNotes: content,
       lessonID: currentLesson?._id,
     });
-    disableEdit();
     return;
   };
 
@@ -142,25 +145,33 @@ const QuillEditor = () => {
   return (
     <div className="w-full flex flex-col p-2 border-none ">
       <div id="unit content" className="mt-3">
-        {notesQuery.status === "loading" ? (
+        {currentLesson.lessonNotes && notesQuery.status === "loading" && (
           <QuillEditorSkeleton />
-        ) : notesQuery.status === "error" ? (
+        )}
+        {currentLesson.lessonNotes && notesQuery.status === "error" && (
           <p className="bg-red-300 rounded-lg p-4">
             {JSON.stringify(notesQuery.error.message)}
           </p>
-        ) : (notesQuery.status === "success" && roles?.includes("EM-202")) ||
-          roles?.includes("EM-203") ? (
-          <ReactQuill
-            value={content}
-            readOnly={!isEditorEnabled}
-            onChange={handleChange}
-            modules={quillModules}
-          />
-        ) : (
-          <div
-            dangerouslySetInnerHTML={{ __html: content }}
-            className="text-start"
-          />
+        )}
+        {(currentLesson.lessonNotes &&
+          notesQuery.status === "success" &&
+          roles?.includes("EM-202")) ||
+          (roles?.includes("EM-203") ? (
+            <ReactQuill
+              value={content}
+              readOnly={!isEditorEnabled}
+              onChange={handleChange}
+              modules={quillModules}
+            />
+          ) : (
+            <div
+              dangerouslySetInnerHTML={{ __html: content }}
+              className="text-start"
+            />
+          ))}
+
+        {!currentLesson.lessonNotes && (
+          <p className="bg-cyan-300 rounded-lg p-4">Notes are not present</p>
         )}
       </div>
 

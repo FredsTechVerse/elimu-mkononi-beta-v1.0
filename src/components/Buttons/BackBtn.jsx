@@ -11,6 +11,7 @@ const BackBtn = ({ isDark }) => {
           : "hover:border-white"
       } cursor-pointer rounded-full flex-row-centered hover:border-2  `}
       onClick={() => {
+        console.log("Back btn clicked");
         navigate(-1);
       }}
     >

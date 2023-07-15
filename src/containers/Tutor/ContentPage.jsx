@@ -6,39 +6,32 @@ import {
   ContentSectionSkeleton,
 } from "../../components";
 import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchUnitData } from "../../controllers/fetchData";
-import { useCurrentLessonContext } from "../../context/currentLessonContext";
+import { useAlertBoxContext } from "../../context/AlertBoxContext";
+import { handleError } from "../../controllers/handleErrors";
 const ContentPage = () => {
   const { unitID } = useParams();
-  const { currentLesson } = useCurrentLessonContext();
-
-  const [lessonType, setLessonType] = useState(null);
+  const { updateAlertBoxData } = useAlertBoxContext();
+  const queryClient = useQueryClient();
   const [sideBarOpen, setSideBarOpen] = useState(false);
-  useEffect(() => {
-    if (currentLesson !== null) {
-      identifyAndUpdateLessonType(currentLesson?.lessonUrl);
-    }
-  }, [currentLesson]);
 
-  const unitDataQuery = useQuery({
-    queryKey: ["unitData", unitID],
-    queryFn: () => fetchUnitData(unitID),
-  });
+  const unitDataQuery = useQuery(
+    ["unitData", unitID],
+    () => fetchUnitData(unitID),
+    {
+      retry: 1,
+      onError: (error) => {
+        handleError(error, updateAlertBoxData);
+      },
+    }
+  );
 
   const openSideBar = () => {
     setSideBarOpen(true);
   };
   const closeSideBar = () => {
     setSideBarOpen(false);
-  };
-
-  const identifyAndUpdateLessonType = (lessonUrl) => {
-    if (lessonUrl) {
-      const lessonType = lessonUrl.split(".")[1];
-      setLessonType(lessonType);
-      return lessonType;
-    }
   };
 
   if (unitDataQuery.status === "loading") {
@@ -83,7 +76,6 @@ const ContentPage = () => {
 
       <article className="w-full laptop:col-span-3 tablet:col-span-2 h-full overflow-y-auto flex  flex-col  ">
         <ContentSection
-          lessonType={lessonType}
           unitData={unitDataQuery.data}
           sideBarOpen={sideBarOpen}
           openSideBar={openSideBar}

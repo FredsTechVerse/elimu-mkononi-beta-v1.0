@@ -7,6 +7,8 @@ const ERRORS = {
   BLANK_ERROR: "The resource / user does not exist",
   DUPLICATION_ERROR: "This document already exists!",
   INVALID_TOKEN: "Your token is invalid!",
+  INVALID_ID: " The resource identity is invalid!",
+  BAD_REQUEST: "Bad request sent to server ",
 };
 
 const renewToken = async () => {
@@ -41,7 +43,7 @@ const renewToken = async () => {
 const handleError = (error, updateAlertBoxData) => {
   let response = "No response has been specified";
   if (error.response && error.response.status === 400) {
-    response = ERRORS.AUTHORIZATION_ERROR;
+    response = ERRORS.BAD_REQUEST;
   } else if (error.response && error.response.status === 401) {
     if (error.response.data.message === "Token expired") {
       renewToken();
@@ -56,6 +58,8 @@ const handleError = (error, updateAlertBoxData) => {
     response = ERRORS.BLANK_ERROR;
   } else if (error.response && error.response.status === 409) {
     response = ERRORS.DUPLICATION_ERROR;
+  } else if (error.response && error.response.status === 422) {
+    response = ERRORS.INVALID_ID;
   } else if (error.message === "Network Error") {
     response = ERRORS.NETWORK_ERROR;
   } else {

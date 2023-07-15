@@ -22,7 +22,7 @@ const UnitForm = () => {
     mutationFn: createUnit,
     onSuccess: (data) => {
       queryClient.setQueryData(["units", data._id], data);
-      queryClient.invalidateQueries(["units"], { exact: true });
+      queryClient.invalidateQueries(["courseData"]);
       updateAlertBoxData({
         response: "Unit saved successfully",
         isResponse: true,

@@ -70,7 +70,7 @@ const AccordionItem = ({
         className=" h-0 overflow-hidden transition-all ease-in-out duration-500 flex flex-col  px-2 "
         style={
           active
-            ? { height: contentEl.current.scrollHeight }
+            ? { height: contentEl?.current?.scrollHeight }
             : { height: "0px" }
         }
       >

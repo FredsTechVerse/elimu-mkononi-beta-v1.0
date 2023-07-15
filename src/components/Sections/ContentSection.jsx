@@ -4,16 +4,11 @@ import { VideoSection, UnitNav, MenuBtn } from "../../components";
 import { UnitOverview } from "../../containers";
 import { Outlet } from "react-router-dom";
 import { useCurrentLessonContext } from "../../context/currentLessonContext";
-const ContentSection = ({
-  unitData,
-  lessonType,
-  openSideBar,
-  sideBarOpen,
-  unitID,
-}) => {
+const ContentSection = ({ unitData, openSideBar, sideBarOpen, unitID }) => {
   const { currentLesson } = useCurrentLessonContext();
 
-  if (lessonType === "mp4") {
+  console.log(currentLesson?.videoKind);
+  if (currentLesson.videoKind === "youtube#video") {
     return (
       <div className="w-full px-1">
         <UnitNav

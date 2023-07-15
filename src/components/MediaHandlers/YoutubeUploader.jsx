@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Dropzone from "react-dropzone";
-import axios from "../../axios";
+import axios, { youtubeInstance } from "../../axios";
 import { CircularProgressBar } from "../../components";
 import { handleError } from "../../controllers/handleErrors";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
@@ -9,7 +9,7 @@ const YoutubeUploader = ({ verifyUpload, updateFileInfo, videoTitle }) => {
   const { updateAlertBoxData } = useAlertBoxContext();
   const [percentCompleted, setPercentCompleted] = useState(0);
   const videoUploadUrl = import.meta.env.VITE_VIDEO_UPLOAD_LINK;
-  const videoDescription = "video description 1";
+  const videoDescription = "Youtube is the new red university!";
   const trackUploadProgress = (progressEvent) => {
     const percentCompleted = Math.round(
       (progressEvent.loaded * 100) / progressEvent.total
@@ -34,11 +34,6 @@ const YoutubeUploader = ({ verifyUpload, updateFileInfo, videoTitle }) => {
     }
   };
 
-  const fetchAccessToken = () => {
-    const accessToken = localStorage.getItem("youtubeAccessToken");
-    return accessToken;
-  };
-
   const redirectToExternalLink = (externalLink) => {
     window.open(externalLink, "_self");
   };
@@ -48,7 +43,7 @@ const YoutubeUploader = ({ verifyUpload, updateFileInfo, videoTitle }) => {
       // The acceptedFiles is a cabinet box containing our files all arranged in order from first to last.
       const videoFile = acceptedFiles[0];
       const { type: videoType } = videoFile;
-      const accessToken = fetchAccessToken();
+      const accessToken = localStorage.getItem("youtubeAccessToken");
       if (!accessToken) {
         const authorizationUri = await authorizeUser();
         localStorage.setItem("previousLocation", window.location.pathname);
@@ -69,7 +64,7 @@ const YoutubeUploader = ({ verifyUpload, updateFileInfo, videoTitle }) => {
         },
       };
 
-      const response = await axios.post(videoUploadUrl, metadata, {
+      const response = await youtubeInstance.post(videoUploadUrl, metadata, {
         headers: headers,
         params: {
           uploadType: "resumable",
@@ -81,12 +76,16 @@ const YoutubeUploader = ({ verifyUpload, updateFileInfo, videoTitle }) => {
       const presignedUrl = response.headers.location;
 
       // Upload the video file using a PUT request
-      const { data: videoData } = await axios.put(presignedUrl, videoFile, {
-        headers: {
-          "Content-Type": videoType,
-        },
-        onUploadProgress: trackUploadProgress,
-      });
+      const { data: videoData } = await youtubeInstance.put(
+        presignedUrl,
+        videoFile,
+        {
+          headers: {
+            "Content-Type": videoType,
+          },
+          onUploadProgress: trackUploadProgress,
+        }
+      );
       const { id: videoID, kind: videoKind } = videoData;
       console.log(`The video id of the uploaded video ${videoID}`);
       const videoUrl = `https://www.youtube.com/watch?v=${videoID}`;

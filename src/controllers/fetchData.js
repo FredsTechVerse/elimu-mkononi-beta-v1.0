@@ -17,8 +17,11 @@ const fetchCourseData = async (courseID) => {
 };
 
 const fetchLessonNotes = async (notesID) => {
-  const { data: notesData } = await axios.get(`notes/${notesID}`);
-  return notesData.content;
+  if (notesID) {
+    const { data: notesData } = await axios.get(`notes/${notesID}`);
+    return notesData.content;
+  }
+  return null;
 };
 
 const fetchUserDetails = async (role) => {

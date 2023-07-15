@@ -89,6 +89,10 @@ const createLesson = async ({
     lessonUrl,
   };
 
+  console.log(
+    `Lesson data to be passed to server ${JSON.stringify(lessonData)}`
+  );
+
   const config = {
     headers: { "Content-Type": "application/json" },
   };
@@ -140,16 +144,16 @@ const createCourse = async ({ courseTitle, courseImage }) => {
   return createdCourse;
 };
 
-const createNotes = async (content, lessonID) => {
+const createNotes = async ({ lessonNotes, lessonID }) => {
   const config = {
     headers: { "Content-Type": "application/json" },
   };
 
   const notesData = {
-    lessonNotes: content,
+    lessonNotes: lessonNotes,
     lessonID: lessonID,
   };
-  console.log(`Notes creation operation to ${JSON.stringify(notesData)}`);
+  console.log(`Notes creation operation set to ${JSON.stringify(notesData)}`);
   const { data: createdNotes } = await axios.post(
     "/notes/newNotes",
     notesData,
@@ -158,13 +162,13 @@ const createNotes = async (content, lessonID) => {
   return createdNotes;
 };
 
-const updateNotes = async (content, notesID) => {
+const updateNotes = async ({ lessonNotes, notesID }) => {
   const config = {
     headers: { "Content-Type": "application/json" },
   };
 
   const notesData = {
-    lessonNotes: content,
+    lessonNotes: lessonNotes,
     notesID: notesID,
   };
 
