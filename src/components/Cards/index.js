@@ -4,7 +4,6 @@ import TeamCard from "./TeamCard";
 import TutorCard from "./TutorCard";
 import UnitCard from "./UnitCard";
 import AdminCard from "./AdminCard";
-import CourseCard from "./CourseCard";
 import UserCard from "./UserCard";
 import UsersTableAlternative from "./UsersTableAlternative";
 import CourseCardV2 from "./CourseCardV2";
@@ -16,7 +15,6 @@ export {
   TutorCard,
   UnitCard,
   AdminCard,
-  CourseCard,
   UserCard,
   UsersTableAlternative,
   TestBox,

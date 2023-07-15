@@ -7,10 +7,12 @@ import {
   PresentationChartLineIcon,
 } from "@heroicons/react/24/solid";
 const CourseCardV2 = ({ courseID, courseImage, courseTitle }) => {
+  console.log(courseImage);
   return (
     <div className="group relative flex flex-col items-center w-full h-full bg-opacity-20  rounded-xl m-3 bg-slate-300 shadow-slate-300 shadow-lg ">
       <img
-        src={`https://us-central1-elearning-module-a887d.cloudfunctions.net/app/s3Direct/${courseImage}`}
+        // src={`https://us-central1-elearning-module-a887d.cloudfunctions.net/app/s3Direct/${courseImage}`}
+        src={`http://localhost:4000/s3Direct/${courseImage}`}
         alt="course image"
         className="bg-gray-300 w-full h-[220px] tablet:h-[180px] laptop:h-[220px]  rounded-t-xl object-cover  bg-cover bg-center"
       />

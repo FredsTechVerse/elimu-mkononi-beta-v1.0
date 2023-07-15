@@ -24,7 +24,7 @@ const UsersDataTable = ({ users, fetchUsersData, role }) => {
         />
       </div>
 
-      <table class="table-fixed w-full bg-slate-300 bg-opacity-10 shadow-lg shadow-slate-200">
+      <table className="table-fixed w-full bg-slate-300 bg-opacity-10 shadow-lg shadow-slate-200">
         <thead>
           <tr className="text-white uppercase bg-primary h-10 ">
             <th className=" w-12  ">No</th>

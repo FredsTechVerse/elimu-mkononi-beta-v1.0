@@ -24,8 +24,13 @@ const renewToken = async () => {
       body,
       config
     );
+    // UPDATES TOKEN HEADER
+    axios.defaults.headers.common[
+      "Authorization"
+    ] = `Bearer ${refreshTokenData.newAccessToken}`;
+
     localStorage.setItem("accessToken", refreshTokenData.newAccessToken);
-    window.location.reload();
+    console.log("Token has been renewed successfully");
   } catch (err) {
     console.log(
       `An error occured while renewing the access token ${JSON.stringify(err)}`

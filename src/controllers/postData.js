@@ -5,9 +5,12 @@ const loginUser = async ({ firstName, password }) => {
   const config = {
     headers: { "Content-Type": "application/json" },
   };
-  const { data } = await axios.post("/auth/login", credentials, config);
-  console.log(JSON.stringify(data));
-  return data;
+  const { data: authorizedUser } = await axios.post(
+    "/auth/login",
+    credentials,
+    config
+  );
+  return authorizedUser;
 };
 
 const createResource = async ({ resourceName, resourceUrl }) => {
@@ -15,13 +18,13 @@ const createResource = async ({ resourceName, resourceUrl }) => {
   const config = {
     headers: { "Content-Type": "application/json" },
   };
-  const { data } = await axios.post(
+  const { data: createdResource } = await axios.post(
     "/resources/new-resource",
     resourceData,
     config
   );
 
-  return data;
+  return createdResource;
 };
 const createChapter = async ({
   chapterNumber,
@@ -39,12 +42,12 @@ const createChapter = async ({
     headers: { "Content-Type": "application/json" },
   };
 
-  const { data } = await axios.post(
+  const { data: createdChapter } = await axios.post(
     "/chapter/new-chapter",
     chapterData,
     config
   );
-  return data;
+  return createdChapter;
 };
 
 const createUnit = async ({
@@ -66,30 +69,36 @@ const createUnit = async ({
     headers: { "Content-Type": "application/json" },
   };
 
-  const { data } = await axios.post("/unit/new-unit", unitData, config);
-  return data;
+  const { data: createdUnit } = await axios.post(
+    "/unit/new-unit",
+    unitData,
+    config
+  );
+  return createdUnit;
 };
 const createLesson = async ({
   lessonNumber,
   lessonName,
   lessonUrl,
   chapterID,
-  thumbnails,
 }) => {
   const lessonData = {
     chapterID,
     lessonNumber: `${chapterID}-${lessonNumber}`,
     lessonName,
     lessonUrl,
-    thumbnails,
   };
 
   const config = {
     headers: { "Content-Type": "application/json" },
   };
 
-  const { data } = await axios.post("/lesson/new-lesson", lessonData, config);
-  return data;
+  const { data: createdLesson } = await axios.post(
+    "/lesson/new-lesson",
+    lessonData,
+    config
+  );
+  return createdLesson;
 };
 const registerUser = async ({
   firstName,
@@ -101,16 +110,14 @@ const registerUser = async ({
 }) => {
   const userData = { firstName, surname, password, contact, email };
   if (role === "EM-203") {
-    let { data } = await axios.post("/auth/register-admin", userData);
-    return data;
+    await axios.post("/auth/register-admin", userData);
+    return;
   } else if (role === "EM-201") {
-    let { data } = await axios.post("/auth/register-student", userData);
-    console.log(`Student Data ${data}`);
-    return data;
+    await axios.post("/auth/register-student", userData);
+    return;
   } else if (role === "EM-202") {
-    let { data } = await axios.post("/auth/register-tutor", userData);
-    console.log(`Tutor Data ${data}`);
-    return data;
+    await axios.post("/auth/register-tutor", userData);
+    return;
   }
 };
 
@@ -123,8 +130,14 @@ const createCourse = async ({ courseTitle, courseImage }) => {
     headers: { "Content-Type": "application/json" },
   };
 
-  const { data } = await axios.post("course/new-course", courseData, config);
-  return data;
+  console.log(JSON.stringify(courseData));
+  const { data: createdCourse } = await axios.post(
+    "course/new-course",
+    courseData,
+    config
+  );
+
+  return createdCourse;
 };
 
 const createNotes = async (content, lessonID) => {
@@ -136,9 +149,13 @@ const createNotes = async (content, lessonID) => {
     lessonNotes: content,
     lessonID: lessonID,
   };
-
-  const { data } = await axios.post("/notes/newNotes", notesData, config);
-  return data;
+  console.log(`Notes creation operation to ${JSON.stringify(notesData)}`);
+  const { data: createdNotes } = await axios.post(
+    "/notes/newNotes",
+    notesData,
+    config
+  );
+  return createdNotes;
 };
 
 const updateNotes = async (content, notesID) => {
@@ -151,8 +168,14 @@ const updateNotes = async (content, notesID) => {
     notesID: notesID,
   };
 
-  const { data } = await axios.put("/notes/updateNotes", notesData, config);
-  return data;
+  console.log(`Notes update operation to  ${JSON.stringify(notesData)}`);
+
+  const { data: updatedNotes } = await axios.put(
+    "/notes/updateNotes",
+    notesData,
+    config
+  );
+  return updatedNotes;
 };
 
 export {

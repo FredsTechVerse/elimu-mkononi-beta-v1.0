@@ -1,9 +1,15 @@
 import React from "react";
-import { DoughnutChart } from "../components";
+import { CircularProgressBar, SpinnerIcon, SubmitButton } from "../components";
+
 const DraftPage = () => {
   return (
     <div className=" w-full">
-      <DoughnutChart />
+      <CircularProgressBar percentCompleted={100} />
+      <SubmitButton
+        type="submit"
+        isSubmitting={true}
+        text={"loading" === "loading" ? "Loggin in" : "Save"}
+      />
     </div>
   );
 };

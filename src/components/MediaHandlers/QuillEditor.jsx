@@ -1,10 +1,10 @@
 import ReactQuill from "react-quill";
 import React, { useState, useCallback, useEffect } from "react";
-import { useOutletContext } from "react-router-dom";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
-import { fetchLessonNotes } from "../../controllers/fetchData";
 import { useCurrentLessonContext } from "../../context/currentLessonContext";
+import { QuillEditorSkeleton } from "../../components";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
+import { fetchLessonNotes } from "../../controllers/fetchData";
 import { createNotes, updateNotes } from "../../controllers/postData";
 import "react-quill/dist/quill.snow.css";
 
@@ -13,23 +13,50 @@ const QuillEditor = () => {
   const queryClient = useQueryClient();
   const { currentLesson } = useCurrentLessonContext();
   const roles = JSON.parse(localStorage.getItem("roles"));
+
   //Quill Editor Config
-  const [readOnly, setReadOnly] = useState(true);
-  const [content, setContent] = useState(null);
-  const [originalContent, setOriginalContent] = useState(null);
+  const [content, setContent] = useState("");
+  const [newContent, setNewContent] = useState("");
+  const [originalContent, setOriginalContent] = useState("");
   const [isEditorEnabled, setIsEditorEnabled] = useState(false);
   const [areNotesPresent, setAreNotesPresent] = useState(false);
 
-  const notesQuery = useQuery({
-    queryKey: ["notes", currentLesson?.lessonNotes],
-    queryFn: () => fetchLessonNotes(currentLesson?.lessonNotes),
-  });
+  const quillModules = {
+    toolbar: [
+      [{ header: [1, 2, false] }],
+      ["bold", "italic", "underline", "strike"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      ["link"],
+      ["clean"],
+    ],
+  };
+
+  const notesQuery = useQuery(
+    ["notes", currentLesson?.lessonNotes],
+    () => fetchLessonNotes(currentLesson?.lessonNotes),
+    {
+      retry: 1,
+      onError: (error) => {
+        handleError(error, updateAlertBoxData);
+        queryClient.invalidateQueries(["notes", currentLesson?.lessonNotes]);
+      },
+      onSuccess: (data) => {
+        if (data) {
+          setOriginalContent(data);
+          setNewContent(data);
+          setAreNotesPresent(false);
+        }
+        setContent("No notes are present");
+        setAreNotesPresent(false);
+      },
+    }
+  );
 
   const createNotesMutation = useMutation({
     mutationFn: createNotes,
     onSuccess: (data) => {
       queryClient.setQueryData(["notes", data._id], data);
-      queryClient.invalidateQueries(["notes"], { exact: true });
+      queryClient.invalckidateQueries(["notes"], { exact: true });
       updateAlertBoxData({
         response: "Lesson Notes have been saved",
         isResponse: true,
@@ -39,6 +66,10 @@ const QuillEditor = () => {
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
+      createNotesMutation.mutate({
+        lessonNotes: content,
+        lessonID: currentLesson?._id,
+      });
     },
   });
 
@@ -47,8 +78,9 @@ const QuillEditor = () => {
     onSuccess: (data) => {
       queryClient.setQueryData(["notes", data._id], data);
       queryClient.invalidateQueries(["notes"], { exact: true });
+      console.log(`Updated notes ${JSON.stringify(data)}`);
       updateAlertBoxData({
-        response: "Lesson Notes have been updated",
+        response: "Lesson Notes updated succesfully!",
         isResponse: true,
         status: "success",
         timeout: 2500,
@@ -56,42 +88,23 @@ const QuillEditor = () => {
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
+      updateNotesMutation.mutate({
+        lessonNotes: content,
+        notesID: currentLesson?.lessonNotes,
+      });
     },
   });
 
-  let quillModules = {};
-
-  if (roles?.includes("EM-202") || roles?.includes("EM-203")) {
-    // Tutor-specific modules
-    quillModules = {
-      toolbar: [
-        [{ header: [1, 2, false] }],
-        ["bold", "italic", "underline", "strike"],
-        [{ list: "ordered" }, { list: "bullet" }],
-        ["link"],
-        ["clean"],
-      ],
-    };
-  } else {
-    // Student-specific modules (hide toolbar)
-    quillModules = {
-      toolbar: false,
-    };
-  }
-
+  const handleChange = useCallback((editorContent) => {
+    setNewContent(editorContent);
+    setContent(newContent);
+  }, []);
   const enableEdit = () => {
-    setOriginalContent(content); // Store the original content
-    setReadOnly(false);
     setIsEditorEnabled(true);
   };
   const disableEdit = () => {
-    setReadOnly(true);
     setIsEditorEnabled(false);
   };
-
-  const handleChange = useCallback((editorContent) => {
-    setContent(editorContent);
-  }, []);
 
   const handleSave = () => {
     if (areNotesPresent) {
@@ -117,24 +130,26 @@ const QuillEditor = () => {
   };
 
   useEffect(() => {
-    console.log("Notes changing is refreshing well!");
     if (currentLesson !== null) {
       if (currentLesson?.lessonNotes) {
         setIsEditorEnabled(false);
-        setAreNotesPresent(true);
-        notesQuery.refetch();
       } else {
+        console.log(`There are no notes since i cannot find a notes ID`);
         setIsEditorEnabled(false);
-        setAreNotesPresent(false);
-        setOriginalContent(""); // Clear the original content when creating new notes
-        setContent(""); // Clear the content when creating new notes
       }
     }
   }, [currentLesson]);
   return (
     <div className="w-full flex flex-col p-2 border-none ">
       <div id="unit content" className="mt-3">
-        {roles?.includes("EM-202") || roles?.includes("EM-203") ? (
+        {notesQuery.status === "loading" ? (
+          <QuillEditorSkeleton />
+        ) : notesQuery.status === "error" ? (
+          <p className="bg-red-300 rounded-lg p-4">
+            {JSON.stringify(notesQuery.error.message)}
+          </p>
+        ) : (notesQuery.status === "success" && roles?.includes("EM-202")) ||
+          roles?.includes("EM-203") ? (
           <ReactQuill
             value={content}
             readOnly={!isEditorEnabled}
@@ -144,10 +159,12 @@ const QuillEditor = () => {
         ) : (
           <div
             dangerouslySetInnerHTML={{ __html: content }}
-            className=" text-start"
+            className="text-start"
           />
         )}
       </div>
+
+      {/* CTA BUTTONS */}
       <div
         className={`${
           roles?.includes("EM-202") || roles?.includes("EM-203")

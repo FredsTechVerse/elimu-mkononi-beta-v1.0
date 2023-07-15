@@ -1,5 +1,5 @@
 import React from "react";
-import { CourseCard, CourseCardV2, CourseSkeleton, PageTitle } from "..";
+import { CourseCardV2, CourseSkeleton, PageTitle } from "..";
 import { fetchCoursesData } from "../../controllers/fetchData";
 import { useQuery } from "@tanstack/react-query";
 const CoursesSection = () => {

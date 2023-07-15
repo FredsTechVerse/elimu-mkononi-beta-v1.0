@@ -9,10 +9,7 @@ export default {
     screens: {
       phone: "300px",
       tablet: "568px",
-      // laptop: "1024px",
-      // desktop: "1280px",
-      laptop: "1280px",
-      "2xl": "1536px",
+      laptop: "1024px",
     },
     extend: {
       colors: {

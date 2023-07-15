@@ -22,17 +22,13 @@ const LessonForm = () => {
   const [lessonNumber, setLessonNumber] = useState("");
   //Dropzone Config
   const [uploadSuccess, setUploadSucess] = useState(false);
-  const [lessonUrl, setLessonUrl] = useState("Test URL");
-  const [thumbnails, setThumbnails] = useState({});
+  const [videoUrl, setVideoUrl] = useState("");
   // Prevents the scroll behaviour of our page
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => (document.body.style.overflow = "unset");
   }, []);
 
-  useEffect(() => {
-    console.log(`Thumbnails changed ${JSON.stringify(thumbnails)}`);
-  }, [thumbnails]);
   useEffect(() => {
     const handleKeyPress = (e) => {
       if (e.key === "Enter" || e.typpe === "submit") {
@@ -52,17 +48,15 @@ const LessonForm = () => {
   const verifyUpload = () => {
     setUploadSucess(true);
   };
-  const updateFileInfo = ({ thumbnails, title, localized, publishedAt }) => {
+  const updateFileInfo = ({ videoUrl, videoKind }) => {
     console.log(
-      `Youtube info i can utilize ${JSON.stringify({
-        thumbnails,
-        // title,
-        // localized,
-        // publishedAt,
+      `Youtube info passed to server i can utilize ${JSON.stringify({
+        videoUrl,
+        videoKind,
       })}`
     );
     // Here is where i need to fetch the lesson url and append it accordingly.
-    setThumbnails({ ...thumbnails });
+    setVideoUrl(videoUrl);
   };
 
   const createLessonMutation = useMutation({
@@ -79,18 +73,31 @@ const LessonForm = () => {
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
+      if (isFormValid) {
+        createLessonMutation.mutate({
+          lessonNumber: lessonNumber,
+          lessonName: lessonName,
+          lessonUrl: videoUrl,
+          chapterID: chapterID,
+        });
+      }
     },
   });
   const isFormValid = () => {
     if (
       lessonName !== null &&
       lessonNumber !== null &&
-      lessonUrl !== null &&
+      videoUrl !== null &&
       uploadSuccess
     ) {
       return true;
     }
-    console.log("Validation Failed.");
+    updateAlertBoxData({
+      response: "Some input fields are empty",
+      isResponse: true,
+      status: "success",
+      timeout: 3000,
+    });
     return false;
   };
 
@@ -100,9 +107,8 @@ const LessonForm = () => {
       createLessonMutation.mutate({
         lessonNumber: lessonNumber,
         lessonName: lessonName,
-        lessonUrl: lessonUrl,
+        lessonUrl: videoUrl,
         chapterID: chapterID,
-        thumbnails: thumbnails,
       });
     }
   };
@@ -179,7 +185,7 @@ const LessonForm = () => {
             <SubmitButton
               disabled={uploadSuccess ? false : true}
               type="submit"
-              submitting={createLessonMutation?.isLoading}
+              isSubmitting={createLessonMutation?.isLoading}
               text={
                 createLessonMutation?.status === "loading"
                   ? "Adding Lesson"

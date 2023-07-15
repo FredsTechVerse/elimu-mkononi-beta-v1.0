@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
-const AdminNavItem = ({ to, text }) => {
+const AdminNavItem = ({ text }) => {
   return (
-    <Link to={to}>
-      <div className="button debug ">
-        {text}
+    <Link to={text}>
+      <div className="group h-12 w-full pointer-cursor hover:bg-purple-400 flex justify-between items-center px-4 text-white rounded-lg bg-primary rounded-ms capitalize">
+        view {text}
         <span className="text-xl">
-          <ChevronRightIcon className="icon-styling" />
+          <ChevronRightIcon className="icon-styling group-hover:text-white" />
         </span>
       </div>
     </Link>

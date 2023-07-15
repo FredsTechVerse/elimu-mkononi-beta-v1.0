@@ -7,7 +7,8 @@ import {
 } from "../../components";
 import { useNavigate } from "react-router-dom";
 import { createCourse } from "../../controllers/postData";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { verifyAccess } from "../../controllers/fetchData";
+import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import { handleError } from "../../controllers/handleErrors";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 
@@ -17,10 +18,25 @@ const CourseForm = () => {
   const formRef = useRef(null);
   const { updateAlertBoxData } = useAlertBoxContext();
 
+  // FORM CONFIGURATIONS
+  //=========================
+  const [courseTitle, setCourseTitle] = useState("");
+  const [uploadSuccess, setUploadSucess] = useState(false);
+  const [fileName, setFileName] = useState(
+    "9117f513331d43d9671a1dba179e8361.jpeg"
+  );
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => (document.body.style.overflow = "unset");
   }, []);
+
+  const accessQuery = useQuery(["accessVerification"], verifyAccess, {
+    retry: 1,
+    onError: (error) => {
+      handleError(error, updateAlertBoxData);
+    },
+  });
 
   useEffect(() => {
     const handleKeyPress = (e) => {
@@ -38,12 +54,6 @@ const CourseForm = () => {
     };
   }, []);
 
-  // FORM CONFIGURATIONS
-  //=========================
-  const [courseTitle, setCourseTitle] = useState("");
-  const [uploadSuccess, setUploadSucess] = useState(false);
-  const [fileName, setFileName] = useState(null);
-
   const createCourseMutation = useMutation({
     mutationFn: createCourse,
     onSuccess: (data) => {
@@ -59,6 +69,12 @@ const CourseForm = () => {
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
+      if (isFormValid) {
+        createCourseMutation.mutate({
+          courseTitle: courseTitle,
+          courseImage: fileName,
+        });
+      }
     },
   });
 
@@ -72,9 +88,15 @@ const CourseForm = () => {
     }
   };
   const isFormValid = () => {
-    if (courseTitle !== null && uploadSuccess) {
+    if (courseTitle !== null && fileName !== null && uploadSuccess) {
       return true;
     }
+    updateAlertBoxData({
+      response: "Some input fields are empty",
+      isResponse: true,
+      status: "success",
+      timeout: 3000,
+    });
     return false;
   };
 
@@ -82,8 +104,9 @@ const CourseForm = () => {
     setUploadSucess(true);
   };
 
-  const updateFileName = (fileName) => {
-    setFileName(fileName);
+  const updateFileName = (imageURl) => {
+    console.log(imageURl);
+    setFileName(imageURl);
   };
 
   return (
@@ -112,6 +135,7 @@ const CourseForm = () => {
           <div className="input-wrap ">
             {!uploadSuccess ? (
               <S3Uploader
+                isTokenActive={accessQuery.status === "success"}
                 verifyUpload={verifyUpload}
                 updateFileName={updateFileName}
               />
@@ -141,7 +165,8 @@ const CourseForm = () => {
           <div className="cta-wrap">
             <SubmitButton
               type="submit"
-              submitting={createCourseMutation?.isLoading}
+              isSubmitting={createCourseMutation?.isLoading}
+              disabled={isFormValid ? false : true}
               text={
                 createCourseMutation?.status === "loading"
                   ? "Adding course"

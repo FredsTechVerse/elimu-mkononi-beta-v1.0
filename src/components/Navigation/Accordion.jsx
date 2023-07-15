@@ -24,7 +24,7 @@ const Accordion = ({ unitData, closeSideBar }) => {
           <Tooltip text="Add Chapter">
             <div
               className={`${
-                roles?.includes("EM-202") || roles?.includes("EM-202")
+                roles?.includes("EM-202") || roles?.includes("EM-203")
                   ? "flex"
                   : "hidden"
               } hover:border-2 hover:border-white rounded-full `}

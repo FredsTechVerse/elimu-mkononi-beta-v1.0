@@ -8,7 +8,7 @@ import {
   DocumentTextIcon,
   PlayCircleIcon,
   WalletIcon,
-  PlusIcon,
+  PlusCircleIcon,
 } from "@heroicons/react/24/solid";
 import { useCurrentLessonContext } from "../../context/currentLessonContext";
 
@@ -37,33 +37,30 @@ const AccordionItem = ({
   return (
     <li className="accordion_item">
       <button
-        className="button px-2 text-sm flex items-center "
+        className="button group px-2 text-sm flex items-center "
         onClick={onToggle}
       >
         {chapterName}
         <div className="flex gap-3 items-center justify-between">
-          {roles?.includes("EM-202") && (
-            <Link
-              to={`/tutor/new-lesson/${chapterID}`}
-              state={{ background: location }}
-            >
-              <Tooltip tooltip="Add lesson">
-                z{" "}
-                <div
-                  onClick={closeSideBar}
-                  className="w-8 h-8 hover:border-white hover:border-2 rounded-full"
-                >
-                  <PlusIcon className="icon-styling" />
-                </div>
-              </Tooltip>
-            </Link>
-          )}
+          {roles?.includes("EM-202") ||
+            (roles?.includes("EM-203") && (
+              <Link
+                to={`/tutor/new-lesson/${chapterID}`}
+                state={{ background: location }}
+              >
+                <Tooltip tooltip="Add lesson">
+                  <div onClick={closeSideBar}>
+                    <PlusCircleIcon className="icon-styling group-hover:text-white " />
+                  </div>
+                </Tooltip>
+              </Link>
+            ))}
 
-          <span className="text-xl">
+          <span>
             {active ? (
-              <ChevronDownIcon className="icon-styling" />
+              <ChevronDownIcon className="icon-styling group-hover:text-white" />
             ) : (
-              <ChevronRightIcon className="icon-styling" />
+              <ChevronRightIcon className="icon-styling group-hover:text-white" />
             )}
           </span>
         </div>
@@ -94,17 +91,9 @@ const AccordionItem = ({
               }}
             >
               <div className="flex flex-row items-center gap-5 justify-start">
-                {identifyLessonType(lesson.lessonUrl) === "mp4" ? (
+                {lesson.videoKind === "youtube#video" ? (
                   <span className="text-sm">
                     <PlayCircleIcon className="icon-styling text-slate-800" />
-                  </span>
-                ) : identifyLessonType(lesson.lessonUrl) === "mp3" ? (
-                  <span className="text-sm">
-                    <MusicalNoteIcon className="icon-styling text-slate-800" />
-                  </span>
-                ) : identifyLessonType(lesson.lessonUrl) === "pdf " ? (
-                  <span className="text-sm">
-                    <DocumentTextIcon className="icon-styling  text-slate-800" />
                   </span>
                 ) : (
                   <span className="text-sm">
@@ -114,7 +103,6 @@ const AccordionItem = ({
 
                 {lesson.lessonName}
               </div>
-              {/* </Link> */}
             </li>
           );
         })}

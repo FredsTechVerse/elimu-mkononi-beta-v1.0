@@ -51,6 +51,12 @@ const RegistrationForm = ({ role }) => {
     ) {
       return true;
     }
+    updateAlertBoxData({
+      response: "Some input fields are empty",
+      isResponse: true,
+      status: "success",
+      timeout: 3000,
+    });
     return false;
   };
   const createUserMutation = useMutation({
@@ -70,6 +76,16 @@ const RegistrationForm = ({ role }) => {
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
+      if (isFormValid()) {
+        createUserMutation.mutate({
+          firstName: fName,
+          surname,
+          password,
+          contact: `254${contact}`,
+          email,
+          role,
+        });
+      }
     },
   });
   const saveUser = async (e) => {
@@ -199,7 +215,7 @@ const RegistrationForm = ({ role }) => {
           <div className="cta-wrap">
             <SubmitButton
               type="submit"
-              submitting={createUserMutation?.isLoading}
+              isSubmitting={createUserMutation?.isLoading}
               text={
                 createUserMutation?.status === "loading"
                   ? "Registering"

@@ -33,6 +33,15 @@ const UnitForm = () => {
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
+      if (isFormValid) {
+        createUnitMutation.mutate({
+          course: courseID,
+          tutor: tutor,
+          unitCode: unitCode,
+          unitName: unitName,
+          unitDescription: unitDescription,
+        });
+      }
     },
   });
 
@@ -73,6 +82,12 @@ const UnitForm = () => {
     ) {
       return true;
     }
+    updateAlertBoxData({
+      response: "Some input fields are empty",
+      isResponse: true,
+      status: "success",
+      timeout: 3000,
+    });
     return false;
   };
   const saveUnit = async (e) => {
@@ -178,7 +193,7 @@ const UnitForm = () => {
           <div className="cta-wrap">
             <SubmitButton
               type="submit"
-              submitting={createUnitMutation?.isLoading}
+              isSubmitting={createUnitMutation?.isLoading}
               text={
                 createUnitMutation?.status === "loading" ? "Saving" : "Save"
               }

@@ -9,7 +9,9 @@ import { useNavigate } from "react-router-dom";
 import { createResource } from "../../controllers/postData";
 import { useMutation } from "@tanstack/react-query";
 import { handleError } from "../../controllers/handleErrors";
+import { useAlertBoxContext } from "../../context/AlertBoxContext";
 const ResourceForm = () => {
+  const { updateAlertBoxData } = useAlertBoxContext();
   const navigate = useNavigate();
   // FORM CONFIGURATIONS
   //=========================
@@ -38,7 +40,13 @@ const ResourceForm = () => {
       navigate(-1);
     },
     onError: (error) => {
-      handleError(error);
+      handleError(error, updateAlertBoxData);
+      if (isFormValid) {
+        saveResource.mutate({
+          resourceName: resourceName,
+          resourceUrl: resourceName,
+        });
+      }
     },
   });
 
@@ -46,6 +54,12 @@ const ResourceForm = () => {
     if (resourceName !== null && uploadSuccess) {
       return true;
     }
+    updateAlertBoxData({
+      response: "Some input fields are empty",
+      isResponse: true,
+      status: "success",
+      timeout: 3000,
+    });
     return false;
   };
 
@@ -125,7 +139,7 @@ const ResourceForm = () => {
             <SubmitButton
               type="submit"
               disabled={uploadSuccess ? false : true}
-              submitting={saveResource?.isLoading}
+              isSubmitting={saveResource?.isLoading}
               text={saveResource?.status === "loading" ? "Saving" : "Save"}
             />
           </div>

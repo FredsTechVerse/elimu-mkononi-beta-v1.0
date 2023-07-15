@@ -1,6 +1,13 @@
 import React from "react";
+import { SpinnerIcon } from "../../components";
 
-const SubmitButton = ({ text, type, disabled = false }) => {
+const SubmitButton = ({
+  text,
+  type,
+  disabled = false,
+  isSubmitting,
+  isError = false,
+}) => {
   return (
     <button
       className={`text-lg capitalize w-48 m-3 h-9 rounded-full text-white text-center ${
@@ -9,7 +16,19 @@ const SubmitButton = ({ text, type, disabled = false }) => {
       type={type}
       disabled={disabled}
     >
-      <div className="w-full h-full flex-row-centered">{text}</div>
+      <p className="w-full h-full flex-row-centered gap-3">
+        {isSubmitting && isError === false && (
+          <span>
+            <SpinnerIcon />
+          </span>
+        )}
+        <span>{text}</span>
+        {isSubmitting && (
+          <span>
+            <SpinnerIcon />
+          </span>
+        )}
+      </p>
     </button>
   );
 };

@@ -27,9 +27,10 @@ const options = {
   plugins: {
     legend: {
       position: "top",
+      display: true,
     },
     title: {
-      display: true,
+      display: false,
       text: "Chart.js Line Chart",
     },
   },
@@ -39,7 +40,7 @@ const chartData = {
   labels,
   datasets: [
     {
-      label: "Dataset 1",
+      label: "Users",
       data: [24, 12, 36, 28, 30, 37, 53, 43, 28],
       backgroundColor: "rgba(53, 162, 235, 0.5)",
       fill: true,

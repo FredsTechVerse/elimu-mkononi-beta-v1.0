@@ -5,12 +5,14 @@ import {
   UsersTableAlternative,
 } from "../../components";
 import { fetchUsersData } from "../../controllers/fetchData";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-
+import { useAlertBoxContext } from "../../context/AlertBoxContext";
+import { handleError } from "../../controllers/handleErrors";
 const UsersPage = () => {
   const { role } = useParams();
-  console.log(`Current role ${role}`);
+  const { updateAlertBoxData } = useAlertBoxContext();
+  const queryClient = useQueryClient();
 
   const assignUserRole = () => {
     if (role === "students") {
@@ -23,9 +25,12 @@ const UsersPage = () => {
   };
   const userRole = assignUserRole();
 
-  const tutorsQuery = useQuery({
-    queryKey: [userRole],
-    queryFn: () => fetchUsersData(userRole),
+  const usersQuery = useQuery([userRole], () => fetchUsersData(userRole), {
+    retry: 1,
+    onError: (error) => {
+      handleError(error, updateAlertBoxData);
+      queryClient.invalidateQueries([userRole]);
+    },
   });
 
   return (
@@ -40,25 +45,21 @@ const UsersPage = () => {
         }
       />
 
-      {tutorsQuery.status === "loading" ? (
+      {usersQuery.status === "loading" ? (
         <div className="w-full h-full flex-row-centered bg-slate-300">
           <p className=" flex-col-centered text-center text-slate-700 py-3 px-2 m-2 rounded-lg h-24 ">
             User Data is Loading
           </p>
         </div>
-      ) : tutorsQuery.status === "error" ? (
-        <p className="bg-red-300 rounded-lg p-4">
-          {JSON.stringify(tutorsQuery.error.message)}
-        </p>
       ) : (
-        <div className="w-full">
+        <div className="w-full debug">
           <UsersDataTable
-            users={tutorsQuery.data}
+            users={usersQuery.data}
             fetchUsersData={fetchUsersData}
             role={userRole}
           />
           <UsersTableAlternative
-            users={tutorsQuery.data}
+            users={usersQuery.data}
             fetchUsersData={fetchUsersData}
             role={userRole}
           />

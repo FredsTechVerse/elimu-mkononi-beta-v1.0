@@ -62,6 +62,12 @@ const ChapterForm = () => {
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
+      createChapterMutation.mutate({
+        unitID: unitID,
+        chapterNumber: `${unitID}-${chapterNumber}`,
+        chapterName: chapterName,
+        chapterDescription: chapterDescription,
+      });
     },
   });
 
@@ -124,7 +130,7 @@ const ChapterForm = () => {
           <div className="cta-wrap ">
             <SubmitButton
               type="submit"
-              submitting={createChapterMutation?.isLoading}
+              isSubmitting={createChapterMutation?.isLoading}
               text={
                 createChapterMutation?.status === "loading" ? "Saving" : "Save"
               }

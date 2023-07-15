@@ -1,5 +1,9 @@
 import axios from "../axios";
 const accessToken = localStorage.getItem("accessToken");
+const verifyAccess = async () => {
+  const { data: accessData } = await axios.get("/auth/verify-access");
+  return accessData.message;
+};
 
 const fetchCoursesData = async () => {
   const { data: coursesData } = await axios.get("/course/all-courses");
@@ -7,6 +11,7 @@ const fetchCoursesData = async () => {
 };
 
 const fetchCourseData = async (courseID) => {
+  console.log(courseID);
   const { data: courseData } = await axios.get(`/course/${courseID}`);
   return courseData;
 };
@@ -59,4 +64,5 @@ export {
   fetchUsersData,
   fetchLessonNotes,
   fetchUserDetails,
+  verifyAccess,
 };

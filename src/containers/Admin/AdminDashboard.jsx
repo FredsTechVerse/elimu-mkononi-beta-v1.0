@@ -7,6 +7,7 @@ import {
   DoughnutChart,
   PieChart,
   AreaChart,
+  AdminNavItem,
 } from "../../components";
 import { useOutletContext } from "react-router-dom";
 
@@ -16,22 +17,15 @@ const AdminDashboard = () => {
     <div className="h-screen w-full py-2 flex phone:flex-col tablet:flex-row  ">
       <div className="w-1/4 phone:hidden laptop:flex flex-col h-full justify-between p-2">
         <UserProfile />
-        <div className="controls w-full h-full flex-col-centered gap-2 ">
+        <div className="controls w-full h-full flex flex-col justify-start gap-2 px-1 ">
           <h1 className="text-slate-900 font-bold text-lg text-center capitalize mt-3 w-full h-12 flex-row-centered  ">
             Navigate to Pages
           </h1>
-          <div className="h-12 w-full flex-row-centered text-white rounded-lg bg-primary rounded-ms">
-            View Students
-          </div>
-          <div className="h-12 w-full flex-row-centered text-white rounded-lg bg-primary rounded-ms">
-            View Tutors
-          </div>
-          <div className="h-12 w-full flex-row-centered text-white rounded-lg bg-primary rounded-ms">
-            View Course
-          </div>
-          <div className="h-12 w-full flex-row-centered text-white rounded-lg bg-primary rounded-ms">
-            View Admins
-          </div>
+
+          <AdminNavItem text="courses" />
+          <AdminNavItem text="students" />
+          <AdminNavItem text="tutors" />
+          <AdminNavItem text="admins" />
         </div>
       </div>
       <div className="w-full laptop:w-3/4  flex flex-col justify-start gap- h-full overflow-auto ">
@@ -63,7 +57,7 @@ const AdminDashboard = () => {
                 <div className="w-full rounded-lg h-16 bg-slate-300"></div>
               </div>
             </div>
-            <div className="phone:h-[250px] tablet:h-[370px] tablet:w-full mt-5  p-2 tablet:w-2/3 flex-col-centered  graph  bg-slate-200 rounded-xl">
+            <div className="phone:h-[250px] tablet:h-[370px] mt-5  p-2 w-full  flex-col-centered rounded-xl">
               <AreaChart />
             </div>
           </div>

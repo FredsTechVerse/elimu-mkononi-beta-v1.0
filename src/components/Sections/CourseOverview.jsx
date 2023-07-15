@@ -10,9 +10,7 @@ const CourseOverview = () => {
   const { updateAlertBoxData } = useAlertBoxContext();
   const roles = JSON.parse(localStorage.getItem("roles"));
   const queryClient = useQueryClient();
-  const queryConfig = {
-    retry: 1, // Set the number of refetch attempts to 1
-  };
+
   const courseQuery = useQuery(
     ["courseData", courseID],
     () => fetchCourseData(courseID),
@@ -20,6 +18,7 @@ const CourseOverview = () => {
       retry: 1,
       onError: (error) => {
         handleError(error, updateAlertBoxData);
+        queryClient.invalidateQueries(["courseData", courseID]);
       },
     }
   );

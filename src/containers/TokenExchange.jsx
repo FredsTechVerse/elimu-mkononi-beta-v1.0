@@ -25,7 +25,7 @@ const TokenExchange = () => {
     exchangeCodeForToken();
   }, []);
 
-  return <div>Exchanging code for access token...</div>;
+  return <div></div>;
 };
 
 export default TokenExchange;

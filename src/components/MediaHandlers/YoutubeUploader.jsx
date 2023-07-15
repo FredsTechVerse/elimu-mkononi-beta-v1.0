@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Dropzone from "react-dropzone";
 import axios from "../../axios";
-import { CircularProgressbar } from "react-circular-progressbar";
+import { CircularProgressBar } from "../../components";
 import { handleError } from "../../controllers/handleErrors";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
-import "react-circular-progressbar/dist/styles.css";
 
 const YoutubeUploader = ({ verifyUpload, updateFileInfo, videoTitle }) => {
   const { updateAlertBoxData } = useAlertBoxContext();
@@ -36,14 +35,11 @@ const YoutubeUploader = ({ verifyUpload, updateFileInfo, videoTitle }) => {
   };
 
   const fetchAccessToken = () => {
-    // You can also retrieve additional information like the refresh token from the response if required
     const accessToken = localStorage.getItem("youtubeAccessToken");
     return accessToken;
   };
 
   const redirectToExternalLink = (externalLink) => {
-    console.log("Redirecting user to external link");
-    // window.location.href = externalLink;
     window.open(externalLink, "_self");
   };
 
@@ -53,14 +49,10 @@ const YoutubeUploader = ({ verifyUpload, updateFileInfo, videoTitle }) => {
       const videoFile = acceptedFiles[0];
       const { type: videoType } = videoFile;
       const accessToken = fetchAccessToken();
-      console.log(`Youtube Access Token ${accessToken}`);
       if (!accessToken) {
-        console.log("About to authorize user");
         const authorizationUri = await authorizeUser();
-        console.log(`Authorization URI ${authorizationUri}`);
         localStorage.setItem("previousLocation", window.location.pathname);
         redirectToExternalLink(authorizationUri);
-        console.log("Fetching access tokens");
       }
       const headers = {
         Authorization: `Bearer ${accessToken}`,
@@ -85,35 +77,31 @@ const YoutubeUploader = ({ verifyUpload, updateFileInfo, videoTitle }) => {
         },
       });
 
-      // Get the location header from the response
-      const location = response.headers.location;
+      // Extract the location header aka the presigned url.
+      const presignedUrl = response.headers.location;
 
       // Upload the video file using a PUT request
-      const { data } = await axios.put(location, videoFile, {
+      const { data: videoData } = await axios.put(presignedUrl, videoFile, {
         headers: {
           "Content-Type": videoType,
         },
         onUploadProgress: trackUploadProgress,
       });
-      console.log(data);
-      const { id: videoID } = data;
-      const { thumbnails, title, localized, publishedAt } = data.snippet;
-      const { license, privacyStatus, uploadStatus } = data.status;
-      updateFileInfo({ thumbnails, title, localized, publishedAt });
+      const { id: videoID, kind: videoKind } = videoData;
+      console.log(`The video id of the uploaded video ${videoID}`);
+      const videoUrl = `https://www.youtube.com/watch?v=${videoID}`;
+      updateFileInfo({ videoUrl, videoKind });
     } catch (error) {
+      console.log(error);
       handleError(error, updateAlertBoxData);
+      //  I will need to handle the youtube renew token error.
     }
   };
   return (
     <div className="h-36 w-72 tablet:w-[360px] mt-2 bg-slate-200  bg-opacity-60 rounded-lg ">
       {percentCompleted > 0 ? (
-        <div className="flex flex-col-centered gap-5 p-3 w-full h-full ">
-          <p> Uploading file ...</p>
-          <CircularProgressbar
-            value={percentCompleted}
-            text={`${percentCompleted}%`}
-          />
-          ;<div>{percentCompleted} % complete </div>
+        <div className="flex flex-col-centered w-full h-full ">
+          <CircularProgressBar percentCompleted={percentCompleted} />
         </div>
       ) : (
         <Dropzone onDrop={handleDrop}>

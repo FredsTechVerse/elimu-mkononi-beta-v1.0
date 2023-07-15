@@ -1,24 +1,49 @@
 # ELIMU MKONONI
 
+# WHAT WE SOLVE
+
+- Where we help learners carry out their revision for the units that they are taking in school.
+- Exams are generally repeated questions over and over again over the course of time.Having this exam materials , class notes and additonal youtube videos (Youtube is the new university) gathered under one roof will help learners practise targeted revision and pass their exams with flying colours.
+- In this application , I pull all resources necessary to help learner succeed in their studies right from the course outline.
+- Having the course outline before playing any lesson is a really good reminder to learner to set his / her goals right.
+- If we really deliver value , logging in to track progress will be a non issue with the users. However in my application , i do not need the user to log in , i only need to know in which school they are in and which course they are taking so that i can administer targeted resources for them.
+- This is my niche.... Helping learners revise for their exams with ease and in a targeted manner and later at a low price.
+
+### DOES THIS PRODUCT HAVE THE ABILITY TO BE MONETIZED ?
+
+- Yes , we place all resources needed to pass exams with updated materials all under one roof! Infact , we do not need to be content creators, we can just share what is out there , what is in youtube since it is our red university.
+- Lecturers can get to recommend for their learners the best resources to use for their revision, including posting lesson notes and relevant materials for their learners to use.**_This is how we bring the lecturers on board._**
+
+- With the ability to monetize this product , the source code will not be let out in the public domain. However , the product will be free to use for all learners for now as we polish up on our marketing skills.
+- Using already pre-existing youtube videos , referencing authors correctly and only paying for space to store images and videos will really make the cost super low and sustainable
+
+  **KAPESHA NEVER PAID , BUT THE SEED SOWED CAN PAY A HUNDRED FOLD!**
+
+  ### PRODUCT REDEFINATION
+
+  - The tutor will officially be renamed as the lecturer.
+  - There will be need to add an account for student content creators.
+
+### TIMELINES
+
+- I believe version one will be ready by this weekend.
+- For release one , users will only be able to add youtube links and watch them play.
+
 ### TO CONSIDER TOMMORROW
 
-- Tweak grid accordinly and remember that we start counting from 1 and not from 0 when positioning items in a grid.
-- Let the last doughnut be of the most complicated data so that i could be able to break it down easily according to courses.
-- Interchange quick actions with detailed pie chart for continuity.
+- I will trouble-shoot notes , after adding new chapters and lessons with option to add a custom video or share a link that is out there.
+- Smoothen notes CRUD logic,resources section, make sure they work in harmony with video , finalize on the ui and release the software into the world for them to see and comment.
 - Polish up on skeleton dimensions.
-- Update post and get queries to only retry once and also to retry fetching data once.
-- Optimize form buttons to show loading state with a spinner , change color of quick action buttons.
-- Fetch video url after uploading video to youtube inorder to save it in my db.
-
-- Optimize notes logic , make sure they work in harmony with video , finalize on the ui and release the software into the world for them to see and comment.
+- Optimize form buttons to show loading state with a spinner ,change color of quick action buttons.
+- Optimize navigation bar , making it visible.
+- Making alertbox the non blocking to other operations
+- Once the player and notes and resources are ready , its time to add content to the page.
 
 ### PERFOMANCE OPTIMIZATION
 
-- Building the resources section to handle pdf & additional audio documents.
-- Effecting audio & video player that does not misbehave.
+- Solve , screen freeze when inspector tools are open during a refresh.
+- Building the resources section to handle pdfs
 - Socials to be displayed absolutely as with my portfolio.
-- We can use useCallback to memoize functions and memo to memoize props all in an effort to hinder updates mostly cause by updating the parent components...
-  Rebuilding it means even its functions change address causing even the children to rerender which can be solved by memoizing funtions using useCallback whose format is the same as useEffect in that we will have to put a dependency array at its end which will have nothing.
 
 ### KEY TIPS I HAVE PICKED UP ALONG THE JOURNEY
 
@@ -40,11 +65,11 @@
 
 - Suitable for handling any post and get requests in that it complements axios giving it superpowers as :-
 
-  - It eliminates the need for a try catch statements as it has its own eventHandlers for handling errors and loading states. eg onError , onLoading , onSuccess
-  - Integrating skeletons has never been easier as we know exactly when our data is loading.
-  - Error handling has also been simplified where we can use the `onError((error)=>{})`or the `isError` if we are just interested in the current state.
-  - queryFn using fetches make it easy to intergrate skeletons and error messages.The functions is automatically called when we involve the error and data props later down in the code.
-  - We also get instant updates when we use it to make a post request.
+- It eliminates the need for a try catch statements as it has its own eventHandlers for handling errors and loading states. eg onError , onLoading , onSuccess
+- Integrating skeletons has never been easier as we know exactly when our data is loading.
+- Error handling has also been simplified where we can use the `onError((error)=>{})`or the `isError` if we are just interested in the current state.
+- queryFn using fetches make it easy to intergrate skeletons and error messages.The functions is automatically called when we involve the error and data props later down in the code.
+- We also get instant updates when we use it to make a post request.
 
 - I enjoy using the one line syntax when doing my fetches which follows the following rule of thumb , we have an array of keys , followed by the function in action and additional configs at the very end eg
   `const courseQuery = useQuery(
@@ -206,12 +231,6 @@ uploadVideo(accessToken, videoFile, title, description);
 - Email is the best and the cheapest mode of communication that i can use extensively for password reset , verification of credentials , user login , frequent updates and communication.
 - SMS can be used for crucial services eg rapid payment responses.
 
-### CODE SPLITTING
-
-- I am currently experiencing screen freeze and just too many barriers which can be solved by putting code splitting according to role..... With a tutor , the student and admin pages do not need to be loaded at first render...
-- There must be a way to carry this optimization in react using vite.... Moving to a new metaframework for this is just too expensive....
-- I need to find a balance as to what i code split and what i load at first render..... Coz remember even react-query has its way of showing skeletons while loading.
-
 ### SENDING AND INTEPRETING STATUS AND ANY DATA FROM BACKEND
 
 - Remember there are only two major sides to requests and responses..... For requests , our crucial information is in the `req.body` whereas for responses , our crucial information is in the `res.data`
@@ -219,12 +238,6 @@ uploadVideo(accessToken, videoFile, title, description);
 - What we send to the frontend will be found inside the response object under the data eg if we send ` res.status(201).json({ signedUrl, Key });` We shall destructure this props from the response.data as `const { signedUrl, Key } = response.data`
 - Usually i enjoy breaking out the data and status (if needed) from the response object as
   `const { data,status } = await axios.post("/s3Direct/", formData, config);`
-
-### WHERE THIS APP CAN BE USED
-
-- This website will serve as a good reference point to all class notes and past papers issued.
-- Find means ama reasons why a lecturer would want to use our application eg having all your resources organized on the fly....
-- We can also have a section for past papers and class notes which will be organized by year and semester.
 
 ### REFERENCES
 

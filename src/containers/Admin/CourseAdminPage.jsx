@@ -1,7 +1,7 @@
 import React from "react";
 import {
   NavigateBtn,
-  CourseCard,
+  CourseCardV2,
   CourseSkeleton,
   PageTitle,
 } from "../../components";
@@ -24,7 +24,7 @@ const CoursesAdminPage = () => {
       <PageTitle text="list of courses" />
 
       <div className="w-full flex-col-centered justify-start">
-        {coursesQuery.status === "loading" ? (
+        {coursesQuery.status === "loading" && (
           <div className="grid-lg">
             <CourseSkeleton />
             <CourseSkeleton />
@@ -33,31 +33,28 @@ const CoursesAdminPage = () => {
             <CourseSkeleton />
             <CourseSkeleton />
           </div>
-        ) : coursesQuery.status === "error" ? (
-          <p className="bg-red-300 rounded-lg p-4">
-            {JSON.stringify(coursesQuery.error.message)}
-          </p>
-        ) : (
+        )}
+        {coursesQuery.data && coursesQuery?.data.length > 0 && (
           <div className="grid-lg">
-            {coursesQuery?.data.length > 0 ? (
-              coursesQuery.data.map((course, courseIndex) => {
-                const { _id, courseTitle, courseImage } = course;
-                return (
-                  <CourseCard
-                    key={courseIndex}
-                    courseID={_id}
-                    courseTitle={courseTitle}
-                    courseImage={courseImage}
-                  />
-                );
-              })
-            ) : (
-              <div className=" w-full h-full">
-                <p className=" h-full text-center bg-blue-300 bg-opacity-40 rounded-lg">
-                  No courses have been found
-                </p>
-              </div>
-            )}
+            {coursesQuery.data.map((course, courseIndex) => {
+              const { _id, courseTitle, courseImage } = course;
+              return (
+                <CourseCardV2
+                  key={courseIndex}
+                  courseID={_id}
+                  courseTitle={courseTitle}
+                  courseImage={courseImage}
+                />
+              );
+            })}
+          </div>
+        )}
+
+        {coursesQuery.data && coursesQuery?.data.length == 0 && (
+          <div className="w-full h-full relative flex-row-centered ">
+            <p className="my-10 p-3 text-center bg-slate-400 bg-opacity-40 rounded-lg">
+              No courses have been found
+            </p>
           </div>
         )}
       </div>

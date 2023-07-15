@@ -48,12 +48,12 @@ const TutorDashboard = () => {
           <div className="h-full phone:w-full tablet:w-1/3 flex-col-centered gap-1 rounded-lg bg-slate-300 "></div>
         </div>
         <div className="flex phone:flex-col tablet:flex-row w-full gap-5 ">
-          <div className=" h-full w-full tablet:w-2/3 mt-5 gap-5  flex flex-col items-center justify-start  bg-slate-200 rounded-xl">
-            <div className=" phone:h-[250px] tablet:h-[370px] w-full  p-2  flex-col-centered  graph  bg-slate-200 rounded-xl">
+          <div className=" h-full w-full tablet:w-2/3 mt-5 gap-5  flex flex-col items-center justify-start   rounded-xl">
+            <div className=" phone:h-[250px] tablet:h-[370px] w-full  p-2  flex-col-centered  graph  rounded-xl">
               <AreaChart />
             </div>
 
-            <div className="content p-2 debug w-full h-full flex-row-centered ">
+            <div className="content p-2 m-2 rounded-xl w-full h-full flex-row-centered bg-slate-200 ">
               <p>I can add the list of units here</p>
             </div>
           </div>

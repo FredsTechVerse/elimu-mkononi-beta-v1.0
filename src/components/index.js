@@ -16,7 +16,6 @@ import {
 
 import {
   ChapterCard,
-  CourseCard,
   HomePageCard,
   TeamCard,
   TutorCard,
@@ -35,6 +34,7 @@ import {
   DoughnutChart,
   AreaChart,
   MultiLineChart,
+  CircularProgressBar,
 } from "./Charts";
 
 import {
@@ -59,6 +59,8 @@ import {
   UserProfile,
 } from "./General";
 
+import { SpinnerIcon } from "./Icons";
+
 import {
   QuillEditor,
   ReactPdfModal,
@@ -68,6 +70,7 @@ import {
   VideoComponent,
   YoutubeUploader,
   VideoPlayer,
+  VideoJS,
 } from "./MediaHandlers";
 
 import {
@@ -108,6 +111,9 @@ import {
   TableSkeleton,
   TableAlternativeSkeleton,
   ContentSectionSkeleton,
+  QuillEditorSkeleton,
+  NotesSkeleton,
+  UnitNavSkeleton,
 } from "./Skeletons";
 
 import { PaymentsTable, UnitsAdminTable, UsersDataTable } from "./Tables";
@@ -118,7 +124,6 @@ export {
   AddBtn,
   LogInForm,
   HomePageCard,
-  CourseCard,
   CourseSkeleton,
   CourseHeading,
   VideoComponent,
@@ -190,6 +195,7 @@ export {
   AreaChart,
   MultiLineChart,
   DoughnutChart,
+  CircularProgressBar,
   UserCard,
   CourseOverview,
   UnitSkeleton,
@@ -204,4 +210,9 @@ export {
   TableSkeleton,
   TableAlternativeSkeleton,
   ContentSectionSkeleton,
+  NotesSkeleton,
+  UnitNavSkeleton,
+  QuillEditorSkeleton,
+  VideoJS,
+  SpinnerIcon,
 };

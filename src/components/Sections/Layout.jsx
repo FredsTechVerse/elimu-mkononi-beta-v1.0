@@ -3,9 +3,12 @@ import { Outlet } from "react-router-dom";
 import { HomeBtn, BackBtn } from "../../components";
 import { fetchUserDetails } from "../../controllers/fetchData";
 import { useQuery } from "@tanstack/react-query";
+import { handleError } from "../../controllers/handleErrors";
+import { useAlertBoxContext } from "../../context/AlertBoxContext";
 
 const Layout = ({ role }) => {
   const [userData, setUserData] = useState(null);
+  const { updateAlertBoxContext } = useAlertBoxContext;
   const userDataQuery = useQuery(["user"], () => fetchUserDetails(role), {
     onSuccess: (data) => {
       setUserData(data);
@@ -14,7 +17,7 @@ const Layout = ({ role }) => {
       if (error?.response?.status === 403) {
         handleLogout();
       } else {
-        console.log(error.response.status);
+        handleError(error, updateAlertBoxContext);
       }
     },
   });

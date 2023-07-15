@@ -19,13 +19,13 @@ const AlertBox = () => {
   }, [alertBoxData]);
   if (alertBoxData?.isResponse === true) {
     return (
-      <div className="fixed tablet:top-2 tablet:right-3 flex-row-centered z-50 phone:w-full tablet:flex py-2 ">
+      <div className="fixed w-[340px] tablet:w-80 alertbox-centered">
         <div
           className={`${
             alertBoxData?.status === "success"
               ? "border-green-600 bg-green-300"
               : "border-red-600  bg-red-300"
-          } text-slate-700 border-0 border-l-8  rounded-md  p-1 w-[340px] tablet:w-80 flex flex-col  `}
+          } text-slate-700 border-0 border-l-8  rounded-md  p-1 flex flex-col  `}
         >
           <span
             onClick={() => {

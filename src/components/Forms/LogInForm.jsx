@@ -24,6 +24,7 @@ const LogInForm = () => {
 
   const createLoginMutation = useMutation({
     mutationFn: loginUser,
+    retry: 1,
     onSuccess: (data) => {
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("refreshToken", data.refreshToken);
@@ -35,12 +36,22 @@ const LogInForm = () => {
         response: "You have logged in successfully",
         isResponse: true,
         status: "success",
-        timeout: 3000,
+        timeout: 2500,
       });
       navigate(from, { replace: true });
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
+      if (isFormValid) {
+        const trimmedFirstName = firstName.trim();
+        const trimmedPassword = password.trim();
+
+        createLoginMutation.mutate({
+          firstName: trimmedFirstName,
+          password: trimmedPassword,
+        });
+        return;
+      }
     },
   });
 
@@ -48,6 +59,12 @@ const LogInForm = () => {
     if (firstName !== null && password !== null) {
       return true;
     }
+    updateAlertBoxData({
+      response: "Some input fields are empty",
+      isResponse: true,
+      status: "success",
+      timeout: 3000,
+    });
     return false;
   };
 
@@ -69,7 +86,7 @@ const LogInForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isFormValid()) {
+    if (isFormValid) {
       const trimmedFirstName = firstName.trim();
       const trimmedPassword = password.trim();
 
@@ -79,7 +96,12 @@ const LogInForm = () => {
       });
       return;
     }
-    console.log("Form is not valid");
+    updateAlertBoxData({
+      response: "Some input fields are empty",
+      isResponse: true,
+      status: "success",
+      timeout: 3000,
+    });
   };
 
   return (
@@ -114,7 +136,8 @@ const LogInForm = () => {
           </div>
           <div className="w-full flex-row-centered">
             <SubmitButton
-              submitting={createLoginMutation?.isLoading}
+              isSubmitting={createLoginMutation?.isLoading}
+              isError={createLoginMutation?.isError}
               type="submit"
               text={
                 createLoginMutation?.status === "loading"
