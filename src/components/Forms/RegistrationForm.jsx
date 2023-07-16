@@ -76,7 +76,7 @@ const RegistrationForm = ({ role }) => {
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
-      if (isFormValid()) {
+      if (error.response && error.response.data.message === "Token expired") {
         createUserMutation.mutate({
           firstName: fName,
           surname,

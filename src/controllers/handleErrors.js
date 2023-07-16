@@ -11,35 +11,6 @@ const ERRORS = {
   BAD_REQUEST: "Bad request sent to server ",
 };
 
-const renewToken = async () => {
-  try {
-    const refreshToken = localStorage.getItem("refreshToken");
-
-    const body = {
-      refreshToken: refreshToken,
-    };
-    const config = {
-      headers: { "Content-Type": "application/json" },
-    };
-    const { data: refreshTokenData } = await axios.post(
-      "/auth/refresh-token",
-      body,
-      config
-    );
-    // UPDATES TOKEN HEADER
-    axios.defaults.headers.common[
-      "Authorization"
-    ] = `Bearer ${refreshTokenData.newAccessToken}`;
-
-    localStorage.setItem("accessToken", refreshTokenData.newAccessToken);
-    console.log("Token has been renewed successfully");
-  } catch (err) {
-    console.log(
-      `An error occured while renewing the access token ${JSON.stringify(err)}`
-    );
-  }
-};
-
 const handleError = (error, updateAlertBoxData) => {
   let response = "No response has been specified";
   if (error.response && error.response.status === 400) {
@@ -76,4 +47,33 @@ const handleError = (error, updateAlertBoxData) => {
   }
 };
 
-export { handleError };
+const renewToken = async (queryKey) => {
+  try {
+    const refreshToken = localStorage.getItem("refreshToken");
+
+    const body = {
+      refreshToken: refreshToken,
+    };
+    const config = {
+      headers: { "Content-Type": "application/json" },
+    };
+    const { data: refreshTokenData } = await axios.post(
+      "/auth/refresh-token",
+      body,
+      config
+    );
+    // UPDATES TOKEN HEADER
+    axios.defaults.headers.common[
+      "Authorization"
+    ] = `Bearer ${refreshTokenData.newAccessToken}`;
+
+    localStorage.setItem("accessToken", refreshTokenData.newAccessToken);
+    console.log("Token has been renewed successfully");
+  } catch (err) {
+    console.log(
+      `An error occured while renewing the access token ${JSON.stringify(err)}`
+    );
+  }
+};
+
+export { handleError, renewToken };

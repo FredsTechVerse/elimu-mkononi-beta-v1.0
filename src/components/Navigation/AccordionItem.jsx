@@ -58,9 +58,9 @@ const AccordionItem = ({
 
           <span>
             {active ? (
-              <ChevronDownIcon className="icon-styling group-hover:text-white" />
+              <ChevronDownIcon className="icon-styling text-slate-900 group-hover:text-white" />
             ) : (
-              <ChevronRightIcon className="icon-styling group-hover:text-white" />
+              <ChevronRightIcon className="icon-styling text-slate-900 group-hover:text-white" />
             )}
           </span>
         </div>

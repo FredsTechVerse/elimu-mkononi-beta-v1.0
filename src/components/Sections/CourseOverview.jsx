@@ -18,7 +18,10 @@ const CourseOverview = () => {
       retry: 1,
       onError: (error) => {
         handleError(error, updateAlertBoxData);
-        queryClient.invalidateQueries(["courseData", courseID]);
+        if (error.response && error.response.data.message === "Token expired") {
+          queryClient.invalidateQueries(["courseData", courseID]);
+          console.log(`The query key has  also been invalidated`);
+        }
       },
     }
   );
@@ -57,7 +60,7 @@ const CourseOverview = () => {
             </div>
           ) : (
             <div className="grid-sm w-full ">
-              {courseQuery.data.units.length > 0 ? (
+              {courseQuery?.data?.units.length > 0 ? (
                 courseQuery?.data?.units.map((unit, index) => {
                   const { unitName, unitDescription, _id } = unit;
                   return (

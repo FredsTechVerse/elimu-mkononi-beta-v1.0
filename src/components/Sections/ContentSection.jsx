@@ -6,8 +6,6 @@ import { Outlet } from "react-router-dom";
 import { useCurrentLessonContext } from "../../context/currentLessonContext";
 const ContentSection = ({ unitData, openSideBar, sideBarOpen, unitID }) => {
   const { currentLesson } = useCurrentLessonContext();
-
-  console.log(currentLesson?.videoKind);
   if (currentLesson.videoKind === "youtube#video") {
     return (
       <div className="w-full px-1">

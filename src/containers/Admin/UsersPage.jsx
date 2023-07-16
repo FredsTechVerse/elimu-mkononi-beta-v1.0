@@ -29,7 +29,9 @@ const UsersPage = () => {
     retry: 1,
     onError: (error) => {
       handleError(error, updateAlertBoxData);
-      queryClient.invalidateQueries([userRole]);
+      if (error.response && error.response.data.message === "Token expired") {
+        queryClient.invalidateQueries([userRole]);
+      }
     },
   });
 

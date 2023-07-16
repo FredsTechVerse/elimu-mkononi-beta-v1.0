@@ -59,7 +59,7 @@ const LessonForm = () => {
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
-      if (isFormValid) {
+      if (error.response && error.response.data.message === "Token expired") {
         createLessonMutation.mutate({
           lessonNumber: lessonNumber,
           lessonName: lessonName,

@@ -62,12 +62,14 @@ const ChapterForm = () => {
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
-      createChapterMutation.mutate({
-        unitID: unitID,
-        chapterNumber: `${unitID}-${chapterNumber}`,
-        chapterName: chapterName,
-        chapterDescription: chapterDescription,
-      });
+      if (error.response && error.response.data.message === "Token expired") {
+        createChapterMutation.mutate({
+          unitID: unitID,
+          chapterNumber: `${unitID}-${chapterNumber}`,
+          chapterName: chapterName,
+          chapterDescription: chapterDescription,
+        });
+      }
     },
   });
 

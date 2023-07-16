@@ -33,7 +33,7 @@ const UnitForm = () => {
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
-      if (isFormValid) {
+      if (error.response && error.response.data.message === "Token expired") {
         createUnitMutation.mutate({
           course: courseID,
           tutor: tutor,

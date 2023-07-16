@@ -17,7 +17,7 @@ const QuillEditor = () => {
 
   //Quill Editor Config
   const [content, setContent] = useState("");
-  const [newContent, setNewContent] = useState("");
+  // const [newContent, setNewContent] = useState("");
   const [originalContent, setOriginalContent] = useState("");
   const [isEditorEnabled, setIsEditorEnabled] = useState(false);
   const [areNotesPresent, setAreNotesPresent] = useState(false);
@@ -39,13 +39,15 @@ const QuillEditor = () => {
       retry: 1,
       onError: (error) => {
         handleError(error, updateAlertBoxData);
-        // queryClient.invalidateQueries(["notes"]);
+        if (error.response && error.response.data.message === "Token expired") {
+          queryClient.invalidateQueries(["notes"]);
+        }
       },
       onSuccess: (savedNotes) => {
         console.log(savedNotes);
         if (savedNotes) {
           setOriginalContent(savedNotes);
-          setNewContent(savedNotes);
+          // setNewContent(savedNotes);
           setContent(savedNotes);
           setAreNotesPresent(false);
         }
@@ -68,10 +70,12 @@ const QuillEditor = () => {
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
-      // createNotesMutation.mutate({
-      //   lessonNotes: content,
-      //   lessonID: currentLesson?._id,
-      // });
+      if (error.response && error.response.data.message === "Token expired") {
+        createNotesMutation.mutate({
+          lessonNotes: content,
+          lessonID: currentLesson?._id,
+        });
+      }
     },
   });
 
@@ -90,17 +94,19 @@ const QuillEditor = () => {
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
-      // updateNotesMutation.mutate({
-      //   lessonNotes: content,
-      //   notesID: currentLesson?.lessonNotes,
-      // });
+      if (error.response && error.response.data.message === "Token expired") {
+        updateNotesMutation.mutate({
+          lessonNotes: content,
+          notesID: currentLesson?.lessonNotes,
+        });
+      }
     },
   });
 
   const handleChange = useCallback((editorContent) => {
     console.log(editorContent);
     setContent(editorContent);
-    setNewContent(editorContent);
+    // setNewContent(editorContent);
   }, []);
   const enableEdit = () => {
     setIsEditorEnabled(true);
@@ -153,10 +159,10 @@ const QuillEditor = () => {
             {JSON.stringify(notesQuery.error.message)}
           </p>
         )}
-        {(currentLesson.lessonNotes &&
+
+        {currentLesson.lessonNotes &&
           notesQuery.status === "success" &&
-          roles?.includes("EM-202")) ||
-          (roles?.includes("EM-203") ? (
+          (roles?.includes("EM-202") || roles?.includes("EM-203") ? (
             <ReactQuill
               value={content}
               readOnly={!isEditorEnabled}

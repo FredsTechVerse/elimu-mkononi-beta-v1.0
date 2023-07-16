@@ -69,7 +69,7 @@ const CourseForm = () => {
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
-      if (isFormValid) {
+      if (error.response && error.response.data.message === "Token expired") {
         createCourseMutation.mutate({
           courseTitle: courseTitle,
           courseImage: fileName,

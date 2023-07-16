@@ -11,7 +11,6 @@ const fetchCoursesData = async () => {
 };
 
 const fetchCourseData = async (courseID) => {
-  console.log(courseID);
   const { data: courseData } = await axios.get(`/course/${courseID}`);
   return courseData;
 };
