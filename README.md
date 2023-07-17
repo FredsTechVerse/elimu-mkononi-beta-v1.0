@@ -31,6 +31,8 @@
 
 ### TO CONSIDER TOMMORROW
 
+- Processes are not patient to wait for access token to be renewed , I need to hault everything first for this to finish then continue.
+- The bad request after upload error still persists, Will be solving it shortly!
 - We can just have one form route which is adjusted internally via conditional rendering.
 - I will trouble-shoot notes , after adding new chapters and lessons with option to add a custom video or share a link that is out there.
 - Smoothen notes CRUD logic,resources section, make sure they work in harmony with video , finalize on the ui and release the software into the world for them to see and comment.

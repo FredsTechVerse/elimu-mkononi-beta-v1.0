@@ -16,12 +16,7 @@ const SubmitButton = ({
       type={type}
       disabled={disabled}
     >
-      <p className="w-full h-full flex-row-centered gap-3">
-        {isSubmitting && isError === false && (
-          <span>
-            <SpinnerIcon />
-          </span>
-        )}
+      <p className="w-full h-full flex justify-between px-2">
         <span>{text}</span>
         {isSubmitting && (
           <span>

@@ -38,9 +38,9 @@ const AlertBox = () => {
           <p className="flex-row-centered gap-3">
             <span>
               {alertBoxData?.status === "success" ? (
-                <CheckCircleIcon className="icon-styling w-12 h-12" />
+                <CheckCircleIcon className="icon-styling w-12 h-12 text-green-700" />
               ) : (
-                <XCircleIcon className="icon-styling w-12 h-12" />
+                <XCircleIcon className="icon-styling w-12 h-12 text-red-700" />
               )}
             </span>
             <span className="px-2 text-sm tablet:text-md">

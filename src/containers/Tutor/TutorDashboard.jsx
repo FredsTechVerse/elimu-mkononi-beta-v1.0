@@ -15,7 +15,17 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchUserDetails } from "../../controllers/fetchData";
 
 const TutorDashboard = () => {
-  const [userData, setUserData] = useState({});
+  const [pieChartData, setPieChartData] = useState({
+    labels: ["Total Units", "Total Lessons"],
+    datasets: [
+      {
+        label: "Workload",
+        data: [10, 20],
+        backgroundColor: ["green", "blue"],
+        borderColor: ["green", "blue"],
+      },
+    ],
+  });
   const { updateAlertBoxData } = useAlertBoxContext();
   const queryClient = useQueryClient();
   const role = "EM-202";
@@ -23,8 +33,6 @@ const TutorDashboard = () => {
   const userDataQuery = useQuery(["user"], () => fetchUserDetails(role), {
     retry: 1,
     onSuccess: (data) => {
-      setUserData(data);
-      console.log(`User data retrieval successfull ${JSON.stringify(data)}`);
       let totalUnits = data?.units?.length;
       let totalLessons = 0;
       data?.units?.forEach((unit) => {
@@ -33,8 +41,19 @@ const TutorDashboard = () => {
         });
       });
 
-      console.log("Total Lessons:", totalLessons);
-      console.log("Total Units:", totalUnits);
+      setPieChartData({
+        ...pieChartData,
+        datasets: [
+          {
+            label: "Workload",
+            data: [totalUnits, totalLessons],
+            backgroundColor: ["green", "blue"],
+            borderColor: ["green", "blue"],
+          },
+        ],
+      });
+
+      console.log({ totalUnits, totalLessons });
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
@@ -45,9 +64,6 @@ const TutorDashboard = () => {
     },
   });
 
-  useEffect(() => {
-    // console.log(`User data : ${JSON.stringify(userData)}`);
-  }, [userData]);
   return (
     <div className="h-screen w-full flex phone:flex-col tablet:flex-row  ">
       <div className="w-1/4 phone:hidden laptop:flex flex-col h-full justify-between p-2">
@@ -107,7 +123,7 @@ const TutorDashboard = () => {
           <div className="phone:w-full tablet:w-1/3  ">
             <div className="flex flex-col justify-evenly items-center gap-5 py-5 ">
               <div className="h-1/3">
-                <PieChart />
+                <PieChart chartData={pieChartData} />
               </div>
               <div className="w-full   bg-slate-300 rounded-lg h-64"></div>
               <div className="w-full h-1/3  flex-col-centered gap-1 rounded-lg  ">
