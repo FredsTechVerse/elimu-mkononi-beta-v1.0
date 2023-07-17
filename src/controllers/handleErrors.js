@@ -1,5 +1,5 @@
 import axios from "../axios";
-
+import { handleLogout } from "./handleLogout";
 const ERRORS = {
   NETWORK_ERROR: "Network error. Please try again later.",
   SERVER_ERROR: "Server error. Please try again later.",
@@ -25,6 +25,7 @@ const handleError = (error, updateAlertBoxData) => {
     }
   } else if (error.response && error.response.status === 403) {
     response = error.response.message;
+    handleLogout();
   } else if (error.response && error.response.status === 404) {
     response = ERRORS.BLANK_ERROR;
   } else if (error.response && error.response.status === 409) {
@@ -47,7 +48,7 @@ const handleError = (error, updateAlertBoxData) => {
   }
 };
 
-const renewToken = async (queryKey) => {
+const renewToken = async () => {
   try {
     const refreshToken = localStorage.getItem("refreshToken");
 

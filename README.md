@@ -31,6 +31,7 @@
 
 ### TO CONSIDER TOMMORROW
 
+- We can just have one form route which is adjusted internally via conditional rendering.
 - I will trouble-shoot notes , after adding new chapters and lessons with option to add a custom video or share a link that is out there.
 - Smoothen notes CRUD logic,resources section, make sure they work in harmony with video , finalize on the ui and release the software into the world for them to see and comment.
 - Polish up on skeleton dimensions.
@@ -82,7 +83,8 @@ handleError(error, updateAlertBoxData);
     }
 );`
 
-- Everythis is within the code. However if no skeletons are involved , i can use the useEffect hook which runs once under the `   userDataQuery.refetch();` method
+- Everything is within the code. However if no skeletons are involved , i can use the useEffect hook which runs once under the `   userDataQuery.refetch();` method
+- Querying can be done while the static content has loaded... You know blending static content with skeletons instead of using skeletons alone is a good trick to make the user feel like the page is loading faster.
 
 ### HOW TO USE CHART JS
 

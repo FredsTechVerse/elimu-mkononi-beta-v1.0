@@ -25,7 +25,6 @@ const ContentPage = () => {
         handleError(error, updateAlertBoxData);
         if (error.response && error.response.data.message === "Token expired") {
           queryClient.invalidateQueries(["unitData", unitID]);
-          console.log(`The query key has  also been invalidated`);
         }
       },
     }

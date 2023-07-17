@@ -5,6 +5,13 @@ const verifyAccess = async () => {
   return accessData.message;
 };
 
+const getYoutubeAuthorizationURI = async () => {
+  console.log("Fetching authorization uri");
+  const { data: authorizationUri } = await axios.get("/oAuth/authorizationUri");
+  console.log(authorizationUri);
+  return authorizationUri;
+};
+
 const fetchCoursesData = async () => {
   const { data: coursesData } = await axios.get("/course/all-courses");
   return coursesData;
@@ -66,5 +73,6 @@ export {
   fetchUsersData,
   fetchLessonNotes,
   fetchUserDetails,
+  getYoutubeAuthorizationURI,
   verifyAccess,
 };

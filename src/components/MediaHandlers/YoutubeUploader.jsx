@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Dropzone from "react-dropzone";
-import axios, { youtubeInstance } from "../../axios";
+import { youtubeInstance } from "../../axios";
 import { CircularProgressBar } from "../../components";
 import { handleError } from "../../controllers/handleErrors";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
+import { getYoutubeAuthorizationURI } from "../../controllers/fetchData";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 const YoutubeUploader = ({ verifyUpload, updateFileInfo, videoTitle }) => {
   const { updateAlertBoxData } = useAlertBoxContext();
+  const queryClient = useQueryClient();
   const [percentCompleted, setPercentCompleted] = useState(0);
   const videoUploadUrl = import.meta.env.VITE_VIDEO_UPLOAD_LINK;
   const videoDescription = "Youtube is the new red university!";
@@ -21,18 +24,19 @@ const YoutubeUploader = ({ verifyUpload, updateFileInfo, videoTitle }) => {
     }
   };
 
-  const authorizeUser = async () => {
-    try {
-      console.log("Fetching authorization uri");
-      const { data: authorizationUri } = await axios.get(
-        "/oAuth/authorizationUri"
-      );
-      console.log(authorizationUri);
-      return authorizationUri;
-    } catch (err) {
-      console.log(`Error during authorization ${err}`);
+  const youtubeAccessTokenQuery = useQuery(
+    ["youtubeAccessToken"],
+    () => getYoutubeAuthorizationURI,
+    {
+      retry: 1,
+      onError: (error) => {
+        handleError(error, updateAlertBoxData);
+        if (error.response && error.response.data.message === "Token expired") {
+          queryClient.invalidateQueries(["courseData", courseID]);
+        }
+      },
     }
-  };
+  );
 
   const redirectToExternalLink = (externalLink) => {
     window.open(externalLink, "_self");
@@ -40,7 +44,6 @@ const YoutubeUploader = ({ verifyUpload, updateFileInfo, videoTitle }) => {
 
   const handleDrop = async (acceptedFiles) => {
     try {
-      // The acceptedFiles is a cabinet box containing our files all arranged in order from first to last.
       const videoFile = acceptedFiles[0];
       const { type: videoType } = videoFile;
       const accessToken = localStorage.getItem("youtubeAccessToken");
@@ -98,28 +101,34 @@ const YoutubeUploader = ({ verifyUpload, updateFileInfo, videoTitle }) => {
   };
   return (
     <div className="h-36 w-72 tablet:w-[360px] mt-2 bg-slate-200  bg-opacity-60 rounded-lg ">
-      {percentCompleted > 0 ? (
-        <div className="flex flex-col-centered w-full h-full ">
-          <CircularProgressBar percentCompleted={percentCompleted} />
-        </div>
+      {youtubeAccessTokenQuery.status === "loading" ? (
+        <p>Fetching the access token b4 we can proceed</p>
       ) : (
-        <Dropzone onDrop={handleDrop}>
-          {({ getRootProps, getInputProps }) => (
-            <div
-              {...getRootProps()}
-              className="dropzone flex-col-centered w-full h-full "
-            >
-              <input {...getInputProps()}></input>
-              <p className="mb-2 text-center">Drag and drop a file here</p>
-              <button
-                type="button"
-                className="bg-primary text-white w-32 h-8 rounded-full"
-              >
-                Select File
-              </button>
+        <div className="w-full">
+          {percentCompleted > 0 ? (
+            <div className="flex flex-col-centered w-full h-full ">
+              <CircularProgressBar percentCompleted={percentCompleted} />
             </div>
+          ) : (
+            <Dropzone onDrop={handleDrop}>
+              {({ getRootProps, getInputProps }) => (
+                <div
+                  {...getRootProps()}
+                  className="dropzone flex-col-centered w-full h-full "
+                >
+                  <input {...getInputProps()}></input>
+                  <p className="mb-2 text-center">Drag and drop a file here</p>
+                  <button
+                    type="button"
+                    className="bg-primary text-white w-32 h-8 rounded-full"
+                  >
+                    Select File
+                  </button>
+                </div>
+              )}
+            </Dropzone>
           )}
-        </Dropzone>
+        </div>
       )}
     </div>
   );

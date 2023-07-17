@@ -8,6 +8,7 @@ import ContentSectionSkeleton from "./ContentSectionSkeleton";
 import QuillEditorSkeleton from "./QuillEditorSkeleton";
 import NotesSkeleton from "./NotesSkeleton";
 import UnitNavSkeleton from "./UnitNavSkeleton";
+import UserProfileSkeleton from "./UserProfileSkeleton";
 export {
   VideoSkeleton,
   UnitSkeleton,
@@ -16,6 +17,7 @@ export {
   TableSkeleton,
   TableAlternativeSkeleton,
   ContentSectionSkeleton,
+  UserProfileSkeleton,
   QuillEditorSkeleton,
   UnitNavSkeleton,
   NotesSkeleton,

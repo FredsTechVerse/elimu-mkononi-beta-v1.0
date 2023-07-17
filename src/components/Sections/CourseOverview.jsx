@@ -20,7 +20,6 @@ const CourseOverview = () => {
         handleError(error, updateAlertBoxData);
         if (error.response && error.response.data.message === "Token expired") {
           queryClient.invalidateQueries(["courseData", courseID]);
-          console.log(`The query key has  also been invalidated`);
         }
       },
     }
@@ -46,9 +45,7 @@ const CourseOverview = () => {
             </div>
           </>
         )}
-        <div className="absolute h-7 bg-slate-100 w-full bottom-0 rounded-t-full">
-          {/* <PageTitle text="Units in this course" /> */}
-        </div>
+        <div className="absolute h-7 bg-slate-100 w-full bottom-0 rounded-t-full"></div>
       </div>
       <div className="flex flex-col items-center justify-center pt-6 w-full">
         <div className="w-full h-full flex flex-col items-center px-2 ">

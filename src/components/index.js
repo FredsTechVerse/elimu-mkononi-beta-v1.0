@@ -114,9 +114,15 @@ import {
   QuillEditorSkeleton,
   NotesSkeleton,
   UnitNavSkeleton,
+  UserProfileSkeleton,
 } from "./Skeletons";
 
-import { PaymentsTable, UnitsAdminTable, UsersDataTable } from "./Tables";
+import {
+  PaymentsTable,
+  UnitsAdminTable,
+  UsersDataTable,
+  TutorUnitsTable,
+} from "./Tables";
 
 import { PriceTag, DurationTag } from "./Tags";
 
@@ -156,6 +162,8 @@ export {
   UnitsAdminTable,
   CTAUnitButtonAdmin,
   DashboardUserButton,
+  UserProfileSkeleton,
+  TutorUnitsTable,
   AdminNavItem,
   RequireAuth,
   Accordion,

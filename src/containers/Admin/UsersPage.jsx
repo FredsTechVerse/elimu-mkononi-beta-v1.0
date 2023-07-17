@@ -3,6 +3,8 @@ import {
   UsersDataTable,
   PageTitle,
   UsersTableAlternative,
+  TableAlternativeSkeleton,
+  TableSkeleton,
 } from "../../components";
 import { fetchUsersData } from "../../controllers/fetchData";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -48,10 +50,9 @@ const UsersPage = () => {
       />
 
       {usersQuery.status === "loading" ? (
-        <div className="w-full h-full flex-row-centered bg-slate-300">
-          <p className=" flex-col-centered text-center text-slate-700 py-3 px-2 m-2 rounded-lg h-24 ">
-            User Data is Loading
-          </p>
+        <div className="w-full debug">
+          <TableSkeleton />
+          <TableAlternativeSkeleton />
         </div>
       ) : (
         <div className="w-full debug">

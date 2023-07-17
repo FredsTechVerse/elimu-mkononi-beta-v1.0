@@ -1,22 +1,18 @@
 import React from "react";
 import {
-  TutorCardHome,
   UserProfile,
   DashboardUserButton,
-  NavPageBtn,
   DoughnutChart,
   PieChart,
   AreaChart,
   AdminNavItem,
 } from "../../components";
-import { useOutletContext } from "react-router-dom";
 
 const AdminDashboard = () => {
-  const tutorData = useOutletContext();
   return (
     <div className="h-screen w-full py-2 flex phone:flex-col tablet:flex-row  ">
       <div className="w-1/4 phone:hidden laptop:flex flex-col h-full justify-between p-2">
-        <UserProfile />
+        <UserProfile name="John mwangi" role="admin" />
         <div className="controls w-full h-full flex flex-col justify-start gap-2 px-1 ">
           <h1 className="text-slate-900 font-bold text-lg text-center capitalize mt-3 w-full h-12 flex-row-centered  ">
             Navigate to Pages
