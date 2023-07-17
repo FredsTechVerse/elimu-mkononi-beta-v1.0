@@ -17,6 +17,7 @@ const handleError = (error, updateAlertBoxData) => {
     response = ERRORS.BAD_REQUEST;
   } else if (error.response && error.response.status === 401) {
     if (error.response.data.message === "Token expired") {
+      console.log("Token renewal expected");
       renewToken();
     } else if (error.response.statusText === "Unauthorized") {
       response = ERRORS.AUTHORIZATION_ERROR;
@@ -63,13 +64,12 @@ const renewToken = async () => {
       body,
       config
     );
-    // UPDATES TOKEN HEADER
     axios.defaults.headers.common[
       "Authorization"
     ] = `Bearer ${refreshTokenData.newAccessToken}`;
 
     localStorage.setItem("accessToken", refreshTokenData.newAccessToken);
-    console.log("Token has been renewed successfully");
+    console.log("Renewed Token!");
   } catch (err) {
     console.log(
       `An error occured while renewing the access token ${JSON.stringify(err)}`

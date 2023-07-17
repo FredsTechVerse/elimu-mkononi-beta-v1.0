@@ -7,6 +7,7 @@ import {
   UserProfileSkeleton,
   TableSkeleton,
   TutorUnitsTable,
+  PageTitle,
 } from "../../components";
 import { handleError } from "../../controllers/handleErrors";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
@@ -23,8 +24,8 @@ const TutorDashboard = () => {
     retry: 1,
     onSuccess: (data) => {
       setUserData(data);
-      console.log(data);
-      // Extracting the total number of lessons
+      console.log(`User data retrieval successfull ${JSON.stringify(data)}`);
+      let totalUnits = data?.units?.length;
       let totalLessons = 0;
       data?.units?.forEach((unit) => {
         unit.unitChapters.forEach((chapter) => {
@@ -32,17 +33,13 @@ const TutorDashboard = () => {
         });
       });
 
-      // Extracting the total number of units
-      let totalUnits = data?.units?.length;
-
-      // Outputting the results
       console.log("Total Lessons:", totalLessons);
       console.log("Total Units:", totalUnits);
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
       if (error.response && error.response.data.message === "Token expired") {
-        console.log("Retrying the fetch");
+        console.log("Refetching user details!");
         queryClient.invalidateQueries(["user"]);
       }
     },
@@ -51,8 +48,6 @@ const TutorDashboard = () => {
   useEffect(() => {
     // console.log(`User data : ${JSON.stringify(userData)}`);
   }, [userData]);
-
-  console.log(`Tutor data ${JSON.stringify(userData)}`);
   return (
     <div className="h-screen w-full flex phone:flex-col tablet:flex-row  ">
       <div className="w-1/4 phone:hidden laptop:flex flex-col h-full justify-between p-2">
@@ -60,7 +55,7 @@ const TutorDashboard = () => {
           <UserProfileSkeleton />
         ) : (
           <UserProfile
-            name={`${userDataQuery?.data?.firstName}  ${userDataQuery?.data?.surName} `}
+            name={`${userDataQuery?.data?.firstName}  ${userDataQuery?.data?.surname} `}
             role="tutor"
           />
         )}
@@ -98,11 +93,14 @@ const TutorDashboard = () => {
               <AreaChart />
             </div>
 
-            <div className="content p-2 m-2 rounded-xl w-full h-full flex-row-centered bg-slate-200 ">
+            <div className="content p-2 m-2 rounded-xl w-full h-full flex flex-col justify-start items-center ">
               {userDataQuery.status === "loading" ? (
                 <TableSkeleton />
               ) : (
-                <TutorUnitsTable />
+                <div className="flex-col-centered gap-5">
+                  <PageTitle text="List of units" />
+                  <TutorUnitsTable unitsData={userDataQuery?.data?.units} />
+                </div>
               )}
             </div>
           </div>
