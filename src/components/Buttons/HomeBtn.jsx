@@ -2,15 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { HomeIcon } from "@heroicons/react/24/solid";
 
-const HomeBtn = ({ isDark }) => {
+const HomeBtn = ({ isDark, inDashboard }) => {
   return (
     <Link to="/">
       <div
-        className={`${
-          isDark
-            ? "text-slate-700 hover:border-slate-900 hover:text-slate-900"
-            : "hover:border-white "
-        } cursor-pointer rounded-full flex-row-centered hover:border-2  `}
+        className={`${isDark && "text-slate-700 hover:text-slate-900"} ${
+          inDashboard && "bg-primary hover:bg-purple-500"
+        } cursor-pointer rounded-full flex-row-centered border-none  `}
         onClick={() => {
           navigate(-1);
         }}

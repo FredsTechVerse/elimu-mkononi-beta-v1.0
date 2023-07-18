@@ -11,14 +11,15 @@ const ERRORS = {
   BAD_REQUEST: "Bad request sent to server ",
 };
 
-const handleError = (error, updateAlertBoxData) => {
+const handleError = async (error, updateAlertBoxData) => {
   let response = "No response has been specified";
   if (error.response && error.response.status === 400) {
     response = ERRORS.BAD_REQUEST;
   } else if (error.response && error.response.status === 401) {
     if (error.response.data.message === "Token expired") {
       console.log("Token renewal expected");
-      renewToken();
+      await renewToken();
+      console.log("Token has been renewed successfully!");
     } else if (error.response.statusText === "Unauthorized") {
       response = ERRORS.AUTHORIZATION_ERROR;
     } else {

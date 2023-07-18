@@ -6,6 +6,8 @@ import {
   PieChart,
   AreaChart,
   AdminNavItem,
+  HomeBtn,
+  BackBtn,
 } from "../../components";
 
 const AdminDashboard = () => {
@@ -26,7 +28,11 @@ const AdminDashboard = () => {
       </div>
       <div className="w-full laptop:w-3/4  flex flex-col justify-start gap- h-full overflow-auto ">
         <div className="w-full flex phone:flex-col tablet:flex-row justify-between items-center   gap-5">
-          <div className="phone:w-full tablet:w-2/3 bg-slate-300 rounded-xl h-40 flex-col-centered ">
+          <div className="phone:w-full tablet:w-2/3 bg-slate-300 rounded-xl h-40 flex flex-col-centered relative ">
+            <div className="flex-row-centered gap-2 absolute top-2 left-3 z-10">
+              <BackBtn inDashboard={true} isDark={false} />
+              <HomeBtn inDashboard={true} isDark={false} />
+            </div>
             <h1 className="font-bold text-lg uppercase w-full h-12 flex-row-centered ">
               GREETINGS
             </h1>

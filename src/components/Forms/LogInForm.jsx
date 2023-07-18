@@ -42,7 +42,7 @@ const LogInForm = () => {
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
-      if (isFormValid) {
+      if (error.response && error.response.data.message === "Token expired") {
         const trimmedFirstName = firstName.trim();
         const trimmedPassword = password.trim();
 

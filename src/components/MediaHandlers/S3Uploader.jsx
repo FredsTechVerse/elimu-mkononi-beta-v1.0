@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Dropzone from "react-dropzone";
 import axios from "../../axios";
+import defaultAxios from "axios";
 import { CircularProgressBar } from "../../components";
 import { handleError } from "../../controllers/handleErrors";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
@@ -34,15 +35,13 @@ const S3Uploader = ({ verifyUpload, updateFileName, isTokenActive }) => {
         const { data } = await axios.post("/s3Direct/", formData, config);
         const { signedUrl, Key } = data;
         console.log("Signed URL & Key", signedUrl, Key);
-        await axios.put(signedUrl, file, {
+        await defaultAxios.put(signedUrl, file, {
           headers: {
             "Content-Type": file.type,
           },
           onUploadProgress: trackProgress,
         });
         updateFileName(Key);
-        // setFileName(Key);
-        // Perform any additional actions after the upload is complete, such as saving data to the database
       }
     } catch (error) {
       console.log(error.response);

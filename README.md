@@ -24,29 +24,19 @@
   - The tutor will officially be renamed as the lecturer.
   - There will be need to add an account for student content creators.
 
+### PERFOMANCE OPTIMIZATION
+
+- Building the resources section to handle pdfs
+- Socials to be displayed absolutely as with my portfolio.
+- The bad request after upload error still persists, Will be solving it shortly!Issue could be with the axios instance i was utilizing.
+- Minimize chapter form routes to one route either with state or internal logic handling
+- Optimize color contrast of navigation bar for visibility.
+- Design a custom CTA , for the tutors units table...
+
 ### TIMELINES
 
 - I believe version one will be ready by this weekend.
 - For release one , users will only be able to add youtube links and watch them play.
-
-### TO CONSIDER TOMMORROW
-
-- Processes are not patient to wait for access token to be renewed , I need to hault everything first for this to finish then continue.
-- The bad request after upload error still persists, Will be solving it shortly!
-- We can just have one form route which is adjusted internally via conditional rendering.
-- I will trouble-shoot notes , after adding new chapters and lessons with option to add a custom video or share a link that is out there.
-- Smoothen notes CRUD logic,resources section, make sure they work in harmony with video , finalize on the ui and release the software into the world for them to see and comment.
-- Polish up on skeleton dimensions.
-- Optimize form buttons to show loading state with a spinner ,change color of quick action buttons.
-- Optimize navigation bar , making it visible.
-- Making alertbox the non blocking to other operations
-- Once the player and notes and resources are ready , its time to add content to the page.
-
-### PERFOMANCE OPTIMIZATION
-
-- Solve , screen freeze when inspector tools are open during a refresh.
-- Building the resources section to handle pdfs
-- Socials to be displayed absolutely as with my portfolio.
 
 ### KEY TIPS I HAVE PICKED UP ALONG THE JOURNEY
 

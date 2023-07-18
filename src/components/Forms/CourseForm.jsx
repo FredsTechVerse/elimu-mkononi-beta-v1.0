@@ -22,16 +22,14 @@ const CourseForm = () => {
   //=========================
   const [courseTitle, setCourseTitle] = useState("");
   const [uploadSuccess, setUploadSucess] = useState(false);
-  const [fileName, setFileName] = useState(
-    "9117f513331d43d9671a1dba179e8361.jpeg"
-  );
+  const [fileName, setFileName] = useState("");
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => (document.body.style.overflow = "unset");
   }, []);
 
-  const accessQuery = useQuery(["accessVerification"], verifyAccess, {
+  const accessQuery = useQuery(["accessVerification"], () => verifyAccess(), {
     retry: 1,
     onError: (error) => {
       handleError(error, updateAlertBoxData);

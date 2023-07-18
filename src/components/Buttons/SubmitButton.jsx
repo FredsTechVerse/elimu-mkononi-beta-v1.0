@@ -16,7 +16,7 @@ const SubmitButton = ({
       type={type}
       disabled={disabled}
     >
-      <p className="w-full h-full flex justify-between px-2">
+      <p className="w-full h-full flex items-center justify-center gap-3 px-2">
         <span>{text}</span>
         {isSubmitting && (
           <span>
