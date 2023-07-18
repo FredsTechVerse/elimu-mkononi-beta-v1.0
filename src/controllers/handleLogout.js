@@ -6,7 +6,8 @@ const handleLogout = () => {
   localStorage.removeItem("roles");
   localStorage.removeItem("youtubeAccessToken");
   delete axios.defaults.headers.common["Authorization"];
-  window.location.reload();
+  // window.location.reload();
+  window.location.href = "/";
 };
 
 export { handleLogout };

@@ -3,13 +3,13 @@ import { profile } from "../../assets";
 import { ShieldCheckIcon } from "@heroicons/react/24/solid";
 const UserProfile = ({ name, role }) => {
   return (
-    <div className="flex-col-centered py-5  w-full rounded-xl h-96 bg-slate-200  ">
+    <div className="flex-col-centered py-5  w-full rounded-xl h-80 bg-slate-200  ">
       <img
         src={profile}
         alt="Profile Picture"
-        className="w-[240px] rounded-full aspect-square  dark:bg-gray-500"
+        className="w-[220px] rounded-full aspect-square  dark:bg-gray-500"
       />
-      <div className="name capitalize mt-4 font-bold text-3xl">{name}</div>
+      <div className="name capitalize mt-2 font-bold text-3xl">{name}</div>
       <h1 className="role capitalize m-2 text-center text-slate-500  font-bold text-lg flex-row-centered gap-1">
         <span>{role}</span>
         <span>

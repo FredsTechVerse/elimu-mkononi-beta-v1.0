@@ -103,8 +103,8 @@ const CourseForm = () => {
   };
 
   const updateFileName = (imageURl) => {
-    console.log(imageURl);
     setFileName(imageURl);
+    console.log(`Filename updated to ${imageURl}`);
   };
 
   return (

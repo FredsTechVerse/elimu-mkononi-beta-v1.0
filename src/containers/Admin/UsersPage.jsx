@@ -50,12 +50,12 @@ const UsersPage = () => {
       />
 
       {usersQuery.status === "loading" ? (
-        <div className="w-full debug">
+        <div className="w-full ">
           <TableSkeleton />
           <TableAlternativeSkeleton />
         </div>
       ) : (
-        <div className="w-full debug">
+        <div className="w-full ">
           <UsersDataTable
             users={usersQuery.data}
             fetchUsersData={fetchUsersData}

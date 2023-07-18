@@ -7,7 +7,6 @@ import {
   PresentationChartLineIcon,
 } from "@heroicons/react/24/solid";
 const CourseCardV2 = ({ courseID, courseImage, courseTitle }) => {
-  console.log(courseImage);
   return (
     <div className="group relative flex flex-col items-center w-full h-full bg-opacity-20  rounded-xl m-3 bg-slate-300 shadow-slate-300 shadow-lg ">
       <img

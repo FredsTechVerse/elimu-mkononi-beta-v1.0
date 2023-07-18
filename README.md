@@ -8,6 +8,7 @@
 - Having the course outline before playing any lesson is a really good reminder to learner to set his / her goals right.
 - If we really deliver value , logging in to track progress will be a non issue with the users. However in my application , i do not need the user to log in , i only need to know in which school they are in and which course they are taking so that i can administer targeted resources for them.
 - This is my niche.... Helping learners revise for their exams with ease and in a targeted manner and later at a low price.
+  -I need a navbar for dashboards asap!
 
 ### DOES THIS PRODUCT HAVE THE ABILITY TO BE MONETIZED ?
 
@@ -26,17 +27,12 @@
 
 ### PERFOMANCE OPTIMIZATION
 
-- Building the resources section to handle pdfs
-- Socials to be displayed absolutely as with my portfolio.
-- The bad request after upload error still persists, Will be solving it shortly!Issue could be with the axios instance i was utilizing.
-- Minimize chapter form routes to one route either with state or internal logic handling
-- Optimize color contrast of navigation bar for visibility.
-- Design a custom CTA , for the tutors units table...
-
-### TIMELINES
-
-- I believe version one will be ready by this weekend.
-- For release one , users will only be able to add youtube links and watch them play.
+- Polish resource section to upload and display pdf's
+- Troubleshoot the youtube uploader.
+- Troubleshoot root caouse bad request S3 upload
+- Populate charts with real time data
+- Unlocking s3 bucket the right and secure way
+- Polish notes section expecially error display and content update crossing paths
 
 ### KEY TIPS I HAVE PICKED UP ALONG THE JOURNEY
 

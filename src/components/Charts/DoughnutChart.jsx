@@ -5,19 +5,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-const DoughnutChart = () => {
-  const chartData = {
-    labels: ["Tutors", "Students", "Admin"],
-    datasets: [
-      {
-        label: "Poll",
-        data: [24, 3, 36],
-        backgroundColor: ["red", "green", "blue"],
-        borderColor: ["red", "green", "blue"],
-      },
-    ],
-  };
-
+const DoughnutChart = ({ chartData }) => {
   const options = {
     borderRadius: 10,
     borderWidth: 1,
@@ -27,7 +15,7 @@ const DoughnutChart = () => {
     animation: { animateScale: true, animateRotate: true },
 
     plugins: {
-      title: { display: true, text: "Distribution of Users" },
+      title: { display: false, text: "Distribution of Users" },
       legend: { display: false },
     },
   };

@@ -28,6 +28,7 @@ const TutorDashboard = () => {
       },
     ],
   });
+
   const { updateAlertBoxData } = useAlertBoxContext();
   const queryClient = useQueryClient();
   const role = "EM-202";
@@ -42,7 +43,7 @@ const TutorDashboard = () => {
           totalLessons += chapter.chapterLessons.length;
         });
       });
-      console.log(`Query successfull ${JSON.stringify(data)}`);
+      // console.log(`Query successfull ${JSON.stringify(data)}`);
 
       setPieChartData({
         ...pieChartData,
@@ -79,6 +80,10 @@ const TutorDashboard = () => {
           />
         )}
         <div className="controls w-full h-full flex-col-centered gap-2 ">
+          <h1 className="text-slate-900 font-bold text-lg text-center capitalize mt-3 w-full h-12 flex-row-centered  ">
+            Navigate to Pages
+          </h1>
+
           <div className="h-12 w-full flex-row-centered text-white rounded-lg bg-primary rounded-ms">
             View Students
           </div>
@@ -93,7 +98,7 @@ const TutorDashboard = () => {
           </div>
         </div>
       </div>
-      <div className="w-full laptop:w-3/4  flex flex-col justify-start h-full overflow-auto  p-3 ">
+      <div className="w-full laptop:w-3/4  flex flex-col justify-start h-full overflow-auto p-3 ">
         <div className="w-full flex phone:flex-col tablet:flex-row justify-between items-center gap-5">
           <div className="phone:w-full tablet:w-2/3 bg-slate-300 rounded-xl h-40 flex flex-col-centered relative ">
             <div className="flex-row-centered gap-2 absolute top-2 left-3 z-10">

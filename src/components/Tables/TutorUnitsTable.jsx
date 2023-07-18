@@ -2,15 +2,15 @@ import React from "react";
 import { CTAButton } from "../../components";
 const TutorUnitsTable = ({ unitsData }) => {
   return (
-    <div className="hidden laptop:block w-full px-3">
-      <table className="table-fixed w-full bg-slate-300 bg-opacity-10 shadow-lg shadow-slate-200">
+    <div className="overflow-auto w-full px-3">
+      <table className="table-fixed bg-slate-300 bg-opacity-10 shadow-lg shadow-slate-200">
         <thead>
-          <tr className="text-white uppercase bg-primary h-10 ">
+          <tr className="text-white uppercase bg-primary h-10  w-full gap-2 ">
             <th className=" w-12 ">No</th>
-            <th className=" w-full">Unit Name</th>
-            <th className=" w-full">Chapters</th>
-            <th className=" w-full">Lessons</th>
-            <th className=" w-full">CTA</th>
+            <th className=" w-48">Unit Name</th>
+            <th className=" w-12">Chapters</th>
+            <th className=" w-12">Lessons</th>
+            <th className=" w-12">CTA</th>
           </tr>
         </thead>
         <tbody>
@@ -34,11 +34,7 @@ const TutorUnitsTable = ({ unitsData }) => {
                   <td>{numberOfLessons}</td>
 
                   <td>
-                    <CTAButton
-                      _id={unit?._id}
-                      contact={unit?.email}
-                      fetchUsersData={unitsData}
-                    />
+                    <CTAButton unitID={unit?._id} />
                   </td>
                 </tr>
               );
