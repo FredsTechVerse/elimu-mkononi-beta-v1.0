@@ -9,38 +9,23 @@ import {
   HomeBtn,
   BackBtn,
   UserProfileSkeleton,
+  PageTitle,
 } from "../../components";
 
 import { handleError } from "../../controllers/handleErrors";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { fetchUserDetails } from "../../controllers/fetchData";
+import {
+  fetchUserDetails,
+  fetchCoursesData,
+} from "../../controllers/fetchData";
 
 const AdminDashboard = () => {
-  const [pieChartData, setPieChartData] = useState({
-    labels: ["Total Units", "Total Lessons"],
-    datasets: [
-      {
-        label: "Workload",
-        data: [10, 20],
-        backgroundColor: ["green", "blue"],
-        borderColor: ["green", "blue"],
-      },
-    ],
-  });
-
-  const [usersData, setUsersData] = useState({
-    labels: ["Students", "Tutors", "Admins"],
-    datasets: [
-      {
-        label: "Total Users",
-        data: [50, 20, 3],
-        backgroundColor: ["green", "blue", "red"],
-        borderColor: ["green", "blue", "red"],
-      },
-    ],
-  });
-
+  const { updateAlertBoxData } = useAlertBoxContext();
+  const queryClient = useQueryClient();
+  const role = "EM-203";
+  const [coursesData, setCoursesData] = useState({});
+  const [usersData, setUsersData] = useState({});
   const [unitsDistribution, setUnitsDistribution] = useState({
     // I need to fetch all courses data from here and count my units and their names
     labels: [
@@ -59,11 +44,8 @@ const AdminDashboard = () => {
       },
     ],
   });
-  const { updateAlertBoxData } = useAlertBoxContext();
-  const queryClient = useQueryClient();
-  const role = "EM-203";
 
-  const userDataQuery = useQuery(["user"], () => fetchUserDetails(role), {
+  const coursesQuery = useQuery(["courses"], fetchCoursesData, {
     retry: 1,
     onSuccess: (data) => {
       let totalUnits = data?.units?.length;
@@ -73,13 +55,13 @@ const AdminDashboard = () => {
           totalLessons += chapter.chapterLessons.length;
         });
       });
-      console.log(`Query successfull ${JSON.stringify(data)}`);
+      console.log(`Courses Data : ${JSON.stringify(data)}`);
 
-      setPieChartData({
-        ...pieChartData,
+      setCoursesData({
+        ...coursesData,
         datasets: [
           {
-            label: "Workload",
+            label: "Courses Data",
             data: [totalUnits, totalLessons],
             backgroundColor: ["green", "blue"],
             borderColor: ["green", "blue"],
@@ -97,10 +79,25 @@ const AdminDashboard = () => {
       }
     },
   });
+
+  const userDataQuery = useQuery(["user"], () => fetchUserDetails(role), {
+    retry: 1,
+    onSuccess: (data) => {
+      console.log(`User Data : ${JSON.stringify(data)}`);
+    },
+    onError: (error) => {
+      handleError(error, updateAlertBoxData);
+      if (error.response && error.response.data.message === "Token expired") {
+        queryClient.invalidateQueries(["courses"]);
+      }
+    },
+  });
+
   return (
     <div className="h-screen w-full py-2 flex phone:flex-col tablet:flex-row  ">
       <div className="w-1/4 phone:hidden laptop:flex flex-col h-full justify-between p-2">
-        {userDataQuery.status === "loading" ? (
+        {userDataQuery.status === "loading" &&
+        coursesQuery.status === "loading" ? (
           <UserProfileSkeleton />
         ) : (
           <UserProfile
@@ -149,13 +146,14 @@ const AdminDashboard = () => {
               </div>
             </div>
             <div className="phone:h-[250px] tablet:h-[370px] mt-5  p-2 w-full  flex-col-centered rounded-xl">
+              <PageTitle text="Application Traffic data" />
               <AreaChart />
             </div>
           </div>
           <div className="phone:w-full tablet:w-1/3 ">
             <div className="flex flex-col justify-evenly items-center gap-5 py-5 ">
               <div className="h-1/3">
-                <PieChart chartData={pieChartData} />
+                <PieChart chartData={coursesData} />
               </div>
               <div className="w-full   bg-slate-300 rounded-lg h-64"></div>
               <div className="w-full h-1/3  flex-col-centered gap-1 rounded-lg  ">

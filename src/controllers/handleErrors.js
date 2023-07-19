@@ -12,6 +12,7 @@ const ERRORS = {
 };
 
 const handleError = async (error, updateAlertBoxData) => {
+  console.log("What the fuck");
   let response = "No response has been specified";
   if (error.response && error.response.status === 400) {
     response = ERRORS.BAD_REQUEST;
@@ -26,8 +27,9 @@ const handleError = async (error, updateAlertBoxData) => {
       response = ERRORS.AUTHORIZATION_ERROR;
     }
   } else if (error.response && error.response.status === 403) {
+    console.log(JSON.stringify(error.response));
     response = error.response.message;
-    handleLogout();
+    // handleLogout();
   } else if (error.response && error.response.status === 404) {
     response = ERRORS.BLANK_ERROR;
   } else if (error.response && error.response.status === 409) {

@@ -14,7 +14,7 @@ const ResourcesSection = () => {
       const formData = new FormData();
       formData.append("lessonID", lessonID);
       formData.append("resourceName", resourceName);
-      formData.append("resouceUrl", resourceUrl); //Jackpot. Defines our fieldname which is crawled by multer to pick out this file for upload.
+      formData.append("resouceUrl", resourceUrl);
 
       const config = {
         headers: { "Content-Type": "application/json" },

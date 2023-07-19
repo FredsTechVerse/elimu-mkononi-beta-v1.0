@@ -2,10 +2,12 @@ import React from "react";
 
 import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/solid";
 import { handleLogout } from "../../controllers/handleLogout";
+import { useAlertBoxContext } from "../../context/AlertBoxContext";
 const LogoutBtn = ({ position = "sidebar" }) => {
+  const { updateAlertBoxData } = useAlertBoxContext();
   return (
     <div
-      onClick={handleLogout}
+      onClick={() => handleLogout({ updateAlertBoxData })}
       className={`${
         position === "navbar"
           ? "border-2 border-white navbar-link"

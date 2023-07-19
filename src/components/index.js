@@ -1,7 +1,6 @@
 import {
   AddBtn,
   SubmitButton,
-  LoadingBtn,
   LogoutBtn,
   AdminNavItem,
   CTAButton,
@@ -181,7 +180,6 @@ export {
   ReactPdfModal,
   ReturnBackBtn,
   LogoutBtn,
-  LoadingBtn,
   Navbar,
   Search,
   CourseNav,

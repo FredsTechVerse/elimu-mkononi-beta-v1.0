@@ -8,7 +8,7 @@
 - Having the course outline before playing any lesson is a really good reminder to learner to set his / her goals right.
 - If we really deliver value , logging in to track progress will be a non issue with the users. However in my application , i do not need the user to log in , i only need to know in which school they are in and which course they are taking so that i can administer targeted resources for them.
 - This is my niche.... Helping learners revise for their exams with ease and in a targeted manner and later at a low price.
-  -I need a navbar for dashboards asap!
+- I need a navbar for dashboards asap!
 
 ### DOES THIS PRODUCT HAVE THE ABILITY TO BE MONETIZED ?
 
@@ -27,14 +27,20 @@
 
 ### PERFOMANCE OPTIMIZATION
 
+- Populate charts with real time data
+- Polish notes section expecially error display and content update crossing paths
 - Polish resource section to upload and display pdf's
 - Troubleshoot the youtube uploader.
-- Troubleshoot root caouse bad request S3 upload
-- Populate charts with real time data
-- Unlocking s3 bucket the right and secure way
-- Polish notes section expecially error display and content update crossing paths
+- Unlocking s3 bucket the right and secure way - Content is not even getting uploaded to my bucket.
+- Troubleshoot root cause bad request S3 upload -
+
+### VERSION 2 OPTIMIZATIONS
+
+- Migrate to typescript using SWC which is a breeze!
 
 ### KEY TIPS I HAVE PICKED UP ALONG THE JOURNEY
+
+- SWC works well without hitches. Will use it when i migrate to typescript.
 
 - Router state has always been simply an object... You know that basic container with a key and a value which in my case was as simple as assigning a background `{ background: location }` and once present in the state activating the second set of routes.
 

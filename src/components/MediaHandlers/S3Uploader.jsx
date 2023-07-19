@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Dropzone from "react-dropzone";
-import axios from "../../axios";
-import defaultAxios from "axios";
+import Axios from "../../axios";
+import axios from "axios";
 import { CircularProgressBar } from "../../components";
 import { handleError } from "../../controllers/handleErrors";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
@@ -23,19 +23,23 @@ const S3Uploader = ({ verifyUpload, updateFileName, isTokenActive }) => {
 
   const handleDrop = async (acceptedFiles) => {
     try {
-      // The acceptedFiles is a cabinet box containing our files all arranged in order from first to last.
       const file = acceptedFiles[0];
       const { type } = file;
-      const formData = new FormData();
-      formData.append("fileType", type);
+      const body = {
+        fileType: type,
+      };
       const config = {
         headers: { "Content-Type": "application/json" },
       };
       if (isTokenActive) {
-        const { data } = await axios.post("/s3Direct/", formData, config);
+        const { data } = await Axios.post("/s3Direct/", body, config);
         const { signedUrl, Key } = data;
-        console.log("Signed URL & Key", signedUrl, Key);
-        await defaultAxios.put(signedUrl, file, {
+        console.log(
+          `Generated signed URL & Key : ${JSON.stringify(
+            signedUrl
+          )}, ${JSON.stringify(Key)}`
+        );
+        await axios.put(signedUrl, file, {
           headers: {
             "Content-Type": file.type,
           },
