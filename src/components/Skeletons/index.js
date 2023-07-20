@@ -9,6 +9,7 @@ import QuillEditorSkeleton from "./QuillEditorSkeleton";
 import NotesSkeleton from "./NotesSkeleton";
 import UnitNavSkeleton from "./UnitNavSkeleton";
 import UserProfileSkeleton from "./UserProfileSkeleton";
+import DoughnutSkeleton from "./DoughnutSkeleton";
 export {
   VideoSkeleton,
   UnitSkeleton,
@@ -21,4 +22,5 @@ export {
   QuillEditorSkeleton,
   UnitNavSkeleton,
   NotesSkeleton,
+  DoughnutSkeleton,
 };

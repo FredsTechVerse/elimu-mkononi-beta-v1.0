@@ -10,6 +10,8 @@ import {
   PageTitle,
   HomeBtn,
   BackBtn,
+  DoughnutChart,
+  DoughnutSkeleton,
 } from "../../components";
 import { handleError } from "../../controllers/handleErrors";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
@@ -22,7 +24,7 @@ const TutorDashboard = () => {
     datasets: [
       {
         label: "Workload",
-        data: [10, 20],
+        data: [0, 0],
         backgroundColor: ["green", "blue"],
         borderColor: ["green", "blue"],
       },
@@ -40,13 +42,13 @@ const TutorDashboard = () => {
       let totalLessons = 0;
       data?.units?.forEach((unit) => {
         unit.unitChapters.forEach((chapter) => {
-          totalLessons += chapter.chapterLessons.length;
+          totalLessons += chapter?.chapterLessons?.length;
         });
       });
       // console.log(`Query successfull ${JSON.stringify(data)}`);
 
       setPieChartData({
-        ...pieChartData,
+        labels: ["Total Units", "Total Lessons"],
         datasets: [
           {
             label: "Workload",
@@ -136,7 +138,10 @@ const TutorDashboard = () => {
           <div className="phone:w-full tablet:w-1/3  ">
             <div className="flex flex-col justify-evenly items-center gap-5 py-5 ">
               <div className="h-1/3">
-                <PieChart chartData={pieChartData} />
+                {userDataQuery.status === "loading" && <DoughnutSkeleton />}
+                {userDataQuery.status === "success" && (
+                  <PieChart chartData={pieChartData} />
+                )}
               </div>
               <div className="w-full   bg-slate-300 rounded-lg h-64"></div>
               <div className="w-full h-1/3  flex-col-centered gap-1 rounded-lg  ">

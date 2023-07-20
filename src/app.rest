@@ -26,6 +26,10 @@ GET http://localhost:4000/auth/all-students
 ### REGISTER STUDENT
 GET http://localhost:4000/auth/all-tutors
 
+
+### COURSES 
+GET http://localhost:4000/course/all-courses
+
 ### REGISTER TUTOR
 POST http://localhost:4000/auth/register-admin
 Content-Type: application/json

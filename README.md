@@ -1,5 +1,7 @@
 # ELIMU MKONONI
 
+- Looking forward to committing that s3 and youtube upload set up successfully!
+
 # WHAT WE SOLVE
 
 - Where we help learners carry out their revision for the units that they are taking in school.

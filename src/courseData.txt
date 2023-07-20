@@ -1,0 +1,39 @@
+COURSE DATA 
+
+[
+  {
+    "_id": "64b2933c9ffc4971c39bc1e7",
+    "courseImage": "9117f513331d43d9671a1dba179e8361.jpeg",
+    "courseTitle": "ASDF",
+    "units": [
+      "64b2934f9ffc4971c39bc1ed",
+      "64b2ff265cafc7d245add506",
+      "64b2ffa15cafc7d245add50e"
+    ],
+    "createdAt": "2023-07-15T12:38:20.950Z",
+    "updatedAt": "2023-07-15T20:20:50.044Z",
+    "__v": 0
+  },
+  {
+    "_id": "64b58dd127e1e0b5881ac892",
+    "courseImage": "9117f513331d43d9671a1dba179e8361.jpeg",
+    "courseTitle": "COURSE 2",
+    "units": [
+      "64b812e588193afe47ad5e97"
+    ],
+    "createdAt": "2023-07-17T18:52:01.789Z",
+    "updatedAt": "2023-07-19T16:44:22.703Z",
+    "__v": 0
+  },
+  {
+    "_id": "64b5971a028c40be5166d068",
+    "courseImage": "9117f513331d43d9671a1dba179e8361.jpeg",
+    "courseTitle": "COURSE 3",
+    "units": [
+      "64b6212b2e0ce421c642b468"
+    ],
+    "createdAt": "2023-07-17T19:31:38.365Z",
+    "updatedAt": "2023-07-18T05:20:44.023Z",
+    "__v": 0
+  }
+]

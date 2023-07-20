@@ -10,6 +10,7 @@ import {
   BackBtn,
   UserProfileSkeleton,
   PageTitle,
+  DoughnutSkeleton,
 } from "../../components";
 
 import { handleError } from "../../controllers/handleErrors";
@@ -24,23 +25,27 @@ const AdminDashboard = () => {
   const { updateAlertBoxData } = useAlertBoxContext();
   const queryClient = useQueryClient();
   const role = "EM-203";
-  const [coursesData, setCoursesData] = useState({});
-  const [usersData, setUsersData] = useState({});
-  const [unitsDistribution, setUnitsDistribution] = useState({
-    // I need to fetch all courses data from here and count my units and their names
-    labels: [
-      "Mechanical Engineering",
-      "Mechatronics Engineering",
-      "Electrical Engineering",
-      "Chemical Engineering",
-      "Telecommunication Engineering",
-    ],
+
+  const [coursesData, setCoursesData] = useState({
+    labels: ["Total Units", "Total Lessons"],
     datasets: [
       {
-        label: "Total Units",
-        data: [8, 4, 2, 3, 7, 9, 10],
-        backgroundColor: ["green", "blue", "red"],
-        borderColor: ["green", "blue", "red"],
+        label: "Workload",
+        data: [0, 0],
+        backgroundColor: ["green", "blue"],
+        borderColor: ["green", "blue"],
+      },
+    ],
+  });
+
+  const [unitsDistribution, setUnitsDistribution] = useState({
+    labels: ["Total Units", "Total Lessons"],
+    datasets: [
+      {
+        label: "Workload",
+        data: [0, 0],
+        backgroundColor: ["green", "blue"],
+        borderColor: ["green", "blue"],
       },
     ],
   });
@@ -48,34 +53,54 @@ const AdminDashboard = () => {
   const coursesQuery = useQuery(["courses"], fetchCoursesData, {
     retry: 1,
     onSuccess: (data) => {
-      let totalUnits = data?.units?.length;
-      let totalLessons = 0;
-      data?.units?.forEach((unit) => {
-        unit.unitChapters.forEach((chapter) => {
-          totalLessons += chapter.chapterLessons.length;
-        });
+      console.log(`Courses data returned ${JSON.stringify(data)}`);
+      let totalUnits = 0;
+      let coursesOffered = [];
+      let unitsPerCourse = [];
+      let totalCourses = data?.length;
+      data.forEach((course) => {
+        totalUnits += course?.units?.length;
+        coursesOffered.push(course?.courseTitle);
+        unitsPerCourse.push(course?.units?.length);
       });
-      console.log(`Courses Data : ${JSON.stringify(data)}`);
 
+      console.log(
+        JSON.stringify({
+          totalUnits,
+          coursesOffered,
+          unitsPerCourse,
+          totalCourses,
+        })
+      );
       setCoursesData({
-        ...coursesData,
+        labels: coursesOffered,
         datasets: [
           {
             label: "Courses Data",
-            data: [totalUnits, totalLessons],
+            data: unitsPerCourse,
             backgroundColor: ["green", "blue"],
             borderColor: ["green", "blue"],
           },
         ],
       });
-
-      console.log({ totalUnits, totalLessons });
+      setUnitsDistribution({
+        labels: coursesOffered,
+        datasets: [
+          {
+            label: "Courses Data",
+            data: unitsPerCourse,
+            backgroundColor: ["green", "blue"],
+            borderColor: ["green", "blue"],
+          },
+        ],
+      });
     },
+
     onError: (error) => {
       handleError(error, updateAlertBoxData);
       if (error.response && error.response.data.message === "Token expired") {
         console.log("Refetching user details!");
-        queryClient.invalidateQueries(["user"]);
+        queryClient.invalidateQueries(["courses"]);
       }
     },
   });
@@ -88,23 +113,24 @@ const AdminDashboard = () => {
     onError: (error) => {
       handleError(error, updateAlertBoxData);
       if (error.response && error.response.data.message === "Token expired") {
-        queryClient.invalidateQueries(["courses"]);
+        queryClient.invalidateQueries(["user"]);
       }
     },
   });
 
   return (
     <div className="h-screen w-full py-2 flex phone:flex-col tablet:flex-row  ">
-      <div className="w-1/4 phone:hidden laptop:flex flex-col h-full justify-between p-2">
-        {userDataQuery.status === "loading" &&
-        coursesQuery.status === "loading" ? (
-          <UserProfileSkeleton />
-        ) : (
-          <UserProfile
-            name={`${userDataQuery?.data?.firstName}  ${userDataQuery?.data?.surname} `}
-            role="tutor"
-          />
-        )}{" "}
+      <div className="w-1/4 phone:hidden laptop:flex flex-col h-full justify-between p-2 gap-4">
+        <div>
+          {userDataQuery.status === "loading" ? (
+            <UserProfileSkeleton />
+          ) : (
+            <UserProfile
+              name={`${userDataQuery?.data?.firstName}  ${userDataQuery?.data?.surname} `}
+              role="admin"
+            />
+          )}
+        </div>
         <div className="controls w-full h-full flex flex-col justify-start gap-2 px-1 ">
           <AdminNavItem text="courses" />
           <AdminNavItem text="students" />
@@ -134,13 +160,19 @@ const AdminDashboard = () => {
             <div className="w-full flex phone:flex-col tablet:flex-row justify-evenly ">
               <div className="phone:w-full tablet:w-1/2 gap-5 border-blue-400 flex-col-centered p-2">
                 <div className="col-span-1 row-span-1">
-                  <DoughnutChart chartData={usersData} />
+                  {coursesQuery.status === "loading" && <DoughnutSkeleton />}
+                  {coursesQuery.status === "success" && (
+                    <DoughnutChart chartData={coursesData} />
+                  )}
                 </div>
                 <div className="w-full rounded-lg h-16 bg-slate-300"></div>
               </div>
               <div className="phone:w-full tablet:w-1/2 gap-5 border-blue-400 flex-col-centered p-2">
                 <div className="col-span-1 row-span-1">
-                  <DoughnutChart chartData={unitsDistribution} />
+                  {coursesQuery.status === "loading" && <DoughnutSkeleton />}
+                  {coursesQuery.status === "success" && (
+                    <DoughnutChart chartData={unitsDistribution} />
+                  )}
                 </div>
                 <div className="w-full rounded-lg h-16 bg-slate-300"></div>
               </div>
@@ -153,7 +185,10 @@ const AdminDashboard = () => {
           <div className="phone:w-full tablet:w-1/3 ">
             <div className="flex flex-col justify-evenly items-center gap-5 py-5 ">
               <div className="h-1/3">
-                <PieChart chartData={coursesData} />
+                {coursesQuery.status === "loading" && <DoughnutSkeleton />}
+                {coursesQuery.status === "success" && (
+                  <DoughnutChart chartData={coursesData} />
+                )}
               </div>
               <div className="w-full   bg-slate-300 rounded-lg h-64"></div>
               <div className="w-full h-1/3  flex-col-centered gap-1 rounded-lg  ">

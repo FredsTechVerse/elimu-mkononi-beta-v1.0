@@ -114,6 +114,7 @@ import {
   NotesSkeleton,
   UnitNavSkeleton,
   UserProfileSkeleton,
+  DoughnutSkeleton,
 } from "./Skeletons";
 
 import {
@@ -216,6 +217,7 @@ export {
   TableSkeleton,
   TableAlternativeSkeleton,
   ContentSectionSkeleton,
+  DoughnutSkeleton,
   NotesSkeleton,
   UnitNavSkeleton,
   QuillEditorSkeleton,

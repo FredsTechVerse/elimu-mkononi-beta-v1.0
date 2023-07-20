@@ -38,6 +38,11 @@ const LogInForm = () => {
         status: "success",
         timeout: 2500,
       });
+      console.log({
+        accessToken: localStorage.getItem("accessToken", data.accessToken),
+        refreshToken: localStorage.getItem("refreshToken", data.refreshToken),
+        roles: localStorage.getItem("roles", JSON.stringify(data.roles)),
+      });
       navigate(from, { replace: true });
     },
     onError: (error) => {

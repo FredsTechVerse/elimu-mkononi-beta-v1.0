@@ -31,14 +31,14 @@ const fetchLessonNotes = async (notesID) => {
 };
 
 const fetchUserDetails = async (role) => {
-  if ((role = "EM-202")) {
+  if (role === "EM-202") {
     const { data: tutorData } = await axios.get("/auth/tutor", {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
     });
     return tutorData;
-  } else if ((role = "EM-203")) {
+  } else if (role === "EM-203") {
     const { data: adminData } = await axios.get("/auth/admin", {
       headers: {
         Authorization: `Bearer ${accessToken}`,

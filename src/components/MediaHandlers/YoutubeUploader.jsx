@@ -26,13 +26,16 @@ const YoutubeUploader = ({ verifyUpload, updateFileInfo, videoTitle }) => {
 
   const youtubeAccessTokenQuery = useQuery(
     ["youtubeAccessToken"],
-    () => getYoutubeAuthorizationURI,
+    getYoutubeAuthorizationURI,
     {
       retry: 1,
+      onSuccess: (data) => {
+        console.log(`Youtube Access Token Data ${JSON.stringify(data)}`);
+      },
       onError: (error) => {
         handleError(error, updateAlertBoxData);
         if (error.response && error.response.data.message === "Token expired") {
-          queryClient.invalidateQueries(["courseData", courseID]);
+          queryClient.invalidateQueries(["youtubeAccessToken"]);
         }
       },
     }
@@ -48,7 +51,7 @@ const YoutubeUploader = ({ verifyUpload, updateFileInfo, videoTitle }) => {
       const { type: videoType } = videoFile;
       const accessToken = localStorage.getItem("youtubeAccessToken");
       if (!accessToken) {
-        const authorizationUri = await authorizeUser();
+        const authorizationUri = youtubeAccessTokenQuery.data;
         localStorage.setItem("previousLocation", window.location.pathname);
         redirectToExternalLink(authorizationUri);
       }
@@ -74,11 +77,7 @@ const YoutubeUploader = ({ verifyUpload, updateFileInfo, videoTitle }) => {
           part: "snippet,status",
         },
       });
-
-      // Extract the location header aka the presigned url.
       const presignedUrl = response.headers.location;
-
-      // Upload the video file using a PUT request
       const { data: videoData } = await youtubeInstance.put(
         presignedUrl,
         videoFile,
@@ -96,7 +95,6 @@ const YoutubeUploader = ({ verifyUpload, updateFileInfo, videoTitle }) => {
     } catch (error) {
       console.log(error);
       handleError(error, updateAlertBoxData);
-      //  I will need to handle the youtube renew token error.
     }
   };
   return (
