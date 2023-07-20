@@ -34,7 +34,7 @@
 - Polish resource section to upload and display pdf's
 - Troubleshoot the youtube uploader.
 - Unlocking s3 bucket the right and secure way - Content is not even getting uploaded to my bucket.
-- Troubleshoot root cause bad request S3 upload -
+- Troubleshoot root cause bad request S3 upload - Found it . I was using the wrong method get instead of put to generate my s3 url.
 
 ### VERSION 2 OPTIMIZATIONS
 
@@ -151,12 +151,9 @@ borderColor: ["red", "green", "blue"],
 
 There are three major aspects to it:-
 
-- We need a headers , body/metadata and then we wait for the response.
-- As for the header , we only pass the access token and the content type which is application/json
-- For the body , we pass the snippet and status which are objects with their own properties.
-- As for the response , we need to get the location header from the response and then upload the video file using a PUT request.
-- In summary we make a post request to get the location url then make a put request to upload the resource to the specified location url. This really bring back the vibe of a presigned url .... We can think of the location url as a presigned url
-- Therefore we first of all get the presigned url then paste data to this url.
+- We need a header, body/metadata and then we wait for the response which contains the location (presignedUrl) where we can upload the video file.
+- While requesting for the presigned url,we only pass the access token and the content type which is application/json to the header.
+- With the aid of a put request , presigned url and the body armed with snippet and status which are objects containing the title and description of the video , we can upload the video file to youtube.
 - The keys , function and additional parameters are separated just as with the axios request methods.....
 
 ### HOW TO UPLOAD YOUTUBE VIDEO FROM FRONTEND USING THE ACCESS TOKEN OBTAINED VIA THE BACKEND BY SWAPPING CODE GENERATED WITH AN ACCESS TOKEN.

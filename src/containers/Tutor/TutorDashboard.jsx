@@ -72,15 +72,17 @@ const TutorDashboard = () => {
 
   return (
     <div className="h-screen w-full flex phone:flex-col tablet:flex-row  ">
-      <div className="w-1/4 phone:hidden laptop:flex flex-col h-full justify-between p-2">
-        {userDataQuery.status === "loading" ? (
-          <UserProfileSkeleton />
-        ) : (
-          <UserProfile
-            name={`${userDataQuery?.data?.firstName}  ${userDataQuery?.data?.surname} `}
-            role="tutor"
-          />
-        )}
+      <div className="w-1/4 phone:hidden laptop:flex flex-col h-full justify-between gap-3 p-2">
+        <div>
+          {userDataQuery.status === "loading" ? (
+            <UserProfileSkeleton />
+          ) : (
+            <UserProfile
+              name={`${userDataQuery?.data?.firstName}  ${userDataQuery?.data?.surname} `}
+              role="tutor"
+            />
+          )}
+        </div>
         <div className="controls w-full h-full flex-col-centered gap-2 ">
           <h1 className="text-slate-900 font-bold text-lg text-center capitalize mt-3 w-full h-12 flex-row-centered  ">
             Navigate to Pages
@@ -140,7 +142,7 @@ const TutorDashboard = () => {
               <div className="h-1/3">
                 {userDataQuery.status === "loading" && <DoughnutSkeleton />}
                 {userDataQuery.status === "success" && (
-                  <PieChart chartData={pieChartData} />
+                  <DoughnutChart chartData={pieChartData} />
                 )}
               </div>
               <div className="w-full   bg-slate-300 rounded-lg h-64"></div>
