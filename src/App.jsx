@@ -81,6 +81,11 @@ function App() {
           <Route path="/log-in" element={<LogInForm />} />
           <Route path="/draft" element={<DraftPage />} />
           <Route path="/fetchToken" element={<TokenExchange />} />
+          <Route
+            exact
+            path="/tutor/new-lesson/:chapterID"
+            element={<LessonForm />}
+          />
 
           <Route element={<UsersLayout />}>
             <Route exact path="/" element={<HomePage />}></Route>

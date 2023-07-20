@@ -11,8 +11,9 @@ import {
   UserProfileSkeleton,
   PageTitle,
   DoughnutSkeleton,
+  MenuBtn,
 } from "../../components";
-
+import { XCircleIcon } from "@heroicons/react/24/solid";
 import { handleError } from "../../controllers/handleErrors";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -22,6 +23,13 @@ import {
 } from "../../controllers/fetchData";
 
 const AdminDashboard = () => {
+  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
+  const openSideBar = () => {
+    setIsSideBarOpen(true);
+  };
+  const closeSideBar = () => {
+    setIsSideBarOpen(false);
+  };
   const { updateAlertBoxData } = useAlertBoxContext();
   const queryClient = useQueryClient();
   const role = "EM-203";
@@ -119,8 +127,22 @@ const AdminDashboard = () => {
   });
 
   return (
-    <div className="h-screen w-full py-2 flex phone:flex-col tablet:flex-row  ">
-      <div className="w-1/4 phone:hidden laptop:flex flex-col h-full justify-between p-2 gap-4">
+    <div className="h-screen w-full flex phone:flex-col tablet:flex-row relative ">
+      <div
+        className={`   ${
+          isSideBarOpen
+            ? "phone:absolute z-10 bg-slate-200 phone:h-full  phone:w-full tablet:w-80"
+            : "phone:hidden"
+        } laptop:relative laptop:w-1/4 laptop:flex flex-col laptop:h-full justify-between gap-2 p-2`}
+      >
+        <div
+          className="absolute right-4 top-3 text-white m-1 hover:cursor-pointer w-7 h-7 laptop:hidden"
+          onClick={() => {
+            closeSideBar();
+          }}
+        >
+          <XCircleIcon className="icon-styling w-8 h-8 text-black" />
+        </div>
         <div>
           {userDataQuery.status === "loading" ? (
             <UserProfileSkeleton />
@@ -139,12 +161,16 @@ const AdminDashboard = () => {
         </div>
       </div>
       <div className="w-full laptop:w-3/4  flex flex-col justify-start  h-full overflow-auto ">
-        <div className="w-full flex phone:flex-col tablet:flex-row justify-between items-center   gap-5">
+        <div className="w-full flex phone:flex-col tablet:flex-row justify-between items-center gap-5">
           <div className="phone:w-full tablet:w-2/3 bg-slate-300 rounded-xl h-40 flex flex-col-centered relative ">
-            <div className="flex-row-centered gap-2 absolute top-2 left-3 z-10">
+            <div className="flex flex-row items-center justify-evenly gap-3 absolute top-2  left-2">
               <BackBtn inDashboard={true} isDark={false} />
               <HomeBtn inDashboard={true} isDark={false} />
             </div>
+            <div className="flex flex-row items-center justify-evenly gap-2 absolute top-2  right-2">
+              <MenuBtn openSideBar={openSideBar} sideBarOpen={isSideBarOpen} />
+            </div>
+
             <h1 className="font-bold text-lg uppercase w-full h-12 flex-row-centered ">
               GREETINGS
             </h1>

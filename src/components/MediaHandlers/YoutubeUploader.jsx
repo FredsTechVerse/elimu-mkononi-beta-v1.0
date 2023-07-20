@@ -25,23 +25,27 @@ const YoutubeUploader = ({ verifyUpload, updateFileInfo, videoTitle }) => {
   };
 
   const youtubeAccessTokenQuery = useQuery(
-    ["youtubeAccessToken"],
+    ["authorizationURI"],
     getYoutubeAuthorizationURI,
     {
       retry: 1,
       onSuccess: (data) => {
-        console.log(`Youtube Access Token Data ${JSON.stringify(data)}`);
+        console.log(
+          `Redirecting to the authorrization URI ${JSON.stringify(data)}`
+        );
+        redirectToExternalLink(data);
       },
       onError: (error) => {
         handleError(error, updateAlertBoxData);
         if (error.response && error.response.data.message === "Token expired") {
-          queryClient.invalidateQueries(["youtubeAccessToken"]);
+          queryClient.invalidateQueries(["authorizationURI"]);
         }
       },
     }
   );
 
   const redirectToExternalLink = (externalLink) => {
+    localStorage.setItem("previousLocation", window.location.pathname);
     window.open(externalLink, "_self");
   };
 
@@ -50,11 +54,6 @@ const YoutubeUploader = ({ verifyUpload, updateFileInfo, videoTitle }) => {
       const videoFile = acceptedFiles[0];
       const { type: videoType } = videoFile;
       const accessToken = localStorage.getItem("youtubeAccessToken");
-      if (!accessToken) {
-        const authorizationUri = youtubeAccessTokenQuery.data;
-        localStorage.setItem("previousLocation", window.location.pathname);
-        redirectToExternalLink(authorizationUri);
-      }
       const headers = {
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
