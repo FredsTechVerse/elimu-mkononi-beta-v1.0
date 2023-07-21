@@ -6,7 +6,7 @@ import { Pie } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const PieChart = ({ chartData, key = "Users" }) => {
+const PieChart = ({ chartData, doughnutName = "Users" }) => {
   const options = {
     borderRadius: 4,
 
@@ -17,8 +17,7 @@ const PieChart = ({ chartData, key = "Users" }) => {
   };
   return (
     <div className="w-full h-full flex-col-centered gap-2">
-      <h1 className="uppercase font-bold">{key}</h1>
-      <div className="h-48 laptop:h-60 aspect-square flex-row-centered relative ">
+      <div className="h-56 laptop:h-64 aspect-square flex-row-centered relative ">
         <Pie data={chartData} options={options}></Pie>
       </div>
     </div>

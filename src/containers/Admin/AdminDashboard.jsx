@@ -195,7 +195,8 @@ const AdminDashboard = () => {
           </div>
         </div>
         <div className="flex phone:flex-col tablet:flex-row w-full gap-5">
-          <div className="phone:w-full tablet:w-2/3 flex flex-col gap-2 ">
+          <div className="phone:w-full tablet:w-2/3 flex flex-col gap-2 pt-2">
+            <PageTitle text="statistics" />
             <div className="w-full flex phone:flex-col tablet:flex-row justify-evenly ">
               <div className="phone:w-full tablet:w-1/2 gap-5 border-blue-400 flex-col-centered p-5">
                 <div className="col-span-1 row-span-1">
@@ -203,8 +204,8 @@ const AdminDashboard = () => {
                   {coursesQuery.status === "success" && (
                     <DoughnutChart
                       chartData={coursesData}
-                      doughnutName="units distribution"
-                      doughnutValue="50"
+                      doughnutName="total users"
+                      doughnutValue="3"
                     />
                   )}
                 </div>
@@ -216,7 +217,7 @@ const AdminDashboard = () => {
                     <DoughnutChart
                       chartData={unitsDistribution}
                       doughnutName="total units"
-                      doughnutValue="50"
+                      doughnutValue="8"
                     />
                   )}
                 </div>
@@ -228,11 +229,14 @@ const AdminDashboard = () => {
             </div>
           </div>
           <div className="phone:w-full tablet:w-1/3 pt-2 ">
-            <div className="flex flex-col justify-evenly items-center gap-5 py-5 ">
-              <div className="h-1/3">
+            <div className="flex flex-col justify-evenly items-center gap-5  ">
+              <div className="h-1/3 ">
+                <div className="pb-3">
+                  <PageTitle text="Units" />
+                </div>
                 {coursesQuery.status === "loading" && <DoughnutSkeleton />}
                 {coursesQuery.status === "success" && (
-                  <DoughnutChart
+                  <PieChart
                     chartData={coursesData}
                     doughnutName="total courses"
                     doughnutValue="50"
