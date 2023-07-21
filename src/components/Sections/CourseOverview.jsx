@@ -36,15 +36,14 @@ const CourseOverview = () => {
           </p>
         </div>
         {(roles?.includes("EM-202") || roles?.includes("EM-203")) && (
-          <>
-            <div className="absolute top-2 right-2 flex gap-1">
-              <NavigateBtn destination="new-unit" text="New Unit" />
-            </div>
-            <div className="absolute top-2 left-2 flex gap-1">
-              <BackBtn />
-            </div>
-          </>
+          <div className="absolute top-2 right-2 flex gap-1">
+            <NavigateBtn destination="new-unit" text="New Unit" />
+          </div>
         )}
+
+        <div className="absolute top-2 left-2 flex gap-1">
+          <BackBtn />
+        </div>
         <div className="absolute h-7 bg-slate-100 w-full bottom-0 rounded-t-full"></div>
       </div>
       <div className="flex flex-col items-center justify-center pt-6 w-full">

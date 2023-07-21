@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { BackBtn } from "../../components";
 const UnitNav = ({ lessonName }) => {
   return (
-    <div className="navigation flex flex-row w-full justify-between gap-10 items-center text-dark py-3 mb-3 text-sm text-white bg-primary px-3 mt-1 rounded-t-lg ">
+    <div className="navigation flex flex-row w-full justify-between gap-10 items-center text-dark  text-sm text-white bg-primary px-3  h-14 rounded-t-lg ">
       <BackBtn />
       <div className="text-lg font-bold ">{lessonName}</div>
       <div className="flex gap-8 ">

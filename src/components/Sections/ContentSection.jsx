@@ -1,6 +1,6 @@
 import React from "react";
 
-import { VideoSection, UnitNav, MenuBtn } from "../../components";
+import { VideoPlayer, UnitNav, MenuBtn } from "../../components";
 import { UnitOverview } from "../../containers";
 import { Outlet } from "react-router-dom";
 import { useCurrentLessonContext } from "../../context/currentLessonContext";
@@ -14,7 +14,7 @@ const ContentSection = ({ unitData, openSideBar, sideBarOpen, unitID }) => {
           openSideBar={openSideBar}
           sideBarOpen={sideBarOpen}
         />
-        <VideoSection />
+        <VideoPlayer />
         <div className="border-none border-slate-400 rounded-lg w-full">
           <Outlet
             context={{
