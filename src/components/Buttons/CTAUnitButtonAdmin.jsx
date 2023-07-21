@@ -32,7 +32,7 @@ const CTAUnitButtonAdmin = ({ contact, _id }) => {
         }}
       >
         <span>
-          <PencilIcon className="icon-styling" />
+          <PencilIcon className="icon-styling " />
         </span>
       </button>
       <button

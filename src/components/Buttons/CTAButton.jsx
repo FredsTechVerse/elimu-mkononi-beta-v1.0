@@ -34,7 +34,7 @@ const CTAButton = ({ contact = null, unitID, fetchUsersData = null }) => {
           }}
         >
           <span className="text-slate-600 group-hover:text-primary text-2xl ">
-            <EyeIcon className="icon-styling" />
+            <EyeIcon className="icon-styling text-slate-700" />
           </span>
         </button>
       </div>
