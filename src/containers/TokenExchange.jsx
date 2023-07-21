@@ -7,26 +7,30 @@ const TokenExchange = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { updateAlertBoxData } = useAlertBoxContext();
-     const exchangeCodeForToken = async () => {
-       const code = new URLSearchParams(location.search).get("code");
-       const previousLocation = localStorage.getItem("previousLocation");
-       localStorage.removeItem("previousLocation");
-       try {
-         const response = await axios.post(`/oAuth/getToken`, { code: code });
-         const youtubeAccessToken = response.data;
-         if (youtubeAccessToken) {
-           localStorage.setItem("youtubeAccessToken", youtubeAccessToken);
-           console.log(`Youtube Access Token ${youtubeAccessToken}`);
-           navigate(previousLocation);
-         }
-       } catch (error) {
-         handleError(error, updateAlertBoxData);
-         console.error("Error exchanging code for access token:", error);
-       }
-     };
+  const exchangeCodeForToken = async () => {
+    if (!location) {
+      return;
+    }
+    const code = new URLSearchParams(location.search).get("code");
+    const previousLocation = localStorage.getItem("previousLocation");
+    localStorage.removeItem("previousLocation");
+    try {
+      const response = await axios.post(`/oAuth/getToken`, { code: code });
+      const youtubeAccessToken = response.data;
+      if (youtubeAccessToken) {
+        localStorage.setItem("youtubeAccessToken", youtubeAccessToken);
+        console.log(
+          `Youtube Access Token ${JSON.stringify(youtubeAccessToken)}`
+        );
+        navigate(previousLocation);
+      }
+    } catch (error) {
+      handleError(error, updateAlertBoxData);
+      console.error("Error exchanging code for access token:", error);
+    }
+  };
 
   useEffect(() => {
- 
     exchangeCodeForToken();
   }, []);
 

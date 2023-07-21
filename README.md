@@ -29,12 +29,11 @@
 
 ### PERFOMANCE OPTIMIZATION
 
-- Populate charts with real time data
 - Polish notes section expecially error display and content update crossing paths
+- Make dashboard a column based in tablets also..... Third column to spread horizontally for ample space.
 - Polish resource section to upload and display pdf's
-- Troubleshoot the youtube uploader.
 - Unlocking s3 bucket the right and secure way - Content is not even getting uploaded to my bucket.
-- Troubleshoot root cause bad request S3 upload - Found it . I was using the wrong method get instead of put to generate my s3 url.
+- Troubleshoot the youtube uploader's bad request while retrieving access token.
 
 ### VERSION 2 OPTIMIZATIONS
 

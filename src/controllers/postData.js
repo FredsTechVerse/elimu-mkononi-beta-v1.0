@@ -15,12 +15,10 @@ const loginUser = async ({ firstName, password }) => {
 
 const logoutUser = async () => {
   const refreshToken = localStorage.getItem("refreshToken");
-  console.log(`Refresh token being sent to server :${refreshToken}`);
   const config = {
     headers: { "Content-Type": "application/json" },
     data: { refreshToken: refreshToken },
   };
-  console.log("Loging out user");
   await axios.delete("/auth/logout", config);
 };
 

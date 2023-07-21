@@ -8,7 +8,8 @@ import {
 
 const HomePage = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
-
+  const accessToken = localStorage.getItem("youtubeAccessToken");
+  console.log(JSON.stringify(accessToken));
   const showNavbar = () => {
     setIsNavOpen(true);
   };

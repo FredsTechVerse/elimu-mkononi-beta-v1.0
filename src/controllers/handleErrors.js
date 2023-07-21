@@ -1,5 +1,6 @@
 import axios from "../axios";
-import { handleLogout } from "./handleLogout";
+// import { handleLogout } from "./handleLogout";
+import { logoutUser } from "../controllers/postData";
 const ERRORS = {
   NETWORK_ERROR: "Network error. Please try again later.",
   SERVER_ERROR: "Server error. Please try again later.",
@@ -9,6 +10,23 @@ const ERRORS = {
   INVALID_TOKEN: "Your token is invalid!",
   INVALID_ID: " The resource identity is invalid!",
   BAD_REQUEST: "Bad request sent to server ",
+};
+
+const handleLogout = async () => {
+  try {
+    await logoutUser();
+    localStorage.removeItem("user");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("roles");
+    localStorage.removeItem("youtubeAccessToken");
+    delete axios.defaults.headers.common["Authorization"];
+    window.location.href = "/";
+  } catch (error) {
+    console.log(
+      `An error occured while logging out user ${JSON.stringify(err)}`
+    );
+  }
 };
 
 const handleError = async (error, updateAlertBoxData) => {
@@ -28,7 +46,7 @@ const handleError = async (error, updateAlertBoxData) => {
   } else if (error.response && error.response.status === 403) {
     console.log(JSON.stringify(error.response));
     response = error.response.message;
-    // handleLogout();
+    // Logout user
   } else if (error.response && error.response.status === 404) {
     response = ERRORS.BLANK_ERROR;
   } else if (error.response && error.response.status === 409) {

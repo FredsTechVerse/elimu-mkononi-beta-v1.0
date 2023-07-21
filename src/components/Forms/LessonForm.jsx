@@ -156,7 +156,7 @@ const LessonForm = () => {
               required
             ></input>
           </div>
-          <div className="input-wrap ">
+          {/* <div className="input-wrap ">
             {!uploadSuccess ? (
               <YoutubeUploader
                 verifyUpload={verifyUpload}
@@ -183,7 +183,7 @@ const LessonForm = () => {
                 </p>
               </div>
             )}
-          </div>
+          </div> */}
 
           {/* CTA BUTTONS */}
           <div className="cta-wrap">
