@@ -6,13 +6,13 @@ const VideoSection = () => {
 
   if (currentLesson?.lessonUrl) {
     return (
-      <div className="w-full text-center text-white flex flex-col justify-start text-3xl font-extrabold">
+      <div className="w-full text-center text-white flex flex-col justify-start text-3xl font-extrabold px-1">
         <VideoPlayer title={currentLesson?.lessonName} />
       </div>
     );
   } else {
     return (
-      <div className="w-full text-center text-white flex flex-col justify-start text-3xl font-extrabold">
+      <div className="w-full text-center text-white flex flex-col justify-start text-3xl font-extrabold px-1">
         <VideoSkeleton />
       </div>
     );

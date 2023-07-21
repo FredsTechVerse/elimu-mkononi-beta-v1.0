@@ -18,7 +18,6 @@ const Accordion = ({ unitData, closeSideBar }) => {
   return (
     <div className="relative z-10 flex flex-col items-center  bg-slate-100 h-screen ">
       <div className="flex items-center justify-between w-full px-2 h-12  font-bold text-md text-slate-200 bg-primary text-center">
-        <BackBtn />
         {unitData && unitData.unitName}
         <div className={` flex-row-centered gap-1 `}>
           <Tooltip text="Add Chapter">
@@ -38,7 +37,7 @@ const Accordion = ({ unitData, closeSideBar }) => {
             </div>
           </Tooltip>
           <div
-            className="text-white m-1 hover:cursor-pointer w-7 h-7 tablet:hidden"
+            className="text-white m-1 hover:cursor-pointer w-7 h-7 laptop:hidden"
             onClick={() => {
               closeSideBar();
             }}
@@ -49,7 +48,7 @@ const Accordion = ({ unitData, closeSideBar }) => {
       </div>
 
       {unitData && unitData.unitChapters.length > 0 ? (
-        <div className="w-full bg-secondary h-full overflow-auto   ">
+        <div className="w-full bg-secondary h-full overflow-y-scroll overflow-x-hidden  ">
           {unitData.unitChapters.map((chapter, chapterIndex) => (
             <AccordionItem
               unitData={unitData}

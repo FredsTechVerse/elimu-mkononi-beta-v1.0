@@ -27,30 +27,24 @@
   - The tutor will officially be renamed as the lecturer.
   - There will be need to add an account for student content creators.
 
-    {notesQuery.status === "success" &&
-    !isEditorEnabled &&
-    (roles?.includes("EM-202") ||
-    (roles?.includes("EM-203") && (
-    <p className="bg-slate-300 rounded-lg p-4">
-    Notes are not present
-    </p>
-    )))}
-
 ### PERFOMANCE OPTIMIZATION
 
-- Polish notes section expecially error display and content update crossing paths
+- Show real time notes refresh upon moving to a new lesson.
 - Make dashboard a column based in tablets also..... Third column to spread horizontally for ample space.
 - Polish resource section to upload and display pdf's
-- Unlocking s3 bucket the right and secure way - Content is not even getting uploaded to my bucket.
+- Unlock s3 bucket the right and secure way - Content is not even getting uploaded to my bucket.
 - Troubleshoot the youtube uploader's bad request while retrieving access token.
+- Final spacing polishes!
+- HAPPY RELEASE!
 
 ### VERSION 2 OPTIMIZATIONS
 
-- Migrate to typescript using SWC which is a breeze!
+- Migrate to typescript using SWC compiler which is a breeze!
 
 ### KEY TIPS I HAVE PICKED UP ALONG THE JOURNEY
 
 - SWC works well without hitches. Will use it when i migrate to typescript.
+- Using overflow-s-hidden hidden helps to hide the unwanted x direction scrollbar when overflow auto is used.
 
 - Router state has always been simply an object... You know that basic container with a key and a value which in my case was as simple as assigning a background `{ background: location }` and once present in the state activating the second set of routes.
 

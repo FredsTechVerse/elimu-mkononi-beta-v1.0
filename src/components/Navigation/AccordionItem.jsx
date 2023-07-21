@@ -50,7 +50,7 @@ const AccordionItem = ({
               >
                 <Tooltip tooltip="Add lesson">
                   <div onClick={closeSideBar}>
-                    <PlusCircleIcon className="icon-styling group-hover:text-white " />
+                    <PlusCircleIcon className="icon-styling group-hover:text-white text-slate-400  " />
                   </div>
                 </Tooltip>
               </Link>

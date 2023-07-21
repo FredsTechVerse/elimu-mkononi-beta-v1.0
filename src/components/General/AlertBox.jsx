@@ -19,7 +19,7 @@ const AlertBox = () => {
   }, [alertBoxData]);
   if (alertBoxData?.isResponse === true) {
     return (
-      <div className="fixed w-[340px] tablet:w-80 alertbox-centered">
+      <div className="fixed w-[90%] tablet:w-80 alertbox-centered">
         <div
           className={`${
             alertBoxData?.status === "success"

@@ -8,7 +8,7 @@ const VideoPlayer = ({ src, title }) => {
 
   return (
     <div className="w-full flex-row-centered ">
-      <div className="w-full aspect-video m-2 ">
+      <div className="w-full aspect-video  ">
         <ReactPlayer
           className="react-player"
           playIcon={<HomeBtn />}

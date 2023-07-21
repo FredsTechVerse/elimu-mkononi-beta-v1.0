@@ -39,16 +39,16 @@ const ContentPage = () => {
 
   if (unitDataQuery.status === "loading") {
     return (
-      <main className="flex relative tablet:grid  tablet:grid-cols-3 laptop:grid-cols-4 w-full h-screen">
+      <main className="flex relative laptop:grid laptop:grid-cols-4 w-full h-screen">
         <article
           className={` ${
             sideBarOpen ? "block" : "hidden"
-          }   w-full h-full absolute tablet:relative tablet:block  tablet:col-span-1 `}
+          }   w-full h-full absolute laptop:relative laptop:block  laptop:col-span-1 `}
         >
           <AccordionSkeleton />
         </article>
 
-        <article className="w-full laptop:col-span-3 tablet:col-span-2 h-full overflow-y-auto flex  flex-col  ">
+        <article className="w-full laptop:col-span-3 h-full overflow-y-auto flex flex-col  ">
           <ContentSectionSkeleton />
         </article>
       </main>
@@ -64,11 +64,11 @@ const ContentPage = () => {
   }
 
   return (
-    <main className="flex relative tablet:grid  tablet:grid-cols-3 laptop:grid-cols-4 w-full h-screen">
+    <main className="flex relative laptop:grid laptop:grid-cols-4 w-full h-screen">
       <article
         className={` ${
           sideBarOpen ? "block" : "hidden"
-        }   w-full h-full absolute tablet:relative tablet:block  tablet:col-span-1 `}
+        }  phone:w-full tablet:w-80 h-full absolute laptop:relative laptop:block `}
       >
         <Accordion
           unitData={unitDataQuery.data}
