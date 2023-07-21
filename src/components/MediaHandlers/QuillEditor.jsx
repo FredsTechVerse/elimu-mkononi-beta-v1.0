@@ -47,7 +47,6 @@ const QuillEditor = () => {
         console.log(savedNotes);
         if (savedNotes) {
           setOriginalContent(savedNotes);
-          // setNewContent(savedNotes);
           setContent(savedNotes);
           setAreNotesPresent(false);
         }
@@ -140,47 +139,11 @@ const QuillEditor = () => {
 
   useEffect(() => {
     if (currentLesson !== null) {
-      if (currentLesson?.lessonNotes) {
-        setIsEditorEnabled(false);
-      } else {
-        console.log(`There are no notes since i cannot find a notes ID`);
-        setIsEditorEnabled(false);
-      }
+      queryClient.invalidateQueries(["notes"]);
     }
   }, [currentLesson]);
   return (
     <div className="w-full flex flex-col p-2 border-none ">
-      <div id="unit content" className="mt-3">
-        {currentLesson.lessonNotes && notesQuery.status === "loading" && (
-          <QuillEditorSkeleton />
-        )}
-        {currentLesson.lessonNotes && notesQuery.status === "error" && (
-          <p className="bg-red-300 rounded-lg p-4">
-            {JSON.stringify(notesQuery.error.message)}
-          </p>
-        )}
-
-        {currentLesson.lessonNotes &&
-          notesQuery.status === "success" &&
-          (roles?.includes("EM-202") || roles?.includes("EM-203") ? (
-            <ReactQuill
-              value={content}
-              readOnly={!isEditorEnabled}
-              onChange={handleChange}
-              modules={quillModules}
-            />
-          ) : (
-            <div
-              dangerouslySetInnerHTML={{ __html: content }}
-              className="text-start"
-            />
-          ))}
-
-        {!currentLesson.lessonNotes && (
-          <p className="bg-cyan-300 rounded-lg p-4">Notes are not present</p>
-        )}
-      </div>
-
       {/* CTA BUTTONS */}
       <div
         className={`${
@@ -191,7 +154,7 @@ const QuillEditor = () => {
       >
         {!isEditorEnabled ? (
           <button
-            className="h-8 w-36 mx-auto bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full"
+            className="h-8 w-36 bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full"
             onClick={() => {
               enableEdit();
             }}
@@ -199,7 +162,7 @@ const QuillEditor = () => {
             {!areNotesPresent ? "Add Notes" : "Edit Notes"}
           </button>
         ) : (
-          <div className="mx-auto flex-row-centered gap-2">
+          <div className=" flex-row-centered gap-2">
             <button
               className="h-8 w-24 bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full"
               onClick={() => {
@@ -218,6 +181,37 @@ const QuillEditor = () => {
             </button>
           </div>
         )}
+      </div>
+      <div id="unit content" className="mt-3">
+        {currentLesson.lessonNotes && notesQuery.status === "loading" && (
+          <QuillEditorSkeleton />
+        )}
+
+        {notesQuery.status === "success" &&
+          isEditorEnabled &&
+          (roles?.includes("EM-202") ||
+            (roles?.includes("EM-203") && (
+              <ReactQuill
+                value={content}
+                readOnly={!isEditorEnabled}
+                onChange={handleChange}
+                modules={quillModules}
+              />
+            )))}
+
+        {notesQuery.status === "success" &&
+          !isEditorEnabled &&
+          (roles?.includes("EM-202") ||
+            (roles?.includes("EM-203") && (
+              <div
+                dangerouslySetInnerHTML={{ __html: content }}
+                className="text-start px-2"
+              />
+            )))}
+
+        {/* {!currentLesson.lessonNotes && (
+          <p className="bg-slate-300 rounded-lg p-4">Notes are not present</p>
+        )} */}
       </div>
     </div>
   );

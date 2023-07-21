@@ -27,6 +27,15 @@
   - The tutor will officially be renamed as the lecturer.
   - There will be need to add an account for student content creators.
 
+    {notesQuery.status === "success" &&
+    !isEditorEnabled &&
+    (roles?.includes("EM-202") ||
+    (roles?.includes("EM-203") && (
+    <p className="bg-slate-300 rounded-lg p-4">
+    Notes are not present
+    </p>
+    )))}
+
 ### PERFOMANCE OPTIMIZATION
 
 - Polish notes section expecially error display and content update crossing paths
