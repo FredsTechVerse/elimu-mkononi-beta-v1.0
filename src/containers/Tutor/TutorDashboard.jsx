@@ -139,13 +139,13 @@ const TutorDashboard = () => {
         </div>
         <div className="flex phone:flex-col tablet:flex-col w-full gap-5  border-black  ">
           <div className=" h-full w-full tablet:w-full gap-5  flex flex-col items-center justify-start  rounded-xl">
-            <div className="  phone:h-[250px] tablet:h-[370px] w-full gap-2 laptop:h-[570px]  p-2  flex flex-col justify-start graph  rounded-xl">
+            <div className="  debug phone:h-[250px] tablet:h-[450px] w-full gap-2 laptop:h-[600px]  p-2  flex flex-col justify-start graph  rounded-xl">
               <PageTitle text="Traffic data" />
               <AreaChart />
             </div>
-            <div className="phone:w-full gap-5  flex phone:flex-col tablet:flex-row tablet:w-full tablet:justify-between  ">
-              <div className=" bg-slate-300 rounded-lg h-full w-2/3 "></div>
-              <div className="h-full w-1/3 flex-row-centered">
+            <div className=" phone:w-full gap-5  flex phone:flex-col tablet:flex-row tablet:w-full tablet:justify-between  ">
+              <div className="bg-slate-300 rounded-lg phone:h-64 tablet:h-full phone:w-full tablet:w-2/3 "></div>
+              <div className="tablet:h-full phone:w-full tablet:w-1/3 flex-row-centered">
                 {userDataQuery.status === "loading" && <DoughnutSkeleton />}
                 {userDataQuery.status === "success" && (
                   <DoughnutChart chartData={pieChartData} />
