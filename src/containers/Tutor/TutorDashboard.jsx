@@ -83,7 +83,7 @@ const TutorDashboard = () => {
       <div
         className={`   ${
           isSideBarOpen
-            ? "phone:absolute z-10 bg-slate-200 phone:h-full  phone:w-full tablet:w-80"
+            ? "phone:absolute z-10 m-3 rounded-lg bg-slate-200 phone:h-full tablet:h-80 laptop:h-full  phone:w-full tablet:w-80"
             : "phone:hidden"
         } laptop:relative laptop:w-1/4 laptop:flex flex-col laptop:h-full justify-between gap-2 p-2`}
       >
@@ -95,7 +95,7 @@ const TutorDashboard = () => {
         >
           <XCircleIcon className="icon-styling w-8 h-8 text-black" />
         </div>
-        <div>
+        <div className="tablet:hidden laptop:block">
           {userDataQuery.status === "loading" ? (
             <UserProfileSkeleton />
           ) : (
@@ -119,7 +119,7 @@ const TutorDashboard = () => {
       </div>
       <div className="w-full laptop:w-3/4  flex flex-col justify-start h-full overflow-auto overflow-x-hidden p-3 gap-3 ">
         <div className="w-full  flex phone:flex-col tablet:flex-row justify-between items-center gap-5">
-          <div className="phone:w-full  bg-slate-300 rounded-xl h-40 flex flex-col-centered relative ">
+          <div className="phone:w-full tablet:w-3/5 laptop:w-full  bg-slate-300 rounded-xl phone:h-36 tablet:h-full laptop:h-40 flex flex-col-centered relative ">
             <div className="flex flex-row items-center justify-evenly gap-3 absolute top-2  left-2">
               <BackBtn inDashboard={true} isDark={false} />
               <HomeBtn inDashboard={true} isDark={false} />
@@ -135,6 +135,16 @@ const TutorDashboard = () => {
               Lorem ipsum dolor, sit amet consectetur adipisicing elit.
               Delectus, sint.
             </p>
+          </div>
+          <div className="phone:hidden tablet:w-2/5 tablet:flex laptop:hidden">
+            {userDataQuery.status === "loading" ? (
+              <UserProfileSkeleton />
+            ) : (
+              <UserProfile
+                name={`${userDataQuery?.data?.firstName}  ${userDataQuery?.data?.surname} `}
+                role="tutor"
+              />
+            )}
           </div>
         </div>
         <div className="flex phone:flex-col tablet:flex-col w-full gap-5  border-black  ">
