@@ -66,8 +66,6 @@ const TutorDashboard = () => {
           },
         ],
       });
-
-      console.log({ totalUnits, totalLessons });
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
@@ -122,7 +120,6 @@ const TutorDashboard = () => {
           <div className="phone:w-full tablet:w-3/5 laptop:w-full  bg-slate-300 rounded-xl phone:h-36 tablet:h-full laptop:h-40 flex flex-col-centered relative ">
             <div className="flex flex-row items-center justify-evenly gap-3 absolute top-2  left-2">
               <BackBtn inDashboard={true} isDark={false} />
-              <HomeBtn inDashboard={true} isDark={false} />
             </div>
             <div className="flex flex-row items-center justify-evenly gap-2 absolute top-2  right-2">
               <MenuBtn openSideBar={openSideBar} sideBarOpen={isSideBarOpen} />
@@ -150,7 +147,7 @@ const TutorDashboard = () => {
         <div className="flex phone:flex-col tablet:flex-col w-full gap-5  border-black  ">
           <div className=" h-full w-full tablet:w-full gap-5  flex flex-col items-center justify-start  rounded-xl">
             <div className=" phone:h-[250px] tablet:h-[450px] w-full gap-2 laptop:h-[600px]  p-2  flex flex-col justify-start graph  rounded-xl">
-              <PageTitle text="Traffic data" />
+              <PageTitle text="Units Uploaded" />
               <AreaChart />
             </div>
             <div className=" phone:w-full gap-5  flex phone:flex-col tablet:flex-row tablet:w-full tablet:justify-between  ">
@@ -158,7 +155,11 @@ const TutorDashboard = () => {
               <div className="tablet:h-full phone:w-full tablet:w-1/3 flex-row-centered">
                 {userDataQuery.status === "loading" && <DoughnutSkeleton />}
                 {userDataQuery.status === "success" && (
-                  <DoughnutChart chartData={pieChartData} />
+                  <DoughnutChart
+                    chartData={pieChartData}
+                    doughnutName="workload"
+                    doughnutValue="50"
+                  />
                 )}
               </div>
             </div>

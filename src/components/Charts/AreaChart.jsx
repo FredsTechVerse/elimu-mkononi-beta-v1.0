@@ -40,8 +40,8 @@ const chartData = {
   labels,
   datasets: [
     {
-      label: "Users",
-      data: [24, 12, 36, 28, 30, 37, 53, 43, 28],
+      label: "Units",
+      data: [24, 15, 36, 28, 30, 37, 33, 30, 28],
       backgroundColor: "rgba(53, 162, 235, 0.5)",
       fill: true,
     },

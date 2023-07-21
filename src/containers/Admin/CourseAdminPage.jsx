@@ -4,6 +4,7 @@ import {
   CourseCardV2,
   CourseSkeleton,
   PageTitle,
+  BackBtn,
 } from "../../components";
 
 import { fetchCoursesData } from "../../controllers/fetchData";
@@ -17,7 +18,11 @@ const CoursesAdminPage = () => {
   });
   return (
     <div className="flex flex-col relative phone:rounded-lg w-full h-full pt-2 px-4">
-      <div className="flex w-full items-center justify-end mb-3 pr-1">
+      <div className="absolute top-2 left-2">
+        <BackBtn isDark={true} />
+      </div>
+
+      <div className="absolute top-2 right-2">
         <NavigateBtn destination="new-course" text="New Course" />
       </div>
 

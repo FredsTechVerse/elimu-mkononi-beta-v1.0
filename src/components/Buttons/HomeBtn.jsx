@@ -1,10 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { HomeIcon } from "@heroicons/react/24/solid";
+const roles = JSON.parse(localStorage.getItem("roles"));
 
 const HomeBtn = ({ isDark, inDashboard }) => {
+  const homeLocation = () => {
+    if (roles?.includes("EM-202")) {
+      return "/tutor";
+    } else if (roles?.includes("EM-203")) {
+      return "/admin";
+    } else {
+      return "/";
+    }
+  };
   return (
-    <Link to="/">
+    <Link to={homeLocation}>
       <div
         className={`${isDark && "text-slate-700 hover:text-slate-900"} ${
           inDashboard && "bg-primary hover:bg-purple-500"
