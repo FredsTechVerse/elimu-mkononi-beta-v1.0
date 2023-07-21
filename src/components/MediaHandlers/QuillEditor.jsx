@@ -2,7 +2,8 @@ import ReactQuill from "react-quill";
 import React, { useState, useCallback, useEffect } from "react";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import { useCurrentLessonContext } from "../../context/currentLessonContext";
-import { QuillEditorSkeleton } from "../../components";
+import { useOutletContext } from "react-router-dom";
+import { QuillEditorSkeleton, MenuBtn } from "../../components";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { fetchLessonNotes } from "../../controllers/fetchData";
 import { createNotes, updateNotes } from "../../controllers/postData";
@@ -11,9 +12,16 @@ import "react-quill/dist/quill.snow.css";
 
 const QuillEditor = () => {
   const { updateAlertBoxData } = useAlertBoxContext();
+  const { openSideBar } = useOutletContext();
   const queryClient = useQueryClient();
   const { currentLesson } = useCurrentLessonContext();
   const roles = JSON.parse(localStorage.getItem("roles"));
+  const isAdmin = () => {
+    if (roles.includes("EM-201") || roles.includes("EM-202")) {
+      return true;
+    }
+    return false;
+  };
 
   //Quill Editor Config
   const [content, setContent] = useState("");
@@ -48,7 +56,7 @@ const QuillEditor = () => {
         if (savedNotes) {
           setOriginalContent(savedNotes);
           setContent(savedNotes);
-          setAreNotesPresent(false);
+          setAreNotesPresent(true);
         }
         setAreNotesPresent(false);
       },
@@ -152,66 +160,64 @@ const QuillEditor = () => {
             : "hidden"
         } w-full items-center justify-end gap-2 my-2`}
       >
-        {!isEditorEnabled ? (
+        <span>
           <button
             className="h-8 w-36 bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full"
-            onClick={() => {
-              enableEdit();
-            }}
+            onClick={openSideBar}
           >
-            {!areNotesPresent ? "Add Notes" : "Edit Notes"}
+            Open Sidebar
           </button>
-        ) : (
-          <div className=" flex-row-centered gap-2">
+        </span>
+        <span>
+          {!isEditorEnabled ? (
             <button
-              className="h-8 w-24 bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full"
+              className="h-8 w-36 bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full"
               onClick={() => {
-                handleSave();
+                enableEdit();
               }}
             >
-              Save
+              {!areNotesPresent ? "Add Notes" : "Edit Notes"}
             </button>
-            <button
-              className="h-8 w-24 bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full"
-              onClick={() => {
-                handleCancel();
-              }}
-            >
-              Cancel
-            </button>
-          </div>
-        )}
+          ) : (
+            <div className=" flex-row-centered gap-2">
+              <button
+                className="h-8 w-24 bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full"
+                onClick={() => {
+                  handleSave();
+                }}
+              >
+                Save
+              </button>
+              <button
+                className="h-8 w-24 bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full"
+                onClick={() => {
+                  handleCancel();
+                }}
+              >
+                Cancel
+              </button>
+            </div>
+          )}
+        </span>
       </div>
-      <div id="unit content" className="mt-3">
+      <div id="unit content" className="mt-3 ">
         {currentLesson.lessonNotes && notesQuery.status === "loading" && (
           <QuillEditorSkeleton />
         )}
 
-        {notesQuery.status === "success" &&
-          isEditorEnabled &&
-          (roles?.includes("EM-202") ||
-            (roles?.includes("EM-203") && (
-              <ReactQuill
-                value={content}
-                readOnly={!isEditorEnabled}
-                onChange={handleChange}
-                modules={quillModules}
-              />
-            )))}
-
-        {notesQuery.status === "success" &&
-          !isEditorEnabled &&
-          (roles?.includes("EM-202") ||
-            (roles?.includes("EM-203") && (
-              <div
-                dangerouslySetInnerHTML={{ __html: content }}
-                className="text-start px-2"
-              />
-            )))}
-
-        {/* {!currentLesson.lessonNotes && (
-          <p className="bg-slate-300 rounded-lg p-4">Notes are not present</p>
-        )} */}
+        {notesQuery.status === "success" && isEditorEnabled && isAdmin ? (
+          <ReactQuill
+            value={content}
+            readOnly={!isEditorEnabled}
+            onChange={handleChange}
+            modules={quillModules}
+          />
+        ) : (
+          <div
+            dangerouslySetInnerHTML={{ __html: content }}
+            className="text-start px-2"
+          />
+        )}
       </div>
     </div>
   );

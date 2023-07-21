@@ -16,9 +16,6 @@ export const CurrentLessonContextProvider = ({ children }) => {
     console.log("Current lesson data is null");
   };
 
-  useEffect(() => {
-    console.log(`Current lesson data changed ${JSON.stringify(currentLesson)}`);
-  }, [currentLesson]);
   return (
     <CurrentLessonContext.Provider
       value={{ currentLesson, updateCurrentLesson }}

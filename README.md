@@ -40,6 +40,7 @@
 ### VERSION 2 OPTIMIZATIONS
 
 - Migrate to typescript using SWC compiler which is a breeze!
+- When it comes to tracking users , unique id's of videos and lessons registered respectively in arrays will really come in handy , we just compare to know what to tick.
 
 ### KEY TIPS I HAVE PICKED UP ALONG THE JOURNEY
 

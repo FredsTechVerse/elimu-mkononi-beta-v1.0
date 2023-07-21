@@ -19,6 +19,7 @@ const ContentSection = ({ unitData, openSideBar, sideBarOpen, unitID }) => {
           <Outlet
             context={{
               unitData: unitData,
+              openSideBar: openSideBar,
             }}
           />
         </div>

@@ -1,11 +1,11 @@
 import React from "react";
 
 import { Link } from "react-router-dom";
-import { MenuBtn, HomeBtn } from "../../components";
-const UnitNav = ({ openSideBar, sideBarOpen, lessonName }) => {
+import { BackBtn } from "../../components";
+const UnitNav = ({ lessonName }) => {
   return (
     <div className="navigation flex flex-row w-full justify-between gap-10 items-center text-dark py-3 mb-3 text-sm text-white bg-primary px-3 mt-1 rounded-t-lg ">
-      <HomeBtn />
+      <BackBtn />
       <div className="text-lg font-bold ">{lessonName}</div>
       <div className="flex gap-8 ">
         <Link to="">
@@ -22,7 +22,6 @@ const UnitNav = ({ openSideBar, sideBarOpen, lessonName }) => {
           </div>
         </Link>
       </div>
-      <MenuBtn openSideBar={openSideBar} sideBarOpen={sideBarOpen} />
     </div>
   );
 };

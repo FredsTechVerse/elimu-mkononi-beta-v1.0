@@ -64,11 +64,11 @@ const ContentPage = () => {
   }
 
   return (
-    <main className="flex relative laptop:grid laptop:grid-cols-4 w-full h-screen">
+    <main className="flex relative  laptop:grid laptop:grid-cols-4 w-full h-screen">
       <article
         className={` ${
           sideBarOpen ? "block" : "hidden"
-        }  phone:w-full tablet:w-80 h-full absolute laptop:relative laptop:block `}
+        }  phone:w-full tablet:w-80 laptop:w-full h-full absolute laptop:relative laptop:block `}
       >
         <Accordion
           unitData={unitDataQuery.data}
