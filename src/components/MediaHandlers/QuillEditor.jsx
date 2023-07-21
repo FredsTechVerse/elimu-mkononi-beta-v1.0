@@ -160,14 +160,12 @@ const QuillEditor = () => {
             : "hidden"
         } w-full items-center justify-end gap-2 my-2`}
       >
-        <span>
-          <button
-            className="h-8 w-36 bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full"
-            onClick={openSideBar}
-          >
-            Open Sidebar
-          </button>
-        </span>
+        <button
+          className="h-8 w-36 laptop:hidden bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full"
+          onClick={openSideBar}
+        >
+          Open Sidebar
+        </button>
         <span>
           {!isEditorEnabled ? (
             <button

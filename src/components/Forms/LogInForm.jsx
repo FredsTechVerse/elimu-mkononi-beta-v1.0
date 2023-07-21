@@ -38,12 +38,14 @@ const LogInForm = () => {
         status: "success",
         timeout: 2500,
       });
-      console.log({
-        accessToken: localStorage.getItem("accessToken", data.accessToken),
-        refreshToken: localStorage.getItem("refreshToken", data.refreshToken),
-        roles: localStorage.getItem("roles", JSON.stringify(data.roles)),
-      });
-      navigate(from, { replace: true });
+
+      if (data.roles.includes("EM-203")) {
+        navigate("/admin", { replace: true });
+      } else if (data.roles.includes("EM-202")) {
+        navigate("/tutor", { replace: true });
+      } else {
+        navigate("/", { replace: true });
+      }
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);

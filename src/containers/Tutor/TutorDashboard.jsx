@@ -139,7 +139,7 @@ const TutorDashboard = () => {
         </div>
         <div className="flex phone:flex-col tablet:flex-col w-full gap-5  border-black  ">
           <div className=" h-full w-full tablet:w-full gap-5  flex flex-col items-center justify-start  rounded-xl">
-            <div className="  debug phone:h-[250px] tablet:h-[450px] w-full gap-2 laptop:h-[600px]  p-2  flex flex-col justify-start graph  rounded-xl">
+            <div className=" phone:h-[250px] tablet:h-[450px] w-full gap-2 laptop:h-[600px]  p-2  flex flex-col justify-start graph  rounded-xl">
               <PageTitle text="Traffic data" />
               <AreaChart />
             </div>

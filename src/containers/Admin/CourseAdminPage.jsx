@@ -16,16 +16,16 @@ const CoursesAdminPage = () => {
     queryFn: fetchCoursesData,
   });
   return (
-    <div className="flex flex-col align-center relative phone:rounded-lg w-full h-full pt-2 px-4">
+    <div className="flex flex-col relative phone:rounded-lg w-full h-full pt-2 px-4">
       <div className="flex w-full items-center justify-end mb-3 pr-1">
         <NavigateBtn destination="new-course" text="New Course" />
       </div>
 
       <PageTitle text="list of courses" />
 
-      <div className="w-full flex-col-centered justify-start">
+      <div className="w-full flex flex-col  justify-start">
         {coursesQuery.status === "loading" && (
-          <div className="grid-lg">
+          <div className="grid-lg tablet:grid-cols-2 laptop:grid-cols-4 tablet:gap-6 ">
             <CourseSkeleton />
             <CourseSkeleton />
             <CourseSkeleton />

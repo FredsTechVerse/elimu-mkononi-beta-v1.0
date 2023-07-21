@@ -133,7 +133,7 @@ const AdminDashboard = () => {
           isSideBarOpen
             ? "phone:absolute z-10 bg-slate-200 phone:h-full  phone:w-full tablet:w-80"
             : "phone:hidden"
-        } laptop:relative laptop:w-1/4 laptop:flex flex-col laptop:h-full justify-between gap-2 p-2`}
+        } laptop:relative laptop:w-1/4  laptop:flex flex-col laptop:h-full justify-between gap-2 p-2`}
       >
         <div
           className="absolute right-4 top-3 text-white m-1 hover:cursor-pointer w-7 h-7 laptop:hidden"
@@ -153,14 +153,19 @@ const AdminDashboard = () => {
             />
           )}
         </div>
-        <div className="controls w-full h-full flex flex-col justify-start gap-2 px-1 ">
-          <AdminNavItem text="courses" />
-          <AdminNavItem text="students" />
-          <AdminNavItem text="tutors" />
-          <AdminNavItem text="admins" />
+        <div className="flex flex-col justify-end px-1 pb-3 ">
+          <h1 className="text-slate-900 font-bold text-lg text-center capitalize mt-3 w-full h-12 flex-row-centered  ">
+            Go to pages
+          </h1>
+          <div className="controls  w-full h-full flex flex-col justify-end  gap-2 ">
+            <AdminNavItem text="courses" />
+            <AdminNavItem text="students" />
+            <AdminNavItem text="tutors" />
+            <AdminNavItem text="admins" />
+          </div>
         </div>
       </div>
-      <div className="w-full laptop:w-3/4  flex flex-col justify-start  h-full overflow-auto overflow-x-hidden ">
+      <div className=" w-full laptop:w-3/4  flex flex-col justify-start  h-full overflow-auto p-3 overflow-x-hidden ">
         <div className="w-full flex phone:flex-col tablet:flex-row justify-between items-center gap-5">
           <div className="phone:w-full tablet:w-2/3 bg-slate-300 rounded-xl h-40 flex flex-col-centered relative ">
             <div className="flex flex-row items-center justify-evenly gap-3 absolute top-2  left-2">
@@ -184,14 +189,13 @@ const AdminDashboard = () => {
         <div className="flex phone:flex-col tablet:flex-row w-full gap-5">
           <div className="phone:w-full tablet:w-2/3 flex flex-col gap-2 ">
             <div className="w-full flex phone:flex-col tablet:flex-row justify-evenly ">
-              <div className="phone:w-full tablet:w-1/2 gap-5 border-blue-400 flex-col-centered p-2">
+              <div className="phone:w-full tablet:w-1/2 gap-5 border-blue-400 flex-col-centered p-5">
                 <div className="col-span-1 row-span-1">
                   {coursesQuery.status === "loading" && <DoughnutSkeleton />}
                   {coursesQuery.status === "success" && (
                     <DoughnutChart chartData={coursesData} />
                   )}
                 </div>
-                <div className="w-full rounded-lg h-16 bg-slate-300"></div>
               </div>
               <div className="phone:w-full tablet:w-1/2 gap-5 border-blue-400 flex-col-centered p-2">
                 <div className="col-span-1 row-span-1">
@@ -200,7 +204,6 @@ const AdminDashboard = () => {
                     <DoughnutChart chartData={unitsDistribution} />
                   )}
                 </div>
-                <div className="w-full rounded-lg h-16 bg-slate-300"></div>
               </div>
             </div>
             <div className="phone:h-[250px] tablet:h-[370px] mt-5  p-2 w-full  flex-col-centered rounded-xl">
@@ -208,7 +211,7 @@ const AdminDashboard = () => {
               <AreaChart />
             </div>
           </div>
-          <div className="phone:w-full tablet:w-1/3 ">
+          <div className="phone:w-full tablet:w-1/3 pt-2 ">
             <div className="flex flex-col justify-evenly items-center gap-5 py-5 ">
               <div className="h-1/3">
                 {coursesQuery.status === "loading" && <DoughnutSkeleton />}
