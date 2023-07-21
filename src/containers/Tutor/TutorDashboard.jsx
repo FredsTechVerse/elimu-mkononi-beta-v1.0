@@ -105,22 +105,15 @@ const TutorDashboard = () => {
             />
           )}
         </div>
-        <div className="controls w-full flex-col-centered gap-2 ">
+        <div className="w-full flex-col-centered gap-1 rounded-lg  ">
           <h1 className="text-slate-900 font-bold text-lg text-center capitalize mt-3 w-full h-12 flex-row-centered  ">
-            Navigate to Pages
+            Quick Access Controls
           </h1>
-
-          <div className="h-12 w-full flex-row-centered text-white rounded-lg bg-primary rounded-ms">
-            View Students
-          </div>
-          <div className="h-12 w-full flex-row-centered text-white rounded-lg bg-primary rounded-ms">
-            View Tutors
-          </div>
-          <div className="h-12 w-full flex-row-centered text-white rounded-lg bg-primary rounded-ms">
-            View Course
-          </div>
-          <div className="h-12 w-full flex-row-centered text-white rounded-lg bg-primary rounded-ms">
-            View Admins
+          <div className="gap-2 p-2 grid grid-cols-2  h-56 w-full">
+            <DashboardUserButton user="chapter" />
+            <DashboardUserButton user="lesson" />
+            <DashboardUserButton user="resource" />
+            <DashboardUserButton user="information" />
           </div>
         </div>
       </div>
@@ -172,17 +165,7 @@ const TutorDashboard = () => {
                 )}
               </div>
               <div className="w-full   bg-slate-300 rounded-lg h-64"></div>
-              <div className="w-full h-1/3  flex-col-centered gap-1 rounded-lg  ">
-                <h1 className="text-slate-900 font-bold text-lg text-center capitalize mt-3 w-full h-12 flex-row-centered  ">
-                  Quick Access Controls
-                </h1>
-                <div className="gap-2 p-2 grid grid-cols-2  h-full w-full">
-                  <DashboardUserButton user="chapter" />
-                  <DashboardUserButton user="lesson" />
-                  <DashboardUserButton user="resource" />
-                  <DashboardUserButton user="information" />
-                </div>
-              </div>
+              <div className="w-full h-1/3  flex-col-centered gap-1 rounded-lg  "></div>
             </div>
 
             <div className="bg-slate-300 rounded-xl"></div>
