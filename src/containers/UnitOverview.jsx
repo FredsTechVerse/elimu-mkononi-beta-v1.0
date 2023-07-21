@@ -1,21 +1,7 @@
 import React from "react";
-import {
-  ChapterCard,
-  UnitSkeleton,
-  NavBgBtn,
-  BackBtn,
-  MenuBtn,
-} from "../components";
-import { useQuery } from "@tanstack/react-query";
-import { fetchUnitData } from "../controllers/fetchData";
-const UnitOverview = ({ openSideBar, sideBarOpen, unitID }) => {
-  const roles = JSON.parse(localStorage.getItem("roles"));
+import { BackBtn, MenuBtn } from "../components";
 
-  const unitQuery = useQuery({
-    queryKey: ["unitData", unitID],
-    queryFn: () => fetchUnitData(unitID),
-  });
-
+const UnitOverview = ({ openSideBar, sideBarOpen }) => {
   return (
     <div className="flex-col-centered justify-start w-full h-full pt-1">
       <div className="relative pattern h-42 w-full phone:rounded-[16px] tablet:rounded-b-[16px] ">
@@ -70,7 +56,10 @@ const UnitOverview = ({ openSideBar, sideBarOpen, unitID }) => {
       </ul>
 
       <div className="w-full flex-row-centered ">
-        <button className="h-12 w-72 text-white bg-primary hover:bg-blue-900 rounded-md m-3">
+        <button
+          onClick={openSideBar}
+          className="h-12 w-72 text-white bg-primary hover:bg-blue-900 rounded-md m-3"
+        >
           Start Learning
         </button>
       </div>

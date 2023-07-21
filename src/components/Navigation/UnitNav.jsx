@@ -7,7 +7,7 @@ const UnitNav = ({ openSideBar, sideBarOpen, lessonName }) => {
     <div className="navigation flex flex-row w-full justify-between gap-10 items-center text-dark py-3 mb-3 text-sm text-white bg-primary px-3 mt-1 rounded-t-lg ">
       <HomeBtn />
       <div className="text-lg font-bold ">{lessonName}</div>
-      <div className="flex gap-8">
+      <div className="flex gap-8 ">
         <Link to="">
           <div className="tab cursor-pointer group">
             <div className="capitalize">Notes</div>

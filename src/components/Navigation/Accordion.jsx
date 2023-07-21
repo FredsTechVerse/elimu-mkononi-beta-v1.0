@@ -42,7 +42,7 @@ const Accordion = ({ unitData, closeSideBar }) => {
               closeSideBar();
             }}
           >
-            <XCircleIcon className="icon-styling text-black" />
+            <XCircleIcon className="icon-styling text-slate-100" />
           </div>
         </div>
       </div>

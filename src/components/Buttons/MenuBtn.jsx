@@ -7,8 +7,8 @@ const MenuBtn = ({ openSideBar, sideBarOpen }) => {
     <div
       onClick={openSideBar}
       className={`${
-        sideBarOpen ? "hidden" : "block"
-      } text-xl  border-none  flex-col-centered px-2 laptop:hidden bg-primary rounded-full `}
+        sideBarOpen ? "hidden" : "flex"
+      } text-xl  flex-col-centered px-2 laptop:hidden border-2 border-white aspect-square h-9 rounded-full `}
     >
       <Bars3BottomRightIcon className="icon-styling text-white" />
     </div>
