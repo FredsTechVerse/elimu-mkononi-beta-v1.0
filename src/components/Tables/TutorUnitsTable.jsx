@@ -2,15 +2,15 @@ import React from "react";
 import { CTAButton } from "../../components";
 const TutorUnitsTable = ({ unitsData }) => {
   return (
-    <div className="overflow-auto w-full px-3">
-      <table className="table-fixed bg-slate-300 bg-opacity-10 shadow-lg shadow-slate-200">
+    <div className="overflow-auto w-full px-3 ">
+      <table className="table-fixed bg-slate-300 bg-opacity-10 shadow-lg shadow-slate-200 w-full">
         <thead>
           <tr className="text-white uppercase bg-primary h-10  w-full gap-2 ">
             <th className=" w-12 ">No</th>
-            <th className=" w-48">Unit Name</th>
+            <th className=" w-24">Unit Name</th>
             <th className=" w-12">Chapters</th>
             <th className=" w-12">Lessons</th>
-            <th className=" w-12">CTA</th>
+            <th className=" w-24">CTA</th>
           </tr>
         </thead>
         <tbody>

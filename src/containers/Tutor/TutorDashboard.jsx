@@ -117,9 +117,9 @@ const TutorDashboard = () => {
           </div>
         </div>
       </div>
-      <div className="w-full laptop:w-3/4  flex flex-col justify-start h-full overflow-auto overflow-x-hidden p-3 ">
-        <div className="w-full flex phone:flex-col tablet:flex-row justify-between items-center gap-5">
-          <div className="phone:w-full tablet:w-2/3 bg-slate-300 rounded-xl h-40 flex flex-col-centered relative ">
+      <div className="w-full laptop:w-3/4  flex flex-col justify-start h-full overflow-auto overflow-x-hidden p-3 gap-3 ">
+        <div className="w-full  flex phone:flex-col tablet:flex-row justify-between items-center gap-5">
+          <div className="phone:w-full  bg-slate-300 rounded-xl h-40 flex flex-col-centered relative ">
             <div className="flex flex-row items-center justify-evenly gap-3 absolute top-2  left-2">
               <BackBtn inDashboard={true} isDark={false} />
               <HomeBtn inDashboard={true} isDark={false} />
@@ -136,16 +136,24 @@ const TutorDashboard = () => {
               Delectus, sint.
             </p>
           </div>
-          <div className="h-full phone:w-full tablet:w-1/3 flex-col-centered gap-1 rounded-lg bg-slate-300 "></div>
         </div>
-        <div className="flex phone:flex-col tablet:flex-row w-full gap-5 ">
-          <div className=" h-full w-full tablet:w-2/3 mt-5 gap-5  flex flex-col items-center justify-start   rounded-xl">
-            <div className="phone:h-[250px] tablet:h-[370px] w-full gap-2 laptop:h-[850px]  p-2  flex-col-centered  graph  rounded-xl">
+        <div className="flex phone:flex-col tablet:flex-col w-full gap-5  border-black  ">
+          <div className=" h-full w-full tablet:w-full gap-5  flex flex-col items-center justify-start  rounded-xl">
+            <div className="  phone:h-[250px] tablet:h-[370px] w-full gap-2 laptop:h-[570px]  p-2  flex flex-col justify-start graph  rounded-xl">
               <PageTitle text="Traffic data" />
               <AreaChart />
             </div>
+            <div className="phone:w-full gap-5  flex phone:flex-col tablet:flex-row tablet:w-full tablet:justify-between  ">
+              <div className=" bg-slate-300 rounded-lg h-full w-2/3 "></div>
+              <div className="h-full w-1/3 flex-row-centered">
+                {userDataQuery.status === "loading" && <DoughnutSkeleton />}
+                {userDataQuery.status === "success" && (
+                  <DoughnutChart chartData={pieChartData} />
+                )}
+              </div>
+            </div>
 
-            <div className="content p-2 m-2 rounded-xl w-full h-full flex flex-col justify-start items-center ">
+            <div className="content p-2 m-2 rounded-xl w-full   flex flex-col justify-start ">
               {userDataQuery.status === "loading" ? (
                 <TableSkeleton />
               ) : (
@@ -155,20 +163,6 @@ const TutorDashboard = () => {
                 </div>
               )}
             </div>
-          </div>
-          <div className="phone:w-full tablet:w-1/3  ">
-            <div className="flex flex-col justify-evenly items-center gap-5 py-5 ">
-              <div className="h-1/3">
-                {userDataQuery.status === "loading" && <DoughnutSkeleton />}
-                {userDataQuery.status === "success" && (
-                  <DoughnutChart chartData={pieChartData} />
-                )}
-              </div>
-              <div className="w-full   bg-slate-300 rounded-lg h-64"></div>
-              <div className="w-full h-1/3  flex-col-centered gap-1 rounded-lg  "></div>
-            </div>
-
-            <div className="bg-slate-300 rounded-xl"></div>
           </div>
         </div>
       </div>
