@@ -41,7 +41,7 @@ const CTAButton = ({ contact = null, unitID, fetchUsersData = null }) => {
     );
   } else {
     return (
-      <div className="flex items-center justify-evenly w-48  border-none">
+      <div className="flex items-center justify-center gap-5 debug  border-none">
         <button
           className="cta-btn group hover:border-green-500"
           onClick={() => {
