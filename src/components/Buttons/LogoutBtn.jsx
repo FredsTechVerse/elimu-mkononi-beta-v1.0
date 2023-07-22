@@ -50,11 +50,11 @@ const LogoutBtn = ({ position = "sidebar", isSubmitting = true }) => {
     >
       {position === "navbar" ? (
         <div className="flex flex-row items-center justify-center w-full gap-3 text-md ">
-          <span>Logout</span>
+          <span>Log Out</span>
           {logoutMutation?.isLoading && <SpinnerIcon />}
         </div>
       ) : (
-        <ArrowRightOnRectangleIcon className="h-5 w-5 m-1.5 text-slate-900" />
+        <ArrowRightOnRectangleIcon className="icon-styling rounded-full h-7 w-7 text-white  " />
       )}
     </div>
   );

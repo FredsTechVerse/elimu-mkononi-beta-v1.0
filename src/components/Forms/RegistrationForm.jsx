@@ -62,7 +62,7 @@ const RegistrationForm = ({ role }) => {
   const createUserMutation = useMutation({
     mutationFn: registerUser,
     onSuccess: (data) => {
-      queryClient.setQueryData([role, data._id], data);
+      queryClient.setQueryData([role, data?._id], data);
       queryClient.invalidateQueries([role], {
         exact: true,
       });

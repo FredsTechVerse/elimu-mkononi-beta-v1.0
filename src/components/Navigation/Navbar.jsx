@@ -12,7 +12,7 @@ const Navbar = () => {
       </Link>
 
       {/* ACTUAL NAVBAR */}
-      <div className="relative flex phone:flex-col tablet:flex-row phone:gap-2 items-center  capitalize">
+      <div className="relative flex tablet:flex-row phone:gap- items-center  capitalize">
         <div id="section-2" className=" h-full flex">
           {roles?.includes("EM-202") && (
             <Tooltip tooltip="Dashboard">
@@ -28,11 +28,7 @@ const Navbar = () => {
 
         <div
           id="section-3"
-          className={`${
-            !roles
-              ? "flex phone:flex-col phone:gap-2 tablet:flex-row"
-              : "hidden"
-          }`}
+          className={`${!roles ? "flex gap-1 tablet:flex-row" : "hidden"}`}
         >
           <Tooltip tooltip="Register">
             <NavBgBtn to="/new-student" text="register" />
@@ -42,8 +38,8 @@ const Navbar = () => {
           </Tooltip>
         </div>
         <div id="section-3" className={`${!roles ? "hidden" : "flex"}`}>
-          <Tooltip tooltip="Logout">
-            <LogoutBtn position="navbar" />
+          <Tooltip tooltip="Log Out">
+            <LogoutBtn />
           </Tooltip>
         </div>
       </div>
