@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   const roles = JSON.parse(localStorage.getItem("roles"));
   return (
-    <div className="absolute top-0 flex justify-between  z-10 w-full pl-4 pr-2 py-2 rounded-full m-2">
+    <div className="absolute top-0 flex justify-between  z-10 w-full px-4 py-2 rounded-full m-2">
       <Link to="/">
         <div
           id="section-1"

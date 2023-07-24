@@ -28,13 +28,36 @@ const AdminDashboard = () => {
   const { updateAlertBoxData } = useAlertBoxContext();
   const [totalUnits, setTotalUnits] = useState(0);
   const [totalCourses, setTotalCourses] = useState(0);
-  const [allUsers, setAllUsers] = useState({});
+  const [allUsers, setAllUsers] = useState({
+    labels: ["Students , Tutors , Admins"],
+    datasets: [
+      {
+        label: "Users",
+        data: [0, 0, 0],
+        backgroundColor: ["green", "blue"],
+        borderColor: ["green", "blue"],
+      },
+    ],
+  });
   const [totalUsers, setTotalUsers] = useState(0);
   const queryClient = useQueryClient();
   const allUsersQuery = useQuery(["users"], fetchAllUsersData, {
     onSuccess: (data) => {
       console.log(`All Users Data ${JSON.stringify(data)}`);
-      setAllUsers(data);
+      setAllUsers({
+        labels: ["Students", "Tutors", "Admins"],
+        datasets: [
+          {
+            label: "Users",
+            data: [data?.totalStudents, data?.totalTutors, data?.totalAdmins],
+            backgroundColor: ["green", "blue"],
+            borderColor: ["green", "blue"],
+          },
+        ],
+      });
+      setTotalUsers(
+        data?.totalStudents + data?.totalTutors + data?.totalAdmins
+      );
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
@@ -72,7 +95,6 @@ const AdminDashboard = () => {
   const coursesQuery = useQuery(["courses"], fetchCoursesData, {
     retry: 1,
     onSuccess: (data) => {
-      console.log(`Courses data returned ${JSON.stringify(data)}`);
       let totalUnits = 0;
       let coursesOffered = [];
       let unitsPerCourse = [];
@@ -97,7 +119,7 @@ const AdminDashboard = () => {
         labels: coursesOffered,
         datasets: [
           {
-            label: "Courses Offered",
+            label: "Total Units",
             data: unitsPerCourse,
             backgroundColor: ["green", "blue"],
             borderColor: ["green", "blue"],
@@ -108,7 +130,7 @@ const AdminDashboard = () => {
         labels: coursesOffered,
         datasets: [
           {
-            label: "Courses Data",
+            label: "Units per course",
             data: unitsPerCourse,
             backgroundColor: ["green", "blue"],
             borderColor: ["green", "blue"],
@@ -147,16 +169,6 @@ const AdminDashboard = () => {
     setIsSideBarOpen(false);
   };
 
-  useEffect(() => {
-    if (
-      allUsers?.tutors > 0 &&
-      allUsers?.students > 0 &&
-      allUsers?.admins > 0
-    ) {
-      setTotalUsers(allUsers?.tutors + allUsers?.students + allUsers?.admins);
-    }
-  }, [allUsers]);
-
   return (
     <div className="h-screen w-full flex phone:flex-col tablet:flex-row relative ">
       <div
@@ -193,6 +205,7 @@ const AdminDashboard = () => {
             <AdminNavItem text="students" />
             <AdminNavItem text="tutors" />
             <AdminNavItem text="admins" />
+            coursesData
           </div>
         </div>
       </div>
@@ -267,7 +280,7 @@ const AdminDashboard = () => {
                 </div>
                 {coursesQuery.status === "loading" && <DoughnutSkeleton />}
                 {coursesQuery.status === "success" && (
-                  <PieChart
+                  <DoughnutChart
                     chartData={coursesData}
                     doughnutName="Courses "
                     doughnutValue={totalCourses}

@@ -1,31 +1,19 @@
-import React, { FC, ReactNode, useRef } from "react";
+import React from "react";
 
-const ToolTip = ({ children, tooltip }) => {
-  const tooltipRef = useRef(null);
-  const container = useRef(null);
-
+const Tooltip = ({ children, tooltip }) => {
   return (
-    <div
-      ref={container}
-      onMouseEnter={({ clientX }) => {
-        if (!tooltipRef.current || !container.current) return;
-        const { left } = container.current.getBoundingClientRect();
-
-        tooltipRef.current.style.left = clientX - left + "px";
-      }}
-      className="group relative inline-block"
-    >
-      {children}
-      {tooltip ? (
-        <span
-          ref={tooltipRef}
-          className="invisible group-hover:visible opacity-0 group-hover:opacity-100 transition bg-black text-white p-1 rounded absolute top-full whitespace-nowrap"
-        >
-          {tooltip}
-        </span>
-      ) : null}
+    <div className="w-full px-4 sm:w-1/2 lg:w-1/4 ">
+      <div>
+        <div className="group relative inline-block">
+          {children}
+          <div className="absolute top-full left-1/2 z-20 mt-3 -translate-x-1/2 whitespace-nowrap rounded bg-slate-700 py-[6px] px-4 text-sm font-semibold text-white opacity-0 group-hover:opacity-100">
+            <span className="absolute top-[-3px] left-1/2 -z-10 h-2 w-2 -translate-x-1/2 rotate-45 rounded-sm bg-slate-700"></span>
+            {tooltip}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default ToolTip;
+export default Tooltip;
