@@ -10,15 +10,15 @@ const NavBgBtn = ({ to, text }) => {
     <Link to={to} state={{ background: location }}>
       <div
         className={
-          text == "Log In"
-            ? "bg-white rounded-full h-8 aspect-square flex-row-centered "
+          text === "Login"
+            ? "navbar-link bg-white "
             : text === "register"
-            ? "navbar-link bg-white text-black  w-28"
-            : "capitalize flex-row-centered gap-1 text-black bg-white rounded-full h-8 debug px-0.5 group"
+            ? "navbar-link bg-white"
+            : "navbar-link  group"
         }
       >
-        {text === "Log In" ? (
-          <ArrowLeftOnRectangleIcon className="icon-styling text-black  " />
+        {text === "Login" ? (
+          <ArrowLeftOnRectangleIcon className="icon-styling text-black" />
         ) : (
           text
         )}

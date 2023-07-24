@@ -60,12 +60,18 @@ const fetchUsersData = async (role) => {
   }
 };
 
+const fetchAllUsersData = async () => {
+  const { data: usersData } = await axios.get("/auth/all-users");
+  return usersData;
+};
+
 const fetchUnitData = async (unitID) => {
   const { data: unitData } = await axios.get(`/unit/${unitID}`);
   return unitData;
 };
 
 export {
+  fetchAllUsersData,
   fetchCoursesData,
   fetchCourseData,
   fetchUnitData,

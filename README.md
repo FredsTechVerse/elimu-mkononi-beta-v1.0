@@ -29,18 +29,18 @@
 
 ### PERFOMANCE OPTIMIZATION
 
-- Show real time notes refresh upon moving to a new lesson.
-- Make dashboard a column based in tablets also..... Third column to spread horizontally for ample space.
 - Polish resource section to upload and display pdf's
-- Unlock s3 bucket the right and secure way - Content is not even getting uploaded to my bucket.
-- Troubleshoot the youtube uploader's bad request while retrieving access token.
-- Final spacing polishes!
-- HAPPY RELEASE!
 
-### VERSION 2 OPTIMIZATIONS
+### POST RELEASE OPTIMIZATIONS
 
-- Migrate to typescript using SWC compiler which is a breeze!
-- When it comes to tracking users , unique id's of videos and lessons registered respectively in arrays will really come in handy , we just compare to know what to tick.
+- Auto lesson & Auto Chapter No increment
+- Setting limit to the total characters required while describing things.
+- Migrating to typescript using SWC compiler which is a breeze!
+- Tracking user interactions with the respective id of courses , units lessons etc .... Upon finishing , we push it into record that a certain user has completed a certain lesson ID without repopulating using the ID![A game with arrays and array methods to find out more about length etc.]
+- Giving the right privilleges to my se Bucket optimum security.
+- Smoothening youutube uploads after retrieval of refresh and access token.
+- Integration of react modal to the resources section.
+- Icons for notes and lessons to be used with cta buttons at the bottom of the alternative section eg When in the resources section we put a button to return back to the notes section. [BUTTON AND CTA APPROACH FOR SMALL SCREENS]
 
 ### KEY TIPS I HAVE PICKED UP ALONG THE JOURNEY
 

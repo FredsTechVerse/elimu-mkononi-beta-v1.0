@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   UserProfile,
   DashboardUserButton,
@@ -20,19 +20,30 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   fetchUserDetails,
   fetchCoursesData,
+  fetchAllUsersData,
 } from "../../controllers/fetchData";
 
 const AdminDashboard = () => {
-  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
-  const openSideBar = () => {
-    setIsSideBarOpen(true);
-  };
-  const closeSideBar = () => {
-    setIsSideBarOpen(false);
-  };
-  const { updateAlertBoxData } = useAlertBoxContext();
-  const queryClient = useQueryClient();
   const role = "EM-203";
+  const { updateAlertBoxData } = useAlertBoxContext();
+  const [totalUnits, setTotalUnits] = useState(0);
+  const [totalCourses, setTotalCourses] = useState(0);
+  const [allUsers, setAllUsers] = useState({});
+  const [totalUsers, setTotalUsers] = useState(0);
+  const queryClient = useQueryClient();
+  const allUsersQuery = useQuery(["users"], fetchAllUsersData, {
+    onSuccess: (data) => {
+      console.log(`All Users Data ${JSON.stringify(data)}`);
+      setAllUsers(data);
+    },
+    onError: (error) => {
+      handleError(error, updateAlertBoxData);
+      if (error.response && error.response.data.message === "Token expired") {
+        console.log("Refetching user details!");
+        queryClient.invalidateQueries(["courses"]);
+      }
+    },
+  });
 
   const [coursesData, setCoursesData] = useState({
     labels: ["Total Units", "Total Lessons"],
@@ -74,17 +85,19 @@ const AdminDashboard = () => {
 
       console.log(
         JSON.stringify({
-          totalUnits,
           coursesOffered,
-          unitsPerCourse,
           totalCourses,
+          totalUnits,
+          unitsPerCourse,
         })
       );
+      setTotalCourses(totalCourses);
+      setTotalUnits(totalUnits);
       setCoursesData({
         labels: coursesOffered,
         datasets: [
           {
-            label: "Courses Data",
+            label: "Courses Offered",
             data: unitsPerCourse,
             backgroundColor: ["green", "blue"],
             borderColor: ["green", "blue"],
@@ -125,6 +138,24 @@ const AdminDashboard = () => {
       }
     },
   });
+
+  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
+  const openSideBar = () => {
+    setIsSideBarOpen(true);
+  };
+  const closeSideBar = () => {
+    setIsSideBarOpen(false);
+  };
+
+  useEffect(() => {
+    if (
+      allUsers?.tutors > 0 &&
+      allUsers?.students > 0 &&
+      allUsers?.admins > 0
+    ) {
+      setTotalUsers(allUsers?.tutors + allUsers?.students + allUsers?.admins);
+    }
+  }, [allUsers]);
 
   return (
     <div className="h-screen w-full flex phone:flex-col tablet:flex-row relative ">
@@ -200,12 +231,12 @@ const AdminDashboard = () => {
             <div className="w-full flex phone:flex-col tablet:flex-row justify-evenly ">
               <div className="phone:w-full tablet:w-1/2 gap-5 border-blue-400 flex-col-centered p-5">
                 <div className="col-span-1 row-span-1">
-                  {coursesQuery.status === "loading" && <DoughnutSkeleton />}
-                  {coursesQuery.status === "success" && (
+                  {allUsersQuery.status === "loading" && <DoughnutSkeleton />}
+                  {allUsersQuery.status === "success" && (
                     <DoughnutChart
-                      chartData={coursesData}
+                      chartData={allUsers}
                       doughnutName="total users"
-                      doughnutValue="3"
+                      doughnutValue={totalUsers}
                     />
                   )}
                 </div>
@@ -217,7 +248,7 @@ const AdminDashboard = () => {
                     <DoughnutChart
                       chartData={unitsDistribution}
                       doughnutName="total units"
-                      doughnutValue="8"
+                      doughnutValue={totalUnits}
                     />
                   )}
                 </div>
@@ -238,8 +269,8 @@ const AdminDashboard = () => {
                 {coursesQuery.status === "success" && (
                   <PieChart
                     chartData={coursesData}
-                    doughnutName="total courses"
-                    doughnutValue="50"
+                    doughnutName="Courses "
+                    doughnutValue={totalCourses}
                   />
                 )}
               </div>
