@@ -12,8 +12,8 @@ const UserCard = ({ user, fetchUsersData, userKey, role }) => {
   return (
     <div
       className={` ${
-        userKey === "odd" && "bg-cyan-100"
-      } flex laptop:hidden flex-col justify-evenly items-center w-[280px] py-2 rounded-lg my-0.5 shadow-md shadow-slate-300 space-y-1 px-3`}
+        userKey === "odd" && "bg-blue-100"
+      } flex laptop:hidden flex-col justify-evenly items-center w-[280px] py-2 rounded-lg my-0.5 shadow-md shadow-slate-300 bg-slate-100 space-y-1 px-3`}
     >
       <div className="flex items-center justify-between w-full text-lg ">
         <p className="capitalize w-full">
@@ -21,7 +21,7 @@ const UserCard = ({ user, fetchUsersData, userKey, role }) => {
         </p>
         <StatusPill status={user.status} />
       </div>
-      <div className="flex items-center justify-between w-full">
+      <div className="flex items-center justify-center w-full">
         {role === "EM-202" && <span>Units : {numberOfUnits(role)}</span>}
         <CTAButton
           _id={user._id}

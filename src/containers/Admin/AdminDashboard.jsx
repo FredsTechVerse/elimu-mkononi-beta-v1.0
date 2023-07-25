@@ -191,7 +191,6 @@ const AdminDashboard = () => {
             <AdminNavItem text="students" />
             <AdminNavItem text="tutors" />
             <AdminNavItem text="admins" />
-            coursesData
           </div>
         </div>
       </div>
@@ -282,10 +281,10 @@ const AdminDashboard = () => {
                   Quick Access Controls
                 </h1>
                 <div className="gap-2 p-2 grid grid-cols-2  h-full w-full">
-                  <DashboardUserButton user="chapter" />
-                  <DashboardUserButton user="lesson" />
-                  <DashboardUserButton user="resource" />
-                  <DashboardUserButton user="information" />
+                  <DashboardUserButton item="chapter" />
+                  <DashboardUserButton item="lesson" />
+                  <DashboardUserButton item="resource" />
+                  <DashboardUserButton item="information" />
                 </div>
               </div>
             </div>
