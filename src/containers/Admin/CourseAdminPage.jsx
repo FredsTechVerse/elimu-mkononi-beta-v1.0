@@ -26,7 +26,7 @@ const CoursesAdminPage = () => {
         <NavigateBtn destination="new-course" text="New Course" />
       </div>
 
-      <PageTitle text="list of courses" />
+      <PageTitle title="list of courses" />
 
       <div className="w-full flex flex-col  justify-start">
         {coursesQuery.status === "loading" && (

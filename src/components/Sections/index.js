@@ -7,7 +7,6 @@ import TeamSection from "./TeamSection";
 import HeroSection from "./HeroSection";
 import Footer from "./Footer";
 import CourseOverview from "./CourseOverview";
-import PageTitle from "./PageTitle";
 import ContentSection from "./ContentSection";
 import Layout from "./Layout";
 export {
@@ -21,6 +20,5 @@ export {
   HeroSection,
   Footer,
   CourseOverview,
-  PageTitle,
   Layout,
 };

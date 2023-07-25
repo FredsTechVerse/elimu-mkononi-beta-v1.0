@@ -56,6 +56,8 @@ import {
   FancyLine,
   Tooltip,
   UserProfile,
+  PageTitle,
+  Heading,
 } from "./General";
 
 import { SpinnerIcon } from "./Icons";
@@ -97,7 +99,6 @@ import {
   HeroSection,
   Footer,
   CourseOverview,
-  PageTitle,
   ContentSection,
   Layout,
 } from "./Sections";
@@ -223,4 +224,5 @@ export {
   QuillEditorSkeleton,
   VideoJS,
   SpinnerIcon,
+  Heading,
 };

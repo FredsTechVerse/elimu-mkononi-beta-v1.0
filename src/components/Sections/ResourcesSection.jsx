@@ -55,7 +55,6 @@ const ResourcesSection = () => {
   };
 
   const updateFileName = (fileName) => {
-    console.log(`Filename ${fileName}`);
     setFileName(fileName);
   };
 

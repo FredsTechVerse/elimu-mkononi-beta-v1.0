@@ -13,7 +13,7 @@ const CoursesSection = () => {
       id="courses"
       className="courses relative  px-2 w-full text-slate-900 bg-white "
     >
-      <PageTitle text="list of courses" />
+      <PageTitle title="list of courses" />
 
       {coursesQuery.status === "loading" ? (
         <div className="grid-lg tablet:grid-cols-2 laptop:grid-cols-4 tablet:gap-6 ">
@@ -36,9 +36,10 @@ const CoursesSection = () => {
               return (
                 <CourseCardV2
                   key={courseIndex}
-                  courseID={_id}
-                  courseTitle={courseTitle}
-                  courseImage={courseImage}
+                  courseData={course}
+                  // courseID={_id}
+                  // courseTitle={courseTitle}
+                  // courseImage={courseImage}
                 />
               );
             })

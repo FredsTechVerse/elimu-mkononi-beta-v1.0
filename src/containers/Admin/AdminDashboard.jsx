@@ -25,6 +25,7 @@ import {
 
 const AdminDashboard = () => {
   const role = "EM-203";
+  const queryClient = useQueryClient();
   const { updateAlertBoxData } = useAlertBoxContext();
   const [totalUnits, setTotalUnits] = useState(0);
   const [totalCourses, setTotalCourses] = useState(0);
@@ -34,48 +35,20 @@ const AdminDashboard = () => {
       {
         label: "Users",
         data: [0, 0, 0],
-        backgroundColor: ["green", "blue"],
-        borderColor: ["green", "blue"],
+        backgroundColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
+        borderColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
       },
     ],
   });
   const [totalUsers, setTotalUsers] = useState(0);
-  const queryClient = useQueryClient();
-  const allUsersQuery = useQuery(["users"], fetchAllUsersData, {
-    onSuccess: (data) => {
-      console.log(`All Users Data ${JSON.stringify(data)}`);
-      setAllUsers({
-        labels: ["Students", "Tutors", "Admins"],
-        datasets: [
-          {
-            label: "Users",
-            data: [data?.totalStudents, data?.totalTutors, data?.totalAdmins],
-            backgroundColor: ["green", "blue"],
-            borderColor: ["green", "blue"],
-          },
-        ],
-      });
-      setTotalUsers(
-        data?.totalStudents + data?.totalTutors + data?.totalAdmins
-      );
-    },
-    onError: (error) => {
-      handleError(error, updateAlertBoxData);
-      if (error.response && error.response.data.message === "Token expired") {
-        console.log("Refetching user details!");
-        queryClient.invalidateQueries(["courses"]);
-      }
-    },
-  });
-
   const [coursesData, setCoursesData] = useState({
     labels: ["Total Units", "Total Lessons"],
     datasets: [
       {
         label: "Workload",
         data: [0, 0],
-        backgroundColor: ["green", "blue"],
-        borderColor: ["green", "blue"],
+        backgroundColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
+        borderColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
       },
     ],
   });
@@ -86,15 +59,50 @@ const AdminDashboard = () => {
       {
         label: "Workload",
         data: [0, 0],
-        backgroundColor: ["green", "blue"],
-        borderColor: ["green", "blue"],
+        backgroundColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
+        borderColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
       },
     ],
   });
 
-  const coursesQuery = useQuery(["courses"], fetchCoursesData, {
+  const userDataQuery = useQuery(["user"], () => fetchUserDetails(role), {
     retry: 1,
+    onSuccess: (data) => {},
+    onError: (error) => {
+      handleError(error, updateAlertBoxData);
+      if (error.response && error.response.data.message === "Token expired") {
+        queryClient.invalidateQueries(["user"]);
+      }
+    },
+  });
+
+  const allUsersQuery = useQuery(["users"], fetchAllUsersData, {
     onSuccess: (data) => {
+      setAllUsers({
+        labels: ["Students", "Tutors", "Admins"],
+        datasets: [
+          {
+            label: "Users",
+            data: [data?.totalStudents, data?.totalTutors, data?.totalAdmins],
+            backgroundColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
+            borderColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
+          },
+        ],
+      });
+      setTotalUsers(
+        data?.totalStudents + data?.totalTutors + data?.totalAdmins
+      );
+    },
+    onError: (error) => {
+      handleError(error, updateAlertBoxData);
+      if (error.response && error.response.data.message === "Token expired") {
+        queryClient.invalidateQueries(["courses"]);
+      }
+    },
+  });
+
+  const coursesQuery = useQuery(["courses"], fetchCoursesData, {
+    onSuccess: async (data) => {
       let totalUnits = 0;
       let coursesOffered = [];
       let unitsPerCourse = [];
@@ -105,14 +113,6 @@ const AdminDashboard = () => {
         unitsPerCourse.push(course?.units?.length);
       });
 
-      console.log(
-        JSON.stringify({
-          coursesOffered,
-          totalCourses,
-          totalUnits,
-          unitsPerCourse,
-        })
-      );
       setTotalCourses(totalCourses);
       setTotalUnits(totalUnits);
       setCoursesData({
@@ -121,8 +121,8 @@ const AdminDashboard = () => {
           {
             label: "Total Units",
             data: unitsPerCourse,
-            backgroundColor: ["green", "blue"],
-            borderColor: ["green", "blue"],
+            backgroundColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
+            borderColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
           },
         ],
       });
@@ -132,8 +132,8 @@ const AdminDashboard = () => {
           {
             label: "Units per course",
             data: unitsPerCourse,
-            backgroundColor: ["green", "blue"],
-            borderColor: ["green", "blue"],
+            backgroundColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
+            borderColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
           },
         ],
       });
@@ -142,21 +142,7 @@ const AdminDashboard = () => {
     onError: (error) => {
       handleError(error, updateAlertBoxData);
       if (error.response && error.response.data.message === "Token expired") {
-        console.log("Refetching user details!");
         queryClient.invalidateQueries(["courses"]);
-      }
-    },
-  });
-
-  const userDataQuery = useQuery(["user"], () => fetchUserDetails(role), {
-    retry: 1,
-    onSuccess: (data) => {
-      console.log(`User Data : ${JSON.stringify(data)}`);
-    },
-    onError: (error) => {
-      handleError(error, updateAlertBoxData);
-      if (error.response && error.response.data.message === "Token expired") {
-        queryClient.invalidateQueries(["user"]);
       }
     },
   });
@@ -240,12 +226,13 @@ const AdminDashboard = () => {
         </div>
         <div className="flex phone:flex-col tablet:flex-row w-full gap-5">
           <div className="phone:w-full tablet:w-2/3 flex flex-col gap-2 pt-2">
-            <PageTitle text="statistics" />
+            <PageTitle title="statistics" />
             <div className="w-full flex phone:flex-col tablet:flex-row justify-evenly ">
               <div className="phone:w-full tablet:w-1/2 gap-5 border-blue-400 flex-col-centered p-5">
                 <div className="col-span-1 row-span-1">
-                  {allUsersQuery.status === "loading" && <DoughnutSkeleton />}
-                  {allUsersQuery.status === "success" && (
+                  {allUsersQuery.status === "loading" ? (
+                    <DoughnutSkeleton />
+                  ) : (
                     <DoughnutChart
                       chartData={allUsers}
                       doughnutName="total users"
@@ -256,8 +243,9 @@ const AdminDashboard = () => {
               </div>
               <div className="phone:w-full tablet:w-1/2 gap-5 border-blue-400 flex-col-centered p-2">
                 <div className="col-span-1 row-span-1">
-                  {coursesQuery.status === "loading" && <DoughnutSkeleton />}
-                  {coursesQuery.status === "success" && (
+                  {coursesQuery.status === "loading" ? (
+                    <DoughnutSkeleton />
+                  ) : (
                     <DoughnutChart
                       chartData={unitsDistribution}
                       doughnutName="total units"
@@ -268,18 +256,19 @@ const AdminDashboard = () => {
               </div>
             </div>
             <div className="phone:h-[250px] tablet:h-[370px] mt-5  p-2 w-full  flex-col-centered rounded-xl">
-              <PageTitle text="Application Traffic data" />
+              <PageTitle title="Application Traffic data" />
               <AreaChart />
             </div>
           </div>
           <div className="phone:w-full tablet:w-1/3 pt-2 ">
             <div className="flex flex-col justify-evenly items-center gap-5  ">
               <div className="h-1/3 ">
-                <div className="pb-3">
-                  <PageTitle text="Units" />
+                <div className="pb-7">
+                  <PageTitle title="Units" />
                 </div>
-                {coursesQuery.status === "loading" && <DoughnutSkeleton />}
-                {coursesQuery.status === "success" && (
+                {coursesQuery.status === "loading" ? (
+                  <DoughnutSkeleton />
+                ) : (
                   <DoughnutChart
                     chartData={coursesData}
                     doughnutName="Courses "

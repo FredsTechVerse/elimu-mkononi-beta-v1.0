@@ -7,6 +7,8 @@ import ProgressBar from "./ProgressBar";
 import UserProfile from "./UserProfile";
 import FancyLine from "./FancyLine";
 import Tooltip from "./Tooltip";
+import PageTitle from "./PageTitle";
+import Heading from "./Heading";
 export {
   AlertBox,
   TutorCardHome,
@@ -17,4 +19,6 @@ export {
   ProgressBar,
   FancyLine,
   Tooltip,
+  PageTitle,
+  Heading,
 };

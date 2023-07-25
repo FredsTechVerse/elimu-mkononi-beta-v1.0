@@ -3,12 +3,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 const UnitCard = ({ unitNumber, unitName, unitDescription, unitID }) => {
   return (
-    <article className="hover:cursor-pointer w-full  laptop:h-44  h-40 flex flex-col gap-2  pt-2 rounded-xl shadow-lg shadow-slate-300 ">
+    <article className="hover:cursor-pointer w-full  laptop:h-44  h-40 flex flex-col gap-2  pt-2 rounded-xl shadow-lg shadow-slate-400 ">
       <section className="px-2 flex items-center justify-start gap-3 ">
-        <div className="ml-4 w-10 h-10  rounded-full bg-slate-600  flex-row-centered text-white ">
+        <div className="ml-2 h-8 aspect-square  rounded-full bg-slate-600  flex-row-centered text-white ">
           <span className="font-extraLight">{unitNumber}</span>
         </div>
-        <h1 className="uppercase text-xl font-extrabold">{unitName}</h1>
+        <h1 className="uppercase text-lg font-extrabold">{unitName}</h1>
       </section>
       <section className="w-full h-full flex flex-col">
         <p className="text-dark text-md w-full h-full px-4 mt-3">

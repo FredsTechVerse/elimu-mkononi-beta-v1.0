@@ -27,12 +27,10 @@
   - The tutor will officially be renamed as the lecturer.
   - There will be need to add an account for student content creators.
 
-### PERFOMANCE OPTIMIZATION
-
-- Polish resource section to upload and display pdf's
-
 ### POST RELEASE OPTIMIZATIONS
 
+- We refine the chapter forms and add tooltips everywhere now that we can.
+- Find out why coursesQuery doesn't automatically refresh charts on first render
 - Auto lesson & Auto Chapter No increment
 - Setting limit to the total characters required while describing things.
 - Migrating to typescript using SWC compiler which is a breeze!

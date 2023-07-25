@@ -8,19 +8,13 @@ const VideoPlayer = () => {
 
   const handleVideoReady = () => {
     setVideoReady(true);
-    // console.log("Video is ready to play");
   };
 
   const handleVideoError = () => {
     // setVideoReady(false);
-    // console.log("We are experiencing an error");
   };
-  const handleVideoEnd = () => {
-    // console.log("Video has ended!");
-  };
-  const handleVideoPause = () => {
-    // console.log("Video has been paused");
-  };
+  const handleVideoEnd = () => {};
+  const handleVideoPause = () => {};
 
   return (
     <div className="w-full flex-row-centered my-2 ">

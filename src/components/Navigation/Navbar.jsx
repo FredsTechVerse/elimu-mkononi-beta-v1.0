@@ -16,11 +16,12 @@ const Navbar = () => {
 
       <div className="relative flex tablet:flex-row phone:gap- items-center  capitalize">
         <div className=" h-full flex">
-          {roles?.includes("EM-202") && (
-            <Tooltip tooltip="Dashboard">
-              <HomeBtn to="/tutor" text="Dashboard" />
-            </Tooltip>
-          )}
+          {roles?.includes("EM-202") ||
+            (roles.includes("EM-203") && (
+              <Tooltip tooltip="Dashboard">
+                <HomeBtn to="/tutor" text="Dashboard" />
+              </Tooltip>
+            ))}
         </div>
         <div className={`${!roles ? "flex gap-1 tablet:flex-row" : "hidden"}`}>
           <Tooltip tooltip="Register">

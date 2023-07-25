@@ -44,8 +44,8 @@ const LogoutBtn = ({ position = "sidebar", isSubmitting = true }) => {
       }}
       className={`${
         position === "navbar"
-          ? "border-2 border-white navbar-link"
-          : "border-white rounded-full hover:bg-border-2 cursor-pointer"
+          ? "border-2 border-white  navbar-link"
+          : "border-white rounded-full h-9 aspect-square bg-white hover:bg-border-2 cursor-pointer flex-row-centered"
       }`}
     >
       {position === "navbar" ? (
@@ -54,7 +54,7 @@ const LogoutBtn = ({ position = "sidebar", isSubmitting = true }) => {
           {logoutMutation?.isLoading && <SpinnerIcon />}
         </div>
       ) : (
-        <ArrowRightOnRectangleIcon className="icon-styling rounded-full h-7 w-7 text-white  " />
+        <ArrowRightOnRectangleIcon className="icon-styling  text-slate-900  " />
       )}
     </div>
   );

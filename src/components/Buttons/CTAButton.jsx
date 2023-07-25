@@ -14,7 +14,6 @@ const CTAButton = ({ contact = null, unitID, fetchUsersData = null }) => {
         data: { _id },
       });
       fetchUsersData();
-      console.log("Tenant successfully deleted and put under archives.");
     } catch (error) {
       console.log(
         `${error.message} encountered when attempting to delete tenant.`

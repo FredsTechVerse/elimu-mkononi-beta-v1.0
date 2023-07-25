@@ -35,8 +35,8 @@ const TutorDashboard = () => {
       {
         label: "Workload",
         data: [0, 0],
-        backgroundColor: ["green", "blue"],
-        borderColor: ["green", "blue"],
+        backgroundColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
+        borderColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
       },
     ],
   });
@@ -63,8 +63,8 @@ const TutorDashboard = () => {
           {
             label: "Workload",
             data: [totalUnits, totalLessons],
-            backgroundColor: ["green", "blue"],
-            borderColor: ["green", "blue"],
+            backgroundColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
+            borderColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
           },
         ],
       });
@@ -149,7 +149,7 @@ const TutorDashboard = () => {
         <div className="flex phone:flex-col tablet:flex-col w-full gap-5   ">
           <div className=" h-full w-full tablet:w-full gap-5  flex flex-col items-center justify-start  rounded-xl">
             <div className=" phone:h-[250px] tablet:h-[450px] w-full gap-2 laptop:h-[600px]  p-2  flex flex-col justify-start graph  rounded-xl">
-              <PageTitle text="Units Uploaded" />
+              <PageTitle title="Units Uploaded" />
               <AreaChart />
             </div>
             <div className=" phone:w-full gap-5  flex phone:flex-col tablet:flex-row tablet:w-full tablet:justify-between  ">
@@ -171,7 +171,7 @@ const TutorDashboard = () => {
                 <TableSkeleton />
               ) : (
                 <div className="flex-col-centered gap-5">
-                  <PageTitle text="List of units" />
+                  <PageTitle title="List of units" />
                   <TutorUnitsTable unitsData={userDataQuery?.data?.units} />
                 </div>
               )}

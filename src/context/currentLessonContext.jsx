@@ -13,7 +13,6 @@ export const CurrentLessonContextProvider = ({ children }) => {
       setCurrentLesson(newLessonData);
       return;
     }
-    console.log("Current lesson data is null");
   };
 
   return (

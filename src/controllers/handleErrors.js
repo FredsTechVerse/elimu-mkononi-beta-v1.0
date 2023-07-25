@@ -35,16 +35,13 @@ const handleError = async (error, updateAlertBoxData) => {
     response = ERRORS.BAD_REQUEST;
   } else if (error.response && error.response.status === 401) {
     if (error.response.data.message === "Token expired") {
-      // console.log("Token renewal expected");
       await renewToken();
-      // console.log("Token has been renewed successfully!");
     } else if (error.response.statusText === "Unauthorized") {
       response = ERRORS.AUTHORIZATION_ERROR;
     } else {
       response = ERRORS.AUTHORIZATION_ERROR;
     }
   } else if (error.response && error.response.status === 403) {
-    console.log(JSON.stringify(error.response));
     response = error.response.message;
     // Logout user
   } else if (error.response && error.response.status === 404) {
@@ -89,7 +86,6 @@ const renewToken = async () => {
     ] = `Bearer ${refreshTokenData.newAccessToken}`;
 
     localStorage.setItem("accessToken", refreshTokenData.newAccessToken);
-    // console.log("Renewed Token!");
   } catch (err) {
     console.log(
       `An error occured while renewing the access token ${JSON.stringify(err)}`

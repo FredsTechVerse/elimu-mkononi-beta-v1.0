@@ -97,7 +97,6 @@ const QuillEditor = () => {
     onSuccess: (data) => {
       queryClient.setQueryData(["notes", data._id], data);
       queryClient.invalidateQueries(["notes"], { exact: true });
-      console.log(`Updated notes ${JSON.stringify(data)}`);
       updateAlertBoxData({
         response: "Lesson Notes updated succesfully!",
         isResponse: true,
@@ -117,7 +116,6 @@ const QuillEditor = () => {
   });
 
   const handleChange = useCallback((editorContent) => {
-    console.log(editorContent);
     setContent(editorContent);
   }, []);
   const enableEdit = () => {
@@ -159,12 +157,13 @@ const QuillEditor = () => {
       >
         Open Sidebar
       </button> */}
+
       <div
         className={`${
           roles?.includes("EM-202") || roles?.includes("EM-203")
             ? "flex"
             : "hidden"
-        } w-full items-center justify-end gap-2 my-2`}
+        } w-full items-center justify-start gap-2 my-2`}
       >
         <button
           className="h-8 w-36 laptop:hidden bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full"
@@ -204,7 +203,11 @@ const QuillEditor = () => {
           )}
         </div>
       </div>
-      <div id="unit content" className="mt-3 ">
+      <h1 className="font-bold text-lg pt-2 ml-1 ">
+        {currentLesson?.lessonName}
+      </h1>
+
+      <div id="unit content" className="mt-1 ">
         {currentLesson.lessonNotes && notesQuery.status === "loading" && (
           <QuillEditorSkeleton />
         )}

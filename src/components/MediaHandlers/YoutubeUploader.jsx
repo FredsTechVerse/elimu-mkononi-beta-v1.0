@@ -32,9 +32,6 @@ const YoutubeUploader = ({ verifyUpload, updateFileInfo, videoTitle }) => {
     {
       retry: 1,
       onSuccess: (data) => {
-        console.log(
-          `Redirecting to the authorrization URI : ${JSON.stringify(data)}`
-        );
         redirectToExternalLink(data);
       },
       onError: (error) => {

@@ -34,11 +34,7 @@ const S3Uploader = ({ verifyUpload, updateFileName, isTokenActive }) => {
       if (isTokenActive) {
         const { data } = await Axios.post("/s3Direct/", body, config);
         const { signedUrl, Key } = data;
-        console.log(
-          `Generated signed URL & Key : ${JSON.stringify(
-            signedUrl
-          )}, ${JSON.stringify(Key)}`
-        );
+
         await axios.put(signedUrl, file, {
           headers: {
             "Content-Type": file.type,
@@ -48,7 +44,6 @@ const S3Uploader = ({ verifyUpload, updateFileName, isTokenActive }) => {
         updateFileName(Key);
       }
     } catch (error) {
-      console.log(error.response);
       handleError(error, updateAlertBoxData);
     }
   };

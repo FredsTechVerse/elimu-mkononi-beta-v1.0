@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AccordionItem, BackBtn, Tooltip } from "../../components";
+import { AccordionItem, HomeBtn, Tooltip } from "../../components";
 import { PlusIcon, XCircleIcon } from "@heroicons/react/24/solid";
 import { useLocation, Link } from "react-router-dom";
 const Accordion = ({ unitData, closeSideBar }) => {
@@ -18,6 +18,7 @@ const Accordion = ({ unitData, closeSideBar }) => {
   return (
     <div className="relative z-10 flex flex-col items-center  bg-slate-100 h-screen  ml-1 rounded-t-xl ">
       <div className="flex items-center justify-between w-full px-2 h-16  font-bold text-md text-slate-200 bg-primary text-center rounded-t-lg ">
+        <HomeBtn />
         {unitData && unitData.unitName}
         <div className={` flex-row-centered gap-1 `}>
           <Tooltip text="Add Chapter">

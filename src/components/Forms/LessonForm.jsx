@@ -35,7 +35,6 @@ const LessonForm = () => {
 
   const updateFileName = ({ videoUrl, videoKind }) => {
     setFileName(videoUrl);
-    console.log(`Filename updated to ${videoUrl}`);
   };
 
   useEffect(() => {
@@ -79,7 +78,6 @@ const LessonForm = () => {
     },
   });
   const isFormValid = () => {
-    console.log("Running form validation");
     if (
       lessonName !== null &&
       lessonNumber !== null &&

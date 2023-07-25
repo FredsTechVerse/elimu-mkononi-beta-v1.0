@@ -7,7 +7,6 @@ const verifyAccess = async () => {
 
 const getYoutubeAuthorizationURI = async () => {
   const { data: authorizationUri } = await axios.get("/oAuth/authorizationUri");
-  console.log(`Authorization URI returned ${authorizationUri}`);
   return authorizationUri;
 };
 

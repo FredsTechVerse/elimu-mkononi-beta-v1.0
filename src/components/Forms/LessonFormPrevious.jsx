@@ -49,13 +49,6 @@ const LessonForm = () => {
     setUploadSucess(true);
   };
   const updateFileInfo = ({ videoUrl, videoKind }) => {
-    console.log(
-      `Youtube info passed to server i can utilize ${JSON.stringify({
-        videoUrl,
-        videoKind,
-      })}`
-    );
-    // Here is where i need to fetch the lesson url and append it accordingly.
     setVideoUrl(videoUrl);
   };
 

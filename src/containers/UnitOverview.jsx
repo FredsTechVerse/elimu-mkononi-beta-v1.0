@@ -13,7 +13,7 @@ const UnitOverview = ({ openSideBar, sideBarOpen }) => {
             <MenuBtn openSideBar={openSideBar} sideBarOpen={sideBarOpen} />
           </div>
           <p className="text-white my-14  font-bold  phone:text-xl tablet:text-2xl laptop:text-4xl uppercase">
-            Course Outline
+            Unit Outline
           </p>
         </div>
       </div>
