@@ -6,7 +6,6 @@ import axios from "../../axios";
 const ResourcesSection = () => {
   const { lessonID, lessonResources } = useOutletContext();
   const { fileName, setFileName } = useState("");
-  // console.log(`List of lesson resources ID'S ${lessonResources}`);
   const [lessonData, setLessonData] = useState({});
 
   const saveResourceToDB = async ({ resourceName }) => {

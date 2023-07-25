@@ -44,7 +44,7 @@ const YoutubeUploader = ({ verifyUpload, updateFileInfo, videoTitle }) => {
   );
 
   const redirectToExternalLink = (externalLink) => {
-    localStorage.setItem("previousLocation", window.location.pathname);
+    localStorage.setItem("previousLocation", window?.location?.pathname);
     window.open(externalLink, "_self");
   };
 
@@ -97,7 +97,6 @@ const YoutubeUploader = ({ verifyUpload, updateFileInfo, videoTitle }) => {
       );
       updateFileInfo({ videoUrl, videoKind });
     } catch (error) {
-      console.log(error);
       handleError(error, updateAlertBoxData);
     }
   };

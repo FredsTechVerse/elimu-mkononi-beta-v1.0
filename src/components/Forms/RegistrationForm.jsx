@@ -1,15 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FormNavigation, SubmitButton, Modal } from "../../components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { registerUser } from "../../controllers/postData";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import { handleError } from "../../controllers/handleErrors";
 
-const RegistrationForm = ({ role }) => {
+const RegistrationForm = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const formRef = useRef(null);
+  const location = useLocation();
+  const role = location?.state?.role;
   const { updateAlertBoxData } = useAlertBoxContext();
 
   // DECLARATION OF OUR STATES

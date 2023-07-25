@@ -22,8 +22,8 @@ const logoutUser = async () => {
   await axios.delete("/auth/logout", config);
 };
 
-const createResource = async ({ resourceName, resourceUrl }) => {
-  const resourceData = { resourceName, resourceUrl };
+const createResource = async ({ resourceName, resourceUrl, chapterID }) => {
+  const resourceData = { resourceName, resourceUrl, chapterID };
   const config = {
     headers: { "Content-Type": "application/json" },
   };

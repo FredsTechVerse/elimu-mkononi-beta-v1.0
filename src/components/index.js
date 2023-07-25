@@ -116,6 +116,7 @@ import {
   UnitNavSkeleton,
   UserProfileSkeleton,
   DoughnutSkeleton,
+  UserCardSkeleton,
 } from "./Skeletons";
 
 import {
@@ -222,6 +223,7 @@ export {
   NotesSkeleton,
   UnitNavSkeleton,
   QuillEditorSkeleton,
+  UserCardSkeleton,
   VideoJS,
   SpinnerIcon,
   Heading,

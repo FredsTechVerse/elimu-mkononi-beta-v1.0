@@ -5,15 +5,17 @@ import {
   SubmitButton,
   YoutubeUploader,
 } from "../../components";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createLesson } from "../../controllers/postData";
 import { handleError } from "../../controllers/handleErrors";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 const LessonForm = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const queryClient = useQueryClient();
-  const { chapterID } = useParams();
+  const chapterID = location?.state?.chapterID;
+  const lessonTotals = location?.state?.lessonTotals;
   const formRef = useRef();
   const { updateAlertBoxData } = useAlertBoxContext();
 
@@ -69,7 +71,7 @@ const LessonForm = () => {
       handleError(error, updateAlertBoxData);
       if (error.response && error.response.data.message === "Token expired") {
         createLessonMutation.mutate({
-          lessonNumber: lessonNumber,
+          lessonNumber: lessonTotals,
           lessonName: lessonName,
           lessonUrl: lessonUrl,
           chapterID: chapterID,
@@ -99,7 +101,7 @@ const LessonForm = () => {
     e.preventDefault();
     if (isFormValid) {
       createLessonMutation.mutate({
-        lessonNumber: lessonNumber,
+        lessonNumber: `${chapterID}-${lessonTotals}`,
         lessonName: lessonName,
         lessonUrl: lessonUrl,
         chapterID: chapterID,
@@ -127,11 +129,8 @@ const LessonForm = () => {
               id="lessonDetails"
               type="number"
               placeholder="Lesson Number"
-              value={lessonNumber}
-              onChange={(e) => {
-                setLessonNumber(e.target.value);
-              }}
-              required
+              value={lessonTotals + 1}
+              readOnly
             ></input>
             <input
               className="input-styling"

@@ -1,4 +1,4 @@
-# ELIMU MKONONI
+# ELIMU HUB
 
 - Looking forward to committing that s3 and youtube upload set up successfully!
 
@@ -29,16 +29,12 @@
 
 ### POST RELEASE OPTIMIZATIONS
 
-- We refine the chapter forms and add tooltips everywhere now that we can.
+- Expose a resource section at the end of each chapter and at the end of the unit with the react modal in play.
 - Find out why coursesQuery doesn't automatically refresh charts on first render
-- Auto lesson & Auto Chapter No increment
-- Setting limit to the total characters required while describing things.
-- Migrating to typescript using SWC compiler which is a breeze!
+- Smoothening youtube uploads after retrieval of refresh and access token.
+- Migrating to typescript using SWC compiler which is a breeze after testing it out in the church application.
 - Tracking user interactions with the respective id of courses , units lessons etc .... Upon finishing , we push it into record that a certain user has completed a certain lesson ID without repopulating using the ID![A game with arrays and array methods to find out more about length etc.]
-- Giving the right privilleges to my se Bucket optimum security.
-- Smoothening youutube uploads after retrieval of refresh and access token.
-- Integration of react modal to the resources section.
-- Icons for notes and lessons to be used with cta buttons at the bottom of the alternative section eg When in the resources section we put a button to return back to the notes section. [BUTTON AND CTA APPROACH FOR SMALL SCREENS]
+- Images should be rendered directly from s3 bucket for scalability... Which is working... The get object has also been configured correctly and is returning some string data without any access denied error. Images are also being stored correctly with their metadata..... How do i secure some documents ?
 
 ### KEY TIPS I HAVE PICKED UP ALONG THE JOURNEY
 
@@ -46,6 +42,7 @@
 - Using overflow-s-hidden hidden helps to hide the unwanted x direction scrollbar when overflow auto is used.
 
 - Router state has always been simply an object... You know that basic container with a key and a value which in my case was as simple as assigning a background `{ background: location }` and once present in the state activating the second set of routes.
+- When an error occurs , the error code should be that of the error message... Not 400... Remember that axios is only successfull when a 2xx response is returned.... The rest automatically results into an error.
 
 - **_react hooks are asynchronous nature. Use them sparingly. They can take time to update no wonder the null console.log on useState_**
 - To refresh dynamic routes , set up the \_redirects file inside the public folder and add the following line : `/*    /index.html  200`. It works like magic.
@@ -199,11 +196,9 @@ const url = "https://www.googleapis.com/upload/youtube/v3/videos";
       },
     });
 
-    console.log("Video uploaded successfully");
     // Handle success and display a success message to the user
 
 } catch (error) {
-console.error("Error uploading video:", error);
 // Handle error and display an error message to the user
 }
 };

@@ -1,17 +1,18 @@
 import React from "react";
 import {
-  NavigateBtn,
+  NavBgBtn,
   CourseCardV2,
   CourseSkeleton,
   PageTitle,
   BackBtn,
 } from "../../components";
+import { useLocation, Link } from "react-router-dom";
 
 import { fetchCoursesData } from "../../controllers/fetchData";
 import { useQuery } from "@tanstack/react-query";
 
 const CoursesAdminPage = () => {
-  const roles = JSON.parse(localStorage.getItem("roles"));
+  const location = useLocation();
   const coursesQuery = useQuery({
     queryKey: ["courses"],
     queryFn: fetchCoursesData,
@@ -21,9 +22,15 @@ const CoursesAdminPage = () => {
       <div className="absolute top-2 left-2">
         <BackBtn isDark={true} />
       </div>
-
+      {/* 
       <div className="absolute top-2 right-2">
-        <NavigateBtn destination="new-course" text="New Course" />
+        <NavBgBtn to="/new-course" text="Add Course" />
+      </div> */}
+
+      <div className={"navbar-link bg-primary  group absolute top-2 right-2"}>
+        <Link to="/new-course" state={{ background: location }}>
+          Add Course
+        </Link>
       </div>
 
       <PageTitle title="list of courses" />
@@ -42,15 +49,7 @@ const CoursesAdminPage = () => {
         {coursesQuery.data && coursesQuery?.data.length > 0 && (
           <div className="grid-lg">
             {coursesQuery.data.map((course, courseIndex) => {
-              const { _id, courseTitle, courseImage } = course;
-              return (
-                <CourseCardV2
-                  key={courseIndex}
-                  courseID={_id}
-                  courseTitle={courseTitle}
-                  courseImage={courseImage}
-                />
-              );
+              return <CourseCardV2 key={courseIndex} courseData={course} />;
             })}
           </div>
         )}

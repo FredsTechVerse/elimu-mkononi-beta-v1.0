@@ -54,7 +54,13 @@ const LogoutBtn = ({ position = "sidebar", isSubmitting = true }) => {
           {logoutMutation?.isLoading && <SpinnerIcon />}
         </div>
       ) : (
-        <ArrowRightOnRectangleIcon className="icon-styling  text-slate-900  " />
+        <span>
+          {logoutMutation?.isLoading ? (
+            <SpinnerIcon />
+          ) : (
+            <ArrowRightOnRectangleIcon className="icon-styling  text-slate-900  " />
+          )}
+        </span>
       )}
     </div>
   );

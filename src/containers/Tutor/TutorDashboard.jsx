@@ -72,7 +72,6 @@ const TutorDashboard = () => {
     onError: (error) => {
       handleError(error, updateAlertBoxData);
       if (error.response && error.response.data.message === "Token expired") {
-        console.log("Refetching user details!");
         queryClient.invalidateQueries(["user"]);
       }
     },

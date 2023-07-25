@@ -12,17 +12,9 @@ const CTAUnitButtonAdmin = ({ contact, _id }) => {
   const deleteTenant = async (_id) => {
     try {
       await axios.delete("/rooms/deleteTenant", { _id });
-      //   After deleting, it should trigger a rerender.
-      console.log("Tenant successfully deleted and put under archives.");
-    } catch (error) {
-      console.log(
-        `${error.message} encountered when attempting to delete tenant.`
-      );
-    }
+    } catch (error) {}
   };
-  const messageTenant = (contact) => {
-    console.log("Messaging Client");
-  };
+  const messageTenant = (contact) => {};
   return (
     <div className="flex items-center justify-center w-full rounded-l-3xl rounded-r-3xl  border-none">
       <button

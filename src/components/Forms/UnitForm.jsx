@@ -107,13 +107,11 @@ const UnitForm = () => {
     <div className="modal-overlay ">
       <div className="form-wrap h-[500px]">
         <FormNavigation text="unit form" />
-        {/* PROPOSED HEADER. */}
         <form
           encType="multipart/form-data"
           className="form-styling"
           onSubmit={saveUnit}
         >
-          {/* DROPDOWN */}
           <div className="flex flex-col">
             <label
               htmlFor="id"
@@ -127,9 +125,7 @@ const UnitForm = () => {
               onChange={(e) => setTutor(e.target.value)}
               className="input-styling  mb-5"
             >
-              <option selected className="text-grey">
-                Choose a tutor
-              </option>
+              <option className="text-grey">Choose a tutor</option>
               {tutorsQuery?.data ? (
                 tutorsQuery?.data.map((tutor, index) => {
                   const { _id: tutorId, firstName, surname } = tutor;
@@ -183,6 +179,7 @@ const UnitForm = () => {
               type="text"
               placeholder="What is the unit about?"
               value={unitDescription}
+              maxLength={50}
               onChange={(e) => {
                 setUnitDescription(e.target.value);
               }}

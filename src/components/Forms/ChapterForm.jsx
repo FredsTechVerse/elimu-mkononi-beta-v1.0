@@ -7,11 +7,14 @@ import { createChapter } from "../../controllers/postData";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 
 const ChapterForm = () => {
-  // A link will be used to redirect us to this particular point.
+  // TRACKING LOCATION
+  const location = useLocation();
+  const from = location?.state?.background?.pathname;
+
   const navigate = useNavigate();
-  const { unitID } = useParams();
+  const unitID = location?.state?.unitID;
+  const chapterTotals = location?.state?.chapterTotals;
   const { updateAlertBoxData } = useAlertBoxContext();
-  const [chapterNumber, setChapterNumber] = useState("");
   const [chapterName, setChapterName] = useState("");
   const [chapterDescription, setChapterDescription] = useState("");
   const [isFormSubmitted, setIsFormSubmittted] = useState(false);
@@ -37,10 +40,6 @@ const ChapterForm = () => {
     };
   }, []);
 
-  // TRACKING LOCATION
-  const location = useLocation();
-  const from = location.state?.background?.pathname;
-
   const queryClient = useQueryClient();
   const createChapterMutation = useMutation({
     mutationFn: createChapter,
@@ -60,7 +59,7 @@ const ChapterForm = () => {
       if (error.response && error.response.data.message === "Token expired") {
         createChapterMutation.mutate({
           unitID: unitID,
-          chapterNumber: `${unitID}-${chapterNumber}`,
+          chapterNumber: `${unitID}-${chapterTotals}`,
           chapterName: chapterName,
           chapterDescription: chapterDescription,
         });
@@ -73,7 +72,7 @@ const ChapterForm = () => {
     setIsFormSubmittted(true);
     createChapterMutation.mutate({
       unitID: unitID,
-      chapterNumber: `${unitID}-${chapterNumber}`,
+      chapterNumber: `${unitID}-${chapterTotals}`,
       chapterName: chapterName,
       chapterDescription: chapterDescription,
     });
@@ -94,11 +93,8 @@ const ChapterForm = () => {
               id="cNumber"
               type="number"
               placeholder="Chapter Number"
-              value={chapterNumber}
-              onChange={(e) => {
-                setChapterNumber(e.target.value);
-              }}
-              required
+              value={chapterTotals + 1}
+              readOnly
             ></input>
             <input
               className="input-styling"
@@ -117,6 +113,7 @@ const ChapterForm = () => {
               type="Text"
               placeholder="Description"
               value={chapterDescription}
+              maxLength={50}
               onChange={(e) => {
                 setChapterDescription(e.target.value);
               }}

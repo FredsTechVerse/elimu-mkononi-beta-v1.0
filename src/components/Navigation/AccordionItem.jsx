@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Tooltip } from "../../components";
 import {
@@ -22,38 +22,34 @@ const AccordionItem = ({
   unitData,
 }) => {
   const location = useLocation();
-  const { _id: chapterID, chapterName, chapterLessons } = chapter;
+  const lessonTotals = chapter && chapter?.chapterLessons?.length;
   const roles = JSON.parse(localStorage.getItem("roles"));
-  const contentEl = useRef(); //Used to interact with the dom accordigly
+  const contentEl = useRef();
   const { updateCurrentLesson } = useCurrentLessonContext();
-  const identifyLessonType = (lessonUrl) => {
-    if (lessonUrl) {
-      const lessonType = lessonUrl.split(".")[1];
-      return lessonType;
-    }
-    return "undefined";
-  };
-
   return (
     <li className="accordion_item">
       <button
         className="button group px-2 text-sm flex items-center "
         onClick={onToggle}
       >
-        {chapterName}
+        {chapter?.chapterName}
         <div className="flex gap-3 items-center justify-between">
           {roles?.includes("EM-202") ||
             (roles?.includes("EM-203") && (
-              <Link
-                to={`/tutor/new-lesson/${chapterID}`}
-                state={{ background: location }}
-              >
-                <Tooltip tooltip="Add lesson">
+              <div className="flex-row-centered gap-2">
+                <Link
+                  to={`/new-lesson`}
+                  state={{
+                    background: location,
+                    chapterID: chapter?._id,
+                    lessonTotals: lessonTotals,
+                  }}
+                >
                   <div onClick={closeSideBar}>
                     <PlusCircleIcon className="icon-styling group-hover:text-white text-slate-400  " />
                   </div>
-                </Tooltip>
-              </Link>
+                </Link>
+              </div>
             ))}
 
           <span>
@@ -74,38 +70,50 @@ const AccordionItem = ({
             : { height: "0px" }
         }
       >
-        {chapterLessons.map((lesson, lessonIndex) => {
-          return (
-            <li
-              key={lessonIndex}
-              className="hover:bg-slate-500 bg-slate-300 text-black w-full px-3 py-2 my-0.5 capitalize rounded-md"
-              onClick={() => {
-                updateCurrentLesson({
-                  ...unitData?.unitChapters[chapterIndex]?.chapterLessons[
-                    lessonIndex
-                  ],
-                  lessonIndex: lessonIndex,
-                  chapterIndex: chapterIndex,
-                });
-                closeSideBar();
-              }}
-            >
-              <div className="flex flex-row items-center gap-5 justify-start">
-                {lesson.videoKind === "youtube#video" ? (
-                  <span className="text-sm">
-                    <PlayCircleIcon className="icon-styling text-slate-800" />
-                  </span>
-                ) : (
-                  <span className="text-sm">
-                    <WalletIcon className="icon-styling text-slate-800" />
-                  </span>
-                )}
+        {chapter?.chapterLessons &&
+          chapter?.chapterLessons.map((lesson, lessonIndex) => {
+            return (
+              <li
+                key={lessonIndex}
+                className="hover:bg-slate-500 bg-slate-300 text-black w-full px-3 py-2 my-0.5 capitalize rounded-md"
+                onClick={() => {
+                  updateCurrentLesson({
+                    ...unitData?.unitChapters[chapterIndex]?.chapterLessons[
+                      lessonIndex
+                    ],
+                    lessonIndex: lessonIndex,
+                    chapterIndex: chapterIndex,
+                  });
+                  closeSideBar();
+                }}
+              >
+                <div className="flex flex-row items-center gap-5 justify-start">
+                  {lesson.videoKind === "youtube#video" ? (
+                    <span className="text-sm">
+                      <PlayCircleIcon className="icon-styling text-slate-800" />
+                    </span>
+                  ) : (
+                    <span className="text-sm">
+                      <WalletIcon className="icon-styling text-slate-800" />
+                    </span>
+                  )}
 
-                {lesson.lessonName}
-              </div>
-            </li>
-          );
-        })}
+                  {lesson.lessonName}
+                </div>
+              </li>
+            );
+          })}
+        <Link
+          to={`/new-resource`}
+          state={{
+            background: location,
+            chapterID: chapter?.chapterID,
+          }}
+        >
+          <li className="hover:bg-slate-400 bg-slate-500 text-white hover:text-slate-900 text-center w-full px-3 py-2 my-0.5 capitalize rounded-md">
+            Add Resource
+          </li>
+        </Link>
       </ul>
     </li>
   );

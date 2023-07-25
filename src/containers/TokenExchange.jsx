@@ -11,7 +11,7 @@ const TokenExchange = () => {
     if (!location) {
       return;
     }
-    const code = new URLSearchParams(location.search).get("code");
+    const code = new URLSearchParams(location?.search).get("code");
     const previousLocation = localStorage.getItem("previousLocation");
     localStorage.removeItem("previousLocation");
     try {

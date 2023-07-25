@@ -3,6 +3,7 @@ import { AccordionItem, HomeBtn, Tooltip } from "../../components";
 import { PlusIcon, XCircleIcon } from "@heroicons/react/24/solid";
 import { useLocation, Link } from "react-router-dom";
 const Accordion = ({ unitData, closeSideBar }) => {
+  const chapterTotals = unitData && unitData?.unitChapters?.length;
   const roles = JSON.parse(localStorage.getItem("roles"));
   const location = useLocation();
   // USING THE CHAPTER ID WE CAN SHOW THE LESSONS.
@@ -17,9 +18,9 @@ const Accordion = ({ unitData, closeSideBar }) => {
 
   return (
     <div className="relative z-10 flex flex-col items-center  bg-slate-100 h-screen  ml-1 rounded-t-xl ">
-      <div className="flex items-center justify-between w-full px-2 h-16  font-bold text-md text-slate-200 bg-primary text-center rounded-t-lg ">
+      <div className="flex items-center justify-between w-full px-2 h-16  font-bold text-md text-slate-200 bg-primary text-center rounded-t-lg uppercase ">
         <HomeBtn />
-        {unitData && unitData.unitName}
+        <span>Unit Breakdown</span>
         <div className={` flex-row-centered gap-1 `}>
           <Tooltip text="Add Chapter">
             <div
@@ -30,8 +31,12 @@ const Accordion = ({ unitData, closeSideBar }) => {
               } hover:border-2 hover:border-white rounded-full `}
             >
               <Link
-                to={`/tutor/new-chapter/${unitID}`}
-                state={{ background: location }}
+                to={`/new-chapter`}
+                state={{
+                  background: location,
+                  unitID: unitID,
+                  chapterTotals: chapterTotals,
+                }}
               >
                 <PlusIcon className="text-white m-0.5 hover:cursor-pointer w-6 h-6" />
               </Link>

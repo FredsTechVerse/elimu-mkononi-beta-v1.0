@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "../../axios";
+import { Tooltip } from "../../components";
 import { useNavigate } from "react-router-dom";
 import { EnvelopeIcon, EyeIcon, TrashIcon } from "@heroicons/react/24/solid";
 
@@ -14,15 +15,9 @@ const CTAButton = ({ contact = null, unitID, fetchUsersData = null }) => {
         data: { _id },
       });
       fetchUsersData();
-    } catch (error) {
-      console.log(
-        `${error.message} encountered when attempting to delete tenant.`
-      );
-    }
+    } catch (error) {}
   };
-  const messageTenant = (contact) => {
-    console.log("Messaging Client");
-  };
+  const messageTenant = (contact) => {};
   if (roles?.includes("EM-202")) {
     return (
       <div className="flex items-center justify-evenly w-full px-4  border-none">
@@ -33,7 +28,9 @@ const CTAButton = ({ contact = null, unitID, fetchUsersData = null }) => {
           }}
         >
           <span className="text-slate-600 group-hover:text-primary text-2xl ">
-            <EyeIcon className="icon-styling text-slate-700" />
+            <Tooltip tooltip="View">
+              <EyeIcon className="icon-styling text-slate-700" />
+            </Tooltip>
           </span>
         </button>
       </div>
@@ -48,7 +45,9 @@ const CTAButton = ({ contact = null, unitID, fetchUsersData = null }) => {
           }}
         >
           <span className="text-slate-600 group-hover:text-green-500 text-xl">
-            <EnvelopeIcon className="icon-styling" />
+            <Tooltip tooltip="Message">
+              <EnvelopeIcon className="icon-styling" />
+            </Tooltip>
           </span>
         </button>
         <button
@@ -58,7 +57,9 @@ const CTAButton = ({ contact = null, unitID, fetchUsersData = null }) => {
           }}
         >
           <span className="text-slate-600 group-hover:text-primary text-2xl ">
-            <EyeIcon className="icon-styling" />
+            <Tooltip tooltip="View">
+              <EyeIcon className="icon-styling" />
+            </Tooltip>
           </span>
         </button>
         <button
@@ -68,7 +69,9 @@ const CTAButton = ({ contact = null, unitID, fetchUsersData = null }) => {
           }}
         >
           <span className="text-slate-600 group-hover:text-red-600 text-2xl">
-            <TrashIcon className="icon-styling" />
+            <Tooltip tooltip="Remove">
+              <TrashIcon className="icon-styling" />
+            </Tooltip>
           </span>
         </button>
       </div>

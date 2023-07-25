@@ -17,7 +17,7 @@ const LogInForm = () => {
     return () => (document.body.style.overflow = "unset");
   }, []);
 
-  const from = location.state?.from?.pathname || "/";
+  const from = location?.state?.from?.pathname || "/";
   // Login Credentials.
   const [firstName, setFirstName] = useState("");
   const [password, setPassword] = useState("");

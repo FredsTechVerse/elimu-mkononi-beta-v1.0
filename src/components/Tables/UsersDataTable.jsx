@@ -1,27 +1,24 @@
 import React from "react";
-import { StatusPill, CTAButton, NavigateBtn } from "..";
+import { StatusPill, CTAButton } from "..";
+import { Link, useLocation } from "react-router-dom";
 
 const UsersDataTable = ({ users, fetchUsersData, role }) => {
+  const location = useLocation();
+
   return (
-    <div className="hidden laptop:block w-full px-3">
-      <div className="flex items-center justify-start mb-1">
-        <NavigateBtn
-          destination={
-            role === "EM-203"
-              ? "new-admin"
-              : role === "EM-202"
-              ? "new-tutor"
-              : "new-student"
-          }
-          text={
-            role === "EM-203"
-              ? "new admin"
-              : role === "EM-202"
-              ? "new tutor"
-              : "new student"
-          }
-          icon="tenantIcon"
-        />
+    <div className="hidden laptop:block w-full px-3 relative">
+      <div
+        className={
+          "capitalize flex-row-centered gap-1 text-white bg-primary w-32 rounded-full h-8  px-0.5 m-2 "
+        }
+      >
+        <Link to="/new-user" state={{ role: role, background: location }}>
+          {role === "EM-203"
+            ? "add admin"
+            : role === "EM-202"
+            ? "add tutor"
+            : "add student"}
+        </Link>
       </div>
 
       <table className="table-fixed w-full bg-slate-300 bg-opacity-10 shadow-lg shadow-slate-200">

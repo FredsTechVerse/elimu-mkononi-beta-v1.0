@@ -32,16 +32,7 @@ const CoursesSection = () => {
         <div className="grid-lg tablet:grid-cols-2 laptop:grid-cols-4 tablet:gap-6   ">
           {coursesQuery?.data.length > 0 ? (
             coursesQuery.data.map((course, courseIndex) => {
-              const { _id, courseTitle, courseImage } = course;
-              return (
-                <CourseCardV2
-                  key={courseIndex}
-                  courseData={course}
-                  // courseID={_id}
-                  // courseTitle={courseTitle}
-                  // courseImage={courseImage}
-                />
-              );
+              return <CourseCardV2 key={courseIndex} courseData={course} />;
             })
           ) : (
             <p className=" mx-auto my-auto h-full text-center bg-blue-300 bg-opacity-40">

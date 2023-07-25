@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link, useLocation } from "react-router-dom";
 import {
   UnitCard,
   UnitSkeleton,
@@ -16,7 +16,7 @@ const CourseOverview = () => {
   const { updateAlertBoxData } = useAlertBoxContext();
   const roles = JSON.parse(localStorage.getItem("roles"));
   const queryClient = useQueryClient();
-
+  const location = useLocation();
   const courseQuery = useQuery(
     ["courseData", courseID],
     () => fetchCourseData(courseID),
@@ -41,7 +41,14 @@ const CourseOverview = () => {
         </div>
         {(roles?.includes("EM-202") || roles?.includes("EM-203")) && (
           <div className="absolute top-2 right-2 flex gap-1">
-            <NavigateBtn destination="new-unit" text="New Unit" />
+            <Link
+              to="/new-unit"
+              state={{ background: location, courseID: courseID }}
+            >
+              <div className="capitalize flex-row-centered gap-1 text-white bg-primary w-32 rounded-full h-8  px-0.5 ">
+                Add Unit
+              </div>
+            </Link>
           </div>
         )}
 

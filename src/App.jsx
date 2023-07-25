@@ -52,7 +52,8 @@ const CourseAdminPage = lazy(() =>
 
 function App() {
   const location = useLocation();
-  const background = location.state && location.state.background;
+  // const background = location.state && location.state.background;
+  const background = location?.state?.background;
   const roles = JSON.parse(localStorage.getItem("roles"));
 
   // AUTHENTICATION REFERENCE.
@@ -69,7 +70,7 @@ function App() {
         fallback={
           <div className="fixed w-screen h-screen flex-col-centered bg-slate-300">
             <p className="phone:text-2xl tablet:text-4xl laptop:text-6xl uppercase font-bold font-sans text-slate-700">
-              ELIMU MKONONI APP
+              ELIMU HUB
             </p>
           </div>
         }
@@ -81,19 +82,10 @@ function App() {
           <Route path="/log-in" element={<LogInForm />} />
           <Route path="/draft" element={<DraftPage />} />
           <Route path="/fetchToken" element={<TokenExchange />} />
-          <Route
-            exact
-            path="/tutor/new-lesson/:chapterID"
-            element={<LessonForm />}
-          />
+          <Route exact path="/new-lesson" element={<LessonForm />} />
 
           <Route element={<UsersLayout />}>
             <Route exact path="/" element={<HomePage />}></Route>
-            <Route
-              exact
-              path="new-student"
-              element={<RegistrationForm role={"EM-201"} />}
-            />
             <Route
               element={
                 <RequireAuth allowedRoles={["EM-201", "EM-202", "EM-203"]} />
@@ -124,8 +116,6 @@ function App() {
               <Route exact path="/tutor" element={<Layout role="EM-202" />}>
                 <Route index element={<TutorDashboard />} />
                 <Route exact path="units" element={<TutorUnitsPage />} />
-                <Route exact path="chapter" element={<ChapterForm />} />
-                <Route exact path="lesson" element={<LessonForm />} />
               </Route>
 
               <Route exact path="/tutor/unit/:unitID" element={<ContentPage />}>
@@ -133,12 +123,6 @@ function App() {
                 <Route exact path="comments" element={<CommentsSection />} />
                 <Route exact path="resources" element={<ResourcesSection />} />
               </Route>
-
-              <Route
-                exact
-                path="/tutor/unit/:unitID/resources/new-resource"
-                element={<ResourceForm />}
-              />
             </Route>
           )}
 
@@ -149,8 +133,6 @@ function App() {
             >
               <Route exact path="/admin" element={<Layout role="EM-203" />}>
                 <Route index element={<AdminDashboard />} />
-                <Route exact path="course-form" element={<CourseForm />} />
-                <Route exact path="unit-form" element={<UnitForm />} />
                 <Route exact path=":role" element={<UsersPage />} />
                 <Route exact path="courses">
                   <Route index element={<CourseAdminPage />} />
@@ -166,58 +148,17 @@ function App() {
         </Routes>
       </Suspense>
 
-      {/* SECOND PAIR OF ROUTES. */}
+      {/* SECOND PAIR OF ROUTES - For anything needing a background */}
 
       {background && (
         <Routes>
           <Route path="/log-in" element={<LogInForm />} />
-          <Route
-            exact
-            path="/new-student"
-            element={<RegistrationForm role={"EM-201"} />}
-          />
-          <Route
-            exact
-            path="/tutor/new-chapter/:unitID"
-            element={<ChapterForm />}
-          />
-
-          <Route
-            exact
-            path="/tutor/unit/:unitID/resources/new-resource"
-            element={<ResourceForm />}
-          />
-          <Route
-            exact
-            path="/tutor/new-lesson/:chapterID"
-            element={<LessonForm />}
-          />
-          <Route
-            exact
-            path="/admin/courses/new-course"
-            element={<CourseForm />}
-          />
-
-          <Route
-            exact
-            path="/course/:courseID/new-unit"
-            element={<UnitForm />}
-          />
-          <Route
-            exact
-            path="/admin/students/new-student"
-            element={<RegistrationForm role={"EM-201"} />}
-          />
-          <Route
-            exact
-            path="/admin/tutors/new-tutor"
-            element={<RegistrationForm role={"EM-202"} />}
-          />
-          <Route
-            exact
-            path="/admin/admins/new-admin"
-            element={<RegistrationForm role={"EM-203"} />}
-          />
+          <Route exact path="/new-user" element={<RegistrationForm />} />
+          <Route exact path="/new-course" element={<CourseForm />} />
+          <Route exact path="/new-unit" element={<UnitForm />} />
+          <Route exact path="/new-chapter" element={<ChapterForm />} />
+          <Route exact path="/new-lesson" element={<LessonForm />} />
+          <Route exact path="/new-resource" element={<ResourceForm />} />
         </Routes>
       )}
     </div>

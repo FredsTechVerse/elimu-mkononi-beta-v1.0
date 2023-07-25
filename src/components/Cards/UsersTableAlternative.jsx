@@ -16,10 +16,10 @@ const UsersTableAlternative = ({ users, fetchUsersData, role }) => {
             }
             text={
               role === "EM-203"
-                ? "new admin"
+                ? "add admin"
                 : role === "EM-202"
-                ? "new tutor"
-                : "new student"
+                ? "add tutor"
+                : "add student"
             }
             icon="tenantIcon"
           />

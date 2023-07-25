@@ -55,14 +55,6 @@ const ContentPage = () => {
     );
   }
 
-  if (unitDataQuery.status === "error") {
-    return (
-      <p className="bg-red-300 rounded-lg p-4">
-        {JSON.stringify(unitDataQuery.error.message)}
-      </p>
-    );
-  }
-
   return (
     <main className="flex relative gap-1 laptop:grid laptop:grid-cols-4 w-full h-screen p-1">
       <article

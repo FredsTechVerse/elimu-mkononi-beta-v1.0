@@ -9,7 +9,11 @@ const ContentSection = ({ unitData, openSideBar, sideBarOpen, unitID }) => {
   if (currentLesson.videoKind === "youtube#video") {
     return (
       <div className="w-full px-1">
-        <UnitNav openSideBar={openSideBar} sideBarOpen={sideBarOpen} />
+        <UnitNav
+          openSideBar={openSideBar}
+          sideBarOpen={sideBarOpen}
+          unitData={unitData}
+        />
         <VideoPlayer />
         <div className="border-none border-slate-400 rounded-lg w-full">
           <Outlet

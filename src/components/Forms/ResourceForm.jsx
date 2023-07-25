@@ -5,13 +5,17 @@ import {
   SubmitButton,
   S3Uploader,
 } from "../../components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { createResource } from "../../controllers/postData";
 import { useMutation } from "@tanstack/react-query";
 import { handleError } from "../../controllers/handleErrors";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 const ResourceForm = () => {
   const { updateAlertBoxData } = useAlertBoxContext();
+  const location = useLocation();
+  const chapterID = location?.state?.chapterID;
+  const formRef = useRef(null);
+
   const navigate = useNavigate();
   // FORM CONFIGURATIONS
   //=========================
@@ -45,6 +49,7 @@ const ResourceForm = () => {
         saveResource.mutate({
           resourceName: resourceName,
           resourceUrl: resourceName,
+          chapterID: chapterID,
         });
       }
     },
@@ -83,19 +88,19 @@ const ResourceForm = () => {
 
   return (
     <Modal>
-      <div className="form-wrap">
+      <div className="form-wrap h-[400px]">
         <FormNavigation text="RESOURCE FORM" />
         <form
           encType="multipart/form-data"
           className="form-styling"
           onSubmit={handleSave}
         >
-          <div className="input-wrap">
+          <div className="w-full flex-col-centered gap-2">
             <label htmlFor="course" className="w-full ">
               File Details
             </label>
             <input
-              className="input-styling w-full"
+              className="input-styling w-[95%]"
               id="course"
               type="text"
               placeholder="Enter file name"

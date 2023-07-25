@@ -10,6 +10,7 @@ import NotesSkeleton from "./NotesSkeleton";
 import UnitNavSkeleton from "./UnitNavSkeleton";
 import UserProfileSkeleton from "./UserProfileSkeleton";
 import DoughnutSkeleton from "./DoughnutSkeleton";
+import UserCardSkeleton from "./UserCardSkeleton";
 export {
   VideoSkeleton,
   UnitSkeleton,
@@ -23,4 +24,5 @@ export {
   UnitNavSkeleton,
   NotesSkeleton,
   DoughnutSkeleton,
+  UserCardSkeleton,
 };
