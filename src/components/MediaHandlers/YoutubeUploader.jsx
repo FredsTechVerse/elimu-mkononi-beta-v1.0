@@ -88,13 +88,7 @@ const YoutubeUploader = ({ verifyUpload, updateFileInfo, videoTitle }) => {
       const { id: videoID, kind: videoKind } = videoData;
 
       const videoUrl = `https://www.youtube.com/watch?v=${videoID}`;
-      console.log(
-        `Video Data ${JSON.stringify({
-          videoID: videoID,
-          videoKind: videoKind,
-          videoUrl: videoUrl,
-        })}`
-      );
+
       updateFileInfo({ videoUrl, videoKind });
     } catch (error) {
       handleError(error, updateAlertBoxData);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { FormNavigation, SubmitButton } from "../../components";
 import { fetchUsersData } from "../../controllers/fetchData";
 import { createUnit } from "../../controllers/postData";
@@ -12,7 +12,7 @@ const UnitForm = () => {
   const queryClient = useQueryClient();
   const formRef = useRef(null);
   const { updateAlertBoxData } = useAlertBoxContext();
-
+  const location = useLocation();
   const tutorsQuery = useQuery({
     queryKey: ["tutors"],
     queryFn: () => fetchUsersData("EM-202"),
@@ -67,7 +67,7 @@ const UnitForm = () => {
   }, []);
 
   // DECLARATION OF VARIABLES
-  const { courseID } = useParams();
+  const { courseID } = location?.state;
   const [tutor, setTutor] = useState();
   const [unitCode, setUnitCode] = useState("");
   const [unitName, setUnitName] = useState("");

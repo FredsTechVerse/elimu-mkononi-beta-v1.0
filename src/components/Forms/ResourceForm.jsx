@@ -88,14 +88,14 @@ const ResourceForm = () => {
 
   return (
     <Modal>
-      <div className="form-wrap h-[400px]">
+      <div className="form-wrap h-[300px]">
         <FormNavigation text="RESOURCE FORM" />
         <form
           encType="multipart/form-data"
           className="form-styling"
           onSubmit={handleSave}
         >
-          <div className="w-full flex-col-centered gap-2">
+          {/* <div className="w-full flex-col-centered gap-2">
             <label htmlFor="course" className="w-full ">
               File Details
             </label>
@@ -110,9 +110,14 @@ const ResourceForm = () => {
               }}
               required
             />
-          </div>
+          </div> */}
           <div className="input-wrap ">
-            {!uploadSuccess ? (
+            <div className="h-36 w-72 tablet:w-[360px] mt-2 bg-slate-200  bg-opacity-60 rounded-lg flex flex-col items-center gap-2 py-2 ">
+              <p className=" h-full text-center p-1 flex-row-centered">
+                This resource form is under development
+              </p>
+
+              {/* {!uploadSuccess ? (
               <S3Uploader
                 verifyUpload={verifyUpload}
                 updateFileName={updateFileName}
@@ -135,19 +140,18 @@ const ResourceForm = () => {
                 </svg>
                 <p className="text-center">
                   The resource has been sucessfully uploaded
-                </p>
-              </div>
-            )}
+                </p> */}
+            </div>
           </div>
           {/* CTA BUTTONS */}
-          <div className="cta-wrap">
+          {/* <div className="cta-wrap">
             <SubmitButton
               type="submit"
               disabled={uploadSuccess ? false : true}
               isSubmitting={saveResource?.isLoading}
               text={saveResource?.status === "loading" ? "Saving" : "Save"}
             />
-          </div>
+          </div> */}
         </form>
       </div>
     </Modal>

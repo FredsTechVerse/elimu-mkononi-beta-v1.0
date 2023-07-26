@@ -19,14 +19,12 @@ const TokenExchange = () => {
       const youtubeAccessToken = response.data;
       if (youtubeAccessToken) {
         localStorage.setItem("youtubeAccessToken", youtubeAccessToken);
-        console.log(
-          `Youtube Access Token ${JSON.stringify(youtubeAccessToken)}`
-        );
+
         navigate(previousLocation);
       }
     } catch (error) {
       handleError(error, updateAlertBoxData);
-      console.error("Error exchanging code for access token:", error);
+      // console.error("Error exchanging code for access token:", error);
     }
   };
 
