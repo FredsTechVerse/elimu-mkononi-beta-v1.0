@@ -29,12 +29,13 @@
 
 ### POST RELEASE OPTIMIZATIONS
 
-- Expose a resource section at the end of each chapter and at the end of the unit with the react modal in play.
-- Find out why coursesQuery doesn't automatically refresh charts on first render
-- Smoothening youtube uploads after retrieval of refresh and access token.
-- Migrating to typescript using SWC compiler which is a breeze after testing it out in the church application.
-- Tracking user interactions with the respective id of courses , units lessons etc .... Upon finishing , we push it into record that a certain user has completed a certain lesson ID without repopulating using the ID![A game with arrays and array methods to find out more about length etc.]
-- Images should be rendered directly from s3 bucket for scalability... Which is working... The get object has also been configured correctly and is returning some string data without any access denied error. Images are also being stored correctly with their metadata..... How do i secure some documents ?
+- Debug admin charts , why they do not fetch on first render.
+- Create an interface for viewing the resources
+- Handle deletion and update of content eg if we delete a unit / we delete it and all of its children.
+- Polish youtube uploads.
+- Fetching documents securely with the exclusion of images.
+- Migrate to typescript using SWC compiler - It just enforces types nothing much.
+- Keeping track of user interaction and completion using document ids , arrays and array methods.
 
 ### KEY TIPS I HAVE PICKED UP ALONG THE JOURNEY
 
