@@ -12,23 +12,6 @@ const ERRORS = {
   BAD_REQUEST: "Bad request sent to server ",
 };
 
-const handleLogout = async () => {
-  try {
-    await logoutUser();
-    localStorage.removeItem("user");
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
-    localStorage.removeItem("roles");
-    localStorage.removeItem("youtubeAccessToken");
-    delete axios.defaults.headers.common["Authorization"];
-    window.location.href = "/";
-  } catch (error) {
-    console.error(
-      `An error occured while logging out user ${JSON.stringify(err)}`
-    );
-  }
-};
-
 const handleError = async (error, updateAlertBoxData) => {
   let response = "No response has been specified";
   if (error.response && error.response.status === 400) {
@@ -43,7 +26,6 @@ const handleError = async (error, updateAlertBoxData) => {
     }
   } else if (error.response && error.response.status === 403) {
     response = error.response.message;
-    // Logout user
   } else if (error.response && error.response.status === 404) {
     response = ERRORS.BLANK_ERROR;
   } else if (error.response && error.response.status === 409) {

@@ -9,7 +9,6 @@ const HeroSection = ({ isNavOpen, showNavbar, hideNavbar }) => {
           showNavbar={showNavbar}
           hideNavbar={hideNavbar}
         />
-        {/* <NavbarSmall isNavOpen={isNavOpen} hideNavbar={hideNavbar} /> */}
         <div className="text-white w-full tablet:w-[90%] text-center flex-col-centered gap-2">
           <h1 className="phone:text-2xl tablet:text-4xl laptop:text-6xl uppercase font-bold font-sans">
             Unlocking Excellence

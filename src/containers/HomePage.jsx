@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  CoursesSection,
-  TeamSection,
-  HeroSection,
-  Footer,
-} from "../components";
+import { CoursesSection, HeroSection, Footer } from "../components";
 
 const HomePage = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -24,7 +19,6 @@ const HomePage = () => {
           hideNavbar={hideNavbar}
         />
         <CoursesSection />
-        {/* <TeamSection /> */}
         <Footer />
       </div>
     </>
