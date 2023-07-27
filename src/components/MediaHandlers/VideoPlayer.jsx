@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactPlayer from "react-player/youtube";
 import { useCurrentLessonContext } from "../../context/currentLessonContext";
 import { VideoSkeleton } from "../../components";
 const VideoPlayer = () => {
   const { currentLesson } = useCurrentLessonContext();
   const [videoReady, setVideoReady] = useState(false);
-
+  const [lessonUrl, setLessonUrl] = useState("");
   const handleVideoReady = () => {
     setVideoReady(true);
   };
@@ -16,6 +16,19 @@ const VideoPlayer = () => {
   const handleVideoEnd = () => {};
   const handleVideoPause = () => {};
 
+  useEffect(() => {
+    return () => {
+      setLessonUrl("");
+    };
+  }, []);
+
+  useEffect(() => {
+    if (currentLesson?.lessonUrl) {
+      setLessonUrl(currentLesson.lessonUrl);
+      setVideoReady(false); // Reset videoReady when lessonUrl changes to show the VideoSkeleton until the new video is ready
+    }
+  }, [currentLesson?.lessonUrl]);
+
   return (
     <div className="w-full flex-row-centered my-2 ">
       <div
@@ -23,7 +36,7 @@ const VideoPlayer = () => {
       >
         <ReactPlayer
           className="react-player"
-          url={currentLesson.lessonUrl}
+          url={lessonUrl}
           style={{ borderRadius: "0.5rem", overflow: "hidden" }}
           controls={true}
           onReady={handleVideoReady}

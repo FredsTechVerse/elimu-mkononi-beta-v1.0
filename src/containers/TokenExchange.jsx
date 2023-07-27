@@ -24,7 +24,6 @@ const TokenExchange = () => {
       }
     } catch (error) {
       handleError(error, updateAlertBoxData);
-      // console.error("Error exchanging code for access token:", error);
     }
   };
 

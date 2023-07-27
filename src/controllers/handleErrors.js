@@ -23,7 +23,7 @@ const handleLogout = async () => {
     delete axios.defaults.headers.common["Authorization"];
     window.location.href = "/";
   } catch (error) {
-    console.log(
+    console.error(
       `An error occured while logging out user ${JSON.stringify(err)}`
     );
   }
@@ -87,7 +87,7 @@ const renewToken = async () => {
 
     localStorage.setItem("accessToken", refreshTokenData.newAccessToken);
   } catch (err) {
-    console.log(
+    console.error(
       `An error occured while renewing the access token ${JSON.stringify(err)}`
     );
   }

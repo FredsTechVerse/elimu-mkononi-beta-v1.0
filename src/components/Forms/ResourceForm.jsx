@@ -7,25 +7,40 @@ import {
 } from "../../components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { createResource } from "../../controllers/postData";
-import { useMutation } from "@tanstack/react-query";
+import { verifyAccess } from "../../controllers/fetchData";
+import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import { handleError } from "../../controllers/handleErrors";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
-const ResourceForm = () => {
+
+const CourseForm = () => {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const formRef = useRef(null);
   const { updateAlertBoxData } = useAlertBoxContext();
   const location = useLocation();
-  const chapterID = location?.state?.chapterID;
-  const formRef = useRef(null);
-
-  const navigate = useNavigate();
+  const { chapterID } = location?.state;
   // FORM CONFIGURATIONS
   //=========================
   const [resourceName, setResourceName] = useState("");
   const [uploadSuccess, setUploadSucess] = useState(false);
+  const [resourceUrl, setResourceUrl] = useState("");
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => (document.body.style.overflow = "unset");
+  }, []);
+
+  const accessQuery = useQuery(["accessVerification"], () => verifyAccess(), {
+    retry: 1,
+    onError: (error) => {
+      handleError(error, updateAlertBoxData);
+    },
+  });
 
   useEffect(() => {
     const handleKeyPress = (e) => {
       if (e.key === "Enter" || e.type === "submit") {
-        handleSave(e);
+        saveCourse(e);
       }
     };
     if (formRef.current) {
@@ -38,25 +53,43 @@ const ResourceForm = () => {
     };
   }, []);
 
-  const saveResource = useMutation({
+  const createResourceMutation = useMutation({
     mutationFn: createResource,
-    onSuccess: () => {
+    onSuccess: (data) => {
+      queryClient.setQueryData(["resources", data._id], data);
+      queryClient.invalidateQueries(["resources"], { exact: true });
+      updateAlertBoxData({
+        response: "Resource saved successfully",
+        isResponse: true,
+        status: "success",
+        timeout: 3000,
+      });
       navigate(-1);
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
-      if (isFormValid) {
-        saveResource.mutate({
+      if (error.response && error.response.data.message === "Token expired") {
+        createResourceMutation.mutate({
           resourceName: resourceName,
-          resourceUrl: resourceName,
+          resourceUrl: resourceUrl,
           chapterID: chapterID,
         });
       }
     },
   });
 
+  const saveCourse = async (e) => {
+    e.preventDefault();
+    if (isFormValid) {
+      createResourceMutation.mutate({
+        resourceName: resourceName,
+        resourceUrl: resourceUrl,
+        chapterID: chapterID,
+      });
+    }
+  };
   const isFormValid = () => {
-    if (resourceName !== null && uploadSuccess) {
+    if (resourceName !== null && resourceUrl !== null && uploadSuccess) {
       return true;
     }
     updateAlertBoxData({
@@ -68,57 +101,41 @@ const ResourceForm = () => {
     return false;
   };
 
-  const handleSave = async (e) => {
-    e.preventDefault();
-    if (isFormValid) {
-      saveResource.mutate({
-        resourceName: resourceName,
-        resourceUrl: resourceName,
-      });
-    }
-  };
-
   const verifyUpload = () => {
     setUploadSucess(true);
   };
 
-  const updateFileName = (fileName) => {
-    setResourceName(fileName);
+  const updateFileName = (resourceUrl) => {
+    setResourceUrl(resourceUrl);
   };
 
   return (
     <Modal>
-      <div className="form-wrap h-[300px]">
-        <FormNavigation text="RESOURCE FORM" />
+      <div className="form-wrap h-[380px]">
+        <FormNavigation text="COURSE FORM" />
         <form
           encType="multipart/form-data"
           className="form-styling"
-          onSubmit={handleSave}
+          onSubmit={saveCourse}
         >
-          {/* <div className="w-full flex-col-centered gap-2">
-            <label htmlFor="course" className="w-full ">
-              File Details
-            </label>
+          <div className="input-wrap">
+            <label htmlFor="resource">Resource Details</label>
             <input
-              className="input-styling w-[95%]"
-              id="course"
+              className="input-styling"
+              id="resource"
               type="text"
-              placeholder="Enter file name"
+              placeholder="Name of file"
               value={resourceName}
               onChange={(e) => {
                 setResourceName(e.target.value);
               }}
               required
             />
-          </div> */}
+          </div>
           <div className="input-wrap ">
-            <div className="h-36 w-72 tablet:w-[360px] mt-2 bg-slate-200  bg-opacity-60 rounded-lg flex flex-col items-center gap-2 py-2 ">
-              <p className=" h-full text-center p-1 flex-row-centered">
-                This resource form is under development
-              </p>
-
-              {/* {!uploadSuccess ? (
+            {!uploadSuccess ? (
               <S3Uploader
+                isTokenActive={accessQuery.status === "success"}
                 verifyUpload={verifyUpload}
                 updateFileName={updateFileName}
               />
@@ -139,23 +156,28 @@ const ResourceForm = () => {
                   />
                 </svg>
                 <p className="text-center">
-                  The resource has been sucessfully uploaded
-                </p> */}
-            </div>
+                  Resource has been sucessfully uploaded
+                </p>
+              </div>
+            )}
           </div>
           {/* CTA BUTTONS */}
-          {/* <div className="cta-wrap">
+          <div className="cta-wrap">
             <SubmitButton
               type="submit"
-              disabled={uploadSuccess ? false : true}
-              isSubmitting={saveResource?.isLoading}
-              text={saveResource?.status === "loading" ? "Saving" : "Save"}
+              isSubmitting={createResourceMutation?.isLoading}
+              disabled={isFormValid ? false : true}
+              text={
+                createResourceMutation?.status === "loading"
+                  ? "Uploading"
+                  : "Upload"
+              }
             />
-          </div> */}
+          </div>
         </form>
       </div>
     </Modal>
   );
 };
 
-export default ResourceForm;
+export default CourseForm;

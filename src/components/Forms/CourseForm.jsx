@@ -165,9 +165,7 @@ const CourseForm = () => {
               isSubmitting={createCourseMutation?.isLoading}
               disabled={isFormValid ? false : true}
               text={
-                createCourseMutation?.status === "loading"
-                  ? "Adding course"
-                  : "Add Course"
+                createCourseMutation?.status === "loading" ? "Saving" : "Save"
               }
             />
           </div>

@@ -107,7 +107,7 @@ const AccordionItem = ({
           to={`/new-resource`}
           state={{
             background: location,
-            chapterID: chapter?.chapterID,
+            chapterID: chapter?._id,
           }}
         >
           <li className="hover:bg-slate-400 bg-slate-500 text-white hover:text-slate-900 text-center w-full px-3 py-2 my-0.5 capitalize rounded-md">

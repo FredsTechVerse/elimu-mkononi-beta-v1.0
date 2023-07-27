@@ -189,9 +189,7 @@ const LessonForm = () => {
               type="submit"
               isSubmitting={createLessonMutation?.isLoading}
               text={
-                createLessonMutation?.status === "loading"
-                  ? "Adding Lesson"
-                  : "Add Lesson"
+                createLessonMutation?.status === "loading" ? "Saving" : "Save"
               }
             />
           </div>
