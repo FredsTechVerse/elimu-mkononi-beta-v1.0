@@ -32,7 +32,7 @@ const CourseOverview = () => {
   );
 
   return (
-    <div className="w-full flex flex-col bg-slate-100 h-full">
+    <div className="w-full flex flex-col bg-slate-100 ">
       <div className="relative pattern h-60 w-full">
         <div className="flex flex-col items-start justify-center w-full h-full flex-row-centered backdrop-blur-md bg-black bg-opacity-20">
           <p className="mx-auto text-white  font-bold  phone:text-xl tablet:text-2xl laptop:text-4xl uppercase">
@@ -57,7 +57,7 @@ const CourseOverview = () => {
         </div>
         <div className="absolute h-7 bg-slate-100 w-full bottom-0 rounded-t-full"></div>
       </div>
-      <div className="flex flex-col items-center gap-3 justify-start  h-full w-full overflow-auto overflow-x-hidden">
+      <div className="flex flex-col items-center gap-3 justify-start w-full">
         <Heading heading="Course Description" />
         <p className="px-5">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum dolore
