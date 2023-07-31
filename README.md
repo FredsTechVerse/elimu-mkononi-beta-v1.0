@@ -29,12 +29,13 @@
 
 ### POST RELEASE OPTIMIZATIONS
 
+- Logout user if refresh token expires
 - Debug admin charts , why they do not fetch on first render.
 - Create an interface for viewing the resources
-- Handle deletion and update of content eg if we delete a unit / we delete it and all of its children.
+- Handle complete deletion and update of content eg if we delete a unit / we delete it and all of its children.
 - Polish youtube uploads.
 - Fetching documents securely with the exclusion of images.
-- Migrate to typescript using SWC compiler - It just enforces types nothing much.
+- Migrate to typescript using SWC compiler - It just enforces types thats it.
 - Keeping track of user interaction and completion using document ids , arrays and array methods.
 
 ### KEY TIPS I HAVE PICKED UP ALONG THE JOURNEY
