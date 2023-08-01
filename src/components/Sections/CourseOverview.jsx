@@ -84,7 +84,6 @@ const CourseOverview = () => {
           soluta aliquid distinctio vel laborum fuga dignissimos!
         </p>
         <Heading heading="List of units" />
-        <div className="rounded-full w-28 h-4 text-primary bg-primary"></div>
         <div className="w-full h-full flex flex-col items-center px-2 ">
           {courseQuery.status === "loading" ? (
             <div className="grid-sm w-full">

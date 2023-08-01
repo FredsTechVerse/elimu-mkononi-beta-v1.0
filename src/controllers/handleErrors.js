@@ -1,5 +1,4 @@
 import axios from "../axios";
-// import { handleLogout } from "./handleLogout";
 import { logoutUser } from "../controllers/postData";
 const ERRORS = {
   NETWORK_ERROR: "Network error. Please try again later.",
@@ -10,6 +9,18 @@ const ERRORS = {
   INVALID_TOKEN: "Your token is invalid!",
   INVALID_ID: " The resource identity is invalid!",
   BAD_REQUEST: "Bad request sent to server ",
+  LOGOUT: "Successfully logged out.",
+};
+
+const handleLogout = async () => {
+  await logoutUser();
+  localStorage.removeItem("user");
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
+  localStorage.removeItem("roles");
+  localStorage.removeItem("youtubeAccessToken");
+  delete axios.defaults.headers.common["Authorization"];
+  window.location.href = "/";
 };
 
 const handleError = async (error, updateAlertBoxData) => {
@@ -25,7 +36,8 @@ const handleError = async (error, updateAlertBoxData) => {
       response = ERRORS.AUTHORIZATION_ERROR;
     }
   } else if (error.response && error.response.status === 403) {
-    response = error.response.message;
+    await handleLogout();
+    response = ERRORS.LOGOUT;
   } else if (error.response && error.response.status === 404) {
     response = ERRORS.BLANK_ERROR;
   } else if (error.response && error.response.status === 409) {
@@ -68,10 +80,16 @@ const renewToken = async () => {
     ] = `Bearer ${refreshTokenData.newAccessToken}`;
 
     localStorage.setItem("accessToken", refreshTokenData.newAccessToken);
-  } catch (err) {
-    console.error(
-      `An error occured while renewing the access token ${JSON.stringify(err)}`
-    );
+  } catch (error) {
+    if (error?.response?.status === 403) {
+      await handleLogout();
+    } else {
+      console.error(
+        `An error occured while renewing the access token ${JSON.stringify(
+          err
+        )}`
+      );
+    }
   }
 };
 
