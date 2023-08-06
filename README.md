@@ -31,12 +31,12 @@
 
 - Inform user that his session has expired and autoredirect to login
 - Make unit outline and unit breakdown more descriptive in that user can know where he/she is at all times.
-- Handle complete deletion and update of content eg if we delete a unit / we delete it and all of its children.
+- Handle complete deletion and update of content eg if we delete a unit / we delete it and all of its children including from s3 bucket.
+- Fetching documents securely with the exclusion of images.(Backend need!)
 - Create an interface for viewing the resources
 - Migrate to typescript using SWC compiler - It just enforces types thats it.
 - Keeping track of user interaction and completion using document ids , arrays and array methods.(Backend need!)
 - Polish youtube data api upload by handling access token expiration.Upload now works well!
-- Fetching documents securely with the exclusion of images.(Backend need!)
 
 ### KEY TIPS I HAVE PICKED UP ALONG THE JOURNEY
 

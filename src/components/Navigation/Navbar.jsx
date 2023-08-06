@@ -25,7 +25,7 @@ const Navbar = () => {
         </div>
         <div className={`${!roles ? "flex gap-1 tablet:flex-row" : "hidden"}`}>
           <Tooltip tooltip="Register">
-            <NavBgBtn to="/new-student" text="register" />
+            <NavBgBtn to="/new-user" text="register" />
           </Tooltip>
           <Tooltip tooltip="Login">
             <NavBgBtn to="/log-in" text="Login" />
