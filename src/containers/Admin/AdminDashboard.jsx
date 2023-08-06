@@ -76,33 +76,10 @@ const AdminDashboard = () => {
     },
   });
 
-  const allUsersQuery = useQuery(["users"], fetchAllUsersData, {
+  const coursesQuery = useQuery(["courseAnalysis"], fetchCoursesData, {
+    staleTime: 0,
     onSuccess: (data) => {
-      setAllUsers({
-        labels: ["Students", "Tutors", "Admins"],
-        datasets: [
-          {
-            label: "Users",
-            data: [data?.totalStudents, data?.totalTutors, data?.totalAdmins],
-            backgroundColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
-            borderColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
-          },
-        ],
-      });
-      setTotalUsers(
-        data?.totalStudents + data?.totalTutors + data?.totalAdmins
-      );
-    },
-    onError: (error) => {
-      handleError(error, updateAlertBoxData);
-      if (error.response && error.response.data.message === "Token expired") {
-        queryClient.invalidateQueries(["courses"]);
-      }
-    },
-  });
-
-  const coursesQuery = useQuery(["courses"], fetchCoursesData, {
-    onSuccess: async (data) => {
+      console.log("Courses query run successfully!");
       let totalUnits = 0;
       let coursesOffered = [];
       let unitsPerCourse = [];
@@ -139,6 +116,35 @@ const AdminDashboard = () => {
       });
     },
 
+    onError: (error) => {
+      console.log("Courses query has an error");
+
+      handleError(error, updateAlertBoxData);
+      if (error.response && error.response.data.message === "Token expired") {
+        queryClient.invalidateQueries(["courseAnalysis"]);
+      }
+    },
+  });
+
+  const allUsersQuery = useQuery(["users"], fetchAllUsersData, {
+    staleTime: 0,
+    onSuccess: (data) => {
+      console.log("All Users query run successfully!");
+      setAllUsers({
+        labels: ["Students", "Tutors", "Admins"],
+        datasets: [
+          {
+            label: "Users",
+            data: [data?.totalStudents, data?.totalTutors, data?.totalAdmins],
+            backgroundColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
+            borderColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
+          },
+        ],
+      });
+      setTotalUsers(
+        data?.totalStudents + data?.totalTutors + data?.totalAdmins
+      );
+    },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
       if (error.response && error.response.data.message === "Token expired") {
@@ -270,7 +276,7 @@ const AdminDashboard = () => {
                 ) : (
                   <DoughnutChart
                     chartData={coursesData}
-                    doughnutName="Courses "
+                    doughnutName="Courses"
                     doughnutValue={totalCourses}
                   />
                 )}

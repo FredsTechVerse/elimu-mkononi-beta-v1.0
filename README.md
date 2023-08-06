@@ -29,13 +29,13 @@
 
 ### POST RELEASE OPTIMIZATIONS
 
-- Debug admin charts , why they do not fetch on first render.
+- Polish youtube data api uploads - I only need to toggle between uploading a link directly and uploading a video.
 - Handle complete deletion and update of content eg if we delete a unit / we delete it and all of its children.
 - Create an interface for viewing the resources
-- Polish youtube data api uploads - Access token is being fetched correctly but the function for exchanging token is calling itself continuously. But my server doesn't crush!
 - Migrate to typescript using SWC compiler - It just enforces types thats it.
 - Keeping track of user interaction and completion using document ids , arrays and array methods.(Backend need!)
 - Fetching documents securely with the exclusion of images.(Backend need!)
+- Inform user that his session has expired and that he needs to login again.
 
 ### KEY TIPS I HAVE PICKED UP ALONG THE JOURNEY
 
