@@ -111,7 +111,7 @@ const LessonForm = () => {
 
   return (
     <Modal>
-      <div className="form-wrap h-[350px]">
+      <div className="form-wrap h-[480px]">
         <FormNavigation text="Lesson Form" />
         <form
           encType="multipart/form-data"
@@ -153,7 +153,7 @@ const LessonForm = () => {
               required
             ></input>
           </div>
-          {/* <div className="input-wrap ">
+          <div className="input-wrap ">
             {!uploadSuccess ? (
               <YoutubeUploader
                 verifyUpload={verifyUpload}
@@ -180,7 +180,7 @@ const LessonForm = () => {
                 </p>
               </div>
             )}
-          </div> */}
+          </div>
 
           {/* CTA BUTTONS */}
           <div className="cta-wrap">

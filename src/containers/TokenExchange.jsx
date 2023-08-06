@@ -9,17 +9,24 @@ const TokenExchange = () => {
   const { updateAlertBoxData } = useAlertBoxContext();
   const exchangeCodeForToken = async () => {
     if (!location) {
+      console.log("Location not found");
       return;
     }
-    const code = new URLSearchParams(location?.search).get("code");
-    const previousLocation = localStorage.getItem("previousLocation");
-    localStorage.removeItem("previousLocation");
     try {
+      const code = new URLSearchParams(location?.search).get("code");
+      console.log(`Code generated : ${JSON.stringify(code)}`);
+      const previousLocation = localStorage.getItem("previousLocation");
       const response = await axios.post(`/oAuth/getToken`, { code: code });
-      const youtubeAccessToken = response.data;
+      const {
+        access_token: youtubeAccessToken,
+        scope,
+        token_type,
+        expiry_date,
+      } = response.data;
       if (youtubeAccessToken) {
+        console.log({ youtubeAccessToken, scope, token_type, expiry_date });
         localStorage.setItem("youtubeAccessToken", youtubeAccessToken);
-
+        console.log(`Previous location ${JSON.stringify(previousLocation)}`);
         navigate(previousLocation);
       }
     } catch (error) {
@@ -30,8 +37,6 @@ const TokenExchange = () => {
   useEffect(() => {
     exchangeCodeForToken();
   }, []);
-
-  return <div></div>;
 };
 
 export default TokenExchange;

@@ -5,6 +5,7 @@ import {
   UsersTableAlternative,
   TableAlternativeSkeleton,
   TableSkeleton,
+  BackBtn,
 } from "../../components";
 import { fetchUsersData } from "../../controllers/fetchData";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -39,8 +40,11 @@ const UsersPage = () => {
 
   return (
     <div className="w-full flex-col-centered">
+      <div className="absolute top-2 right-2">
+        <BackBtn inDashboard={true} isDark={false} />
+      </div>
       <PageTitle
-        text={
+        title={
           userRole === "EM-201"
             ? "Student's Summary"
             : userRole === "EM-202"
@@ -48,14 +52,13 @@ const UsersPage = () => {
             : "Admin's Summary"
         }
       />
-
       {usersQuery.status === "loading" ? (
-        <div className="w-full ">
+        <div className="w-[90%]">
           <TableSkeleton />
           <TableAlternativeSkeleton />
         </div>
       ) : (
-        <div className="w-full ">
+        <div className="w-[90%] ">
           <UsersDataTable
             users={usersQuery.data}
             fetchUsersData={fetchUsersData}
