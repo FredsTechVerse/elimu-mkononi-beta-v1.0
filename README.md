@@ -59,6 +59,7 @@
 
 ### USING USEQUERY
 
+- Adding the enabled prop prevents react query from running immediately! Turns out that it was not being triggered by the status check! It is just build to run immediately upon render.
 - Suitable for handling any post and get requests in that it complements axios giving it superpowers as :-
 
 - It eliminates the need for a try catch statements as it has its own eventHandlers for handling errors and loading states. eg onError , onLoading , onSuccess
