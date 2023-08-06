@@ -7,11 +7,15 @@ import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import { getYoutubeAuthorizationURI } from "../../controllers/fetchData";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-const YoutubeUploader = ({ verifyUpload, updateFileInfo, videoTitle }) => {
+const YoutubeUploader = ({
+  verifyUpload,
+  updateFileInfo,
+  videoTitle,
+  lessonState,
+}) => {
   const { updateAlertBoxData } = useAlertBoxContext();
   const [percentCompleted, setPercentCompleted] = useState(0);
   const [isQueryEnabled, setIsQueryEnabled] = useState(false);
-
   const queryClient = useQueryClient();
   const accessToken = localStorage.getItem("youtubeAccessToken");
   const videoUploadUrl = import.meta.env.VITE_VIDEO_UPLOAD_LINK;
@@ -47,7 +51,10 @@ const YoutubeUploader = ({ verifyUpload, updateFileInfo, videoTitle }) => {
   );
 
   const redirectToExternalLink = (externalLink) => {
-    localStorage.setItem("previousLocation", window?.location?.pathname);
+    localStorage.setItem("previousLocation", lessonState?.pathname);
+    localStorage.setItem("chapterID", lessonState?.chapterID);
+    localStorage.setItem("lessonTotals", lessonState?.lessonTotals);
+    localStorage.setItem("background", lessonState?.background?.pathname);
     window.open(externalLink, "_self");
   };
 
@@ -88,11 +95,11 @@ const YoutubeUploader = ({ verifyUpload, updateFileInfo, videoTitle }) => {
           onUploadProgress: trackUploadProgress,
         }
       );
-      const { id: videoID, kind: videoKind } = videoData;
+      const { id: videoID } = videoData;
 
       const videoUrl = `https://www.youtube.com/watch?v=${videoID}`;
 
-      updateFileInfo({ videoUrl, videoKind });
+      updateFileInfo({ videoUrl });
     } catch (error) {
       console.error(error);
       handleError(error, updateAlertBoxData);
@@ -104,17 +111,17 @@ const YoutubeUploader = ({ verifyUpload, updateFileInfo, videoTitle }) => {
 
   if (!accessToken) {
     return (
-      <div className="h-36 w-72 tablet:w-[360px] mt-2 bg-slate-200  bg-opacity-60 rounded-lg ">
+      <div className="h-36 w-72 tablet:w-[360px] mt-2 bg-slate-300  bg-opacity-60 rounded-lg flex-col-centered">
         {youtubeAccessTokenQuery.status === "loading" && (
-          <p>Fetching the access token b4 we can proceed</p>
+          <p className="text-center">Fetching the access token...</p>
         )}
       </div>
     );
   }
 
   return (
-    <div className="h-36 w-72 tablet:w-[360px] mt-2 bg-green-400  bg-opacity-60 rounded-lg ">
-      <div className="w-full">
+    <div className="h-36  w-72 tablet:w-[360px] mt-2 bg-slate-300  bg-opacity-60 rounded-lg ">
+      <div className="w-full h-full">
         {percentCompleted > 0 ? (
           <div className="flex flex-col-centered w-full h-full ">
             <CircularProgressBar percentCompleted={percentCompleted} />
@@ -124,7 +131,7 @@ const YoutubeUploader = ({ verifyUpload, updateFileInfo, videoTitle }) => {
             {({ getRootProps, getInputProps }) => (
               <div
                 {...getRootProps()}
-                className="dropzone flex-col-centered w-full h-full "
+                className="dropzone flex-col-centered h-full "
               >
                 <input {...getInputProps()}></input>
                 <p className="mb-2 text-center">Drag and drop a file here</p>

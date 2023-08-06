@@ -59,7 +59,7 @@ const CourseForm = () => {
       queryClient.setQueryData(["resources", data._id], data);
       queryClient.invalidateQueries(["resources"], { exact: true });
       updateAlertBoxData({
-        response: "Resource saved successfully",
+        response: "Resource has been saved",
         isResponse: true,
         status: "success",
         timeout: 3000,

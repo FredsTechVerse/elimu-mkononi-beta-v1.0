@@ -69,7 +69,7 @@ const RegistrationForm = () => {
         exact: true,
       });
       updateAlertBoxData({
-        response: "User registered successfully",
+        response: "User has been registered.",
         isResponse: true,
         status: "success",
         timeout: 3000,

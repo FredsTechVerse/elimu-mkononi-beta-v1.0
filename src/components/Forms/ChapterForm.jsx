@@ -47,7 +47,7 @@ const ChapterForm = () => {
       queryClient.setQueryData(["chapter", unitID], data);
       queryClient.invalidateQueries(["unitData"]);
       updateAlertBoxData({
-        response: "Chapter saved successfully ",
+        response: "Chapter has been saved",
         isResponse: true,
         status: "success",
         timeout: 4500,

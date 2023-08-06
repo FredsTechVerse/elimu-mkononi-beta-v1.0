@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   UserProfile,
   DashboardUserButton,
   DoughnutChart,
-  PieChart,
   AreaChart,
   AdminNavItem,
-  HomeBtn,
+  LogoutBtn,
+  Tooltip,
   BackBtn,
   UserProfileSkeleton,
   PageTitle,
@@ -79,7 +79,6 @@ const AdminDashboard = () => {
   const coursesQuery = useQuery(["courseAnalysis"], fetchCoursesData, {
     staleTime: 0,
     onSuccess: (data) => {
-      console.log("Courses query run successfully!");
       let totalUnits = 0;
       let coursesOffered = [];
       let unitsPerCourse = [];
@@ -129,7 +128,6 @@ const AdminDashboard = () => {
   const allUsersQuery = useQuery(["users"], fetchAllUsersData, {
     staleTime: 0,
     onSuccess: (data) => {
-      console.log("All Users query run successfully!");
       setAllUsers({
         labels: ["Students", "Tutors", "Admins"],
         datasets: [
@@ -204,7 +202,9 @@ const AdminDashboard = () => {
         <div className="w-full  flex phone:flex-col tablet:flex-row justify-between items-center gap-5">
           <div className="phone:w-full tablet:w-3/5 laptop:w-full  bg-slate-300 rounded-xl phone:h-36 tablet:h-full laptop:h-40 flex flex-col-centered relative ">
             <div className="flex flex-row items-center justify-evenly gap-3 absolute top-2  left-2">
-              <BackBtn inDashboard={true} isDark={false} />
+              <Tooltip tooltip="Logout">
+                <LogoutBtn />
+              </Tooltip>
             </div>
             <div className="flex flex-row items-center justify-evenly gap-2 absolute top-2  right-2">
               <MenuBtn openSideBar={openSideBar} sideBarOpen={isSideBarOpen} />

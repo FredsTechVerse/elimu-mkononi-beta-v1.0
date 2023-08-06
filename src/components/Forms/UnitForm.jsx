@@ -24,7 +24,7 @@ const UnitForm = () => {
       queryClient.setQueryData(["units", data._id], data);
       queryClient.invalidateQueries(["courseData"]);
       updateAlertBoxData({
-        response: "Unit saved successfully",
+        response: "Unit has been saved",
         isResponse: true,
         status: "success",
         timeout: 3000,
@@ -125,7 +125,7 @@ const UnitForm = () => {
               onChange={(e) => setTutor(e.target.value)}
               className="input-styling  mb-5"
             >
-              <option className="text-grey">Choose a tutor</option>
+              <option className="text-grey">--Choose a tutor--</option>
               {tutorsQuery?.data ? (
                 tutorsQuery?.data.map((tutor, index) => {
                   const { _id: tutorId, firstName, surname } = tutor;

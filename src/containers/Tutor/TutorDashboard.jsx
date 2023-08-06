@@ -8,6 +8,8 @@ import {
   TableSkeleton,
   TutorUnitsTable,
   PageTitle,
+  Tooltip,
+  LogoutBtn,
   HomeBtn,
   BackBtn,
   DoughnutChart,
@@ -119,9 +121,11 @@ const TutorDashboard = () => {
       <div className="w-full laptop:w-3/4  flex flex-col justify-start h-full overflow-auto overflow-x-hidden p-3 gap-3 ">
         <div className="w-full  flex phone:flex-col tablet:flex-row justify-between items-center gap-5">
           <div className="phone:w-full tablet:w-3/5 laptop:w-full  bg-slate-300 rounded-xl phone:h-36 tablet:h-full laptop:h-40 flex flex-col-centered relative ">
-            {/* <div className="flex flex-row items-center justify-evenly gap-3 absolute top-2  left-2">
-              <BackBtn inDashboard={true} isDark={false} />
-            </div> */}
+            <div className="flex flex-row items-center justify-evenly gap-3 absolute top-2  left-2">
+              <Tooltip tooltip="Logout">
+                <LogoutBtn />
+              </Tooltip>
+            </div>
             <div className="flex flex-row items-center justify-evenly gap-2 absolute top-2  right-2">
               <MenuBtn openSideBar={openSideBar} sideBarOpen={isSideBarOpen} />
             </div>
