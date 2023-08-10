@@ -4,11 +4,11 @@ import { UserIcon } from "@heroicons/react/24/solid";
 const NavPageBtn = ({ page }) => {
   return (
     <Link to={page}>
-      <div className="w-full h-full border-2 bg-primary hover:bg-purple-500 cursor-pointer rounded-md flex-col-centered gap-2 py-2 ">
+      <button className="w-full h-full border-2 bg-primary hover:bg-purple-500 cursor-pointer rounded-md flex-col-centered gap-2 py-2 ">
         <div className="h-full w-full flex-row-centered text-white rounded-lg bg-primary rounded-ms">
           View {page}
         </div>
-      </div>
+      </button>
     </Link>
   );
 };

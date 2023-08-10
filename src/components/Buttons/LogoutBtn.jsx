@@ -38,7 +38,7 @@ const LogoutBtn = ({ position = "sidebar", isSubmitting = true }) => {
     },
   });
   return (
-    <div
+    <button
       onClick={() => {
         logoutMutation.mutate();
       }}
@@ -62,7 +62,7 @@ const LogoutBtn = ({ position = "sidebar", isSubmitting = true }) => {
           )}
         </span>
       )}
-    </div>
+    </button>
   );
 };
 
