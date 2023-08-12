@@ -4,6 +4,7 @@
 
 # WHAT WE SOLVE
 
+- Learning react hook form is not a priority right now....
 - Where we help learners carry out their revision for the units that they are taking in school.
 - Exams are generally repeated questions over and over again over the course of time.Having this exam materials , class notes and additonal youtube videos (Youtube is the new university) gathered under one roof will help learners practise targeted revision and pass their exams with flying colours.
 - In this application , I pull all resources necessary to help learner succeed in their studies right from the course outline.
@@ -29,20 +30,19 @@
 
 ### POST RELEASE OPTIMIZATIONS
 
-- Inform user that his session has expired and autoredirect to login
-- Make unit outline and unit breakdown more descriptive in that user can know where he/she is at all times.
-- Handle complete deletion and update of content eg if we delete a unit / we delete it and all of its children including from s3 bucket.
-- Fetching documents securely with the exclusion of images.(Backend need!)
-- Create an interface for viewing the resources
-- Migrate to typescript using SWC compiler - It just enforces types thats it.
+- Handle complete deletion and update of content eg if we delete a unit / we delete it and all of its children including from s3 bucket. (Mongoose therapy...They just need the id to fetch data ... Form elements are already controlled components... They will do what we say and hopefully by using react forms hook, we get to manage them all in one place.)
+- Create resources interface and test upload to s3 bucket while at it see how to retrieve the documents privately.
+- Optimize navigation bar with the newly found techniques.
+- Inform user that his session has expired then autoredirect to login... Refresh hinders our alert box implementation from playing out... Add a delay to logout session b3 refresh if token has expired.
+- Make unit outline and unit breakdown more descriptive in that user can know where he/she is at all times.Give descriptive title names.Save server lots of traffic
 - Keeping track of user interaction and completion using document ids , arrays and array methods.(Backend need!)
-- Polish youtube data api upload by handling access token expiration.Upload now works well!
+- Look into how user can reset password securely... On the backend its just a simple update after thorough verification from server.
+- Implement typescript with SWC
 
 ### KEY TIPS I HAVE PICKED UP ALONG THE JOURNEY
 
 - SWC works well without hitches. Will use it when i migrate to typescript.
 - Using overflow-s-hidden hidden helps to hide the unwanted x direction scrollbar when overflow auto is used.
-
 - Router state has always been simply an object... You know that basic container with a key and a value which in my case was as simple as assigning a background `{ background: location }` and once present in the state activating the second set of routes.
 - When an error occurs , the error code should be that of the error message... Not 400... Remember that axios is only successfull when a 2xx response is returned.... The rest automatically results into an error.
 

@@ -11,10 +11,12 @@ const VideoPlayer = () => {
   };
 
   const handleVideoError = () => {
-    // setVideoReady(false);
+    setVideoReady(false);
   };
-  const handleVideoEnd = () => {};
-  const handleVideoPause = () => {};
+
+  const handleVideoEnd = () => {
+    // Will be used to update student data on lesson that he/she has just completed watching.
+  };
 
   useEffect(() => {
     return () => {
@@ -42,7 +44,6 @@ const VideoPlayer = () => {
           onReady={handleVideoReady}
           onError={handleVideoError}
           onEnded={handleVideoEnd}
-          onPause={handleVideoPause}
           width="100%"
           height="100%"
         />

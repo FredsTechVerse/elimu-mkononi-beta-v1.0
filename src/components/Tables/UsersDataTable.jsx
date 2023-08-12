@@ -57,7 +57,7 @@ const UsersDataTable = ({ users, fetchUsersData, role }) => {
                   </td>
                   <td>
                     <CTAButton
-                      _id={user._id}
+                      userID={user._id}
                       contact={user.email}
                       fetchUsersData={fetchUsersData}
                     />

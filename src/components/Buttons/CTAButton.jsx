@@ -4,16 +4,15 @@ import { Tooltip } from "../../components";
 import { useNavigate } from "react-router-dom";
 import { EnvelopeIcon, EyeIcon, TrashIcon } from "@heroicons/react/24/solid";
 
-const CTAButton = ({ contact = null, unitID, fetchUsersData = null }) => {
+const CTAButton = ({ contact = null, userID, fetchUsersData = null }) => {
+  console.log({ userID });
   const roles = JSON.parse(localStorage.getItem("roles"));
 
   let navigate = useNavigate();
-  const deleteUser = async (_id) => {
+  const deleteUser = async (userID) => {
     try {
-      await axios.delete("/auth/student", {
-        headers: {},
-        data: { _id },
-      });
+      console.log(`Student ID passed ${JSON.stringify(userID)}`);
+      await axios.delete(`/auth/student/${userID}`);
       fetchUsersData();
     } catch (error) {}
   };
@@ -24,7 +23,7 @@ const CTAButton = ({ contact = null, unitID, fetchUsersData = null }) => {
         <button
           className="cta-btn group hover:border-primary"
           onClick={() => {
-            navigate(`/tutor/unit/${unitID}`);
+            navigate(`/tutor/unit/${userID}`);
           }}
         >
           <span className="text-slate-600 group-hover:text-primary text-2xl ">
@@ -53,7 +52,7 @@ const CTAButton = ({ contact = null, unitID, fetchUsersData = null }) => {
         <button
           className="cta-btn group hover:border-primary"
           onClick={() => {
-            navigate(`/TenantsInformation/${unitID}`);
+            navigate(`/TenantsInformation/${userID}`);
           }}
         >
           <span className="text-slate-600 group-hover:text-primary text-2xl ">
@@ -65,7 +64,7 @@ const CTAButton = ({ contact = null, unitID, fetchUsersData = null }) => {
         <button
           className="cta-btn group hover:border-red-600"
           onClick={() => {
-            deleteUser(unitID);
+            deleteUser(userID);
           }}
         >
           <span className="text-slate-600 group-hover:text-red-600 text-2xl">
