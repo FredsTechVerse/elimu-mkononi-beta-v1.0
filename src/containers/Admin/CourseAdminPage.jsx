@@ -7,33 +7,36 @@ import {
   BackBtn,
 } from "../../components";
 import { useLocation, Link } from "react-router-dom";
-
+import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import { fetchCoursesData } from "../../controllers/fetchData";
-import { useQuery } from "@tanstack/react-query";
+import { handleError } from "../../controllers/handleErrors";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 const CoursesAdminPage = () => {
   const location = useLocation();
-  const coursesQuery = useQuery({
-    queryKey: ["courses"],
-    queryFn: fetchCoursesData,
+  const queryClient = useQueryClient();
+  const { updateAlertBoxData } = useAlertBoxContext();
+  const coursesQuery = useQuery(["courses"], fetchCoursesData, {
+    retry: 1,
+    onError: (error) => {
+      handleError(error, updateAlertBoxData);
+      if (error.response && error.response.data.message === "Token expired") {
+        queryClient.invalidateQueries(["courses"]);
+      }
+    },
   });
   return (
-    <div className="flex flex-col relative phone:rounded-lg w-full h-full pt-2 px-4">
-      <div className="absolute top-2 left-2">
+    <div className="flex flex-col gap-5 relative phone:rounded-lg w-full h-full px-4">
+      <div className="absolute top-2 left-2 z-10">
         <BackBtn isDark={true} />
       </div>
-      {/* 
-      <div className="absolute top-2 right-2">
-        <NavBgBtn to="/new-course" text="Add Course" />
-      </div> */}
 
-      <div className={"navbar-link bg-primary  group absolute top-2 right-2"}>
-        <Link to="/new-course" state={{ background: location }}>
-          Add Course
-        </Link>
+      <div className="absolute top-2 right-2 ">
+        <NavBgBtn to="/new-course" text="Add Course" isBlue={true} />
       </div>
-
-      <PageTitle title="list of courses" />
+      <div className="relative top-2">
+        <PageTitle title="list of courses" />
+      </div>
 
       <div className="w-full flex flex-col  justify-start">
         {coursesQuery.status === "loading" && (

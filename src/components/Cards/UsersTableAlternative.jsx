@@ -1,29 +1,23 @@
 import React from "react";
-import { UserCard, NavigateBtn } from "../../components";
+import { UserCard, DashboardUserButton } from "../../components";
 
 const UsersTableAlternative = ({ users, fetchUsersData, role }) => {
   return (
     <div className="phone:block laptop:hidden w-full flex-col-centered">
       <div className="flex-col-centered">
-        <div className="flex items-center justify-start w-full ml-7 mb-1">
-          <NavigateBtn
-            destination={
+        <div className="flex-row-centered self-end  mb-2 w-32 h-10 ">
+          <DashboardUserButton
+            isRounded={false}
+            item={
               role === "EM-203"
-                ? "new-admin"
+                ? "admin"
                 : role === "EM-202"
-                ? "new-tutor"
-                : "new-student"
+                ? "tutor"
+                : "student"
             }
-            text={
-              role === "EM-203"
-                ? "add admin"
-                : role === "EM-202"
-                ? "add tutor"
-                : "add student"
-            }
-            icon="tenantIcon"
           />
         </div>
+
         <div className="grid-sm">
           {users.length > 0 &&
             users.map((userData, userIndex) => {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, NavbarSmall } from "../../components";
+import { Navbar } from "../../components";
 const HeroSection = ({ isNavOpen, showNavbar, hideNavbar }) => {
   return (
     <div className="homepage w-full h-[80vh]">

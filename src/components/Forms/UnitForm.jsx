@@ -13,9 +13,14 @@ const UnitForm = () => {
   const formRef = useRef(null);
   const { updateAlertBoxData } = useAlertBoxContext();
   const location = useLocation();
-  const tutorsQuery = useQuery({
-    queryKey: ["tutors"],
-    queryFn: () => fetchUsersData("EM-202"),
+  const tutorsQuery = useQuery(["tutors"], () => fetchUsersData("EM-202"), {
+    retry: 1,
+    onError: (error) => {
+      handleError(error, updateAlertBoxData);
+      if (error.response && error.response.data.message === "Token expired") {
+        queryClient.invalidateQueries(["tutors"]);
+      }
+    },
   });
 
   const createUnitMutation = useMutation({

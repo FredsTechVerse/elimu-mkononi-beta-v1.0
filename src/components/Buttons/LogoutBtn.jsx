@@ -8,7 +8,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "../../axios";
 
 import { SpinnerIcon } from "../../components";
-const LogoutBtn = ({ position = "sidebar", isSubmitting = true }) => {
+const LogoutBtn = ({ isBlue = false }) => {
   const { updateAlertBoxData } = useAlertBoxContext();
   const logoutMutation = useMutation({
     mutationFn: logoutUser,
@@ -42,26 +42,19 @@ const LogoutBtn = ({ position = "sidebar", isSubmitting = true }) => {
       onClick={() => {
         logoutMutation.mutate();
       }}
-      className={`${
-        position === "navbar"
-          ? "border-2 border-white  navbar-link"
-          : "border-white rounded-full h-9 aspect-square bg-white hover:bg-border-2 cursor-pointer flex-row-centered"
-      }`}
+      className={` rounded-full h-9 aspect-square cursor-pointer flex-row-centered ${
+        isBlue
+          ? "bg-primary hover:bg-purple-500"
+          : "bg-slate-600 hover:bg-slate-900 text-white"
+      } `}
     >
-      {position === "navbar" ? (
-        <div className="flex flex-row items-center justify-center w-full gap-3 text-md ">
-          <span>Log Out</span>
-          {logoutMutation?.isLoading && <SpinnerIcon />}
-        </div>
-      ) : (
-        <span>
-          {logoutMutation?.isLoading ? (
-            <SpinnerIcon />
-          ) : (
-            <ArrowRightOnRectangleIcon className="icon-styling  text-slate-900  " />
-          )}
-        </span>
-      )}
+      <span>
+        {logoutMutation?.isLoading ? (
+          <SpinnerIcon />
+        ) : (
+          <ArrowRightOnRectangleIcon className={`icon-styling text-white`} />
+        )}
+      </span>
     </button>
   );
 };

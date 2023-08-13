@@ -79,6 +79,8 @@ function App() {
           {/* GENERAL ROUTES */}
           <Route exact path="*" element={<NotFound />}></Route>
           <Route exact path="forbidden" element={<Forbidden />} />
+          <Route exact path="/new-user" element={<RegistrationForm />} />
+
           <Route path="/log-in" element={<LogInForm />} />
           <Route path="/draft" element={<DraftPage />} />
           <Route path="/fetchToken" element={<TokenExchange />} />

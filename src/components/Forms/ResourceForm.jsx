@@ -112,7 +112,7 @@ const CourseForm = () => {
   return (
     <Modal>
       <div className="form-wrap h-[380px]">
-        <FormNavigation text="COURSE FORM" />
+        <FormNavigation text="RESOURCE FORM" />
         <form
           encType="multipart/form-data"
           className="form-styling"

@@ -44,7 +44,7 @@ const QuillEditor = () => {
     ["notes", currentLesson?.lessonNotes],
     () => fetchLessonNotes(currentLesson?.lessonNotes),
     {
-      retry: 0,
+      retry: 1,
       onError: (error) => {
         handleError(error, updateAlertBoxData);
         if (error.response && error.response.data.message === "Token expired") {
@@ -66,6 +66,7 @@ const QuillEditor = () => {
     }
   );
   useEffect(() => {
+    setContent("");
     notesQuery.refetch();
   }, [currentLesson?.lessonNotes]);
 
@@ -212,7 +213,7 @@ const QuillEditor = () => {
           <QuillEditorSkeleton />
         )}
 
-        {notesQuery.status === "success" && isEditorEnabled && isAdmin ? (
+        {notesQuery.status === "success" && isEditorEnabled && isAdmin() ? (
           <ReactQuill
             value={content}
             readOnly={!isEditorEnabled}

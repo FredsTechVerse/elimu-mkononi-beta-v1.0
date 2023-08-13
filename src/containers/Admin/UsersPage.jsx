@@ -40,18 +40,20 @@ const UsersPage = () => {
 
   return (
     <div className="w-full flex-col-centered">
-      <div className="absolute top-2 right-2">
-        <BackBtn inDashboard={true} isDark={false} />
+      <div className="absolute top-2 left-2">
+        <BackBtn isDark={true} />
       </div>
-      <PageTitle
-        title={
-          userRole === "EM-201"
-            ? "Student's Summary"
-            : userRole === "EM-202"
-            ? "tutor's summary"
-            : "Admin's Summary"
-        }
-      />
+      <div className="relative top-2">
+        <PageTitle
+          title={
+            userRole === "EM-201"
+              ? "Student's Summary"
+              : userRole === "EM-202"
+              ? "tutor's summary"
+              : "Admin's Summary"
+          }
+        />
+      </div>
       {usersQuery.status === "loading" ? (
         <div className="w-[90%] mt-5">
           <TableSkeleton />

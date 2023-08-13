@@ -76,7 +76,6 @@ import {
 
 import {
   Navbar,
-  NavbarSmall,
   Search,
   CourseNav,
   NavBtn,
@@ -180,7 +179,6 @@ export {
   Navbar,
   Search,
   CourseNav,
-  NavbarSmall,
   NavBtn,
   NavBgBtn,
   HomeBtn,

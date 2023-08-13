@@ -191,27 +191,27 @@ const AdminDashboard = () => {
             Go to pages
           </h1>
           <div className="controls  w-full h-full flex flex-col justify-end  gap-2 ">
-            <AdminNavItem text="courses" />
-            <AdminNavItem text="students" />
-            <AdminNavItem text="tutors" />
-            <AdminNavItem text="admins" />
+            <AdminNavItem to="courses" text="courses" />
+            <AdminNavItem to="students" text="students" />
+            <AdminNavItem to="tutors" text="tutors" />
+            <AdminNavItem to="admins" text="admins" />
           </div>
         </div>
       </div>
       <div className=" w-full laptop:w-3/4  flex flex-col justify-start  h-full overflow-auto p-3 overflow-x-hidden ">
         <div className="w-full  flex phone:flex-col tablet:flex-row justify-between items-center gap-5">
           <div className="phone:w-full tablet:w-3/5 laptop:w-full  bg-slate-300 rounded-xl phone:h-36 tablet:h-full laptop:h-40 flex flex-col-centered relative ">
-            <div className="flex flex-row items-center justify-evenly gap-3 absolute top-2  left-2">
+            <div className="flex flex-row items-center justify-evenly gap-3 absolute top-2  right-2">
               <Tooltip tooltip="Logout">
                 <LogoutBtn />
               </Tooltip>
             </div>
-            <div className="flex flex-row items-center justify-evenly gap-2 absolute top-2  right-2">
+            <div className="flex flex-row items-center justify-evenly gap-2 absolute top-2  left-2">
               <MenuBtn openSideBar={openSideBar} sideBarOpen={isSideBarOpen} />
             </div>
 
             <h1 className="font-bold text-lg uppercase w-full h-12 flex-row-centered ">
-              GREETINGS
+              Admin Dashboard
             </h1>
             <p className="text-center text-lg px-4">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit.

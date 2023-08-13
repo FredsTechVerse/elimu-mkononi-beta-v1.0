@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   UserProfile,
   DashboardUserButton,
-  PieChart,
+  AdminNavItem,
   AreaChart,
   UserProfileSkeleton,
   TableSkeleton,
@@ -10,8 +10,6 @@ import {
   PageTitle,
   Tooltip,
   LogoutBtn,
-  HomeBtn,
-  BackBtn,
   DoughnutChart,
   DoughnutSkeleton,
   MenuBtn,
@@ -110,11 +108,22 @@ const TutorDashboard = () => {
           <h1 className="text-slate-900 font-bold text-lg text-center capitalize mt-3 w-full h-12 flex-row-centered  ">
             Quick Access Controls
           </h1>
-          <div className="gap-2 p-2 grid grid-cols-2  h-56 w-full">
-            <DashboardUserButton user="chapter" />
-            <DashboardUserButton user="lesson" />
-            <DashboardUserButton user="resource" />
-            <DashboardUserButton user="information" />
+          <div className="gap-2 p-2 grid grid-cols-1  h-full w-full">
+            <AdminNavItem
+              page="tutorDashboard"
+              to="/new-chapter"
+              text="chapter"
+            />
+            <AdminNavItem
+              page="tutorDashboard"
+              to="/new-lesson"
+              text="lesson"
+            />
+            <AdminNavItem
+              page="tutorDashboard"
+              to="/new-resource"
+              text="resource"
+            />
           </div>
         </div>
       </div>

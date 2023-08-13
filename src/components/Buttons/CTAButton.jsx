@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { EnvelopeIcon, EyeIcon, TrashIcon } from "@heroicons/react/24/solid";
 
 const CTAButton = ({ contact = null, userID, fetchUsersData = null }) => {
-  console.log({ userID });
+  // console.log({ userID });
   const roles = JSON.parse(localStorage.getItem("roles"));
 
   let navigate = useNavigate();
@@ -52,7 +52,7 @@ const CTAButton = ({ contact = null, userID, fetchUsersData = null }) => {
         <button
           className="cta-btn group hover:border-primary"
           onClick={() => {
-            navigate(`/TenantsInformation/${userID}`);
+            navigate("/new-user", { state: { userID, readOnly: true } });
           }}
         >
           <span className="text-slate-600 group-hover:text-primary text-2xl ">

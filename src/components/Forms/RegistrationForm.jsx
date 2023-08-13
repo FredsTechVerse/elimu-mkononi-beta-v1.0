@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FormNavigation, SubmitButton, Modal } from "../../components";
 import { useNavigate, useLocation } from "react-router-dom";
+import { fetchUserData } from "../../controllers/fetchData";
 import { registerUser } from "../../controllers/postData";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import { handleError } from "../../controllers/handleErrors";
 
@@ -22,6 +23,17 @@ const RegistrationForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [cPassword, setCPassword] = useState("");
+
+  const [isUserQueryEnabled, setIsUserQueryEnabled] = useState(false);
+  const userID = location?.state?.userID;
+  // console.log({ userID });
+
+  useEffect(() => {
+    if (location?.state?.readOnly === true) {
+      setIsUserQueryEnabled(true);
+      console.log("User Query Enabled");
+    }
+  }, [userID]);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -61,6 +73,31 @@ const RegistrationForm = () => {
     });
     return false;
   };
+
+  const userQuery = useQuery(
+    ["user", userID],
+    () => fetchUserData({ userID: userID, role: "EM-201" }),
+    {
+      enabled: isUserQueryEnabled,
+      retry: 1,
+      onSuccess: (data) => {
+        const { firstName, surname, email, password, contact, status, role } =
+          data;
+        setFName(firstName);
+        setSurname(surname);
+        setContact(contact);
+        setEmail(email);
+        setPassword("Should not be returned");
+        setCPassword("Should not be returned");
+      },
+      onError: (error) => {
+        handleError(error, updateAlertBoxData);
+        if (error.response && error.response.data.message === "Token expired") {
+          queryClient.invalidateQueries(["user"]);
+        }
+      },
+    }
+  );
   const createUserMutation = useMutation({
     mutationFn: registerUser,
     onSuccess: (data) => {

@@ -1,11 +1,20 @@
 import React from "react";
 import { CourseCardV2, CourseSkeleton, PageTitle } from "..";
+import { useAlertBoxContext } from "../../context/AlertBoxContext";
+import { handleError } from "../../controllers/handleErrors";
 import { fetchCoursesData } from "../../controllers/fetchData";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 const CoursesSection = () => {
-  const coursesQuery = useQuery({
-    queryKey: ["courses"],
-    queryFn: fetchCoursesData,
+  const { updateAlertBoxData } = useAlertBoxContext();
+  const queryClient = useQueryClient();
+  const coursesQuery = useQuery(["courses"], fetchCoursesData, {
+    retry: 1,
+    onError: (error) => {
+      handleError(error, updateAlertBoxData);
+      if (error.response && error.response.data.message === "Token expired") {
+        queryClient.invalidateQueries(["courses"]);
+      }
+    },
   });
 
   return (

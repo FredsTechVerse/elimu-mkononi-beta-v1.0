@@ -1,9 +1,11 @@
 # ELIMU HUB
 
-- Looking forward to committing that s3 and youtube upload set up successfully!
+- All I need is practise to hammer the concepts in!
 
 # WHAT WE SOLVE
 
+- Make sure that the lesson video blurs out on lesson change and that the notes refetch every time the ID changes.... Avoiding a refetch might see to it that this is done.
+- Look for alternative tooltip alternatives.
 - Learning react hook form is not a priority right now....
 - Where we help learners carry out their revision for the units that they are taking in school.
 - Exams are generally repeated questions over and over again over the course of time.Having this exam materials , class notes and additonal youtube videos (Youtube is the new university) gathered under one roof will help learners practise targeted revision and pass their exams with flying colours.
@@ -30,17 +32,18 @@
 
 ### POST RELEASE OPTIMIZATIONS
 
+- Inform user that his session has expired then autoredirect to login... Refresh hinders our alert box implementation from playing out... Add a delay to logout session b3 refresh if token has expired.
 - Handle complete deletion and update of content eg if we delete a unit / we delete it and all of its children including from s3 bucket. (Mongoose therapy...They just need the id to fetch data ... Form elements are already controlled components... They will do what we say and hopefully by using react forms hook, we get to manage them all in one place.)
 - Create resources interface and test upload to s3 bucket while at it see how to retrieve the documents privately.
-- Optimize navigation bar with the newly found techniques.
-- Inform user that his session has expired then autoredirect to login... Refresh hinders our alert box implementation from playing out... Add a delay to logout session b3 refresh if token has expired.
+- Going back to homepage does not work... Screen freezes.
 - Make unit outline and unit breakdown more descriptive in that user can know where he/she is at all times.Give descriptive title names.Save server lots of traffic
-- Keeping track of user interaction and completion using document ids , arrays and array methods.(Backend need!)
 - Look into how user can reset password securely... On the backend its just a simple update after thorough verification from server.
 - Implement typescript with SWC
+- Keep track of user interaction and completion using document ids , arrays and array methods.(Backend need!)
 
 ### KEY TIPS I HAVE PICKED UP ALONG THE JOURNEY
 
+- self-end class name gives a flex-item positioning independence.
 - SWC works well without hitches. Will use it when i migrate to typescript.
 - Using overflow-s-hidden hidden helps to hide the unwanted x direction scrollbar when overflow auto is used.
 - Router state has always been simply an object... You know that basic container with a key and a value which in my case was as simple as assigning a background `{ background: location }` and once present in the state activating the second set of routes.

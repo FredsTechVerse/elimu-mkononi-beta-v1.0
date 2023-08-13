@@ -4,17 +4,15 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   const roles = JSON.parse(localStorage.getItem("roles"));
   return (
-    <div className="absolute top-0 flex justify-between  z-10 w-full px-4 py-2 rounded-full m-2">
-      <Link to="/">
-        <div
-          id="section-1"
-          className="text-white font-bold phone:text-lg tablet:text-2xl font-sans"
-        >
-          ELIMU HUB
-        </div>
+    <>
+      <Link
+        className="text-white font-bold phone:text-lg tablet:text-2xl font-sans fixed top-0 z-10 left-2 h-[10vh] flex-row-centered "
+        to="/"
+      >
+        ELIMU HUB
       </Link>
 
-      <div className="relative flex tablet:flex-row phone:gap- items-center  capitalize">
+      <div className="h-[10vh] fixed top-0 right-2 z-10 flex-row-centered  ">
         <div className=" h-full flex">
           {roles?.includes("EM-202") ||
             (roles?.includes("EM-203") && (
@@ -33,11 +31,11 @@ const Navbar = () => {
         </div>
         <div className={`${!roles ? "hidden" : "flex"}`}>
           <Tooltip tooltip="Logout">
-            <LogoutBtn />
+            <LogoutBtn isBlue={true} />
           </Tooltip>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
