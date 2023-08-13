@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Dropzone from "react-dropzone";
 import Axios from "../../axios";
 import axios from "axios";
 import { CircularProgressBar } from "../../components";
-import { handleError } from "../../controllers/handleErrors";
+import { handleError } from "../../controllers";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 
 const S3Uploader = ({ verifyUpload, updateFileName, isTokenActive }) => {

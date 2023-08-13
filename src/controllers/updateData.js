@@ -1,6 +1,4 @@
-import axios from "../axios";
-
-const createCourse = async ({ courseTitle, courseImage }) => {
+const updateCourse = async ({ courseTitle, courseImage }) => {
   let courseData = {
     courseTitle,
     courseImage,
@@ -9,16 +7,16 @@ const createCourse = async ({ courseTitle, courseImage }) => {
     headers: { "Content-Type": "application/json" },
   };
 
-  const { data: createdCourse } = await axios.post(
+  const { data: updatedCourse } = await axios.put(
     "/course",
     courseData,
     config
   );
 
-  return createdCourse;
+  return updatedCourse;
 };
 
-const createUnit = async ({
+const updateUnit = async ({
   course,
   tutor,
   unitCode,
@@ -37,11 +35,11 @@ const createUnit = async ({
     headers: { "Content-Type": "application/json" },
   };
 
-  const { data: createdUnit } = await axios.post("/unit", unitData, config);
-  return createdUnit;
+  const { data: updatedUnit } = await axios.put("/unit", unitData, config);
+  return updatedUnit;
 };
 
-const createChapter = async ({
+const updateChapter = async ({
   chapterNumber,
   chapterName,
   chapterDescription,
@@ -57,15 +55,15 @@ const createChapter = async ({
     headers: { "Content-Type": "application/json" },
   };
 
-  const { data: createdChapter } = await axios.post(
+  const { data: updatedChapter } = await axios.put(
     "/chapter",
     chapterData,
     config
   );
-  return createdChapter;
+  return updatedChapter;
 };
 
-const createLesson = async ({
+const updateLesson = async ({
   lessonNumber,
   lessonName,
   lessonUrl,
@@ -82,33 +80,34 @@ const createLesson = async ({
     headers: { "Content-Type": "application/json" },
   };
 
-  const { data: createdLesson } = await axios.post(
+  const { data: updatedLesson } = await axios.put(
     "/lesson",
     lessonData,
     config
   );
-  return createdLesson;
+  return updatedLesson;
 };
 
-const createNotes = async ({ lessonNotes, lessonID }) => {
+const updateNotes = async ({ lessonNotes, notesID }) => {
   const config = {
     headers: { "Content-Type": "application/json" },
   };
 
   const notesData = {
     lessonNotes: lessonNotes,
-    lessonID: lessonID,
+    notesID: notesID,
   };
-  const { data: createdNotes } = await axios.post("/notes", notesData, config);
-  return createdNotes;
+
+  const { data: updatedNotes } = await axios.put("/notes", notesData, config);
+  return updatedNotes;
 };
 
-const createResource = async ({ resourceName, resourceUrl, chapterID }) => {
+const updateResource = async ({ resourceName, resourceUrl, chapterID }) => {
   const resourceData = { resourceName, resourceUrl, chapterID };
   const config = {
     headers: { "Content-Type": "application/json" },
   };
-  const { data: createdResource } = await axios.post(
+  const { data: createdResource } = await axios.put(
     "/resources",
     resourceData,
     config
@@ -118,10 +117,10 @@ const createResource = async ({ resourceName, resourceUrl, chapterID }) => {
 };
 
 export {
-  createCourse,
-  createUnit,
-  createChapter,
-  createLesson,
-  createNotes,
-  createResource,
+  updateCourse,
+  updateUnit,
+  updateChapter,
+  updateLesson,
+  updateNotes,
+  updateResource,
 };

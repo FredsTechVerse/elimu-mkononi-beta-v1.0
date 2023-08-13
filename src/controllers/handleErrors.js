@@ -1,5 +1,5 @@
 import axios from "../axios";
-import { logoutUser } from "../controllers/postData";
+import { logoutUser } from "./postData";
 const ERRORS = {
   NETWORK_ERROR: "Network error. Please try again later.",
   SERVER_ERROR: "Server error. Please try again later.",
@@ -90,6 +90,12 @@ const renewToken = async ({ updateAlertBoxData }) => {
       });
       await handleLogout();
     } else {
+      updateAlertBoxData({
+        response: "An error occured while renewing token",
+        isResponse: true,
+        status: "error",
+        timeout: 2500,
+      });
       console.error(
         `An error occured while renewing the access token ${JSON.stringify(
           err

@@ -2,8 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FormNavigation, Modal, SubmitButton, AlertBox } from "..";
 import { useMutation } from "@tanstack/react-query";
-import { loginUser } from "../../controllers/postData";
-import { handleError } from "../../controllers/handleErrors";
+import { loginUser, handleError } from "../../controllers";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import axios from "../../axios";
 const LogInForm = () => {

@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import Dropzone from "react-dropzone";
 import { youtubeInstance } from "../../axios";
 import { CircularProgressBar } from "../../components";
-import { handleError } from "../../controllers/handleErrors";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
-import { getYoutubeAuthorizationURI } from "../../controllers/fetchData";
+import { getYoutubeAuthorizationURI, handleError } from "../../controllers";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 const YoutubeUploader = ({

@@ -7,21 +7,20 @@ import {
   AdminNavItem,
   LogoutBtn,
   Tooltip,
-  BackBtn,
   UserProfileSkeleton,
   PageTitle,
   DoughnutSkeleton,
   MenuBtn,
 } from "../../components";
 import { XCircleIcon } from "@heroicons/react/24/solid";
-import { handleError } from "../../controllers/handleErrors";
-import { useAlertBoxContext } from "../../context/AlertBoxContext";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
+  handleError,
   fetchUserDetails,
   fetchCoursesData,
   fetchAllUsersData,
-} from "../../controllers/fetchData";
+} from "../../controllers";
+import { useAlertBoxContext } from "../../context/AlertBoxContext";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 const AdminDashboard = () => {
   const role = "EM-203";

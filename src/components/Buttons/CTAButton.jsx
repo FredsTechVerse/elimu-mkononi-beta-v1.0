@@ -5,18 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { EnvelopeIcon, EyeIcon, TrashIcon } from "@heroicons/react/24/solid";
 
 const CTAButton = ({ contact = null, userID, fetchUsersData = null }) => {
-  // console.log({ userID });
   const roles = JSON.parse(localStorage.getItem("roles"));
-
   let navigate = useNavigate();
-  const deleteUser = async (userID) => {
-    try {
-      console.log(`Student ID passed ${JSON.stringify(userID)}`);
-      await axios.delete(`/auth/student/${userID}`);
-      fetchUsersData();
-    } catch (error) {}
-  };
-  const messageTenant = (contact) => {};
+
   if (roles?.includes("EM-202")) {
     return (
       <div className="flex items-center justify-evenly w-full px-4  border-none">

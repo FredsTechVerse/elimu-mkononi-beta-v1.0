@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
   UserProfile,
-  DashboardUserButton,
   AdminNavItem,
   AreaChart,
   UserProfileSkeleton,
@@ -15,10 +14,9 @@ import {
   MenuBtn,
 } from "../../components";
 import { XCircleIcon } from "@heroicons/react/24/solid";
-import { handleError } from "../../controllers/handleErrors";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { fetchUserDetails } from "../../controllers/fetchData";
+import { fetchUserDetails, handleError } from "../../controllers";
 
 const TutorDashboard = () => {
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);

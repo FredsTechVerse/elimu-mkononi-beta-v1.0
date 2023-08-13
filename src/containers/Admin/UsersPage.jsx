@@ -7,11 +7,10 @@ import {
   TableSkeleton,
   BackBtn,
 } from "../../components";
-import { fetchUsersData } from "../../controllers/fetchData";
+import { fetchUsersData, handleError } from "../../controllers";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
-import { handleError } from "../../controllers/handleErrors";
 const UsersPage = () => {
   const { role } = useParams();
   const { updateAlertBoxData } = useAlertBoxContext();

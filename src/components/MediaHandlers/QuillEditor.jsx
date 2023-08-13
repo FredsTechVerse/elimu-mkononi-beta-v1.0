@@ -3,11 +3,14 @@ import React, { useState, useCallback, useEffect } from "react";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import { useCurrentLessonContext } from "../../context/currentLessonContext";
 import { useOutletContext } from "react-router-dom";
-import { QuillEditorSkeleton, MenuBtn } from "../../components";
+import { QuillEditorSkeleton } from "../../components";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
-import { fetchLessonNotes } from "../../controllers/fetchData";
-import { createNotes, updateNotes } from "../../controllers/postData";
-import { handleError } from "../../controllers/handleErrors";
+import {
+  fetchLessonNotes,
+  handleError,
+  createNotes,
+  updateNotes,
+} from "../../controllers";
 import "react-quill/dist/quill.snow.css";
 
 const QuillEditor = () => {

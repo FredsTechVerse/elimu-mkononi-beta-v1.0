@@ -1,8 +1,7 @@
 import React from "react";
 import { CourseCardV2, CourseSkeleton, PageTitle } from "..";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
-import { handleError } from "../../controllers/handleErrors";
-import { fetchCoursesData } from "../../controllers/fetchData";
+import { fetchCoursesData, handleError } from "../../controllers";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 const CoursesSection = () => {
   const { updateAlertBoxData } = useAlertBoxContext();

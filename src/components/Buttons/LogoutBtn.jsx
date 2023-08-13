@@ -1,9 +1,8 @@
 import React from "react";
 
 import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/solid";
-import { logoutUser } from "../../controllers/postData";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
-import { handleError } from "../../controllers/handleErrors";
+import { handleError, logoutUser } from "../../controllers";
 import { useMutation } from "@tanstack/react-query";
 import axios from "../../axios";
 

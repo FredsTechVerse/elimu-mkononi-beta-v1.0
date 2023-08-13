@@ -6,10 +6,9 @@ import {
   PageTitle,
   BackBtn,
 } from "../../components";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
-import { fetchCoursesData } from "../../controllers/fetchData";
-import { handleError } from "../../controllers/handleErrors";
+import { fetchCoursesData, handleError } from "../../controllers";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 const CoursesAdminPage = () => {

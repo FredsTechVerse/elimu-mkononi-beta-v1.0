@@ -7,10 +7,9 @@ import {
 } from "../../components";
 import { XCircleIcon } from "@heroicons/react/24/solid";
 
-import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createLesson } from "../../controllers/postData";
-import { handleError } from "../../controllers/handleErrors";
+import { createLesson, handleError } from "../../controllers";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 const LessonForm = () => {
   const navigate = useNavigate();

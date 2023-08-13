@@ -8,8 +8,7 @@ import {
   Heading,
 } from "../../components";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { fetchCourseData } from "../../controllers/fetchData";
-import { handleError } from "../../controllers/handleErrors";
+import { fetchCourseData, handleError } from "../../controllers";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 const CourseOverview = () => {
   const { courseID } = useParams();

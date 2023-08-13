@@ -44,6 +44,7 @@
 
 ### KEY TIPS I HAVE PICKED UP ALONG THE JOURNEY
 
+- Working with smaller files grouped by functionalities makes development simpler!
 - self-end class name gives a flex-item positioning independence.
 - SWC works well without hitches. Will use it when i migrate to typescript.
 - Using overflow-s-hidden hidden helps to hide the unwanted x direction scrollbar when overflow auto is used.

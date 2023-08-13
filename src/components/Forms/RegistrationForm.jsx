@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FormNavigation, SubmitButton, Modal } from "../../components";
 import { useNavigate, useLocation } from "react-router-dom";
-import { fetchUserData } from "../../controllers/fetchData";
-import { registerUser } from "../../controllers/postData";
+import { registerUser, handleError, fetchUserData } from "../../controllers";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
-import { handleError } from "../../controllers/handleErrors";
 
 const RegistrationForm = () => {
   const navigate = useNavigate();

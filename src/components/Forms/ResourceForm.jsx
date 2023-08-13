@@ -6,10 +6,8 @@ import {
   S3Uploader,
 } from "../../components";
 import { useNavigate, useLocation } from "react-router-dom";
-import { createResource } from "../../controllers/postData";
-import { verifyAccess } from "../../controllers/fetchData";
+import { verifyAccess, createResource, handleError } from "../../controllers";
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
-import { handleError } from "../../controllers/handleErrors";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 
 const CourseForm = () => {

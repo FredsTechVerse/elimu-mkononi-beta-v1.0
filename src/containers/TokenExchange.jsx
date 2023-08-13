@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import axios from "../axios";
 import { useNavigate, useLocation } from "react-router-dom";
-import { handleError } from "../controllers/handleErrors";
+import { handleError } from "../controllers";
 import { useAlertBoxContext } from "../context/AlertBoxContext";
 const TokenExchange = () => {
   const navigate = useNavigate();

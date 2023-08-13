@@ -7,9 +7,8 @@ import {
 } from "../../components";
 import { useParams } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { fetchUnitData } from "../../controllers/fetchData";
+import { fetchUnitData, handleError } from "../../controllers";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
-import { handleError } from "../../controllers/handleErrors";
 const ContentPage = () => {
   const { unitID } = useParams();
   const { updateAlertBoxData } = useAlertBoxContext();
