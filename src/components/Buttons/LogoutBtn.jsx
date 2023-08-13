@@ -45,7 +45,7 @@ const LogoutBtn = ({ isBlue = false }) => {
       className={` rounded-full h-9 aspect-square cursor-pointer flex-row-centered ${
         isBlue
           ? "bg-primary hover:bg-purple-500"
-          : "bg-slate-600 hover:bg-slate-900 text-white"
+          : "bg-slate-800 hover:bg-slate-900 text-white"
       } `}
     >
       <span>

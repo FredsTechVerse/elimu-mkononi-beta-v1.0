@@ -32,8 +32,9 @@
 
 ### POST RELEASE OPTIMIZATIONS
 
-- Inform user that his session has expired then autoredirect to login... Refresh hinders our alert box implementation from playing out... Add a delay to logout session b3 refresh if token has expired.
-- Handle complete deletion and update of content eg if we delete a unit / we delete it and all of its children including from s3 bucket. (Mongoose therapy...They just need the id to fetch data ... Form elements are already controlled components... They will do what we say and hopefully by using react forms hook, we get to manage them all in one place.)
+- Handle deletion of a thing and all of its children.Make sure the delete controller is ready and all the action will be taken care for me.
+- Update only requires a fine fetch and a response to sever... Its the responsibility of the frontend to tell server what changed.
+- Use react hook to display and submit form data for a good perfomance boost.
 - Create resources interface and test upload to s3 bucket while at it see how to retrieve the documents privately.
 - Going back to homepage does not work... Screen freezes.
 - Make unit outline and unit breakdown more descriptive in that user can know where he/she is at all times.Give descriptive title names.Save server lots of traffic

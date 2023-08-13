@@ -13,7 +13,7 @@ const ERRORS = {
 };
 
 const handleLogout = async () => {
-  await logoutUser();
+  logoutUser();
   localStorage.removeItem("user");
   localStorage.removeItem("accessToken");
   localStorage.removeItem("refreshToken");
@@ -29,14 +29,14 @@ const handleError = async (error, updateAlertBoxData) => {
     response = ERRORS.BAD_REQUEST;
   } else if (error.response && error.response.status === 401) {
     if (error.response.data.message === "Token expired") {
-      await renewToken();
+      renewToken({ updateAlertBoxData });
     } else if (error.response.statusText === "Unauthorized") {
       response = ERRORS.AUTHORIZATION_ERROR;
     } else {
       response = ERRORS.AUTHORIZATION_ERROR;
     }
   } else if (error.response && error.response.status === 403) {
-    await handleLogout();
+    handleLogout();
     response = ERRORS.LOGOUT;
   } else if (error.response && error.response.status === 404) {
     response = ERRORS.BLANK_ERROR;
@@ -60,7 +60,7 @@ const handleError = async (error, updateAlertBoxData) => {
   }
 };
 
-const renewToken = async () => {
+const renewToken = async ({ updateAlertBoxData }) => {
   try {
     const refreshToken = localStorage.getItem("refreshToken");
 
@@ -82,6 +82,12 @@ const renewToken = async () => {
     localStorage.setItem("accessToken", refreshTokenData.newAccessToken);
   } catch (error) {
     if (error?.response?.status === 403) {
+      updateAlertBoxData({
+        response: "Your session has expired",
+        isResponse: true,
+        status: "error",
+        timeout: 2500,
+      });
       await handleLogout();
     } else {
       console.error(

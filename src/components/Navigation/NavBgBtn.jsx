@@ -8,7 +8,11 @@ const NavBgBtn = ({ to, text, isBlue = false }) => {
       <Link
         to={to}
         state={{ background: location }}
-        className="rounded-full bg-slate-700 hover:bg-slate-900 group h-9 aspect-square flex-row-centered "
+        className={` rounded-full h-9 aspect-square cursor-pointer flex-row-centered ${
+          isBlue
+            ? "bg-primary hover:bg-purple-500"
+            : "bg-slate-800 hover:bg-slate-900 text-white"
+        } `}
       >
         <ArrowLeftOnRectangleIcon className="icon-styling text-white" />
       </Link>

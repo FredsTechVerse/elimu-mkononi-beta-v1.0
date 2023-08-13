@@ -12,15 +12,13 @@ const Navbar = () => {
         ELIMU HUB
       </Link>
 
-      <div className="h-[10vh] fixed top-0 right-2 z-10 flex-row-centered  ">
-        <div className=" h-full flex">
-          {roles?.includes("EM-202") ||
-            (roles?.includes("EM-203") && (
-              <Tooltip tooltip="Dashboard">
-                <HomeBtn to="/tutor" text="Dashboard" />
-              </Tooltip>
-            ))}
-        </div>
+      <div className="h-[10vh] fixed top-0 right-2 z-10 flex-row-centered ">
+        {roles?.includes("EM-202") ||
+          (roles?.includes("EM-203") && (
+            <Tooltip tooltip="Dashboard">
+              <HomeBtn to="/tutor" text="Dashboard" />
+            </Tooltip>
+          ))}
         <div className={`${!roles ? "flex gap-1 tablet:flex-row" : "hidden"}`}>
           <Tooltip tooltip="Register">
             <NavBgBtn to="/new-user" text="register" />
@@ -31,7 +29,7 @@ const Navbar = () => {
         </div>
         <div className={`${!roles ? "hidden" : "flex"}`}>
           <Tooltip tooltip="Logout">
-            <LogoutBtn isBlue={true} />
+            <LogoutBtn />
           </Tooltip>
         </div>
       </div>
