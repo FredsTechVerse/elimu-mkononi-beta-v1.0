@@ -27,7 +27,7 @@ const createUnit = async ({
 }) => {
   const unitData = {
     courseID: course,
-    tutorId: tutor,
+    tutorID: tutor,
     unitCode: unitCode,
     unitName: unitName,
     unitDescription: unitDescription,

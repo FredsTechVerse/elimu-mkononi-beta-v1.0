@@ -1,5 +1,5 @@
 import axios from "../axios";
-import { logoutUser } from "./postData";
+import { logoutUser } from "../controllers";
 const ERRORS = {
   NETWORK_ERROR: "Network error. Please try again later.",
   SERVER_ERROR: "Server error. Please try again later.",

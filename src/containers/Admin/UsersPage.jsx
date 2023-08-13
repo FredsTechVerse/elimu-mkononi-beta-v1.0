@@ -60,16 +60,8 @@ const UsersPage = () => {
         </div>
       ) : (
         <div className="w-[90%] mt-5 ">
-          <UsersDataTable
-            users={usersQuery.data}
-            fetchUsersData={fetchUsersData}
-            role={userRole}
-          />
-          <UsersTableAlternative
-            users={usersQuery.data}
-            fetchUsersData={fetchUsersData}
-            role={userRole}
-          />
+          <UsersDataTable users={usersQuery.data} role={userRole} />
+          <UsersTableAlternative users={usersQuery.data} role={userRole} />
         </div>
       )}
     </div>

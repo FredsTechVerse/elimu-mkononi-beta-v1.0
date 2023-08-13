@@ -121,8 +121,9 @@
     @apply flex flex-col justify-center items-center w-full mt-4;
   }
   .cta-btn {
-    @apply flex items-center justify-center hover:border-2 text-secondary w-8 h-8 rounded-full;
+    @apply rounded-full h-7 my-1 aspect-square cursor-pointer flex-row-centered bg-slate-800 hover:bg-slate-900 text-white;
   }
+
   .select-input {
     @apply relative appearance-none py-2 justify-center rounded text-gray-700 focus:outline-none focus:border-purple placeholder:text-sm px-0 w-full;
   }

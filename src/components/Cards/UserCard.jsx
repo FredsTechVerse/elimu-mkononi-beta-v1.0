@@ -2,7 +2,7 @@ import React from "react";
 
 import { CTAButton, StatusPill } from "..";
 
-const UserCard = ({ user, fetchUsersData, userKey, role }) => {
+const UserCard = ({ user, userKey, role }) => {
   let numberOfUnits = (role) => {
     if (role === "EM-202") {
       return user.units?.length;
@@ -23,11 +23,7 @@ const UserCard = ({ user, fetchUsersData, userKey, role }) => {
       </div>
       <div className="flex items-center justify-center w-full">
         {role === "EM-202" && <span>Units : {numberOfUnits(role)}</span>}
-        <CTAButton
-          _id={user._id}
-          contact={user.email}
-          fetchUsersData={fetchUsersData}
-        />
+        <CTAButton _id={user._id} contact={user.email} />
       </div>
     </div>
   );

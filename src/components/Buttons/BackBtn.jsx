@@ -9,7 +9,7 @@ const BackBtn = ({ isDark, isBlue = false }) => {
         isDark && "text-slate-700 hover:text-white hover:bg-slate-700 "
       }  ${
         isBlue && "bg-primary hover:bg-purple-500 "
-      } cursor-pointer rounded-full  flex-row-centered hover:bg-white  group `}
+      } cursor-pointer rounded-full  flex-row-centered  group `}
       onClick={() => {
         navigate(-1);
       }}

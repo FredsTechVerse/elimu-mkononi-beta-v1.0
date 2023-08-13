@@ -24,8 +24,8 @@ const DashboardUserButton = ({ item, isRounded = true }) => {
       to={link}
       state={{ background: location, role: roleInformation }}
       className={` w-full h-full bg-primary text-white hover:bg-purple-500 cursor-pointer ${
-        isRounded ? "rounded-full" : "rounded-sm"
-      } flex flex-row justify-center items-center gap-2 py-3`}
+        isRounded ? "rounded-full" : "rounded-md"
+      } flex flex-row justify-center items-center gap-2 py-2`}
     >
       <span className="capitalize text-sm text-center"> {item}</span>
       <PlusIcon className="w-6 aspect-square text-white" />

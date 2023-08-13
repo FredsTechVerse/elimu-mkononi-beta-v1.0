@@ -2,7 +2,7 @@ import React from "react";
 import { StatusPill, NavigateBtn, DashboardUserButton, CTAButton } from "..";
 import { Link, useLocation } from "react-router-dom";
 
-const UsersDataTable = ({ users, fetchUsersData, role }) => {
+const UsersDataTable = ({ users, role }) => {
   const location = useLocation();
 
   return (
@@ -55,11 +55,7 @@ const UsersDataTable = ({ users, fetchUsersData, role }) => {
                     <StatusPill status={user.status} />
                   </td>
                   <td>
-                    <CTAButton
-                      userID={user._id}
-                      contact={user.email}
-                      fetchUsersData={fetchUsersData}
-                    />
+                    <CTAButton userID={user._id} contact={user.email} />
                   </td>
                 </tr>
               );
