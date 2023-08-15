@@ -1,6 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import { FormNavigation, SubmitButton, Modal } from "../../components";
+import {
+  FormNavigation,
+  SubmitButton,
+  Modal,
+  ErrorMessage,
+} from "../../components";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useForm } from "react-hook-form";
+
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createChapter, handleError } from "../../controllers";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
@@ -13,10 +20,20 @@ const ChapterForm = () => {
   const navigate = useNavigate();
   const unitID = location?.state?.unitID;
   const chapterTotals = location?.state?.chapterTotals;
+
   const { updateAlertBoxData } = useAlertBoxContext();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      chapterName: "",
+      chapterDescription: "",
+    },
+  });
   const [chapterName, setChapterName] = useState("");
   const [chapterDescription, setChapterDescription] = useState("");
-  const [isFormSubmitted, setIsFormSubmittted] = useState(false);
   const formRef = useRef(null);
 
   useEffect(() => {
@@ -26,7 +43,7 @@ const ChapterForm = () => {
   useEffect(() => {
     const handleKeyPress = (e) => {
       if (e.key === "Enter" || e.type === "submit") {
-        fileUploadHandler(e);
+        saveChapter(e);
       }
     };
     if (formRef.current) {
@@ -66,22 +83,24 @@ const ChapterForm = () => {
     },
   });
 
-  const fileUploadHandler = async (e) => {
-    e.preventDefault();
-    setIsFormSubmittted(true);
-    createChapterMutation.mutate({
-      unitID: unitID,
-      chapterNumber: `${unitID}-${chapterTotals}`,
-      chapterName: chapterName,
-      chapterDescription: chapterDescription,
-    });
+  const saveChapter = async (data) => {
+    const { chapterName, chapterDescription } = data;
+
+    if (unitID) {
+      createChapterMutation.mutate({
+        unitID: unitID,
+        chapterNumber: `${unitID}-${chapterTotals}`,
+        chapterName: chapterName,
+        chapterDescription: chapterDescription,
+      });
+    }
   };
 
   return (
     <Modal>
-      <div className="form-wrap h-[400px]">
+      <div className="form-wrap ">
         <FormNavigation text="Chapter Form" />
-        <form className="form-styling" onSubmit={fileUploadHandler}>
+        <form className="form-styling" onSubmit={saveChapter}>
           {/* FILE */}
           <div className="input-wrap gap-2">
             <label htmlFor="cNumber" className="w-full ">
@@ -97,27 +116,23 @@ const ChapterForm = () => {
             ></input>
             <input
               className="input-styling"
-              id="fName"
-              type="Text"
               placeholder="Chapter Name"
-              value={chapterName}
-              onChange={(e) => {
-                setChapterName(e.target.value);
-              }}
-              required
-            ></input>
-
+              {...register("chapterName", {
+                required: "This field is required ",
+              })}
+            />
+            {errors.chapterName && (
+              <ErrorMessage message={errors.chapterName?.message} />
+            )}
             <textarea
-              id="lName"
-              type="Text"
               placeholder="Description"
-              value={chapterDescription}
-              maxLength={50}
-              onChange={(e) => {
-                setChapterDescription(e.target.value);
-              }}
-              required
+              {...register("chapterDescription", {
+                required: "This field is required ",
+              })}
             ></textarea>
+            {errors.chapterDescription && (
+              <ErrorMessage message={errors.chapterDescription?.message} />
+            )}
           </div>
           {/* CTA BUTTONS */}
           <div className="cta-wrap ">

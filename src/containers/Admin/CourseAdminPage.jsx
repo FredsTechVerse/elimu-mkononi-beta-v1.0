@@ -30,7 +30,7 @@ const CoursesAdminPage = () => {
         <BackBtn isDark={true} />
       </div>
 
-      <div className="absolute top-2 right-2 ">
+      <div className="absolute top-2 right-2 z-10">
         <NavBgBtn to="/new-course" text="Add Course" isBlue={true} />
       </div>
       <div className="relative top-2">

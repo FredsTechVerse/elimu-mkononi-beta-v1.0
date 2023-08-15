@@ -6,12 +6,7 @@ import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import { getYoutubeAuthorizationURI, handleError } from "../../controllers";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-const YoutubeUploader = ({
-  verifyUpload,
-  updateFileInfo,
-  videoTitle,
-  lessonState,
-}) => {
+const YoutubeUploader = ({ updateFileInfo, videoTitle, lessonState }) => {
   const { updateAlertBoxData } = useAlertBoxContext();
   const [percentCompleted, setPercentCompleted] = useState(0);
   const [isQueryEnabled, setIsQueryEnabled] = useState(false);
@@ -25,7 +20,6 @@ const YoutubeUploader = ({
     );
     setPercentCompleted(percentCompleted);
     if (percentCompleted == 100) {
-      verifyUpload();
       setPercentCompleted(0);
     }
   };

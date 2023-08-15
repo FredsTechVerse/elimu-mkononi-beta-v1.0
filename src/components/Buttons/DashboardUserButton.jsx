@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { PlusIcon } from "@heroicons/react/24/solid";
-const DashboardUserButton = ({ item, isRounded = true, isDark = false }) => {
+const DashboardUserButton = ({ item, isRounded = true }) => {
   const location = useLocation();
   let link = "/new-user";
 
@@ -23,11 +23,7 @@ const DashboardUserButton = ({ item, isRounded = true, isDark = false }) => {
     <Link
       to={link}
       state={{ background: location, role: roleInformation }}
-      className={` w-full h-full text-white ${
-        !isDark
-          ? "bg-primary hover:bg-purple-500"
-          : "bg-slate-800 hover:bg-slate-900"
-      }  cursor-pointer ${
+      className={` w-full h-full bg-primary text-white hover:bg-purple-500 cursor-pointer ${
         isRounded ? "rounded-full" : "rounded-md"
       } flex flex-row justify-center items-center gap-2 py-2`}
     >

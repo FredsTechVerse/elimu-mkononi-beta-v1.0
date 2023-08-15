@@ -138,7 +138,7 @@
   }
 
   .form-wrap {
-    @apply bg-slate-300 bg-opacity-50 flex flex-col justify-start items-center phone:w-full tablet:w-[420px] h-[320px] rounded-2xl;
+    @apply bg-slate-300 bg-opacity-50 flex flex-col justify-start items-center phone:w-full tablet:w-[420px] h-auto rounded-2xl;
   }
 
   .form-styling {

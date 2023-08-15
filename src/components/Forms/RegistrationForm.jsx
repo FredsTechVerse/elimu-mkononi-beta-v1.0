@@ -1,10 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
-import { FormNavigation, SubmitButton, Modal } from "../../components";
+import {
+  FormNavigation,
+  SubmitButton,
+  Modal,
+  ErrorMessage,
+} from "../../components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { registerUser, handleError, fetchUserData } from "../../controllers";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
-
+import { useForm } from "react-hook-form";
 const RegistrationForm = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -13,14 +18,20 @@ const RegistrationForm = () => {
   const role = location?.state?.role;
   const { updateAlertBoxData } = useAlertBoxContext();
 
-  // DECLARATION OF OUR STATES
-  //==========================
-  const [fName, setFName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [contact, setContact] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [cPassword, setCPassword] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      fName: "",
+      surname: "",
+      contact: "",
+      email: "",
+      password: "",
+      cPassword: "",
+    },
+  });
 
   const [isUserQueryEnabled, setIsUserQueryEnabled] = useState(false);
   const userID = location?.state?.userID;
@@ -53,24 +64,6 @@ const RegistrationForm = () => {
     };
   }, []);
 
-  const isFormValid = () => {
-    if (
-      password !== null &&
-      cPassword !== null &&
-      password === cPassword &&
-      password.length >= 8
-    ) {
-      return true;
-    }
-    updateAlertBoxData({
-      response: "Some input fields are empty",
-      isResponse: true,
-      status: "success",
-      timeout: 3000,
-    });
-    return false;
-  };
-
   const userQuery = useQuery(
     ["user", userID],
     () => fetchUserData({ userID: userID, role: "EM-201" }),
@@ -80,12 +73,6 @@ const RegistrationForm = () => {
       onSuccess: (data) => {
         const { firstName, surname, email, password, contact, status, role } =
           data;
-        setFName(firstName);
-        setSurname(surname);
-        setContact(contact);
-        setEmail(email);
-        setPassword("Should not be returned");
-        setCPassword("Should not be returned");
       },
       onError: (error) => {
         handleError(error, updateAlertBoxData);
@@ -124,23 +111,23 @@ const RegistrationForm = () => {
       }
     },
   });
-  const saveUser = async (e) => {
-    e.preventDefault();
-    if (isFormValid()) {
-      createUserMutation.mutate({
-        firstName: fName,
-        surname,
-        password,
-        contact: `254${contact}`,
-        email,
-        role,
-      });
-    }
+
+  const saveUser = async (data) => {
+    console.log(data);
+    const { fName, surname, password, contact, email } = data;
+    createUserMutation.mutate({
+      firstName: fName,
+      surname,
+      password,
+      contact: `254${contact}`,
+      email,
+      role: role,
+    });
   };
 
   return (
     <Modal>
-      <div className="form-wrap h-[550px]">
+      <div className="form-wrap ">
         <FormNavigation
           text={
             role === "EM-203"
@@ -150,33 +137,30 @@ const RegistrationForm = () => {
               : "Student Registration"
           }
         />
-        <form className="form-styling" onSubmit={saveUser}>
+        <form className="form-styling" onSubmit={handleSubmit(saveUser)}>
           <div className="input-wrap">
             <label htmlFor="contact">Names</label>
             <div className="input-wrap">
               <input
                 className="input-styling"
-                id="fName"
-                type="Text"
                 placeholder="First Name"
-                value={fName}
-                onChange={(e) => {
-                  setFName(e.target.value);
-                }}
-                required
-              ></input>
+                {...register("fName", {
+                  required: "This field is required ",
+                })}
+              />
+
+              {errors.fName && <ErrorMessage message={errors.fName?.message} />}
 
               <input
                 className="input-styling"
-                id="lName"
-                type="Text"
                 placeholder="Last Name"
-                value={surname}
-                onChange={(e) => {
-                  setSurname(e.target.value);
-                }}
-                required
-              ></input>
+                {...register("surname", {
+                  required: "This field is required ",
+                })}
+              />
+              {errors.surname && (
+                <ErrorMessage message={errors.surname?.message} />
+              )}
             </div>
           </div>
           {/* CONTACT SECTION */}
@@ -193,30 +177,27 @@ const RegistrationForm = () => {
                 />
                 <input
                   className="input-styling phone:w-52  tablet:w-72"
-                  id="contact"
-                  type="Number"
                   placeholder="Safaricom No."
-                  value={contact}
-                  onChange={(e) => {
-                    setContact(e.target.value);
-                  }}
-                  required
+                  {...register("contact", {
+                    required: "This field is required ",
+                  })}
                 />
               </div>
+              {errors.contact && (
+                <ErrorMessage message={errors.contact?.message} />
+              )}
             </div>
             <div className="input-wrap">
               <label htmlFor="email">Email</label>
               <input
                 className="input-styling"
-                id="email"
-                type="email"
                 placeholder="E-mail Address"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-                required
+                type="email"
+                {...register("email", {
+                  required: "This field is required ",
+                })}
               />
+              {errors.email && <ErrorMessage message={errors.email?.message} />}
             </div>
           </div>
 
@@ -226,27 +207,26 @@ const RegistrationForm = () => {
             <label htmlFor="password">Password</label>
             <input
               className="input-styling"
-              id="password"
-              type="password"
               placeholder="Enter Password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-              required
+              {...register("password", {
+                required: "This field is required ",
+              })}
             />
+            {errors.password && (
+              <ErrorMessage message={errors.password?.message} />
+            )}
 
             <input
               className="input-styling"
-              id="CPassword"
-              type="password"
               placeholder="Confirm Password"
-              value={cPassword}
-              onChange={(e) => {
-                setCPassword(e.target.value);
-              }}
-              required
+              {...register("cPassword", {
+                required: "This field is required ",
+              })}
             />
+
+            {errors.cPassword && (
+              <ErrorMessage message={errors.cPassword?.message} />
+            )}
           </div>
           <div className="cta-wrap">
             <SubmitButton

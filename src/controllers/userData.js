@@ -10,13 +10,13 @@ const registerUser = async ({
 }) => {
   const userData = { firstName, surname, password, contact, email };
   if (role === "EM-203") {
-    await axios.post("/auth/register-admin", userData);
+    await axios.post("/auth/admin", userData);
     return;
   } else if (role === "EM-201") {
-    await axios.post("/auth/register-student", userData);
+    await axios.post("/auth/student", userData);
     return;
   } else if (role === "EM-202") {
-    await axios.post("/auth/register-tutor", userData);
+    await axios.post("/auth/tutor", userData);
     return;
   }
 };

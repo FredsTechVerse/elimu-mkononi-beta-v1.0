@@ -6,7 +6,7 @@ import { CircularProgressBar } from "../../components";
 import { handleError } from "../../controllers";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 
-const S3Uploader = ({ verifyUpload, updateFileName, isTokenActive }) => {
+const S3Uploader = ({ updateFileName, isTokenActive }) => {
   const [percentCompleted, setPercentCompleted] = useState(0);
   //  Simply tracks our progress from the config object.
   const { updateAlertBoxData } = useAlertBoxContext();
@@ -16,7 +16,6 @@ const S3Uploader = ({ verifyUpload, updateFileName, isTokenActive }) => {
     );
     setPercentCompleted(percentCompleted);
     if (percentCompleted == 100) {
-      verifyUpload();
       setPercentCompleted(0);
     }
   };

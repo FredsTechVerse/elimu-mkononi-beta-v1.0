@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { FormNavigation, Modal, SubmitButton, AlertBox } from "..";
+import { FormNavigation, Modal, SubmitButton, ErrorMessage } from "..";
 import { useMutation } from "@tanstack/react-query";
 import { loginUser, handleError } from "../../controllers";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import axios from "../../axios";
+import { useForm } from "react-hook-form";
+
 const LogInForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -16,10 +18,21 @@ const LogInForm = () => {
     return () => (document.body.style.overflow = "unset");
   }, []);
 
-  const from = location?.state?.from?.pathname || "/";
+  // const from = location?.state?.from?.pathname || "/";
   // Login Credentials.
-  const [firstName, setFirstName] = useState("");
-  const [password, setPassword] = useState("");
+  // const [firstName, setFirstName] = useState("");
+  // const [password, setPassword] = useState("");
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      firstName: "",
+      password: "",
+    },
+  });
 
   const createLoginMutation = useMutation({
     mutationFn: loginUser,
@@ -61,23 +74,10 @@ const LogInForm = () => {
     },
   });
 
-  const isFormValid = () => {
-    if (firstName !== null && password !== null) {
-      return true;
-    }
-    updateAlertBoxData({
-      response: "Some input fields are empty",
-      isResponse: true,
-      status: "success",
-      timeout: 3000,
-    });
-    return false;
-  };
-
   useEffect(() => {
     const handleKeyPress = (e) => {
       if (e.key === "Enter" || e.type === "submit") {
-        handleSubmit(e);
+        login(e);
       }
     };
     if (formRef.current) {
@@ -90,55 +90,51 @@ const LogInForm = () => {
     };
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (isFormValid) {
-      const trimmedFirstName = firstName.trim();
-      const trimmedPassword = password.trim();
+  const login = async (data) => {
+    const { firstName, password } = data;
+    const trimmedFirstName = firstName.trim();
+    const trimmedPassword = password.trim();
 
-      createLoginMutation.mutate({
-        firstName: trimmedFirstName,
-        password: trimmedPassword,
-      });
-      return;
-    }
-    updateAlertBoxData({
-      response: "Some input fields are empty",
-      isResponse: true,
-      status: "success",
-      timeout: 3000,
+    createLoginMutation.mutate({
+      firstName: trimmedFirstName,
+      password: trimmedPassword,
     });
+    return;
   };
 
   return (
     <Modal>
-      <div className="form-wrap h-[320px]">
+      <div className="form-wrap">
         <FormNavigation text="Log In" />
 
-        <form className="form-styling" onSubmit={handleSubmit}>
+        <form className="form-styling" onSubmit={handleSubmit(login)}>
           <div className="input-wrap">
             <label htmlFor="surname">Username</label>
             <input
-              id="email"
-              name="surname"
-              placeholder="Type first name "
-              type="text"
               className="input-styling"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              placeholder="Type first name "
+              {...register("firstName", {
+                required: "This field is required ",
+              })}
             />
+
+            {errors.firstName && (
+              <ErrorMessage message={errors.firstName?.message} />
+            )}
           </div>
           <div className="input-wrap">
             <label htmlFor="password">Password</label>
             <input
-              id="password"
-              name="password"
               placeholder="Password"
-              type="password"
               className="input-styling"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              {...register("password", {
+                required: "This field is required ",
+              })}
             />
+
+            {errors.password && (
+              <ErrorMessage message={errors.password?.message} />
+            )}
           </div>
           <div className="w-full flex-row-centered">
             <SubmitButton

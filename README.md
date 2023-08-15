@@ -37,8 +37,10 @@
 - Implement react form hook to handle validation and optimization of forms.
 - Implement tanstack table to handle sorting , filtering and pagination table logic.
 - Implement dropdown and accordions using shadcdn/ui (A component library.)
-- Revam card table data alternative .
-- Handle deletion of a thing and all of its children.
+- Handle deletion of a thing and all of its children. Integrate deletion and update into the course card.
+- Students now not being registered.
+  -Bit of friction between s3 uploader and form uploader...
+  - Try submitting via keypress see what happens
 
 ##### CHUNK 2
 
@@ -53,7 +55,11 @@
 - Keep track of user interaction and completion using document ids , arrays and array methods.(Backend need!)[To be done after migration to typescript]
 
 ### KEY TIPS I HAVE PICKED UP ALONG THE JOURNEY
-- No 1 golden principal , no need to import a component from a component library if :- 
+
+- Multiple use states leads to multiple rerenders...Each state update triggers a new render cycle, and React will batch multiple state updates into a single render cycle only if they occur synchronously within the same event handler. Minimize their usage.
+
+- No 1 golden principal , no need to import a component from a component library if :-
+
   - It is easy to implement
   - I will end up redoing the styling.
 
@@ -91,6 +97,16 @@
 - Subscribing to an input via the watch function has a side effect of triggering form rerenders. We can either subscribe to the whole form or to a specific input.
 - Validation has been made easier than ever , If any errors are present the onSubmit function is not called. All this is inbuilt.
 - Also gives us just the improved functionality , leaves styling to the dev.
+- I still can put more custom barriers before the form is submitted
+  QUESTIONS
+
+HOW do i updata my fields from a post reques .... Rough gues ..register. `register('firstName', { value: 'bill' })`
+
+How to validate types eg email.... Just set the input type attribute.
+
+Setting disabled to true will lead input value to be undefined and input control to be disabled.`<input {...register("test", {disabled: true})} />`
+
+- Setting up value for the registered input. This prop should be utilised inside useEffect or invoke once, each re-run will update or overwrite the input value which you have supplied.
 
 ### USING USEQUERY
 

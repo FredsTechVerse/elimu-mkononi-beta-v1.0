@@ -9,10 +9,12 @@ import FancyLine from "./FancyLine";
 import Tooltip from "./Tooltip";
 import PageTitle from "./PageTitle";
 import Heading from "./Heading";
+import ErrorMessage from "./ErrorMessage";
 export {
   AlertBox,
   TutorCardHome,
   ReturnBackBtn,
+  ErrorMessage,
   RequireAuth,
   UserProfile,
   Modal,

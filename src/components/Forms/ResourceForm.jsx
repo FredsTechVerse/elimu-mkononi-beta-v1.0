@@ -4,11 +4,13 @@ import {
   Modal,
   SubmitButton,
   S3Uploader,
+  ErrorMessage,
 } from "../../components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { verifyAccess, createResource, handleError } from "../../controllers";
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
+import { useForm } from "react-hook-form";
 
 const CourseForm = () => {
   const navigate = useNavigate();
@@ -17,11 +19,17 @@ const CourseForm = () => {
   const { updateAlertBoxData } = useAlertBoxContext();
   const location = useLocation();
   const { chapterID } = location?.state;
-  // FORM CONFIGURATIONS
-  //=========================
-  const [resourceName, setResourceName] = useState("");
-  const [uploadSuccess, setUploadSucess] = useState(false);
   const [resourceUrl, setResourceUrl] = useState("");
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      resourceName: "",
+    },
+  });
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -76,31 +84,15 @@ const CourseForm = () => {
     },
   });
 
-  const saveCourse = async (e) => {
-    e.preventDefault();
-    if (isFormValid) {
+  const saveCourse = async (data) => {
+    const { resourceName } = data;
+    if (resourceUrl && chapterID) {
       createResourceMutation.mutate({
         resourceName: resourceName,
         resourceUrl: resourceUrl,
         chapterID: chapterID,
       });
     }
-  };
-  const isFormValid = () => {
-    if (resourceName !== null && resourceUrl !== null && uploadSuccess) {
-      return true;
-    }
-    updateAlertBoxData({
-      response: "Some input fields are empty",
-      isResponse: true,
-      status: "success",
-      timeout: 3000,
-    });
-    return false;
-  };
-
-  const verifyUpload = () => {
-    setUploadSucess(true);
   };
 
   const updateFileName = (resourceUrl) => {
@@ -109,32 +101,31 @@ const CourseForm = () => {
 
   return (
     <Modal>
-      <div className="form-wrap h-[380px]">
+      <div className="form-wrap ">
         <FormNavigation text="RESOURCE FORM" />
         <form
           encType="multipart/form-data"
           className="form-styling"
-          onSubmit={saveCourse}
+          onSubmit={handleSubmit(saveCourse)}
         >
           <div className="input-wrap">
             <label htmlFor="resource">Resource Details</label>
             <input
               className="input-styling"
-              id="resource"
-              type="text"
               placeholder="Name of file"
-              value={resourceName}
-              onChange={(e) => {
-                setResourceName(e.target.value);
-              }}
-              required
+              {...register("resourceName", {
+                required: "This field is required ",
+              })}
             />
+
+            {errors.resourceName && (
+              <ErrorMessage message={errors.resourceName?.message} />
+            )}
           </div>
           <div className="input-wrap ">
-            {!uploadSuccess ? (
+            {!resourceUrl ? (
               <S3Uploader
                 isTokenActive={accessQuery.status === "success"}
-                verifyUpload={verifyUpload}
                 updateFileName={updateFileName}
               />
             ) : (

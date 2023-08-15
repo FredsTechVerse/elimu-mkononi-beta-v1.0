@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useForm } from "react-hook-form";
+
 import {
+  ErrorMessage,
   FormNavigation,
   Modal,
   SubmitButton,
@@ -18,9 +21,19 @@ const CourseForm = () => {
 
   // FORM CONFIGURATIONS
   //=========================
-  const [courseTitle, setCourseTitle] = useState("");
   const [uploadSuccess, setUploadSucess] = useState(false);
   const [fileName, setFileName] = useState("");
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors }, //Where we subscribe with
+  } = useForm({
+    defaultValues: {
+      courseTitle: "",
+    },
+  });
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -73,18 +86,9 @@ const CourseForm = () => {
       }
     },
   });
-
-  const saveCourse = async (e) => {
-    e.preventDefault();
-    if (isFormValid) {
-      createCourseMutation.mutate({
-        courseTitle: courseTitle,
-        courseImage: fileName,
-      });
-    }
-  };
+  // FORM VALIDATION
   const isFormValid = () => {
-    if (courseTitle !== null && fileName !== null && uploadSuccess) {
+    if (fileName !== null) {
       return true;
     }
     updateAlertBoxData({
@@ -96,42 +100,44 @@ const CourseForm = () => {
     return false;
   };
 
-  const verifyUpload = () => {
-    setUploadSucess(true);
+  const saveCourse = async (data) => {
+    const { courseTitle } = data;
+    if (isFormValid) {
+      createCourseMutation.mutate({
+        courseTitle: courseTitle,
+        courseImage: fileName,
+      });
+    }
   };
 
+  // CALLBACK FUNCTIONS FROM S3 UPLOADER.
   const updateFileName = (imageURl) => {
     setFileName(imageURl);
   };
 
   return (
     <Modal>
-      <div className="form-wrap h-[380px]">
+      <div className="form-wrap ">
         <FormNavigation text="COURSE FORM" />
         <form
           encType="multipart/form-data"
           className="form-styling"
-          onSubmit={saveCourse}
+          onSubmit={handleSubmit(saveCourse)}
         >
           <div className="input-wrap">
             <label htmlFor="course">Course Details</label>
             <input
               className="input-styling"
-              id="course"
-              type="text"
               placeholder="Course Title"
-              value={courseTitle}
-              onChange={(e) => {
-                setCourseTitle(e.target.value);
-              }}
-              required
+              {...register("courseTitle", {
+                required: "This field is required ",
+              })}
             />
           </div>
           <div className="input-wrap ">
-            {!uploadSuccess ? (
+            {!fileName ? (
               <S3Uploader
                 isTokenActive={accessQuery.status === "success"}
-                verifyUpload={verifyUpload}
                 updateFileName={updateFileName}
               />
             ) : (

@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { FormNavigation, SubmitButton } from "../../components";
+import { FormNavigation, SubmitButton, ErrorMessage } from "../../components";
 import { fetchUsersData, handleError, createUnit } from "../../controllers";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
+import { useForm } from "react-hook-form";
 
 const UnitForm = () => {
   const navigate = useNavigate();
@@ -71,31 +72,27 @@ const UnitForm = () => {
 
   // DECLARATION OF VARIABLES
   const { courseID } = location?.state;
-  const [tutor, setTutor] = useState();
-  const [unitCode, setUnitCode] = useState("");
-  const [unitName, setUnitName] = useState("");
-  const [unitDescription, setUnitDescription] = useState("");
+  // const [tutor, setTutor] = useState();
+  // const [unitCode, setUnitCode] = useState("");
+  // const [unitName, setUnitName] = useState("");
+  // const [unitDescription, setUnitDescription] = useState("");
 
-  const isFormValid = () => {
-    if (
-      tutor !== null &&
-      unitCode !== null &&
-      unitName !== null &&
-      unitDescription !== null
-    ) {
-      return true;
-    }
-    updateAlertBoxData({
-      response: "Some input fields are empty",
-      isResponse: true,
-      status: "success",
-      timeout: 3000,
-    });
-    return false;
-  };
-  const saveUnit = async (e) => {
-    e.preventDefault();
-    if (isFormValid) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      tutor: "",
+      unitCode: "",
+      unitName: "",
+      unitDescription: "",
+    },
+  });
+
+  const saveUnit = async (data) => {
+    const { tutor, unitCode, unitName, unitDescription } = data;
+    if (courseID) {
       createUnitMutation.mutate({
         course: courseID,
         tutor: tutor,
@@ -108,12 +105,12 @@ const UnitForm = () => {
 
   return (
     <div className="modal-overlay ">
-      <div className="form-wrap h-[500px]">
+      <div className="form-wrap ">
         <FormNavigation text="unit form" />
         <form
           encType="multipart/form-data"
           className="form-styling"
-          onSubmit={saveUnit}
+          onSubmit={handleSubmit(saveUnit)}
         >
           <div className="flex flex-col">
             <label
@@ -124,9 +121,10 @@ const UnitForm = () => {
             </label>
 
             <select
-              value={tutor}
-              onChange={(e) => setTutor(e.target.value)}
               className="input-styling  mb-5"
+              {...register("tutor", {
+                required: "This field is required ",
+              })}
             >
               <option className="text-grey">--Choose a tutor--</option>
               {tutorsQuery?.data ? (
@@ -144,6 +142,7 @@ const UnitForm = () => {
                 </p>
               )}
             </select>
+            {errors.tutor && <ErrorMessage message={errors.tutor?.message} />}
           </div>
           {/* FILE */}
           <div className="input-wrap">
@@ -152,42 +151,41 @@ const UnitForm = () => {
             </label>
             <input
               className="input-styling"
-              id="unitCode"
-              type="text"
               placeholder="Unit Code"
-              value={unitCode}
-              onChange={(e) => {
-                setUnitCode(e.target.value);
-              }}
-              required
-            ></input>
+              {...register("unitCode", {
+                required: "This field is required ",
+              })}
+            />
+            {errors.unitCode && (
+              <ErrorMessage message={errors.unitCode?.message} />
+            )}
+
             <input
               className="input-styling"
-              id="unitName"
-              type="Text"
               placeholder="Unit Name"
-              value={unitName}
-              onChange={(e) => {
-                setUnitName(e.target.value);
-              }}
-              required
-            ></input>
+              {...register("unitName", {
+                required: "This field is required ",
+              })}
+            />
+
+            {errors.unitName && (
+              <ErrorMessage message={errors.unitName?.message} />
+            )}
           </div>
           <div className="input-wrap">
             <label htmlFor="description" className="w-full">
               Unit Description
             </label>
             <textarea
-              id="description"
-              type="text"
               placeholder="What is the unit about?"
-              value={unitDescription}
-              maxLength={50}
-              onChange={(e) => {
-                setUnitDescription(e.target.value);
-              }}
-              required
+              {...register("unitDescription", {
+                required: "This field is required ",
+                maxLength: 50,
+              })}
             ></textarea>
+            {errors.unitDescription && (
+              <ErrorMessage message={errors.unitDescription?.message} />
+            )}
           </div>
           {/* CTA BUTTONS */}
           <div className="cta-wrap">

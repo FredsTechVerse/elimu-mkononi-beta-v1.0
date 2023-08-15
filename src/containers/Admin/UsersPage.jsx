@@ -28,6 +28,7 @@ const UsersPage = () => {
     }
   };
   const userRole = assignUserRole();
+  console.log({ userRole });
 
   const usersQuery = useQuery([userRole], () => fetchUsersData(userRole), {
     retry: 1,
@@ -68,9 +69,9 @@ const UsersPage = () => {
               <DashboardUserButton
                 isRounded={false}
                 item={
-                  role === "EM-203"
+                  userRole === "EM-203"
                     ? "admin"
-                    : role === "EM-202"
+                    : userRole === "EM-202"
                     ? "tutor"
                     : "student"
                 }
