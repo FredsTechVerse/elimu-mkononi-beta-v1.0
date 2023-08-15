@@ -1,9 +1,11 @@
 import React from "react";
 import { Tooltip } from "../../components";
+import { deleteUser } from "../../controllers";
 import { useNavigate } from "react-router-dom";
 import { EnvelopeIcon, EyeIcon, TrashIcon } from "@heroicons/react/24/solid";
 
 const CTAButton = ({ contact = null, userID }) => {
+  console.log({ userID });
   const roles = JSON.parse(localStorage.getItem("roles"));
   let navigate = useNavigate();
 
@@ -16,20 +18,20 @@ const CTAButton = ({ contact = null, userID }) => {
             navigate(`/tutor/unit/${userID}`);
           }}
         >
-          <EyeIcon className="icon-styling h-5 text-slate-700" />
+          <EyeIcon className="icon-styling h-4 laptop:h-5 text-slate-700" />
         </button>
       </div>
     );
   } else {
     return (
-      <div className="flex-row-centered gap-5 ">
+      <div className="flex-row-centered gap-2 ">
         <button
           className="cta-btn"
           onClick={() => {
             messageTenant(contact);
           }}
         >
-          <EnvelopeIcon className="icon-styling h-4  text-white " />
+          <EnvelopeIcon className="icon-styling h-4 laptop:h-5  text-white " />
         </button>
         <button
           className="cta-btn"
@@ -37,15 +39,15 @@ const CTAButton = ({ contact = null, userID }) => {
             navigate("/new-user", { state: { userID, readOnly: true } });
           }}
         >
-          <EyeIcon className="icon-styling h-4 text-white" />
+          <EyeIcon className="icon-styling h-4 laptop:h-5 text-white" />
         </button>
         <button
           className="cta-btn"
           onClick={() => {
-            deleteUser(userID);
+            deleteUser({ userID });
           }}
         >
-          <TrashIcon className="icon-styling h-4 text-white" />
+          <TrashIcon className="icon-styling h-4 laptop:h-5 text-white" />
         </button>
       </div>
     );

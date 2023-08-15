@@ -2,15 +2,15 @@ import React from "react";
 
 const StatusPill = ({ status }) => {
   return (
-    <div
+    <p
       className={` ${
         status == "active"
           ? "bg-green-500 bg-opacity-70 text-green-900"
           : "bg-rose-500 bg-opacity-70 text-rose-900"
-      } flex items-center justify-center rounded-full w-20 h-5 `}
+      }  w-20 h-5  phone:absolute laptop:relative top-0 right-0   rounded-tr-xl rounded-bl-xl laptop:rounded-full flex-row-centered text-sm capitalize  `}
     >
-      <p className="text-center font-bold text-sm capitalize">{status}</p>
-    </div>
+      {status}
+    </p>
   );
 };
 

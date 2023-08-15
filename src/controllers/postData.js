@@ -1,7 +1,7 @@
 import axios from "../axios";
 
 const createCourse = async ({ courseTitle, courseImage }) => {
-  let courseData = {
+  const courseData = {
     courseTitle,
     courseImage,
   };
@@ -47,7 +47,7 @@ const createChapter = async ({
   chapterDescription,
   unitID,
 }) => {
-  let chapterData = {
+  const chapterData = {
     unitID,
     chapterNumber,
     chapterName,

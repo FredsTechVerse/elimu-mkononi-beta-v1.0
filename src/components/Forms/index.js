@@ -5,6 +5,7 @@ import CourseForm from "./CourseForm";
 import LessonForm from "./LessonForm";
 import ResourceForm from "./ResourceForm";
 import UnitForm from "./UnitForm";
+import DummyForm from "./DummyForm";
 
 export {
   LogInForm,
@@ -13,5 +14,6 @@ export {
   ChapterForm,
   CourseForm,
   LessonForm,
+  DummyForm,
   UnitForm,
 };

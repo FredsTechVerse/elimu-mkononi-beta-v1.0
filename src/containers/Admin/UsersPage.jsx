@@ -4,6 +4,10 @@ import {
   PageTitle,
   UsersTableAlternative,
   TableAlternativeSkeleton,
+  StatusPill,
+  UserCard,
+  DashboardUserButton,
+  CTAButton,
   TableSkeleton,
   BackBtn,
 } from "../../components";
@@ -60,8 +64,23 @@ const UsersPage = () => {
         </div>
       ) : (
         <div className="w-[90%] mt-5 ">
-          <UsersDataTable users={usersQuery.data} role={userRole} />
-          <UsersTableAlternative users={usersQuery.data} role={userRole} />
+          <div className=" w-full px-3 relative">
+            <div className="flex-row-centered self-end  mb-2 w-32 h-10 ">
+              <DashboardUserButton
+                isRounded={false}
+                item={
+                  role === "EM-203"
+                    ? "admin"
+                    : role === "EM-202"
+                    ? "tutor"
+                    : "student"
+                }
+              />
+            </div>
+
+            <UsersTableAlternative usersQuery={usersQuery} role={userRole} />
+            <UsersDataTable usersQuery={usersQuery} role={userRole} />
+          </div>
         </div>
       )}
     </div>

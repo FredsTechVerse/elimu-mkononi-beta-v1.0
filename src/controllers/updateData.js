@@ -1,5 +1,5 @@
 const updateCourse = async ({ courseTitle, courseImage }) => {
-  let courseData = {
+  const courseData = {
     courseTitle,
     courseImage,
   };
@@ -45,7 +45,7 @@ const updateChapter = async ({
   chapterDescription,
   unitID,
 }) => {
-  let chapterData = {
+  const chapterData = {
     unitID,
     chapterNumber,
     chapterName,

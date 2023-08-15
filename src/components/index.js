@@ -44,6 +44,7 @@ import {
   LessonForm,
   UnitForm,
   ResourceForm,
+  DummyForm,
 } from "./Forms";
 
 import {
@@ -142,6 +143,7 @@ export {
   ContentSection,
   CourseForm,
   ResourceForm,
+  DummyForm,
   ChapterForm,
   LessonForm,
   UnitForm,

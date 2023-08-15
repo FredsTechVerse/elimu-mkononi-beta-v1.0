@@ -121,7 +121,7 @@
     @apply flex flex-col justify-center items-center w-full mt-4;
   }
   .cta-btn {
-    @apply rounded-full h-7 my-1 aspect-square cursor-pointer flex-row-centered bg-slate-800 hover:bg-slate-900 text-white;
+    @apply rounded-full h-6 laptop:h-8 my-1 aspect-square cursor-pointer flex-row-centered bg-slate-800 hover:bg-slate-900 text-white;
   }
 
   .select-input {

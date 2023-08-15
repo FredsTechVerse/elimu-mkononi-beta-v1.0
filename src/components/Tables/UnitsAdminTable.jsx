@@ -236,7 +236,7 @@ const UnitsAdminTable = () => {
 
             <tbody className="flex flex-col w-full items-center justify-start">
               {unitsData.map((tutorData, index) => {
-                let {
+                const {
                   unitCode,
                   unitName,
                   unitType,
@@ -245,8 +245,8 @@ const UnitsAdminTable = () => {
                   _id,
                   email,
                 } = tutorData;
-                let tutorName = `${tutor[0].fName} ${tutor[0].surname}`;
-                let chaptersNo = unitChapters.length;
+                const tutorName = `${tutor[0].fName} ${tutor[0].surname}`;
+                const chaptersNo = unitChapters.length;
                 return (
                   <tr
                     className={`${

@@ -32,22 +32,36 @@
 
 ### POST RELEASE OPTIMIZATIONS
 
-- Handle deletion of a thing and all of its children.Make sure the delete controller is ready and all the action will be taken care for me.
-- Update only requires a fine fetch and a response to sever... Its the responsibility of the frontend to tell server what changed.
-- Use react hook to display and submit form data for a good perfomance boost.
-- Create resources interface and test upload to s3 bucket while at it see how to retrieve the documents privately.
-- Going back to homepage does not work... Screen freezes.
-- Make unit outline and unit breakdown more descriptive in that user can know where he/she is at all times.Give descriptive title names.Save server lots of traffic
-- Look into how user can reset password securely... On the backend its just a simple update after thorough verification from server.
-- Implement typescript with SWC
-- Keep track of user interaction and completion using document ids , arrays and array methods.(Backend need!)
+##### CHUNK 1
+
+- Implement react form hook to handle validation and optimization of forms.
+- Implement tanstack table to handle sorting , filtering and pagination table logic.
+- Implement dropdown and accordions using shadcdn/ui (A component library.)
+- Revam card table data alternative .
+- Handle deletion of a thing and all of its children.
+
+##### CHUNK 2
+
+- Correct back btn... Screen freezes when it reaches to the homepage
+- Create resources interface and test upload to S3 Bucket
+- Make unit outline and unit breakdown descriptive
+- Implement reset password functionality.
+
+##### CHUNK 3
+
+- Implement typescript with SWC [Weekend Project]
+- Keep track of user interaction and completion using document ids , arrays and array methods.(Backend need!)[To be done after migration to typescript]
 
 ### KEY TIPS I HAVE PICKED UP ALONG THE JOURNEY
+- No 1 golden principal , no need to import a component from a component library if :- 
+  - It is easy to implement
+  - I will end up redoing the styling.
 
+- Must try luxon when i want to process actual dates data.
+- Component libraries will be a huge time saver for building complex components eg the dropdowns and the tables and calendar functionality. shadcn/ui comes in nicely.
 - Working with smaller files grouped by functionalities makes development simpler!
 - self-end class name gives a flex-item positioning independence.
-- SWC works well without hitches. Will use it when i migrate to typescript.
-- Using overflow-s-hidden hidden helps to hide the unwanted x direction scrollbar when overflow auto is used.
+- Using overflow-x-hidden hidden helps to hide the unwanted x direction scrollbar when overflow-y-auto is used.
 - Router state has always been simply an object... You know that basic container with a key and a value which in my case was as simple as assigning a background `{ background: location }` and once present in the state activating the second set of routes.
 - When an error occurs , the error code should be that of the error message... Not 400... Remember that axios is only successfull when a 2xx response is returned.... The rest automatically results into an error.
 
@@ -63,11 +77,25 @@
 - For arrays,check for length instead of checking if null.
 - The handle logout is called because i pass the function instead of the refence. Therefore , ` onClick={() => {handleLogout()}}` should be replaced by ` onClick={handleLogout}`
 
+### USING TANSTACK TABLE
+
+- Previously known as react table extended to tanstack table to support other metaframeworks.
+- As a headless UI ,it only gives us the functionality. It does not provide markup or styling which gives lots of flexibility to the dev to style it to preference via tailwindcss or use libraries like shadcn/ui.
+- Component libraries provide ready markup for different components but come at the tradeoff of loosing flexibility "Bootstrap apps look like bootstrap app". However, they are a huge timesaver when it comes to implementing complex components like calendars , dropdowns and tooltips.
+- To the useReactTable mother hook, we simply pass in our columns (documentation recommended to be in a separate file which we imported into the main tables component ) , data (Which was also being fetched from a separate file and imported into the tables component # NEXTJS FS is weird at first glance!) and any other hooks that we might need to achieve functionalities eg core row display hook (getCoreRowModel), pagination(getPaginationRowModel).
+
+### USING REACT FORM
+
+- When errors are present , we will not be able to continue with submitting our form.
+- Assigning default values to input fields declares types implicitly therefore no need of declaring them explicitly typescript.
+- Subscribing to an input via the watch function has a side effect of triggering form rerenders. We can either subscribe to the whole form or to a specific input.
+- Validation has been made easier than ever , If any errors are present the onSubmit function is not called. All this is inbuilt.
+- Also gives us just the improved functionality , leaves styling to the dev.
+
 ### USING USEQUERY
 
 - Adding the enabled prop prevents react query from running immediately! Turns out that it was not being triggered by the status check! It is just build to run immediately upon render.
 - Suitable for handling any post and get requests in that it complements axios giving it superpowers as :-
-
 - It eliminates the need for a try catch statements as it has its own eventHandlers for handling errors and loading states. eg onError , onLoading , onSuccess
 - Integrating skeletons has never been easier as we know exactly when our data is loading.
 - Error handling has also been simplified where we can use the `onError((error)=>{})`or the `isError` if we are just interested in the current state.

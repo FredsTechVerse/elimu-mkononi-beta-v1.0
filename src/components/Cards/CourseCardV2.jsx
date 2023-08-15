@@ -7,7 +7,7 @@ import {
   PresentationChartLineIcon,
 } from "@heroicons/react/24/solid";
 const CourseCardV2 = ({ courseData }) => {
-  let roles = JSON.parse(localStorage.getItem("roles"));
+  const roles = JSON.parse(localStorage.getItem("roles"));
   let totalCourseUnits = 0;
   let totalCourseChapters = 0;
   let totalCourseLessons = 0;
