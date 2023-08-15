@@ -21,7 +21,6 @@ import {
   UnitCard,
   AdminCard,
   UserCard,
-  UsersTableAlternative,
   TestBox,
   CourseCardV2,
 } from "./Cards";
@@ -119,7 +118,7 @@ import {
 import {
   PaymentsTable,
   UnitsAdminTable,
-  UsersDataTable,
+  UsersTable,
   TutorUnitsTable,
 } from "./Tables";
 
@@ -154,7 +153,7 @@ export {
   StatusPill,
   PriceTag,
   DurationTag,
-  UsersDataTable,
+  UsersTable,
   CTAButton,
   PageTitle,
   SubmitButton,
@@ -168,7 +167,6 @@ export {
   Accordion,
   AccordionItem,
   RegistrationForm,
-  UsersTableAlternative,
   AudioPlayer,
   VideoSkeleton,
   CoursesSection,

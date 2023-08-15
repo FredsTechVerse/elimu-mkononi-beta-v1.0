@@ -5,6 +5,7 @@ import ContentPage from "./Tutor/ContentPage";
 import TutorUnitsPage from "./Tutor/TutorUnitsPage";
 import CourseOverview from "../components/Sections/CourseOverview";
 import UsersPage from "./Admin/UsersPage";
+import UsersGrid from "./Admin/UsersGrid";
 import AdminDashboard from "./Admin/AdminDashboard";
 import CourseAdminPage from "./Admin/CourseAdminPage";
 import DraftPage from "./DraftPage";
@@ -21,6 +22,7 @@ export {
   UsersPage,
   CourseAdminPage,
   UsersLayout,
+  UsersGrid,
   DraftPage,
   CourseOverview,
   Forbidden,

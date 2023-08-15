@@ -1,6 +1,6 @@
 import React from "react";
-import { StatusPill, CTAButton } from "../../components";
-const UsersDataTable = ({ usersQuery, role }) => {
+import { StatusPill, CTAButton } from "..";
+const UsersTable = ({ usersQuery, role }) => {
   return (
     <table className="phone:hidden laptop:table  w-full bg-slate-50 shadow-lg shadow-slate-200  ">
       <thead className="w-full ">
@@ -49,4 +49,4 @@ const UsersDataTable = ({ usersQuery, role }) => {
   );
 };
 
-export default UsersDataTable;
+export default UsersTable;

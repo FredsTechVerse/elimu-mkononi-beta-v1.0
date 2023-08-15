@@ -1,6 +1,6 @@
 import React from "react";
 import { UserCard } from "../../components";
-const UsersTableAlternative = ({ usersQuery, role }) => {
+const UsersGrid = ({ usersQuery, role }) => {
   return (
     <div className="grid-sm laptop:hidden">
       {usersQuery.data.length > 0 &&
@@ -18,4 +18,4 @@ const UsersTableAlternative = ({ usersQuery, role }) => {
   );
 };
 
-export default UsersTableAlternative;
+export default UsersGrid;

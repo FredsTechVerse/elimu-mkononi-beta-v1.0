@@ -24,7 +24,6 @@ const RegistrationForm = () => {
 
   const [isUserQueryEnabled, setIsUserQueryEnabled] = useState(false);
   const userID = location?.state?.userID;
-  // console.log({ userID });
 
   useEffect(() => {
     if (location?.state?.readOnly === true) {

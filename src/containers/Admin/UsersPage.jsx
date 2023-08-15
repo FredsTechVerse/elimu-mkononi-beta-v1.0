@@ -1,16 +1,14 @@
 import React from "react";
 import {
-  UsersDataTable,
+  UsersTable,
   PageTitle,
-  UsersTableAlternative,
   TableAlternativeSkeleton,
-  StatusPill,
-  UserCard,
   DashboardUserButton,
   CTAButton,
   TableSkeleton,
   BackBtn,
 } from "../../components";
+import { UsersGrid } from "../../containers";
 import { fetchUsersData, handleError } from "../../controllers";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
@@ -33,6 +31,7 @@ const UsersPage = () => {
 
   const usersQuery = useQuery([userRole], () => fetchUsersData(userRole), {
     retry: 1,
+    staleTime: 1000 * 60 * 30,
     onError: (error) => {
       handleError(error, updateAlertBoxData);
       if (error.response && error.response.data.message === "Token expired") {
@@ -78,8 +77,8 @@ const UsersPage = () => {
               />
             </div>
 
-            <UsersTableAlternative usersQuery={usersQuery} role={userRole} />
-            <UsersDataTable usersQuery={usersQuery} role={userRole} />
+            <UsersGrid usersQuery={usersQuery} role={userRole} />
+            <UsersTable usersQuery={usersQuery} role={userRole} />
           </div>
         </div>
       )}

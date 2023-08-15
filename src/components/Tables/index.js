@@ -1,6 +1,6 @@
 import PaymentsTable from "./PaymentsTable";
 import UnitsAdminTable from "./UnitsAdminTable";
-import UsersDataTable from "./UsersDataTable";
+import UsersTable from "./UsersTable";
 import TutorUnitsTable from "./TutorUnitsTable";
 
-export { PaymentsTable, UnitsAdminTable, UsersDataTable, TutorUnitsTable };
+export { PaymentsTable, UnitsAdminTable, UsersTable, TutorUnitsTable };
