@@ -43,9 +43,27 @@ const logoutUser = async () => {
   await axios.delete("/auth/logout", config);
 };
 
-const deleteUser = async ({ userID }) => {
-  console.log(`User ID  for deletion passed :  ${JSON.stringify(userID)}`);
-  await axios.delete(`/auth/student/${userID}`);
+const deleteUser = async ({ userID, role }) => {
+  // console.log(
+  //   `User credentials  for deletion passed :  ${JSON.stringify({
+  //     userID: userID,
+  //     role: role,
+  //   })}`
+  // );
+  // let response;
+
+  if (role === "EM-203") {
+    let { data: adminData } = await axios.delete(`/auth/admin/${userID}`);
+    return adminData;
+  } else if (role === "EM-202") {
+    let { data: tutorData } = await axios.delete(`/auth/tutor/${userID}`);
+    return tutorData;
+  } else if (role === "EM-201") {
+    let { data: studentData } = await axios.delete(`/auth/student/${userID}`);
+    return studentData;
+  } else {
+    throw new Error(`Unsupported role: ${role}`);
+  }
 };
 
 const messageUser = ({ contact }) => {

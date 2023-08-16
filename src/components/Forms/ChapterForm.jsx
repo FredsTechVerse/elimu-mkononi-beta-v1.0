@@ -22,10 +22,6 @@ const ChapterForm = () => {
 
   const chapterTotals = location?.state?.chapterTotals;
   const unitID = location?.state?.unitID;
-  // const [chapterName, setChapterName] = useState("");
-  // const [chapterDescription, setChapterDescription] = useState("");
-
-  console.log(typeof chapterTotals);
 
   const {
     register,
@@ -91,8 +87,6 @@ const ChapterForm = () => {
   };
 
   const saveChapter = async (data) => {
-    console.log(data);
-    console.log({ unitID });
     const { chapterName, chapterNumber, chapterDescription } = data;
 
     if (unitID) {

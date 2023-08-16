@@ -1,13 +1,45 @@
-import React from "react";
-import { deleteUser } from "../../controllers";
+import React, { useState } from "react";
+import { deleteUser, handleError } from "../../controllers";
+import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { EnvelopeIcon, EyeIcon, TrashIcon } from "@heroicons/react/24/solid";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-const CTAButton = ({ contact = null, userID, role }) => {
+const CTAButton = ({ contact = null, userID, role = "EM-201" }) => {
   const location = useLocation();
+  const queryClient = useQueryClient();
+  const { updateAlertBoxData } = useAlertBoxContext();
   const roles = JSON.parse(localStorage.getItem("roles"));
-  let navigate = useNavigate();
+  const [isDeleteQueryEnabled, setIsDeleteQueryEnabled] = useState(false);
+  const navigate = useNavigate();
+
+  useQuery(
+    ["deletedUser"],
+    () => {
+      deleteUser({ userID, role });
+    },
+    {
+      enabled: isDeleteQueryEnabled,
+      onSuccess: (data) => {
+        console.log({ role, data });
+        queryClient.invalidateQueries([role]);
+        setIsDeleteQueryEnabled(false);
+        updateAlertBoxData({
+          response: "Deleted user successfully",
+          isResponse: true,
+          status: "success",
+          timeout: 4500,
+        });
+      },
+      onError: (error) => {
+        handleError(error, updateAlertBoxData);
+        if (error.response && error.response.data.message === "Token expired") {
+          queryClient.invalidateQueries(["deletedUser"]);
+        }
+      },
+    }
+  );
 
   if (roles?.includes("EM-202")) {
     return (
@@ -36,7 +68,6 @@ const CTAButton = ({ contact = null, userID, role }) => {
         <button
           className="cta-btn"
           onClick={() => {
-            // console.log({ userID, role });
             navigate("/new-user", {
               state: { userID, role, background: location },
             });
@@ -47,8 +78,7 @@ const CTAButton = ({ contact = null, userID, role }) => {
         <button
           className="cta-btn"
           onClick={() => {
-            console.log({ userID, role });
-            deleteUser({ userID });
+            setIsDeleteQueryEnabled(true);
           }}
         >
           <TrashIcon className="icon-styling h-4 laptop:h-5 text-white" />

@@ -16,12 +16,6 @@ const LogInForm = () => {
     document.body.style.overflow = "hidden";
     return () => (document.body.style.overflow = "unset");
   }, []);
-
-  // const from = location?.state?.from?.pathname || "/";
-  // Login Credentials.
-  // const [firstName, setFirstName] = useState("");
-  // const [password, setPassword] = useState("");
-
   const {
     register,
     handleSubmit,
@@ -47,7 +41,7 @@ const LogInForm = () => {
         response: "You have logged in successfully",
         isResponse: true,
         status: "success",
-        timeout: 2500,
+        timeout: 4500,
       });
 
       if (data.roles.includes("EM-203")) {

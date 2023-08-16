@@ -26,9 +26,6 @@ const LessonForm = () => {
   const queryClient = useQueryClient();
   const formRef = useRef();
 
-  //Form Variables
-  // const [lessonName, setLessonName] = useState("");
-  // const [lessonType, setLessonType] = useState("link");
   const [lessonUrl, setLessonUrl] = useState("");
 
   const {
@@ -78,7 +75,7 @@ const LessonForm = () => {
         response: "Lesson has been saved.",
         isResponse: true,
         status: "success",
-        timeout: 3000,
+        timeout: 4500,
       });
       navigate(-1);
     },
@@ -100,8 +97,6 @@ const LessonForm = () => {
   };
 
   const saveLesson = async (data) => {
-    console.log({ data });
-    console.log({ chapterID });
     const { lessonName, lessonNumber, youtubeUrl } = data;
     if (chapterID && typeof lessonTotals !== "string") {
       if (watch("lessonType") === "link") {

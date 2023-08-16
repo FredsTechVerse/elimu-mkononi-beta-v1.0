@@ -23,7 +23,7 @@ const LogoutBtn = ({ isBlue = false }) => {
         response: "Logged out successfully",
         isResponse: true,
         status: "success",
-        timeout: 3000,
+        timeout: 4500,
       });
     },
     onError: (error) => {

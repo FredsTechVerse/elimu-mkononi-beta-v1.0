@@ -52,7 +52,7 @@ const UnitForm = () => {
         response: "Unit has been saved",
         isResponse: true,
         status: "success",
-        timeout: 3000,
+        timeout: 4500,
       });
       navigate(-1);
     },
@@ -132,7 +132,6 @@ const UnitForm = () => {
                 required: "This field is required ",
               })}
             >
-              {/* <option className="text-grey">--Choose a tutor--</option> */}
               {tutorsQuery?.data ? (
                 tutorsQuery?.data.map((tutor, index) => {
                   const { _id: tutorId, firstName, surname } = tutor;
@@ -143,9 +142,9 @@ const UnitForm = () => {
                   );
                 })
               ) : (
-                <p className="bg-rose-500 px-2 py-1 rounded-lg">
+                <option className="bg-rose-500 px-2 py-1 rounded-lg">
                   No tutor data found
-                </p>
+                </option>
               )}
             </select>
             {errors.tutor && <ErrorMessage message={errors.tutor?.message} />}

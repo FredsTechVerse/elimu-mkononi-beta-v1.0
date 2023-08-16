@@ -47,6 +47,7 @@ const handleError = async (error, updateAlertBoxData) => {
   } else if (error.message === "Network Error") {
     response = ERRORS.NETWORK_ERROR;
   } else {
+    console.log(error);
     response = ERRORS.SERVER_ERROR;
   }
 
@@ -55,7 +56,7 @@ const handleError = async (error, updateAlertBoxData) => {
       response: response,
       isResponse: true,
       status: "error",
-      timeout: 2500,
+      timeout: 4500,
     });
   }
 };
@@ -86,7 +87,7 @@ const renewToken = async ({ updateAlertBoxData }) => {
         response: "Your session has expired",
         isResponse: true,
         status: "error",
-        timeout: 2500,
+        timeout: 4500,
       });
       await handleLogout();
     } else {
@@ -94,7 +95,7 @@ const renewToken = async ({ updateAlertBoxData }) => {
         response: "An error occured while renewing token",
         isResponse: true,
         status: "error",
-        timeout: 2500,
+        timeout: 4500,
       });
       console.error(
         `An error occured while renewing the access token ${JSON.stringify(

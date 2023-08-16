@@ -21,8 +21,6 @@ const RegistrationForm = () => {
     userID ? true : false
   );
 
-  console.log({ userRole: role, isUserQueryEnabled, userID });
-
   const {
     register,
     handleSubmit,
@@ -79,7 +77,6 @@ const RegistrationForm = () => {
 
   useEffect(() => {
     if (userQuery?.status === "success" && userQuery?.data) {
-      console.log({ userData: userQuery?.data });
       setValue("fName", userQuery?.data?.firstName);
       setValue("surname", userQuery?.data?.surname);
       setValue("contact", userQuery?.data?.contact);
@@ -99,7 +96,7 @@ const RegistrationForm = () => {
         response: "User has been registered.",
         isResponse: true,
         status: "success",
-        timeout: 3000,
+        timeout: 4500,
       });
       navigate(-1);
     },
@@ -135,7 +132,7 @@ const RegistrationForm = () => {
       response: "Role has not been provided.",
       isResponse: true,
       status: "failure",
-      timeout: 3000,
+      timeout: 4500,
     });
   };
 

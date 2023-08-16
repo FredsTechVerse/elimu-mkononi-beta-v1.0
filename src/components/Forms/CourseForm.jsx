@@ -67,7 +67,7 @@ const CourseForm = () => {
         response: "Course has been saved.",
         isResponse: true,
         status: "success",
-        timeout: 3000,
+        timeout: 4500,
       });
       navigate(-1);
     },

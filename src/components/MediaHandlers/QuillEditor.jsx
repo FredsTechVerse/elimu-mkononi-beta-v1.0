@@ -82,7 +82,7 @@ const QuillEditor = () => {
         response: "Lesson Notes have been saved",
         isResponse: true,
         status: "success",
-        timeout: 2500,
+        timeout: 4500,
       });
     },
     onError: (error) => {
@@ -105,7 +105,7 @@ const QuillEditor = () => {
         response: "Lesson Notes updated succesfully!",
         isResponse: true,
         status: "success",
-        timeout: 2500,
+        timeout: 4500,
       });
     },
     onError: (error) => {
