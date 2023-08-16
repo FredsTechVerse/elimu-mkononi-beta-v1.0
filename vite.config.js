@@ -5,4 +5,7 @@ export default defineConfig({
   build: {
     sourcemap: true,
   },
+  server: {
+    port: 3000,
+  },
 });

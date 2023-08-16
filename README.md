@@ -58,6 +58,9 @@
 
 ### KEY TIPS I HAVE PICKED UP ALONG THE JOURNEY
 
+- I was able to update the chapter 4 accross rerenders. It appears react router dom manages its states.
+- Page not found is quite strong when a person navigates to a form directly with a background....Look for better words... But it works well!
+
 - Multiple use states leads to multiple rerenders...Each state update triggers a new render cycle, and React will batch multiple state updates into a single render cycle only if they occur synchronously within the same event handler. Minimize their usage.
 
 - No 1 golden principal , no need to import a component from a component library if :-
@@ -94,11 +97,15 @@
 
 ### USING REACT FORM
 
+- `console.log(register());` Returns an object with the name , onBLur , onChange and ref properties.
+- No wonder when we want to update , we first spread the object then use the addtional props to add stuff. eg `...register("lessonNumber", {additional props})`
+- To access props value simply swap register with watch eg `watch("lessonNumber")`
+
 - When errors are present , we will not be able to continue with submitting our form.
 - Assigning default values to input fields declares types implicitly therefore no need of declaring them explicitly typescript.
 - Subscribing to an input via the watch function has a side effect of triggering form rerenders. We can either subscribe to the whole form or to a specific input.
-- Validation has been made easier than ever , If any errors are present the onSubmit function is not called. All this is inbuilt.
 - Handles the default behaviour of the form for us. We do not need to prevent default.
+- Validation has been made easier than ever , If any errors are present the onSubmit function is not called. All this is inbuilt.
 - Just giives us just the improved functionality and leaves styling to the dev.
 - Leaves us with the freedom to put more custom barriers before the form is submitted
 
@@ -107,7 +114,7 @@
 - To validate types eg email.... Just set the input type attribute which will be validated natively by the form before submission.
 
 - Setting disabled to true will lead input value to be undefined and input control to be disabled.`<input {...register("test", {disabled: true})} />`
-
+- Disable externally if you want to keep value.
 - Setting up value for the registered input. This prop should be utilised inside useEffect or invoke once, each re-run will update or overwrite the input value which you have supplied.
 
 ### USING REACT-QUERY
