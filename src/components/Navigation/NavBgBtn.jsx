@@ -9,7 +9,6 @@ const NavBgBtn = ({ to, text, isBlue = false }) => {
   if (!role) {
     roleInformation = "EM-201";
   }
-  console.log(roleInformation);
   if (text === "Login") {
     return (
       <Link

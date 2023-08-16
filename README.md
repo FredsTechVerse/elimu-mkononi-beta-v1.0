@@ -50,6 +50,7 @@
 - Make unit outline and unit breakdown descriptive
 - Implement reset password functionality.
 - The logout and login buttons need some addition words . I might resort into using a brieve sidebar menu also which is to be borrowed from the church application.
+- A must experiment on use of the tanstack table functionalities to update the card.. I mean how will it know coz its only the elements that are changing really....
 
 ##### CHUNK 3
 
@@ -123,6 +124,8 @@
 - Adding the enabled prop prevents react query from running immediately! Turns out that it was not being triggered by the status check! It is just build to run immediately when spotted!
 - Suitable for handling mutation and fetch requests.
 - Mutation opertations is broader than a post request in that it can be used to make a put(update ) and a delete request also.
+- Found a way to utilize useEffect to update state from either cache or a fresh fetch by migrating onSuccess out of the query and instead populating the data if the query status is successfull and the data exists. Mine is to watch out for a query status change.
+- To delete data , I arise the dead when the time to do so comes and invalidate the necessary parties for a fresh refetch.
 
 #### ITS SUPERPOWERS
 

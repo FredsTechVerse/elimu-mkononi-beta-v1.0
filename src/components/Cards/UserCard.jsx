@@ -21,7 +21,7 @@ const UserCard = ({ user, userKey, role }) => {
           <span>{user.firstName}</span> <span>{user.surname}</span>
         </p>
         {role === "EM-202" && <span>Units : {numberOfUnits(role)}</span>}
-        <CTAButton _id={user._id} contact={user.email} />
+        <CTAButton _id={user._id} contact={user.email} role={role} />
       </div>
     </div>
   );

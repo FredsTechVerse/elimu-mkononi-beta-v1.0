@@ -28,7 +28,6 @@ const UsersPage = () => {
     }
   };
   const userRole = assignUserRole();
-  console.log({ userRole });
 
   const usersQuery = useQuery([userRole], () => fetchUsersData(userRole), {
     retry: 1,

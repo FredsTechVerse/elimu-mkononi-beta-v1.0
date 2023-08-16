@@ -39,7 +39,11 @@ const UsersTable = ({ usersQuery, role }) => {
                   </div>
                 </td>
                 <td>
-                  <CTAButton userID={user._id} contact={user.email} />
+                  <CTAButton
+                    userID={user._id}
+                    contact={user.email}
+                    role={role}
+                  />
                 </td>
               </tr>
             );

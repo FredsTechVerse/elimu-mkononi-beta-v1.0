@@ -1,11 +1,11 @@
 import React from "react";
-import { Tooltip } from "../../components";
 import { deleteUser } from "../../controllers";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { EnvelopeIcon, EyeIcon, TrashIcon } from "@heroicons/react/24/solid";
 
-const CTAButton = ({ contact = null, userID }) => {
-  console.log({ userID });
+const CTAButton = ({ contact = null, userID, role }) => {
+  const location = useLocation();
   const roles = JSON.parse(localStorage.getItem("roles"));
   let navigate = useNavigate();
 
@@ -36,7 +36,10 @@ const CTAButton = ({ contact = null, userID }) => {
         <button
           className="cta-btn"
           onClick={() => {
-            navigate("/new-user", { state: { userID, readOnly: true } });
+            // console.log({ userID, role });
+            navigate("/new-user", {
+              state: { userID, role, background: location },
+            });
           }}
         >
           <EyeIcon className="icon-styling h-4 laptop:h-5 text-white" />
@@ -44,6 +47,7 @@ const CTAButton = ({ contact = null, userID }) => {
         <button
           className="cta-btn"
           onClick={() => {
+            console.log({ userID, role });
             deleteUser({ userID });
           }}
         >

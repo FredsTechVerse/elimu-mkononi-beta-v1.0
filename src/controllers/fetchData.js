@@ -48,16 +48,16 @@ const fetchUsersData = async (role) => {
 };
 
 const fetchUserData = async ({ role, userID }) => {
-  console.log(`User ID to server ${userID}`);
+  console.log(`User ID sent to server ${(role, userID)}`);
   if (role === "EM-203") {
     let { data: adminData } = await axios.get(`/auth/admin/${userID}`);
     return adminData;
-  } else if (role === "EM-201") {
-    let { data: studentData } = await axios.get(`/auth/student/${userID}`);
-    return studentData;
   } else if (role === "EM-202") {
     let { data: tutorData } = await axios.get(`/auth/tutor/${userID}`);
     return tutorData;
+  } else if (role === "EM-201") {
+    let { data: studentData } = await axios.get(`/auth/student/${userID}`);
+    return studentData;
   }
 };
 

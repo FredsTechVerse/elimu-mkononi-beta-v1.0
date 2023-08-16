@@ -11,18 +11,23 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import { useForm } from "react-hook-form";
 const RegistrationForm = () => {
+  const location = useLocation();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const formRef = useRef(null);
-  const location = useLocation();
+  const { role, userID } = location?.state;
   const { updateAlertBoxData } = useAlertBoxContext();
-  const role = location?.state?.role;
-  console.log({ userRole: role });
+  const [isUserQueryEnabled, setIsUserQueryEnabled] = useState(
+    userID ? true : false
+  );
+
+  console.log({ userRole: role, isUserQueryEnabled, userID });
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm({
     defaultValues: {
       fName: "",
@@ -33,16 +38,6 @@ const RegistrationForm = () => {
       cPassword: "",
     },
   });
-
-  const [isUserQueryEnabled, setIsUserQueryEnabled] = useState(false);
-  const userID = location?.state?.userID;
-
-  useEffect(() => {
-    if (location?.state?.readOnly === true) {
-      setIsUserQueryEnabled(true);
-      console.log("User Query Enabled");
-    }
-  }, [userID]);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -67,22 +62,32 @@ const RegistrationForm = () => {
 
   const userQuery = useQuery(
     ["user", userID],
-    () => fetchUserData({ userID: userID, role: "EM-201" }),
+    () => fetchUserData({ userID: userID, role: role }),
     {
       enabled: isUserQueryEnabled,
+      staleTime: 1000 * 60 * 60,
       retry: 1,
-      onSuccess: (data) => {
-        const { firstName, surname, email, password, contact, status, role } =
-          data;
-      },
+
       onError: (error) => {
         handleError(error, updateAlertBoxData);
         if (error.response && error.response.data.message === "Token expired") {
-          queryClient.invalidateQueries(["user"]);
+          queryClient.invalidateQueries(["user", userID], { exact: true });
         }
       },
     }
   );
+
+  useEffect(() => {
+    if (userQuery?.status === "success" && userQuery?.data) {
+      console.log({ userData: userQuery?.data });
+      setValue("fName", userQuery?.data?.firstName);
+      setValue("surname", userQuery?.data?.surname);
+      setValue("contact", userQuery?.data?.contact);
+      setValue("email", userQuery?.data?.email);
+      setValue("password", userQuery?.data?.password);
+      setValue("cPassword", userQuery?.data?.password);
+    }
+  }, [userID, userQuery?.status]);
   const createUserMutation = useMutation({
     mutationFn: registerUser,
     onSuccess: (data) => {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   UserProfile,
   DashboardUserButton,
@@ -28,6 +28,14 @@ const AdminDashboard = () => {
   const { updateAlertBoxData } = useAlertBoxContext();
   const [totalUnits, setTotalUnits] = useState(0);
   const [totalCourses, setTotalCourses] = useState(0);
+  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
+  const openSideBar = () => {
+    setIsSideBarOpen(true);
+  };
+  const closeSideBar = () => {
+    setIsSideBarOpen(false);
+  };
+
   const [allUsers, setAllUsers] = useState({
     labels: ["Students , Tutors , Admins"],
     datasets: [
@@ -66,7 +74,6 @@ const AdminDashboard = () => {
 
   const userDataQuery = useQuery(["user"], () => fetchUserDetails(role), {
     retry: 1,
-    onSuccess: (data) => {},
     onError: (error) => {
       handleError(error, updateAlertBoxData);
       if (error.response && error.response.data.message === "Token expired") {
@@ -76,13 +83,32 @@ const AdminDashboard = () => {
   });
 
   const coursesQuery = useQuery(["courseAnalysis"], fetchCoursesData, {
-    staleTime: 0,
-    onSuccess: (data) => {
+    staleTime: 1000 * 60 * 60,
+    onError: (error) => {
+      handleError(error, updateAlertBoxData);
+      if (error.response && error.response.data.message === "Token expired") {
+        queryClient.invalidateQueries(["courseAnalysis"]);
+      }
+    },
+  });
+
+  const allUsersQuery = useQuery(["users"], fetchAllUsersData, {
+    staleTime: 1000 * 60 * 60,
+    onError: (error) => {
+      handleError(error, updateAlertBoxData);
+      if (error.response && error.response.data.message === "Token expired") {
+        queryClient.invalidateQueries(["courses"]);
+      }
+    },
+  });
+
+  useEffect(() => {
+    if (coursesQuery.status === "success" && coursesQuery?.data) {
       let totalUnits = 0;
       let coursesOffered = [];
       let unitsPerCourse = [];
-      let totalCourses = data?.length;
-      data.forEach((course) => {
+      let totalCourses = coursesQuery?.data?.length;
+      coursesQuery?.data.forEach((course) => {
         totalUnits += course?.units?.length;
         coursesOffered.push(course?.courseTitle);
         unitsPerCourse.push(course?.units?.length);
@@ -112,51 +138,33 @@ const AdminDashboard = () => {
           },
         ],
       });
-    },
+    }
+  }, [coursesQuery?.status]);
 
-    onError: (error) => {
-      console.log("Courses query has an error");
-
-      handleError(error, updateAlertBoxData);
-      if (error.response && error.response.data.message === "Token expired") {
-        queryClient.invalidateQueries(["courseAnalysis"]);
-      }
-    },
-  });
-
-  const allUsersQuery = useQuery(["users"], fetchAllUsersData, {
-    staleTime: 0,
-    onSuccess: (data) => {
+  useEffect(() => {
+    if (allUsersQuery.status === "success" && allUsersQuery?.data) {
       setAllUsers({
         labels: ["Students", "Tutors", "Admins"],
         datasets: [
           {
             label: "Users",
-            data: [data?.totalStudents, data?.totalTutors, data?.totalAdmins],
+            data: [
+              allUsersQuery?.data?.totalStudents,
+              allUsersQuery?.data?.totalTutors,
+              allUsersQuery?.data?.totalAdmins,
+            ],
             backgroundColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
             borderColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
           },
         ],
       });
       setTotalUsers(
-        data?.totalStudents + data?.totalTutors + data?.totalAdmins
+        allUsersQuery?.data?.totalStudents +
+          allUsersQuery?.data?.totalTutors +
+          allUsersQuery?.data?.totalAdmins
       );
-    },
-    onError: (error) => {
-      handleError(error, updateAlertBoxData);
-      if (error.response && error.response.data.message === "Token expired") {
-        queryClient.invalidateQueries(["courses"]);
-      }
-    },
-  });
-
-  const [isSideBarOpen, setIsSideBarOpen] = useState(false);
-  const openSideBar = () => {
-    setIsSideBarOpen(true);
-  };
-  const closeSideBar = () => {
-    setIsSideBarOpen(false);
-  };
+    }
+  }, [allUsersQuery.status]);
 
   return (
     <div className="h-screen w-full flex phone:flex-col tablet:flex-row relative ">
