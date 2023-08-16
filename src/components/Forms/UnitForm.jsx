@@ -65,7 +65,7 @@ const UnitForm = () => {
   });
 
   const retryMutation = (formData) => {
-    createChapterMutation.mutate({
+    createUnitMutation.mutate({
       course: formData.courseID,
       tutor: formData.tutor,
       unitCode: formData.unitCode,
@@ -96,6 +96,8 @@ const UnitForm = () => {
   }, []);
 
   const saveUnit = async (data) => {
+    console.log(data);
+    console.log({ courseID });
     const { tutor, unitCode, unitName, unitDescription } = data;
     if (courseID) {
       createUnitMutation.mutate({
@@ -127,11 +129,12 @@ const UnitForm = () => {
 
             <select
               className="input-styling  mb-5"
+              name="--Choose a tutor--"
               {...register("tutor", {
                 required: "This field is required ",
               })}
             >
-              <option className="text-grey">--Choose a tutor--</option>
+              {/* <option className="text-grey">--Choose a tutor--</option> */}
               {tutorsQuery?.data ? (
                 tutorsQuery?.data.map((tutor, index) => {
                   const { _id: tutorId, firstName, surname } = tutor;
@@ -159,6 +162,10 @@ const UnitForm = () => {
               placeholder="Unit Code"
               {...register("unitCode", {
                 required: "This field is required ",
+                maxLength: {
+                  value: 15,
+                  message: "Must not be greater than 10 characters",
+                },
               })}
             />
             {errors.unitCode && (
@@ -170,6 +177,10 @@ const UnitForm = () => {
               placeholder="Unit Name"
               {...register("unitName", {
                 required: "This field is required ",
+                maxLength: {
+                  value: 30,
+                  message: "Must not be greater than 20 characters",
+                },
               })}
             />
 
@@ -183,9 +194,13 @@ const UnitForm = () => {
             </label>
             <textarea
               placeholder="What is the unit about?"
+              maxLength={60}
               {...register("unitDescription", {
                 required: "This field is required ",
-                maxLength: 60,
+                maxLength: {
+                  value: 60,
+                  message: "Must not be greater than 60 characters",
+                },
               })}
             ></textarea>
             {errors.unitDescription && (
