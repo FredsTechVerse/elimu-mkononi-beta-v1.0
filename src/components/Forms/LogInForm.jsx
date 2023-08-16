@@ -62,14 +62,7 @@ const LogInForm = () => {
     onError: (error) => {
       handleError(error, updateAlertBoxData);
       if (error.response && error.response.data.message === "Token expired") {
-        const trimmedFirstName = firstName.trim();
-        const trimmedPassword = password.trim();
-
-        createLoginMutation.mutate({
-          firstName: trimmedFirstName,
-          password: trimmedPassword,
-        });
-        return;
+        retryMutation(error.config.data);
       }
     },
   });
@@ -99,7 +92,13 @@ const LogInForm = () => {
       firstName: trimmedFirstName,
       password: trimmedPassword,
     });
-    return;
+  };
+
+  const retryMutation = (formData) => {
+    createChapterMutation.mutate({
+      firstName: formData.firstName,
+      password: formData.password,
+    });
   };
 
   return (
@@ -139,7 +138,6 @@ const LogInForm = () => {
           <div className="w-full flex-row-centered">
             <SubmitButton
               isSubmitting={createLoginMutation?.isLoading}
-              isError={createLoginMutation?.isError}
               type="submit"
               text={
                 createLoginMutation?.status === "loading"

@@ -35,6 +35,7 @@ const LessonForm = () => {
   } = useForm({
     defaultValues: {
       lessonName: "",
+      lessonNumber: lessonTotals + 1,
       lessonType: "link",
       lessonUrl: "",
     },
@@ -81,26 +82,38 @@ const LessonForm = () => {
     onError: (error) => {
       handleError(error, updateAlertBoxData);
       if (error.response && error.response.data.message === "Token expired") {
-        createLessonMutation.mutate({
-          lessonNumber: lessonTotals,
-          lessonName: lessonName,
-          lessonUrl: lessonUrl,
-          chapterID: chapterID,
-        });
+        retryMutation(error.config.data);
       }
     },
   });
 
+  const retryMutation = (formData) => {
+    createLessonMutation.mutate({
+      lessonNumber: formData.lessonTotals,
+      lessonName: formData.lessonName,
+      lessonUrl: formData.lessonUrl,
+      chapterID: formData.chapterID,
+    });
+  };
+
   const saveLesson = async (data) => {
-    const { lessonName, lessonUrl } = data;
+    const { lessonName, lessonNumber, lessonUrl } = data;
     if (chapterID && lessonTotals) {
       createLessonMutation.mutate({
-        lessonNumber: `${chapterID}-${lessonTotals}`,
+        lessonNumber: `${chapterID}-${lessonNumber}`,
         lessonName: lessonName,
         lessonUrl: lessonUrl,
         chapterID: chapterID,
       });
+      return;
     }
+
+    updateAlertBoxData({
+      response: "Unit ID / Lesson Number has not been specified.",
+      isResponse: true,
+      status: "failure",
+      timeout: 4500,
+    });
   };
 
   return (
@@ -127,13 +140,12 @@ const LessonForm = () => {
               Lesson Details
             </label>
             <input
-              className="input-styling"
-              id="lessonDetails"
-              type="number"
+              className={`input-styling ${disabled && "bg-slate-300"}`}
               placeholder="Lesson Number"
-              value={lessonTotals + 1}
-              readOnly
-            ></input>
+              {...register("lessonNumber", {
+                disabled: true,
+              })}
+            />
             <input
               className="input-styling"
               placeholder="Lesson Name"
@@ -205,7 +217,7 @@ const LessonForm = () => {
                       d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"
                     />
                   </svg>
-                  <p className="text-center">Lesson has been uploaded!</p>
+                  <p className="text-center">Lesson has been uploaded</p>
                 </div>
               )}
             </div>
@@ -214,7 +226,7 @@ const LessonForm = () => {
           {/* CTA BUTTONS */}
           <div className="cta-wrap">
             <SubmitButton
-              disabled={isFormValid ? false : true}
+              disabled={chapterID && lessonTotals ? false : true}
               type="submit"
               isSubmitting={createLessonMutation?.isLoading}
               text={

@@ -6,10 +6,10 @@ export const useAlertBoxContext = () => {
 };
 export const AlertBoxContextProvider = ({ children }) => {
   const [alertBoxData, setAlertBoxData] = useState({
-    status: null,
+    status: "failure",
     isResponse: false,
     response: null,
-    timeout: null,
+    timeout: 4500,
   });
 
   const updateAlertBoxData = ({ response, isResponse, status, timeout }) => {

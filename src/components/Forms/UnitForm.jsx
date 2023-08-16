@@ -7,11 +7,32 @@ import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import { useForm } from "react-hook-form";
 
 const UnitForm = () => {
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
-  const formRef = useRef(null);
   const { updateAlertBoxData } = useAlertBoxContext();
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const formRef = useRef(null);
   const location = useLocation();
+
+  // DECLARATION OF VARIABLES
+  const { courseID } = location?.state;
+  // const [tutor, setTutor] = useState();
+  // const [unitCode, setUnitCode] = useState("");
+  // const [unitName, setUnitName] = useState("");
+  // const [unitDescription, setUnitDescription] = useState("");
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      tutor: "",
+      unitCode: "",
+      unitName: "",
+      unitDescription: "",
+    },
+  });
+
   const tutorsQuery = useQuery(["tutors"], () => fetchUsersData("EM-202"), {
     retry: 1,
     onError: (error) => {
@@ -38,16 +59,20 @@ const UnitForm = () => {
     onError: (error) => {
       handleError(error, updateAlertBoxData);
       if (error.response && error.response.data.message === "Token expired") {
-        createUnitMutation.mutate({
-          course: courseID,
-          tutor: tutor,
-          unitCode: unitCode,
-          unitName: unitName,
-          unitDescription: unitDescription,
-        });
+        retryMutation(error.config.data);
       }
     },
   });
+
+  const retryMutation = (formData) => {
+    createChapterMutation.mutate({
+      course: formData.courseID,
+      tutor: formData.tutor,
+      unitCode: formData.unitCode,
+      unitName: formData.unitName,
+      unitDescription: formData.unitDescription,
+    });
+  };
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -69,26 +94,6 @@ const UnitForm = () => {
       }
     };
   }, []);
-
-  // DECLARATION OF VARIABLES
-  const { courseID } = location?.state;
-  // const [tutor, setTutor] = useState();
-  // const [unitCode, setUnitCode] = useState("");
-  // const [unitName, setUnitName] = useState("");
-  // const [unitDescription, setUnitDescription] = useState("");
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      tutor: "",
-      unitCode: "",
-      unitName: "",
-      unitDescription: "",
-    },
-  });
 
   const saveUnit = async (data) => {
     const { tutor, unitCode, unitName, unitDescription } = data;
@@ -180,7 +185,7 @@ const UnitForm = () => {
               placeholder="What is the unit about?"
               {...register("unitDescription", {
                 required: "This field is required ",
-                maxLength: 50,
+                maxLength: 60,
               })}
             ></textarea>
             {errors.unitDescription && (
@@ -192,6 +197,7 @@ const UnitForm = () => {
             <SubmitButton
               type="submit"
               isSubmitting={createUnitMutation?.isLoading}
+              disabled={courseID ? false : true}
               text={
                 createUnitMutation?.status === "loading" ? "Saving" : "Save"
               }

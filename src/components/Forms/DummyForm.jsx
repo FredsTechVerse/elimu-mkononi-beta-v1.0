@@ -4,8 +4,8 @@ export default function DummyForm() {
   const {
     register,
     handleSubmit,
-    watch,
-    formState: { errors }, //Where we subscribe with
+
+    formState: { errors },
   } = useForm({
     defaultValues: {
       example: "Example Input",

@@ -1,13 +1,7 @@
 import React from "react";
 import { SpinnerIcon } from "../../components";
 
-const SubmitButton = ({
-  text,
-  type,
-  disabled = false,
-  isSubmitting,
-  isError = false,
-}) => {
+const SubmitButton = ({ text, type, disabled = false, isSubmitting }) => {
   return (
     <button
       className={`text-lg capitalize w-48 m-3 h-9 rounded-full text-white text-center ${

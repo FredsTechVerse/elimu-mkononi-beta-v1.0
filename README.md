@@ -44,6 +44,7 @@
 
 ##### CHUNK 2
 
+- Look into how we can use spread operator with the alertbox to avoid having to pass in default props again if they do not change.
 - Correct back btn... Screen freezes when it reaches to the homepage
 - Create resources interface and test upload to S3 Bucket
 - Make unit outline and unit breakdown descriptive
@@ -96,20 +97,21 @@
 - Assigning default values to input fields declares types implicitly therefore no need of declaring them explicitly typescript.
 - Subscribing to an input via the watch function has a side effect of triggering form rerenders. We can either subscribe to the whole form or to a specific input.
 - Validation has been made easier than ever , If any errors are present the onSubmit function is not called. All this is inbuilt.
-- Also gives us just the improved functionality , leaves styling to the dev.
-- I still can put more custom barriers before the form is submitted
-  QUESTIONS
+- Handles the default behaviour of the form for us. We do not need to prevent default.
+- Just giives us just the improved functionality and leaves styling to the dev.
+- Leaves us with the freedom to put more custom barriers before the form is submitted
 
-HOW do i updata my fields from a post reques .... Rough gues ..register. `register('firstName', { value: 'bill' })`
+- To update my fields via a post request update value using the value prop `register('firstName', { value: 'bill' })`
 
-How to validate types eg email.... Just set the input type attribute.
+- To validate types eg email.... Just set the input type attribute which will be validated natively by the form before submission.
 
-Setting disabled to true will lead input value to be undefined and input control to be disabled.`<input {...register("test", {disabled: true})} />`
+- Setting disabled to true will lead input value to be undefined and input control to be disabled.`<input {...register("test", {disabled: true})} />`
 
 - Setting up value for the registered input. This prop should be utilised inside useEffect or invoke once, each re-run will update or overwrite the input value which you have supplied.
 
 ### USING USEQUERY
 
+- axios.config.data contains the info about the request that we were making , so instead of redoing the whole process , we can just use the data from the axios config object.
 - Adding the enabled prop prevents react query from running immediately! Turns out that it was not being triggered by the status check! It is just build to run immediately upon render.
 - Suitable for handling any post and get requests in that it complements axios giving it superpowers as :-
 - It eliminates the need for a try catch statements as it has its own eventHandlers for handling errors and loading states. eg onError , onLoading , onSuccess

@@ -12,7 +12,7 @@ import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import { useForm } from "react-hook-form";
 
-const CourseForm = () => {
+const ResourceForm = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const formRef = useRef(null);
@@ -46,7 +46,7 @@ const CourseForm = () => {
   useEffect(() => {
     const handleKeyPress = (e) => {
       if (e.key === "Enter" || e.type === "submit") {
-        saveCourse(e);
+        saveResource(e);
       }
     };
     if (formRef.current) {
@@ -75,16 +75,20 @@ const CourseForm = () => {
     onError: (error) => {
       handleError(error, updateAlertBoxData);
       if (error.response && error.response.data.message === "Token expired") {
-        createResourceMutation.mutate({
-          resourceName: resourceName,
-          resourceUrl: resourceUrl,
-          chapterID: chapterID,
-        });
+        retryMutation(error.config.data);
       }
     },
   });
 
-  const saveCourse = async (data) => {
+  const retryMutation = (formData) => {
+    createChapterMutation.mutate({
+      resourceName: formData.resourceName,
+      resourceUrl: formData.resourceUrl,
+      chapterID: formData.chapterID,
+    });
+  };
+
+  const saveResource = async (data) => {
     const { resourceName } = data;
     if (resourceUrl && chapterID) {
       createResourceMutation.mutate({
@@ -92,7 +96,14 @@ const CourseForm = () => {
         resourceUrl: resourceUrl,
         chapterID: chapterID,
       });
+      return;
     }
+    updateAlertBoxData({
+      response: "Chapter ID has not been specified.",
+      isResponse: true,
+      status: "failure",
+      timeout: 4500,
+    });
   };
 
   const updateFileName = (resourceUrl) => {
@@ -106,7 +117,7 @@ const CourseForm = () => {
         <form
           encType="multipart/form-data"
           className="form-styling"
-          onSubmit={handleSubmit(saveCourse)}
+          onSubmit={handleSubmit(saveResource)}
         >
           <div className="input-wrap">
             <label htmlFor="resource">Resource Details</label>
@@ -155,7 +166,7 @@ const CourseForm = () => {
             <SubmitButton
               type="submit"
               isSubmitting={createResourceMutation?.isLoading}
-              disabled={isFormValid ? false : true}
+              disabled={resourceUrl && chapterID ? false : true}
               text={
                 createResourceMutation?.status === "loading"
                   ? "Uploading"
@@ -169,4 +180,4 @@ const CourseForm = () => {
   );
 };
 
-export default CourseForm;
+export default ResourceForm;

@@ -13,28 +13,29 @@ import { createChapter, handleError } from "../../controllers";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 
 const ChapterForm = () => {
-  // TRACKING LOCATION
+  const formRef = useRef(null);
+  const { updateAlertBoxData } = useAlertBoxContext();
+
   const location = useLocation();
+  const navigate = useNavigate();
   const from = location?.state?.background?.pathname;
 
-  const navigate = useNavigate();
-  const unitID = location?.state?.unitID;
   const chapterTotals = location?.state?.chapterTotals;
+  const unitID = location?.state?.unitID;
+  // const [chapterName, setChapterName] = useState("");
+  // const [chapterDescription, setChapterDescription] = useState("");
 
-  const { updateAlertBoxData } = useAlertBoxContext();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
     defaultValues: {
+      chapterNumber: chapterTotals + 1,
       chapterName: "",
       chapterDescription: "",
     },
   });
-  const [chapterName, setChapterName] = useState("");
-  const [chapterDescription, setChapterDescription] = useState("");
-  const formRef = useRef(null);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -73,47 +74,58 @@ const ChapterForm = () => {
     onError: (error) => {
       handleError(error, updateAlertBoxData);
       if (error.response && error.response.data.message === "Token expired") {
-        createChapterMutation.mutate({
-          unitID: unitID,
-          chapterNumber: `${unitID}-${chapterTotals}`,
-          chapterName: chapterName,
-          chapterDescription: chapterDescription,
-        });
+        retryMutation(error.config.data); // Retry with captured form data
       }
     },
   });
 
+  const retryMutation = (formData) => {
+    createChapterMutation.mutate({
+      unitID: formData.unitID,
+      chapterNumber: `${formData.unitID}-${formData.chapterNumber}`,
+      chapterName: formData.chapterName,
+      chapterDescription: formData.chapterDescription,
+    });
+  };
+
   const saveChapter = async (data) => {
-    const { chapterName, chapterDescription } = data;
+    const { chapterName, chapterNumber, chapterDescription } = data;
 
     if (unitID) {
       createChapterMutation.mutate({
         unitID: unitID,
-        chapterNumber: `${unitID}-${chapterTotals}`,
+        chapterNumber: `${unitID}-${chapterNumber}`,
         chapterName: chapterName,
         chapterDescription: chapterDescription,
       });
+      return;
     }
+
+    updateAlertBoxData({
+      response: "No unit ID specified",
+      isResponse: true,
+      status: "failure",
+      timeout: 4500,
+    });
   };
 
   return (
     <Modal>
       <div className="form-wrap ">
         <FormNavigation text="Chapter Form" />
-        <form className="form-styling" onSubmit={saveChapter}>
+        <form className="form-styling" onSubmit={handleSubmit(saveChapter)}>
           {/* FILE */}
           <div className="input-wrap gap-2">
             <label htmlFor="cNumber" className="w-full ">
               Chapter Details
             </label>
             <input
-              className="input-styling"
-              id="cNumber"
-              type="number"
+              className={`input-styling ${disabled && "bg-slate-300"}`}
               placeholder="Chapter Number"
-              value={chapterTotals + 1}
-              readOnly
-            ></input>
+              {...register("chapterNumber", {
+                disabled: true,
+              })}
+            />
             <input
               className="input-styling"
               placeholder="Chapter Name"
@@ -139,6 +151,7 @@ const ChapterForm = () => {
             <SubmitButton
               type="submit"
               isSubmitting={createChapterMutation?.isLoading}
+              disabled={unitID ? false : true}
               text={
                 createChapterMutation?.status === "loading" ? "Saving" : "Save"
               }
