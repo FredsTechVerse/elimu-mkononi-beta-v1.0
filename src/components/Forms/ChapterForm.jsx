@@ -89,6 +89,8 @@ const ChapterForm = () => {
   };
 
   const saveChapter = async (data) => {
+    console.log(data);
+    console.log({ unitID });
     const { chapterName, chapterNumber, chapterDescription } = data;
 
     if (unitID) {
@@ -120,11 +122,10 @@ const ChapterForm = () => {
               Chapter Details
             </label>
             <input
-              className={`input-styling ${disabled && "bg-slate-300"}`}
+              disabled={true}
+              className={`input-styling `}
               placeholder="Chapter Number"
-              {...register("chapterNumber", {
-                disabled: true,
-              })}
+              {...register("chapterNumber", {})}
             />
             <input
               className="input-styling"
