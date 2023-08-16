@@ -9,7 +9,6 @@ import { useForm } from "react-hook-form";
 
 const LogInForm = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const formRef = useRef(null);
   const { updateAlertBoxData } = useAlertBoxContext();
 
@@ -70,7 +69,7 @@ const LogInForm = () => {
   useEffect(() => {
     const handleKeyPress = (e) => {
       if (e.key === "Enter" || e.type === "submit") {
-        login(e);
+        handleSubmit(login)(e);
       }
     };
     if (formRef.current) {

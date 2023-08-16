@@ -110,18 +110,21 @@
 
 - Setting up value for the registered input. This prop should be utilised inside useEffect or invoke once, each re-run will update or overwrite the input value which you have supplied.
 
-### USING USEQUERY
+### USING REACT-QUERY
 
-- axios.config.data contains the info about the request that we were making , so instead of redoing the whole process , we can just use the data from the axios config object.
-- Adding the enabled prop prevents react query from running immediately! Turns out that it was not being triggered by the status check! It is just build to run immediately upon render.
-- Suitable for handling any post and get requests in that it complements axios giving it superpowers as :-
-- It eliminates the need for a try catch statements as it has its own eventHandlers for handling errors and loading states. eg onError , onLoading , onSuccess
+- Is amazing how much information we can extract from the axios error body eg instead of repopulating the form again after renewing token because we do not have the global form states , we simply extract the previous values from the axios.config.data object and retry the request. If the data is in this config object , it doesn't even matter if we had been redirected after the request failed , we can still retry the mutation and the data will be there.
+- Adding the enabled prop prevents react query from running immediately! Turns out that it was not being triggered by the status check! It is just build to run immediately when spotted!
+- Suitable for handling mutation and fetch requests.
+- Mutation opertations is broader than a post request in that it can be used to make a put(update ) and a delete request also.
+
+#### ITS SUPERPOWERS
+
+- Eliminates the need for a try catch statements as it has its own eventHandlers for handling errors and loading states. eg onError , onLoading , onSuccess
 - Integrating skeletons has never been easier as we know exactly when our data is loading.
 - Error handling has also been simplified where we can use the `onError((error)=>{})`or the `isError` if we are just interested in the current state.
-- queryFn using fetches make it easy to intergrate skeletons and error messages.The functions is automatically called when we involve the error and data props later down in the code.
 - We also get instant updates when we use it to make a post request.
 
-- I enjoy using the one line syntax when doing my fetches which follows the following rule of thumb , we have an array of keys , followed by the function in action and additional configs at the very end eg
+- Has a one line syntax which i enjoy using when doing my fetches whose syntax( [keys ],function ,additonal props) eg
   `const courseQuery = useQuery(
 ["courseData", courseID],
 () => fetchCourseData(courseID),
@@ -132,10 +135,7 @@ handleError(error, updateAlertBoxData);
     }
 );`
 
-- Everything is within the code. However if no skeletons are involved , i can use the useEffect hook which runs once under the `   userDataQuery.refetch();` method
-- Querying can be done while the static content has loaded... You know blending static content with skeletons instead of using skeletons alone is a good trick to make the user feel like the page is loading faster.
-
-### HOW TO USE CHART JS
+### USING CHART JS
 
 - With multiple datasets , we can have multiple charts in one chart eg With the three datasets , we have 3 charts inside one chart with additional props to define how things will look.
 
@@ -200,7 +200,7 @@ borderColor: ["red", "green", "blue"],
 
 - Speaking of options , those that need embedding are well defined eg `animation.animateScale` and `animation.animateRotate`
 
-### HOW TO UPLOAD VIDEOS VIA THE YOUTUBE DATA API
+### UPLOADING VIDEOS VIA THE YOUTUBE DATA API
 
 There are three major aspects to it:-
 

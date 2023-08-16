@@ -54,7 +54,7 @@ const LessonForm = () => {
   useEffect(() => {
     const handleKeyPress = (e) => {
       if (e.key === "Enter" || e.type === "submit") {
-        saveLesson(e);
+        handleSubmit(saveLesson)(e);
       }
     };
     if (formRef.current) {

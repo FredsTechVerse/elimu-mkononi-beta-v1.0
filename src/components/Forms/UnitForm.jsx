@@ -82,7 +82,7 @@ const UnitForm = () => {
   useEffect(() => {
     const handleKeyPress = (e) => {
       if (e.key === "Enter" || e.type === "submit") {
-        saveUnit(e);
+        handleSubmit(saveUnit)(e);
       }
     };
     if (formRef.current) {

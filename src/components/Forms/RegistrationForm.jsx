@@ -52,7 +52,6 @@ const RegistrationForm = () => {
   useEffect(() => {
     const handleKeyPress = (e) => {
       if (e.key === "Enter" || e.type === "submit") {
-        // saveUser(e);
         handleSubmit(saveUser)(e);
       }
     };

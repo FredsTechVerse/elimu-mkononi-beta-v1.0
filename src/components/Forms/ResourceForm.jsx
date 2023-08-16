@@ -46,7 +46,7 @@ const ResourceForm = () => {
   useEffect(() => {
     const handleKeyPress = (e) => {
       if (e.key === "Enter" || e.type === "submit") {
-        saveResource(e);
+        handleSubmit(saveResource)(e);
       }
     };
     if (formRef.current) {

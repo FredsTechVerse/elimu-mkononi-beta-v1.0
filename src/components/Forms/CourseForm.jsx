@@ -45,7 +45,7 @@ const CourseForm = () => {
   useEffect(() => {
     const handleKeyPress = (e) => {
       if (e.key === "Enter" || e.type === "submit") {
-        saveCourse(e);
+        handleSubmit(saveCourse)(e);
       }
     };
     if (formRef.current) {

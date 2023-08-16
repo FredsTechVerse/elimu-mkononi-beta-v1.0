@@ -44,7 +44,7 @@ const ChapterForm = () => {
   useEffect(() => {
     const handleKeyPress = (e) => {
       if (e.key === "Enter" || e.type === "submit") {
-        saveChapter(e);
+        handleSubmit(saveChapter)(e);
       }
     };
     if (formRef.current) {
