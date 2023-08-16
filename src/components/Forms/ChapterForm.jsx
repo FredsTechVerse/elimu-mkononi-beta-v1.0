@@ -25,6 +25,8 @@ const ChapterForm = () => {
   // const [chapterName, setChapterName] = useState("");
   // const [chapterDescription, setChapterDescription] = useState("");
 
+  console.log(typeof chapterTotals);
+
   const {
     register,
     handleSubmit,
