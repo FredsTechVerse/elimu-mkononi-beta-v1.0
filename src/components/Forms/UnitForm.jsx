@@ -96,8 +96,6 @@ const UnitForm = () => {
   }, []);
 
   const saveUnit = async (data) => {
-    console.log(data);
-    console.log({ courseID });
     const { tutor, unitCode, unitName, unitDescription } = data;
     if (courseID) {
       createUnitMutation.mutate({
