@@ -49,6 +49,7 @@
 - Create resources interface and test upload to S3 Bucket
 - Make unit outline and unit breakdown descriptive
 - Implement reset password functionality.
+- The logout and login buttons need some addition words . I might resort into using a brieve sidebar menu also which is to be borrowed from the church application.
 
 ##### CHUNK 3
 

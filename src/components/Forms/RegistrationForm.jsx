@@ -15,8 +15,9 @@ const RegistrationForm = () => {
   const queryClient = useQueryClient();
   const formRef = useRef(null);
   const location = useLocation();
-  const role = location?.state?.role;
   const { updateAlertBoxData } = useAlertBoxContext();
+  const role = location?.state?.role;
+  console.log({ userRole: role });
 
   const {
     register,
@@ -114,15 +115,23 @@ const RegistrationForm = () => {
   });
 
   const saveUser = async (data) => {
-    console.log(data);
     const { fName, surname, password, contact, email } = data;
-    createUserMutation.mutate({
-      firstName: fName,
-      surname,
-      password,
-      contact: `254${contact}`,
-      email,
-      role: role,
+    if (role) {
+      createUserMutation.mutate({
+        firstName: fName,
+        surname,
+        password,
+        contact: `254${contact}`,
+        email,
+        role: role,
+      });
+      return;
+    }
+    updateAlertBoxData({
+      response: "Role has not been provided.",
+      isResponse: true,
+      status: "failure",
+      timeout: 3000,
     });
   };
 

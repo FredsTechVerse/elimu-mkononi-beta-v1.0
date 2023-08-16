@@ -9,7 +9,7 @@ const ERRORS = {
   INVALID_TOKEN: "Your token is invalid!",
   INVALID_ID: " The resource identity is invalid!",
   BAD_REQUEST: "Bad request sent to server ",
-  LOGOUT: "Successfully logged out.",
+  LOGOUT: "Unauthorzied!Logging out.",
 };
 
 const handleLogout = async () => {

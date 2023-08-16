@@ -24,18 +24,18 @@ const NavBgBtn = ({ to, text, isBlue = false }) => {
         <ArrowLeftOnRectangleIcon className="icon-styling text-white" />
       </Link>
     );
-  } else if (text === "Register") {
+  } else if (text === "register") {
     return (
       <Link
         to={to}
-        state={{ background: location, role: role }}
-        className={` rounded-full h-9 aspect-square cursor-pointer flex-row-centered ${
+        state={{ background: location, role: roleInformation }}
+        className={`navbar-link group ${
           isBlue
-            ? "bg-primary hover:bg-purple-500"
-            : "bg-slate-800 hover:bg-slate-900 text-white"
-        } `}
+            ? "bg-primary hover:bg-purple-500 "
+            : "bg-slate-700 hover:bg-slate-900  "
+        } text-white `}
       >
-        <ArrowLeftOnRectangleIcon className="icon-styling text-white" />
+        {text}
       </Link>
     );
   } else {
