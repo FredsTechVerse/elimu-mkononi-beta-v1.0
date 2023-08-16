@@ -16,28 +16,32 @@ import { useForm } from "react-hook-form";
 const LessonForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { background, chapterID, lessonTotals } = location?.state;
+
   const { pathname } = location;
+  const { background, chapterID } = location?.state;
+  const { updateAlertBoxData } = useAlertBoxContext();
+
+  const lessonTotals = location?.state?.lessonTotals;
   const lessonState = { pathname, background, chapterID, lessonTotals };
   const queryClient = useQueryClient();
   const formRef = useRef();
-  const { updateAlertBoxData } = useAlertBoxContext();
 
   //Form Variables
   // const [lessonName, setLessonName] = useState("");
   // const [lessonType, setLessonType] = useState("link");
-  // const [lessonUrl, setLessonUrl] = useState("");
+  const [lessonUrl, setLessonUrl] = useState("");
 
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      lessonName: "",
+      lessonName: "Elimu Mkononi",
       lessonNumber: lessonTotals + 1,
       lessonType: "link",
-      lessonUrl: "",
+      youtubeUrl: "",
     },
   });
   // Prevents the scroll behaviour of our page
@@ -47,7 +51,6 @@ const LessonForm = () => {
   }, []);
 
   const updateFileInfo = ({ videoUrl }) => {
-    console.log({ videoUrl });
     setLessonUrl(videoUrl);
   };
 
@@ -97,19 +100,30 @@ const LessonForm = () => {
   };
 
   const saveLesson = async (data) => {
-    const { lessonName, lessonNumber, lessonUrl } = data;
-    if (chapterID && lessonTotals) {
-      createLessonMutation.mutate({
-        lessonNumber: `${chapterID}-${lessonNumber}`,
-        lessonName: lessonName,
-        lessonUrl: lessonUrl,
-        chapterID: chapterID,
-      });
+    console.log({ data });
+    console.log({ chapterID });
+    const { lessonName, lessonNumber, youtubeUrl } = data;
+    if (chapterID && typeof lessonTotals !== "string") {
+      if (watch("lessonType") === "link") {
+        createLessonMutation.mutate({
+          lessonNumber: `${chapterID}-${lessonNumber}`,
+          lessonName: lessonName,
+          lessonUrl: youtubeUrl,
+          chapterID: chapterID,
+        });
+      } else {
+        createLessonMutation.mutate({
+          lessonNumber: `${chapterID}-${lessonNumber}`,
+          lessonName: lessonName,
+          lessonUrl: lessonUrl,
+          chapterID: chapterID,
+        });
+      }
       return;
     }
 
     updateAlertBoxData({
-      response: "Unit ID / Lesson Number has not been specified.",
+      response: "Chapter ID / Lesson Number has not been specified.",
       isResponse: true,
       status: "failure",
       timeout: 4500,
@@ -140,11 +154,10 @@ const LessonForm = () => {
               Lesson Details
             </label>
             <input
-              className={`input-styling ${disabled && "bg-slate-300"}`}
+              className={`input-styling `}
+              disabled={true}
               placeholder="Lesson Number"
-              {...register("lessonNumber", {
-                disabled: true,
-              })}
+              {...register("lessonNumber", {})}
             />
             <input
               className="input-styling"
@@ -179,12 +192,12 @@ const LessonForm = () => {
               <ErrorMessage message={errors.lessonType?.message} />
             )}
           </div>
-          {lessonType === "link" ? (
+          {watch("lessonType") === "link" ? (
             <div className="input-wrap">
               <input
                 className="input-styling"
                 placeholder="Enter a youtube link"
-                {...register("lessonUrl", {
+                {...register("youtubeUrl", {
                   required: "This field is required ",
                 })}
               />
@@ -199,7 +212,7 @@ const LessonForm = () => {
                 <YoutubeUploader
                   updateFileInfo={updateFileInfo}
                   lessonState={lessonState}
-                  videoTitle={lessonName}
+                  videoTitle={register("lessonName").name}
                 />
               ) : (
                 <div className="h-36 w-72 tablet:w-[360px] mt-2 bg-slate-200  bg-opacity-60 rounded-lg flex flex-col items-center gap-2 py-2 ">
@@ -226,7 +239,9 @@ const LessonForm = () => {
           {/* CTA BUTTONS */}
           <div className="cta-wrap">
             <SubmitButton
-              disabled={chapterID && lessonTotals ? false : true}
+              disabled={
+                chapterID && typeof lessonTotals !== "string" ? false : true
+              }
               type="submit"
               isSubmitting={createLessonMutation?.isLoading}
               text={
