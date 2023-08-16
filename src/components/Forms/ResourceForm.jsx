@@ -68,7 +68,7 @@ const ResourceForm = () => {
         response: "Resource has been saved",
         isResponse: true,
         status: "success",
-        timeout: 3000,
+        timeout: 4500,
       });
       navigate(-1);
     },
@@ -81,7 +81,7 @@ const ResourceForm = () => {
   });
 
   const retryMutation = (formData) => {
-    createChapterMutation.mutate({
+    createResourceMutation.mutate({
       resourceName: formData.resourceName,
       resourceUrl: formData.resourceUrl,
       chapterID: formData.chapterID,
