@@ -26,7 +26,7 @@ const UserForm = () => {
   const [isUserQueryEnabled, setIsUserQueryEnabled] = useState(
     userID ? true : false
   );
-  const [isEditEnabled, setIsEditEnabled] = useState(false);
+  const [isEditEnabled, setIsEditEnabled] = useState(userID ? false : true);
 
   const enableEdit = () => {
     setIsEditEnabled(true);
@@ -170,7 +170,7 @@ const UserForm = () => {
     const { fName, surname, password, contact, email } = data;
     console.log({ fName, surname, password, contact, email });
     if (role) {
-      if (!isUserQueryEnabled) {
+      if (!isEditEnabled) {
         console.log("Creating user");
         createUserMutation.mutate({
           firstName: fName,
@@ -219,7 +219,7 @@ const UserForm = () => {
             <label htmlFor="contact">Names</label>
             <div className="input-wrap">
               <input
-                readOnly={isUserQueryEnabled}
+                readOnly={!isEditEnabled}
                 className="input-styling"
                 placeholder="First Name"
                 {...register("fName", {
@@ -230,7 +230,7 @@ const UserForm = () => {
               {errors.fName && <ErrorMessage message={errors.fName?.message} />}
 
               <input
-                readOnly={isUserQueryEnabled}
+                readOnly={!isEditEnabled}
                 className="input-styling"
                 placeholder="Last Name"
                 {...register("surname", {
@@ -255,7 +255,7 @@ const UserForm = () => {
                   readOnly
                 />
                 <input
-                  readOnly={isUserQueryEnabled}
+                  readOnly={!isEditEnabled}
                   className="input-styling phone:w-52  tablet:w-72"
                   placeholder="Safaricom No."
                   {...register("contact", {
@@ -270,7 +270,7 @@ const UserForm = () => {
             <div className="input-wrap">
               <label htmlFor="email">Email</label>
               <input
-                readOnly={isUserQueryEnabled}
+                readOnly={!isEditEnabled}
                 className="input-styling"
                 placeholder="E-mail Address"
                 type="email"
@@ -287,7 +287,7 @@ const UserForm = () => {
             <div className="input-wrap">
               <label htmlFor="password">Password</label>
               <input
-                readOnly={isUserQueryEnabled}
+                readOnly={!isEditEnabled}
                 className="input-styling"
                 placeholder="Enter Password"
                 {...register("password", {
@@ -299,7 +299,7 @@ const UserForm = () => {
               )}
 
               <input
-                readOnly={isUserQueryEnabled}
+                readOnly={!isEditEnabled}
                 className="input-styling"
                 placeholder="Confirm Password"
                 {...register("cPassword", {
@@ -340,7 +340,7 @@ const UserForm = () => {
 
             <div
               className={`${
-                isEditEnabled ? "flex flex-row gap-5 items-center" : "hidden"
+                isEditEnabled ? "flex flex-row  items-center" : "hidden"
               }`}
             >
               <SubmitButton

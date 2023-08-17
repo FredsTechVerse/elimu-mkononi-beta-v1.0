@@ -3,7 +3,7 @@ import React from "react";
 const ActionBtn = ({ text, onClick, type }) => {
   return (
     <button
-      className="text-lg capitalize w-48 m-3 h-9 rounded-full text-white text-center bg-primary  hover:bg-purple-600"
+      className="text-lg capitalize w-40 m-3 h-9 rounded-full text-white text-center bg-slate-900 hover:bg-purple-600"
       type={type}
       onClick={onClick}
     >
