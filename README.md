@@ -54,10 +54,12 @@
 
 ##### CHUNK 3
 
+- Add the menu button to user page for free navigateion.Persist the side bar on large screens for swift navigation.
 - Implement typescript with SWC [Weekend Project]
 - Keep track of user interaction and completion using document ids , arrays and array methods.(Backend need!)[To be done after migration to typescript]
 - Tweak login to use email to login.
 - Consider verify email account while logging in to ensure true data....
+- Invalidate users upon a new registration via the user form
 
 ### KEY TIPS I HAVE PICKED UP ALONG THE JOURNEY
 

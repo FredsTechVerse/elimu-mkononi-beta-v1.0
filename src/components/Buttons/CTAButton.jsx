@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { deleteUser, handleError } from "../../controllers";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import { useNavigate } from "react-router-dom";
@@ -14,17 +14,23 @@ const CTAButton = ({ contact = null, userID, role = "EM-201" }) => {
   const [isDeleteQueryEnabled, setIsDeleteQueryEnabled] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    console.log({ deleteQueryStatus: isDeleteQueryEnabled });
+  }, [isDeleteQueryEnabled]);
+
   useQuery(["deletedUser"], () => deleteUser({ userID, role }), {
     enabled: isDeleteQueryEnabled,
     onSuccess: () => {
-      queryClient.invalidateQueries([role]);
-      setIsDeleteQueryEnabled(false);
       updateAlertBoxData({
         response: "Deleted user successfully",
         isResponse: true,
         status: "success",
-        timeout: 4500,
+        timeout: 2500,
       });
+      setIsDeleteQueryEnabled(false);
+      queryClient.invalidateQueries([role]);
+      queryClient.invalidateQueries(["users"]);
+      queryClient.invalidateQueries(["deletedUser"]);
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);

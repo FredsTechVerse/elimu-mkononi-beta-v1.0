@@ -83,7 +83,6 @@ const UserForm = () => {
       enabled: isUserQueryEnabled,
       staleTime: 1000 * 60 * 60,
       retry: 1,
-
       onError: (error) => {
         handleError(error, updateAlertBoxData);
         if (error.response && error.response.data.message === "Token expired") {
@@ -106,6 +105,7 @@ const UserForm = () => {
     mutationFn: registerUser,
     onSuccess: (data) => {
       queryClient.setQueryData([role, data?._id], data);
+      queryClient.invalidateQueries(["users"], { exact: true });
       queryClient.invalidateQueries([role], {
         exact: true,
       });

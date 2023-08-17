@@ -65,13 +65,9 @@ const logoutUser = async () => {
 };
 
 const deleteUser = async ({ userID, role }) => {
-  // console.log(
-  //   `User credentials  for deletion passed :  ${JSON.stringify({
-  //     userID: userID,
-  //     role: role,
-  //   })}`
-  // );
-
+  console.log(
+    `The delete user function is active with the roles ${(userID, role)}`
+  );
   if (role === "EM-203") {
     let { data: adminData } = await axios.delete(`/auth/admin/${userID}`);
     return adminData;
