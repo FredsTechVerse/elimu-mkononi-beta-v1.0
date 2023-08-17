@@ -34,32 +34,27 @@
 
 ##### CHUNK 1
 
-- Implement react form hook to handle validation and optimization of forms.
 - Implement tanstack table to handle sorting , filtering and pagination table logic.
-- Implement dropdown and accordions using shadcdn/ui (A component library.)
-- Handle deletion of a thing and all of its children. Integrate deletion and update into the course card.
-- Students now not being registered.
-  -Bit of friction between s3 uploader and form uploader...
-  - Try submitting via keypress see what happens
+- A must experiment on use of the tanstack table functionalities to update the card.. I mean how will it know coz its only the elements that are changing really....
+- Make navbar a dropdown in small screen similar to church app.
+- Delete function is executing twice... Find out why.
 
 ##### CHUNK 2
 
-- Look into how we can use spread operator with the alertbox to avoid having to pass in default props again if they do not change.
-- Correct back btn... Screen freezes when it reaches to the homepage
-- Create resources interface and test upload to S3 Bucket
 - Make unit outline and unit breakdown descriptive
-- Implement reset password functionality.
-- The logout and login buttons need some addition words . I might resort into using a brieve sidebar menu also which is to be borrowed from the church application.
-- A must experiment on use of the tanstack table functionalities to update the card.. I mean how will it know coz its only the elements that are changing really....
+- Correct back btn... Screen freezes when it reaches to the homepage
+- Look into how we can use spread operator with the alertbox to avoid having to pass in default props again if they do not change.
+- Create resources interface and test upload to S3 Bucket
+- Add the menu button to user page for free navigateion.Persist the side bar on large screens for swift navigation.
+- Invalidate users upon a new registration via the user form
 
 ##### CHUNK 3
 
-- Add the menu button to user page for free navigateion.Persist the side bar on large screens for swift navigation.
 - Implement typescript with SWC [Weekend Project]
 - Keep track of user interaction and completion using document ids , arrays and array methods.(Backend need!)[To be done after migration to typescript]
 - Tweak login to use email to login.
 - Consider verify email account while logging in to ensure true data....
-- Invalidate users upon a new registration via the user form
+- Find out means of resetting token.
 
 ### KEY TIPS I HAVE PICKED UP ALONG THE JOURNEY
 

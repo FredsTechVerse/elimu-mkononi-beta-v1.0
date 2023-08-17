@@ -11,6 +11,7 @@ import MenuBtn from "./MenuBtn";
 import BackBtn from "./BackBtn";
 import NavPageBtn from "./NavPageBtn";
 import AddBtn from "./AddBtn";
+import TableBtn from "./TableBtn";
 export {
   AddBtn,
   SubmitButton,
@@ -25,4 +26,5 @@ export {
   MenuBtn,
   BackBtn,
   NavPageBtn,
+  TableBtn,
 };

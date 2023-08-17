@@ -11,6 +11,7 @@ import {
   MenuBtn,
   BackBtn,
   DashboardUserButton,
+  TableBtn,
   NavPageBtn,
 } from "./Buttons";
 
@@ -122,6 +123,7 @@ import {
   UnitsAdminTable,
   UsersTable,
   TutorUnitsTable,
+  TanstackTable,
 } from "./Tables";
 
 import { PriceTag, DurationTag } from "./Tags";
@@ -153,6 +155,7 @@ export {
   AlertBox,
   AdminCard,
   PaymentsTable,
+  TanstackTable,
   NavigateBtn,
   StatusPill,
   PriceTag,
@@ -188,6 +191,7 @@ export {
   HomeBtn,
   BackBtn,
   NavPageBtn,
+  TableBtn,
   Modal,
   TeamCard,
   ProgressBar,
