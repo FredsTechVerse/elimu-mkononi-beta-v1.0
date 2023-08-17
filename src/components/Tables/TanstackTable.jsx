@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { useState } from "react";
 import basicData from "../../BasicData.json";
 import { TableBtn } from "../../components";
 
