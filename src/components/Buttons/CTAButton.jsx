@@ -14,32 +14,25 @@ const CTAButton = ({ contact = null, userID, role = "EM-201" }) => {
   const [isDeleteQueryEnabled, setIsDeleteQueryEnabled] = useState(false);
   const navigate = useNavigate();
 
-  useQuery(
-    ["deletedUser"],
-    () => {
-      deleteUser({ userID, role });
+  useQuery(["deletedUser"], () => deleteUser({ userID, role }), {
+    enabled: isDeleteQueryEnabled,
+    onSuccess: () => {
+      queryClient.invalidateQueries([role]);
+      setIsDeleteQueryEnabled(false);
+      updateAlertBoxData({
+        response: "Deleted user successfully",
+        isResponse: true,
+        status: "success",
+        timeout: 4500,
+      });
     },
-    {
-      enabled: isDeleteQueryEnabled,
-      onSuccess: (data) => {
-        console.log({ role, data });
-        queryClient.invalidateQueries([role]);
-        setIsDeleteQueryEnabled(false);
-        updateAlertBoxData({
-          response: "Deleted user successfully",
-          isResponse: true,
-          status: "success",
-          timeout: 4500,
-        });
-      },
-      onError: (error) => {
-        handleError(error, updateAlertBoxData);
-        if (error.response && error.response.data.message === "Token expired") {
-          queryClient.invalidateQueries(["deletedUser"]);
-        }
-      },
-    }
-  );
+    onError: (error) => {
+      handleError(error, updateAlertBoxData);
+      if (error.response && error.response.data.message === "Token expired") {
+        queryClient.invalidateQueries(["deletedUser"]);
+      }
+    },
+  });
 
   if (roles?.includes("EM-202")) {
     return (

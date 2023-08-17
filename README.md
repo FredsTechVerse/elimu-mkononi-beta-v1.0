@@ -122,6 +122,10 @@
 
 ### USING REACT-QUERY
 
+- There will be painfull tears if you miss the return statement in the useQuery hook if your useCase requires an arrow function that extends to another line other eg ` () => {
+  return deleteUser({ userID, role });
+},`
+- To avoid the painful tears simply define the arrow function in a single line avoiding the need for curly braces which always require a return statement as shown `() => deleteUser({ userID, role })`
 - Is amazing how much information we can extract from the axios error body eg instead of repopulating the form again after renewing token because we do not have the global form states , we simply extract the previous values from the axios.config.data object and retry the request. If the data is in this config object , it doesn't even matter if we had been redirected after the request failed , we can still retry the mutation and the data will be there.
 - Adding the enabled prop prevents react query from running immediately! Turns out that it was not being triggered by the status check! It is just build to run immediately when spotted!
 - Suitable for handling mutation and fetch requests.
