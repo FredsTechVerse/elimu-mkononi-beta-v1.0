@@ -11,7 +11,7 @@ const SubmitButton = ({ text, type, disabled = false, isSubmitting }) => {
       disabled={disabled}
     >
       <p className="w-full h-full flex items-center justify-center gap-3 px-2">
-        <span>{text}</span>
+        <span className="capitalize">{text}</span>
         {isSubmitting && (
           <span>
             <SpinnerIcon />

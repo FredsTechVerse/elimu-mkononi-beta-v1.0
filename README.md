@@ -56,6 +56,8 @@
 
 - Implement typescript with SWC [Weekend Project]
 - Keep track of user interaction and completion using document ids , arrays and array methods.(Backend need!)[To be done after migration to typescript]
+- Tweak login to use email to login.
+- Consider verify email account while logging in to ensure true data....
 
 ### KEY TIPS I HAVE PICKED UP ALONG THE JOURNEY
 

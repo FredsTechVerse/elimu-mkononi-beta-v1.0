@@ -14,7 +14,7 @@ import {
 import {
   RequireAuth,
   LogInForm,
-  RegistrationForm,
+  UserForm,
   ResourcesSection,
   Layout,
   AlertBox,
@@ -79,7 +79,7 @@ function App() {
           {/* GENERAL ROUTES */}
           <Route exact path="*" element={<NotFound />}></Route>
           <Route exact path="forbidden" element={<Forbidden />} />
-          <Route exact path="/new-user" element={<RegistrationForm />} />
+          <Route exact path="/new-user" element={<UserForm />} />
 
           <Route path="/log-in" element={<LogInForm />} />
           <Route path="/draft" element={<DraftPage />} />
@@ -155,7 +155,7 @@ function App() {
       {background && (
         <Routes>
           <Route path="/log-in" element={<LogInForm />} />
-          <Route exact path="/new-user" element={<RegistrationForm />} />
+          <Route exact path="/new-user" element={<UserForm />} />
           <Route exact path="/new-course" element={<CourseForm />} />
           <Route exact path="/new-unit" element={<UnitForm />} />
           <Route exact path="/new-chapter" element={<ChapterForm />} />

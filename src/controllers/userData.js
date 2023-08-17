@@ -21,6 +21,27 @@ const registerUser = async ({
   }
 };
 
+const updateUser = async ({
+  userID,
+  firstName,
+  surname,
+  contact,
+  email,
+  role,
+}) => {
+  const userData = { firstName, surname, contact, email };
+  if (role === "EM-203") {
+    await axios.put(`/auth/admin/${userID}`, userData);
+    return;
+  } else if (role === "EM-201") {
+    await axios.put(`/auth/student/${userID}`, userData);
+    return;
+  } else if (role === "EM-202") {
+    await axios.put(`/auth/tutor/${userID}`, userData);
+    return;
+  }
+};
+
 const loginUser = async ({ firstName, password }) => {
   const credentials = { firstName, password };
   const config = {
@@ -50,7 +71,6 @@ const deleteUser = async ({ userID, role }) => {
   //     role: role,
   //   })}`
   // );
-  // let response;
 
   if (role === "EM-203") {
     let { data: adminData } = await axios.delete(`/auth/admin/${userID}`);
@@ -70,4 +90,11 @@ const messageUser = ({ contact }) => {
   console.log("Contact data to api responsible ${JSON.stingify(contact)}");
 };
 
-export { registerUser, loginUser, logoutUser, deleteUser, messageUser };
+export {
+  registerUser,
+  loginUser,
+  logoutUser,
+  deleteUser,
+  messageUser,
+  updateUser,
+};

@@ -4,6 +4,7 @@ import CTAButton from "./CTAButton";
 import NavigateBtn from "./NavigateBtn";
 import CTAUnitButtonAdmin from "./CTAUnitButtonAdmin";
 import DashboardUserButton from "./DashboardUserButton";
+import ActionBtn from "./ActionBtn";
 import LogoutBtn from "./LogoutBtn";
 import HomeBtn from "./HomeBtn";
 import MenuBtn from "./MenuBtn";
@@ -15,6 +16,7 @@ export {
   SubmitButton,
   AdminNavItem,
   CTAButton,
+  ActionBtn,
   NavigateBtn,
   CTAUnitButtonAdmin,
   DashboardUserButton,

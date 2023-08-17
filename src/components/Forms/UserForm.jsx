@@ -4,13 +4,19 @@ import {
   SubmitButton,
   Modal,
   ErrorMessage,
-} from "../../components";
+  ActionBtn,
+} from "..";
 import { useNavigate, useLocation } from "react-router-dom";
-import { registerUser, handleError, fetchUserData } from "../../controllers";
+import {
+  registerUser,
+  updateUser,
+  handleError,
+  fetchUserData,
+} from "../../controllers";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import { useForm } from "react-hook-form";
-const RegistrationForm = () => {
+const UserForm = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -20,6 +26,14 @@ const RegistrationForm = () => {
   const [isUserQueryEnabled, setIsUserQueryEnabled] = useState(
     userID ? true : false
   );
+  const [isEditEnabled, setIsEditEnabled] = useState(false);
+
+  const enableEdit = () => {
+    setIsEditEnabled(true);
+  };
+  const disableEdit = () => {
+    setIsEditEnabled(false);
+  };
 
   const {
     register,
@@ -58,6 +72,10 @@ const RegistrationForm = () => {
     };
   }, []);
 
+  useEffect(() => {
+    console.log({ isUserQueryEnabled });
+  }, [isUserQueryEnabled]);
+
   const userQuery = useQuery(
     ["user", userID],
     () => fetchUserData({ userID: userID, role: role }),
@@ -75,14 +93,13 @@ const RegistrationForm = () => {
     }
   );
 
+  // Updates user data
   useEffect(() => {
     if (userQuery?.status === "success" && userQuery?.data) {
       setValue("fName", userQuery?.data?.firstName);
       setValue("surname", userQuery?.data?.surname);
       setValue("contact", userQuery?.data?.contact);
       setValue("email", userQuery?.data?.email);
-      setValue("password", userQuery?.data?.password);
-      setValue("cPassword", userQuery?.data?.password);
     }
   }, [userID, userQuery?.status]);
   const createUserMutation = useMutation({
@@ -103,30 +120,83 @@ const RegistrationForm = () => {
     onError: (error) => {
       handleError(error, updateAlertBoxData);
       if (error.response && error.response.data.message === "Token expired") {
+        retryCreatingUserMutation(error.config.data);
+      }
+    },
+  });
+
+  const retryCreatingUserMutation = (formData) => {
+    createUserMutation.mutate({
+      firstName: formData.firstName,
+      surname: formData.surname,
+      password: formData.password,
+      contact: formData.contact,
+      email: formData.email,
+      role: formData.email,
+    });
+  };
+
+  const updateUserMutation = useMutation({
+    mutationFn: updateUser,
+    onSuccess: (data) => {
+      queryClient.setQueryData([role, data?._id], data);
+      queryClient.invalidateQueries([role], {
+        exact: true,
+      });
+      updateAlertBoxData({
+        response: "User has been registered.",
+        isResponse: true,
+        status: "success",
+        timeout: 4500,
+      });
+      navigate(-1);
+    },
+    onError: (error) => {
+      handleError(error, updateAlertBoxData);
+      if (error.response && error.response.data.message === "Token expired") {
+        retryUpdatingUserMutation(error.config.data);
+      }
+    },
+  });
+
+  const retryUpdatingUserMutation = (formData) => {
+    createUserMutation.mutate({
+      userID: formData.userID,
+      firstName: formData.firstName,
+      surname: formData.surname,
+      contact: formData.contact,
+      email: formData.email,
+      role: formData.email,
+    });
+  };
+
+  const saveUser = async (data) => {
+    const { fName, surname, password, contact, email } = data;
+    console.log({ fName, surname, password, contact, email });
+    if (role) {
+      if (!isUserQueryEnabled) {
+        console.log("Creating user");
         createUserMutation.mutate({
           firstName: fName,
           surname,
           password,
           contact: `254${contact}`,
           email,
-          role,
+          role: role,
         });
+        return;
+      } else {
+        console.log("Updating user");
+        updateUserMutation.mutate({
+          userID: userID,
+          firstName: fName,
+          surname,
+          contact: `254${contact}`,
+          email,
+          role: role,
+        });
+        return;
       }
-    },
-  });
-
-  const saveUser = async (data) => {
-    const { fName, surname, password, contact, email } = data;
-    if (role) {
-      createUserMutation.mutate({
-        firstName: fName,
-        surname,
-        password,
-        contact: `254${contact}`,
-        email,
-        role: role,
-      });
-      return;
     }
     updateAlertBoxData({
       response: "Role has not been provided.",
@@ -153,6 +223,7 @@ const RegistrationForm = () => {
             <label htmlFor="contact">Names</label>
             <div className="input-wrap">
               <input
+                readOnly={isUserQueryEnabled}
                 className="input-styling"
                 placeholder="First Name"
                 {...register("fName", {
@@ -163,6 +234,7 @@ const RegistrationForm = () => {
               {errors.fName && <ErrorMessage message={errors.fName?.message} />}
 
               <input
+                readOnly={isUserQueryEnabled}
                 className="input-styling"
                 placeholder="Last Name"
                 {...register("surname", {
@@ -187,6 +259,7 @@ const RegistrationForm = () => {
                   readOnly
                 />
                 <input
+                  readOnly={isUserQueryEnabled}
                   className="input-styling phone:w-52  tablet:w-72"
                   placeholder="Safaricom No."
                   {...register("contact", {
@@ -201,6 +274,7 @@ const RegistrationForm = () => {
             <div className="input-wrap">
               <label htmlFor="email">Email</label>
               <input
+                readOnly={isUserQueryEnabled}
                 className="input-styling"
                 placeholder="E-mail Address"
                 type="email"
@@ -213,42 +287,80 @@ const RegistrationForm = () => {
           </div>
 
           {/* PASSWORD SECTION */}
+          {!isUserQueryEnabled && (
+            <div className="input-wrap">
+              <label htmlFor="password">Password</label>
+              <input
+                readOnly={isUserQueryEnabled}
+                className="input-styling"
+                placeholder="Enter Password"
+                {...register("password", {
+                  required: "This field is required ",
+                })}
+              />
+              {errors.password && (
+                <ErrorMessage message={errors.password?.message} />
+              )}
 
-          <div className="input-wrap">
-            <label htmlFor="password">Password</label>
-            <input
-              className="input-styling"
-              placeholder="Enter Password"
-              {...register("password", {
-                required: "This field is required ",
-              })}
-            />
-            {errors.password && (
-              <ErrorMessage message={errors.password?.message} />
-            )}
+              <input
+                readOnly={isUserQueryEnabled}
+                className="input-styling"
+                placeholder="Confirm Password"
+                {...register("cPassword", {
+                  required: "This field is required ",
+                })}
+              />
 
-            <input
-              className="input-styling"
-              placeholder="Confirm Password"
-              {...register("cPassword", {
-                required: "This field is required ",
-              })}
-            />
+              {errors.cPassword && (
+                <ErrorMessage message={errors.cPassword?.message} />
+              )}
+            </div>
+          )}
 
-            {errors.cPassword && (
-              <ErrorMessage message={errors.cPassword?.message} />
-            )}
-          </div>
           <div className="cta-wrap">
-            <SubmitButton
-              type="submit"
-              isSubmitting={createUserMutation?.isLoading}
-              text={
-                createUserMutation?.status === "loading"
-                  ? "Registering"
-                  : "Register"
-              }
-            />
+            <div
+              className={`${
+                !isEditEnabled ? "flex flex-row gap-5 items-center" : "hidden"
+              }`}
+            >
+              {!isUserQueryEnabled ? (
+                <SubmitButton
+                  type="submit"
+                  isSubmitting={createUserMutation.isLoading}
+                  text={
+                    createUserMutation.isLoading ? "Registering" : "Register"
+                  }
+                />
+              ) : (
+                <ActionBtn
+                  type="button"
+                  onClick={() => {
+                    enableEdit();
+                  }}
+                  text="Edit"
+                />
+              )}
+            </div>
+
+            <div
+              className={`${
+                isEditEnabled ? "flex flex-row gap-5 items-center" : "hidden"
+              }`}
+            >
+              <SubmitButton
+                type="submit"
+                isSubmitting={updateUserMutation.isLoading}
+                text={updateUserMutation.isLoading ? "Updating" : "Update"}
+              />
+              <ActionBtn
+                type="button"
+                onClick={() => {
+                  disableEdit();
+                  userQuery.refetch();
+                }}
+                text="cancel"
+              />
+            </div>
           </div>
         </form>
       </div>
@@ -256,4 +368,4 @@ const RegistrationForm = () => {
   );
 };
 
-export default RegistrationForm;
+export default UserForm;

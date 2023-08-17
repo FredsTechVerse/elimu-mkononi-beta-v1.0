@@ -4,6 +4,7 @@ import {
   LogoutBtn,
   AdminNavItem,
   CTAButton,
+  ActionBtn,
   NavigateBtn,
   CTAUnitButtonAdmin,
   HomeBtn,
@@ -36,7 +37,7 @@ import {
 } from "./Charts";
 
 import {
-  RegistrationForm,
+  UserForm,
   LogInForm,
   CourseForm,
   ChapterForm,
@@ -129,6 +130,7 @@ export {
   AddBtn,
   LogInForm,
   HomePageCard,
+  ActionBtn,
   CourseSkeleton,
   VideoComponent,
   FormNavigation,
@@ -168,7 +170,7 @@ export {
   RequireAuth,
   Accordion,
   AccordionItem,
-  RegistrationForm,
+  UserForm,
   AudioPlayer,
   VideoSkeleton,
   CoursesSection,

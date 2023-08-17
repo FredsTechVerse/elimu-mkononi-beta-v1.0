@@ -46,6 +46,7 @@ import {
   logoutUser,
   deleteUser,
   messageUser,
+  updateUser,
 } from "./userData";
 
 export {
@@ -73,6 +74,7 @@ export {
   fetchUsersData,
   fetchUserDetails,
   updateCourse,
+  updateUser,
   updateUnit,
   updateChapter,
   updateLesson,

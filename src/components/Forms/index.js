@@ -1,4 +1,4 @@
-import RegistrationForm from "./RegistrationForm";
+import UserForm from "./UserForm";
 import LogInForm from "./LogInForm";
 import ChapterForm from "./ChapterForm";
 import CourseForm from "./CourseForm";
@@ -9,7 +9,7 @@ import DummyForm from "./DummyForm";
 
 export {
   LogInForm,
-  RegistrationForm,
+  UserForm,
   ResourceForm,
   ChapterForm,
   CourseForm,
