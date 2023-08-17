@@ -14,9 +14,7 @@ const CTAButton = ({ contact = null, userID, role = "EM-201" }) => {
   const [isDeleteQueryEnabled, setIsDeleteQueryEnabled] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log({ deleteQueryStatus: isDeleteQueryEnabled });
-  }, [isDeleteQueryEnabled]);
+  useEffect(() => {}, [isDeleteQueryEnabled]);
 
   useQuery(["deletedUser"], () => deleteUser({ userID, role }), {
     enabled: isDeleteQueryEnabled,

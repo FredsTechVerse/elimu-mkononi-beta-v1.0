@@ -72,10 +72,6 @@ const UserForm = () => {
     };
   }, []);
 
-  useEffect(() => {
-    console.log({ isUserQueryEnabled });
-  }, [isUserQueryEnabled]);
-
   const userQuery = useQuery(
     ["user", userID],
     () => fetchUserData({ userID: userID, role: role }),

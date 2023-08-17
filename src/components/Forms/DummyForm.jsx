@@ -14,12 +14,8 @@ export default function DummyForm() {
   });
 
   //   Declaring default values gives us implicit type checking with typescript.
-  const onSubmit = (data) => {
-    console.log(data);
-    console.log("Will it submit with the errors");
-  };
+  const onSubmit = (data) => {};
 
-  //   console.log(watch("example")); // watch input value by passing the name of it
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     <form onSubmit={handleSubmit(onSubmit)}>
