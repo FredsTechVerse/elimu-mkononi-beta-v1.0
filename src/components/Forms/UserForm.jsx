@@ -24,8 +24,12 @@ const UserForm = () => {
   const { role, userID } = location?.state;
   const { updateAlertBoxData } = useAlertBoxContext();
   const [isUserQueryEnabled, setIsUserQueryEnabled] = useState(
-    userID ? true : false
+    userID !== undefined ? true : false
   );
+
+  useEffect(() => {
+    console.log({ isUserQueryEnabled });
+  }, [isUserQueryEnabled]);
   const [isEditEnabled, setIsEditEnabled] = useState(userID ? false : true);
 
   const enableEdit = () => {
@@ -72,6 +76,7 @@ const UserForm = () => {
     };
   }, []);
 
+  //  Fetches the user data is need be
   const userQuery = useQuery(
     ["user", userID],
     () => fetchUserData({ userID: userID, role: role }),
@@ -88,7 +93,7 @@ const UserForm = () => {
     }
   );
 
-  // Updates user data
+  // Updates accordingly  after fetch
   useEffect(() => {
     if (userQuery?.status === "success" && userQuery?.data) {
       setValue("fName", userQuery?.data?.firstName);
@@ -97,6 +102,9 @@ const UserForm = () => {
       setValue("email", userQuery?.data?.email);
     }
   }, [userID, userQuery?.status]);
+
+  // Used to create a user instance.
+
   const createUserMutation = useMutation({
     mutationFn: registerUser,
     onSuccess: (data) => {
@@ -170,7 +178,7 @@ const UserForm = () => {
     const { fName, surname, password, contact, email } = data;
     console.log({ fName, surname, password, contact, email });
     if (role) {
-      if (!isEditEnabled) {
+      if (!isUserQueryEnabled) {
         console.log("Creating user");
         createUserMutation.mutate({
           firstName: fName,
@@ -316,7 +324,9 @@ const UserForm = () => {
           <div className="cta-wrap">
             <div
               className={`${
-                !isEditEnabled ? "flex flex-row gap-5 items-center" : "hidden"
+                !isUserQueryEnabled || !isEditEnabled
+                  ? "flex flex-row gap-5 items-center"
+                  : "hidden"
               }`}
             >
               {!isUserQueryEnabled ? (
@@ -340,7 +350,9 @@ const UserForm = () => {
 
             <div
               className={`${
-                isEditEnabled ? "flex flex-row  items-center" : "hidden"
+                isEditEnabled && isUserQueryEnabled
+                  ? "flex flex-row  items-center"
+                  : "hidden"
               }`}
             >
               <SubmitButton
