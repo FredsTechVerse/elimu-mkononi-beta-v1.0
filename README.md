@@ -19,11 +19,8 @@
 
 - Yes , we place all resources needed to pass exams with updated materials all under one roof! Infact , we do not need to be content creators, we can just share what is out there , what is in youtube since it is our red university.
 - Lecturers can get to recommend for their learners the best resources to use for their revision, including posting lesson notes and relevant materials for their learners to use.**_This is how we bring the lecturers on board._**
-
 - With the ability to monetize this product , the source code will not be let out in the public domain. However , the product will be free to use for all learners for now as we polish up on our marketing skills.
 - Using already pre-existing youtube videos , referencing authors correctly and only paying for space to store images and videos will really make the cost super low and sustainable
-
-  **KAPESHA NEVER PAID , BUT THE SEED SOWED CAN PAY A HUNDRED FOLD!**
 
   ### PRODUCT REDEFINATION
 
