@@ -66,12 +66,22 @@ const fetchCoursesData = async () => {
   return coursesData;
 };
 
-const fetchCourseData = async (courseID) => {
+const fetchCourseData = async ({ courseID }) => {
   const { data: courseData } = await axios.get(`/course/${courseID}`);
   return courseData;
 };
 
-const fetchLessonNotes = async (notesID) => {
+const fetchChapterData = async ({ courseID }) => {
+  const { data: courseData } = await axios.get(`/chapter/${courseID}`);
+  return courseData;
+};
+
+const fetchLessonData = async ({ lessonID }) => {
+  const { data: lessonData } = await axios.get(`/chapter/${lessonID}`);
+  return lessonData;
+};
+
+const fetchLessonNotes = async ({ notesID }) => {
   if (notesID) {
     const { data: notesData } = await axios.get(`notes/${notesID}`);
     return notesData.content;
@@ -79,7 +89,7 @@ const fetchLessonNotes = async (notesID) => {
   return null;
 };
 
-const fetchUnitData = async (unitID) => {
+const fetchUnitData = async ({ unitID }) => {
   const { data: unitData } = await axios.get(`/unit/${unitID}`);
   return unitData;
 };
@@ -90,7 +100,9 @@ export {
   fetchAllUsersData,
   fetchCoursesData,
   fetchCourseData,
+  fetchChapterData,
   fetchUnitData,
+  fetchLessonData,
   fetchLessonNotes,
   fetchUserData,
   fetchUsersData,

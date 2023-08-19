@@ -45,7 +45,7 @@ const QuillEditor = () => {
 
   const notesQuery = useQuery(
     ["notes", currentLesson?.lessonNotes],
-    () => fetchLessonNotes(currentLesson?.lessonNotes),
+    () => fetchLessonNotes({ notesID: currentLesson?.lessonNotes }),
     {
       retry: 1,
       onError: (error) => {
@@ -54,24 +54,21 @@ const QuillEditor = () => {
           queryClient.invalidateQueries(["notes"]);
         }
       },
-      onSuccess: (savedNotes) => {
-        if (savedNotes) {
-          setOriginalContent(savedNotes);
-          setContent(savedNotes);
-          setAreNotesPresent(true);
-          return;
-        }
-        setAreNotesPresent(false);
-        setOriginalContent("");
-        setContent("");
-        return;
-      },
     }
   );
+
   useEffect(() => {
+    if (notesQuery.status === "success" && notesQuery?.data) {
+      setOriginalContent(notesQuery?.data);
+      setContent(notesQuery?.data);
+      setAreNotesPresent(true);
+      return;
+    }
+    setAreNotesPresent(false);
+    setOriginalContent("");
     setContent("");
-    notesQuery.refetch();
-  }, [currentLesson?.lessonNotes]);
+    return;
+  }, [notesQuery.status]);
 
   const createNotesMutation = useMutation({
     mutationFn: createNotes,
@@ -152,16 +149,6 @@ const QuillEditor = () => {
 
   return (
     <div className="w-full flex flex-col p-2 border-none ">
-      {/* CTA BUTTONS */}
-      {/* <button
-        className={`${roles.includes(
-          "EM-201" ? "flex " : "hidden"
-        )} h-8 w-36  laptop:hidden bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full`}
-        onClick={openSideBar}
-      >
-        Open Sidebar
-      </button> */}
-
       <div
         className={`${
           roles?.includes("EM-202") || roles?.includes("EM-203")

@@ -17,15 +17,14 @@ const updateCourse = async ({ courseTitle, courseImage }) => {
 };
 
 const updateUnit = async ({
-  course,
   tutor,
+  unitID,
   unitCode,
   unitName,
   unitDescription,
 }) => {
   const unitData = {
-    courseID: course,
-    tutorId: tutor,
+    tutorID: tutor,
     unitCode: unitCode,
     unitName: unitName,
     unitDescription: unitDescription,
@@ -35,18 +34,21 @@ const updateUnit = async ({
     headers: { "Content-Type": "application/json" },
   };
 
-  const { data: updatedUnit } = await axios.put("/unit", unitData, config);
+  const { data: updatedUnit } = await axios.put(
+    `/unit/${unitID}`,
+    unitData,
+    config
+  );
   return updatedUnit;
 };
 
 const updateChapter = async ({
+  chapterID,
   chapterNumber,
   chapterName,
   chapterDescription,
-  unitID,
 }) => {
   const chapterData = {
-    unitID,
     chapterNumber,
     chapterName,
     chapterDescription,
@@ -56,7 +58,7 @@ const updateChapter = async ({
   };
 
   const { data: updatedChapter } = await axios.put(
-    "/chapter",
+    `/chapter/${chapterID}`,
     chapterData,
     config
   );
@@ -64,14 +66,13 @@ const updateChapter = async ({
 };
 
 const updateLesson = async ({
-  lessonNumber,
+  lessonID,
   lessonName,
   lessonUrl,
-  chapterID,
+  lessonNumber,
 }) => {
   const lessonData = {
-    chapterID,
-    lessonNumber: `${chapterID}-${lessonNumber}`,
+    lessonNumber,
     lessonName,
     lessonUrl,
   };
@@ -81,7 +82,7 @@ const updateLesson = async ({
   };
 
   const { data: updatedLesson } = await axios.put(
-    "/lesson",
+    `/lesson/${lessonID}`,
     lessonData,
     config
   );
@@ -98,17 +99,21 @@ const updateNotes = async ({ lessonNotes, notesID }) => {
     notesID: notesID,
   };
 
-  const { data: updatedNotes } = await axios.put("/notes", notesData, config);
+  const { data: updatedNotes } = await axios.put(
+    `/notes/${notesID}`,
+    notesData,
+    config
+  );
   return updatedNotes;
 };
 
-const updateResource = async ({ resourceName, resourceUrl, chapterID }) => {
-  const resourceData = { resourceName, resourceUrl, chapterID };
+const updateResource = async ({ resourceName, resourceUrl, resourceID }) => {
+  const resourceData = { resourceName, resourceUrl };
   const config = {
     headers: { "Content-Type": "application/json" },
   };
   const { data: createdResource } = await axios.put(
-    "/resources",
+    `/resources/${resourceID}`,
     resourceData,
     config
   );

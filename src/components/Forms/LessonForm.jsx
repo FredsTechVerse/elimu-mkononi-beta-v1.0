@@ -4,12 +4,18 @@ import {
   Modal,
   SubmitButton,
   YoutubeUploader,
+  ActionBtn,
 } from "../../components";
 import { XCircleIcon } from "@heroicons/react/24/solid";
 
 import { useNavigate, useLocation } from "react-router-dom";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createLesson, handleError } from "../../controllers";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  createLesson,
+  updateLesson,
+  fetchLessonData,
+  handleError,
+} from "../../controllers";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import { useForm } from "react-hook-form";
 
@@ -17,17 +23,29 @@ const LessonForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const formRef = useRef();
   const { pathname } = location;
   const { background, chapterID } = location?.state;
   const { updateAlertBoxData } = useAlertBoxContext();
+  const [lessonUrl, setLessonUrl] = useState("");
 
   const lessonTotals = location?.state?.lessonTotals;
-  console.log(typeof lessonTotals, { chapterID, lessonTotals });
+  const { lessonID } = location?.state;
   const lessonState = { pathname, background, chapterID, lessonTotals };
   const queryClient = useQueryClient();
-  const formRef = useRef();
 
-  const [lessonUrl, setLessonUrl] = useState("");
+  const [isLessonQueryEnabled, setIsUserLessonQueryEnabled] = useState(
+    lessonID !== undefined ? true : false
+  );
+
+  const [isEditEnabled, setIsEditEnabled] = useState(lessonID ? false : true);
+
+  const enableEdit = () => {
+    setIsEditEnabled(true);
+  };
+  const disableEdit = () => {
+    setIsEditEnabled(false);
+  };
 
   const {
     register,
@@ -36,8 +54,8 @@ const LessonForm = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      lessonName: "Elimu Mkononi",
       lessonNumber: lessonTotals + 1,
+      lessonName: "Elimu Mkononi",
       lessonType: "link",
       youtubeUrl: "",
     },
@@ -68,6 +86,32 @@ const LessonForm = () => {
     };
   }, []);
 
+  //  Fetches the user data is need be
+  const lessonQuery = useQuery(
+    ["user", lessonID],
+    () => fetchLessonData({ lessonID }),
+    {
+      enabled: isLessonQueryEnabled,
+      staleTime: 1000 * 60 * 60,
+      retry: 1,
+      onError: (error) => {
+        handleError(error, updateAlertBoxData);
+        if (error.response && error.response.data.message === "Token expired") {
+          queryClient.invalidateQueries(["lesson", lessonID], { exact: true });
+        }
+      },
+    }
+  );
+
+  // Updates accordingly  after fetch
+  useEffect(() => {
+    if (lessonQuery?.status === "success" && lessonQuery?.data) {
+      setValue("lessonNumber", lessonQuery?.data?.lessonNumber);
+      setValue("lessonName", lessonQuery?.data?.lessonName);
+      setValue("youtubeUrl", lessonQuery?.data?.lessonUrl);
+    }
+  }, [lessonID, lessonQuery?.status]);
+
   const createLessonMutation = useMutation({
     mutationFn: createLesson,
     onSuccess: () => {
@@ -83,12 +127,41 @@ const LessonForm = () => {
     onError: (error) => {
       handleError(error, updateAlertBoxData);
       if (error.response && error.response.data.message === "Token expired") {
-        retryMutation(error.config.data);
+        retryCreatingLessonMutation(error.config.data);
       }
     },
   });
 
-  const retryMutation = (formData) => {
+  const retryCreatingLessonMutation = (formData) => {
+    createLessonMutation.mutate({
+      lessonNumber: formData.lessonTotals,
+      lessonName: formData.lessonName,
+      lessonUrl: formData.lessonUrl,
+      chapterID: formData.chapterID,
+    });
+  };
+
+  const updateLessonMutation = useMutation({
+    mutationFn: updateLesson,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["unitData"]);
+      updateAlertBoxData({
+        response: "Lesson has been saved.",
+        isResponse: true,
+        status: "success",
+        timeout: 4500,
+      });
+      navigate(-1);
+    },
+    onError: (error) => {
+      handleError(error, updateAlertBoxData);
+      if (error.response && error.response.data.message === "Token expired") {
+        retryUpdatingLessonMutation(error.config.data);
+      }
+    },
+  });
+
+  const retryUpdatingLessonMutation = (formData) => {
     createLessonMutation.mutate({
       lessonNumber: formData.lessonTotals,
       lessonName: formData.lessonName,
@@ -99,27 +172,49 @@ const LessonForm = () => {
 
   const saveLesson = async (data) => {
     const { lessonName, lessonNumber, youtubeUrl } = data;
-    if (chapterID && typeof lessonTotals !== "string") {
-      if (watch("lessonType") === "link") {
-        createLessonMutation.mutate({
-          lessonNumber: `${chapterID}-${lessonNumber}`,
-          lessonName: lessonName,
-          lessonUrl: youtubeUrl,
-          chapterID: chapterID,
-        });
-      } else {
-        createLessonMutation.mutate({
-          lessonNumber: `${chapterID}-${lessonNumber}`,
-          lessonName: lessonName,
-          lessonUrl: lessonUrl,
-          chapterID: chapterID,
-        });
+
+    if (!lessonID) {
+      if (chapterID && typeof lessonTotals !== "string") {
+        if (watch("lessonType") === "link") {
+          createLessonMutation.mutate({
+            lessonNumber: `${chapterID}-${lessonNumber}`,
+            lessonName: lessonName,
+            lessonUrl: youtubeUrl,
+            chapterID: chapterID,
+          });
+        } else {
+          createLessonMutation.mutate({
+            lessonNumber: `${chapterID}-${lessonNumber}`,
+            lessonName: lessonName,
+            lessonUrl: lessonUrl,
+            chapterID: chapterID,
+          });
+        }
+        return;
       }
-      return;
+    } else {
+      if (chapterID && typeof lessonTotals !== "string") {
+        if (watch("lessonType") === "link") {
+          updateLessonMutation.mutate({
+            lessonNumber: `${chapterID}-${lessonNumber}`,
+            lessonName,
+            lessonUrl: youtubeUrl,
+            lessonID,
+          });
+        } else {
+          updateLessonMutation.mutate({
+            lessonNumber: `${chapterID}-${lessonNumber}`,
+            lessonName,
+            lessonUrl,
+            lessonID,
+          });
+        }
+        return;
+      }
     }
 
     updateAlertBoxData({
-      response: "Chapter ID / Lesson Number has not been specified.",
+      response: "Lesson ID / Lesson Number has not been specified.",
       isResponse: true,
       status: "failure",
       timeout: 4500,
@@ -156,6 +251,7 @@ const LessonForm = () => {
               {...register("lessonNumber", {})}
             />
             <input
+              readOnly={!isEditEnabled}
               className="input-styling"
               placeholder="Lesson Name"
               {...register("lessonName", {
@@ -177,6 +273,7 @@ const LessonForm = () => {
 
             <select
               className="input-styling  mb-5"
+              disabled={!isEditEnabled}
               {...register("lessonType", {
                 required: "This field is required ",
               })}
@@ -192,6 +289,7 @@ const LessonForm = () => {
             <div className="input-wrap">
               <input
                 className="input-styling"
+                readOnly={!isEditEnabled}
                 placeholder="Enter a youtube link"
                 {...register("youtubeUrl", {
                   required: "This field is required ",
@@ -233,7 +331,7 @@ const LessonForm = () => {
           )}
 
           {/* CTA BUTTONS */}
-          <div className="cta-wrap">
+          {/* <div className="cta-wrap">
             <SubmitButton
               disabled={
                 chapterID && typeof lessonTotals !== "string" ? false : true
@@ -244,6 +342,54 @@ const LessonForm = () => {
                 createLessonMutation?.status === "loading" ? "Saving" : "Save"
               }
             />
+          </div> */}
+
+          <div className="cta-wrap">
+            <div
+              className={`${
+                !isLessonQueryEnabled || !isEditEnabled
+                  ? "flex flex-row gap-5 items-center"
+                  : "hidden"
+              }`}
+            >
+              {!isLessonQueryEnabled ? (
+                <SubmitButton
+                  type="submit"
+                  isSubmitting={createLessonMutation.isLoading}
+                  text={createLessonMutation.isLoading ? "Saving" : "Save"}
+                />
+              ) : (
+                <ActionBtn
+                  type="button"
+                  onClick={() => {
+                    enableEdit();
+                  }}
+                  text="Edit"
+                />
+              )}
+            </div>
+
+            <div
+              className={`${
+                isEditEnabled && isLessonQueryEnabled
+                  ? "flex flex-row  items-center"
+                  : "hidden"
+              }`}
+            >
+              <SubmitButton
+                type="submit"
+                isSubmitting={updateLessonMutation.isLoading}
+                text={updateLessonMutation.isLoading ? "Updating" : "Update"}
+              />
+              <ActionBtn
+                type="button"
+                onClick={() => {
+                  disableEdit();
+                  lessonQuery.refetch();
+                }}
+                text="cancel"
+              />
+            </div>
           </div>
         </form>
       </div>

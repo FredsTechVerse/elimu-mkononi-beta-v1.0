@@ -1,5 +1,29 @@
 import axios from "../axios";
 
+const refreshYoutubeToken = async () => {
+  try {
+    const refreshToken = localStorage.getItem("youtubeRefreshToken");
+    const config = {
+      headers: { "Content-Type": "application/json" },
+      data: { refreshToken: refreshToken },
+    };
+    const { data } = await axios.post(
+      "oAuth/refreshToken",
+      { refreshToken },
+      config
+    );
+
+    const { accessToken, expiresIn } = data;
+    localStorage.setItem("youtubeRefreshToken", accessToken);
+    localStorage.setItem("youtubeAccessTokenExpiryDate", expiresIn);
+    return { accessToken, expiresIn };
+  } catch (err) {
+    console.log(
+      `Error while refreshing youtube access token ${JSON.stringify(err)}`
+    );
+  }
+};
+
 const createCourse = async ({ courseTitle, courseImage }) => {
   const courseData = {
     courseTitle,
@@ -124,4 +148,5 @@ export {
   createLesson,
   createNotes,
   createResource,
+  refreshYoutubeToken,
 };

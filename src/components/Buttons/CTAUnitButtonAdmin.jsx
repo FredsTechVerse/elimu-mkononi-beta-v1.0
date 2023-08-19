@@ -1,13 +1,14 @@
 import React from "react";
 import axios from "../../axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   ChatBubbleBottomCenterIcon,
   PencilIcon,
   TrashIcon,
 } from "@heroicons/react/24/solid";
-const CTAUnitButtonAdmin = ({ contact, _id }) => {
+const CTAUnitButtonAdmin = ({ contact, _id: unitID }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   // My work in the front-end is simply to make the axios request to the backend ili ifanye haki
   const deleteTenant = async (_id) => {
     try {
@@ -20,7 +21,9 @@ const CTAUnitButtonAdmin = ({ contact, _id }) => {
       <button
         className="flex items-center justify-center w-full bg-primary  border-none text-secondary py-1 px-2"
         onClick={() => {
-          navigate(`/TenantsInformation/${_id}`);
+          navigate(`/new-unit/${_id}`, {
+            state: { background: location, courseID: courseID },
+          });
         }}
       >
         <span>

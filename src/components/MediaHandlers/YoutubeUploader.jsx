@@ -7,6 +7,7 @@ import { CircularProgressBar } from "../../components";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import {
   getYoutubeAuthorizationURI,
+  refreshYoutubeToken,
   handleError,
   redirectToExternalLink,
   fetchPresignedUrl,
@@ -17,6 +18,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 const YoutubeUploader = ({ updateFileInfo, videoTitle, lessonState }) => {
   const queryClient = useQueryClient();
   const { updateAlertBoxData } = useAlertBoxContext();
+
   const accessToken = localStorage.getItem("youtubeAccessToken");
   const [percentCompleted, setPercentCompleted] = useState(0);
   const [isQueryEnabled, setIsQueryEnabled] = useState(
@@ -94,13 +96,21 @@ const YoutubeUploader = ({ updateFileInfo, videoTitle, lessonState }) => {
 
         updateFileInfo({ videoUrl });
       } else {
-        //  Refresh Access Token and retry the put request logic
-        updateAlertBoxData({
-          response: "Your token has expired. Kindly logout and login again.",
-          isResponse: true,
-          status: "error",
-          timeout: 4500,
+        await refreshYoutubeToken();
+
+        const presignedUrl = await fetchPresignedUrl({
+          videoUploadUrl,
+          metadata,
+          headers,
         });
+        const videoUrl = await uploadVideoToYoutube({
+          presignedUrl,
+          videoFile,
+          videoType,
+          trackUploadProgress,
+        });
+
+        updateFileInfo({ videoUrl });
       }
     } catch (error) {
       console.error(error);

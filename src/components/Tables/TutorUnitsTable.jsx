@@ -1,7 +1,8 @@
 import React from "react";
 import { CTAButton } from "../../components";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 const TutorUnitsTable = ({ unitsData }) => {
+  const location = useLocation();
   return (
     <div className="overflow-auto w-full laptop:px-3 ">
       <table className="table-fixed bg-slate-300 bg-opacity-10 shadow-lg shadow-slate-200 w-full">
@@ -35,10 +36,23 @@ const TutorUnitsTable = ({ unitsData }) => {
                   <td>{numberOfLessons}</td>
 
                   <td>
-                    <Link to={`/unit/${unit?._id}`}>
-                      <button className="bg-primary text-white rounded-full px-5 py-0.5">
-                        View
-                      </button>
+                    <Link
+                      to={`/unit/${unit?._id}`}
+                      className="bg-primary text-white rounded-full px-5 py-0.5"
+                    >
+                      View
+                    </Link>
+
+                    <Link
+                      to={`/new-unit`}
+                      className="bg-primary text-white rounded-full px-5 py-0.5"
+                      state={{
+                        background: location,
+                        unitID: unit?.id,
+                        courseID: courseID,
+                      }}
+                    >
+                      Edit
                     </Link>
                   </td>
                 </tr>

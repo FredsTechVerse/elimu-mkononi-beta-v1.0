@@ -5,6 +5,7 @@ import {
   createLesson,
   createNotes,
   createResource,
+  refreshYoutubeToken,
 } from "./postData";
 
 import {
@@ -13,7 +14,9 @@ import {
   fetchAllUsersData,
   fetchCoursesData,
   fetchCourseData,
+  fetchChapterData,
   fetchUnitData,
+  fetchLessonData,
   fetchLessonNotes,
   fetchUserData,
   fetchUsersData,
@@ -71,10 +74,13 @@ export {
   createResource,
   verifyAccess,
   getYoutubeAuthorizationURI,
+  refreshYoutubeToken,
   fetchAllUsersData,
   fetchCoursesData,
   fetchCourseData,
+  fetchChapterData,
   fetchUnitData,
+  fetchLessonData,
   fetchLessonNotes,
   fetchUserData,
   fetchUsersData,
