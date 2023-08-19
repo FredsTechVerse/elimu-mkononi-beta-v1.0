@@ -49,6 +49,12 @@ import {
   updateUser,
 } from "./userData";
 
+import {
+  redirectToExternalLink,
+  fetchPresignedUrl,
+  uploadVideoToYoutube,
+} from "./youtubeUpload";
+
 export {
   handleError,
   renewToken,
@@ -86,4 +92,7 @@ export {
   deleteLesson,
   deleteNotes,
   deleteResource,
+  redirectToExternalLink,
+  fetchPresignedUrl,
+  uploadVideoToYoutube,
 };

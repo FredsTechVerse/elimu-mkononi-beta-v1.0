@@ -1,19 +1,47 @@
-import React, { useState, useEffect } from "react";
+//  Before making an upload , i simply need to confirm token expirataion time with the current
+// time to trigger a refresh token fetch. The refresh token will always be stored in my backend.
+
+import React, { useState } from "react";
 import Dropzone from "react-dropzone";
-import { youtubeInstance } from "../../axios";
 import { CircularProgressBar } from "../../components";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
-import { getYoutubeAuthorizationURI, handleError } from "../../controllers";
+import {
+  getYoutubeAuthorizationURI,
+  handleError,
+  redirectToExternalLink,
+  fetchPresignedUrl,
+  uploadVideoToYoutube,
+} from "../../controllers";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 const YoutubeUploader = ({ updateFileInfo, videoTitle, lessonState }) => {
-  const { updateAlertBoxData } = useAlertBoxContext();
-  const [percentCompleted, setPercentCompleted] = useState(0);
-  const [isQueryEnabled, setIsQueryEnabled] = useState(false);
   const queryClient = useQueryClient();
+  const { updateAlertBoxData } = useAlertBoxContext();
   const accessToken = localStorage.getItem("youtubeAccessToken");
-  const videoUploadUrl = import.meta.env.VITE_VIDEO_UPLOAD_LINK;
-  const videoDescription = "Youtube is the new red university!";
+  const [percentCompleted, setPercentCompleted] = useState(0);
+  const [isQueryEnabled, setIsQueryEnabled] = useState(
+    accessToken ? false : true
+  );
+
+  // Fetches the access token if not present.
+  useQuery(["authorizationURI"], getYoutubeAuthorizationURI, {
+    enabled: isQueryEnabled,
+    staleTime: 60 * 60 * 1000,
+    retry: 1,
+    onSuccess: (data) => {
+      redirectToExternalLink({
+        data,
+        lessonState,
+      });
+    },
+    onError: (error) => {
+      handleError(error, updateAlertBoxData);
+      if (error.response && error.response.data.message === "Token expired") {
+        queryClient.invalidateQueries(["authorizationURI"]);
+      }
+    },
+  });
+
   const trackUploadProgress = (progressEvent) => {
     const percentCompleted = Math.round(
       (progressEvent.loaded * 100) / progressEvent.total
@@ -24,36 +52,17 @@ const YoutubeUploader = ({ updateFileInfo, videoTitle, lessonState }) => {
     }
   };
 
-  const youtubeAccessTokenQuery = useQuery(
-    ["authorizationURI"],
-    getYoutubeAuthorizationURI,
-    {
-      enabled: isQueryEnabled, // Control when the query should run
-      staleTime: 3600 * 1000,
-      retry: 1,
-      onSuccess: (data) => {
-        redirectToExternalLink(data);
-      },
-      onError: (error) => {
-        handleError(error, updateAlertBoxData);
-        if (error.response && error.response.data.message === "Token expired") {
-          queryClient.invalidateQueries(["authorizationURI"]);
-        }
-      },
-    }
-  );
-
-  const redirectToExternalLink = (externalLink) => {
-    localStorage.setItem("previousLocation", lessonState?.pathname);
-    localStorage.setItem("chapterID", lessonState?.chapterID);
-    localStorage.setItem("lessonTotals", lessonState?.lessonTotals);
-    localStorage.setItem("background", lessonState?.background?.pathname);
-    window.open(externalLink, "_self");
-  };
-
   const handleDrop = async (acceptedFiles) => {
     try {
       const videoFile = acceptedFiles[0];
+      const currentTime = Date.now();
+      const youtubeAccessTokenExpiryTime = localStorage.getItem(
+        "youtubeAccessTokenExpiryDate"
+      );
+
+      const videoUploadUrl = import.meta.env.VITE_VIDEO_UPLOAD_LINK;
+      const videoDescription = "Youtube is the new red university!";
+
       const { type: videoType } = videoFile;
       const headers = {
         Authorization: `Bearer ${accessToken}`,
@@ -70,47 +79,34 @@ const YoutubeUploader = ({ updateFileInfo, videoTitle, lessonState }) => {
         },
       };
 
-      const response = await youtubeInstance.post(videoUploadUrl, metadata, {
-        headers: headers,
-        params: {
-          uploadType: "resumable",
-          part: "snippet,status",
-        },
-      });
-      const presignedUrl = response.headers.location;
-      const { data: videoData } = await youtubeInstance.put(
-        presignedUrl,
-        videoFile,
-        {
-          headers: {
-            "Content-Type": videoType,
-          },
-          onUploadProgress: trackUploadProgress,
-        }
-      );
-      const { id: videoID } = videoData;
+      if (currentTime < youtubeAccessTokenExpiryTime) {
+        const presignedUrl = await fetchPresignedUrl({
+          videoUploadUrl,
+          metadata,
+          headers,
+        });
+        const videoUrl = await uploadVideoToYoutube({
+          presignedUrl,
+          videoFile,
+          videoType,
+          trackUploadProgress,
+        });
 
-      const videoUrl = `https://www.youtube.com/watch?v=${videoID}`;
-
-      updateFileInfo({ videoUrl });
+        updateFileInfo({ videoUrl });
+      } else {
+        //  Refresh Access Token and retry the put request logic
+        updateAlertBoxData({
+          response: "Your token has expired. Kindly logout and login again.",
+          isResponse: true,
+          status: "error",
+          timeout: 4500,
+        });
+      }
     } catch (error) {
       console.error(error);
       handleError(error, updateAlertBoxData);
     }
   };
-  useEffect(() => {
-    setIsQueryEnabled(!accessToken);
-  }, [accessToken]);
-
-  if (!accessToken) {
-    return (
-      <div className="h-36 w-72 tablet:w-[360px] mt-2 bg-slate-300  bg-opacity-60 rounded-lg flex-col-centered">
-        {youtubeAccessTokenQuery.status === "loading" && (
-          <p className="text-center">Fetching the access token...</p>
-        )}
-      </div>
-    );
-  }
 
   return (
     <div className="h-36  w-72 tablet:w-[360px] mt-2 bg-slate-300  bg-opacity-60 rounded-lg ">
@@ -127,12 +123,14 @@ const YoutubeUploader = ({ updateFileInfo, videoTitle, lessonState }) => {
                 className="dropzone flex-col-centered h-full "
               >
                 <input {...getInputProps()}></input>
-                <p className="mb-2 text-center">Drag and drop a file here</p>
+                <p className="text-center mb-2">
+                  You can drag and drop your video here
+                </p>
                 <button
                   type="button"
                   className="bg-primary text-white w-32 h-8 rounded-full"
                 >
-                  Select File
+                  Select Video
                 </button>
               </div>
             )}

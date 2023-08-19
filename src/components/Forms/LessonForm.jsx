@@ -22,6 +22,7 @@ const LessonForm = () => {
   const { updateAlertBoxData } = useAlertBoxContext();
 
   const lessonTotals = location?.state?.lessonTotals;
+  console.log(typeof lessonTotals, { chapterID, lessonTotals });
   const lessonState = { pathname, background, chapterID, lessonTotals };
   const queryClient = useQueryClient();
   const formRef = useRef();

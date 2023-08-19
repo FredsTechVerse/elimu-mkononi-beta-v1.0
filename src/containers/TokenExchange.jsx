@@ -12,17 +12,22 @@ const TokenExchange = () => {
       const code = new URLSearchParams(location?.search).get("code");
       const previousLocation = localStorage.getItem("previousLocation");
       const chapterID = localStorage.getItem("chapterID");
-      const lessonTotals = localStorage.getItem("lessonTotals");
+      const lessonTotals = parseInt(localStorage.getItem("lessonTotals"));
       const background = localStorage.getItem("background");
-      const response = await axios.post(`/oAuth/getToken`, { code: code });
-      const {
-        access_token: youtubeAccessToken,
-        scope,
-        token_type,
-        expiry_date,
-      } = response.data;
-      if (youtubeAccessToken) {
-        localStorage.setItem("youtubeAccessToken", youtubeAccessToken);
+      const { data: youtubeAccessTokenData } = await axios.post(
+        `/oAuth/getToken`,
+        { code: code }
+      );
+
+      console.log({ youtubeAccessTokenData });
+
+      const { access_token, refresh_token, scope, token_type, expiry_date } =
+        youtubeAccessTokenData;
+
+      if (access_token && refresh_token && expiry_date) {
+        localStorage.setItem("youtubeAccessToken", access_token);
+        localStorage.setItem("youtubeRefreshToken", refresh_token);
+        localStorage.setItem("youtubeAccessTokenExpiryDate", expiry_date);
 
         navigate(previousLocation, {
           state: {
