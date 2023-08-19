@@ -56,6 +56,7 @@
 - Tweak login to use email to login.
 - Consider verify email account while logging in to ensure true data....
 - Find out means of resetting token.
+- Consider anonymous authentication for students. But for tutors and admins , their records must be straight.... They must authenticate.
 
 ### KEY TIPS I HAVE PICKED UP ALONG THE JOURNEY
 

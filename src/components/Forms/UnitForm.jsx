@@ -12,13 +12,7 @@ const UnitForm = () => {
   const navigate = useNavigate();
   const formRef = useRef(null);
   const location = useLocation();
-
-  // DECLARATION OF VARIABLES
   const { courseID } = location?.state;
-  // const [tutor, setTutor] = useState();
-  // const [unitCode, setUnitCode] = useState("");
-  // const [unitName, setUnitName] = useState("");
-  // const [unitDescription, setUnitDescription] = useState("");
 
   const {
     register,
