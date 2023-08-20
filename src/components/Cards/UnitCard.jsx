@@ -13,6 +13,7 @@ const UnitCard = ({
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const roles = JSON.parse(localStorage.getItem("roles"));
   const queryClient = useQueryClient();
   const { updateAlertBoxData } = useAlertBoxContext();
   const [isDeleteQueryEnabled, setIsDeleteQueryEnabled] = useState(false);
@@ -43,14 +44,16 @@ const UnitCard = ({
         </div>
         <h1 className="uppercase text-lg font-extrabold">{unitName}</h1>
       </section>
-      <section className="w-full h-full flex-row-centered">
+      <section className={` w-full h-full flex-row-centered`}>
         <p className="text-dark text-md w-full h-full px-4 mt-3">
           {unitDescription}
         </p>
       </section>
       <section className=" flex gap-2 justify-end items-center">
         <button
-          className="cta-btn"
+          className={`${
+            roles.includes("EM-201") || (roles.includes("EM-202") && "hidden")
+          } cta-btn`}
           onClick={() => {
             setIsDeleteQueryEnabled(true);
           }}
@@ -59,7 +62,7 @@ const UnitCard = ({
         </button>
 
         <button
-          className="cta-btn"
+          className={`cta-btn ${roles.includes("EM-201") && "hidden"}`}
           onClick={() => {
             navigate("/new-unit", {
               state: { unitID, background: location },

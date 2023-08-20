@@ -1,7 +1,10 @@
 import React from "react";
 import { CTAButton } from "../../components";
-import { Link, useLocation } from "react-router-dom";
+import { PencilIcon } from "@heroicons/react/24/solid";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 const TutorUnitsTable = ({ unitsData }) => {
+  const roles = JSON.parse(localStorage.getItem("roles"));
+  const navigate = useNavigate();
   const location = useLocation();
   return (
     <div className="overflow-auto w-full laptop:px-3 ">
@@ -23,6 +26,7 @@ const TutorUnitsTable = ({ unitsData }) => {
               unit.unitChapters.forEach((chapter) => {
                 numberOfLessons += chapter.chapterLessons.length;
               });
+              console.log({ unitDataz: unit });
               return (
                 <tr
                   className={`${
@@ -35,24 +39,24 @@ const TutorUnitsTable = ({ unitsData }) => {
                   <td>{numberOfChapters}</td>
                   <td>{numberOfLessons}</td>
 
-                  <td>
-                    <Link
-                      to={`/unit/${unit?._id}`}
-                      className="bg-primary text-white rounded-full px-5 py-0.5"
-                    >
-                      View
-                    </Link>
-
-                    <Link
-                      to={`/new-unit`}
-                      className="bg-primary text-white rounded-full px-5 py-0.5"
-                      state={{
-                        background: location,
-                        unitID: unit?.id,
-                        courseID: courseID,
+                  <td className="flex-row-centered gap-3  ">
+                    <button
+                      className={`cta-btn ${
+                        roles.includes("EM-201") && "hidden"
+                      }`}
+                      onClick={() => {
+                        navigate("/new-unit", {
+                          state: { unitID: unit?._id, background: location },
+                        });
                       }}
                     >
-                      Edit
+                      <PencilIcon className="icon-styling h-4 laptop:h-5 text-white" />
+                    </button>
+                    <Link
+                      to={`/unit/${unit?._id}`}
+                      className="bg-slate-700 text-white rounded-full px-5 py-0.5"
+                    >
+                      View
                     </Link>
                   </td>
                 </tr>
