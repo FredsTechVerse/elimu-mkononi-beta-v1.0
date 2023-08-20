@@ -303,17 +303,6 @@ const UnitForm = () => {
               <ErrorMessage message={errors.unitDescription?.message} />
             )}
           </div>
-          {/* CTA BUTTONS */}
-          {/* <div className="cta-wrap">
-            <SubmitButton
-              type="submit"
-              isSubmitting={createUnitMutation?.isLoading}
-              disabled={courseID ? false : true}
-              text={
-                createUnitMutation?.status === "loading" ? "Saving" : "Save"
-              }
-            />
-          </div> */}
 
           <div className="cta-wrap">
             <div
@@ -326,6 +315,7 @@ const UnitForm = () => {
               {!isUnitQueryEnabled ? (
                 <SubmitButton
                   type="submit"
+                  disabled={courseID ? false : true}
                   isSubmitting={createUnitMutation.isLoading}
                   text={
                     createUnitMutation.isLoading ? "Registering" : "Register"

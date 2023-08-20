@@ -8,7 +8,6 @@ import { useAlertBoxContext } from "../../context/AlertBoxContext";
 
 const S3Uploader = ({ updateFileName, isTokenActive }) => {
   const [percentCompleted, setPercentCompleted] = useState(0);
-  //  Simply tracks our progress from the config object.
   const { updateAlertBoxData } = useAlertBoxContext();
   const trackProgress = (progressEvent) => {
     const percentCompleted = Math.round(
@@ -31,7 +30,7 @@ const S3Uploader = ({ updateFileName, isTokenActive }) => {
         headers: { "Content-Type": "application/json" },
       };
       if (isTokenActive) {
-        const { data } = await Axios.post("/s3Direct/", body, config);
+        const { data } = await Axios.post("/file/", body, config);
         const { signedUrl, Key } = data;
 
         await axios.put(signedUrl, file, {

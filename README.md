@@ -99,7 +99,7 @@
 
 - What we send to the frontend will be found inside the response object under the data eg if we send ` res.status(201).json({ signedUrl, Key });` We shall destructure this props from the response.data as `const { signedUrl, Key } = response.data`
 - Usually i enjoy breaking out the data and status (if needed) from the response object as
-  `const { data,status } = await axios.post("/s3Direct/", formData, config);`
+  `const { data,status } = await axios.post("/file/", formData, config);`
 
 ### REFERENCES
 

@@ -1,6 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import { verifyAccess, createCourse, handleError } from "../../controllers";
+import { useNavigate, useLocation } from "react-router-dom";
+import {
+  verifyAccess,
+  createCourse,
+  fetchCourseData,
+  updateCourse,
+  handleError,
+} from "../../controllers";
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import { useForm } from "react-hook-form";
@@ -11,14 +17,28 @@ import {
   Modal,
   SubmitButton,
   S3Uploader,
+  ActionBtn,
 } from "../../components";
 
 const CourseForm = () => {
   const formRef = useRef(null);
+  const location = useLocation();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [fileName, setFileName] = useState("");
   const { updateAlertBoxData } = useAlertBoxContext();
+  const { courseID } = location.state;
+  const [isCourseQueryEnabled, setIsCourseQueryEnabled] = useState(
+    courseID ? true : false
+  );
+  const [isEditEnabled, setIsEditEnabled] = useState(courseID ? false : true);
+
+  const enableEdit = () => {
+    setIsEditEnabled(true);
+  };
+  const disableEdit = () => {
+    setIsEditEnabled(false);
+  };
 
   const {
     register,
@@ -34,6 +54,30 @@ const CourseForm = () => {
     document.body.style.overflow = "hidden";
     return () => (document.body.style.overflow = "unset");
   }, []);
+
+  const courseQuery = useQuery(
+    ["course", courseID],
+    () => fetchCourseData({ courseID }),
+    {
+      enabled: isCourseQueryEnabled,
+      staleTime: 1000 * 60 * 60,
+      retry: 1,
+      onError: (error) => {
+        handleError(error, updateAlertBoxData);
+        if (error.response && error.response.data.message === "Token expired") {
+          queryClient.invalidateQueries(["course", courseID], { exact: true });
+        }
+      },
+    }
+  );
+
+  // Updates accordingly  after fetch
+  useEffect(() => {
+    if (courseQuery?.status === "success" && courseQuery?.data) {
+      setValue("courseTitle", courseQuery?.data?.firstName);
+      setFileName(courseQuery?.data?.courseImage);
+    }
+  }, [courseID, courseQuery?.status]);
 
   const accessQuery = useQuery(["accessVerification"], () => verifyAccess(), {
     retry: 1,
@@ -86,17 +130,54 @@ const CourseForm = () => {
     });
   };
 
+  const updateCourseMutation = useMutation({
+    mutationFn: updateCourse,
+    onSuccess: (data) => {
+      queryClient.setQueryData(["courses", data._id], data);
+      queryClient.invalidateQueries(["courses"], { exact: true });
+      updateAlertBoxData({
+        response: "Course has been updated.",
+        isResponse: true,
+        status: "success",
+        timeout: 4500,
+      });
+      navigate(-1);
+    },
+    onError: (error) => {
+      handleError(error, updateAlertBoxData);
+      if (error.response && error.response.data.message === "Token expired") {
+        retryUpdatingCourseMutation(error.config.data); // Retry with captured form data
+      }
+    },
+  });
+
+  const retryUpdatingCourseMutation = (formData) => {
+    updateCourseMutation.mutate({
+      courseID: formData.courseID,
+      courseTitle: formData.courseTitle,
+      courseImage: formData.courseImage,
+    });
+  };
+
   const saveCourse = async (data) => {
     const { courseTitle } = data;
     if (fileName) {
-      createCourseMutation.mutate({
-        courseTitle: courseTitle,
-        courseImage: fileName,
-      });
-      return;
+      if (!isCourseQueryEnabled) {
+        createCourseMutation.mutate({
+          courseTitle: courseTitle,
+          courseImage: fileName,
+        });
+        return;
+      } else {
+        updateCourseMutation.mutate({
+          courseTitle: courseTitle,
+          courseImage: fileName,
+        });
+        return;
+      }
     }
     updateAlertBoxData({
-      response: "Some input fields are empty",
+      response: "File name is missing",
       isResponse: true,
       status: "failure",
       timeout: 4500,
@@ -120,6 +201,7 @@ const CourseForm = () => {
           <div className="input-wrap">
             <label htmlFor="course">Course Details</label>
             <input
+              readOnly={!isEditEnabled}
               className="input-styling"
               placeholder="Course Title"
               {...register("courseTitle", {
@@ -130,7 +212,48 @@ const CourseForm = () => {
               <ErrorMessage message={errors.courseTitle?.message} />
             )}
           </div>
-          <div className="input-wrap ">
+
+          <div
+            className={`${
+              !isCourseQueryEnabled ? "hidden" : "flex"
+            } input-wrap `}
+          >
+            {!isEditEnabled && fileName ? (
+              <img
+                src={`https://elimu-mkononi.s3.af-south-1.amazonaws.com/${fileName}`}
+                className="bg-gray-300 w-full h-[220px] tablet:h-[180px] laptop:h-[220px]  rounded-xl object-cover  bg-cover bg-center"
+                alt="courseImage"
+              />
+            ) : isEditEnabled && !fileName ? (
+              <S3Uploader
+                isTokenActive={accessQuery.status === "success"}
+                updateFileName={updateFileName}
+              />
+            ) : (
+              <div className="h-36 w-72 tablet:w-[360px] mt-2 bg-slate-200  bg-opacity-60 rounded-lg flex flex-col items-center gap-2 py-2 ">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-16 h-16 text-green-700"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"
+                  />
+                </svg>
+                <p className="text-center">Course Image has been uploaded</p>
+              </div>
+            )}
+          </div>
+          <div
+            className={`${
+              isCourseQueryEnabled ? "hidden" : "flex"
+            } input-wrap `}
+          >
             {!fileName ? (
               <S3Uploader
                 isTokenActive={accessQuery.status === "success"}
@@ -156,16 +279,54 @@ const CourseForm = () => {
               </div>
             )}
           </div>
-          {/* CTA BUTTONS */}
+
           <div className="cta-wrap">
-            <SubmitButton
-              type="submit"
-              isSubmitting={createCourseMutation?.isLoading}
-              disabled={fileName ? false : true}
-              text={
-                createCourseMutation?.status === "loading" ? "Saving" : "Save"
-              }
-            />
+            <div
+              className={`${
+                !isCourseQueryEnabled || !isEditEnabled
+                  ? "flex flex-row gap-5 items-center"
+                  : "hidden"
+              }`}
+            >
+              {!isCourseQueryEnabled ? (
+                <SubmitButton
+                  type="submit"
+                  disabled={fileName ? false : true}
+                  isSubmitting={createCourseMutation.isLoading}
+                  text={createCourseMutation.isLoading ? "Saving" : "Save"}
+                />
+              ) : (
+                <ActionBtn
+                  type="button"
+                  onClick={() => {
+                    enableEdit();
+                  }}
+                  text="Edit"
+                />
+              )}
+            </div>
+
+            <div
+              className={`${
+                isEditEnabled && isCourseQueryEnabled
+                  ? "flex flex-row  items-center"
+                  : "hidden"
+              }`}
+            >
+              <SubmitButton
+                type="submit"
+                isSubmitting={updateCourseMutation.isLoading}
+                text={updateCourseMutation.isLoading ? "Updating" : "Update"}
+              />
+              <ActionBtn
+                type="button"
+                onClick={() => {
+                  disableEdit();
+                  courseQuery.refetch();
+                }}
+                text="cancel"
+              />
+            </div>
           </div>
         </form>
       </div>

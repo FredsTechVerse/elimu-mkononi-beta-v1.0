@@ -15,7 +15,6 @@ import {
   createChapter,
   updateChapter,
   handleError,
-  handleError,
 } from "../../controllers";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 
@@ -26,10 +25,10 @@ const ChapterForm = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const from = location?.state?.background?.pathname;
-  const chapterTotals = location?.state?.chapterTotals;
-  const unitID = location?.state?.unitID;
-  const { chapterID } = location?.state;
+  const from = location.state?.background?.pathname;
+  const chapterTotals = location.state?.chapterTotals;
+  const unitID = location.state?.unitID;
+  const { chapterID } = location.state;
   const [isChapterQueryEnabled, setIsChapterQueryEnabled] = useState(
     chapterID !== undefined ? true : false
   );
@@ -85,7 +84,9 @@ const ChapterForm = () => {
       onError: (error) => {
         handleError(error, updateAlertBoxData);
         if (error.response && error.response.data.message === "Token expired") {
-          queryClient.invalidateQueries(["user", chapterID], { exact: true });
+          queryClient.invalidateQueries(["chapter", chapterID], {
+            exact: true,
+          });
         }
       },
     }
@@ -230,17 +231,6 @@ const ChapterForm = () => {
               <ErrorMessage message={errors.chapterDescription?.message} />
             )}
           </div>
-          {/* CTA BUTTONS */}
-          {/* <div className="cta-wrap ">
-            <SubmitButton
-              type="submit"
-              isSubmitting={createChapterMutation?.isLoading}
-              disabled={unitID ? false : true}
-              text={
-                createChapterMutation?.status === "loading" ? "Saving" : "Save"
-              }
-            />
-          </div> */}
 
           <div className="cta-wrap">
             <div
@@ -253,10 +243,9 @@ const ChapterForm = () => {
               {!isChapterQueryEnabled ? (
                 <SubmitButton
                   type="submit"
+                  disabled={unitID ? false : true}
                   isSubmitting={createChapterMutation.isLoading}
-                  text={
-                    createChapterMutation.isLoading ? "Registering" : "Register"
-                  }
+                  text={createChapterMutation.isLoading ? "Saving" : "Save"}
                 />
               ) : (
                 <ActionBtn

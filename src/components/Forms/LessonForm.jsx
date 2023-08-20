@@ -25,12 +25,11 @@ const LessonForm = () => {
 
   const formRef = useRef();
   const { pathname } = location;
-  const { background, chapterID } = location?.state;
+  const lessonTotals = location.state?.lessonTotals;
+  const { background, chapterID, lessonID } = location.state;
   const { updateAlertBoxData } = useAlertBoxContext();
   const [lessonUrl, setLessonUrl] = useState("");
 
-  const lessonTotals = location?.state?.lessonTotals;
-  const { lessonID } = location?.state;
   const lessonState = { pathname, background, chapterID, lessonTotals };
   const queryClient = useQueryClient();
 
@@ -330,20 +329,6 @@ const LessonForm = () => {
             </div>
           )}
 
-          {/* CTA BUTTONS */}
-          {/* <div className="cta-wrap">
-            <SubmitButton
-              disabled={
-                chapterID && typeof lessonTotals !== "string" ? false : true
-              }
-              type="submit"
-              isSubmitting={createLessonMutation?.isLoading}
-              text={
-                createLessonMutation?.status === "loading" ? "Saving" : "Save"
-              }
-            />
-          </div> */}
-
           <div className="cta-wrap">
             <div
               className={`${
@@ -355,6 +340,9 @@ const LessonForm = () => {
               {!isLessonQueryEnabled ? (
                 <SubmitButton
                   type="submit"
+                  disabled={
+                    chapterID && typeof lessonTotals !== "string" ? false : true
+                  }
                   isSubmitting={createLessonMutation.isLoading}
                   text={createLessonMutation.isLoading ? "Saving" : "Save"}
                 />
