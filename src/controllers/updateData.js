@@ -1,3 +1,4 @@
+import axios from "../axios";
 const updateCourse = async ({ courseTitle, courseImage }) => {
   const courseData = {
     courseTitle,
