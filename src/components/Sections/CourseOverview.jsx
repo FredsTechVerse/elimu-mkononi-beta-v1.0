@@ -18,7 +18,7 @@ const CourseOverview = () => {
   const location = useLocation();
   const courseQuery = useQuery(
     ["courseData", courseID],
-    () => fetchCourseData(courseID),
+    () => fetchCourseData({ courseID }),
     {
       retry: 1,
       onError: (error) => {
@@ -102,6 +102,7 @@ const CourseOverview = () => {
                       unitNumber={`${index + 1}`}
                       unitName={unitName}
                       unitDescription={unitDescription}
+                      courseID={courseID}
                     />
                   );
                 })

@@ -32,13 +32,14 @@ const Accordion = ({ unitData, closeSideBar }) => {
             >
               <Link
                 to={`/new-chapter`}
+                className="cta-btn"
                 state={{
                   background: location,
                   unitID: unitID,
                   chapterTotals: chapterTotals,
                 }}
               >
-                <PlusIcon className="text-white m-0.5 hover:cursor-pointer w-6 h-6" />
+                <PlusIcon className="text-white m-0.5 hover:cursor-pointer h-4" />
               </Link>
             </div>
           </Tooltip>

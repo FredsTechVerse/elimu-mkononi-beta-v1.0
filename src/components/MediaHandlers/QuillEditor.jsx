@@ -20,7 +20,7 @@ const QuillEditor = () => {
   const { currentLesson } = useCurrentLessonContext();
   const roles = JSON.parse(localStorage.getItem("roles"));
   const isAdmin = () => {
-    if (roles.includes("EM-201") || roles.includes("EM-202")) {
+    if (roles.includes("EM-203") || roles.includes("EM-202")) {
       return true;
     }
     return false;
@@ -28,7 +28,6 @@ const QuillEditor = () => {
 
   //Quill Editor Config
   const [content, setContent] = useState("");
-  // const [newContent, setNewContent] = useState("");
   const [originalContent, setOriginalContent] = useState("");
   const [isEditorEnabled, setIsEditorEnabled] = useState(false);
   const [areNotesPresent, setAreNotesPresent] = useState(false);
@@ -58,6 +57,10 @@ const QuillEditor = () => {
   );
 
   useEffect(() => {
+    console.log(`Is Editor Enabled ${isEditorEnabled}`);
+  }, [isEditorEnabled]);
+
+  useEffect(() => {
     if (notesQuery.status === "success" && notesQuery?.data) {
       setOriginalContent(notesQuery?.data);
       setContent(notesQuery?.data);
@@ -68,7 +71,7 @@ const QuillEditor = () => {
     setOriginalContent("");
     setContent("");
     return;
-  }, [notesQuery.status]);
+  }, [notesQuery.status, currentLesson]);
 
   const createNotesMutation = useMutation({
     mutationFn: createNotes,
@@ -199,21 +202,21 @@ const QuillEditor = () => {
       </h1>
 
       <div id="unit content" className="mt-1 ">
-        {currentLesson.lessonNotes && notesQuery.status === "loading" && (
-          <QuillEditorSkeleton />
-        )}
+        {notesQuery.status === "loading" && <QuillEditorSkeleton />}
 
-        {notesQuery.status === "success" && isEditorEnabled && isAdmin() ? (
-          <ReactQuill
-            value={content}
-            readOnly={!isEditorEnabled}
-            onChange={handleChange}
-            modules={quillModules}
-          />
+        {isEditorEnabled && isAdmin() ? (
+          <div className="debug">
+            <ReactQuill
+              value={content}
+              readOnly={!isEditorEnabled}
+              onChange={handleChange}
+              modules={quillModules}
+            />
+          </div>
         ) : (
           <div
             dangerouslySetInnerHTML={{ __html: content }}
-            className="text-start px-2"
+            className="text-start px-2 "
           />
         )}
       </div>

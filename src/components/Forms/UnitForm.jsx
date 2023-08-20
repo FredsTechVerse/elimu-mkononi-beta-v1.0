@@ -25,7 +25,7 @@ const UnitForm = () => {
   const formRef = useRef(null);
   const location = useLocation();
 
-  const { courseID, unitID } = location?.state;
+  const { courseID, unitID, background } = location?.state;
   const [isUnitQueryEnabled, setIsUnitQueryEnabled] = useState(
     unitID ? true : false
   );
@@ -104,7 +104,7 @@ const UnitForm = () => {
         status: "success",
         timeout: 4500,
       });
-      navigate(-1);
+      navigate(background);
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
@@ -125,7 +125,7 @@ const UnitForm = () => {
         status: "success",
         timeout: 4500,
       });
-      navigate(-1);
+      navigate(background);
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);

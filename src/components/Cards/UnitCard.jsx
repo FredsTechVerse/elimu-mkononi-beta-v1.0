@@ -20,6 +20,7 @@ const UnitCard = ({
 
   useQuery(["deletedUnit"], () => deleteUnit({ unitID }), {
     enabled: isDeleteQueryEnabled,
+    staleTime: 0,
     onSuccess: () => {
       updateAlertBoxData({
         response: "Deleted unit successfully",
@@ -32,7 +33,7 @@ const UnitCard = ({
     onError: (error) => {
       handleError(error, updateAlertBoxData);
       if (error.response && error.response.data.message === "Token expired") {
-        queryClient.invalidateQueries(["deletedUser"]);
+        queryClient.invalidateQueries(["deletedUnit"]);
       }
     },
   });

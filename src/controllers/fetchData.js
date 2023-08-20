@@ -71,13 +71,16 @@ const fetchCourseData = async ({ courseID }) => {
   return courseData;
 };
 
-const fetchChapterData = async ({ courseID }) => {
-  const { data: courseData } = await axios.get(`/chapter/${courseID}`);
+const fetchChapterData = async ({ chapterID }) => {
+  const { data: courseData } = await axios.get(`/chapter/${chapterID}`);
   return courseData;
 };
 
 const fetchLessonData = async ({ lessonID }) => {
-  const { data: lessonData } = await axios.get(`/chapter/${lessonID}`);
+  console.log("Fetching lesson Data");
+  const { data: lessonData } = await axios.get(`/lesson/${lessonID}`);
+  console.log({ retrievedLessonData: lessonData });
+
   return lessonData;
 };
 
@@ -90,6 +93,7 @@ const fetchLessonNotes = async ({ notesID }) => {
 };
 
 const fetchUnitData = async ({ unitID }) => {
+  console.log({ unitID });
   const { data: unitData } = await axios.get(`/unit/${unitID}`);
   return unitData;
 };

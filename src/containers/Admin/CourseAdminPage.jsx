@@ -39,7 +39,7 @@ const CoursesAdminPage = () => {
 
       <div className="w-full flex flex-col  justify-start">
         {coursesQuery.status === "loading" && (
-          <div className="grid-lg tablet:grid-cols-2 laptop:grid-cols-4 tablet:gap-6 ">
+          <div className="grid-lg tablet:grid-cols-2 laptop:grid-cols-4 tablet:gap-6  ">
             <CourseSkeleton />
             <CourseSkeleton />
             <CourseSkeleton />
@@ -49,7 +49,7 @@ const CoursesAdminPage = () => {
           </div>
         )}
         {coursesQuery.data && coursesQuery?.data.length > 0 && (
-          <div className="grid-lg">
+          <div className="grid-lg tablet:grid-cols-2 laptop:grid-cols-4 tablet:gap-6 ">
             {coursesQuery.data.map((course, courseIndex) => {
               return <CourseCardV2 key={courseIndex} courseData={course} />;
             })}

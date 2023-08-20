@@ -18,7 +18,7 @@ const ResourceForm = () => {
   const formRef = useRef(null);
   const { updateAlertBoxData } = useAlertBoxContext();
   const location = useLocation();
-  const { chapterID } = location?.state;
+  const { chapterID, background } = location?.state;
   const [resourceUrl, setResourceUrl] = useState("");
 
   const {
@@ -70,7 +70,7 @@ const ResourceForm = () => {
         status: "success",
         timeout: 4500,
       });
-      navigate(-1);
+      navigate(background);
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);

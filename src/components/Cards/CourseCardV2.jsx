@@ -1,18 +1,49 @@
-import React from "react";
-
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAlertBoxContext } from "../../context/AlertBoxContext";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { deleteCourse, handleError } from "../../controllers";
+import { TrashIcon, PencilIcon } from "@heroicons/react/24/solid";
 import {
   ClockIcon,
   Square3Stack3DIcon,
   PresentationChartLineIcon,
 } from "@heroicons/react/24/solid";
 const CourseCardV2 = ({ courseData }) => {
+  console.log({ courseData });
   const roles = JSON.parse(localStorage.getItem("roles"));
   let totalCourseUnits = 0;
   let totalCourseChapters = 0;
   let totalCourseLessons = 0;
   const isTutor = roles?.includes("EM-202");
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const { updateAlertBoxData } = useAlertBoxContext();
+  const [isDeleteQueryEnabled, setIsDeleteQueryEnabled] = useState(false);
+
+  useQuery(
+    ["deletedCourse", courseData?._id],
+    () => deleteCourse({ courseID: courseData?._id }),
+    {
+      enabled: isDeleteQueryEnabled,
+      staleTime: 0,
+      onSuccess: () => {
+        updateAlertBoxData({
+          response: "Deleted course successfully",
+          isResponse: true,
+          status: "success",
+          timeout: 2500,
+        });
+        queryClient.invalidateQueries(["courses"], { exact: true });
+      },
+      onError: (error) => {
+        handleError(error, updateAlertBoxData);
+        if (error.response && error.response.data.message === "Token expired") {
+          queryClient.invalidateQueries(["deletedCourse", courseData?._id]);
+        }
+      },
+    }
+  );
   const handleClick = () => {
     if (!roles?.includes("EM-202")) {
       navigate(`/course/${courseData?._id}`);
@@ -65,28 +96,52 @@ const CourseCardV2 = ({ courseData }) => {
           </span>
         </div>
       </div>
-      <button
-        onClick={handleClick}
-        className={`${
-          isTutor ? "hidden" : "flex"
-        } absolute bottom-0 right-0 flex-row justify-center items-center hover:pl-7  gap-2 group hover:font-bold hover:gap-4 text-sm h-8  font-extralight capitalize w-48 tablet:w-40 laptop:w-44 bg-slate-600 hover:bg-slate-800  text-white rounded-br-xl rounded-tl-xl `}
-      >
-        <span>Go to Course</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-6 h-5"
+
+      <div className="absolute bottom-0 right-0 flex gap-2 items-center">
+        <button
+          className={`${
+            roles.includes("EM-201") || (roles.includes("EM-202") && "hidden")
+          } cta-btn`}
+          onClick={() => {
+            setIsDeleteQueryEnabled(true);
+          }}
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-          />
-        </svg>
-      </button>
+          <TrashIcon className="icon-styling h-4 text-white" />
+        </button>
+
+        <button
+          className={`cta-btn ${roles.includes("EM-201") && "hidden"}`}
+          onClick={() => {
+            navigate("/new-course", {
+              state: { courseID: courseData?._id, background: location },
+            });
+          }}
+        >
+          <PencilIcon className="icon-styling h-4  text-white" />
+        </button>
+        <button
+          onClick={handleClick}
+          className={`${
+            isTutor ? "hidden" : "flex"
+          } flex-row justify-center items-center hover:pl-7  gap-2 group hover:font-bold hover:gap-4 text-sm h-8  font-extralight capitalize w-48 tablet:w-40 laptop:w-44 bg-slate-600 hover:bg-slate-800  text-white rounded-br-xl rounded-tl-xl `}
+        >
+          <span>Go to Course</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-5"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+            />
+          </svg>
+        </button>
+      </div>
     </div>
   );
 };

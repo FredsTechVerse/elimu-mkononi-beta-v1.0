@@ -185,7 +185,6 @@ const UserForm = () => {
           email,
           role,
         });
-        return;
       } else {
         console.log("Updating user");
         updateUserMutation.mutate({
@@ -196,8 +195,8 @@ const UserForm = () => {
           email,
           role,
         });
-        return;
       }
+      return;
     }
     updateAlertBoxData({
       response: "Role has not been provided.",

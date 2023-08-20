@@ -1,6 +1,6 @@
 import axios from "../axios";
 const deleteCourse = async ({ courseID }) => {
-  console.log(`Course ID  for deletion passed :  ${JSON.stringify(unitID)}`);
+  console.log(`Course ID  for deletion passed :  ${JSON.stringify(courseID)}`);
   const { data } = await axios.delete(`/course/${courseID}`);
   return data;
 };
@@ -12,17 +12,22 @@ const deleteUnit = async ({ unitID }) => {
 };
 
 const deleteChapter = async ({ chapterID }) => {
-  console.log(`User ID  for deletion passed :  ${JSON.stringify(chapterID)}`);
+  console.log(
+    `Chapter ID  for deletion passed :  ${JSON.stringify(chapterID)}`
+  );
   const { data } = await axios.delete(`/chapter/${chapterID}`);
   return data;
 };
 
 const deleteLesson = async ({ lessonID }) => {
-  console.log(
-    `Resource ID  for deletion passed :  ${JSON.stringify(lessonID)}`
-  );
-  const { data } = await axios.delete(`/lesson/${lessonID}`);
-  return data;
+  if (lessonID) {
+    console.log(
+      `Lesson ID  for deletion passed :  ${JSON.stringify(lessonID)}`
+    );
+    const { data } = await axios.delete(`/lesson/${lessonID}`);
+    return data;
+  }
+  return "";
 };
 
 const deleteNotes = async ({ notesID }) => {

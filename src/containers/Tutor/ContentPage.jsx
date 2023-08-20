@@ -17,7 +17,7 @@ const ContentPage = () => {
 
   const unitDataQuery = useQuery(
     ["unitData", unitID],
-    () => fetchUnitData(unitID),
+    () => fetchUnitData({ unitID }),
     {
       retry: 1,
       onError: (error) => {

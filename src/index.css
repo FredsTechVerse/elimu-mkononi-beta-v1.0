@@ -62,7 +62,7 @@
   }
 
   .icon-styling {
-    @apply text-slate-700 m-0.5 cursor-pointer w-6 h-6;
+    @apply text-slate-700 m-0.5 cursor-pointer h-6 aspect-square;
   }
 
   .centered {
@@ -105,7 +105,7 @@
     @apply flex flex-col justify-center items-center w-full mt-4;
   }
   .cta-btn {
-    @apply rounded-full h-6 laptop:h-8 my-1 aspect-square cursor-pointer flex-row-centered bg-slate-800 hover:bg-slate-900 text-white;
+    @apply rounded-full h-4 laptop:h-6 my-1 aspect-square cursor-pointer flex-row-centered bg-slate-800 hover:bg-slate-900 text-white;
   }
 
   /* MODAL STYLING */

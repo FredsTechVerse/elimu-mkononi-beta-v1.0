@@ -54,6 +54,14 @@
 - Find out means of resetting token.
 - Consider anonymous authentication for students. But for tutors and admins , their records must be straight.... They must authenticate.
 
+#### PRODUCT OPTIMIZATION
+
+- Lesson , Chapter number are not being read correctly... Something weird happends to them upon update
+- For the lesson number . split using the splice operator to have the number at the end only
+- There is a back button loop that is affecting the back btn...
+- Find a way of appending back the lesson type that was there after token verification.
+- Find a better way of not going to s3 uploader without lesson or resource name.
+
 ### KEY TIPS I HAVE PICKED UP ALONG THE JOURNEY
 
 - I was able to update the chapter 4 accross rerenders. It appears react router dom manages its states.

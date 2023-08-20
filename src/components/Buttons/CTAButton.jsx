@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { deleteUser, handleError } from "../../controllers";
+import React, { useState } from "react";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
-import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
-import { EnvelopeIcon, EyeIcon, TrashIcon } from "@heroicons/react/24/solid";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { deleteUser, handleError } from "../../controllers";
+import { EnvelopeIcon, EyeIcon, TrashIcon } from "@heroicons/react/24/solid";
 
 const CTAButton = ({ contact = null, userID, role = "EM-201" }) => {
   const location = useLocation();
@@ -14,10 +13,10 @@ const CTAButton = ({ contact = null, userID, role = "EM-201" }) => {
   const [isDeleteQueryEnabled, setIsDeleteQueryEnabled] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {}, [isDeleteQueryEnabled]);
-
   useQuery(["deletedUser"], () => deleteUser({ userID, role }), {
     enabled: isDeleteQueryEnabled,
+    staleTime: 0,
+    retry: 0,
     onSuccess: () => {
       updateAlertBoxData({
         response: "Deleted user successfully",
@@ -28,7 +27,6 @@ const CTAButton = ({ contact = null, userID, role = "EM-201" }) => {
       setIsDeleteQueryEnabled(false);
       queryClient.invalidateQueries([role]);
       queryClient.invalidateQueries(["users"]);
-      queryClient.invalidateQueries(["deletedUser"]);
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);

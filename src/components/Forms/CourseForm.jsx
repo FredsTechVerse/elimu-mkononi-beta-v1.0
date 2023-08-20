@@ -27,7 +27,7 @@ const CourseForm = () => {
   const queryClient = useQueryClient();
   const [fileName, setFileName] = useState("");
   const { updateAlertBoxData } = useAlertBoxContext();
-  const { courseID } = location.state;
+  const { courseID, background } = location.state;
   const [isCourseQueryEnabled, setIsCourseQueryEnabled] = useState(
     courseID ? true : false
   );
@@ -113,7 +113,7 @@ const CourseForm = () => {
         status: "success",
         timeout: 4500,
       });
-      navigate(-1);
+      navigate(background);
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
@@ -141,7 +141,7 @@ const CourseForm = () => {
         status: "success",
         timeout: 4500,
       });
-      navigate(-1);
+      navigate(background);
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
