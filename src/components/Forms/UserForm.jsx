@@ -24,8 +24,8 @@ const UserForm = () => {
   const { updateAlertBoxData } = useAlertBoxContext();
 
   const { role, userID } = location?.state;
-  const [isChapterQueryEnabled, setIsChapterQueryEnabled] = useState(
-    userID !== undefined ? true : false
+  const [isUserQueryEnabled, setIsUserQueryEnabled] = useState(
+    userID ? true : false
   );
   const [isEditEnabled, setIsEditEnabled] = useState(userID ? false : true);
 
@@ -78,7 +78,7 @@ const UserForm = () => {
     ["user", userID],
     () => fetchUserData({ userID, role }),
     {
-      enabled: isChapterQueryEnabled,
+      enabled: isUserQueryEnabled,
       staleTime: 1000 * 60 * 60,
       retry: 1,
       onError: (error) => {
@@ -175,7 +175,7 @@ const UserForm = () => {
     const { fName, surname, password, contact, email } = data;
     console.log({ fName, surname, password, contact, email });
     if (role) {
-      if (!isChapterQueryEnabled) {
+      if (!isUserQueryEnabled) {
         console.log("Creating user");
         createUserMutation.mutate({
           firstName: fName,
@@ -183,18 +183,18 @@ const UserForm = () => {
           password,
           contact: `254${contact}`,
           email,
-          role: role,
+          role,
         });
         return;
       } else {
         console.log("Updating user");
         updateUserMutation.mutate({
-          userID: userID,
+          userID,
           firstName: fName,
           surname,
           contact: `254${contact}`,
           email,
-          role: role,
+          role,
         });
         return;
       }
@@ -288,7 +288,7 @@ const UserForm = () => {
           </div>
 
           {/* PASSWORD SECTION */}
-          {!isChapterQueryEnabled && (
+          {!isUserQueryEnabled && (
             <div className="input-wrap">
               <label htmlFor="password">Password</label>
               <input
@@ -321,12 +321,12 @@ const UserForm = () => {
           <div className="cta-wrap">
             <div
               className={`${
-                !isChapterQueryEnabled || !isEditEnabled
+                !isUserQueryEnabled || !isEditEnabled
                   ? "flex flex-row gap-5 items-center"
                   : "hidden"
               }`}
             >
-              {!isChapterQueryEnabled ? (
+              {!isUserQueryEnabled ? (
                 <SubmitButton
                   type="submit"
                   isSubmitting={createUserMutation.isLoading}
@@ -347,7 +347,7 @@ const UserForm = () => {
 
             <div
               className={`${
-                isEditEnabled && isChapterQueryEnabled
+                isEditEnabled && isUserQueryEnabled
                   ? "flex flex-row  items-center"
                   : "hidden"
               }`}
