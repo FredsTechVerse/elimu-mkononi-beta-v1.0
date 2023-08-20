@@ -346,9 +346,7 @@ const LessonForm = () => {
               {!isLessonQueryEnabled ? (
                 <SubmitButton
                   type="submit"
-                  disabled={
-                    chapterID && typeof lessonTotals !== "string" ? false : true
-                  }
+                  disabled={lessonUrl || watch("youtubeUrl") ? false : true}
                   isSubmitting={createLessonMutation.isLoading}
                   text={createLessonMutation.isLoading ? "Saving" : "Save"}
                 />
