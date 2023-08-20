@@ -9,6 +9,7 @@ import {
 } from "../../components";
 import {
   fetchUsersData,
+  fetchUnitData,
   handleError,
   createUnit,
   updateUnit,
@@ -26,7 +27,7 @@ const UnitForm = () => {
 
   const { courseID, unitID } = location?.state;
   const [isUnitQueryEnabled, setIsUnitQueryEnabled] = useState(
-    unitID !== undefined ? true : false
+    unitID ? true : false
   );
   const [isEditEnabled, setIsEditEnabled] = useState(unitID ? false : true);
 
@@ -40,10 +41,12 @@ const UnitForm = () => {
   const {
     register,
     handleSubmit,
+    setValue,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      tutor: "",
+      tutor: "xxx",
       unitCode: "",
       unitName: "",
       unitDescription: "",
@@ -77,10 +80,13 @@ const UnitForm = () => {
     }
   );
 
+  console.log({ unitID, isUnitQueryEnabled });
+
   // Update unit data values accordingly
   useEffect(() => {
+    console.log({ unitData: unitQuery?.data?.tutor[0] });
     if (unitQuery?.status === "success" && unitQuery?.data) {
-      setValue("tutor", unitQuery?.data?.tutor);
+      setValue("tutor", unitQuery?.data?.tutor[0]);
       setValue("unitCode", unitQuery?.data?.unitCode);
       setValue("unitName", unitQuery?.data?.unitName);
       setValue("unitDescription", unitQuery?.data?.unitDescription);
@@ -173,8 +179,9 @@ const UnitForm = () => {
 
   const saveUnit = async (data) => {
     const { tutor, unitCode, unitName, unitDescription } = data;
-    if (courseID !== undefined) {
-      if (!isUnitQueryEnabled) {
+    console.log({ tutor, unitCode, unitName, unitDescription });
+    if (!isUnitQueryEnabled) {
+      if (courseID) {
         console.log("Creating unit");
         createUnitMutation.mutate({
           course: courseID,
@@ -183,19 +190,27 @@ const UnitForm = () => {
           unitName: unitName,
           unitDescription: unitDescription,
         });
-      } else {
-        updateUnitMutation.mutate({
-          unitID: unitID,
-          course: courseID,
-          tutor: tutor,
-          unitCode: unitCode,
-          unitName: unitName,
-          unitDescription: unitDescription,
-        });
+        return;
       }
+
+      updateAlertBoxData({
+        response: "courseID is not defined",
+        isResponse: true,
+        status: "failure",
+        timeout: 4500,
+      });
+    } else {
+      updateUnitMutation.mutate({
+        unitID: unitID,
+        tutor: tutor,
+        unitCode: unitCode,
+        unitName: unitName,
+        unitDescription: unitDescription,
+      });
+      return;
     }
     updateAlertBoxData({
-      response: "courseID| unitID has not been provided.",
+      response: "Something went wrong while updating unit",
       isResponse: true,
       status: "failure",
       timeout: 4500,
@@ -204,7 +219,6 @@ const UnitForm = () => {
 
   return (
     <Modal>
-      {" "}
       <div className="form-wrap ">
         <FormNavigation text="unit form" />
         <form
@@ -222,17 +236,18 @@ const UnitForm = () => {
 
             <select
               disabled={!isEditEnabled}
+              defaultValue={watch("tutor")}
               className="input-styling  mb-5"
-              name="--Choose a tutor--"
+              placeholder=""
               {...register("tutor", {
                 required: "This field is required ",
               })}
             >
               {tutorsQuery?.data ? (
                 tutorsQuery?.data.map((tutor, index) => {
-                  const { _id: tutorId, firstName, surname } = tutor;
+                  const { _id: tutorID, firstName, surname } = tutor;
                   return (
-                    <option key={`tutor-${index}`} value={tutorId}>
+                    <option key={`tutor-${index}`} value={tutorID}>
                       {`${firstName} ${surname}`}
                     </option>
                   );
