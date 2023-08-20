@@ -61,6 +61,7 @@
 - There is a back button loop that is affecting the back btn...
 - Find a way of appending back the lesson type that was there after token verification.
 - Find a better way of not going to s3 uploader without lesson or resource name.
+- We are deleting multiple things at a time... Behaviour observed on users and course sections.
 
 ### KEY TIPS I HAVE PICKED UP ALONG THE JOURNEY
 

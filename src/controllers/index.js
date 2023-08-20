@@ -39,6 +39,7 @@ import {
   deleteLesson,
   deleteNotes,
   deleteResource,
+  deleteFile,
 } from "./deleteData";
 
 import { handleError, renewToken } from "./handleErrors";
@@ -96,6 +97,7 @@ export {
   deleteUnit,
   deleteChapter,
   deleteLesson,
+  deleteFile,
   deleteNotes,
   deleteResource,
   redirectToExternalLink,

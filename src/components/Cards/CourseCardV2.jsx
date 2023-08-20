@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { deleteCourse, handleError } from "../../controllers";
@@ -10,7 +10,7 @@ import {
   PresentationChartLineIcon,
 } from "@heroicons/react/24/solid";
 const CourseCardV2 = ({ courseData }) => {
-  console.log({ courseData });
+  const location = useLocation();
   const roles = JSON.parse(localStorage.getItem("roles"));
   let totalCourseUnits = 0;
   let totalCourseChapters = 0;

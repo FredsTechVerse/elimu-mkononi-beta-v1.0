@@ -26,13 +26,15 @@ const CourseForm = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [fileName, setFileName] = useState("");
+  const [oldImage, setOldImage] = useState("");
   const { updateAlertBoxData } = useAlertBoxContext();
   const { courseID, background } = location.state;
   const [isCourseQueryEnabled, setIsCourseQueryEnabled] = useState(
     courseID ? true : false
   );
   const [isEditEnabled, setIsEditEnabled] = useState(courseID ? false : true);
-
+  const [isImageEditEnabled, setIsImageEditEnabled] = useState(false);
+  // console.log({ courseID, isCourseQueryEnabled });
   const enableEdit = () => {
     setIsEditEnabled(true);
   };
@@ -43,6 +45,7 @@ const CourseForm = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -73,11 +76,25 @@ const CourseForm = () => {
 
   // Updates accordingly  after fetch
   useEffect(() => {
+    console.log({ courseQuery: courseQuery?.data });
     if (courseQuery?.status === "success" && courseQuery?.data) {
-      setValue("courseTitle", courseQuery?.data?.firstName);
-      setFileName(courseQuery?.data?.courseImage);
+      console.log({ courseData: courseQuery?.data });
+      setValue("courseTitle", courseQuery?.data?.courseTitle);
+      setFileName(courseQuery?.data?.couseImage);
+      setOldImage(courseQuery?.data?.couseImage);
     }
   }, [courseID, courseQuery?.status]);
+
+  // Updates accordingly  after fetch
+  useEffect(() => {
+    console.log({ courseQuery: courseQuery?.data });
+    if (courseQuery?.status === "success" && courseQuery?.data) {
+      console.log({ courseData: courseQuery?.data });
+      setValue("courseTitle", courseQuery?.data?.courseTitle);
+      setFileName(courseQuery?.data?.couseImage);
+      setOldImage(courseQuery?.data?.couseImage);
+    }
+  }, []);
 
   const accessQuery = useQuery(["accessVerification"], () => verifyAccess(), {
     retry: 1,
@@ -133,8 +150,9 @@ const CourseForm = () => {
   const updateCourseMutation = useMutation({
     mutationFn: updateCourse,
     onSuccess: (data) => {
-      queryClient.setQueryData(["courses", data._id], data);
       queryClient.invalidateQueries(["courses"], { exact: true });
+      queryClient.invalidateQueries(["course", courseID], { exact: true });
+
       updateAlertBoxData({
         response: "Course has been updated.",
         isResponse: true,
@@ -161,27 +179,27 @@ const CourseForm = () => {
 
   const saveCourse = async (data) => {
     const { courseTitle } = data;
-    if (fileName) {
-      if (!isCourseQueryEnabled) {
-        createCourseMutation.mutate({
-          courseTitle: courseTitle,
-          courseImage: fileName,
-        });
-        return;
-      } else {
-        updateCourseMutation.mutate({
-          courseTitle: courseTitle,
-          courseImage: fileName,
-        });
-        return;
-      }
+    // if (fileName) {
+    if (!isCourseQueryEnabled) {
+      createCourseMutation.mutate({
+        courseTitle,
+        courseImage,
+      });
+      return;
+    } else {
+      updateCourseMutation.mutate({
+        courseID,
+        courseTitle,
+      });
+      return;
     }
-    updateAlertBoxData({
-      response: "File name is missing",
-      isResponse: true,
-      status: "failure",
-      timeout: 4500,
-    });
+    // }
+    // updateAlertBoxData({
+    //   response: "File name is missing",
+    //   isResponse: true,
+    //   status: "failure",
+    //   timeout: 4500,
+    // });
   };
 
   // CALLBACK FUNCTIONS FROM S3 UPLOADER.
@@ -198,38 +216,37 @@ const CourseForm = () => {
           className="form-styling"
           onSubmit={handleSubmit(saveCourse)}
         >
-          <div className="input-wrap">
-            <label htmlFor="course">Course Details</label>
-            <input
-              readOnly={!isEditEnabled}
-              className="input-styling"
-              placeholder="Course Title"
-              {...register("courseTitle", {
-                required: "This field is required ",
-              })}
-            />
-            {errors.courseTitle && (
-              <ErrorMessage message={errors.courseTitle?.message} />
-            )}
-          </div>
-
-          <div
-            className={`${
-              !isCourseQueryEnabled ? "hidden" : "flex"
-            } input-wrap `}
-          >
-            {!isEditEnabled && fileName ? (
+          {/* {!isImageEditEnabled || (isCourseQueryEnabled && oldImage) ? (
+            <div className="flex flex-col">
               <img
-                src={`https://elimu-mkononi.s3.af-south-1.amazonaws.com/${fileName}`}
-                className="bg-gray-300 w-full h-[220px] tablet:h-[180px] laptop:h-[220px]  rounded-xl object-cover  bg-cover bg-center"
+                src={`https://elimu-mkononi.s3.af-south-1.amazonaws.com/${oldImage}`}
+                className="bg-gray-300 h-36 w-72 tablet:w-[360px] rounded-xl object-cover  bg-cover bg-center"
                 alt="courseImage"
               />
-            ) : isEditEnabled && !fileName ? (
+              <div className="flex justify-end">
+                <button
+                  onClick={() => {
+                    if (!isImageEditEnabled) {
+                      setIsImageEditEnabled(true);
+                    } else {
+                      setIsImageEditEnabled(false);
+                      // Proceed to saving the new info.
+                    }
+                  }}
+                >
+                  {!isImageEditEnabled ? "Edit" : "Save"}
+                </button>
+              </div>
+            </div>
+          ) : isImageEditEnabled || (isCourseQueryEnabled && !fileName) ? (
+            <div className="h-36 w-72 tablet:w-[360px]">
               <S3Uploader
                 isTokenActive={accessQuery.status === "success"}
                 updateFileName={updateFileName}
               />
-            ) : (
+            </div>
+          ) : (
+            <div className={`w-72 tablet:w-[360px] my-3  `}>
               <div className="h-36 w-72 tablet:w-[360px] mt-2 bg-slate-200  bg-opacity-60 rounded-lg flex flex-col items-center gap-2 py-2 ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -247,8 +264,24 @@ const CourseForm = () => {
                 </svg>
                 <p className="text-center">Course Image has been uploaded</p>
               </div>
+            </div>
+          )} */}
+
+          <div className="input-wrap">
+            <label htmlFor="course">Course Details</label>
+            <input
+              readOnly={!isEditEnabled}
+              className="input-styling"
+              placeholder="Course Title"
+              {...register("courseTitle", {
+                required: "This field is required ",
+              })}
+            />
+            {errors.courseTitle && (
+              <ErrorMessage message={errors.courseTitle?.message} />
             )}
           </div>
+
           <div
             className={`${
               isCourseQueryEnabled ? "hidden" : "flex"

@@ -1,5 +1,11 @@
 import axios from "../axios";
-const updateCourse = async ({ courseTitle, courseImage }) => {
+import { deleteFile } from "../controllers";
+const updateCourse = async ({
+  courseTitle,
+  courseImage,
+  courseID,
+  // oldImage,
+}) => {
   const courseData = {
     courseTitle,
     courseImage,
@@ -9,10 +15,12 @@ const updateCourse = async ({ courseTitle, courseImage }) => {
   };
 
   const { data: updatedCourse } = await axios.put(
-    "/course",
+    `/course/${courseID}`,
     courseData,
     config
   );
+
+  // await deleteFile({ fileKey: oldImage });
 
   return updatedCourse;
 };

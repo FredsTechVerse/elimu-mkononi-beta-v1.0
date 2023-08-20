@@ -127,7 +127,7 @@
   }
 
   .input-styling {
-    @apply w-72 tablet:w-[360px] px-2 bg-white appearance-none h-10 border-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-400 placeholder:text-sm rounded-md border-none;
+    @apply w-72 tablet:w-[360px] px-2 appearance-none h-10 border-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-400 placeholder:text-sm rounded-md border-none;
   }
 
   textarea {

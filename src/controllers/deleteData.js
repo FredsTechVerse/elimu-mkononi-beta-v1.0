@@ -4,6 +4,11 @@ const deleteCourse = async ({ courseID }) => {
   const { data } = await axios.delete(`/course/${courseID}`);
   return data;
 };
+const deleteFile = async ({ fileKey }) => {
+  console.log(`File key  for deletion to passed :  ${JSON.stringify(fileKey)}`);
+  const { data } = await axios.delete(`/file/${fileKey}`);
+  return data;
+};
 
 const deleteUnit = async ({ unitID }) => {
   console.log(`Unit ID  for deletion passed :  ${JSON.stringify(unitID)}`);
@@ -48,6 +53,7 @@ export {
   deleteCourse,
   deleteUnit,
   deleteChapter,
+  deleteFile,
   deleteLesson,
   deleteNotes,
   deleteResource,
