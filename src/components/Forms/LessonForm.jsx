@@ -13,6 +13,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   createLesson,
   updateLesson,
+  deleteLesson,
   fetchLessonData,
   handleError,
 } from "../../controllers";
@@ -34,10 +35,12 @@ const LessonForm = () => {
   const queryClient = useQueryClient();
 
   const [isLessonQueryEnabled, setIsUserLessonQueryEnabled] = useState(
-    lessonID !== undefined ? true : false
+    lessonID ? true : false
   );
 
   const [isEditEnabled, setIsEditEnabled] = useState(lessonID ? false : true);
+
+  console.log({ lessonID, isLessonQueryEnabled });
 
   const enableEdit = () => {
     setIsEditEnabled(true);
@@ -50,11 +53,12 @@ const LessonForm = () => {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: {
       lessonNumber: lessonTotals + 1,
-      lessonName: "Elimu Mkononi",
+      lessonName: "Elimu Mkononi Default Lesson Name",
       lessonType: "link",
       youtubeUrl: "",
     },
@@ -87,7 +91,7 @@ const LessonForm = () => {
 
   //  Fetches the user data is need be
   const lessonQuery = useQuery(
-    ["user", lessonID],
+    ["lesson", lessonID],
     () => fetchLessonData({ lessonID }),
     {
       enabled: isLessonQueryEnabled,
@@ -105,6 +109,8 @@ const LessonForm = () => {
   // Updates accordingly  after fetch
   useEffect(() => {
     if (lessonQuery?.status === "success" && lessonQuery?.data) {
+      console.log("Lesson Data");
+      console.log({ lessonData: lessonQuery?.data });
       setValue("lessonNumber", lessonQuery?.data?.lessonNumber);
       setValue("lessonName", lessonQuery?.data?.lessonName);
       setValue("youtubeUrl", lessonQuery?.data?.lessonUrl);
@@ -121,7 +127,7 @@ const LessonForm = () => {
         status: "success",
         timeout: 4500,
       });
-      navigate(-1);
+      navigate(background);
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
@@ -150,7 +156,7 @@ const LessonForm = () => {
         status: "success",
         timeout: 4500,
       });
-      navigate(-1);
+      navigate(background);
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
@@ -171,8 +177,8 @@ const LessonForm = () => {
 
   const saveLesson = async (data) => {
     const { lessonName, lessonNumber, youtubeUrl } = data;
-
-    if (!lessonID) {
+    console.log("savingLesson");
+    if (!isLessonQueryEnabled) {
       if (chapterID && typeof lessonTotals !== "string") {
         if (watch("lessonType") === "link") {
           createLessonMutation.mutate({
@@ -192,7 +198,7 @@ const LessonForm = () => {
         return;
       }
     } else {
-      if (chapterID && typeof lessonTotals !== "string") {
+      if (typeof lessonTotals !== "string") {
         if (watch("lessonType") === "link") {
           updateLessonMutation.mutate({
             lessonNumber: `${chapterID}-${lessonNumber}`,
@@ -213,7 +219,7 @@ const LessonForm = () => {
     }
 
     updateAlertBoxData({
-      response: "Lesson ID / Lesson Number has not been specified.",
+      response: "Chapter ID has not been specified.",
       isResponse: true,
       status: "failure",
       timeout: 4500,
