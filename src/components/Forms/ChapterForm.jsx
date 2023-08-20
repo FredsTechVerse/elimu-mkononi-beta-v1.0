@@ -30,12 +30,16 @@ const ChapterForm = () => {
   const unitID = location.state?.unitID;
   const { chapterID } = location.state;
   const [isChapterQueryEnabled, setIsChapterQueryEnabled] = useState(
-    chapterID !== undefined ? true : false
+    chapterID ? true : false
   );
   const [isEditEnabled, setIsEditEnabled] = useState(chapterID ? false : true);
+
+  console.log({ chapterID, isChapterQueryEnabled });
+
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -95,10 +99,10 @@ const ChapterForm = () => {
   // Updates accordingly  after fetch
   useEffect(() => {
     if (chapterQuery?.status === "success" && chapterQuery?.data) {
-      setValue("unitID", chapterQuery?.data?.firstName);
-      setValue("chapterNumber", chapterQuery?.data?.surname);
-      setValue("chapterName", chapterQuery?.data?.contact);
-      setValue("chapterDescription", chapterQuery?.data?.email);
+      console.log({ chapterData: chapterQuery?.data });
+      setValue("chapterNumber", chapterQuery?.data?.chapterNumber);
+      setValue("chapterName", chapterQuery?.data?.chapterName);
+      setValue("chapterDescription", chapterQuery?.data?.chapterDescription);
     }
   }, [chapterID, chapterQuery?.status]);
 
@@ -118,7 +122,7 @@ const ChapterForm = () => {
     onError: (error) => {
       handleError(error, updateAlertBoxData);
       if (error.response && error.response.data.message === "Token expired") {
-        retryCreateChapterMutation(error.config.data); // Retry with captured form data
+        retryCreateChapterMutation(error.config.data);
       }
     },
   });
@@ -148,7 +152,7 @@ const ChapterForm = () => {
     onError: (error) => {
       handleError(error, updateAlertBoxData);
       if (error.response && error.response.data.message === "Token expired") {
-        retryUpdateChapterMutation(error.config.data); // Retry with captured form data
+        retryUpdateChapterMutation(error.config.data);
       }
     },
   });
