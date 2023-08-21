@@ -41,19 +41,22 @@ const LogoutBtn = ({ isBlue = false }) => {
       onClick={() => {
         logoutMutation.mutate();
       }}
-      className={` rounded-full h-9 aspect-square cursor-pointer flex-row-centered ${
+      className={`  w-full h-12 tablet:h-9 tablet:rounded-full tablet:w-9 tablet:aspect-square cursor-pointer flex-row-centered gap-2  ${
         isBlue
           ? "bg-primary hover:bg-purple-500"
-          : "bg-slate-800 hover:bg-slate-900 text-white"
+          : "tablet:bg-slate-700 tablet:text-white hover:bg-slate-900 hover:text-white "
       } `}
     >
       <span>
         {logoutMutation?.isLoading ? (
           <SpinnerIcon />
         ) : (
-          <ArrowRightOnRectangleIcon className={`icon-styling text-white`} />
+          <ArrowRightOnRectangleIcon
+            className={`icon-styling text-black tablet:text-white`}
+          />
         )}
       </span>
+      <span className="tablet:hidden">Logout</span>
     </button>
   );
 };

@@ -17,16 +17,20 @@ const HomeBtn = ({ isBlue = false }) => {
   };
   return (
     <button
-      className={` rounded-full h-9 aspect-square cursor-pointer flex-row-centered ${
+      className={`text-sm capitalize w-full h-12 laptop:w-28 laptop:h-8 mx-1 flex-row-centered px-4  laptop:rounded-full ${
+        roles?.includes("EM-202") || roles?.includes("EM-203")
+          ? "flex"
+          : "hidden"
+      }  ${
         isBlue
           ? "bg-primary hover:bg-purple-500"
-          : "bg-slate-800 hover:bg-slate-900 text-white"
-      } `}
+          : "laptop:bg-slate-700 laptop:text-white hover:bg-slate-900 hover:text-white "
+      } text-black`}
       onClick={() => {
         navigate(homeLocation());
       }}
     >
-      <HomeIcon className="icon-styling h-5 aspect-square text-white" />
+      Dashboard
     </button>
   );
 };

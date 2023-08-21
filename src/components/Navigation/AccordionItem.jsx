@@ -104,7 +104,7 @@ const AccordionItem = ({
         <div className="flex gap-3 items-center justify-between">
           <div className="flex-row-centered gap-2">
             <button
-              className={`cta-btn ${roles.includes("EM-201") && "hidden"}`}
+              className={`cta-btn ${roles?.includes("EM-201") && "hidden"}`}
               onClick={() => {
                 navigate("/new-lesson", {
                   state: {
@@ -118,7 +118,7 @@ const AccordionItem = ({
               <PlusIcon className="icon-styling h-4 laptop:h-5 text-white" />
             </button>
             <button
-              className={`cta-btn ${roles.includes("EM-201") && "hidden"}`}
+              className={`cta-btn ${roles?.includes("EM-201") && "hidden"}`}
               onClick={() => {
                 navigate("/new-chapter", {
                   state: {
@@ -211,7 +211,7 @@ const AccordionItem = ({
                   <div className="flex gap-1">
                     <button
                       className={`cta-btn ${
-                        roles.includes("EM-201") && "hidden"
+                        roles?.includes("EM-201") && "hidden"
                       }`}
                       onClick={() => {
                         navigate("/new-lesson", {
@@ -226,7 +226,7 @@ const AccordionItem = ({
                     </button>
                     <button
                       className={`cta-btn ${
-                        roles.includes("EM-201") && "hidden"
+                        roles?.includes("EM-201") && "hidden"
                       }`}
                       onClick={() => {
                         setLessonToDelete(lesson?._id);
@@ -244,7 +244,7 @@ const AccordionItem = ({
           <p>Resources</p>
 
           <button
-            className={`cta-btn ${roles.includes("EM-201") && "hidden"}`}
+            className={`cta-btn ${roles?.includes("EM-201") && "hidden"}`}
             onClick={() => {
               navigate("/new-resource", {
                 state: {

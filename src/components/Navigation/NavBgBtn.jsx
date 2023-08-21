@@ -14,13 +14,17 @@ const NavBgBtn = ({ to, text, isBlue = false }) => {
       <Link
         to={to}
         state={{ background: location }}
-        className={` rounded-full h-9 aspect-square cursor-pointer flex-row-centered ${
+        className={` group w-full h-12 laptop:rounded-full laptop:w-12 laptop:aspect-square cursor-pointer flex-row-centered gap-2  ${
           isBlue
             ? "bg-primary hover:bg-purple-500"
-            : "bg-slate-800 hover:bg-slate-900 text-white"
+            : "laptop:bg-slate-700 laptop:text-white hover:bg-slate-900 hover:text-white "
         } `}
       >
-        <ArrowLeftOnRectangleIcon className="icon-styling text-white" />
+        <span className="laptop:hidden">Login</span>
+
+        <ArrowLeftOnRectangleIcon
+          className={`icon-styling text-black group-hover:text-white laptop:text-white`}
+        />
       </Link>
     );
   } else if (text === "register") {
@@ -28,11 +32,11 @@ const NavBgBtn = ({ to, text, isBlue = false }) => {
       <Link
         to={to}
         state={{ background: location, role: roleInformation }}
-        className={`navbar-link group ${
+        className={`text-sm capitalize w-full h-12 laptop:w-28 laptop:h-8 mx-1 flex-row-centered px-4  laptop:rounded-full   ${
           isBlue
-            ? "bg-primary hover:bg-purple-500 "
-            : "bg-slate-700 hover:bg-slate-900  "
-        } text-white `}
+            ? "bg-primary hover:bg-purple-500"
+            : "laptop:bg-slate-700 laptop:text-white hover:bg-slate-900 hover:text-white "
+        } text-black`}
       >
         {text}
       </Link>

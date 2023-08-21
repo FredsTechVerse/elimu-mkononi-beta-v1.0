@@ -1,40 +1,58 @@
-import React from "react";
-import { LogoutBtn, HomeBtn, NavBgBtn, Tooltip } from "../../components";
+import React, { useState, useEffect } from "react";
+import {
+  LogoutBtn,
+  HomeBtn,
+  NavBgBtn,
+  NavMenuBtn,
+  NavItemBtn,
+} from "../../components";
 import { Link } from "react-router-dom";
-const Navbar = () => {
+
+import { NavBtn, MenuBtn } from "../../components";
+const MainNav = () => {
   const roles = JSON.parse(localStorage.getItem("roles"));
+  const [isNavOpen, setIsNavOpen] = useState(false);
+
+  const toggleNavbar = () => {
+    setIsNavOpen((prev) => !prev);
+  };
+
   return (
     <>
       <Link
-        className="text-white font-bold phone:text-lg tablet:text-2xl font-sans fixed top-0 z-10 left-2 h-[10vh] flex-row-centered "
         to="/"
+        className="fixed z-50 top-0 left-2 text-white h-[10vh] flex items-center justify-center  uppercase text-3xl  font-extrabold tracking-widest  laptop:py-0 "
       >
-        ELIMU HUB
+        AIPCA
       </Link>
 
-      <div className="h-[10vh] fixed top-0 right-2 z-10 flex-row-centered ">
-        {roles?.includes("EM-202") ||
-          (roles?.includes("EM-203") && (
-            <Tooltip tooltip="Dashboard">
-              <HomeBtn to="/tutor" text="Dashboard" />
-            </Tooltip>
-          ))}
-        <div className={`${!roles ? "flex gap-1 tablet:flex-row" : "hidden"}`}>
-          <Tooltip tooltip="Register">
-            <NavBgBtn to="/new-user" text="register" />
-          </Tooltip>
-          <Tooltip tooltip="Login">
-            <NavBgBtn to="/log-in" text="Login" />
-          </Tooltip>
+      <NavMenuBtn
+        isNavOpen={isNavOpen}
+        isDark={false}
+        toggleNavbar={toggleNavbar}
+      />
+
+      <section
+        className={`${
+          isNavOpen ? "flex" : "hidden laptop:flex"
+        }  bg-white laptop:bg-transparent rounded-lg laptop:rounded-none text-slate-800 fixed z-50  top-[10vh] flex laptop:top-0  right-3   laptop:h-14 phone:flex-col laptop:flex-row laptop:gap-3  items-center justify-center phone:w-[95%] tablet:w-[40%] laptop:w-fit laptop:py-2  `}
+      >
+        <NavBgBtn to="/new-user" text="register" />
+        <HomeBtn />
+
+        <div
+          className={`w-full ${
+            !roles ? "flex gap-1 tablet:flex-row" : "hidden"
+          }`}
+        >
+          <NavBgBtn to="/log-in" text="Login" />
         </div>
-        <div className={`${!roles ? "hidden" : "flex"}`}>
-          <Tooltip tooltip="Logout">
-            <LogoutBtn />
-          </Tooltip>
+        <div className={`${!roles ? "hidden" : "flex w-full "}`}>
+          <LogoutBtn />
         </div>
-      </div>
+      </section>
     </>
   );
 };
 
-export default Navbar;
+export default MainNav;

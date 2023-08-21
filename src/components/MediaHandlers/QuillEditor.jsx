@@ -20,7 +20,7 @@ const QuillEditor = () => {
   const { currentLesson } = useCurrentLessonContext();
   const roles = JSON.parse(localStorage.getItem("roles"));
   const isAdmin = () => {
-    if (roles.includes("EM-203") || roles.includes("EM-202")) {
+    if (roles?.includes("EM-203") || roles?.includes("EM-202")) {
       return true;
     }
     return false;

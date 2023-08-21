@@ -13,6 +13,8 @@ import {
   DashboardUserButton,
   TableBtn,
   NavPageBtn,
+  NavItemBtn,
+  NavMenuBtn,
 } from "./Buttons";
 
 import {
@@ -166,6 +168,8 @@ export {
   CTAButton,
   PageTitle,
   SubmitButton,
+  NavItemBtn,
+  NavMenuBtn,
   UnitsAdminTable,
   CTAUnitButtonAdmin,
   DashboardUserButton,

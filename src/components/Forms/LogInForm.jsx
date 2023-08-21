@@ -44,9 +44,9 @@ const LogInForm = () => {
         timeout: 4500,
       });
 
-      if (data.roles.includes("EM-203")) {
+      if (data?.roles?.includes("EM-203")) {
         navigate("/admin", { replace: true });
-      } else if (data.roles.includes("EM-202")) {
+      } else if (data?.roles?.includes("EM-202")) {
         navigate("/tutor", { replace: true });
       } else {
         navigate("/", { replace: true });

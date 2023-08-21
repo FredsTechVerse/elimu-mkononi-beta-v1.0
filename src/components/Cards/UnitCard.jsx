@@ -53,7 +53,7 @@ const UnitCard = ({
       <section className=" flex gap-2 justify-end items-center">
         <button
           className={`${
-            roles.includes("EM-201") || (roles.includes("EM-202") && "hidden")
+            roles?.includes("EM-201") || (roles?.includes("EM-202") && "hidden")
           } cta-btn`}
           onClick={() => {
             setIsDeleteQueryEnabled(true);
@@ -63,7 +63,7 @@ const UnitCard = ({
         </button>
 
         <button
-          className={`cta-btn ${roles.includes("EM-201") && "hidden"}`}
+          className={`cta-btn ${roles?.includes("EM-201") && "hidden"}`}
           onClick={() => {
             navigate("/new-unit", {
               state: { unitID, background: location },
