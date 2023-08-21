@@ -54,8 +54,8 @@ const FileUpdater = ({ queryKey, fileName, updateImage }) => {
   });
 
   return (
-    <div className="flex flex-col debug">
-      <div className=" debug">
+    <div className="flex flex-col ">
+      <div>
         {currentImage && !isImageEditEnabled ? (
           <img
             src={`https://elimu-mkononi.s3.af-south-1.amazonaws.com/${currentImage}`}
