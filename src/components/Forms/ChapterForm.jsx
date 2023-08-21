@@ -33,6 +33,7 @@ const ChapterForm = () => {
     chapterID ? true : false
   );
   const [isEditEnabled, setIsEditEnabled] = useState(chapterID ? false : true);
+  const queryClient = useQueryClient();
 
   console.log({ chapterID, isChapterQueryEnabled });
 
@@ -75,8 +76,6 @@ const ChapterForm = () => {
       }
     };
   }, []);
-
-  const queryClient = useQueryClient();
 
   const chapterQuery = useQuery(
     ["chapter", chapterID],

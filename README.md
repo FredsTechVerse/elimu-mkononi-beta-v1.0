@@ -65,6 +65,8 @@
 
 ### KEY TIPS I HAVE PICKED UP ALONG THE JOURNEY
 
+- For ease of element logic construction ask the right question eg what conditions should be met for the element to be displayed?
+
 - I was able to update the chapter 4 accross rerenders. It appears react router dom manages its states.
 - Page not found is quite strong when a person navigates to a form directly with a background....Look for better words... But it works well!
 

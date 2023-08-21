@@ -60,6 +60,7 @@ import {
   Tooltip,
   UserProfile,
   PageTitle,
+  FileUpdater,
   Heading,
 } from "./General";
 
@@ -145,6 +146,7 @@ export {
   UserProfile,
   Footer,
   ContentSection,
+  FileUpdater,
   ErrorMessage,
   CourseForm,
   ResourceForm,

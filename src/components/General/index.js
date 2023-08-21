@@ -10,9 +10,11 @@ import Tooltip from "./Tooltip";
 import PageTitle from "./PageTitle";
 import Heading from "./Heading";
 import ErrorMessage from "./ErrorMessage";
+import FileUpdater from "./FileUpdater";
 export {
   AlertBox,
   TutorCardHome,
+  FileUpdater,
   ReturnBackBtn,
   ErrorMessage,
   RequireAuth,
