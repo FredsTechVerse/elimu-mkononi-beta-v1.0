@@ -1,48 +1,4 @@
-import {
-  createCourse,
-  createUnit,
-  createChapter,
-  createLesson,
-  createNotes,
-  createResource,
-  refreshYoutubeToken,
-} from "./postData";
-
-import {
-  verifyAccess,
-  getYoutubeAuthorizationURI,
-  fetchAllUsersData,
-  fetchCoursesData,
-  fetchCourseData,
-  fetchChapterData,
-  fetchUnitData,
-  fetchLessonData,
-  fetchLessonNotes,
-  fetchUserData,
-  fetchUsersData,
-  fetchUserDetails,
-} from "./fetchData";
-
-import {
-  updateCourse,
-  updateUnit,
-  updateChapter,
-  updateLesson,
-  updateNotes,
-  updateResource,
-} from "./updateData";
-
-import {
-  deleteCourse,
-  deleteUnit,
-  deleteChapter,
-  deleteLesson,
-  deleteNotes,
-  deleteResource,
-  deleteFile,
-} from "./deleteData";
-
-import { handleError, renewToken } from "./handleErrors";
+import { verifyAccess, renewToken } from "./AuthController";
 
 import {
   registerUser,
@@ -51,13 +7,63 @@ import {
   deleteUser,
   messageUser,
   updateUser,
-} from "./userData";
+  fetchAllUsersData,
+  fetchUserDetails,
+  fetchUsersData,
+  fetchUserData,
+} from "./UserController";
+import {
+  createCourse,
+  fetchCourseData,
+  fetchCoursesData,
+  updateCourse,
+  deleteCourse,
+} from "./CourseConroller";
 
 import {
+  createUnit,
+  fetchUnitData,
+  updateUnit,
+  deleteUnit,
+} from "./UnitController";
+
+import {
+  createChapter,
+  fetchChapterData,
+  updateChapter,
+  deleteChapter,
+} from "./ChapterController";
+
+import {
+  createLesson,
+  fetchLessonData,
+  updateLesson,
+  deleteLesson,
+} from "./LessonController";
+
+import {
+  createNotes,
+  fetchLessonNotes,
+  updateNotes,
+  deleteNotes,
+} from "./NotesController";
+
+import {
+  createResource,
+  updateResource,
+  deleteResource,
+} from "./ResourceController";
+
+import {
+  getYoutubeAuthorizationURI,
+  refreshYoutubeToken,
   redirectToExternalLink,
   fetchPresignedUrl,
   uploadVideoToYoutube,
-} from "./youtubeUpload";
+} from "./YoutubeController";
+
+import { deleteFile } from "./FileController";
+import { handleError } from "./ErrorController";
 
 export {
   handleError,

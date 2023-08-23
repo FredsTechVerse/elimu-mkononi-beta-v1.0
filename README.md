@@ -47,7 +47,9 @@
 
 ##### CHUNK 3
 
+- B4 migration to typescript , refactor controllers grouping CRUD functionalities for each party , that way , migrating to typescript will simply be a matter of adding an interface at the top.
 - Implement typescript with SWC [Weekend Project]
+
 - Keep track of user interaction and completion using document ids , arrays and array methods.(Backend need!)[To be done after migration to typescript]
 - Tweak login to use email to login.
 - Consider verify email account while logging in to ensure true data....

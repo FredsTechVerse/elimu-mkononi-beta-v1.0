@@ -1,4 +1,34 @@
+import axios from "../axios";
 import { youtubeInstance } from "../axios";
+
+const getYoutubeAuthorizationURI = async () => {
+  const { data: authorizationUri } = await axios.get("/oAuth/authorizationUri");
+  return authorizationUri;
+};
+
+const refreshYoutubeToken = async () => {
+  try {
+    const refreshToken = localStorage.getItem("youtubeRefreshToken");
+    const config = {
+      headers: { "Content-Type": "application/json" },
+      data: { refreshToken: refreshToken },
+    };
+    const { data } = await axios.post(
+      "oAuth/refreshToken",
+      { refreshToken },
+      config
+    );
+
+    const { accessToken, expiresIn } = data;
+    localStorage.setItem("youtubeRefreshToken", accessToken);
+    localStorage.setItem("youtubeAccessTokenExpiryDate", expiresIn);
+    return { accessToken, expiresIn };
+  } catch (err) {
+    console.log(
+      `Error while refreshing youtube access token ${JSON.stringify(err)}`
+    );
+  }
+};
 
 const redirectToExternalLink = ({ data: externalLink, lessonState }) => {
   localStorage.setItem("previousLocation", lessonState?.pathname);
@@ -52,4 +82,10 @@ const uploadVideoToYoutube = async ({
   return videoUrl;
 };
 
-export { redirectToExternalLink, fetchPresignedUrl, uploadVideoToYoutube };
+export {
+  getYoutubeAuthorizationURI,
+  refreshYoutubeToken,
+  redirectToExternalLink,
+  fetchPresignedUrl,
+  uploadVideoToYoutube,
+};
