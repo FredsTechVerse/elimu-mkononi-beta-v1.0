@@ -99,9 +99,7 @@ const CourseCardV2 = ({ courseData }) => {
 
       <div className="absolute bottom-0 right-0 flex gap-2 items-center">
         <button
-          className={`${
-            roles?.includes("EM-201") || (roles?.includes("EM-202") && "hidden")
-          } cta-btn`}
+          className={`${roles?.includes("EM-203") ? "cta-btn" : "hidden"}`}
           onClick={() => {
             setIsDeleteQueryEnabled(true);
           }}
@@ -110,7 +108,7 @@ const CourseCardV2 = ({ courseData }) => {
         </button>
 
         <button
-          className={`cta-btn ${roles?.includes("EM-201") && "hidden"}`}
+          className={`${roles?.includes("EM-203") ? "cta-btn" : "hidden"}`}
           onClick={() => {
             navigate("/new-course", {
               state: { courseID: courseData?._id, background: location },

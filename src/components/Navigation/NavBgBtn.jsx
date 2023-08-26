@@ -14,7 +14,7 @@ const NavBgBtn = ({ to, text, isBlue = false }) => {
       <Link
         to={to}
         state={{ background: location }}
-        className={` group w-full h-12 laptop:rounded-full laptop:w-12 laptop:aspect-square cursor-pointer flex-row-centered gap-2  ${
+        className={` group w-full h-10 laptop:rounded-full laptop:w-10 laptop:aspect-square cursor-pointer flex-row-centered gap-2  ${
           isBlue
             ? "bg-primary hover:bg-purple-500"
             : "laptop:bg-slate-700 laptop:text-white hover:bg-slate-900 hover:text-white "

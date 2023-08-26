@@ -63,7 +63,7 @@ const UsersTable = ({ usersQuery, role }) => {
     onSortingChange: setSorting,
   });
   return (
-    <div className="p-10 phone:hidden laptop:table w-full flex flex-col items-center justify-center">
+    <div className="py-5 phone:hidden laptop:table w-full flex flex-col items-center justify-center">
       <input
         type="text"
         placeholder="Search"

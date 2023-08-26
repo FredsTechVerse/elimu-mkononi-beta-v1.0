@@ -4,7 +4,7 @@ import {
   CourseCardV2,
   CourseSkeleton,
   PageTitle,
-  BackBtn,
+  HomeBtn,
 } from "../../components";
 import { useLocation } from "react-router-dom";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
@@ -25,9 +25,9 @@ const CoursesAdminPage = () => {
     },
   });
   return (
-    <div className="flex flex-col gap-5 relative phone:rounded-lg w-full h-full px-4">
+    <div className="w-full laptop:w-3/4 flex flex-col gap-5 relative phone:rounded-lg justify-start  h-full overflow-auto p-3 overflow-x-hidden ">
       <div className="absolute top-2 left-2 z-10">
-        <BackBtn isDark={true} />
+        <HomeBtn isDark={true} />
       </div>
 
       <div className="absolute top-2 right-2 z-10">
@@ -39,7 +39,7 @@ const CoursesAdminPage = () => {
 
       <div className="w-full flex flex-col  justify-start">
         {coursesQuery.status === "loading" && (
-          <div className="grid-lg tablet:grid-cols-2 laptop:grid-cols-4 tablet:gap-6  ">
+          <div className="grid-lg tablet:grid-cols-2 laptop:grid-cols-3 tablet:gap-6  ">
             <CourseSkeleton />
             <CourseSkeleton />
             <CourseSkeleton />
@@ -49,7 +49,7 @@ const CoursesAdminPage = () => {
           </div>
         )}
         {coursesQuery.data && coursesQuery?.data.length > 0 && (
-          <div className="grid-lg tablet:grid-cols-2 laptop:grid-cols-4 tablet:gap-6 ">
+          <div className="grid-lg tablet:grid-cols-2 laptop:grid-cols-3 tablet:gap-6 ">
             {coursesQuery.data.map((course, courseIndex) => {
               return <CourseCardV2 key={courseIndex} courseData={course} />;
             })}

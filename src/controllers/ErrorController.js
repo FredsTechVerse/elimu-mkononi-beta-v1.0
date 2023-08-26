@@ -1,4 +1,4 @@
-import { handleLogout } from "../controllers";
+import { handleLogout, renewToken } from "../controllers";
 const ERRORS = {
   NETWORK_ERROR: "Network error. Please try again later.",
   SERVER_ERROR: "Server error. Please try again later.",
@@ -13,26 +13,26 @@ const ERRORS = {
 
 const handleError = async (error, updateAlertBoxData) => {
   let response = "No response has been specified";
-  if (error.response && error.response.status === 400) {
+  if (error?.response?.status === 400) {
     response = ERRORS.BAD_REQUEST;
-  } else if (error.response && error.response.status === 401) {
+  } else if (error?.response?.status === 401) {
     if (error.response.data.message === "Token expired") {
       renewToken({ updateAlertBoxData });
-    } else if (error.response.statusText === "Unauthorized") {
+    } else if (error?.response?.statusText === "Unauthorized") {
       response = ERRORS.AUTHORIZATION_ERROR;
     } else {
       response = ERRORS.AUTHORIZATION_ERROR;
     }
-  } else if (error.response && error.response.status === 403) {
+  } else if (error?.response?.status === 403) {
     handleLogout();
     response = ERRORS.LOGOUT;
-  } else if (error.response && error.response.status === 404) {
+  } else if (error?.response?.status === 404) {
     response = ERRORS.BLANK_ERROR;
-  } else if (error.response && error.response.status === 409) {
+  } else if (error?.response?.status === 409) {
     response = ERRORS.DUPLICATION_ERROR;
-  } else if (error.response && error.response.status === 422) {
+  } else if (error?.response?.status === 422) {
     response = ERRORS.INVALID_ID;
-  } else if (error.message === "Network Error") {
+  } else if (error?.message === "Network Error") {
     response = ERRORS.NETWORK_ERROR;
   } else {
     console.log(error);

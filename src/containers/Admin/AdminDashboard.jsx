@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import { Outlet } from "react-router-dom";
 import { AdminSideBar, AdminSummary } from "../../containers";
 import {
   handleError,
@@ -161,18 +161,20 @@ const AdminDashboard = () => {
         closeSideBar={closeSideBar}
         isSideBarOpen={isSideBarOpen}
       />
-      <AdminSummary
-        openSideBar={openSideBar}
-        isSideBarOpen={isSideBarOpen}
-        totalUnits={totalUnits}
-        totalCourses={totalCourses}
-        totalUsers={totalUsers}
-        coursesData={coursesData}
-        coursesQuery={coursesQuery}
-        unitsDistribution={unitsDistribution}
-        userDataQuery={userDataQuery}
-        allUsersQuery={allUsersQuery}
-        allUsers={allUsers}
+      <Outlet
+        context={{
+          openSideBar,
+          isSideBarOpen,
+          totalUnits,
+          totalCourses,
+          totalUsers,
+          coursesData,
+          coursesQuery,
+          unitsDistribution,
+          userDataQuery,
+          allUsersQuery,
+          allUsers,
+        }}
       />
     </div>
   );

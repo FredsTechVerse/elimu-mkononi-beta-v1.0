@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
-const BackBtn = ({ isDark, isBlue = false }) => {
+const BackBtn = ({ isDark, isBlue = false, to = -1 }) => {
   const navigate = useNavigate();
   return (
     <button
@@ -11,7 +11,7 @@ const BackBtn = ({ isDark, isBlue = false }) => {
         isBlue && "bg-primary hover:bg-purple-500 "
       } cursor-pointer rounded-full  flex-row-centered  group `}
       onClick={() => {
-        navigate(-1);
+        navigate(to);
       }}
     >
       <ArrowLeftIcon

@@ -10,6 +10,7 @@ import {
   CourseOverview,
   NotFound,
   TokenExchange,
+  AdminSummary,
 } from "./containers";
 import {
   RequireAuth,
@@ -130,8 +131,9 @@ function App() {
           {/* ADMIN ROUTES */}
           {roles?.includes("EM-203") && (
             <Route element={<RequireAuth allowedRoles={["EM-203"]} />}>
-              <Route exact path="/admin" element={<Layout role="EM-203" />}>
-                <Route index element={<AdminDashboard />} />
+              {/* <Route exact path="/admin" element={<Layout role="EM-203" />}> */}
+              <Route exact path="/admin" element={<AdminDashboard />}>
+                <Route index element={<AdminSummary />} />
                 <Route exact path=":role" element={<UsersPage />} />
                 <Route exact path="courses">
                   <Route index element={<CourseAdminPage />} />

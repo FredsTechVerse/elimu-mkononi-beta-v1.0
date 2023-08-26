@@ -18,7 +18,6 @@ import {
 } from "./Buttons";
 
 import {
-  ChapterCard,
   HomePageCard,
   TeamCard,
   TutorCard,
@@ -139,7 +138,6 @@ export {
   CourseSkeleton,
   VideoComponent,
   FormNavigation,
-  ChapterCard,
   TutorCard,
   UnitCard,
   UnitNav,

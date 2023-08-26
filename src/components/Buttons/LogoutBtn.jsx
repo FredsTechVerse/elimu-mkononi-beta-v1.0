@@ -41,7 +41,7 @@ const LogoutBtn = ({ isBlue = false }) => {
       onClick={() => {
         logoutMutation.mutate();
       }}
-      className={`  w-full h-12 tablet:h-9 tablet:rounded-full tablet:w-9 tablet:aspect-square cursor-pointer flex-row-centered gap-2  ${
+      className={`  w-full h-10  tablet:rounded-full tablet:w-10 tablet:aspect-square cursor-pointer flex-row-centered gap-2  ${
         isBlue
           ? "bg-primary hover:bg-purple-500"
           : "tablet:bg-slate-700 tablet:text-white hover:bg-slate-900 hover:text-white "

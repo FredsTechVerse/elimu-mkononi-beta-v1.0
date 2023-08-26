@@ -3,8 +3,8 @@ import { UserCard } from "../../components";
 const UsersGrid = ({ usersQuery, role }) => {
   return (
     <div className="grid-sm laptop:hidden">
-      {usersQuery.data.length > 0 &&
-        usersQuery.data.map((userData, userIndex) => {
+      {usersQuery?.data?.length > 0 &&
+        usersQuery?.data.map((userData, userIndex) => {
           return (
             <UserCard
               user={userData}

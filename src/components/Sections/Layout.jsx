@@ -1,6 +1,5 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { HomeBtn, BackBtn } from "../../components";
 
 const Layout = () => {
   return (
