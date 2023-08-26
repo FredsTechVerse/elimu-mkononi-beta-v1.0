@@ -20,7 +20,7 @@ const Accordion = ({ unitData, closeSideBar }) => {
     <div className="relative z-10 flex flex-col items-center  bg-slate-100 h-screen  ml-1 rounded-t-xl ">
       <div className="flex items-center justify-between w-full px-2 h-16  font-bold text-md text-slate-200 bg-primary text-center rounded-t-lg uppercase ">
         <HomeBtn />
-        <span>Unit Breakdown</span>
+        <span className="uppercase">{unitData?.unitName}</span>
         <div className={` flex-row-centered gap-1 `}>
           <Tooltip text="Add Chapter">
             <div
@@ -70,7 +70,7 @@ const Accordion = ({ unitData, closeSideBar }) => {
         </div>
       ) : (
         <div className="flex-col-centered text-center py-3 px-2 bg-rose-300 m-2 rounded-lg">
-          This unit has no content yet.Kindly add conentent by clicking the plus
+          This unit has no content yet.Kindly add content by clicking the plus
           button above.
         </div>
       )}
