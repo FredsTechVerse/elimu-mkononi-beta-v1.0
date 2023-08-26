@@ -1,5 +1,4 @@
-import axios from "../axios";
-import { youtubeInstance } from "../axios";
+import axios, { youtubeInstance } from "../axios";
 
 const getYoutubeAuthorizationURI = async () => {
   const { data: authorizationUri } = await axios.get("/oAuth/authorizationUri");

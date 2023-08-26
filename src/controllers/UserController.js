@@ -83,10 +83,6 @@ const deleteUser = async ({ userID, role }) => {
   }
 };
 
-const messageUser = ({ contact }) => {
-  console.log("Contact data to api responsible ${JSON.stingify(contact)}");
-};
-
 const fetchAllUsersData = async () => {
   const { data: usersData } = await axios.get("/auth/all-users");
   return usersData;
@@ -94,14 +90,14 @@ const fetchAllUsersData = async () => {
 
 const fetchUserDetails = async (role) => {
   if (role === "EM-202") {
-    const { data: tutorData } = await axios.get("/auth/tutor", {
+    const { data: tutorData } = await axios.get("/tutor", {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
     });
     return tutorData;
   } else if (role === "EM-203") {
-    const { data: adminData } = await axios.get("/auth/admin", {
+    const { data: adminData } = await axios.get("/admin", {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -112,13 +108,13 @@ const fetchUserDetails = async (role) => {
 
 const fetchUsersData = async (role) => {
   if (role === "EM-203") {
-    let { data: adminData } = await axios.get("/auth/all-admins");
+    let { data: adminData } = await axios.get("/admin/all-admins");
     return adminData;
   } else if (role === "EM-201") {
-    let { data: studentData } = await axios.get("/auth/all-students");
+    let { data: studentData } = await axios.get("/student/all-students");
     return studentData;
   } else if (role === "EM-202") {
-    let { data: tutorData } = await axios.get("/auth/all-tutors");
+    let { data: tutorData } = await axios.get("/tutor/all-tutors");
     return tutorData;
   }
 };
@@ -126,13 +122,13 @@ const fetchUsersData = async (role) => {
 const fetchUserData = async ({ role, userID }) => {
   console.log(`User ID sent to server ${(role, userID)}`);
   if (role === "EM-203") {
-    let { data: adminData } = await axios.get(`/auth/admin/${userID}`);
+    let { data: adminData } = await axios.get(`/admin/${userID}`);
     return adminData;
   } else if (role === "EM-202") {
-    let { data: tutorData } = await axios.get(`/auth/tutor/${userID}`);
+    let { data: tutorData } = await axios.get(`/tutor/${userID}`);
     return tutorData;
   } else if (role === "EM-201") {
-    let { data: studentData } = await axios.get(`/auth/student/${userID}`);
+    let { data: studentData } = await axios.get(`/student/${userID}`);
     return studentData;
   }
 };
@@ -142,7 +138,6 @@ export {
   loginUser,
   logoutUser,
   deleteUser,
-  messageUser,
   updateUser,
   fetchAllUsersData,
   fetchUserDetails,

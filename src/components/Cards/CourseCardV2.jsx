@@ -106,7 +106,7 @@ const CourseCardV2 = ({ courseData }) => {
             setIsDeleteQueryEnabled(true);
           }}
         >
-          <TrashIcon className="icon-styling h-4 text-white" />
+          <TrashIcon className="icon-styling h-3 laptop:h-4 text-white" />
         </button>
 
         <button
@@ -117,7 +117,7 @@ const CourseCardV2 = ({ courseData }) => {
             });
           }}
         >
-          <PencilIcon className="icon-styling h-4  text-white" />
+          <PencilIcon className="icon-styling h-3 laptop:h-4  text-white" />
         </button>
         <button
           onClick={handleClick}

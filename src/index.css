@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --secondary: 210 40% 96.1%;
+    --primary: 222.2 47.4% 11.2%;
+  }
+
+  .dark {
+    --primary: 210 40% 98%;
+    --secondary: 217.2 32.6% 17.5%;
+  }
+}
+
 @layer components {
   * {
     @apply m-0 p-0 box-border font-primary;
@@ -19,7 +31,7 @@
   }
 
   *::-webkit-scrollbar-track {
-    @apply bg-slate-100 bg-opacity-20;
+    @apply bg-slate-100 bg-opacity-0;
   }
 
   *::-webkit-scrollbar-thumb {
@@ -105,7 +117,7 @@
     @apply flex flex-col justify-center items-center w-full mt-4;
   }
   .cta-btn {
-    @apply rounded-full h-4 laptop:h-6 my-1 aspect-square cursor-pointer flex-row-centered bg-slate-800 hover:bg-slate-900 text-white;
+    @apply rounded-full h-7 my-1 aspect-square cursor-pointer flex-row-centered bg-slate-700 hover:bg-slate-900 text-white;
   }
 
   /* MODAL STYLING */
@@ -115,7 +127,7 @@
 
   /* FORM STYLING */
   .form-wrap {
-    @apply bg-slate-300 bg-opacity-50 flex flex-col justify-start items-center phone:w-full tablet:w-[420px] h-auto rounded-2xl;
+    @apply bg-slate-300 bg-opacity-50 flex flex-col justify-start items-center phone:w-full tablet:w-[420px] h-auto rounded-2xl  overflow-auto overflow-x-hidden;
   }
 
   .form-styling {

@@ -27,43 +27,37 @@
   - The tutor will officially be renamed as the lecturer.
   - There will be need to add an account for student content creators.
 
-### POST RELEASE OPTIMIZATIONS
+#### PRODUCT OPTIMIZATION
 
-##### CHUNK 1
+### DRAFT
 
-- Implement tanstack table to handle sorting , filtering and pagination table logic.
-- A must experiment on use of the tanstack table functionalities to update the card.. I mean how will it know coz its only the elements that are changing really....
-- Make navbar a dropdown in small screen similar to church app.
-- Delete function is executing twice... Find out why.
+- Messaging funcitonalities will be set in the individua admin pages for the functionalites.
+- Infact it will be a cta button instead of being in the individual rows.
+
+- Try data aggregation for the dashboard.
+
+-Polish on navbar and ui.
 
 ##### CHUNK 2
 
-- Make unit outline and unit breakdown descriptive
-- Correct back btn... Screen freezes when it reaches to the homepage
-- Look into how we can use spread operator with the alertbox to avoid having to pass in default props again if they do not change.
-- Create resources interface and test upload to S3 Bucket
+- Correct back btn... Make path defined eliminating screen freeze and the form loop.
 - Add the menu button to user page for free navigateion.Persist the side bar on large screens for swift navigation.
-- Invalidate users upon a new registration via the user form
+- Add sidebar to each and every page by squeezing table , scrapping off the completed card. Making it scroll on small screens.
+- Make unit outline and unit descriptive interms of actually possessing the unit description and the unit name.
+- Check why delete function is executing twice on deployed version.
+- Create resources interface and test upload to S3 Bucket.
+- For the lesson number . split using the splice operator to have the number at the end only during updates.
+- Find a better way of not going to s3 uploader without lesson or resource name.
 
 ##### CHUNK 3
 
-- B4 migration to typescript , refactor controllers grouping CRUD functionalities for each party , that way , migrating to typescript will simply be a matter of adding an interface at the top.
-- Implement typescript with SWC [Weekend Project]
-
-- Keep track of user interaction and completion using document ids , arrays and array methods.(Backend need!)[To be done after migration to typescript]
-- Tweak login to use email to login.
+- Anything with search functionality will be a table.
+- Polish the authentication system to use email while logging in , email and password verification.
 - Consider verify email account while logging in to ensure true data....
-- Find out means of resetting token.
-- Consider anonymous authentication for students. But for tutors and admins , their records must be straight.... They must authenticate.
-
-#### PRODUCT OPTIMIZATION
-
-- Lesson , Chapter number are not being read correctly... Something weird happends to them upon update
-- For the lesson number . split using the splice operator to have the number at the end only
-- There is a back button loop that is affecting the back btn...
-- Find a way of appending back the lesson type that was there after token verification.
-- Find a better way of not going to s3 uploader without lesson or resource name.
-- We are deleting multiple things at a time... Behaviour observed on users and course sections.
+- Test youtube refresh token acquisition by inversing if logic.
+- Consider anonymous authentication for students only. Easily done by not needing a student to login.... With time , after adding user tracking , it should be reason enough to urge student to sign up for an account.
+- Implement typescript with SWC [After a good grasp while implementing it in the AIPCA application.]
+- Consider tracking user interaction and completion. We can utilize document ids , arrays and array methods
 
 ### KEY TIPS I HAVE PICKED UP ALONG THE JOURNEY
 

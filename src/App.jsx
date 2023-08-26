@@ -80,7 +80,6 @@ function App() {
           <Route exact path="*" element={<NotFound />}></Route>
           <Route exact path="forbidden" element={<Forbidden />} />
           <Route exact path="/new-user" element={<UserForm />} />
-
           <Route path="/log-in" element={<LogInForm />} />
           <Route path="/draft" element={<DraftPage />} />
           <Route path="/fetchToken" element={<TokenExchange />} />
@@ -130,9 +129,7 @@ function App() {
 
           {/* ADMIN ROUTES */}
           {roles?.includes("EM-203") && (
-            <Route
-              element={<RequireAuth allowedRoles={["EM-203", "EM-201"]} />}
-            >
+            <Route element={<RequireAuth allowedRoles={["EM-203"]} />}>
               <Route exact path="/admin" element={<Layout role="EM-203" />}>
                 <Route index element={<AdminDashboard />} />
                 <Route exact path=":role" element={<UsersPage />} />

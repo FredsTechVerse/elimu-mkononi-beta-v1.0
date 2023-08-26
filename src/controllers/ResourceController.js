@@ -1,3 +1,4 @@
+import axios from "../axios";
 const createResource = async ({ resourceName, resourceUrl, chapterID }) => {
   const resourceData = { resourceName, resourceUrl, chapterID };
   const config = {

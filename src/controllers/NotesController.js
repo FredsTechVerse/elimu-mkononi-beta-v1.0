@@ -1,3 +1,5 @@
+import axios from "../axios";
+
 const createNotes = async ({ lessonNotes, lessonID }) => {
   const config = {
     headers: { "Content-Type": "application/json" },

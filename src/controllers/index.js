@@ -1,11 +1,10 @@
-import { verifyAccess, renewToken } from "./AuthController";
+import { verifyAccess, renewToken, handleLogout } from "./AuthController";
 
 import {
   registerUser,
   loginUser,
   logoutUser,
   deleteUser,
-  messageUser,
   updateUser,
   fetchAllUsersData,
   fetchUserDetails,
@@ -67,12 +66,12 @@ import { handleError } from "./ErrorController";
 
 export {
   handleError,
+  handleLogout,
   renewToken,
   registerUser,
   loginUser,
   logoutUser,
   deleteUser,
-  messageUser,
   createCourse,
   createUnit,
   createChapter,

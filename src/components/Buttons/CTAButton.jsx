@@ -3,9 +3,9 @@ import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { deleteUser, handleError } from "../../controllers";
-import { EnvelopeIcon, EyeIcon, TrashIcon } from "@heroicons/react/24/solid";
+import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
 
-const CTAButton = ({ contact = null, userID, role = "EM-201" }) => {
+const CTAButton = ({ userID, role = "EM-201" }) => {
   const location = useLocation();
   const queryClient = useQueryClient();
   const { updateAlertBoxData } = useAlertBoxContext();
@@ -40,12 +40,12 @@ const CTAButton = ({ contact = null, userID, role = "EM-201" }) => {
     return (
       <div className="flex items-center justify-evenly w-full px-4  border-none">
         <button
-          className="cta-btn "
+          className="cta-btn capitalize"
           onClick={() => {
             navigate(`/tutor/unit/${userID}`);
           }}
         >
-          <EyeIcon className="icon-styling h-4 laptop:h-5 text-slate-700" />
+          update
         </button>
       </div>
     );
@@ -53,22 +53,14 @@ const CTAButton = ({ contact = null, userID, role = "EM-201" }) => {
     return (
       <div className="flex-row-centered gap-2 ">
         <button
-          className="cta-btn"
-          onClick={() => {
-            messageTenant(contact);
-          }}
-        >
-          <EnvelopeIcon className="icon-styling h-4 laptop:h-5  text-white " />
-        </button>
-        <button
-          className="cta-btn"
+          className="cta-btn capitalize text-center rounded-full w-20 text-sm text-white"
           onClick={() => {
             navigate("/new-user", {
               state: { userID, role, background: location },
             });
           }}
         >
-          <EyeIcon className="icon-styling h-4 laptop:h-5 text-white" />
+          update
         </button>
         <button
           className="cta-btn"
@@ -76,7 +68,7 @@ const CTAButton = ({ contact = null, userID, role = "EM-201" }) => {
             setIsDeleteQueryEnabled(true);
           }}
         >
-          <TrashIcon className="icon-styling h-4 laptop:h-5 text-white" />
+          <TrashIcon className="icon-styling h-3 laptop:h-4 text-white" />
         </button>
       </div>
     );

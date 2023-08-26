@@ -115,7 +115,7 @@ const AccordionItem = ({
                 });
               }}
             >
-              <PlusIcon className="icon-styling h-4 laptop:h-5 text-white" />
+              <PlusIcon className="icon-styling h-4  text-white" />
             </button>
             <button
               className={`cta-btn ${roles?.includes("EM-201") && "hidden"}`}
@@ -254,7 +254,7 @@ const AccordionItem = ({
               });
             }}
           >
-            <PlusIcon className="icon-styling h-4 laptop:h-5 text-white" />
+            <PlusIcon className="icon-styling h-4  text-white" />
           </button>
         </li>
       </ul>

@@ -59,7 +59,7 @@ const UnitCard = ({
             setIsDeleteQueryEnabled(true);
           }}
         >
-          <TrashIcon className="icon-styling h-4 laptop:h-5 text-white" />
+          <TrashIcon className="icon-styling h-4 text-white" />
         </button>
 
         <button
@@ -70,7 +70,7 @@ const UnitCard = ({
             });
           }}
         >
-          <PencilIcon className="icon-styling h-4 laptop:h-5 text-white" />
+          <PencilIcon className="icon-styling h-4  text-white" />
         </button>
 
         <Link
