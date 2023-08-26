@@ -41,21 +41,20 @@
 ##### CHUNK 2
 
 - Correct back btn... Make path defined eliminating screen freeze and the form loop.
-- Add the menu button to user page for free navigateion.Persist the side bar on large screens for swift navigation.
-- Add sidebar to each and every page by squeezing table , scrapping off the completed card. Making it scroll on small screens.
-- Make unit outline and unit descriptive interms of actually possessing the unit description and the unit name.
+- Make unit outline realtime {unitData?.unitDescription}
 - Check why delete function is executing twice on deployed version.
+- Swap dashboard to utilize an aggregation pipeline.
 - Create resources interface and test upload to S3 Bucket.
 - For the lesson number . split using the splice operator to have the number at the end only during updates.
 - Find a better way of not going to s3 uploader without lesson or resource name.
+- Anything with search functionality will be a table Get rid of the cards.
+- Test youtube refresh token acquisition by inversing if logic.
+- Polish the authentication system to use email while logging in , email and password verification.
+- Consider verify email account while logging in to ensure true data....
 
 ##### CHUNK 3
 
-- Anything with search functionality will be a table.
-- Polish the authentication system to use email while logging in , email and password verification.
-- Consider verify email account while logging in to ensure true data....
-- Test youtube refresh token acquisition by inversing if logic.
-- Consider anonymous authentication for students only. Easily done by not needing a student to login.... With time , after adding user tracking , it should be reason enough to urge student to sign up for an account.
+- Consider anonymous authentication for students only by scrapping their authentication off.After adding user tracking , it should be reason enough to urge student to sign up for an account.
 - Implement typescript with SWC [After a good grasp while implementing it in the AIPCA application.]
 - Consider tracking user interaction and completion. We can utilize document ids , arrays and array methods
 
