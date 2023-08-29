@@ -31,18 +31,17 @@
 
 ### DRAFT
 
-- Messaging funcitonalities will be set in the individua admin pages for the functionalites.
-- Infact it will be a cta button instead of being in the individual rows.
+- Messaging funcitonalities will be set in the individual admin pages for the functionalites as a CTA
 
 - Try data aggregation for the dashboard.
 
--Polish on navbar and ui.
+- Polish on navbar and ui.
 
 ##### CHUNK 2
 
-- Correct back btn... Make path defined eliminating screen freeze and the form loop.
-- Make unit outline realtime {unitData?.unitDescription}
 - Check why delete function is executing twice on deployed version.
+- Correct back btn... Make path defined eliminating screen freeze and the form loop. Best done by homebtn.
+- Make unit outline realtime {unitData?.unitDescription}
 - Swap dashboard to utilize an aggregation pipeline.
 - Create resources interface and test upload to S3 Bucket.
 - For the lesson number . split using the splice operator to have the number at the end only during updates.

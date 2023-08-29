@@ -115,7 +115,7 @@ const AccordionItem = ({
                 });
               }}
             >
-              <PlusIcon className="icon-styling h-4  text-white" />
+              <PlusIcon className="icon-styling h-3 laptop:h-4  text-white" />
             </button>
             <button
               className={`${roles?.includes("EM-203") ? "cta-btn" : "hidden"}`}
@@ -128,7 +128,7 @@ const AccordionItem = ({
                 });
               }}
             >
-              <PencilIcon className="icon-stylingh-4text-white" />
+              <PencilIcon className="icon-styling h-3 laptop:h-4 text-white" />
             </button>
             <button
               className="cta-btn"
@@ -136,7 +136,7 @@ const AccordionItem = ({
                 setIsDeleteChapterQueryEnabled(true);
               }}
             >
-              <TrashIcon className="icon-stylingh-4 text-white" />
+              <TrashIcon className="icon-styling h-3 laptop:h-4 text-white" />
             </button>
           </div>
 
@@ -222,7 +222,7 @@ const AccordionItem = ({
                         });
                       }}
                     >
-                      <PencilIcon className="icon-stylingh-4text-white" />
+                      <PencilIcon className="icon-styling h-3 laptop:h-4 text-white" />
                     </button>
                     <button
                       className={`cta-btn ${
@@ -232,7 +232,7 @@ const AccordionItem = ({
                         setLessonToDelete(lesson?._id);
                       }}
                     >
-                      <TrashIcon className="icon-stylingh-4text-white" />
+                      <TrashIcon className="icon-styling h-3 laptop:h-4 text-white" />
                     </button>
                   </div>
                 </div>

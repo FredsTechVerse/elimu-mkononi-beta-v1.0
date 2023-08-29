@@ -27,15 +27,14 @@ const ChapterForm = () => {
 
   const from = location.state?.background?.pathname;
   const chapterTotals = location.state?.chapterTotals;
-  const unitID = location.state?.unitID;
-  const { chapterID } = location.state;
+  const { chapterID, unitID } = location.state;
   const [isChapterQueryEnabled, setIsChapterQueryEnabled] = useState(
     chapterID ? true : false
   );
   const [isEditEnabled, setIsEditEnabled] = useState(chapterID ? false : true);
   const queryClient = useQueryClient();
 
-  console.log({ chapterID, isChapterQueryEnabled });
+  // console.log({ chapterID, unitID, isChapterQueryEnabled });
 
   const {
     register,
@@ -167,8 +166,15 @@ const ChapterForm = () => {
 
   const saveChapter = async (data) => {
     const { chapterName, chapterNumber, chapterDescription } = data;
-
-    if (!unitID) {
+    console.log({
+      unitID,
+      chapterName,
+      chapterNumber,
+      chapterDescription,
+      isChapterQueryEnabled,
+    });
+    if (unitID) {
+      console.log("Saving chapter.");
       if (!isChapterQueryEnabled) {
         createChapterMutation.mutate({
           unitID: unitID,
