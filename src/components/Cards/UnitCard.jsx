@@ -28,6 +28,7 @@ const UnitCard = ({
         status: "success",
         timeout: 2500,
       });
+      setIsDeleteQueryEnabled(false);
       queryClient.invalidateQueries(["courseData", courseID], { exact: true });
     },
     onError: (error) => {
@@ -52,7 +53,9 @@ const UnitCard = ({
       </section>
       <section className=" flex gap-2 justify-end items-center">
         <button
-          className={`${roles?.includes("EM-203") ? "cta-btn" : "hidden"}`}
+          className={`${
+            roles?.includes("EM-203") ? "cta-btn group" : "hidden"
+          }`}
           onClick={() => {
             setIsDeleteQueryEnabled(true);
           }}
@@ -61,7 +64,9 @@ const UnitCard = ({
         </button>
 
         <button
-          className={`${roles?.includes("EM-203") ? "cta-btn" : "hidden"}`}
+          className={`${
+            roles?.includes("EM-203") ? "cta-btn group" : "hidden"
+          }`}
           onClick={() => {
             navigate("/new-unit", {
               state: { unitID, background: location },

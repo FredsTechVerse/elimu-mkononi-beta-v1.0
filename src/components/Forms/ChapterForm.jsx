@@ -98,7 +98,10 @@ const ChapterForm = () => {
   useEffect(() => {
     if (chapterQuery?.status === "success" && chapterQuery?.data) {
       console.log({ chapterData: chapterQuery?.data });
-      setValue("chapterNumber", chapterQuery?.data?.chapterNumber);
+      setValue(
+        "chapterNumber",
+        chapterQuery?.data?.chapterNumber.split("-")[1]
+      );
       setValue("chapterName", chapterQuery?.data?.chapterName);
       setValue("chapterDescription", chapterQuery?.data?.chapterDescription);
     }
@@ -139,6 +142,7 @@ const ChapterForm = () => {
     onSuccess: (data) => {
       queryClient.setQueryData(["chapter", unitID], data);
       queryClient.invalidateQueries(["unitData"]);
+      queryClient.invalidateQueries(["chapter", chapterID], { exact: true });
       updateAlertBoxData({
         response: "Chapter has been updated",
         isResponse: true,
@@ -173,9 +177,9 @@ const ChapterForm = () => {
       chapterDescription,
       isChapterQueryEnabled,
     });
-    if (unitID) {
-      console.log("Saving chapter.");
-      if (!isChapterQueryEnabled) {
+
+    if (!isChapterQueryEnabled) {
+      if (unitID) {
         createChapterMutation.mutate({
           unitID: unitID,
           chapterNumber: `${unitID}-${chapterNumber}`,
@@ -184,22 +188,22 @@ const ChapterForm = () => {
         });
         return;
       } else {
-        updateChapterMutation.mutate({
-          chapterID,
-          chapterNumber: `${unitID}-${chapterNumber}`,
-          chapterName,
-          chapterDescription,
+        updateAlertBoxData({
+          response: "No unit ID specified",
+          isResponse: true,
+          status: "failure",
+          timeout: 4500,
         });
-        return;
       }
+    } else {
+      updateChapterMutation.mutate({
+        chapterID,
+        chapterNumber: `${unitID}-${chapterNumber}`,
+        chapterName,
+        chapterDescription,
+      });
+      return;
     }
-
-    updateAlertBoxData({
-      response: "No unit ID specified",
-      isResponse: true,
-      status: "failure",
-      timeout: 4500,
-    });
   };
 
   return (

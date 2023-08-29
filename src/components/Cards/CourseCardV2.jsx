@@ -34,6 +34,7 @@ const CourseCardV2 = ({ courseData }) => {
           status: "success",
           timeout: 2500,
         });
+        setIsDeleteQueryEnabled(false);
         queryClient.invalidateQueries(["courses"], { exact: true });
       },
       onError: (error) => {
@@ -99,7 +100,9 @@ const CourseCardV2 = ({ courseData }) => {
 
       <div className="absolute bottom-0 right-0 flex gap-2 items-center">
         <button
-          className={`${roles?.includes("EM-203") ? "cta-btn" : "hidden"}`}
+          className={`${
+            roles?.includes("EM-203") ? "cta-btn group" : "hidden"
+          }`}
           onClick={() => {
             setIsDeleteQueryEnabled(true);
           }}
@@ -108,7 +111,9 @@ const CourseCardV2 = ({ courseData }) => {
         </button>
 
         <button
-          className={`${roles?.includes("EM-203") ? "cta-btn" : "hidden"}`}
+          className={`${
+            roles?.includes("EM-203") ? "cta-btn group " : "hidden"
+          }`}
           onClick={() => {
             navigate("/new-course", {
               state: { courseID: courseData?._id, background: location },

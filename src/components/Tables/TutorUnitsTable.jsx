@@ -41,7 +41,7 @@ const TutorUnitsTable = ({ unitsData }) => {
 
                   <td className="flex-row-centered gap-3  ">
                     <button
-                      className={`cta-btn ${
+                      className={`cta-btn group ${
                         roles?.includes("EM-201") && "hidden"
                       }`}
                       onClick={() => {

@@ -15,7 +15,6 @@ import {
   TrashIcon,
 } from "@heroicons/react/24/solid";
 
-// It should be having the chapter name & the lessons.
 const AccordionItem = ({
   chapter,
   onToggle,
@@ -30,17 +29,16 @@ const AccordionItem = ({
   const lessonTotals = chapter && chapter?.chapterLessons?.length;
   const { updateAlertBoxData } = useAlertBoxContext();
   const roles = JSON.parse(localStorage.getItem("roles"));
+  const [lessonToDelete, setLessonToDelete] = useState(null);
   const [isDeleteChapterQueryEnabled, setIsDeleteChapterQueryEnabled] =
     useState(false);
   const [isDeleteLessonQueryEnabled, setIsDeleteLessonQueryEnabled] =
     useState(false);
-  const [lessonToDelete, setLessonToDelete] = useState(null);
   const contentEl = useRef();
   const { updateCurrentLesson } = useCurrentLessonContext();
 
   useEffect(() => {
-    console.log(`Lesson to delete ${lessonToDelete}`);
-    setIsDeleteLessonQueryEnabled(true);
+    console.log({ lessonToDelete, isDeleteLessonQueryEnabled });
   }, [lessonToDelete]);
 
   useQuery(
@@ -57,7 +55,7 @@ const AccordionItem = ({
           status: "success",
           timeout: 2500,
         });
-        setIsDeleteQueryEnabled(false);
+        setIsDeleteChapterQueryEnabled(false);
         queryClient.invalidateQueries(["unitData"]);
       },
       onError: (error) => {
@@ -96,7 +94,7 @@ const AccordionItem = ({
   );
   return (
     <li className="accordion_item">
-      <button
+      <div
         className="button group px-2 text-sm flex items-center "
         onClick={onToggle}
       >
@@ -104,7 +102,9 @@ const AccordionItem = ({
         <div className="flex gap-3 items-center justify-between">
           <div className="flex-row-centered gap-2">
             <button
-              className={`${roles?.includes("EM-203") ? "cta-btn" : "hidden"}`}
+              className={`${
+                roles?.includes("EM-203") ? "cta-btn group" : "hidden"
+              }`}
               onClick={() => {
                 navigate("/new-lesson", {
                   state: {
@@ -118,7 +118,9 @@ const AccordionItem = ({
               <PlusIcon className="icon-styling h-3 laptop:h-4  text-white" />
             </button>
             <button
-              className={`${roles?.includes("EM-203") ? "cta-btn" : "hidden"}`}
+              className={`${
+                roles?.includes("EM-203") ? "cta-btn group" : "hidden"
+              }`}
               onClick={() => {
                 navigate("/new-chapter", {
                   state: {
@@ -131,7 +133,7 @@ const AccordionItem = ({
               <PencilIcon className="icon-styling h-3 laptop:h-4 text-white" />
             </button>
             <button
-              className="cta-btn"
+              className="cta-btn group"
               onClick={() => {
                 setIsDeleteChapterQueryEnabled(true);
               }}
@@ -148,7 +150,7 @@ const AccordionItem = ({
             )}
           </span>
         </div>
-      </button>
+      </div>
       <ul
         ref={contentEl}
         className=" h-0 overflow-hidden transition-all ease-in-out duration-500 flex flex-col  px-2 "
@@ -194,7 +196,7 @@ const AccordionItem = ({
                     />
                   )}
                   <p
-                    className=" text-center whitespace-wrap px-2  w-full  capitalize"
+                    className=" text-center whitespace-wrap px-2  w-full capitalize text-sm"
                     onClick={() => {
                       updateCurrentLesson({
                         ...unitData?.unitChapters[chapterIndex]?.chapterLessons[
@@ -210,7 +212,7 @@ const AccordionItem = ({
                   </p>
                   <div className="flex gap-1">
                     <button
-                      className={`cta-btn ${
+                      className={`cta-btn group ${
                         roles?.includes("EM-201") && "hidden"
                       }`}
                       onClick={() => {
@@ -225,11 +227,12 @@ const AccordionItem = ({
                       <PencilIcon className="icon-styling h-3 laptop:h-4 text-white" />
                     </button>
                     <button
-                      className={`cta-btn ${
+                      className={`cta-btn group ${
                         roles?.includes("EM-201") && "hidden"
                       }`}
                       onClick={() => {
                         setLessonToDelete(lesson?._id);
+                        setIsDeleteLessonQueryEnabled(true);
                       }}
                     >
                       <TrashIcon className="icon-styling h-3 laptop:h-4 text-white" />
@@ -244,7 +247,9 @@ const AccordionItem = ({
           <p>Resources</p>
 
           <button
-            className={`${roles?.includes("EM-203") ? "cta-btn" : "hidden"}`}
+            className={`${
+              roles?.includes("EM-203") ? "cta-btn group" : "hidden"
+            }`}
             onClick={() => {
               navigate("/new-resource", {
                 state: {

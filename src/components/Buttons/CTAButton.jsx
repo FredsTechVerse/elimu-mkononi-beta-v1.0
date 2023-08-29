@@ -40,7 +40,7 @@ const CTAButton = ({ userID, role = "EM-201" }) => {
     return (
       <div className="flex items-center justify-evenly w-full px-4  border-none">
         <button
-          className="cta-btn capitalize"
+          className="cta-btn group capitalize"
           onClick={() => {
             navigate(`/tutor/unit/${userID}`);
           }}
@@ -53,7 +53,7 @@ const CTAButton = ({ userID, role = "EM-201" }) => {
     return (
       <div className="flex-row-centered gap-2 ">
         <button
-          className="cta-btn capitalize text-center rounded-full w-20 text-sm text-white"
+          className="cta-btn group capitalize text-center rounded-full w-20 text-sm text-white"
           onClick={() => {
             navigate("/new-user", {
               state: { userID, role, background: location },
@@ -63,7 +63,7 @@ const CTAButton = ({ userID, role = "EM-201" }) => {
           update
         </button>
         <button
-          className="cta-btn"
+          className="cta-btn group"
           onClick={() => {
             setIsDeleteQueryEnabled(true);
           }}

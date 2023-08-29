@@ -58,7 +58,7 @@ const LessonForm = () => {
   } = useForm({
     defaultValues: {
       lessonNumber: lessonTotals + 1,
-      lessonName: "Elimu Mkononi Default Lesson Name",
+      lessonName: "Enter Lesson Name",
       lessonType: "link",
       youtubeUrl: "",
     },
@@ -111,7 +111,7 @@ const LessonForm = () => {
     if (lessonQuery?.status === "success" && lessonQuery?.data) {
       console.log("Lesson Data");
       console.log({ lessonData: lessonQuery?.data });
-      setValue("lessonNumber", lessonQuery?.data?.lessonNumber);
+      setValue("lessonNumber", lessonQuery?.data?.lessonNumber.split("-")[1]);
       setValue("lessonName", lessonQuery?.data?.lessonName);
       setValue("youtubeUrl", lessonQuery?.data?.lessonUrl);
     }
@@ -177,7 +177,6 @@ const LessonForm = () => {
 
   const saveLesson = async (data) => {
     const { lessonName, lessonNumber, youtubeUrl } = data;
-    console.log("savingLesson");
     if (!isLessonQueryEnabled) {
       if (chapterID && typeof lessonTotals !== "string") {
         if (watch("lessonType") === "link") {

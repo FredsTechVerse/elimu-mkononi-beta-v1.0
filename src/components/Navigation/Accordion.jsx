@@ -21,27 +21,25 @@ const Accordion = ({ unitData, closeSideBar }) => {
       <div className="flex items-center justify-between w-full px-2 h-16  font-bold text-md text-slate-200 bg-primary text-center rounded-t-lg uppercase ">
         <span className="uppercase">{unitData?.unitName}</span>
         <div className={` flex-row-centered gap-1 `}>
-          <Tooltip text="Add Chapter">
-            <div
-              className={`${
-                roles?.includes("EM-202") || roles?.includes("EM-203")
-                  ? "flex"
-                  : "hidden"
-              } `}
+          <div
+            className={`${
+              roles?.includes("EM-202") || roles?.includes("EM-203")
+                ? "flex"
+                : "hidden"
+            } `}
+          >
+            <Link
+              to={`/new-chapter`}
+              className="cta-btn group "
+              state={{
+                background: location,
+                unitID: unitID,
+                chapterTotals: chapterTotals,
+              }}
             >
-              <Link
-                to={`/new-chapter`}
-                className="cta-btn "
-                state={{
-                  background: location,
-                  unitID: unitID,
-                  chapterTotals: chapterTotals,
-                }}
-              >
-                <PlusIcon className="text-white group-hover:text-slate-800 m-0.5 hover:cursor-pointer h-3 laptop:h-4" />
-              </Link>
-            </div>
-          </Tooltip>
+              <PlusIcon className="text-white group-hover:text-slate-800 m-0.5 hover:cursor-pointer h-3 laptop:h-4" />
+            </Link>
+          </div>
           <div
             className="text-white m-1 hover:cursor-pointer w-7 h-7 laptop:hidden"
             onClick={() => {

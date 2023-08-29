@@ -8,7 +8,7 @@ const createLesson = async ({
 }) => {
   const lessonData = {
     chapterID,
-    lessonNumber: `${chapterID}-${lessonNumber}`,
+    lessonNumber,
     lessonName,
     lessonUrl,
   };
@@ -58,6 +58,7 @@ const updateLesson = async ({
 };
 
 const deleteLesson = async ({ lessonID }) => {
+  console.log("Hello from delete lesson");
   if (lessonID) {
     console.log(
       `Lesson ID  for deletion passed :  ${JSON.stringify(lessonID)}`
