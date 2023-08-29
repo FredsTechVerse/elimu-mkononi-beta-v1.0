@@ -12,7 +12,6 @@ import {
 } from "@tanstack/react-table";
 
 const UsersTable = ({ usersQuery, role }) => {
-  console.log(JSON.stringify(usersQuery.data));
   const [filtering, setFiltering] = useState("");
   const [sorting, setSorting] = useState([]);
   const columnHelper = createColumnHelper();
@@ -40,7 +39,6 @@ const UsersTable = ({ usersQuery, role }) => {
     columnHelper.accessor("cta button", {
       cell: (info) => {
         const record = info.row.original;
-        console.log(record);
         const userID = record._id;
         const contact = record.contact;
         return <CTAButton userID={userID} contact={contact} role={role} />;

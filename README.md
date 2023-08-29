@@ -33,27 +33,22 @@
 
 - Messaging funcitonalities will be set in the individual admin pages for the functionalites as a CTA
 
-- Try data aggregation for the dashboard.
-
-- Polish on navbar and ui.
-
 ##### CHUNK 2
 
 - Check why delete function is executing twice on deployed version.
+- Optimize dashboard to utilize an aggregation pipeline.Test CRUD functionalites , Cleanup console , Release to the transformers team.
+- Build church app backend.
+- Complete authentication system by verifying email account and password reset.
 - Correct back btn... Make path defined eliminating screen freeze and the form loop. Best done by homebtn.
-- Make unit outline realtime {unitData?.unitDescription}
-- Swap dashboard to utilize an aggregation pipeline.
 - Create resources interface and test upload to S3 Bucket.
-- For the lesson number . split using the splice operator to have the number at the end only during updates.
 - Find a better way of not going to s3 uploader without lesson or resource name.
 - Anything with search functionality will be a table Get rid of the cards.
 - Test youtube refresh token acquisition by inversing if logic.
-- Polish the authentication system to use email while logging in , email and password verification.
 - Consider verify email account while logging in to ensure true data....
 
 ##### CHUNK 3
 
-- Consider anonymous authentication for students only by scrapping their authentication off.After adding user tracking , it should be reason enough to urge student to sign up for an account.
+- Scrap away student authentication only tutor and admin to login.
 - Implement typescript with SWC [After a good grasp while implementing it in the AIPCA application.]
 - Consider tracking user interaction and completion. We can utilize document ids , arrays and array methods
 
