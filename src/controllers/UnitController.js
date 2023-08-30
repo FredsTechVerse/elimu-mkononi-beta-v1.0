@@ -22,6 +22,11 @@ const createUnit = async ({
   return createdUnit;
 };
 
+const fetchUnitsAggregate = async () => {
+  const { data: unitCount } = await axios.get(`/unit/aggregated`);
+  return unitCount;
+};
+
 const fetchUnitData = async ({ unitID }) => {
   console.log({ unitID });
   const { data: unitData } = await axios.get(`/unit/${unitID}`);
@@ -60,4 +65,10 @@ const deleteUnit = async ({ unitID }) => {
   return data;
 };
 
-export { createUnit, fetchUnitData, updateUnit, deleteUnit };
+export {
+  createUnit,
+  fetchUnitsAggregate,
+  fetchUnitData,
+  updateUnit,
+  deleteUnit,
+};

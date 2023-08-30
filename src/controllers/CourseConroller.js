@@ -17,6 +17,11 @@ const createCourse = async ({ courseTitle, courseImage }) => {
   return createdCourse;
 };
 
+const fetchCoursesAggregate = async () => {
+  const { data: courseCount } = await axios.get(`/course/aggregated`);
+  console.log({ courseCount });
+  return courseCount;
+};
 const fetchCoursesData = async () => {
   const { data: coursesData } = await axios.get("/course/all-courses");
   return coursesData;
@@ -59,6 +64,7 @@ const deleteCourse = async ({ courseID }) => {
 export {
   createCourse,
   fetchCourseData,
+  fetchCoursesAggregate,
   fetchCoursesData,
   updateCourse,
   deleteCourse,

@@ -21,10 +21,10 @@ const AdminSummary = () => {
     totalCourses,
     totalUsers,
     coursesData,
-    coursesQuery,
+    coursesAggregationQuery,
     unitsDistribution,
     userDataQuery,
-    allUsersQuery,
+    usersAggregationQuery,
     allUsers,
   } = useOutletContext();
   return (
@@ -65,7 +65,7 @@ const AdminSummary = () => {
           <div className="w-full flex phone:flex-col tablet:flex-row justify-evenly ">
             <div className="phone:w-full tablet:w-1/2 gap-5 border-blue-400 flex-col-centered p-5">
               <div className="col-span-1 row-span-1">
-                {allUsersQuery.status === "loading" ? (
+                {usersAggregationQuery.status === "loading" ? (
                   <DoughnutSkeleton />
                 ) : (
                   <DoughnutChart
@@ -78,13 +78,13 @@ const AdminSummary = () => {
             </div>
             <div className="phone:w-full tablet:w-1/2 gap-5 border-blue-400 flex-col-centered p-2">
               <div className="col-span-1 row-span-1">
-                {coursesQuery.status === "loading" ? (
+                {coursesAggregationQuery.status === "loading" ? (
                   <DoughnutSkeleton />
                 ) : (
                   <DoughnutChart
-                    chartData={unitsDistribution}
-                    doughnutName="total units"
-                    doughnutValue={totalUnits}
+                    chartData={coursesData}
+                    doughnutName="Courses"
+                    doughnutValue={totalCourses}
                   />
                 )}
               </div>
@@ -101,13 +101,13 @@ const AdminSummary = () => {
               <div className="pb-7">
                 <PageTitle title="Units" />
               </div>
-              {coursesQuery.status === "loading" ? (
+              {coursesAggregationQuery.status === "loading" ? (
                 <DoughnutSkeleton />
               ) : (
                 <DoughnutChart
-                  chartData={coursesData}
-                  doughnutName="Courses"
-                  doughnutValue={totalCourses}
+                  chartData={unitsDistribution}
+                  doughnutName="total units"
+                  doughnutValue={totalUnits}
                 />
               )}
             </div>

@@ -96,7 +96,7 @@ const LogInForm = () => {
 
   return (
     <Modal>
-      <div className="form-wrap">
+      <div className="form-wrap pb-4">
         <FormNavigation text="Log In" />
 
         <form className="form-styling" onSubmit={handleSubmit(login)}>

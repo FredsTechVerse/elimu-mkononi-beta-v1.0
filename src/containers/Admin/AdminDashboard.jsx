@@ -4,8 +4,9 @@ import { AdminSideBar, AdminSummary } from "../../containers";
 import {
   handleError,
   fetchUserDetails,
-  fetchCoursesData,
-  fetchAllUsersData,
+  fetchCoursesAggregate,
+  fetchUnitsAggregate,
+  fetchUsersAggregate,
 } from "../../controllers";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -70,38 +71,62 @@ const AdminDashboard = () => {
     },
   });
 
-  const coursesQuery = useQuery(["courseAnalysis"], fetchCoursesData, {
-    staleTime: 1000 * 60 * 60,
-    onError: (error) => {
-      handleError(error, updateAlertBoxData);
-      if (error.response && error.response.data.message === "Token expired") {
-        queryClient.invalidateQueries(["courseAnalysis"]);
-      }
-    },
-  });
+  const coursesAggregationQuery = useQuery(
+    ["courseAggregate"],
+    fetchCoursesAggregate,
+    {
+      staleTime: 1000 * 60 * 60,
+      onError: (error) => {
+        handleError(error, updateAlertBoxData);
+        if (error.response && error.response.data.message === "Token expired") {
+          queryClient.invalidateQueries(["courseAggregate"]);
+        }
+      },
+    }
+  );
+  const unitsAggregationQuery = useQuery(
+    ["unitsAggregate"],
+    fetchUnitsAggregate,
+    {
+      staleTime: 1000 * 60 * 60,
+      onError: (error) => {
+        handleError(error, updateAlertBoxData);
+        if (error.response && error.response.data.message === "Token expired") {
+          queryClient.invalidateQueries(["unitsAggregate"]);
+        }
+      },
+    }
+  );
 
-  const allUsersQuery = useQuery(["users"], fetchAllUsersData, {
-    staleTime: 1000 * 60 * 60,
-    onError: (error) => {
-      handleError(error, updateAlertBoxData);
-      if (error.response && error.response.data.message === "Token expired") {
-        queryClient.invalidateQueries(["courses"]);
-      }
-    },
-  });
+  const usersAggregationQuery = useQuery(
+    ["usersAggregate"],
+    fetchUsersAggregate,
+    {
+      staleTime: 1000 * 60 * 60,
+      onError: (error) => {
+        handleError(error, updateAlertBoxData);
+        if (error.response && error.response.data.message === "Token expired") {
+          queryClient.invalidateQueries(["usersAggregate"]);
+        }
+      },
+    }
+  );
 
   useEffect(() => {
-    if (coursesQuery.status === "success" && coursesQuery?.data) {
+    if (
+      unitsAggregationQuery.status === "success" &&
+      unitsAggregationQuery.data
+    ) {
       let totalUnits = 0;
       let coursesOffered = [];
       let unitsPerCourse = [];
-      let totalCourses = coursesQuery?.data?.length;
-      coursesQuery?.data.forEach((course) => {
-        totalUnits += course?.units?.length;
-        coursesOffered.push(course?.courseTitle);
-        unitsPerCourse.push(course?.units?.length);
+      let totalCourses = coursesAggregationQuery?.data?.coursesCount;
+      console.log({ totalCourses });
+      unitsAggregationQuery.data.map((unit) => {
+        totalUnits += unit.unitCount;
+        coursesOffered.push(unit._id);
+        unitsPerCourse.push(unit.unitCount);
       });
-
       setTotalCourses(totalCourses);
       setTotalUnits(totalUnits);
       setCoursesData({
@@ -127,19 +152,22 @@ const AdminDashboard = () => {
         ],
       });
     }
-  }, [coursesQuery?.status]);
+  }, [unitsAggregationQuery.status]);
 
   useEffect(() => {
-    if (allUsersQuery.status === "success" && allUsersQuery?.data) {
+    if (
+      usersAggregationQuery.status === "success" &&
+      usersAggregationQuery.data
+    ) {
       setAllUsers({
         labels: ["Students", "Tutors", "Admins"],
         datasets: [
           {
             label: "Users",
             data: [
-              allUsersQuery?.data?.totalStudents,
-              allUsersQuery?.data?.totalTutors,
-              allUsersQuery?.data?.totalAdmins,
+              usersAggregationQuery.data?.totalStudents,
+              usersAggregationQuery.data?.totalTutors,
+              usersAggregationQuery.data?.totalAdmins,
             ],
             backgroundColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
             borderColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
@@ -147,12 +175,12 @@ const AdminDashboard = () => {
         ],
       });
       setTotalUsers(
-        allUsersQuery?.data?.totalStudents +
-          allUsersQuery?.data?.totalTutors +
-          allUsersQuery?.data?.totalAdmins
+        usersAggregationQuery.data?.totalStudents +
+          usersAggregationQuery.data?.totalTutors +
+          usersAggregationQuery.data?.totalAdmins
       );
     }
-  }, [allUsersQuery.status]);
+  }, [usersAggregationQuery.status]);
 
   return (
     <div className="h-screen w-full flex phone:flex-col tablet:flex-row relative ">
@@ -169,10 +197,10 @@ const AdminDashboard = () => {
           totalCourses,
           totalUsers,
           coursesData,
-          coursesQuery,
+          coursesAggregationQuery,
           unitsDistribution,
           userDataQuery,
-          allUsersQuery,
+          usersAggregationQuery,
           allUsers,
         }}
       />

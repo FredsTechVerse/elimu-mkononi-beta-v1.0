@@ -35,10 +35,10 @@
 
 ##### CHUNK 2
 
-- Optimize dashboard to utilize an aggregation pipeline,Apart from unit count we can find out so much about our course.
-- Refine charts and test CRUD functionalites.
+- Initialize charts correctly.
+- Sort out courses to display course names in addition to the count.
+- Test CRUD functionalites.Cleanup display , console and release to transfomers team.
 - Complete authentication system swapping username for email , verifying email during account creation, password reset functionality.
-- Cleanup console , Release to the transformers team.
 - Learn how to make cashew nuts.
 - Scrap away student authentication only tutor and admin to login.
 - Build church app backend with inspiration from Elimu Hub sidebar and porfolio form and card components.

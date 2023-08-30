@@ -7,6 +7,7 @@ import {
   deleteUser,
   updateUser,
   fetchAllUsersData,
+  fetchUsersAggregate,
   fetchUserDetails,
   fetchUsersData,
   fetchUserData,
@@ -14,6 +15,7 @@ import {
 import {
   createCourse,
   fetchCourseData,
+  fetchCoursesAggregate,
   fetchCoursesData,
   updateCourse,
   deleteCourse,
@@ -22,6 +24,7 @@ import {
 import {
   createUnit,
   fetchUnitData,
+  fetchUnitsAggregate,
   updateUnit,
   deleteUnit,
 } from "./UnitController";
@@ -82,10 +85,13 @@ export {
   getYoutubeAuthorizationURI,
   refreshYoutubeToken,
   fetchAllUsersData,
+  fetchUsersAggregate,
   fetchCoursesData,
+  fetchCoursesAggregate,
   fetchCourseData,
   fetchChapterData,
   fetchUnitData,
+  fetchUnitsAggregate,
   fetchLessonData,
   fetchLessonNotes,
   fetchUserData,

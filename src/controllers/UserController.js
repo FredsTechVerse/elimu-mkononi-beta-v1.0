@@ -85,6 +85,11 @@ const fetchAllUsersData = async () => {
   return usersData;
 };
 
+const fetchUsersAggregate = async () => {
+  const { data: userCount } = await axios.get(`/auth/aggregated-users`);
+  return userCount;
+};
+
 const fetchUserDetails = async (role) => {
   if (role === "EM-202") {
     const { data: tutorData } = await axios.get("/tutor", {
@@ -137,6 +142,7 @@ export {
   deleteUser,
   updateUser,
   fetchAllUsersData,
+  fetchUsersAggregate,
   fetchUserDetails,
   fetchUsersData,
   fetchUserData,
