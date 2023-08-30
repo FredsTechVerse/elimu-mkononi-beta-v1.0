@@ -35,11 +35,14 @@
 
 ##### CHUNK 2
 
+- Set up the messaging functionality.Overlay forms are ready , just need the data and textbox with characted count.
+- Improve authentication system by using the email & password to login , Implement email and contact verification for new account and build custom password reset functionality where user is prompted to confirm their contact before resetting their password.
+- Look for a good email service to integrate.... If it works once it definately will work for everything.
+- Build interface , then work on functionality once I have settled on a good email provider.
 - Cleanup update forms logic. Ensure CRUD functionalites for all forms are working. Cleanup console.logs().
 - Correct back btn... Make path defined eliminating screen freeze and the form loop. Best done by homebtn.
   . Release software for user feedback.
 - Learn how to make cashew nuts.
-- Improve authentication system by using the email & password to login , Implement email and contact verification for new account and build custom password reset functionality where user is prompted to confirm their contact before resetting their password.
 - Build the messaging platform where contact info will be retrieved from server.
 - Scrap away student authentication only tutor and admin to login.
 - Build church app backend with inspiration from Elimu Hub sidebar and porfolio form and card components.

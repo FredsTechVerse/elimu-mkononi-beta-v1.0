@@ -43,6 +43,47 @@ const updateUser = async ({
   }
 };
 
+const verifyContact = async ({ contact }) => {
+  const credentials = { contact };
+  const config = {
+    headers: { "Content-Type": "application/json" },
+  };
+  const { data: authorizedUser } = await axios.post(
+    "/auth/verify-contact",
+    credentials,
+    config
+  );
+  return authorizedUser;
+};
+
+const confirmResetToken = async ({ resetToken, role, userID }) => {
+  const userData = { resetToken };
+  if (role === "EM-203") {
+    await axios.post(`/admin/${userID}`, userData);
+    return;
+  } else if (role === "EM-201") {
+    await axios.post(`/student/${userID}`, userData);
+    return;
+  } else if (role === "EM-202") {
+    await axios.post(`/tutor/${userID}`, userData);
+    return;
+  }
+};
+
+const updatePassword = async ({ role, userID, password }) => {
+  const userData = { password };
+  if (role === "EM-203") {
+    await axios.put(`/admin/${userID}`, userData);
+    return;
+  } else if (role === "EM-201") {
+    await axios.put(`/student/${userID}`, userData);
+    return;
+  } else if (role === "EM-202") {
+    await axios.put(`/tutor/${userID}`, userData);
+    return;
+  }
+};
+
 const loginUser = async ({ firstName, password }) => {
   const credentials = { firstName, password };
   const config = {
@@ -146,4 +187,7 @@ export {
   fetchUserDetails,
   fetchUsersData,
   fetchUserData,
+  verifyContact,
+  updatePassword,
+  confirmResetToken,
 };

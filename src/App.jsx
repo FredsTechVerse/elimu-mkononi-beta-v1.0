@@ -23,7 +23,11 @@ import {
   ChapterForm,
   LessonForm,
   UnitForm,
+  MessageForm,
   ResourceForm,
+  ForgotPasswordForm,
+  PasswordUpdateForm,
+  ResetTokenVerificationForm,
 } from "./components";
 
 // LAZY LOADED COMPONENTS.
@@ -84,7 +88,7 @@ function App() {
           <Route path="/log-in" element={<LogInForm />} />
           <Route path="/draft" element={<DraftPage />} />
           <Route path="/fetchToken" element={<TokenExchange />} />
-          <Route exact path="/new-lesson" element={<LessonForm />} />
+          <Route exact path="/new-message" element={<MessageForm />} />
 
           <Route element={<UsersLayout />}>
             <Route exact path="/" element={<HomePage />}></Route>
@@ -160,6 +164,22 @@ function App() {
           <Route exact path="/new-chapter" element={<ChapterForm />} />
           <Route exact path="/new-lesson" element={<LessonForm />} />
           <Route exact path="/new-resource" element={<ResourceForm />} />
+          <Route exact path="/new-message" element={<MessageForm />} />
+          <Route
+            exact
+            path="/forgot-password"
+            element={<ForgotPasswordForm />}
+          />
+          <Route
+            exact
+            path="/reset-token"
+            element={<ResetTokenVerificationForm />}
+          />
+          <Route
+            exact
+            path="/update-password"
+            element={<PasswordUpdateForm />}
+          />
         </Routes>
       )}
     </div>

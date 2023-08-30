@@ -11,7 +11,8 @@ const LogInForm = () => {
   const navigate = useNavigate();
   const formRef = useRef(null);
   const { updateAlertBoxData } = useAlertBoxContext();
-
+  const location = useLocation();
+  const { background } = location.state;
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => (document.body.style.overflow = "unset");
@@ -140,10 +141,11 @@ const LogInForm = () => {
             />
           </div>
           <p className="mt-1 text-center text-sm text-white ">
-            <span>Not registered?</span>
+            <span>Forgot password</span>
             <span className="mx-2 text-black">
               <Link
-                to={"/new-student"}
+                to={"/forgot-password"}
+                state={{ background: background }}
                 className="font-medium text-slate-800 hover:text-indigo-500 focus:outline-none focus:ring-2"
               >
                 Sign up

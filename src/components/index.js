@@ -47,6 +47,10 @@ import {
   UnitForm,
   ResourceForm,
   DummyForm,
+  MessageForm,
+  ForgotPasswordForm,
+  PasswordUpdateForm,
+  ResetTokenVerificationForm,
 } from "./Forms";
 
 import {
@@ -150,6 +154,7 @@ export {
   ErrorMessage,
   CourseForm,
   ResourceForm,
+  MessageForm,
   DummyForm,
   ChapterForm,
   LessonForm,
@@ -172,6 +177,8 @@ export {
   CTAUnitButtonAdmin,
   DashboardUserButton,
   UserProfileSkeleton,
+  ForgotPasswordForm,
+  PasswordUpdateForm,
   TutorUnitsTable,
   AdminNavItem,
   RequireAuth,
@@ -222,6 +229,7 @@ export {
   AccordionSkeleton,
   TableSkeleton,
   TableAlternativeSkeleton,
+  ResetTokenVerificationForm,
   ContentSectionSkeleton,
   DoughnutSkeleton,
   NotesSkeleton,

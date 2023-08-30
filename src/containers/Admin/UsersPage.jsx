@@ -7,6 +7,7 @@ import {
   MenuBtn,
   TableSkeleton,
   HomeBtn,
+  NavBgBtn,
 } from "../../components";
 import { UsersGrid } from "../../containers";
 import { useOutletContext } from "react-router-dom";
@@ -61,6 +62,8 @@ const UsersPage = () => {
               : "student"
           }
         />
+
+        <NavBgBtn to="/new-message" text="Message" />
       </div>
       <div className="relative top-2">
         <PageTitle

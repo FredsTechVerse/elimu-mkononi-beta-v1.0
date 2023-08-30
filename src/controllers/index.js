@@ -1,11 +1,14 @@
 import { verifyAccess, renewToken, handleLogout } from "./AuthController";
-
+import { messageUser, fetchMessageData } from "./Communication";
 import {
   registerUser,
   loginUser,
   logoutUser,
   deleteUser,
   updateUser,
+  verifyContact,
+  updatePassword,
+  confirmResetToken,
   fetchAllUsersData,
   fetchUsersAggregate,
   fetchUserDetails,
@@ -70,6 +73,7 @@ import { handleError } from "./ErrorController";
 export {
   handleError,
   handleLogout,
+  messageUser,
   renewToken,
   registerUser,
   loginUser,
@@ -82,7 +86,11 @@ export {
   createNotes,
   createResource,
   verifyAccess,
+  verifyContact,
+  updatePassword,
+  confirmResetToken,
   getYoutubeAuthorizationURI,
+  fetchMessageData,
   refreshYoutubeToken,
   fetchAllUsersData,
   fetchUsersAggregate,

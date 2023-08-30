@@ -21,7 +21,11 @@ const handleError = async (error, updateAlertBoxData) => {
     } else if (error?.response?.statusText === "Unauthorized") {
       response = ERRORS.AUTHORIZATION_ERROR;
     } else {
-      response = ERRORS.AUTHORIZATION_ERROR;
+      if (error?.response?.data?.message) {
+        response = error?.response?.data?.message;
+      } else {
+        response = ERRORS.AUTHORIZATION_ERROR;
+      }
     }
   } else if (error?.response?.status === 403) {
     handleLogout();
