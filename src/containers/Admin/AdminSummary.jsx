@@ -76,7 +76,7 @@ const AdminSummary = () => {
               <div className="col-span-1 row-span-1">
                 <DoughnutChart
                   chartData={coursesData}
-                  doughnutName="Courses"
+                  doughnutName="total courses"
                   doughnutValue={totalCourses}
                 />
               </div>

@@ -90,7 +90,6 @@ const AdminDashboard = () => {
       let coursesOffered = [];
       let unitsPerCourse = [];
       let totalCourses = coursesAggregationQuery?.data?.coursesCount;
-      console.log({ totalCourses });
       unitsAggregationQuery.data.map((unit) => {
         totalUnits += unit.unitCount;
         coursesOffered.push(unit._id);
@@ -113,7 +112,7 @@ const AdminDashboard = () => {
         labels: coursesOffered,
         datasets: [
           {
-            label: "Units per course",
+            label: "Total ",
             data: unitsPerCourse,
             backgroundColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
             borderColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
@@ -132,7 +131,7 @@ const AdminDashboard = () => {
         labels: ["Students", "Tutors", "Admins"],
         datasets: [
           {
-            label: "Users",
+            label: "Total",
             data: [
               usersAggregationQuery.data?.totalStudents,
               usersAggregationQuery.data?.totalTutors,

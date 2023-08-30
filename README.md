@@ -35,14 +35,14 @@
 
 ##### CHUNK 2
 
-- Initialize charts correctly.
-- Sort out courses to display course names in addition to the count.
-- Test CRUD functionalites.Cleanup display , console and release to transfomers team.
-- Complete authentication system swapping username for email , verifying email during account creation, password reset functionality.
+- Cleanup update forms logic. Ensure CRUD functionalites for all forms are working. Cleanup console.logs().
+- Correct back btn... Make path defined eliminating screen freeze and the form loop. Best done by homebtn.
+  . Release software for user feedback.
 - Learn how to make cashew nuts.
+- Improve authentication system by using the email & password to login , Implement email and contact verification for new account and build custom password reset functionality where user is prompted to confirm their contact before resetting their password.
+- Build the messaging platform where contact info will be retrieved from server.
 - Scrap away student authentication only tutor and admin to login.
 - Build church app backend with inspiration from Elimu Hub sidebar and porfolio form and card components.
-- Correct back btn... Make path defined eliminating screen freeze and the form loop. Best done by homebtn.
 - Create resources interface and test upload to S3 Bucket.
 - Find a better way of not going to s3 uploader without lesson or resource name.
 - Anything with search functionality will be a table.Get rid of the polished cards which will be used later.
