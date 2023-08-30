@@ -46,7 +46,7 @@ const UnitForm = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      tutor: "xxx",
+      tutor: "",
       unitCode: "",
       unitName: "",
       unitDescription: "",

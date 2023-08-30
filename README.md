@@ -35,20 +35,21 @@
 
 ##### CHUNK 2
 
-- Check why delete function is executing twice on deployed version.
-- Optimize dashboard to utilize an aggregation pipeline.Test CRUD functionalites , Cleanup console , Release to the transformers team.
-- Build church app backend.
-- Complete authentication system by verifying email account and password reset.
+- Optimize dashboard to utilize an aggregation pipeline,Apart from unit count we can find out so much about our course.
+- Refine charts and test CRUD functionalites.
+- Complete authentication system swapping username for email , verifying email during account creation, password reset functionality.
+- Cleanup console , Release to the transformers team.
+- Learn how to make cashew nuts.
+- Scrap away student authentication only tutor and admin to login.
+- Build church app backend with inspiration from Elimu Hub sidebar and porfolio form and card components.
 - Correct back btn... Make path defined eliminating screen freeze and the form loop. Best done by homebtn.
 - Create resources interface and test upload to S3 Bucket.
 - Find a better way of not going to s3 uploader without lesson or resource name.
-- Anything with search functionality will be a table Get rid of the cards.
+- Anything with search functionality will be a table.Get rid of the polished cards which will be used later.
 - Test youtube refresh token acquisition by inversing if logic.
-- Consider verify email account while logging in to ensure true data....
 
 ##### CHUNK 3
 
-- Scrap away student authentication only tutor and admin to login.
 - Implement typescript with SWC [After a good grasp while implementing it in the AIPCA application.]
 - Consider tracking user interaction and completion. We can utilize document ids , arrays and array methods
 
