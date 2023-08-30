@@ -25,41 +25,10 @@ const AdminDashboard = () => {
     setIsSideBarOpen(false);
   };
 
-  const [allUsers, setAllUsers] = useState({
-    labels: ["Students , Tutors , Admins"],
-    datasets: [
-      {
-        label: "Users",
-        data: [0, 0, 0],
-        backgroundColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
-        borderColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
-      },
-    ],
-  });
+  const [allUsers, setAllUsers] = useState(null);
   const [totalUsers, setTotalUsers] = useState(0);
-  const [coursesData, setCoursesData] = useState({
-    labels: ["Total Units", "Total Lessons"],
-    datasets: [
-      {
-        label: "Workload",
-        data: [0, 0],
-        backgroundColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
-        borderColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
-      },
-    ],
-  });
-
-  const [unitsDistribution, setUnitsDistribution] = useState({
-    labels: ["Total Units", "Total Lessons"],
-    datasets: [
-      {
-        label: "Workload",
-        data: [0, 0],
-        backgroundColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
-        borderColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
-      },
-    ],
-  });
+  const [coursesData, setCoursesData] = useState(null);
+  const [unitsDistribution, setUnitsDistribution] = useState(null);
 
   const userDataQuery = useQuery(["user"], () => fetchUserDetails(role), {
     retry: 1,

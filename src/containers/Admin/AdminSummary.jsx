@@ -65,28 +65,20 @@ const AdminSummary = () => {
           <div className="w-full flex phone:flex-col tablet:flex-row justify-evenly ">
             <div className="phone:w-full tablet:w-1/2 gap-5 border-blue-400 flex-col-centered p-5">
               <div className="col-span-1 row-span-1">
-                {usersAggregationQuery.status === "loading" ? (
-                  <DoughnutSkeleton />
-                ) : (
-                  <DoughnutChart
-                    chartData={allUsers}
-                    doughnutName="total users"
-                    doughnutValue={totalUsers}
-                  />
-                )}
+                <DoughnutChart
+                  chartData={allUsers}
+                  doughnutName="total users"
+                  doughnutValue={totalUsers}
+                />
               </div>
             </div>
             <div className="phone:w-full tablet:w-1/2 gap-5 border-blue-400 flex-col-centered p-2">
               <div className="col-span-1 row-span-1">
-                {coursesAggregationQuery.status === "loading" ? (
-                  <DoughnutSkeleton />
-                ) : (
-                  <DoughnutChart
-                    chartData={coursesData}
-                    doughnutName="Courses"
-                    doughnutValue={totalCourses}
-                  />
-                )}
+                <DoughnutChart
+                  chartData={coursesData}
+                  doughnutName="Courses"
+                  doughnutValue={totalCourses}
+                />
               </div>
             </div>
           </div>
@@ -101,15 +93,12 @@ const AdminSummary = () => {
               <div className="pb-7">
                 <PageTitle title="Units" />
               </div>
-              {coursesAggregationQuery.status === "loading" ? (
-                <DoughnutSkeleton />
-              ) : (
-                <DoughnutChart
-                  chartData={unitsDistribution}
-                  doughnutName="total units"
-                  doughnutValue={totalUnits}
-                />
-              )}
+
+              <DoughnutChart
+                chartData={unitsDistribution}
+                doughnutName="total units"
+                doughnutValue={totalUnits}
+              />
             </div>
             <div className="w-full   bg-slate-300 rounded-lg h-64"></div>
             <div className="w-full h-1/3  flex-col-centered gap-1 rounded-lg  ">
