@@ -43,8 +43,8 @@ const updateUser = async ({
   }
 };
 
-const verifyContact = async ({ contact }) => {
-  const credentials = { contact };
+const verifyContact = async ({ contact, email }) => {
+  const credentials = { contact, email };
   const config = {
     headers: { "Content-Type": "application/json" },
   };
@@ -71,15 +71,15 @@ const confirmResetToken = async ({ resetToken, role, userID }) => {
 };
 
 const updatePassword = async ({ role, userID, password }) => {
-  const userData = { password };
+  const userData = { password, userID };
   if (role === "EM-203") {
-    await axios.put(`/admin/${userID}`, userData);
+    await axios.put(`/admin/password`, userData);
     return;
   } else if (role === "EM-201") {
-    await axios.put(`/student/${userID}`, userData);
+    await axios.put(`/student/password`, userData);
     return;
   } else if (role === "EM-202") {
-    await axios.put(`/tutor/${userID}`, userData);
+    await axios.put(`/tutor/password`, userData);
     return;
   }
 };

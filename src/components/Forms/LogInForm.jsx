@@ -141,14 +141,22 @@ const LogInForm = () => {
             />
           </div>
           <p className="mt-1 text-center text-sm text-white ">
-            <span>Forgot password</span>
+            <span className="mx-2 text-black">
+              <Link
+                to={"/new-user"}
+                state={{ background: background }}
+                className="font-medium hover:text-slate-100 text-primary focus:outline-none focus:ring-2"
+              >
+                Register
+              </Link>
+            </span>
             <span className="mx-2 text-black">
               <Link
                 to={"/forgot-password"}
                 state={{ background: background }}
-                className="font-medium text-slate-800 hover:text-indigo-500 focus:outline-none focus:ring-2"
+                className="font-medium hover:text-slate-100 text-primary focus:outline-none focus:ring-2"
               >
-                Sign up
+                Forgot Password
               </Link>
             </span>
           </p>

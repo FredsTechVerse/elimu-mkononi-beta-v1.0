@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import {
-  confirmResetToken as verifyContact,
-  handleError,
-} from "../../controllers";
+import { verifyContact, handleError } from "../../controllers";
 import { useMutation } from "@tanstack/react-query";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
+import axios from "../../axios";
 import { useForm } from "react-hook-form";
 
 import { ErrorMessage, FormNavigation, Modal, SubmitButton } from "..";
@@ -20,7 +18,6 @@ const ForgotPasswordForm = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -52,8 +49,9 @@ const ForgotPasswordForm = () => {
   const contactVerificationMutation = useMutation({
     mutationFn: verifyContact,
     onSuccess: (data) => {
-      const { role, userID } = data;
-      console.log({ role, userID });
+      const { accessToken, userInfo } = data;
+      const { role, userID, resetToken } = userInfo;
+      axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
       updateAlertBoxData({
         response: "Contact information has been confirmed",
         isResponse: true,
@@ -79,14 +77,15 @@ const ForgotPasswordForm = () => {
   const retryContactVerificationMutation = (formData) => {
     contactVerificationMutation.mutate({
       contact: formData.contact,
+      email: formData.email,
     });
   };
 
   const handleContactVerification = async (data) => {
-    const { contact } = data;
-    console.log({ contact });
+    const { contact, email } = data;
     contactVerificationMutation.mutate({
       contact: `254${contact}`,
+      email,
     });
     return;
   };
@@ -101,6 +100,18 @@ const ForgotPasswordForm = () => {
           onSubmit={handleSubmit(handleContactVerification)}
         >
           <div className="input-wrap">
+            <div className="input-wrap">
+              <label htmlFor="email">Email</label>
+              <input
+                className="input-styling"
+                placeholder="E-mail Address"
+                type="email"
+                {...register("email", {
+                  required: "This field is required ",
+                })}
+              />
+              {errors.email && <ErrorMessage message={errors.email?.message} />}
+            </div>
             <label htmlFor="contact">Contact</label>
             <div className="flex phone:gap-3 tablet:gap-2">
               <input
@@ -126,9 +137,10 @@ const ForgotPasswordForm = () => {
             <div className="flex flex-row gap-5 items-center">
               <SubmitButton
                 type="submit"
-                disabled={watch("resetToken") ? false : true}
                 isSubmitting={contactVerificationMutation.isLoading}
-                text={contactVerificationMutation.isLoading ? "Saving" : "Save"}
+                text={
+                  contactVerificationMutation.isLoading ? "Verifying" : "Verify"
+                }
               />
             </div>
           </div>

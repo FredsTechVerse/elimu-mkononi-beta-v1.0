@@ -4,8 +4,7 @@ const UsersGrid = ({ usersQuery, role }) => {
   console.log({ usersQuery });
   return (
     <div className="grid-sm laptop:hidden">
-      {typeof usersQuery?.data === "array" &&
-        usersQuery?.data?.length > 0 &&
+      {usersQuery?.data?.length > 0 &&
         usersQuery?.data?.map((userData, userIndex) => {
           return (
             <UserCard

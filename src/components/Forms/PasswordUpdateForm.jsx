@@ -80,7 +80,6 @@ const PasswordUpdateForm = () => {
 
   const handlePasswordUpdate = async (data) => {
     const { password, cPassword } = data;
-    console.log({ password, cPassword, role, userID });
     if (password === cPassword) {
       updatePasswordMutation.mutate({
         password,

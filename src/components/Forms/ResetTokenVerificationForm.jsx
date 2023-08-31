@@ -13,7 +13,6 @@ const ResetTokenVerificationForm = () => {
   const navigate = useNavigate();
   const { updateAlertBoxData } = useAlertBoxContext();
   const { background, role, userID } = location.state;
-  console.log({ background, role, userID });
   const {
     register,
     handleSubmit,
@@ -81,7 +80,7 @@ const ResetTokenVerificationForm = () => {
     const { resetToken } = data;
     console.log({ resetToken });
     resetTokenConfirmationMutation.mutate({
-      password,
+      resetToken,
     });
     return;
   };
