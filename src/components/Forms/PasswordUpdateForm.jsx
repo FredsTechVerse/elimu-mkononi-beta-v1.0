@@ -111,7 +111,7 @@ const PasswordUpdateForm = () => {
               className="input-styling"
               placeholder="Enter new password"
               {...register("password", {
-                required: "This fyield is required ",
+                required: "This field is required ",
               })}
             />
             {errors.password && (
@@ -123,7 +123,7 @@ const PasswordUpdateForm = () => {
 
             <input
               className="input-styling"
-              placeholder="Confirm New Password"
+              placeholder="Retype New Password"
               {...register("cPassword", {
                 required: "This field is required ",
               })}
@@ -139,7 +139,7 @@ const PasswordUpdateForm = () => {
                 type="submit"
                 disabled={watch("password") ? false : true}
                 isSubmitting={updatePasswordMutation.isLoading}
-                text={updatePasswordMutation.isLoading ? "Saving" : "Save"}
+                text={updatePasswordMutation.isLoading ? "Updating" : "Update"}
               />
             </div>
           </div>

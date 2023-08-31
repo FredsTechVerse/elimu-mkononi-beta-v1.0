@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { AdminSideBar, AdminSummary } from "../../containers";
+import { AdminSideBar } from "../../containers";
 import {
   handleError,
   fetchUserDetails,

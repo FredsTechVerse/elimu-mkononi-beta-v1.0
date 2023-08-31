@@ -35,7 +35,7 @@ const CourseOverview = () => {
       <div className="relative pattern h-60 w-full">
         <div className="flex flex-col items-start justify-center w-full h-full flex-row-centered backdrop-blur-md bg-black bg-opacity-20">
           <p className="mx-auto text-white  font-bold  phone:text-xl tablet:text-2xl laptop:text-4xl uppercase">
-            {courseQuery?.data && courseQuery?.data?.courseTitle}
+            {courseQuery.data && courseQuery.data?.courseTitle}
           </p>
         </div>
         {(roles?.includes("EM-202") || roles?.includes("EM-203")) && (

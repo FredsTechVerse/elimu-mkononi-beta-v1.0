@@ -114,7 +114,9 @@ const ResetTokenVerificationForm = () => {
                 disabled={watch("resetToken") ? false : true}
                 isSubmitting={resetTokenConfirmationMutation.isLoading}
                 text={
-                  resetTokenConfirmationMutation.isLoading ? "Saving" : "Save"
+                  resetTokenConfirmationMutation.isLoading
+                    ? "Verifying"
+                    : "Verify"
                 }
               />
             </div>

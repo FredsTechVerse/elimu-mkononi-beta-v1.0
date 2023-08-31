@@ -95,7 +95,7 @@ const AccordionItem = ({
   return (
     <li className="accordion_item">
       <div
-        className="button group px-2 text-sm flex items-center "
+        className="button hover:bg-slate-300 group px-2 text-sm flex items-center "
         onClick={onToggle}
       >
         {chapter?.chapterName}

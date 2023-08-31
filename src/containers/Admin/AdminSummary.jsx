@@ -9,7 +9,6 @@ import {
   Tooltip,
   UserProfileSkeleton,
   PageTitle,
-  DoughnutSkeleton,
   MenuBtn,
 } from "../../components";
 

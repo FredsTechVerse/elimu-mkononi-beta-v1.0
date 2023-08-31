@@ -35,13 +35,12 @@
 
 ##### CHUNK 2
 
-- Test email (nodemailer) and sms functionality. Messaging just needs contact info and data.
-- Finalize of password reset , authentication using email account.
-- Cleanup update forms logic. Ensure CRUD functionalites for all forms are working. Cleanup console.logs().
+- Test email (nodemailer) and sms functionality.
+- Build the messaging platform where contact info will be retrieved from server.
+- Finalize on authentication by sending SMS and email to the user , using email to login , impoving user search logic as an admin can also be a tutor.
+- Cleanup update form logic especially the courseForm. Ensure CRUD functionalites for all forms are working. Cleanup console.logs().
 - Correct back btn by saving the from variable where needbe
 - Release software for user feedback.
-- Learn how to make cashew nuts - We heat to bring out the flavour .... Heat till brown. Alot of it will make them bitter.
-- Build the messaging platform where contact info will be retrieved from server.
 - Scrap away student authentication only tutor and admin to login.
 - Build church app backend with inspiration from Elimu Hub sidebar and porfolio form and card components.
 - Create resources interface and test upload to S3 Bucket.
