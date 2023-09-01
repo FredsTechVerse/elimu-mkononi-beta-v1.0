@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   LogoutBtn,
   HomeBtn,
   NavBgBtn,
   NavMenuBtn,
-  NavItemBtn,
+  UseScrollHandler,
 } from "../../components";
 import { Link } from "react-router-dom";
 
-import { NavBtn, MenuBtn } from "../../components";
 const MainNav = () => {
   const roles = JSON.parse(localStorage.getItem("roles"));
   const [isNavOpen, setIsNavOpen] = useState(false);
-
+  const scroll = UseScrollHandler();
+  console.log({ scroll });
   const toggleNavbar = () => {
     setIsNavOpen((prev) => !prev);
   };

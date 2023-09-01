@@ -3,7 +3,7 @@ import { useParams, Link, useLocation } from "react-router-dom";
 import {
   UnitCard,
   UnitSkeleton,
-  NavigateBtn,
+  HomeBtn,
   BackBtn,
   Heading,
 } from "../../components";
@@ -16,6 +16,14 @@ const CourseOverview = () => {
   const roles = JSON.parse(localStorage.getItem("roles"));
   const queryClient = useQueryClient();
   const location = useLocation();
+  console.log({ location });
+  const from = () => {
+    if (location?.state?.previousPage) {
+      return location.state.previousPage;
+    }
+    return -1;
+  };
+  console.log({ courseLocation: location });
   const courseQuery = useQuery(
     ["courseData", courseID],
     () => fetchCourseData({ courseID }),
@@ -35,7 +43,7 @@ const CourseOverview = () => {
       <div className="relative pattern h-60 w-full">
         <div className="flex flex-col items-start justify-center w-full h-full flex-row-centered backdrop-blur-md bg-black bg-opacity-20">
           <p className="mx-auto text-white  font-bold  phone:text-xl tablet:text-2xl laptop:text-4xl uppercase">
-            {courseQuery.data && courseQuery.data?.courseTitle}
+            {courseQuery?.data?.courseTitle}
           </p>
         </div>
         {(roles?.includes("EM-202") || roles?.includes("EM-203")) && (
@@ -52,7 +60,11 @@ const CourseOverview = () => {
         )}
 
         <div className="absolute top-2 left-2 flex gap-1">
-          <BackBtn />
+          {roles?.includes("EM-202") || roles?.includes("EM-203") ? (
+            <HomeBtn />
+          ) : (
+            <BackBtn to="/" />
+          )}
         </div>
         <div className="absolute h-7 bg-slate-100 w-full bottom-0 rounded-t-full"></div>
       </div>

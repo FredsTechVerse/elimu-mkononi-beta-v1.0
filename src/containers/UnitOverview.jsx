@@ -1,13 +1,27 @@
 import React from "react";
-import { BackBtn, MenuBtn } from "../components";
+import { BackBtn, MenuBtn, HomeBtn } from "../components";
+import { useLocation } from "react-router-dom";
 
 const UnitOverview = ({ openSideBar, sideBarOpen }) => {
+  const location = useLocation();
+  const roles = JSON.parse(localStorage.getItem("roles"));
+  const from = () => {
+    if (location?.state?.previousPage) {
+      return location?.state.previousPage;
+    }
+    return -1;
+  };
+  console.log({ unitOverview: location });
   return (
     <div className="flex-col-centered justify-start w-full h-full pt-1">
       <div className="relative pattern h-42 w-full phone:rounded-[16px] tablet:rounded-b-[16px] ">
         <div className="flex flex-col items-center justify-center w-full h-full  backdrop-blur-md bg-black bg-opacity-20 phone:rounded-[16px] laptop:rounded-b-[16px]">
           <div className={`absolute top-2 left-2  flex gap-1`}>
-            <BackBtn />
+            {roles?.includes("EM-202") || roles?.includes("EM-203") ? (
+              <HomeBtn />
+            ) : (
+              <BackBtn to={from()} />
+            )}
           </div>
           <div className="absolute top-2 right-2 flex gap-2">
             <MenuBtn openSideBar={openSideBar} sideBarOpen={sideBarOpen} />

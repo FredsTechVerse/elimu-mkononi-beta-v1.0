@@ -28,6 +28,7 @@ import {
   ForgotPasswordForm,
   PasswordUpdateForm,
   ResetTokenVerificationForm,
+  UserCredentialsConfirmationForm,
 } from "./components";
 
 // LAZY LOADED COMPONENTS.
@@ -165,6 +166,11 @@ function App() {
           <Route exact path="/new-lesson" element={<LessonForm />} />
           <Route exact path="/new-resource" element={<ResourceForm />} />
           <Route exact path="/new-message" element={<MessageForm />} />
+          <Route
+            exact
+            path="/account-confirmation"
+            element={<UserCredentialsConfirmationForm />}
+          />
           <Route
             exact
             path="/forgot-password"

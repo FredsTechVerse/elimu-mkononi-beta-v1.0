@@ -30,10 +30,8 @@ const LessonForm = () => {
   const { background, chapterID, lessonID } = location.state;
   const { updateAlertBoxData } = useAlertBoxContext();
   const [lessonUrl, setLessonUrl] = useState("");
-
   const lessonState = { pathname, background, chapterID, lessonTotals };
   const queryClient = useQueryClient();
-
   const [isLessonQueryEnabled, setIsUserLessonQueryEnabled] = useState(
     lessonID ? true : false
   );

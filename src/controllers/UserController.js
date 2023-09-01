@@ -9,16 +9,16 @@ const registerUser = async ({
   email,
   role,
 }) => {
-  const userData = { firstName, surname, password, contact, email };
+  const userInfo = { firstName, surname, password, contact, email };
   if (role === "EM-203") {
-    await axios.post("/admin", userData);
-    return;
+    const { data: userData } = await axios.post("/admin", userInfo);
+    return userData;
   } else if (role === "EM-201") {
-    await axios.post("/student", userData);
-    return;
+    const { data: userData } = await axios.post("/student", userInfo);
+    return userData;
   } else if (role === "EM-202") {
-    await axios.post("/tutor", userData);
-    return;
+    const { data: userData } = await axios.post("/tutor", userInfo);
+    return userData;
   }
 };
 
@@ -70,6 +70,26 @@ const confirmResetToken = async ({ resetToken, role, userID }) => {
   }
 };
 
+const confirmUserCredentials = async ({
+  contactVerification,
+  emailVerification,
+  role,
+  userID,
+}) => {
+  console.log({ contactVerification, emailVerification, role, userID });
+  const userData = { contactVerification, emailVerification, role };
+  if (role === "EM-203") {
+    await axios.post(`/admin/confirmation/${userID}`, userData);
+    return;
+  } else if (role === "EM-201") {
+    await axios.post(`/student/confirmation/${userID}`, userData);
+    return;
+  } else if (role === "EM-202") {
+    await axios.post(`/tutor/confirmation/${userID}`, userData);
+    return;
+  }
+};
+
 const updatePassword = async ({ role, userID, password }) => {
   const userData = { password, userID };
   if (role === "EM-203") {
@@ -84,8 +104,8 @@ const updatePassword = async ({ role, userID, password }) => {
   }
 };
 
-const loginUser = async ({ firstName, password }) => {
-  const credentials = { firstName, password };
+const loginUser = async ({ email, password }) => {
+  const credentials = { email, password };
   const config = {
     headers: { "Content-Type": "application/json" },
   };
@@ -190,4 +210,5 @@ export {
   verifyContact,
   updatePassword,
   confirmResetToken,
+  confirmUserCredentials,
 };

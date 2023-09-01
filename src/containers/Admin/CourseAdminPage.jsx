@@ -12,7 +12,6 @@ import { fetchCoursesData, handleError } from "../../controllers";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 const CoursesAdminPage = () => {
-  const location = useLocation();
   const queryClient = useQueryClient();
   const { updateAlertBoxData } = useAlertBoxContext();
   const coursesQuery = useQuery(["courses"], fetchCoursesData, {
@@ -50,8 +49,8 @@ const CoursesAdminPage = () => {
         )}
         {coursesQuery.data && coursesQuery?.data.length > 0 && (
           <div className="grid-lg tablet:grid-cols-2 laptop:grid-cols-3 tablet:gap-6 ">
-            {coursesQuery.data.map((course, courseIndex) => {
-              return <CourseCardV2 key={courseIndex} courseData={course} />;
+            {coursesQuery.data.map((course, index) => {
+              return <CourseCardV2 key={index} courseData={course} />;
             })}
           </div>
         )}

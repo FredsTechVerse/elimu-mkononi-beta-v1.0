@@ -133,7 +133,9 @@ const AccordionItem = ({
               <PencilIcon className="icon-styling h-3 laptop:h-4 text-white" />
             </button>
             <button
-              className="cta-btn group"
+              className={`${
+                roles?.includes("EM-203") ? "cta-btn group" : "hidden"
+              } cta-btn group`}
               onClick={() => {
                 setIsDeleteChapterQueryEnabled(true);
               }}

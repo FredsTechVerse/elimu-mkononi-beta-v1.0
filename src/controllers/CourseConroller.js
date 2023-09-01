@@ -32,12 +32,7 @@ const fetchCourseData = async ({ courseID }) => {
   return courseData;
 };
 
-const updateCourse = async ({
-  courseTitle,
-  courseImage,
-  courseID,
-  // oldImage,
-}) => {
+const updateCourse = async ({ courseTitle, courseImage, courseID }) => {
   const courseData = {
     courseTitle,
     courseImage,

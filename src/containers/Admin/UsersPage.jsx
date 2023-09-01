@@ -51,7 +51,7 @@ const UsersPage = () => {
         <MenuBtn openSideBar={openSideBar} sideBarOpen={isSideBarOpen} />
       </div>
 
-      <div className="absolute top-2 right-2 flex-row-centered gap-2 w-32 h-10 ">
+      <div className="absolute top-2 right-2 flex-row-centered gap-2 ">
         <DashboardUserButton
           isRounded={false}
           item={

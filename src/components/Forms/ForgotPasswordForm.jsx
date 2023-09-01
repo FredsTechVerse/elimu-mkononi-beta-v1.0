@@ -51,6 +51,8 @@ const ForgotPasswordForm = () => {
     onSuccess: (data) => {
       const { accessToken, userInfo } = data;
       const { role, userID, resetToken } = userInfo;
+
+      console.log({ resetToken });
       axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
       updateAlertBoxData({
         response: "Contact information has been confirmed",

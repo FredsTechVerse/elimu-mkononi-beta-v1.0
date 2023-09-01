@@ -35,13 +35,13 @@
 
 ##### CHUNK 2
 
-- Test email (nodemailer) and sms functionality.
-- Build the messaging platform where contact info will be retrieved from server.
-- Finalize on authentication by sending SMS and email to the user , using email to login , impoving user search logic as an admin can also be a tutor.
-- Cleanup update form logic especially the courseForm. Ensure CRUD functionalites for all forms are working. Cleanup console.logs().
-- Correct back btn by saving the from variable where needbe
+- Try to recreate the course title error. Admin children are fine.... Problem is either the message Admin Summary.
+- Facelift course form updates , especially the buttons.
+- Crosscheck form CRUD functionalities.
+- Improve user hunt logic as an admin while logging in can also be a tutor.
+- Cleanup console.logs().
 - Release software for user feedback.
-- Scrap away student authentication only tutor and admin to login.
+- Improve navigation bar to change styling dynamically , Ensure user registration confirmation upon registering.
 - Build church app backend with inspiration from Elimu Hub sidebar and porfolio form and card components.
 - Create resources interface and test upload to S3 Bucket.
 - Find a better way of not going to s3 uploader without lesson or resource name.
@@ -56,12 +56,9 @@
 ### KEY TIPS I HAVE PICKED UP ALONG THE JOURNEY
 
 - For ease of element logic construction ask the right question eg what conditions should be met for the element to be displayed?
-
 - I was able to update the chapter 4 accross rerenders. It appears react router dom manages its states.
 - Page not found is quite strong when a person navigates to a form directly with a background....Look for better words... But it works well!
-
 - Multiple use states leads to multiple rerenders...Each state update triggers a new render cycle, and React will batch multiple state updates into a single render cycle only if they occur synchronously within the same event handler. Minimize their usage.
-
 - No 1 golden principal , no need to import a component from a component library if :-
 
   - It is easy to implement

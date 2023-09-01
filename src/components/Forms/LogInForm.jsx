@@ -23,7 +23,7 @@ const LogInForm = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      firstName: "",
+      email: "",
       password: "",
     },
   });
@@ -78,19 +78,19 @@ const LogInForm = () => {
   }, []);
 
   const login = async (data) => {
-    const { firstName, password } = data;
-    const trimmedFirstName = firstName.trim();
+    const { email, password } = data;
+    const trimmedEmail = email.trim();
     const trimmedPassword = password.trim();
 
     createLoginMutation.mutate({
-      firstName: trimmedFirstName,
+      email: trimmedEmail,
       password: trimmedPassword,
     });
   };
 
   const retryMutation = (formData) => {
     createChapterMutation.mutate({
-      firstName: formData.firstName,
+      email: formData.email,
       password: formData.password,
     });
   };
@@ -102,18 +102,16 @@ const LogInForm = () => {
 
         <form className="form-styling" onSubmit={handleSubmit(login)}>
           <div className="input-wrap">
-            <label htmlFor="surname">Username</label>
+            <label htmlFor="surname">Email</label>
             <input
               className="input-styling"
-              placeholder="Type first name "
-              {...register("firstName", {
+              placeholder="Enter your email "
+              {...register("email", {
                 required: "This field is required ",
               })}
             />
 
-            {errors.firstName && (
-              <ErrorMessage message={errors.firstName?.message} />
-            )}
+            {errors.email && <ErrorMessage message={errors.email?.message} />}
           </div>
           <div className="input-wrap">
             <label htmlFor="password">Password</label>

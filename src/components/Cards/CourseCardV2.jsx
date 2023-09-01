@@ -47,7 +47,11 @@ const CourseCardV2 = ({ courseData }) => {
   );
   const handleClick = () => {
     if (!roles?.includes("EM-202")) {
-      navigate(`/course/${courseData?._id}`);
+      navigate(`/course/${courseData?._id}`, {
+        state: {
+          previousPage: location,
+        },
+      });
     }
   };
 

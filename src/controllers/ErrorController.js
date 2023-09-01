@@ -13,29 +13,37 @@ const ERRORS = {
 
 const handleError = async (error, updateAlertBoxData) => {
   let response = "No response has been specified";
-  if (error?.response?.status === 400) {
-    response = ERRORS.BAD_REQUEST;
-  } else if (error?.response?.status === 401) {
-    if (error.response.data.message === "Token expired") {
+  let status = error?.response?.status;
+  let message = error?.response?.data?.message;
+  if (status === 400) {
+    response = message;
+  } else if (status === 401) {
+    if (message === "Token expired") {
       renewToken({ updateAlertBoxData });
-    } else if (error?.response?.statusText === "Unauthorized") {
+    } else if (response.statusText === "Unauthorized") {
       response = ERRORS.AUTHORIZATION_ERROR;
     } else {
-      if (error?.response?.data?.message) {
-        response = error?.response?.data?.message;
-      } else {
-        response = ERRORS.AUTHORIZATION_ERROR;
-      }
+      response = message;
     }
-  } else if (error?.response?.status === 403) {
+  } else if (status === 403) {
     handleLogout();
     response = ERRORS.LOGOUT;
-  } else if (error?.response?.status === 404) {
-    response = ERRORS.BLANK_ERROR;
-  } else if (error?.response?.status === 409) {
-    response = ERRORS.DUPLICATION_ERROR;
-  } else if (error?.response?.status === 422) {
-    response = ERRORS.INVALID_ID;
+  } else if (status === 404) {
+    if (message) {
+      response = message;
+    } else {
+      response = ERRORS.BLANK_ERROR;
+    }
+  } else if (status === 409) {
+    response = message;
+  } else if (status === 422) {
+    response = message;
+  } else if (status === 500) {
+    if (message) {
+      response = message;
+    } else {
+      response = ERRORS.INVALID_ID;
+    }
   } else if (error?.message === "Network Error") {
     response = ERRORS.NETWORK_ERROR;
   } else {

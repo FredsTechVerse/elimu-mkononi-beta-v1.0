@@ -7,6 +7,7 @@ import ResourceForm from "./ResourceForm";
 import ForgotPasswordForm from "./ForgotPasswordForm";
 import PasswordUpdateForm from "./PasswordUpdateForm";
 import ResetTokenVerificationForm from "./ResetTokenVerificationForm";
+import UserCredentialsConfirmationForm from "./UserCredentialsConfirmationForm";
 import MessageForm from "./MessageForm";
 import UnitForm from "./UnitForm";
 import DummyForm from "./DummyForm";
@@ -15,6 +16,7 @@ export {
   ForgotPasswordForm,
   PasswordUpdateForm,
   ResetTokenVerificationForm,
+  UserCredentialsConfirmationForm,
   LogInForm,
   UserForm,
   ResourceForm,

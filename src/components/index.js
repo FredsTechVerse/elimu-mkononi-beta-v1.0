@@ -51,6 +51,7 @@ import {
   ForgotPasswordForm,
   PasswordUpdateForm,
   ResetTokenVerificationForm,
+  UserCredentialsConfirmationForm,
 } from "./Forms";
 
 import {
@@ -66,6 +67,7 @@ import {
   UserProfile,
   PageTitle,
   FileUpdater,
+  UseScrollHandler,
   Heading,
 } from "./General";
 
@@ -150,6 +152,7 @@ export {
   UserProfile,
   Footer,
   ContentSection,
+  UseScrollHandler,
   FileUpdater,
   ErrorMessage,
   CourseForm,
@@ -230,6 +233,7 @@ export {
   TableSkeleton,
   TableAlternativeSkeleton,
   ResetTokenVerificationForm,
+  UserCredentialsConfirmationForm,
   ContentSectionSkeleton,
   DoughnutSkeleton,
   NotesSkeleton,

@@ -23,7 +23,7 @@ const UserForm = () => {
   const formRef = useRef(null);
   const { updateAlertBoxData } = useAlertBoxContext();
 
-  const { role, userID } = location?.state;
+  const { role, userID, background } = location?.state;
   const [isUserQueryEnabled, setIsUserQueryEnabled] = useState(
     userID ? true : false
   );
@@ -105,6 +105,8 @@ const UserForm = () => {
   const createUserMutation = useMutation({
     mutationFn: registerUser,
     onSuccess: (data) => {
+      console.log(JSON.stringify({ data }));
+      const { _id: userID } = data;
       queryClient.setQueryData([role, data?._id], data);
       queryClient.invalidateQueries(["users"], { exact: true });
       queryClient.invalidateQueries([role], {
@@ -116,7 +118,9 @@ const UserForm = () => {
         status: "success",
         timeout: 4500,
       });
-      navigate(-1);
+      navigate("/account-confirmation", {
+        state: { userID: userID, background: background, role: role },
+      });
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
