@@ -112,7 +112,7 @@ const AdminDashboard = () => {
         labels: coursesOffered,
         datasets: [
           {
-            label: "Total ",
+            label: "Units",
             data: unitsPerCourse,
             backgroundColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
             borderColor: ["#8B1874", "#B71375", "#FC4F00", "#F79540"],
