@@ -55,6 +55,9 @@ const FileUpdater = ({ queryKey, fileName, updateImage }) => {
 
   return (
     <div className="flex flex-col ">
+      <p className=" font-bold  text-sm  my-1 capitalize">
+        Course image preview
+      </p>
       <div>
         {currentImage && !isImageEditEnabled ? (
           <img
@@ -81,7 +84,7 @@ const FileUpdater = ({ queryKey, fileName, updateImage }) => {
               updateImage(updatedFileName);
             }
           }}
-          text={!isImageEditEnabled ? "Edit" : "Save"}
+          text={!isImageEditEnabled ? "Update" : "Save"}
         />
         {isImageEditEnabled && (
           <ActionBtn

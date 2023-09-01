@@ -41,7 +41,7 @@
   /* ELEMENTS STYLING */
 
   label {
-    @apply text-sm font-bold text-slate-900;
+    @apply text-sm font-bold text-slate-900 capitalize;
   }
 
   p {

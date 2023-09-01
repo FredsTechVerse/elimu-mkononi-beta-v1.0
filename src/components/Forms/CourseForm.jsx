@@ -41,6 +41,7 @@ const CourseForm = () => {
 
   const updateCourseImage = (imageURL) => {
     setCourseImage(imageURL);
+    enableEdit();
   };
 
   const {
