@@ -26,7 +26,6 @@ const TutorUnitsTable = ({ unitsData }) => {
               unit.unitChapters.forEach((chapter) => {
                 numberOfLessons += chapter.chapterLessons.length;
               });
-              console.log({ unitDataz: unit });
               return (
                 <tr
                   className={`${

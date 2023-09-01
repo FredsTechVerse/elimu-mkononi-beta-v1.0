@@ -12,7 +12,6 @@ const MainNav = () => {
   const roles = JSON.parse(localStorage.getItem("roles"));
   const [isNavOpen, setIsNavOpen] = useState(false);
   const scroll = UseScrollHandler();
-  console.log({ scroll });
   const toggleNavbar = () => {
     setIsNavOpen((prev) => !prev);
   };

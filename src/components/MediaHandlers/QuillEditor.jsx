@@ -57,10 +57,6 @@ const QuillEditor = () => {
   );
 
   useEffect(() => {
-    console.log(`Is Editor Enabled ${isEditorEnabled}`);
-  }, [isEditorEnabled]);
-
-  useEffect(() => {
     if (notesQuery.status === "success" && notesQuery?.data) {
       setOriginalContent(notesQuery?.data);
       setContent(notesQuery?.data);

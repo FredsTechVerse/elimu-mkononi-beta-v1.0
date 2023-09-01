@@ -33,9 +33,6 @@ const ChapterForm = () => {
   );
   const [isEditEnabled, setIsEditEnabled] = useState(chapterID ? false : true);
   const queryClient = useQueryClient();
-
-  // console.log({ chapterID, unitID, isChapterQueryEnabled });
-
   const {
     register,
     handleSubmit,
@@ -97,7 +94,6 @@ const ChapterForm = () => {
   // Updates accordingly  after fetch
   useEffect(() => {
     if (chapterQuery?.status === "success" && chapterQuery?.data) {
-      console.log({ chapterData: chapterQuery?.data });
       setValue(
         "chapterNumber",
         chapterQuery?.data?.chapterNumber.split("-")[1]
@@ -170,14 +166,6 @@ const ChapterForm = () => {
 
   const saveChapter = async (data) => {
     const { chapterName, chapterNumber, chapterDescription } = data;
-    console.log({
-      unitID,
-      chapterName,
-      chapterNumber,
-      chapterDescription,
-      isChapterQueryEnabled,
-    });
-
     if (!isChapterQueryEnabled) {
       if (unitID) {
         createChapterMutation.mutate({

@@ -50,7 +50,6 @@ const updateCourse = async ({ courseTitle, courseImage, courseID }) => {
 };
 
 const deleteCourse = async ({ courseID }) => {
-  console.log(`Course ID  for deletion passed :  ${JSON.stringify(courseID)}`);
   const { data } = await axios.delete(`/course/${courseID}`);
   return data;
 };

@@ -40,7 +40,6 @@ const updateNotes = async ({ lessonNotes, notesID }) => {
 };
 
 const deleteNotes = async ({ notesID }) => {
-  console.log(`NotesID  for deletion passed :  ${JSON.stringify(notesID)}`);
   const { data } = await axios.delete(`/notes/${notesID}`);
   return data;
 };

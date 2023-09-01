@@ -79,12 +79,7 @@ const UnitForm = () => {
       },
     }
   );
-
-  console.log({ unitID, isUnitQueryEnabled });
-
-  // Update unit data values accordingly
   useEffect(() => {
-    console.log({ unitData: unitQuery?.data?.tutor[0] });
     if (unitQuery?.status === "success" && unitQuery?.data) {
       setValue("tutor", unitQuery?.data?.tutor[0]);
       setValue("unitCode", unitQuery?.data?.unitCode);
@@ -179,10 +174,8 @@ const UnitForm = () => {
 
   const saveUnit = async (data) => {
     const { tutor, unitCode, unitName, unitDescription } = data;
-    console.log({ tutor, unitCode, unitName, unitDescription });
     if (!isUnitQueryEnabled) {
       if (courseID) {
-        console.log("Creating unit");
         createUnitMutation.mutate({
           course: courseID,
           tutor: tutor,

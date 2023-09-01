@@ -28,7 +28,6 @@ const fetchUnitsAggregate = async () => {
 };
 
 const fetchUnitData = async ({ unitID }) => {
-  console.log({ unitID });
   const { data: unitData } = await axios.get(`/unit/${unitID}`);
   return unitData;
 };
@@ -60,7 +59,6 @@ const updateUnit = async ({
 };
 
 const deleteUnit = async ({ unitID }) => {
-  console.log(`Unit ID  for deletion passed :  ${JSON.stringify(unitID)}`);
   const { data } = await axios.delete(`/unit/${unitID}`);
   return data;
 };

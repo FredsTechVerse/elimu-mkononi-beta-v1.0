@@ -23,8 +23,6 @@ const FileUpdater = ({ queryKey, fileName, updateImage }) => {
     setCurrentImage(imageURL);
   };
 
-  console.log({ currentImage });
-
   const accessQuery = useQuery(["accessVerification"], verifyAccess, {
     retry: 1,
     onError: (error) => {

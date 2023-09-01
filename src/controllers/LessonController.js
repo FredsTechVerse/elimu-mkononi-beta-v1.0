@@ -26,10 +26,7 @@ const createLesson = async ({
 };
 
 const fetchLessonData = async ({ lessonID }) => {
-  console.log("Fetching lesson Data");
   const { data: lessonData } = await axios.get(`/lesson/${lessonID}`);
-  console.log({ retrievedLessonData: lessonData });
-
   return lessonData;
 };
 
@@ -58,11 +55,7 @@ const updateLesson = async ({
 };
 
 const deleteLesson = async ({ lessonID }) => {
-  console.log("Hello from delete lesson");
   if (lessonID) {
-    console.log(
-      `Lesson ID  for deletion passed :  ${JSON.stringify(lessonID)}`
-    );
     const { data } = await axios.delete(`/lesson/${lessonID}`);
     return data;
   }

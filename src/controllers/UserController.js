@@ -76,7 +76,6 @@ const confirmUserCredentials = async ({
   role,
   userID,
 }) => {
-  console.log({ contactVerification, emailVerification, role, userID });
   const userData = { contactVerification, emailVerification, role };
   if (role === "EM-203") {
     await axios.post(`/admin/confirmation/${userID}`, userData);
@@ -183,7 +182,6 @@ const fetchUsersData = async (role) => {
 };
 
 const fetchUserData = async ({ role, userID }) => {
-  console.log(`User ID sent to server ${(role, userID)}`);
   if (role === "EM-203") {
     let { data: adminData } = await axios.get(`/admin/${userID}`);
     return adminData;

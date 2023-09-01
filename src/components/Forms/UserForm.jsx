@@ -105,7 +105,6 @@ const UserForm = () => {
   const createUserMutation = useMutation({
     mutationFn: registerUser,
     onSuccess: (data) => {
-      console.log(JSON.stringify({ data }));
       const { _id: userID } = data;
       queryClient.setQueryData([role, data?._id], data);
       queryClient.invalidateQueries(["users"], { exact: true });
@@ -177,10 +176,8 @@ const UserForm = () => {
 
   const saveUser = async (data) => {
     const { fName, surname, password, contact, email } = data;
-    console.log({ fName, surname, password, contact, email });
     if (role) {
       if (!isUserQueryEnabled) {
-        console.log("Creating user");
         createUserMutation.mutate({
           firstName: fName,
           surname,
@@ -190,7 +187,6 @@ const UserForm = () => {
           role,
         });
       } else {
-        console.log("Updating user");
         updateUserMutation.mutate({
           userID,
           firstName: fName,

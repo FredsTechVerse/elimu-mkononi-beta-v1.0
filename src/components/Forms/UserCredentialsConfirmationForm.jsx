@@ -76,7 +76,6 @@ const UserCredentialsConfirmationForm = () => {
 
   const handleResetToken = async (data) => {
     const { contactVerification, emailVerification } = data;
-    console.log({ contactVerification, emailVerification });
     userCredentialsConfirmationMutation.mutate({
       contactVerification,
       emailVerification,

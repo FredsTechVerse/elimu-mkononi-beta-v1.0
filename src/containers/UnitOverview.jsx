@@ -11,7 +11,6 @@ const UnitOverview = ({ openSideBar, sideBarOpen }) => {
     }
     return -1;
   };
-  console.log({ unitOverview: location });
   return (
     <div className="flex-col-centered justify-start w-full h-full pt-1">
       <div className="relative pattern h-42 w-full phone:rounded-[16px] tablet:rounded-b-[16px] ">

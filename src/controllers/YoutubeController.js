@@ -38,7 +38,6 @@ const redirectToExternalLink = ({ data: externalLink, lessonState }) => {
 };
 
 const fetchPresignedUrl = async ({ videoUploadUrl, metadata, headers }) => {
-  console.log({ videoUploadUrl, metadata, headers });
   const response = await youtubeInstance.post(videoUploadUrl, metadata, {
     headers: headers,
     params: {
@@ -47,7 +46,6 @@ const fetchPresignedUrl = async ({ videoUploadUrl, metadata, headers }) => {
     },
   });
   const presignedUrl = response.headers.location;
-  console.log({ presignedUrl });
   return presignedUrl;
 };
 
@@ -57,12 +55,6 @@ const uploadVideoToYoutube = async ({
   videoType,
   trackUploadProgress,
 }) => {
-  console.log({
-    presignedUrl,
-    videoFile,
-    videoType,
-    trackUploadProgress,
-  });
   const { data: videoData } = await youtubeInstance.put(
     presignedUrl,
     videoFile,
@@ -77,7 +69,6 @@ const uploadVideoToYoutube = async ({
   const { id: videoID } = videoData;
 
   const videoUrl = `https://www.youtube.com/watch?v=${videoID}`;
-  console.log({ videoUrl });
   return videoUrl;
 };
 

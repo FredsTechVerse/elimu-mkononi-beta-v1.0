@@ -11,7 +11,6 @@ const BackBtn = ({ isDark, isBlue = false, to = -1 }) => {
         isBlue && "bg-primary hover:bg-purple-500 "
       } cursor-pointer rounded-full  flex-row-centered  group `}
       onClick={() => {
-        console.log(`Back btn has been clicked ${JSON.stringify(to)}`);
         navigate(to);
       }}
     >

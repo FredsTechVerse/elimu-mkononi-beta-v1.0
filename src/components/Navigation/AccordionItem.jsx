@@ -37,10 +37,6 @@ const AccordionItem = ({
   const contentEl = useRef();
   const { updateCurrentLesson } = useCurrentLessonContext();
 
-  useEffect(() => {
-    console.log({ lessonToDelete, isDeleteLessonQueryEnabled });
-  }, [lessonToDelete]);
-
   useQuery(
     ["deletedChapter"],
     () => deleteChapter({ chapterID: chapter?._id, role: roles }),

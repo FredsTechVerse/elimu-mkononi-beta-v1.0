@@ -28,9 +28,6 @@ const updateResource = async ({ resourceName, resourceUrl, resourceID }) => {
 };
 
 const deleteResource = async ({ resourceID }) => {
-  console.log(
-    `Resource ID  for deletion passed :  ${JSON.stringify(resourceID)}`
-  );
   const { data } = await axios.delete(`/resources/${resourceID}`);
   return data;
 };

@@ -35,18 +35,17 @@
 
 ##### CHUNK 2
 
-- Work on timely notes update.
-- Try to recreate the course title error. Admin children are fine.... Problem narrowed them down to the Admin Summary.
-- Improve user hunt logic as an admin while logging in can also be a tutor.
 - Cleanup console.logs().
-- Release software for user feedback.
 - Improve navigation bar to change styling dynamically , Ensure user registration confirmation upon registering.
+- Release software for user feedback.
+- Work on timely notes update.
+- Improve user hunt logic as an admin while logging in can also be a tutor.
 - Build church app backend with inspiration from Elimu Hub sidebar and porfolio form and card components.
-- Create resources interface which will be used to test reading and deletion functionality.
-- Deepen delete cleanup.
+- Create resources interface . Will test read functionality with react pdf deletion works well.... Update only happens after deletion.
 - Find a better way of not going to s3 uploader without lesson or resource name.
 - Anything with search functionality will be a table.Get rid of the polished cards which will be used later.
 - Test youtube refresh token acquisition by inversing if logic.
+- Deepen delete functionality to delete clear even the children.
 
 ##### CHUNK 3
 

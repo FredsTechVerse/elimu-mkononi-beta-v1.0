@@ -19,8 +19,6 @@ const TokenExchange = () => {
         { code: code }
       );
 
-      console.log({ youtubeAccessTokenData });
-
       const { access_token, refresh_token, scope, token_type, expiry_date } =
         youtubeAccessTokenData;
 

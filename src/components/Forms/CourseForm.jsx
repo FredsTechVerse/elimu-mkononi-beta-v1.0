@@ -78,7 +78,6 @@ const CourseForm = () => {
 
   // Updates accordingly  after fetch
   useEffect(() => {
-    console.log(JSON.stringify({ courseQuery: courseQuery?.data }));
     if (courseQuery?.status === "success" && courseQuery?.data) {
       setValue("courseTitle", courseQuery?.data?.courseTitle);
       setCourseImage(courseQuery?.data?.courseImage);

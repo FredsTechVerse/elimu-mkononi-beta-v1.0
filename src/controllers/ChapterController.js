@@ -52,9 +52,6 @@ const updateChapter = async ({
 };
 
 const deleteChapter = async ({ chapterID }) => {
-  console.log(
-    `Chapter ID  for deletion passed :  ${JSON.stringify(chapterID)}`
-  );
   const { data } = await axios.delete(`/chapter/${chapterID}`);
   return data;
 };

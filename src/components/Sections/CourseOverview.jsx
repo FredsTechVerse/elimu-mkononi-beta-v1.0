@@ -16,14 +16,12 @@ const CourseOverview = () => {
   const roles = JSON.parse(localStorage.getItem("roles"));
   const queryClient = useQueryClient();
   const location = useLocation();
-  console.log({ location });
   const from = () => {
     if (location?.state?.previousPage) {
       return location.state.previousPage;
     }
     return -1;
   };
-  console.log({ courseLocation: location });
   const courseQuery = useQuery(
     ["courseData", courseID],
     () => fetchCourseData({ courseID }),

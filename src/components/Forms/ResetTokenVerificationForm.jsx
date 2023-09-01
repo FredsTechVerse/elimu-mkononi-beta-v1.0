@@ -78,7 +78,6 @@ const ResetTokenVerificationForm = () => {
 
   const handleResetToken = async (data) => {
     const { resetToken } = data;
-    console.log({ resetToken });
     resetTokenConfirmationMutation.mutate({
       resetToken,
     });

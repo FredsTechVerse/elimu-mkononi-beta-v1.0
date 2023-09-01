@@ -47,7 +47,6 @@ const handleError = async (error, updateAlertBoxData) => {
   } else if (error?.message === "Network Error") {
     response = ERRORS.NETWORK_ERROR;
   } else {
-    console.log(error);
     response = ERRORS.SERVER_ERROR;
   }
 

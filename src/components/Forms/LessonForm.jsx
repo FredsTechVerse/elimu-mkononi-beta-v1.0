@@ -37,9 +37,6 @@ const LessonForm = () => {
   );
 
   const [isEditEnabled, setIsEditEnabled] = useState(lessonID ? false : true);
-
-  console.log({ lessonID, isLessonQueryEnabled });
-
   const enableEdit = () => {
     setIsEditEnabled(true);
   };
@@ -107,8 +104,6 @@ const LessonForm = () => {
   // Updates accordingly  after fetch
   useEffect(() => {
     if (lessonQuery?.status === "success" && lessonQuery?.data) {
-      console.log("Lesson Data");
-      console.log({ lessonData: lessonQuery?.data });
       setValue("lessonNumber", lessonQuery?.data?.lessonNumber.split("-")[1]);
       setValue("lessonName", lessonQuery?.data?.lessonName);
       setValue("youtubeUrl", lessonQuery?.data?.lessonUrl);
