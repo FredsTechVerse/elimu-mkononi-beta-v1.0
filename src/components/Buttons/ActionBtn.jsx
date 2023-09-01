@@ -1,9 +1,11 @@
 import React from "react";
 
-const ActionBtn = ({ text, onClick, type }) => {
+const ActionBtn = ({ text, onClick, type, size = "large" }) => {
   return (
     <button
-      className="text-lg capitalize w-40 m-3 h-9 rounded-full text-white text-center bg-slate-900 hover:bg-purple-600"
+      className={` ${
+        size === "small" ? "text-xs w-24 h-6 my-2" : " text-lg  w-40 m-3 h-9"
+      } capitalize rounded-full text-white text-center bg-slate-900 hover:bg-purple-600`}
       type={type}
       onClick={onClick}
     >

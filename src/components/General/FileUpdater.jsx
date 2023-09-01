@@ -69,9 +69,10 @@ const FileUpdater = ({ queryKey, fileName, updateImage }) => {
           />
         )}
       </div>
-      <div className="flex items-center justify-center gap-1">
+      <div className="flex items-center justify-end gap-2">
         <ActionBtn
           type="button"
+          size="small"
           onClick={() => {
             if (!isImageEditEnabled) {
               enableImageEdit();
@@ -88,6 +89,7 @@ const FileUpdater = ({ queryKey, fileName, updateImage }) => {
             onClick={() => {
               disableImageEdit();
             }}
+            size="small"
             text="cancel"
           />
         )}
