@@ -36,6 +36,7 @@ const updateNotes = async ({ lessonNotes, notesID }) => {
     notesData,
     config
   );
+  console.log({ updatedNotes });
   return updatedNotes;
 };
 

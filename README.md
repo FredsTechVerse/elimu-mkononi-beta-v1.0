@@ -35,17 +35,16 @@
 
 ##### CHUNK 2
 
-- Cleanup console.logs().
-- Improve navigation bar to change styling dynamically , Ensure user registration confirmation upon registering.
-- Release software for user feedback.
-- Work on timely notes update.
+- Apply dynamic styling to the navigation bar.
+- Build church app backend with inspiration from Elimu Hub sidebar and porfolio form and card components. Ensure user registration , correct info is captured on the pages , communication to both sms and email. I think the contact info is wrong
+- Tweak the buttons as needed.
+- Deepen delete functionality to delete clear even the children.
 - Improve user hunt logic as an admin while logging in can also be a tutor.
-- Build church app backend with inspiration from Elimu Hub sidebar and porfolio form and card components.
 - Create resources interface . Will test read functionality with react pdf deletion works well.... Update only happens after deletion.
+- Release software for user feedback.
 - Find a better way of not going to s3 uploader without lesson or resource name.
 - Anything with search functionality will be a table.Get rid of the polished cards which will be used later.
 - Test youtube refresh token acquisition by inversing if logic.
-- Deepen delete functionality to delete clear even the children.
 
 ##### CHUNK 3
 

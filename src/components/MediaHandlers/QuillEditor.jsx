@@ -95,8 +95,7 @@ const QuillEditor = () => {
   const updateNotesMutation = useMutation({
     mutationFn: updateNotes,
     onSuccess: (data) => {
-      queryClient.setQueryData(["notes", data._id], data);
-      queryClient.invalidateQueries(["notes"], { exact: true });
+      queryClient.invalidateQueries(["notes", data._id], { exact: true });
       updateAlertBoxData({
         response: "Lesson Notes updated succesfully!",
         isResponse: true,

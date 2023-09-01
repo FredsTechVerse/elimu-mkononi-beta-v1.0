@@ -163,7 +163,7 @@ const AccordionItem = ({
             return (
               <li
                 key={lessonIndex}
-                className=" bg-slate-300 hover:bg-slate-400 text-black w-full px-3 py-2 my-0.5 capitalize rounded-md"
+                className=" bg-slate-300 hover:bg-slate-400 text-black w-full px-3  my-0.5 capitalize rounded-md"
               >
                 <div className="flex flex-row items-center  justify-between">
                   {lesson.videoKind === "youtube#video" ? (
@@ -194,7 +194,7 @@ const AccordionItem = ({
                     />
                   )}
                   <p
-                    className=" text-center whitespace-wrap px-2  w-full capitalize text-sm"
+                    className=" h-full text-center whitespace-wrap px-2 py-3   w-full capitalize text-sm"
                     onClick={() => {
                       updateCurrentLesson({
                         ...unitData?.unitChapters[chapterIndex]?.chapterLessons[
