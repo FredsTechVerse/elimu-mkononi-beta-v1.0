@@ -35,15 +35,15 @@
 
 ##### CHUNK 2
 
-- Try to recreate the course title error. Admin children are fine.... Problem is either the message Admin Summary.
-- Facelift course form updates , especially the buttons.
-- Crosscheck form CRUD functionalities.
+- Work on timely notes update.
+- Try to recreate the course title error. Admin children are fine.... Problem narrowed them down to the Admin Summary.
 - Improve user hunt logic as an admin while logging in can also be a tutor.
 - Cleanup console.logs().
 - Release software for user feedback.
 - Improve navigation bar to change styling dynamically , Ensure user registration confirmation upon registering.
 - Build church app backend with inspiration from Elimu Hub sidebar and porfolio form and card components.
-- Create resources interface and test upload to S3 Bucket.
+- Create resources interface which will be used to test reading and deletion functionality.
+- Deepen delete cleanup.
 - Find a better way of not going to s3 uploader without lesson or resource name.
 - Anything with search functionality will be a table.Get rid of the polished cards which will be used later.
 - Test youtube refresh token acquisition by inversing if logic.

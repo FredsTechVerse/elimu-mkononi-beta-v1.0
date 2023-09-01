@@ -19,7 +19,6 @@ const createCourse = async ({ courseTitle, courseImage }) => {
 
 const fetchCoursesAggregate = async () => {
   const { data: courseCount } = await axios.get(`/course/aggregated`);
-  console.log({ courseCount });
   return courseCount;
 };
 const fetchCoursesData = async () => {

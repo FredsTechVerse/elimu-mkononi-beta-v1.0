@@ -89,7 +89,7 @@ const AdminDashboard = () => {
       let totalUnits = 0;
       let coursesOffered = [];
       let unitsPerCourse = [];
-      let totalCourses = coursesAggregationQuery?.data?.coursesCount;
+      let totalCourses = coursesAggregationQuery?.data?.coursesCount.length;
       unitsAggregationQuery.data.map((unit) => {
         totalUnits += unit.unitCount;
         coursesOffered.push(unit._id);
@@ -165,7 +165,6 @@ const AdminDashboard = () => {
           totalCourses,
           totalUsers,
           coursesData,
-          coursesAggregationQuery,
           unitsDistribution,
           userDataQuery,
           usersAggregationQuery,
