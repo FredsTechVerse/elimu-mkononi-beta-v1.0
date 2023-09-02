@@ -35,10 +35,12 @@
 
 ##### CHUNK 2
 
+- Separate the nav home btn from the usual nav btn as they have different sylings.
 - Apply dynamic styling to the navigation bar.
 - Build church app backend with inspiration from Elimu Hub sidebar and porfolio form and card components. Ensure user registration , correct info is captured on the pages , communication to both sms and email. I think the contact info is wrong
-- Tweak the buttons as needed.
-- Deepen delete functionality to delete clear even the children.
+- Tweak the button color to be exciting.
+- Scrap away the usercard and shorten the table on small screens.
+- Deepen delete functionality to delete fuly even the children.
 - Improve user hunt logic as an admin while logging in can also be a tutor.
 - Create resources interface . Will test read functionality with react pdf deletion works well.... Update only happens after deletion.
 - Release software for user feedback.

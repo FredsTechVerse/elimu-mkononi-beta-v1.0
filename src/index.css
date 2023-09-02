@@ -74,7 +74,11 @@
   }
 
   .icon-styling {
-    @apply text-slate-700 m-0.5 cursor-pointer h-6 aspect-square group-hover:text-slate-800;
+    @apply text-slate-100 m-0.5 cursor-pointer h-6 aspect-square group-hover:text-white;
+  }
+
+  .card-icon-styling {
+    @apply text-slate-700 m-0.5 cursor-pointer h-6 aspect-square group-hover:text-slate-900;
   }
 
   .centered {
@@ -117,7 +121,7 @@
     @apply flex flex-col justify-center items-center w-full mt-4;
   }
   .cta-btn {
-    @apply rounded-full h-7 my-1 aspect-square cursor-pointer flex-row-centered bg-slate-600 hover:bg-white;
+    @apply rounded-full h-7 my-1 aspect-square cursor-pointer flex-row-centered bg-slate-700 hover:bg-slate-900;
   }
 
   /* MODAL STYLING */

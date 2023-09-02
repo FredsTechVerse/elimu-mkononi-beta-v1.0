@@ -46,10 +46,12 @@ const UsersPage = () => {
 
   return (
     <div className="relative w-full laptop:w-3/4  flex flex-col justify-start items-center  h-full overflow-auto p-3 overflow-x-hidden ">
-      <div className="absolute top-2 left-2 flex-row-centered gap-2">
-        <HomeBtn isDark={true} />
+      <div className="absolute z-10 top-2 left-2 flex-row-centered gap-2">
         <MenuBtn openSideBar={openSideBar} sideBarOpen={isSideBarOpen} />
+        <HomeBtn isDark={true} />
       </div>
+
+      {/* <div className="absolute top-2 left-2 z-10"></div> */}
 
       <div className="absolute top-2 right-2 flex-row-centered gap-2 ">
         <DashboardUserButton

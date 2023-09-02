@@ -7,6 +7,7 @@ import {
 } from "../../components";
 import { useParams } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { Outlet } from "react-router-dom";
 import { fetchUnitData, handleError } from "../../controllers";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 const ContentPage = () => {
@@ -36,23 +37,7 @@ const ContentPage = () => {
     setSideBarOpen(false);
   };
 
-  if (unitDataQuery.status === "loading") {
-    return (
-      <main className="flex relative laptop:grid laptop:grid-cols-4 w-full h-screen">
-        <article
-          className={` ${
-            sideBarOpen ? "block" : "hidden"
-          }   w-full h-full absolute laptop:relative laptop:block  laptop:col-span-1 `}
-        >
-          <AccordionSkeleton />
-        </article>
-
-        <article className="w-full laptop:col-span-3 h-full overflow-y-auto flex flex-col  ">
-          <ContentSectionSkeleton />
-        </article>
-      </main>
-    );
-  }
+  console.log({ unitDataQuery });
 
   return (
     <main className="flex relative gap-1 laptop:grid laptop:grid-cols-4 w-full h-screen p-1">
@@ -61,19 +46,26 @@ const ContentPage = () => {
           sideBarOpen ? "block" : "hidden"
         }  phone:w-full tablet:w-80 laptop:w-full h-full absolute laptop:relative laptop:block `}
       >
-        <Accordion
-          unitData={unitDataQuery.data}
-          fetchUnitData={fetchUnitData}
-          closeSideBar={closeSideBar}
-        />
+        {unitDataQuery.status === "loading" ? (
+          <AccordionSkeleton />
+        ) : (
+          <Accordion
+            unitData={unitDataQuery.data}
+            fetchUnitData={fetchUnitData}
+            closeSideBar={closeSideBar}
+            unitID={unitID}
+          />
+        )}
       </article>
 
       <article className="w-full laptop:col-span-3 tablet:col-span-2 h-full overflow-y-auto flex  flex-col  ">
-        <ContentSection
-          unitData={unitDataQuery.data}
-          sideBarOpen={sideBarOpen}
-          openSideBar={openSideBar}
-          unitID={unitID}
+        <Outlet
+          context={{
+            unitDataQuery: unitDataQuery,
+            sideBarOpen: sideBarOpen,
+            openSideBar: openSideBar,
+            unitID: unitID,
+          }}
         />
       </article>
     </main>

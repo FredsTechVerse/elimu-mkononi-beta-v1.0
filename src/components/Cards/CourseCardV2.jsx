@@ -82,23 +82,21 @@ const CourseCardV2 = ({ courseData }) => {
         } rounded-b-xl`}
       >
         <div className="group flex-col-centered  rounded-lg h-12 px-2 ">
-          <Square3Stack3DIcon className="icon-styling text-slate-800" />
+          <Square3Stack3DIcon className="card-icon-styling" />
           <span className="number font-extralight text-md text-black">
             {totalCourseUnits} units
           </span>
         </div>
 
         <div className="group flex-col-centered rounded-lg h-12 px-2 ">
-          <PresentationChartLineIcon className="icon-styling text-slate-800" />
+          <PresentationChartLineIcon className="card-icon-styling" />
           <span className="number font-extralight text-md text-black">
             {totalCourseChapters} chapters
           </span>
         </div>
         <div className="group flex-col-centered  rounded-lg h-12 px-2 ">
-          <ClockIcon className="icon-styling text-slate-800" />
-          <span className="number font-extralight text-md text-black">
-            {totalCourseLessons} lessons
-          </span>
+          <ClockIcon className="card-icon-styling" />
+          <span className="card-styling">{totalCourseLessons} lessons</span>
         </div>
       </div>
 

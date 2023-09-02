@@ -1,40 +1,26 @@
 import React from "react";
-
-import { VideoPlayer, UnitNav, MenuBtn } from "../../components";
-import { UnitOverview } from "../../containers";
-import { Outlet } from "react-router-dom";
-import { useCurrentLessonContext } from "../../context/currentLessonContext";
-const ContentSection = ({ unitData, openSideBar, sideBarOpen, unitID }) => {
-  const { currentLesson } = useCurrentLessonContext();
-  if (currentLesson.videoKind === "youtube#video") {
+import { ContentSectionSkeleton } from "../../components";
+import { VideoPlayer, UnitNav } from "../../components";
+import { Outlet, useOutletContext } from "react-router-dom";
+const ContentSection = () => {
+  const { unitDataQuery, openSideBar, sideBarOpen } = useOutletContext();
+  if (unitDataQuery?.status === "success") {
     return (
-      <div className="w-full px-1">
+      <div className="w-full flex flex-col gap-1">
         <UnitNav
           openSideBar={openSideBar}
           sideBarOpen={sideBarOpen}
-          unitData={unitData}
+          unitData={unitDataQuery.data}
         />
         <VideoPlayer />
         <div className="border-none border-slate-400 rounded-lg w-full">
-          <Outlet
-            context={{
-              unitData: unitData,
-              openSideBar: openSideBar,
-            }}
-          />
+          <Outlet context={{ openSideBar }} />
         </div>
       </div>
     );
+  } else {
+    return <ContentSectionSkeleton />;
   }
-  return (
-    <div className="w-full h-full flex-col-centered bg-transparent px-2">
-      <UnitOverview
-        openSideBar={openSideBar}
-        sideBarOpen={sideBarOpen}
-        unitID={unitID}
-      />
-    </div>
-  );
 };
 
 export default ContentSection;

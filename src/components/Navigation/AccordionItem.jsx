@@ -22,6 +22,7 @@ const AccordionItem = ({
   chapterIndex,
   closeSideBar,
   unitData,
+  unitID,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -164,6 +165,7 @@ const AccordionItem = ({
               <li
                 key={lessonIndex}
                 className=" bg-slate-300 hover:bg-slate-400 text-black w-full px-3  my-0.5 capitalize rounded-md"
+                onClick={() => navigate(`/unit/${unitID}`)}
               >
                 <div className="flex flex-row items-center  justify-between">
                   {lesson.videoKind === "youtube#video" ? (
@@ -241,24 +243,17 @@ const AccordionItem = ({
             );
           })}
 
-        <li className="hover:bg-slate-400 bg-slate-500 text-white hover:text-slate-900 text-center w-full px-3 py-2 my-0.5 capitalize rounded-md flex justify-between items-center">
+        <li
+          className="hover:bg-slate-400 bg-slate-500 text-white hover:text-slate-900 text-center w-full px-3 py-2 my-0.5 capitalize rounded-md flex justify-between items-center debug"
+          onClick={() => {
+            navigate(`resources/${chapter?._id}`, {
+              state: {
+                background: location,
+              },
+            });
+          }}
+        >
           <p>Resources</p>
-
-          <button
-            className={`${
-              roles?.includes("EM-203") ? "cta-btn group" : "hidden"
-            }`}
-            onClick={() => {
-              navigate("/new-resource", {
-                state: {
-                  background: location,
-                  chapterID: chapter?._id,
-                },
-              });
-            }}
-          >
-            <PlusIcon className="icon-styling h-4  text-white" />
-          </button>
         </li>
       </ul>
     </li>

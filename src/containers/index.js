@@ -2,7 +2,6 @@ import HomePage from "./HomePage";
 import UsersLayout from "./UsersPage/UsersLayout";
 import TutorDashboard from "./Tutor/TutorDashboard";
 import ContentPage from "./Tutor/ContentPage";
-import TutorUnitsPage from "./Tutor/TutorUnitsPage";
 import CourseOverview from "../components/Sections/CourseOverview";
 import UsersPage from "./Admin/UsersPage";
 import UsersGrid from "./Admin/UsersGrid";
@@ -21,7 +20,6 @@ export {
   AdminSideBar,
   HomePage,
   TutorDashboard,
-  TutorUnitsPage,
   ContentPage,
   UsersPage,
   CourseAdminPage,

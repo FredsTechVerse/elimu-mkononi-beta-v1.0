@@ -17,7 +17,7 @@ import {
   LogInForm,
   UserForm,
   ResourcesSection,
-  Layout,
+  ContentSection,
   AlertBox,
   CourseForm,
   ChapterForm,
@@ -41,9 +41,7 @@ const CommentsSection = lazy(() =>
 const TutorDashboard = lazy(() =>
   import("./containers/Tutor/TutorDashboard.jsx")
 );
-const TutorUnitsPage = lazy(() =>
-  import("./containers/Tutor/TutorUnitsPage.jsx")
-);
+
 const AdminDashboard = lazy(() =>
   import("./containers/Admin/AdminDashboard.jsx")
 );
@@ -90,7 +88,6 @@ function App() {
           <Route path="/draft" element={<DraftPage />} />
           <Route path="/fetchToken" element={<TokenExchange />} />
           <Route exact path="/new-message" element={<MessageForm />} />
-
           <Route element={<UsersLayout />}>
             <Route exact path="/" element={<HomePage />}></Route>
             <Route
@@ -109,34 +106,29 @@ function App() {
                 element={<UnitOverview />}
               />
               <Route exact path="/unit/:unitID" element={<ContentPage />}>
-                <Route index element={<QuillEditor />} />
-                <Route exact path="comments" element={<CommentsSection />} />
-                <Route exact path="resources" element={<ResourcesSection />} />
+                <Route exact path="" element={<ContentSection />}>
+                  <Route index element={<QuillEditor />} />
+                  <Route exact path="comments" element={<ResourcesSection />} />
+                </Route>
+                <Route
+                  exact
+                  path="resources/:chapterID"
+                  element={<ResourcesSection />}
+                />
               </Route>
             </Route>
           </Route>
 
           {/* TUTOR ROUTES */}
-
           {roles?.includes("EM-202") && (
             <Route element={<RequireAuth allowedRoles={["EM-202"]} />}>
-              <Route exact path="/tutor" element={<Layout role="EM-202" />}>
-                <Route index element={<TutorDashboard />} />
-                <Route exact path="units" element={<TutorUnitsPage />} />
-              </Route>
-
-              <Route exact path="/tutor/unit/:unitID" element={<ContentPage />}>
-                <Route index element={<QuillEditor />} />
-                <Route exact path="comments" element={<CommentsSection />} />
-                <Route exact path="resources" element={<ResourcesSection />} />
-              </Route>
+              <Route exact path="/tutor" element={<TutorDashboard />} />
             </Route>
           )}
 
           {/* ADMIN ROUTES */}
           {roles?.includes("EM-203") && (
             <Route element={<RequireAuth allowedRoles={["EM-203"]} />}>
-              {/* <Route exact path="/admin" element={<Layout role="EM-203" />}> */}
               <Route exact path="/admin" element={<AdminDashboard />}>
                 <Route index element={<AdminSummary />} />
                 <Route exact path=":role" element={<UsersPage />} />

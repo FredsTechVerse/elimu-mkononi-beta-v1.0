@@ -107,7 +107,6 @@ import {
   Footer,
   CourseOverview,
   ContentSection,
-  Layout,
 } from "./Sections";
 
 import {
@@ -223,7 +222,6 @@ export {
   CourseOverview,
   UnitSkeleton,
   VideoPlayer,
-  Layout,
   FancyLine,
   MenuBtn,
   Tooltip,
