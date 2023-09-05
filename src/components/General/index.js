@@ -11,7 +11,6 @@ import PageTitle from "./PageTitle";
 import Heading from "./Heading";
 import ErrorMessage from "./ErrorMessage";
 import FileUpdater from "./FileUpdater";
-import UseScrollHandler from "./UseScrollHandler";
 export {
   AlertBox,
   TutorCardHome,
@@ -20,7 +19,6 @@ export {
   ErrorMessage,
   RequireAuth,
   UserProfile,
-  UseScrollHandler,
   Modal,
   ProgressBar,
   FancyLine,

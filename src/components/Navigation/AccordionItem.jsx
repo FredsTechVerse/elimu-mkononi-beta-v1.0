@@ -44,7 +44,7 @@ const AccordionItem = ({
     {
       enabled: isDeleteChapterQueryEnabled,
       staleTime: 0,
-      retry: 0,
+
       onSuccess: () => {
         updateAlertBoxData({
           response: "Deleted chapter successfully",
@@ -70,7 +70,7 @@ const AccordionItem = ({
     {
       enabled: isDeleteLessonQueryEnabled,
       staleTime: 0,
-      retry: 0,
+
       onSuccess: () => {
         updateAlertBoxData({
           response: "Deleted lesson successfully",

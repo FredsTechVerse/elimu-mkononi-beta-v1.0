@@ -7,7 +7,6 @@ const CoursesSection = () => {
   const { updateAlertBoxData } = useAlertBoxContext();
   const queryClient = useQueryClient();
   const coursesQuery = useQuery(["courses"], fetchCoursesData, {
-    retry: 1,
     onError: (error) => {
       handleError(error, updateAlertBoxData);
       if (error.response && error.response.data.message === "Token expired") {
@@ -15,7 +14,6 @@ const CoursesSection = () => {
       }
     },
   });
-
   return (
     <div
       id="courses"

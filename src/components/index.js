@@ -67,7 +67,6 @@ import {
   UserProfile,
   PageTitle,
   FileUpdater,
-  UseScrollHandler,
   Heading,
 } from "./General";
 
@@ -151,7 +150,6 @@ export {
   UserProfile,
   Footer,
   ContentSection,
-  UseScrollHandler,
   FileUpdater,
   ErrorMessage,
   CourseForm,

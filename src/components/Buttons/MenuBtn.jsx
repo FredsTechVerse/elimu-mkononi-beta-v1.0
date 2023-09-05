@@ -8,8 +8,9 @@ const MenuBtn = ({ openSideBar, sideBarOpen }) => {
       onClick={openSideBar}
       className={`${
         sideBarOpen ? "hidden" : "flex"
-      } text-xl  flex-col-centered px-2 laptop:hidden border-none group bg-slate-600 hover:bg-slate-900  aspect-square h-9 rounded-full `}
+      } flex-row-centered gap-1 capitalize laptop:hidden border-none group bg-slate-700 hover:bg-slate-800 h-10 px-2 rounded-lg text-white `}
     >
+      <span>Menu</span>
       <Bars3BottomRightIcon className="icon-styling text-white" />
     </button>
   );

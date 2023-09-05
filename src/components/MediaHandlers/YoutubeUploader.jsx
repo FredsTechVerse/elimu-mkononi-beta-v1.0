@@ -29,7 +29,7 @@ const YoutubeUploader = ({ updateFileInfo, videoTitle, lessonState }) => {
   useQuery(["authorizationURI"], getYoutubeAuthorizationURI, {
     enabled: isQueryEnabled,
     staleTime: 60 * 60 * 1000,
-    retry: 1,
+
     onSuccess: (data) => {
       redirectToExternalLink({
         data,

@@ -31,7 +31,6 @@ const AdminDashboard = () => {
   const [unitsDistribution, setUnitsDistribution] = useState(null);
 
   const userDataQuery = useQuery(["user"], () => fetchUserDetails(role), {
-    retry: 1,
     onError: (error) => {
       handleError(error, updateAlertBoxData);
       if (error.response && error.response.data.message === "Token expired") {

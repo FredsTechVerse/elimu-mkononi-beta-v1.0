@@ -54,7 +54,6 @@ const UnitForm = () => {
   });
 
   const tutorsQuery = useQuery(["tutors"], () => fetchUsersData("EM-202"), {
-    retry: 1,
     onError: (error) => {
       handleError(error, updateAlertBoxData);
       if (error.response && error.response.data.message === "Token expired") {
@@ -70,7 +69,7 @@ const UnitForm = () => {
     {
       enabled: isUnitQueryEnabled,
       staleTime: 1000 * 60 * 60,
-      retry: 1,
+
       onError: (error) => {
         handleError(error, updateAlertBoxData);
         if (error.response && error.response.data.message === "Token expired") {

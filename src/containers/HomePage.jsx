@@ -10,6 +10,7 @@ const HomePage = () => {
   const hideNavbar = () => {
     setIsNavOpen(false);
   };
+
   return (
     <>
       <div className="flex flex-col items-center justify-center gap-5 w-full ">
@@ -19,6 +20,7 @@ const HomePage = () => {
           hideNavbar={hideNavbar}
         />
         <CoursesSection />
+
         <Footer />
       </div>
     </>

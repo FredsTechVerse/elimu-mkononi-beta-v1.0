@@ -1,34 +1,24 @@
 import React from "react";
 import { Bars3BottomRightIcon, XMarkIcon } from "@heroicons/react/24/solid";
 
-const NavMenuBtn = (props) => {
+const NavMenuBtn = ({ isNavOpen, position, toggleNavbar }) => {
   return (
     <button
       className={`${
-        props.position === "layout"
+        position === "layout"
           ? "relative w-full mx-auto h-8 bg-slate-300"
-          : "fixed z-50 top-0  right-2 h-[10vh] px-2"
-      } laptop:hidden  ${
-        props.isDark ? "text-slate-800" : "text-slate-900"
-      } flex items-center justify-center uppercase gap-1 `}
+          : "fixed z-50 top-0  h-[8vh] right-2  px-2"
+      } text-slate-800 flex items-center justify-center uppercase gap-1 `}
       onClick={() => {
-        props.toggleNavbar();
+        toggleNavbar();
       }}
     >
-      {props.isNavOpen ? "Close " : "Menu"}
+      {isNavOpen ? "Close " : "Menu"}
 
-      {props.isNavOpen ? (
-        <XMarkIcon
-          className={`icon-styling ${
-            props.isDark ? "text-slate-800" : "text-slate-900"
-          }`}
-        />
+      {isNavOpen ? (
+        <XMarkIcon className={`icon-styling text-slate-800 `} />
       ) : (
-        <Bars3BottomRightIcon
-          className={`icon-styling ${
-            props.isDark ? "text-slate-800" : "text-slate-900"
-          }`}
-        />
+        <Bars3BottomRightIcon className={`icon-styling text-slate-800`} />
       )}
     </button>
   );

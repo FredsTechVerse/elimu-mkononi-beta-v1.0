@@ -46,7 +46,6 @@ const QuillEditor = () => {
     ["notes", currentLesson?.lessonNotes],
     () => fetchLessonNotes({ notesID: currentLesson?.lessonNotes }),
     {
-      retry: 1,
       onError: (error) => {
         handleError(error, updateAlertBoxData);
         if (error.response && error.response.data.message === "Token expired") {

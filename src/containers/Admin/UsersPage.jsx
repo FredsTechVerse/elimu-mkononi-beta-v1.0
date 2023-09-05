@@ -32,7 +32,6 @@ const UsersPage = () => {
   const userRole = assignUserRole();
 
   const usersQuery = useQuery([userRole], () => fetchUsersData(userRole), {
-    retry: 1,
     staleTime: 1000 * 60 * 30,
     onError: (error) => {
       handleError(error, updateAlertBoxData);

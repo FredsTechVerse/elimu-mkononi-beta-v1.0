@@ -63,7 +63,7 @@ const MessageForm = () => {
     {
       enabled: isMessageQueryEnabled,
       staleTime: 1000 * 60 * 60,
-      retry: 1,
+
       onError: (error) => {
         handleError(error, updateAlertBoxData);
         if (error.response && error.response.data.message === "Token expired") {

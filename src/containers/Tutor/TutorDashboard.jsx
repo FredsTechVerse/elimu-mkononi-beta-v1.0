@@ -44,7 +44,6 @@ const TutorDashboard = () => {
   const role = "EM-202";
 
   const userDataQuery = useQuery(["user"], () => fetchUserDetails(role), {
-    retry: 1,
     onSuccess: (data) => {
       // I need to compute the no of units per course that the teacher has uploaded.
       let totalUnits = data?.units?.length;
@@ -129,9 +128,7 @@ const TutorDashboard = () => {
         <div className="w-full  flex phone:flex-col tablet:flex-row justify-between items-center gap-5">
           <div className="phone:w-full tablet:w-3/5 laptop:w-full  bg-slate-300 rounded-xl phone:h-36 tablet:h-full laptop:h-40 flex flex-col-centered relative ">
             <div className="flex flex-row items-center justify-evenly gap-3 absolute top-2  left-2">
-              <Tooltip tooltip="Logout">
-                <LogoutBtn />
-              </Tooltip>
+              <LogoutBtn />
             </div>
             <div className="flex flex-row items-center justify-evenly gap-2 absolute top-2  right-2">
               <MenuBtn openSideBar={openSideBar} sideBarOpen={isSideBarOpen} />

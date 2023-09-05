@@ -23,7 +23,7 @@ const DashboardUserButton = ({ item, isRounded = true, isBlue = false }) => {
     <Link
       to={link}
       state={{ background: location, role: roleInformation }}
-      className={`navbar-link group ${
+      className={`text-white text-sm capitalize rounded-md w-full h-10 flex-row-centered group ${
         isBlue
           ? "bg-primary hover:bg-purple-500 "
           : "bg-slate-700 hover:bg-slate-900  "

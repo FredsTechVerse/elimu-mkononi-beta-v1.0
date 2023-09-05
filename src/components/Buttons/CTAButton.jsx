@@ -16,7 +16,7 @@ const CTAButton = ({ userID, role = "EM-201" }) => {
   useQuery(["deletedUser"], () => deleteUser({ userID, role }), {
     enabled: isDeleteQueryEnabled,
     staleTime: 0,
-    retry: 0,
+
     onSuccess: () => {
       updateAlertBoxData({
         response: "Deleted user successfully",

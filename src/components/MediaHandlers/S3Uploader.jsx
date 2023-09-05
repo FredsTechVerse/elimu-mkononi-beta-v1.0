@@ -23,7 +23,6 @@ const S3Uploader = ({ updateFileName }) => {
   };
 
   useQuery(["accessVerification"], verifyAccess, {
-    retry: 1,
     onError: (error) => {
       handleError(error, updateAlertBoxData);
     },

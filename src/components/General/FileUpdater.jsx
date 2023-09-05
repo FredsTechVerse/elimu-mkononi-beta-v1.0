@@ -24,7 +24,6 @@ const FileUpdater = ({ queryKey, fileName, updateImage }) => {
   };
 
   const accessQuery = useQuery(["accessVerification"], verifyAccess, {
-    retry: 1,
     onError: (error) => {
       handleError(error, updateAlertBoxData);
     },
@@ -32,7 +31,7 @@ const FileUpdater = ({ queryKey, fileName, updateImage }) => {
   useQuery(["deletedFile", fileName], () => deleteFile({ fileKey: fileName }), {
     enabled: isDeleteQueryEnabled,
     staleTime: 0,
-    retry: 0,
+
     onSuccess: () => {
       updateAlertBoxData({
         response: "Deleted user successfully",

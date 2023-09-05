@@ -15,7 +15,6 @@ const CoursesAdminPage = () => {
   const queryClient = useQueryClient();
   const { updateAlertBoxData } = useAlertBoxContext();
   const coursesQuery = useQuery(["courses"], fetchCoursesData, {
-    retry: 1,
     onError: (error) => {
       handleError(error, updateAlertBoxData);
       if (error.response && error.response.data.message === "Token expired") {

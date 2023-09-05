@@ -7,7 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "../../axios";
 
 import { SpinnerIcon } from "../../components";
-const LogoutBtn = ({ isBlue = false }) => {
+const LogoutBtn = ({ isBlue = false, position = "default" }) => {
   const { updateAlertBoxData } = useAlertBoxContext();
   const logoutMutation = useMutation({
     mutationFn: logoutUser,
@@ -41,18 +41,23 @@ const LogoutBtn = ({ isBlue = false }) => {
       onClick={() => {
         logoutMutation.mutate();
       }}
-      className={`  w-full h-10  tablet:rounded-full tablet:w-10 tablet:aspect-square cursor-pointer flex-row-centered gap-2  ${
-        isBlue
-          ? "bg-primary hover:bg-purple-500"
-          : "tablet:bg-slate-700 tablet:text-white hover:bg-slate-900 hover:text-white "
+      className={` capitalize group w-full cursor-pointer flex-row-centered hover:bg-slate-900 hover:text-white   ${
+        position === "navbar"
+          ? "hover:rounded-b-lg h-10"
+          : "bg-slate-700 text-white rounded-lg px-2 h-10"
       } `}
     >
+      <span>Logout</span>
       <span>
         {logoutMutation?.isLoading ? (
           <SpinnerIcon />
         ) : (
           <ArrowRightOnRectangleIcon
-            className={`icon-styling text-black tablet:text-white`}
+            className={`  ${
+              position === "navbar"
+                ? "text-black group-hover:text-white"
+                : "text-white"
+            } icon-styling `}
           />
         )}
       </span>

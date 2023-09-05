@@ -79,7 +79,6 @@ const ChapterForm = () => {
     {
       enabled: isChapterQueryEnabled,
       staleTime: 1000 * 60 * 60,
-      retry: 1,
       onError: (error) => {
         handleError(error, updateAlertBoxData);
         if (error.response && error.response.data.message === "Token expired") {
@@ -199,7 +198,6 @@ const ChapterForm = () => {
       <div className="form-wrap ">
         <FormNavigation text="Chapter Form" />
         <form className="form-styling" onSubmit={handleSubmit(saveChapter)}>
-          {/* FILE */}
           <div className="input-wrap gap-2">
             <label htmlFor="cNumber" className="w-full ">
               Chapter Details

@@ -20,7 +20,6 @@ const ContentPage = () => {
     ["unitData", unitID],
     () => fetchUnitData({ unitID }),
     {
-      retry: 1,
       onError: (error) => {
         handleError(error, updateAlertBoxData);
         if (error.response && error.response.data.message === "Token expired") {

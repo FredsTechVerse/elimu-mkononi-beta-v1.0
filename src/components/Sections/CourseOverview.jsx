@@ -26,7 +26,6 @@ const CourseOverview = () => {
     ["courseData", courseID],
     () => fetchCourseData({ courseID }),
     {
-      retry: 1,
       onError: (error) => {
         handleError(error, updateAlertBoxData);
         if (error.response && error.response.data.message === "Token expired") {
