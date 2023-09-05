@@ -4,8 +4,8 @@ const ActionBtn = ({ text, onClick, type, size = "large" }) => {
   return (
     <button
       className={` ${
-        size === "small" ? "text-xs w-24 h-6 my-2" : " text-lg  w-40 m-3 h-9"
-      } capitalize rounded-full text-white text-center bg-slate-900 hover:bg-purple-600`}
+        size === "small" ? "text-sm h-8 px-1 my-2" : " text-lg m-3 h-9 px-3"
+      } capitalize w-max rounded-full text-white text-center bg-slate-900 hover:bg-purple-600`}
       type={type}
       onClick={onClick}
     >
