@@ -29,12 +29,10 @@
 ### HIGH PRIORITY TASKS
 
 - With the software goals well defined , I need to finalize this product. I have built enough functionality. The work remaining is making it work well.
-  a. The navigation bar - Separate its buttons , spread it to large screens. swap the white background with an overlay. Allow refetch of data.
-- Put the navigation bar at the bottom of small screens especially on the dashboard and additional buttons at the top with an icons kick where possible.
-- The best way to rectify the back btn dilemma for my forms is to just get rid of the routes i will utilize context instead to pass data to the respective forms.
+- The best way to rectify the back btn dilemma for my forms can be to get rid of the routes i will utilize context instead to pass data to the respective forms.
 - Find a way of eliminating some columns for the user data instead of using a card. In this case where the users are many , a striped table is convenient to both small and large screens.
 - Deepen delete functionality to delete fully even the children.
-- Improve user hunt logic(Find all users save them in an array , use password to narrow down user and confirm details accordingly.) The should be flexibility to add roles to a user.
+- Improve user hunt logic(Find all users save them in an array , use password to narrow down user and confirm details accordingly.) The should be flexibility to add roles to a user. Ensure email and sms token update.
 - Page not found is quite strong when a person navigates to a form directly with a background....Look for better words... But it works well!
 - Unify color scheme to primary secondary and tertiary colors expecially on the buttons & Route recocilliation solving back btn dilemma.
 

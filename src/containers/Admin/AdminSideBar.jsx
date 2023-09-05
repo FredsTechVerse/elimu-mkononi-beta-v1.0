@@ -32,7 +32,7 @@ const AdminSideBar = ({ userDataQuery, isSideBarOpen, toggleSideBar }) => {
           />
         )}
       </div>
-      <div className=" flex flex-col justify-end px-1 pb-3 ">
+      <div className=" flex flex-col justify-end px-1 ">
         <div
           onClick={toggleSideBar}
           className="controls  w-full h-full flex flex-col justify-end  gap-2 "
