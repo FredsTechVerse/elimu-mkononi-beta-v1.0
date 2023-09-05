@@ -23,14 +23,14 @@ const DashboardUserButton = ({ item, isRounded = true, isBlue = false }) => {
     <Link
       to={link}
       state={{ background: location, role: roleInformation }}
-      className={`text-white text-sm capitalize rounded-md w-full h-10 flex-row-centered group ${
+      className={`text-white text-sm capitalize rounded-md w-full h-10 flex-row-centered gap-2 group ${
         isBlue
           ? "bg-primary hover:bg-purple-500 "
           : "bg-slate-700 hover:bg-slate-900  "
       } text-white   `}
     >
       <span className="capitalize text-sm text-center"> {item}</span>
-      <PlusIcon className="w-6 aspect-square text-white" />
+      <PlusIcon className="w-5 aspect-square text-white" />
     </Link>
   );
 };

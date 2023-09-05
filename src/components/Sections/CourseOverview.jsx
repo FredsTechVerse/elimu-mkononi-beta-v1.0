@@ -58,7 +58,7 @@ const CourseOverview = () => {
 
         <div className="absolute top-2 left-2 flex gap-1">
           {roles?.includes("EM-202") || roles?.includes("EM-203") ? (
-            <HomeBtn />
+            <HomeBtn icon={true} />
           ) : (
             <BackBtn to="/" />
           )}

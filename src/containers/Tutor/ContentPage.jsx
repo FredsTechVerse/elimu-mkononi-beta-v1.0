@@ -39,7 +39,7 @@ const ContentPage = () => {
   console.log({ unitDataQuery });
 
   return (
-    <main className="flex relative gap-1 laptop:grid laptop:grid-cols-4 w-full h-screen p-1">
+    <main className="flex relative gap-1 laptop:grid laptop:grid-cols-4 w-full h-screen  overflow-y-hidden">
       <article
         className={` ${
           sideBarOpen ? "block" : "hidden"

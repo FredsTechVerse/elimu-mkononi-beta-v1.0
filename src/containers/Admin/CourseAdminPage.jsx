@@ -5,8 +5,10 @@ import {
   CourseSkeleton,
   PageTitle,
   HomeBtn,
+  NavMenuBtn,
+  DashboardUserButton,
 } from "../../components";
-import { useLocation } from "react-router-dom";
+import { useLocation, useOutletContext } from "react-router-dom";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import { fetchCoursesData, handleError } from "../../controllers";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -22,16 +24,23 @@ const CoursesAdminPage = () => {
       }
     },
   });
+  const { openSideBar, isSideBarOpen, toggleSideBar } = useOutletContext();
+
   return (
     <div className="w-full laptop:w-3/4 flex flex-col gap-5 relative phone:rounded-lg justify-start  h-full overflow-auto p-3 overflow-x-hidden ">
-      <div className="absolute top-2 left-2 z-10">
-        <HomeBtn isDark={true} />
+      <div className="absolute z-10 top-2 left-2 flex-row-centered gap-2">
+        <NavBgBtn to="/new-course" text="Add Course" />
+        <HomeBtn position="dashboard" icon={true} />
       </div>
 
       <div className="absolute top-2 right-2 z-10">
-        <NavBgBtn to="/new-course" text="Add Course" isBlue={true} />
+        <NavMenuBtn
+          isNavOpen={isSideBarOpen}
+          toggleNavbar={toggleSideBar}
+          position="layout"
+        />
       </div>
-      <div className="relative top-2">
+      <div className="relative top-8 tablet:top-0">
         <PageTitle title="list of courses" />
       </div>
 

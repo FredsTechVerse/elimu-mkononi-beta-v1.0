@@ -132,14 +132,7 @@ function App() {
               <Route exact path="/admin" element={<AdminDashboard />}>
                 <Route index element={<AdminSummary />} />
                 <Route exact path=":role" element={<UsersPage />} />
-                <Route exact path="courses">
-                  <Route index element={<CourseAdminPage />} />
-                  <Route
-                    exact
-                    path=":courseID"
-                    element={<CourseOverview />}
-                  ></Route>
-                </Route>
+                <Route exact path="courses" element={<CourseAdminPage />} />
               </Route>
             </Route>
           )}

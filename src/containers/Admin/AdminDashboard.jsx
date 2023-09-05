@@ -18,11 +18,9 @@ const AdminDashboard = () => {
   const [totalUnits, setTotalUnits] = useState(0);
   const [totalCourses, setTotalCourses] = useState(0);
   const [isSideBarOpen, setIsSideBarOpen] = useState(false);
-  const openSideBar = () => {
-    setIsSideBarOpen(true);
-  };
-  const closeSideBar = () => {
-    setIsSideBarOpen(false);
+
+  const toggleSideBar = () => {
+    setIsSideBarOpen((prev) => !prev);
   };
 
   const [allUsers, setAllUsers] = useState(null);
@@ -150,15 +148,15 @@ const AdminDashboard = () => {
   }, [usersAggregationQuery.status]);
 
   return (
-    <div className="h-screen w-full flex phone:flex-col tablet:flex-row relative ">
+    <div className="h-screen w-full flex phone:flex-col tablet:flex-row relative overflow-hidden ">
       <AdminSideBar
         userDataQuery={userDataQuery}
-        closeSideBar={closeSideBar}
         isSideBarOpen={isSideBarOpen}
+        toggleSideBar={toggleSideBar}
       />
       <Outlet
         context={{
-          openSideBar,
+          toggleSideBar,
           isSideBarOpen,
           totalUnits,
           totalCourses,

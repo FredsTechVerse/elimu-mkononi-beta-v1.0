@@ -23,6 +23,8 @@
 ### DRAFT
 
 - Messaging funcitonalities will be set in the individual admin pages for the functionalites as a CTA
+- I have to resolve the back button dilemma for the sake of browser navigation. Covering it up with the home btn will not cut it.
+- We have reaffirmed the need for the users card.
 
 ### HIGH PRIORITY TASKS
 

@@ -41,10 +41,10 @@ const LogoutBtn = ({ isBlue = false, position = "default" }) => {
       onClick={() => {
         logoutMutation.mutate();
       }}
-      className={` capitalize group w-full cursor-pointer flex-row-centered hover:bg-slate-900 hover:text-white   ${
+      className={` capitalize group w-full cursor-pointer flex-row-centered hover:bg-slate-900 hover:text-white h-10 gap-2   ${
         position === "navbar"
-          ? "hover:rounded-b-lg h-10"
-          : "bg-slate-700 text-white rounded-lg px-2 h-10"
+          ? "hover:rounded-b-lg"
+          : "bg-slate-700 text-white rounded-lg px-3"
       } `}
     >
       <span>Logout</span>
@@ -61,7 +61,6 @@ const LogoutBtn = ({ isBlue = false, position = "default" }) => {
           />
         )}
       </span>
-      <span className="tablet:hidden">Logout</span>
     </button>
   );
 };

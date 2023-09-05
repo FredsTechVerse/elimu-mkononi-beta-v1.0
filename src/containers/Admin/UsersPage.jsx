@@ -4,10 +4,10 @@ import {
   PageTitle,
   TableAlternativeSkeleton,
   DashboardUserButton,
-  MenuBtn,
   TableSkeleton,
   HomeBtn,
   NavBgBtn,
+  NavMenuBtn,
 } from "../../components";
 import { UsersGrid } from "../../containers";
 import { useOutletContext } from "react-router-dom";
@@ -41,13 +41,17 @@ const UsersPage = () => {
     },
   });
 
-  const { openSideBar, isSideBarOpen } = useOutletContext();
+  const { isSideBarOpen, toggleSideBar } = useOutletContext();
 
   return (
     <div className="relative w-full laptop:w-3/4  flex flex-col justify-start items-center  h-full overflow-auto p-3 overflow-x-hidden ">
       <div className="absolute z-10 top-2 left-2 flex-row-centered gap-2">
-        <MenuBtn openSideBar={openSideBar} sideBarOpen={isSideBarOpen} />
-        <HomeBtn isDark={true} />
+        <NavMenuBtn
+          isNavOpen={isSideBarOpen}
+          toggleNavbar={toggleSideBar}
+          position="layout"
+        />
+        <HomeBtn isDark={true} icon={true} position="dashboard" />
       </div>
 
       {/* <div className="absolute top-2 left-2 z-10"></div> */}
