@@ -16,11 +16,21 @@ const AdminSideBar = ({ userDataQuery, isSideBarOpen, toggleSideBar }) => {
           : "phone:hidden laptop:flex h-full "
       } relative backdrop-blur-xl bg-slate-300 bg-opacity-30 laptop:m-1 laptop:rounded-lg laptop:relative laptop:w-1/4  flex flex-col laptop:h-full phone:justify-start laptop:justify-between gap-5 tablet:gap-2 p-2`}
     >
-      <div
-        className="absolute top-2 right-2 text-white hover:cursor-pointer w-max h-max tablet:hidden"
-        onClick={toggleSideBar}
-      >
-        <XCircleIcon className="icon-styling w-8 h-8 text-black" />
+      <div className=" flex items-center justify-between">
+        <div className="">
+          <HomeBtn position="dashboard" />
+        </div>
+        <div className="flex-row-centered gap-2">
+          <div>
+            <LogoutBtn />
+          </div>
+          <div
+            className="text-white hover:cursor-pointer w-max h-max tablet:hidden"
+            onClick={toggleSideBar}
+          >
+            <XCircleIcon className="icon-styling w-8 h-8 text-black" />
+          </div>
+        </div>
       </div>
       <div className="tablet:hidden laptop:block ">
         {userDataQuery.status === "loading" ? (
@@ -32,14 +42,7 @@ const AdminSideBar = ({ userDataQuery, isSideBarOpen, toggleSideBar }) => {
           />
         )}
       </div>
-      <div className=" flex items-center justify-between">
-        <div className="">
-          <HomeBtn position="dashboard" />
-        </div>
-        <div>
-          <LogoutBtn />
-        </div>
-      </div>
+
       <div className=" flex flex-col justify-end px-1 ">
         <div
           onClick={toggleSideBar}

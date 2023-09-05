@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const roles = JSON.parse(localStorage.getItem("roles"));
+  console.log({ roles });
   const [isNavOpen, setIsNavOpen] = useState(false);
   const toggleNavbar = () => {
     setIsNavOpen((prev) => !prev);

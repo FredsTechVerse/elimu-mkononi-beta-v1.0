@@ -20,7 +20,7 @@ const AdminNavItem = ({ text, to, page = null }) => {
 
   return (
     <Link to={to}>
-      <button className="group h-10 laptop:h-14 w-full pointer-cursor hover:bg-purple-400  text-white rounded-lg bg-primary rounded-ms capitalize">
+      <button className="group h-10 laptop:h-12 w-full pointer-cursor hover:bg-purple-400  text-white rounded-lg bg-primary rounded-ms capitalize">
         <div className="flex justify-between items-center px-4">
           Visit {text}
           <span className="text-xl">
