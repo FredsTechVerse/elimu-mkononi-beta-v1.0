@@ -32,7 +32,7 @@ const UsersTable = ({ usersQuery, role }) => {
     columnHelper.accessor("status", {
       cell: (info) => (
         <div className=" flex-row-centered">
-          <StatusPill status={info.getValue()} />,
+          <StatusPill status={info.getValue()} />
         </div>
       ),
     }),
@@ -61,7 +61,7 @@ const UsersTable = ({ usersQuery, role }) => {
     onSortingChange: setSorting,
   });
   return (
-    <div className="py-5 phone:hidden laptop:table w-full flex flex-col items-center justify-center">
+    <div className="py-5 phone:hidden tablet:table w-full flex flex-col items-center justify-center">
       <input
         type="text"
         placeholder="Search"

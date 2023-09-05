@@ -2,7 +2,7 @@ import React from "react";
 import { UserCard } from "../../components";
 const UsersGrid = ({ usersQuery, role }) => {
   return (
-    <div className="grid-sm laptop:hidden">
+    <div className="grid-sm tablet:hidden">
       {usersQuery?.data?.length > 0 &&
         usersQuery?.data?.map((userData, userIndex) => {
           return (

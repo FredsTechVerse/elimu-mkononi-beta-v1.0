@@ -85,8 +85,8 @@ const UsersPage = () => {
       ) : (
         <div className=" w-full mt-5 ">
           <div className=" w-full px-3 relative">
-            <UsersGrid usersQuery={usersQuery} role={userRole} />
             <UsersTable usersQuery={usersQuery} role={userRole} />
+            <UsersGrid usersQuery={usersQuery} role={userRole} />
           </div>
         </div>
       )}
