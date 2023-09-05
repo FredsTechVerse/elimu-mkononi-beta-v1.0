@@ -27,11 +27,11 @@ const AdminSummary = () => {
   return (
     <div className=" w-full laptop:w-3/4  flex flex-col justify-start  h-full overflow-auto p-3 overflow-x-hidden ">
       <div className="  w-full  flex phone:flex-col tablet:flex-row justify-between items-center gap-5">
-        <div className="phone:w-full tablet:w-3/5 laptop:w-full  bg-slate-300 bg-opacity-40 rounded-xl phone:h-36 tablet:h-full laptop:h-40 flex flex-col-centered relative ">
-          <div className="flex flex-row items-center justify-evenly gap-3 absolute top-2  right-2">
+        <div className="phone:w-full tablet:w-3/5 order-2 laptop:w-full  bg-slate-300 bg-opacity-40 rounded-xl phone:h-36 tablet:h-full laptop:h-40 flex flex-col-centered relative ">
+          <div className="flex flex-row items-center justify-evenly gap-3 absolute top-2  left-2">
             <LogoutBtn />
           </div>
-          <div className="flex flex-row items-center justify-evenly gap-2 absolute top-2  left-2">
+          <div className="flex flex-row items-center justify-evenly gap-2 absolute top-2  right-2">
             <NavMenuBtn
               isNavOpen={isSideBarOpen}
               toggleNavbar={toggleSideBar}

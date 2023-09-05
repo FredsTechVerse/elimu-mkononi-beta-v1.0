@@ -11,8 +11,8 @@ const AdminSideBar = ({ userDataQuery, isSideBarOpen, toggleSideBar }) => {
     <div
       className={` ${
         isSideBarOpen
-          ? "phone:absolute z-30 tablet:top-[9vh] tablet:right-2 laptop:top-0  h-full tablet:h-max  phone:w-full tablet:w-80 rounded-lg  "
-          : "phone:hidden laptop:flex  h-full "
+          ? "phone:absolute z-30 tablet:top-[10vh] tablet:right-2 laptop:right-0 laptop:top-0  h-full tablet:h-max  phone:w-full tablet:w-80 rounded-lg  "
+          : "phone:hidden laptop:flex h-full "
       } backdrop-blur-xl bg-slate-300 bg-opacity-30 laptop:m-1 laptop:rounded-lg laptop:relative laptop:w-1/4  flex flex-col laptop:h-full phone:justify-start laptop:justify-between gap-5 tablet:gap-2 p-2`}
     >
       <div
