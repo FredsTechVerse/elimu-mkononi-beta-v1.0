@@ -128,7 +128,7 @@ const CourseCardV2 = ({ courseData }) => {
           onClick={handleClick}
           className={`${
             isTutor ? "hidden" : "flex"
-          } flex-row justify-center items-center hover:pl-7  gap-2  hover:font-bold hover:gap-4 text-sm h-8  font-extralight capitalize w-48 tablet:w-40 laptop:w-44 bg-slate-600 hover:bg-slate-800  text-white rounded-br-xl rounded-tl-xl `}
+          } flex-row justify-center items-center hover:pl-7  gap-2  hover:font-bold hover:gap-4 text-sm h-8  font-extralight capitalize w-40 tablet:w-40 laptop:w-44 bg-slate-600 hover:bg-slate-800  text-white rounded-br-xl rounded-tl-xl `}
         >
           <span>Go to Course</span>
           <svg
