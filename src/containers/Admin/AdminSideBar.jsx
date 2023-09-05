@@ -18,7 +18,7 @@ const AdminSideBar = ({ userDataQuery, isSideBarOpen, toggleSideBar }) => {
     >
       <div className=" flex items-center justify-between">
         <div className="">
-          <HomeBtn position="dashboard" />
+          <HomeBtn position="dashboard" icon={true} />
         </div>
         <div className="flex-row-centered gap-2">
           <div>
