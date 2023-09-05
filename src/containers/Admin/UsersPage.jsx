@@ -45,8 +45,7 @@ const UsersPage = () => {
 
   return (
     <div className="relative w-full laptop:w-3/4  flex flex-col justify-start items-center  h-full overflow-auto p-3 overflow-x-hidden ">
-      <div className="absolute z-10 top-2 right-2 flex-row-centered gap-2">
-        <HomeBtn isDark={true} icon={true} position="dashboard" />
+      <div className="flex flex-row items-center justify-evenly gap-2 fixed bottom-2 right-2 tablet:right-5 z-20">
         <NavMenuBtn
           isNavOpen={isSideBarOpen}
           toggleNavbar={toggleSideBar}

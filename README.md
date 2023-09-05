@@ -25,14 +25,26 @@
 - Messaging funcitonalities will be set in the individual admin pages for the functionalites as a CTA
 - I have to resolve the back button dilemma for the sake of browser navigation. Covering it up with the home btn will not cut it.
 - We have reaffirmed the need for the users card.
+- The home buttton should be in the menu together with the logout side by side
+
+### DESIGN REVIEW
+
+Menu and logout button have to go in small screens greetings section.. Group them just like the navbar.
+
+- the menu now looks fantastic with autoclose on click
+- Make add course or user a round cta button pale chini
+- Make sidebar scrollable small screens... Looking good
+- Find a way to group the buttons with a suitable icon on small screens
+- Having the users profile on the phones sidebar is a bit redudant.
+- CTA Buttons spilling on phone
 
 ### HIGH PRIORITY TASKS
 
+- Improve user hunt logic(Find all users save them in an array , use password to narrow down user and confirm details accordingly.) The should be flexibility to add roles to a user. Ensure email and sms token update.
 - With the software goals well defined , I need to finalize this product. I have built enough functionality. The work remaining is making it work well.
 - The best way to rectify the back btn dilemma for my forms can be to get rid of the routes i will utilize context instead to pass data to the respective forms.
 - Find a way of eliminating some columns for the user data instead of using a card. In this case where the users are many , a striped table is convenient to both small and large screens.
 - Deepen delete functionality to delete fully even the children.
-- Improve user hunt logic(Find all users save them in an array , use password to narrow down user and confirm details accordingly.) The should be flexibility to add roles to a user. Ensure email and sms token update.
 - Page not found is quite strong when a person navigates to a form directly with a background....Look for better words... But it works well!
 - Unify color scheme to primary secondary and tertiary colors expecially on the buttons & Route recocilliation solving back btn dilemma.
 
@@ -73,8 +85,7 @@
 - Anything that is not in the useEffect runs twice due to react strict mode.Hence the double console.logs() and this is normal.
 - Fetching an element in an arrya using `(roles?.includes("EM-203") || roles?.includes("EM-202")` instead of `(roles[0] === "EM-203" || roles[0] === "EM-202"` is bettter
 - Never do javascript comparisons like this `(roles?.includes("EM-202" || "EM-203")) ` . Javascript excludes the second part hence causing an error interms of expected behaviour.
-- How to check if an object is empty`Object.keys(obj).length === 0`
-- For arrays,check for length instead of checking if null.
+- For arrays check for length. An empty array will never return false as it is alway truthy.
 - The handle logout is called because i pass the function instead of the reference. Therefore , ` onClick={() => {handleLogout()}}` should be replaced by ` onClick={handleLogout}`
 
 ### HANDLING COMMUNICATION
