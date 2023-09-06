@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AccordionItem, HomeBtn } from "../../components";
+import { AccordionItem, HomeBtn, ErrorMessage } from "../../components";
 import { PlusIcon, XCircleIcon } from "@heroicons/react/24/solid";
 import { useLocation, Link } from "react-router-dom";
 const Accordion = ({ unitData, closeSideBar }) => {
@@ -68,10 +68,7 @@ const Accordion = ({ unitData, closeSideBar }) => {
           ))}
         </div>
       ) : (
-        <div className="flex-col-centered text-center py-3 px-2 bg-rose-300 m-2 rounded-lg">
-          This unit has no content yet.Kindly add content by clicking the plus
-          button above.
-        </div>
+        <ErrorMessage message="The unit has no chapters" />
       )}
     </div>
   );

@@ -7,6 +7,7 @@ import {
   HomeBtn,
   NavMenuBtn,
   DashboardUserButton,
+  ErrorMessage,
 } from "../../components";
 import { useLocation, useOutletContext } from "react-router-dom";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
@@ -39,7 +40,7 @@ const CoursesAdminPage = () => {
           position="layout"
         />
       </div>
-      <div className="relative top-8 tablet:top-0">
+      <div className="relative pt-12 tablet:top-0">
         <PageTitle title="list of courses" />
       </div>
 
@@ -54,20 +55,14 @@ const CoursesAdminPage = () => {
             <CourseSkeleton />
           </div>
         )}
-        {coursesQuery.data && coursesQuery?.data.length > 0 && (
+        {coursesQuery.data && coursesQuery?.data.length > 0 ? (
           <div className="grid-lg tablet:grid-cols-2 laptop:grid-cols-3 tablet:gap-6 ">
             {coursesQuery.data.map((course, index) => {
               return <CourseCardV2 key={index} courseData={course} />;
             })}
           </div>
-        )}
-
-        {coursesQuery.data && coursesQuery?.data.length == 0 && (
-          <div className="w-full h-full relative flex-row-centered ">
-            <p className="my-10 p-3 text-center bg-slate-400 bg-opacity-40 rounded-lg">
-              No courses have been found
-            </p>
-          </div>
+        ) : (
+          <ErrorMessage message="No courses data" />
         )}
       </div>
     </div>

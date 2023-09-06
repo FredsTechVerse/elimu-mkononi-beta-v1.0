@@ -121,7 +121,7 @@
     @apply flex flex-col justify-center items-center w-full mt-4;
   }
   .cta-btn {
-    @apply rounded-full h-7 mb-0.5 aspect-square cursor-pointer flex-row-centered bg-slate-700 hover:bg-slate-900;
+    @apply rounded-full h-7 mb-0.5 aspect-square cursor-pointer flex-row-centered bg-slate-700 hover:bg-slate-900 transition-all  duration-200;
   }
 
   /* MODAL STYLING */

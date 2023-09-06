@@ -2,9 +2,11 @@ import React from "react";
 
 const ErrorMessage = ({ message }) => {
   return (
-    <p className=" text-red-800 max-w-72 tablet:max-w-[360px] rounded-full text-center text-sm ">
-      {message}
-    </p>
+    <div className="flex-row-centered w-full">
+      <p className=" flex-col-centered text-center p-3 bg-rose-300 m-2 rounded-lg w-max ">
+        {message}
+      </p>
+    </div>
   );
 };
 

@@ -14,7 +14,7 @@ const NavBgBtn = ({ to, text, isBlue = false }) => {
       <Link
         to={to}
         state={{ background: location }}
-        className={` capitalize group w-full h-10  cursor-pointer flex-row-centered gap-2  ${
+        className={` transition-all  duration-200 capitalize group w-full h-10  cursor-pointer flex-row-centered gap-2  ${
           isBlue
             ? "bg-primary hover:bg-purple-500"
             : "hover:rounded-b-lg  hover:bg-slate-900 hover:text-white "

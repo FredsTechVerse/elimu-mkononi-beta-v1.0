@@ -14,7 +14,7 @@ const AdminSideBar = ({ userDataQuery, isSideBarOpen, toggleSideBar }) => {
   }, []);
   return (
     <div
-      className={` ${
+      className={` overflow-auto ${
         isSideBarOpen
           ? "phone:absolute z-30 tablet:bottom-[10vh] tablet:right-2 laptop:right-0 laptop:top-0  h-full tablet:h-max  phone:w-full tablet:w-80 rounded-lg  "
           : "phone:hidden laptop:flex h-full "
@@ -22,17 +22,17 @@ const AdminSideBar = ({ userDataQuery, isSideBarOpen, toggleSideBar }) => {
     >
       <div className=" flex items-center justify-between">
         <div className="">
-          <HomeBtn position="dashboard" icon={true} />
+          <HomeBtn position="dashboard" icon={true} isBlue={true} />
         </div>
         <div className="flex-row-centered gap-2">
           <div>
-            <LogoutBtn />
+            <LogoutBtn isBlue={true} />
           </div>
           <div
             className="text-white hover:cursor-pointer w-max h-max tablet:hidden"
             onClick={toggleSideBar}
           >
-            <XCircleIcon className="icon-styling w-8 h-8 text-black" />
+            <XCircleIcon className="icon-styling w-8 h-8 text-black " />
           </div>
         </div>
       </div>

@@ -33,7 +33,7 @@ const AdminSummary = () => {
           position="layout"
         />
       </div>
-      <div className="  w-full  flex phone:flex-col tablet:flex-row justify-between items-center gap-5">
+      <div className="w-full  flex phone:flex-col tablet:flex-row justify-between items-center gap-5">
         <div className="phone:w-full tablet:w-3/5 order-2 laptop:w-full  bg-slate-300 bg-opacity-40 rounded-xl phone:h-36 tablet:h-full laptop:h-40 flex flex-col-centered relative ">
           <h1 className="font-bold text-lg uppercase w-full h-12 flex-row-centered ">
             Admin Dashboard
@@ -101,10 +101,10 @@ const AdminSummary = () => {
                 Quick Access Controls
               </h1>
               <div className="gap-2 p-2 grid grid-cols-1 laptop:grid-cols-2  h-full w-full">
-                <DashboardUserButton item="course" />
-                <DashboardUserButton item="student" />
-                <DashboardUserButton item="tutor" />
-                <DashboardUserButton item="admin" />
+                <DashboardUserButton isBlue={true} item="course" />
+                <DashboardUserButton isBlue={true} item="student" />
+                <DashboardUserButton isBlue={true} item="tutor" />
+                <DashboardUserButton isBlue={true} item="admin" />
               </div>
             </div>
           </div>

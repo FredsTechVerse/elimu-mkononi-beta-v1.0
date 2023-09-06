@@ -5,7 +5,7 @@ const AddBtn = ({ users, user }) => {
   const location = useLocation();
   return (
     <Link to={`${users}/new-${user}`} state={{ background: location }}>
-      <button className="w-full h-full border-2 bg-primary hover:bg-purple-500 cursor-pointer rounded-md flex-col-centered gap-2 py-2 ">
+      <button className=" transition-all  duration-200 w-full h-full border-2 bg-primary hover:bg-purple-500 cursor-pointer rounded-md flex-col-centered gap-2 py-2 ">
         <UserIcon className="w-9 phone:h-16 tablet:aspect-square text-white" />
         <span className="capitalize text-xs tablet:text-sm text-center text-white">
           {users}

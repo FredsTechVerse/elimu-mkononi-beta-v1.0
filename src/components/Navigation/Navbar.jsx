@@ -21,14 +21,13 @@ const Navbar = () => {
 
       <NavMenuBtn
         isNavOpen={isNavOpen}
-        isDark={false}
         toggleNavbar={toggleNavbar}
         scroll={scroll}
       />
 
       <section
         onClick={toggleNavbar}
-        className={` ${
+        className={` mt-3 ${
           isNavOpen ? "flex" : "hidden"
         }  bg-slate-100 rounded-lg  text-slate-800 fixed z-50  top-[8vh] flex right-3  phone:flex-col  items-center justify-center phone:w-[45%] tablet:w-[30%] laptop:w-[15%] `}
       >

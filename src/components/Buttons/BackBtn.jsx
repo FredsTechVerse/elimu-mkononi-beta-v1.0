@@ -5,7 +5,7 @@ const BackBtn = ({ isDark, isBlue = false, to = -1 }) => {
   const navigate = useNavigate();
   return (
     <button
-      className={`${
+      className={` transition-all  duration-200 ${
         isDark && "text-slate-700 hover:text-white hover:bg-slate-700 "
       }  ${
         isBlue && "bg-primary hover:bg-purple-500 "

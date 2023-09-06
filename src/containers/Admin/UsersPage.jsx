@@ -67,7 +67,7 @@ const UsersPage = () => {
 
         <NavBgBtn to="/new-message" text="Message" />
       </div>
-      <div className="relative top-2">
+      <div className="relative pt-12 tablet:pt-0">
         <PageTitle
           title={
             userRole === "EM-201"

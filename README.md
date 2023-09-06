@@ -22,10 +22,8 @@
 
 ### DRAFT
 
-- I cannot delete user data in cards
 - Messaging funcitonalities will be set in the individual admin pages for the functionalites as a CTA
 - I have to resolve the back button dilemma for the sake of browser navigation. Covering it up with the home btn will not cut it.
-- We have reaffirmed the need for the users card.
 - Remove white space while confiming token inputs.
 
 ### DESIGN REVIEW
@@ -33,7 +31,6 @@
 - THE SIDEBAR MENU NOW LOOKS REALLY DOPE! KUDOS
 - Spread user hunt logic to the rest of authentication system
 - Build resources and messaging interface where we should be able to store all outgoing messages and their statuses which will be used to organize them .... The key to knowing which went and which didn't without delaying user experience.
-- Make sidebar scrollable small screens... Looking good
 - Spread admin dashboard styling to tutor dashboard.
 - Group page actions just as we have grouped menu items
 
@@ -64,6 +61,16 @@
 
 ### KEY CONCEPTS LEARNT DURING THE BUILD
 
+- Here is how we can pass a body to a delete request
+
+```js
+const axios = require("axios");
+
+const requestData = { id: 123, reason: "No longer needed" };
+axios.delete("https://api.example.com/resource", { data: requestData });
+```
+
+- This data will be found in the req.body ie `const {id,reason} = req.body`
 - Once we are able to deliver value , users will gladly register.
 - Always ask the right questions while developing an elements logic eg what conditions should be met for the element to be displayed?
 - Working with smaller files grouped by functionalities makes development simpler!

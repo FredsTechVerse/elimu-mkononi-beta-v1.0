@@ -6,6 +6,7 @@ import {
   HomeBtn,
   BackBtn,
   Heading,
+  ErrorMessage,
 } from "../../components";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchCourseData, handleError } from "../../controllers";
@@ -58,7 +59,7 @@ const CourseOverview = () => {
 
         <div className="absolute top-2 left-2 flex gap-1">
           {roles?.includes("EM-202") || roles?.includes("EM-203") ? (
-            <HomeBtn icon={true} position="dashboard" />
+            <HomeBtn isBlue={true} icon={true} position="dashboard" />
           ) : (
             <BackBtn to="/" />
           )}
@@ -100,27 +101,25 @@ const CourseOverview = () => {
               ))}
             </div>
           ) : (
-            <div className="grid-sm w-full ">
+            <div className="w-full">
               {courseQuery?.data?.units.length > 0 ? (
-                courseQuery?.data?.units.map((unit, index) => {
-                  const { unitName, unitDescription, _id } = unit;
-                  return (
-                    <UnitCard
-                      unitID={_id}
-                      key={index}
-                      unitNumber={`${index + 1}`}
-                      unitName={unitName}
-                      unitDescription={unitDescription}
-                      courseID={courseID}
-                    />
-                  );
-                })
-              ) : (
-                <div className="col-span-3">
-                  <p className="bg-blue-300 rounded-lg p-4 text-center">
-                    The unit has not yet been populated
-                  </p>
+                <div className="grid-sm w-full ">
+                  {courseQuery?.data?.units.map((unit, index) => {
+                    const { unitName, unitDescription, _id } = unit;
+                    return (
+                      <UnitCard
+                        unitID={_id}
+                        key={index}
+                        unitNumber={`${index + 1}`}
+                        unitName={unitName}
+                        unitDescription={unitDescription}
+                        courseID={courseID}
+                      />
+                    );
+                  })}
                 </div>
+              ) : (
+                <ErrorMessage message="This course has no units " />
               )}
             </div>
           )}

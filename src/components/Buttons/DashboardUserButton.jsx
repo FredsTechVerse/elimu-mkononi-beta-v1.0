@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { PlusIcon } from "@heroicons/react/24/solid";
-const DashboardUserButton = ({ item, isRounded = true, isBlue = false }) => {
+const DashboardUserButton = ({ item, isBlue = false }) => {
   const location = useLocation();
   let link = "/new-user";
 
@@ -23,14 +22,13 @@ const DashboardUserButton = ({ item, isRounded = true, isBlue = false }) => {
     <Link
       to={link}
       state={{ background: location, role: roleInformation }}
-      className={`text-white text-sm capitalize rounded-md w-full h-10 flex-row-centered gap-2 group ${
+      className={` transition-all  duration-200 text-white text-sm capitalize rounded-md w-full h-10 flex-row-centered text-center gap-2 group ${
         isBlue
           ? "bg-primary hover:bg-purple-500 "
           : "bg-slate-700 hover:bg-slate-900  "
       } text-white   `}
     >
-      <span className="capitalize text-sm text-center"> {item}</span>
-      <PlusIcon className="w-5 aspect-square text-white" />
+      <span className="capitalize text-sm text-center">Add {item}</span>
     </Link>
   );
 };
