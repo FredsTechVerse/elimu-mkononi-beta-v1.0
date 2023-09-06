@@ -28,25 +28,22 @@
 
 ### DESIGN REVIEW
 
-- THE SIDEBAR MENU NOW LOOKS REALLY DOPE! KUDOS
-- Spread user hunt logic to the rest of authentication system
-- Build resources and messaging interface where we should be able to store all outgoing messages and their statuses which will be used to organize them .... The key to knowing which went and which didn't without delaying user experience.
+- Build messaging functionality , keept track by capturing all messages in database with respective tags.
+- Spread the improved user hunt logic to the rest of authentication system
 - Spread admin dashboard styling to tutor dashboard.
-- Group page actions just as we have grouped menu items
+- Deepen delete functionality to delete fully even the children.
+- Scroll unstable in phones... Last element not visible sometimes.
 
 ### HIGH PRIORITY TASKS
 
 - With the software goals well defined , I need to finalize this product. I have built enough functionality. The work remaining is making it beautiful and functional.
 - The best way to rectify the back btn dilemma for my forms can be to get rid of the routes i will utilize context instead to pass data to the respective forms.
-- Deepen delete functionality to delete fully even the children.
 - Page not found is quite strong when a person navigates to a form directly with a background....Look for better words... But it works well!
-- Unify color scheme to primary secondary and tertiary colors expecially on the buttons & Route recocilliation solving back btn dilemma.
 
 ### TECHNICAL BITS REMAINING.
 
 - Create resources interface with read and delete functionalities on the space prepared.
 - Building the messaging platform ( I should be able to track messaging functionality.)
-- Improving user hunt logic by first finding all users , saving them in an array and using the password field to narrow down the specific user.
 - Find a better way of not going to s3 uploader without lesson or resource name.
 - Testing youtube refresh token acquisition by inversing if logic.
 - Implementing typescript with SWC and proceeding with user tracking after engaging user feedback from the transformers team.

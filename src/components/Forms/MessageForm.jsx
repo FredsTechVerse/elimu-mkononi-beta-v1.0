@@ -29,6 +29,7 @@ const MessageForm = () => {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -111,9 +112,10 @@ const MessageForm = () => {
 
   const saveMessage = async (data) => {
     const { recipient, message } = data;
+    console.log({ recipient, message });
     if (!isMessageQueryEnabled) {
       createMessageMutation.mutate({
-        recipient,
+        recipient: `0${recipient}`,
         message,
       });
       return;
@@ -136,12 +138,22 @@ const MessageForm = () => {
             <label htmlFor="cNumber" className="w-full ">
               Recipient
             </label>
-            <input
-              readOnly={isMessageQueryEnabled}
-              className={`input-styling `}
-              placeholder="Enter recipient"
-              {...register("recipient", {})}
-            />
+            <div className="flex phone:gap-3 tablet:gap-2">
+              <input
+                className="input-styling w-16"
+                type="Text"
+                required
+                value="+254"
+                readOnly
+              />
+              <input
+                className="input-styling phone:w-52  tablet:w-72"
+                placeholder="Enter Safaricom No."
+                {...register("recipient", {
+                  required: "This field is required ",
+                })}
+              />
+            </div>
 
             {errors.recipient && (
               <ErrorMessage message={errors.recipient?.message} />
@@ -170,7 +182,11 @@ const MessageForm = () => {
             >
               <SubmitButton
                 type="submit"
-                disabled={messageID ? false : true}
+                disabled={
+                  watch("recipient") !== "" && watch("message") !== ""
+                    ? false
+                    : true
+                }
                 isSubmitting={createMessageMutation.isLoading}
                 text={createMessageMutation.isLoading ? "Sending" : "Send"}
               />

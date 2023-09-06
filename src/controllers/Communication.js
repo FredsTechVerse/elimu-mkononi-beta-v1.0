@@ -2,7 +2,7 @@ import axios from "axios";
 
 const fetchMessageData = async () => {};
 
-const messageUser = async ({ message, contact }) => {
+const messageUser = async ({ message, recipient }) => {
   try {
     const config = {
       headers: {
@@ -13,7 +13,7 @@ const messageUser = async ({ message, contact }) => {
     const smsPayload = {
       phone: "0112615416",
       message: message,
-      recipient: [contact],
+      recipient: [recipient],
     };
 
     const { data } = await axios.post(
