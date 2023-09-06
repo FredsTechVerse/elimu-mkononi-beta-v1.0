@@ -228,9 +228,7 @@ const UnitForm = () => {
 
             <select
               disabled={!isEditEnabled}
-              defaultValue={watch("tutor")}
               className="input-styling  mb-5"
-              placeholder=""
               {...register("tutor", {
                 required: "This field is required ",
               })}
@@ -239,13 +237,17 @@ const UnitForm = () => {
                 tutorsQuery?.data.map((tutor, index) => {
                   const { _id: tutorID, firstName, surname } = tutor;
                   return (
-                    <option key={`tutor-${index}`} value={tutorID}>
+                    <option
+                      key={`tutor-${index}`}
+                      className="w-full h-8 "
+                      value={tutorID}
+                    >
                       {`${firstName} ${surname}`}
                     </option>
                   );
                 })
               ) : (
-                <option className="bg-rose-500 px-2 py-1 rounded-lg">
+                <option className="bg-rose-500 w-full h-8 rounded-lg">
                   No tutor data found
                 </option>
               )}

@@ -43,8 +43,8 @@ const updateUser = async ({
   }
 };
 
-const verifyContact = async ({ contact, email }) => {
-  const credentials = { contact, email };
+const verifyContact = async ({ contact, email, role }) => {
+  const credentials = { contact, email, role };
   const config = {
     headers: { "Content-Type": "application/json" },
   };

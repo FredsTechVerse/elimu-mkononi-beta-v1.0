@@ -28,22 +28,14 @@
 
 ### DESIGN REVIEW
 
-- Build messaging functionality , keept track by capturing all messages in database with respective tags.
-- Spread the improved user hunt logic to the rest of authentication system
-- Spread admin dashboard styling to tutor dashboard.
+- Resource CR&D working well bro.
+- Capture all outgoing messages and their status as we have done with emails for ease of categorization and troubleshooting.
 - Deepen delete functionality to delete fully even the children.
 - Scroll unstable in phones... Last element not visible sometimes.
-
-### HIGH PRIORITY TASKS
-
-- With the software goals well defined , I need to finalize this product. I have built enough functionality. The work remaining is making it beautiful and functional.
+- Spread admin dashboard styling to tutor dashboard.
+- The goal is now making the software functional and beautiful.
 - The best way to rectify the back btn dilemma for my forms can be to get rid of the routes i will utilize context instead to pass data to the respective forms.
 - Page not found is quite strong when a person navigates to a form directly with a background....Look for better words... But it works well!
-
-### TECHNICAL BITS REMAINING.
-
-- Create resources interface with read and delete functionalities on the space prepared.
-- Building the messaging platform ( I should be able to track messaging functionality.)
 - Find a better way of not going to s3 uploader without lesson or resource name.
 - Testing youtube refresh token acquisition by inversing if logic.
 - Implementing typescript with SWC and proceeding with user tracking after engaging user feedback from the transformers team.

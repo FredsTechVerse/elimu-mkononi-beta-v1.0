@@ -22,6 +22,8 @@ const ForgotPasswordForm = () => {
   } = useForm({
     defaultValues: {
       contact: "",
+      email: "",
+      role: "",
     },
   });
 
@@ -49,8 +51,8 @@ const ForgotPasswordForm = () => {
   const contactVerificationMutation = useMutation({
     mutationFn: verifyContact,
     onSuccess: (data) => {
-      const { accessToken, userInfo } = data;
-      const { role, userID, resetToken } = userInfo;
+      const { accessToken, userInformation } = data;
+      const { role, userID, resetToken } = userInformation;
       axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
       updateAlertBoxData({
         response: "Contact information has been confirmed",
@@ -78,14 +80,16 @@ const ForgotPasswordForm = () => {
     contactVerificationMutation.mutate({
       contact: formData.contact,
       email: formData.email,
+      role: formData.role,
     });
   };
 
   const handleContactVerification = async (data) => {
-    const { contact, email } = data;
+    const { contact, email, role } = data;
     contactVerificationMutation.mutate({
       contact: `254${contact}`,
       email,
+      role,
     });
     return;
   };
@@ -132,6 +136,42 @@ const ForgotPasswordForm = () => {
             {errors.contact && (
               <ErrorMessage message={errors.contact?.message} />
             )}
+          </div>
+
+          <div className="flex flex-col">
+            <label
+              htmlFor="id"
+              className="w-full block my-2 text-sm font-medium text-gray-900"
+            >
+              Select Role
+            </label>
+
+            <select
+              className="input-styling  mb-5"
+              {...register("role", {
+                required: "This field is required ",
+              })}
+            >
+              <option
+                value="EM-201"
+                className="uppercase w-full h-10 rounded-lg"
+              >
+                Student
+              </option>
+              <option
+                value="EM-202"
+                className="uppercase w-full h-10 rounded-lg"
+              >
+                Tutor
+              </option>
+              <option
+                value="EM-203"
+                className="uppercase w-full h-10 rounded-lg"
+              >
+                Admin
+              </option>
+            </select>
+            {errors.tutor && <ErrorMessage message={errors.tutor?.message} />}
           </div>
           <div className="cta-wrap">
             <div className="flex flex-row gap-5 items-center">
