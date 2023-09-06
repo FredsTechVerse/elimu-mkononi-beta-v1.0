@@ -23,6 +23,7 @@ import {
   ChapterForm,
   LessonForm,
   UnitForm,
+  ReactPdf,
   MessageForm,
   ResourceForm,
   ForgotPasswordForm,
@@ -108,7 +109,7 @@ function App() {
               <Route exact path="/unit/:unitID" element={<ContentPage />}>
                 <Route exact path="" element={<ContentSection />}>
                   <Route index element={<QuillEditor />} />
-                  <Route exact path="comments" element={<ResourcesSection />} />
+                  <Route exact path="comments" element={<CommentsSection />} />
                 </Route>
                 <Route
                   exact
@@ -151,6 +152,11 @@ function App() {
           <Route exact path="/new-lesson" element={<LessonForm />} />
           <Route exact path="/new-resource" element={<ResourceForm />} />
           <Route exact path="/new-message" element={<MessageForm />} />
+          <Route
+            exact
+            path="/view-resource/:resourceUrl"
+            element={<ReactPdf />}
+          />
           <Route
             exact
             path="/account-confirmation"

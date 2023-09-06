@@ -1,20 +1,20 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect } from "react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
+import { useNavigate } from "react-router-dom";
 
 const ReactPdfModal = ({ children }) => {
+  const navigate = useNavigate();
   useLayoutEffect(() => {
     document.body.style.overflow = "hidden";
     return () => (document.body.style.overflow = "unset");
   }, []);
 
-  const [isModalClosed, setIsModalClosed] = useState(false);
-
   return (
-    <div className={`${isModalClosed ? "hidden" : "modal-overlay fixed"}`}>
+    <div className="modal-overlay fixed">
       <XMarkIcon
         className="h-8 w-8 absolute top-2 right-2"
         onClick={() => {
-          setIsModalClosed(true);
+          navigate(-1);
         }}
       />
       {children}

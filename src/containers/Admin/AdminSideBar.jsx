@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { XCircleIcon } from "@heroicons/react/24/solid";
 import {
   AdminNavItem,
@@ -8,6 +8,10 @@ import {
   UserProfileSkeleton,
 } from "../../components";
 const AdminSideBar = ({ userDataQuery, isSideBarOpen, toggleSideBar }) => {
+  useLayoutEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => (document.body.style.overflow = "unset");
+  }, []);
   return (
     <div
       className={` ${

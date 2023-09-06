@@ -1,17 +1,19 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { Document, Page } from "react-pdf/dist/esm/entry.vite";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
-
+import { useParams } from "react-router-dom";
 import { ReactPdfModal } from "../../components";
 
 //CRUCIAL STYLING DEPENDENCIES
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 
-function ReactPdf({ pdfUrl }) {
+function ReactPdf() {
+  const { resourceUrl } = useParams();
+  const pdfUrl = `http://localhost:4000/file/${resourceUrl}`;
+  console.log(pdfUrl);
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
-
   // ADDING RESPONSIVENESS
   const screenWidth = window.innerWidth;
   let scale = 0.7; // Default scale

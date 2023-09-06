@@ -16,7 +16,7 @@ const Navbar = () => {
         to="/"
         className="fixed z-50 top-0 left-2 text-white h-[8vh] flex items-center justify-center  uppercase text-3xl  font-extrabold tracking-widest  laptop:py-0 "
       >
-        AIPCA
+        Elimu Hub
       </Link>
 
       <NavMenuBtn

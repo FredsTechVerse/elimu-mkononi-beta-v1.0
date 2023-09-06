@@ -55,8 +55,7 @@ const ResourceForm = () => {
   const createResourceMutation = useMutation({
     mutationFn: createResource,
     onSuccess: (data) => {
-      queryClient.setQueryData(["resources", data._id], data);
-      queryClient.invalidateQueries(["resources"], { exact: true });
+      queryClient.invalidateQueries(["resources", chapterID], { exact: true });
       updateAlertBoxData({
         response: "Resource has been saved",
         isResponse: true,

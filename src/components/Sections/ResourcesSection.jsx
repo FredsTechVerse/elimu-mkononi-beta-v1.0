@@ -3,19 +3,21 @@ import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import { fetchChapterData, handleError } from "../../controllers";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-
 import { PlusIcon, DocumentTextIcon } from "@heroicons/react/24/solid";
+import { PageTitle } from "../../components";
 const ResourcesSection = () => {
   const location = useLocation();
-  const background = location;
   const { chapterID } = useParams();
   const navigate = useNavigate();
   const roles = localStorage.getItem("roles");
   const queryClient = useQueryClient();
   const resourcesQuery = useQuery(
-    ["courses"],
+    ["resources", chapterID],
     () => fetchChapterData({ chapterID }),
     {
+      onSuccess: (data) => {
+        console.log({ chapterData: data });
+      },
       onError: (error) => {
         handleError(error, updateAlertBoxData);
         if (error.response && error.response.data.message === "Token expired") {
@@ -25,17 +27,17 @@ const ResourcesSection = () => {
     }
   );
   return (
-    <div>
+    <div className="relative">
       <button
         className={`${
           roles?.includes("EM-203")
-            ? "bg-slate-700 hover:bg-slate-900 w-max px-3 flex-row-centered rounded-full gap-2 h-8 text-slate-100 group"
+            ? "absolute capitalize right-2 top-2 bg-slate-600 hover:bg-slate-900 w-max px-3 flex-row-centered rounded-lg gap-2 h-10 text-slate-100 group z-10"
             : "hidden"
         }`}
         onClick={() => {
           navigate("/new-resource", {
             state: {
-              background: background,
+              background: location,
               chapterID: chapterID,
             },
           });
@@ -43,20 +45,28 @@ const ResourcesSection = () => {
       >
         <span>Add resource</span>
       </button>
-      <div>
+
+      <div className="relative flex-row-centered h-12">
+        <PageTitle title="list of resources" />
+      </div>
+      <div className="grid-sm">
         {resourcesQuery.status === "success" &&
         resourcesQuery?.data?.chapterResources?.length > 0 ? (
-          resourcesQuery?.data?.chapterResources.map((resource) => {
+          resourcesQuery?.data?.chapterResources.map((resource, index) => {
             return (
               <div
+                key={index}
                 onClick={() => {
-                  navigate("view-resource/${resourceUrl}");
+                  navigate(`/view-resource/${resource.resourceUrl}`, {
+                    state: { background: location },
+                  });
                 }}
+                className="flex items-center justify-start w-full bg-slate-300 bg-opacity-60 hover:bg-opacity-90 h-12 rounded-lg px-1 gap-3"
               >
                 <span>
-                  <DocumentTextIcon />
+                  <DocumentTextIcon className="icon-styling text-slate-800" />
                 </span>
-                {resource.resourceName}
+                <span className="text-slate-800">{resource.resourceName}</span>
               </div>
             );
           })

@@ -26,25 +26,24 @@
 - Messaging funcitonalities will be set in the individual admin pages for the functionalites as a CTA
 - I have to resolve the back button dilemma for the sake of browser navigation. Covering it up with the home btn will not cut it.
 - We have reaffirmed the need for the users card.
+- Remove white space while confiming token inputs.
 
 ### DESIGN REVIEW
 
-Menu and logout button have to go in small screens greetings section.. Group them just like the navbar.
-
-- the menu now looks fantastic with autoclose on click
+- THE SIDEBAR MENU NOW LOOKS REALLY DOPE! KUDOS
+- Spread user hunt logic to the rest of authentication system
+- Build resources and messaging interface where we should be able to store all outgoing messages and their statuses which will be used to organize them .... The key to knowing which went and which didn't without delaying user experience.
 - Make sidebar scrollable small screens... Looking good
+- Spread admin dashboard styling to tutor dashboard.
 - Group page actions just as we have grouped menu items
-- Test CRUD functionalities on small screens
 
 ### HIGH PRIORITY TASKS
 
--
-
-* With the software goals well defined , I need to finalize this product. I have built enough functionality. The work remaining is making it beautiful and functional.
-* The best way to rectify the back btn dilemma for my forms can be to get rid of the routes i will utilize context instead to pass data to the respective forms.
-* Deepen delete functionality to delete fully even the children.
-* Page not found is quite strong when a person navigates to a form directly with a background....Look for better words... But it works well!
-* Unify color scheme to primary secondary and tertiary colors expecially on the buttons & Route recocilliation solving back btn dilemma.
+- With the software goals well defined , I need to finalize this product. I have built enough functionality. The work remaining is making it beautiful and functional.
+- The best way to rectify the back btn dilemma for my forms can be to get rid of the routes i will utilize context instead to pass data to the respective forms.
+- Deepen delete functionality to delete fully even the children.
+- Page not found is quite strong when a person navigates to a form directly with a background....Look for better words... But it works well!
+- Unify color scheme to primary secondary and tertiary colors expecially on the buttons & Route recocilliation solving back btn dilemma.
 
 ### TECHNICAL BITS REMAINING.
 
