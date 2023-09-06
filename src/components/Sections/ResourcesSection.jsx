@@ -71,7 +71,11 @@ const ResourcesSection = () => {
             );
           })
         ) : (
-          <p> No resources present at the moment</p>
+          <div className="flex-row-centered w-full h-full debug">
+            <p className="debug mx-auto  my-auto">
+              No resources present at the moment
+            </p>
+          </div>
         )}
       </div>
     </div>

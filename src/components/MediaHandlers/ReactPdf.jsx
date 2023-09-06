@@ -10,7 +10,7 @@ import "react-pdf/dist/esm/Page/TextLayer.css";
 
 function ReactPdf() {
   const { resourceUrl } = useParams();
-  const pdfUrl = `http://localhost:4000/file/${resourceUrl}`;
+  const pdfUrl = `https://us-central1-elearning-module-a887d.cloudfunctions.net/app/file/${resourceUrl}`;
   console.log(pdfUrl);
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
@@ -52,7 +52,7 @@ function ReactPdf() {
     setPageNumber(1);
   }, [pdfUrl]);
   return (
-    <ReactPdfModal isModalClosed={`Hell No we are active`}>
+    <ReactPdfModal>
       <div className=" flex-col-centered">
         <Document
           className="flex border-2 border-primary "

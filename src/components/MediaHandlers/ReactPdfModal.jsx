@@ -12,7 +12,7 @@ const ReactPdfModal = ({ children }) => {
   return (
     <div className="modal-overlay fixed">
       <XMarkIcon
-        className="h-8 w-8 absolute top-2 right-2"
+        className="h-6 aspect-square absolute top-2 right-2 text-white"
         onClick={() => {
           navigate(-1);
         }}

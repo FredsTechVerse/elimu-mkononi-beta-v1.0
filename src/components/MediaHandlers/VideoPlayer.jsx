@@ -34,7 +34,9 @@ const VideoPlayer = () => {
   return (
     <div className="w-full flex-row-centered pr-1  ">
       <div
-        className={` ${videoReady ? "block" : "hidden"} w-full aspect-video  `}
+        className={` ${
+          videoReady ? "block" : "hidden"
+        } w-full aspect-video shadow-lg `}
       >
         <ReactPlayer
           className="react-player"
