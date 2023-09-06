@@ -212,7 +212,7 @@ const AccordionItem = ({
                   </p>
                   <div className="flex gap-1">
                     <button
-                      className={`cta-btn group ${
+                      className={`cta-btn z-10 group ${
                         roles?.includes("EM-201") && "hidden"
                       }`}
                       onClick={() => {
@@ -224,7 +224,7 @@ const AccordionItem = ({
                         });
                       }}
                     >
-                      <PencilIcon className="icon-styling h-3 laptop:h-4 text-white" />
+                      <PencilIcon className="icon-styling h-3 laptop:h-4 text-white " />
                     </button>
                     <button
                       className={`cta-btn group ${
