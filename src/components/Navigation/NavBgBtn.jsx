@@ -16,13 +16,15 @@ const NavBgBtn = ({ to, text, isBlue = false }) => {
         state={{ background: location }}
         className={` transition-all  duration-200 capitalize group w-full h-8 tablet:h-10 cursor-pointer flex-row-centered gap-2  ${
           isBlue
-            ? "bg-primary hover:bg-purple-500"
+            ? "bg-primary hover:bg-purple-500 text-white"
             : "hover:rounded-b-lg  hover:bg-slate-900 hover:text-white "
         } `}
       >
         <span>Login</span>
         <ArrowLeftOnRectangleIcon
-          className={`icon-styling text-black group-hover:text-white `}
+          className={`icon-styling ${
+            isBlue ? "text-white" : "text-black"
+          } group-hover:text-white `}
         />
       </Link>
     );
@@ -33,7 +35,7 @@ const NavBgBtn = ({ to, text, isBlue = false }) => {
         state={{ background: location, role: roleInformation }}
         className={` capitalize group w-full h-8 tablet:h-10  cursor-pointer flex-row-centered   ${
           isBlue
-            ? "bg-primary hover:bg-purple-500"
+            ? "bg-primary hover:bg-purple-500 text-white"
             : "hover:rounded-t-lg  hover:bg-slate-900 hover:text-white "
         } `}
       >
@@ -47,7 +49,7 @@ const NavBgBtn = ({ to, text, isBlue = false }) => {
         state={{ background: location }}
         className={`navbar-link group ${
           isBlue
-            ? "bg-primary hover:bg-purple-500 "
+            ? "bg-primary hover:bg-purple-500 text-white"
             : "bg-slate-700 hover:bg-slate-900  "
         } text-white `}
       >

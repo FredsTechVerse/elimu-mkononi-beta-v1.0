@@ -45,7 +45,7 @@ const LogoutBtn = ({ isBlue = false, position = "default" }) => {
         position === "navbar" ? "rounded-b-lg" : " text-white rounded-lg px-3"
       } ${
         isBlue
-          ? "bg-primary hover:bg-purple-500 "
+          ? "bg-primary hover:bg-purple-500 text-white "
           : "bg-slate-100 hover:bg-slate-900  "
       }`}
     >
@@ -55,11 +55,14 @@ const LogoutBtn = ({ isBlue = false, position = "default" }) => {
           <SpinnerIcon />
         ) : (
           <ArrowRightOnRectangleIcon
-            className={`  ${
-              position === "navbar"
-                ? "text-black group-hover:text-white"
-                : "text-white"
-            } icon-styling `}
+            // className={`  ${
+            //   position === "navbar"
+            //     ? "text-black group-hover:text-white"
+            //     : "text-white"
+            // } icon-styling `}
+            className={`icon-styling ${
+              isBlue ? "text-white" : "text-black"
+            } group-hover:text-white `}
           />
         )}
       </span>

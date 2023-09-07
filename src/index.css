@@ -27,15 +27,15 @@
 
   /* Chrome, Edge, and Safari */
   *::-webkit-scrollbar {
-    width: 6px;
+    @apply w-[5px];
   }
 
   *::-webkit-scrollbar-track {
-    @apply bg-white;
+    @apply bg-transparent;
   }
 
   *::-webkit-scrollbar-thumb {
-    @apply bg-slate-600 border-none bg-opacity-40;
+    @apply bg-slate-500 border-none bg-opacity-40 rounded-full;
   }
 
   /* ELEMENTS STYLING */

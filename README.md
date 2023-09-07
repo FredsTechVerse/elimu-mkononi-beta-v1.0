@@ -32,15 +32,16 @@
 
 - Cleanup the delete functionality to delete fully even the children
 - Cleanup the console... Remaining chuncks need to be sent to email.
-- Report error messages to troubleshooting email eg sms services interruptions , good thing that they have been pulled together.
+- Report error messages to the troubleshooting email better than console logs eg sms services interruptions , good thing that they have been pulled together and its free.
 - Remind admin to topup via sms when balance response is low.
 - Spread admin dashboard styling to tutor dashboard.
 - Rectify the back btn dilemma by ensuring the forms do not appear in route history.
 - Find a better way of not going to youtube uploader without lesson or resource name s3 uploader doesnt care as it generates its own random name.
 - Test youtube refresh token acquisition by inversing if logic.
-- Cleanup the console.
+
 <!-- SECONDARY -->
 
+- Move to portfolio backend and frontend revamp (# simplification.)
 - Simplifying or separating the form CRUD logic.
 - Implement typescript with SWC.
 - If need arises implement user tracking
@@ -53,7 +54,7 @@
 ### KEY CONCEPTS LEARNT DURING THE BUILD
 
 - Rounding things up was the missing part of the puzzle....Things look elegant.
-
+- Overflow hidden can be used to hide stubborn borders.
 - Here is how we can pass a body to a delete request
 
 ```js

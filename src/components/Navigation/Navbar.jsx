@@ -11,13 +11,6 @@ const Navbar = () => {
 
   return (
     <>
-      {/* <Link
-        to="/"
-        className="fixed z-50 top-0 left-2 text-white h-[8vh] flex items-center justify-center  uppercase text-3xl  font-extrabold tracking-widest  laptop:py-0 "
-      >
-        Elimu Hub
-      </Link> */}
-
       <div className="flex flex-row items-center justify-evenly gap-2 fixed bottom-2 right-2 tablet:right-5 z-20">
         <NavMenuBtn
           isNavOpen={isNavOpen}
@@ -30,20 +23,20 @@ const Navbar = () => {
         onClick={toggleNavbar}
         className={` mt-3 ${
           isNavOpen ? "flex " : "hidden"
-        }  bg-slate-200 rounded-lg  text-slate-800 fixed z-50  bottom-[55px] flex right-3  phone:flex-col  items-center justify-center phone:w-[45%] tablet:w-[30%] laptop:w-[15%] `}
+        }  rounded-lg  text-slate-800 fixed z-50  bottom-[55px] flex right-3  phone:flex-col  items-center justify-center phone:w-[45%] tablet:w-[30%] laptop:w-[15%]  overflow-hidden `}
       >
-        <NavBgBtn to="/new-user" text="register" />
-        <HomeBtn />
+        <NavBgBtn isBlue={true} to="/new-user" text="register" />
+        <HomeBtn isBlue={true} />
 
         <div
           className={`w-full ${
             !roles ? "flex gap-1 tablet:flex-row" : "hidden"
           }`}
         >
-          <NavBgBtn to="/log-in" text="login" />
+          <NavBgBtn isBlue={true} to="/log-in" text="login" />
         </div>
         <div className={`${!roles ? "hidden" : "flex w-full "}`}>
-          <LogoutBtn position="navbar" />
+          <LogoutBtn isBlue={true} position="navbar" />
         </div>
       </section>
     </>
