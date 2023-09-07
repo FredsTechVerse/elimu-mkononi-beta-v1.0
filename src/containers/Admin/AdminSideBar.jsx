@@ -18,7 +18,7 @@ const AdminSideBar = ({ userDataQuery, isSideBarOpen, toggleSideBar }) => {
         isSideBarOpen
           ? "phone:absolute z-30 tablet:bottom-[55px] tablet:right-2 laptop:right-0 laptop:top-0  h-full tablet:h-max  phone:w-full tablet:w-80 rounded-lg  "
           : "phone:hidden laptop:flex h-full "
-      } relative backdrop-blur-xl bg-slate-300 bg-opacity-30 laptop:m-1 laptop:rounded-lg laptop:relative laptop:w-1/4  flex flex-col laptop:h-full phone:justify-start laptop:justify-between gap-2 p-2`}
+      } relative backdrop-blur-xl  phone:bg-slate-300 laptop:bg-transparent bg-opacity-40 laptop:m-1 laptop:rounded-lg laptop:relative laptop:w-1/4  flex flex-col laptop:h-full phone:justify-start laptop:justify-between gap-2 p-2`}
     >
       <div className=" flex items-center justify-between">
         <div className="">

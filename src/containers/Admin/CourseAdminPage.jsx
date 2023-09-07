@@ -25,12 +25,15 @@ const CoursesAdminPage = () => {
       }
     },
   });
-  const { openSideBar, isSideBarOpen, toggleSideBar } = useOutletContext();
+  const { isSideBarOpen, toggleSideBar } = useOutletContext();
 
   return (
     <div className="w-full laptop:w-3/4 flex flex-col gap-5 relative phone:rounded-lg justify-start  h-full overflow-auto p-3 overflow-x-hidden ">
-      <div className="absolute z-10 top-2 right-2 flex-row-centered gap-2">
+      <div className=" absolute z-10 top-2 right-1 tablet:right-2 flex-row-centered gap-2">
         <NavBgBtn to="/new-course" text="Add Course" />
+      </div>
+      <div className="absolute top-2 left-1 w-max px-2">
+        <PageTitle title="list of courses" />
       </div>
 
       <div className="flex flex-row items-center justify-evenly gap-2 fixed bottom-2 right-2 tablet:right-5 z-20">
@@ -40,11 +43,8 @@ const CoursesAdminPage = () => {
           position="layout"
         />
       </div>
-      <div className="relative pt-12 tablet:top-0">
-        <PageTitle title="list of courses" />
-      </div>
 
-      <div className="w-full flex flex-col  justify-start">
+      <div className="w-full flex flex-col  justify-start pt-8">
         {coursesQuery.status === "loading" && (
           <div className="grid-lg tablet:grid-cols-2 laptop:grid-cols-3 tablet:gap-6  ">
             <CourseSkeleton />

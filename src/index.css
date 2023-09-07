@@ -114,7 +114,7 @@
     @apply uppercase outline-none  hover:bg-primary  hover:text-white text-black font-bold flex justify-between w-full items-center py-3 px-4 cursor-pointer;
   }
   .navbar-link {
-    @apply text-white text-sm capitalize  flex-row-centered px-4 mx-1 rounded-lg w-28 h-8 tablet:h-10;
+    @apply text-white text-sm capitalize  flex-row-centered px-2 mx-1 rounded-lg phone:w-max h-8 tablet:h-10;
   }
 
   .cta-wrap {
@@ -131,7 +131,7 @@
 
   /* FORM STYLING */
   .form-wrap {
-    @apply bg-slate-300 bg-opacity-50 flex flex-col justify-start items-center phone:w-full tablet:w-[420px] h-auto rounded-2xl  overflow-auto overflow-x-hidden;
+    @apply bg-slate-300 bg-opacity-50 flex flex-col justify-start items-center phone:w-[97%] tablet:w-[420px] h-auto rounded-2xl  overflow-auto overflow-x-hidden mx-2;
   }
 
   .form-styling {
@@ -139,11 +139,11 @@
   }
 
   .input-wrap {
-    @apply flex flex-col justify-center items-start  gap-2 my-0.5;
+    @apply flex flex-col justify-center items-start  gap-1.5 my-0.5;
   }
 
   .input-styling {
-    @apply w-72 tablet:w-[360px] px-2 appearance-none h-8 tablet:h-10 border-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-400 placeholder:text-sm rounded-md border-none;
+    @apply w-72 tablet:w-[360px] px-2 appearance-none h-10 border-2 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-400 placeholder:text-sm rounded-sm border-none;
   }
 
   textarea {

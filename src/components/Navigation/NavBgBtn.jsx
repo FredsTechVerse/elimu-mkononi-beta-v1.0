@@ -49,7 +49,7 @@ const NavBgBtn = ({ to, text, isBlue = false }) => {
           isBlue
             ? "bg-primary hover:bg-purple-500 "
             : "bg-slate-700 hover:bg-slate-900  "
-        } text-white   `}
+        } text-white `}
       >
         {text}
       </Link>

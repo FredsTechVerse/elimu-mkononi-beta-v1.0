@@ -30,21 +30,19 @@
 
 <!-- PRIMARY -->
 
-- To implement search functionality simply advise user to rotate phone for table view.
-- Resource CR&D working well bro.
-- Revert error message to what it was before.
-- Deepen delete functionality to delete fully even the children.
-- Scroll unstable in phones... Last element not visible sometimes. Eliminating it where possible solves things quite neatly.
+- Deepen delete functionality to delete fully even the children
+- Report error messages to troubleshooting email eg sms services interruptions
+- Remind admin to topup via sms when balance response is low.
+- Limit character length in forms especially name unit code etc
+- Apply the fancy error message where needed.
 - Spread admin dashboard styling to tutor dashboard.
 - The only way to rectify the back btn dilemma is ensuring the forms do not appear in route history
-- Page not found is quite strong when a person navigates to a form directly with a background....Look for better words... But it works well!
 - Find a better way of not going to youtube uploader without lesson or resource name s3 uploader doesnt care as it generates its own random name.
 - Test youtube refresh token acquisition by inversing if logic.
 
 <!-- SECONDARY -->
 
-- Send email when sms services have been interrupted.
-- Remind user to recharge once the balance reaches a certain amount
+- Simplifying or separating the form CRUD logic.
 - Implement typescript with SWC and proceeding with user tracking after engaging user feedback from the transformers team.
 - Learning how to easily spot, track and serve (handle) server errors in production applications for ease of troubleshooting.
 
@@ -53,6 +51,8 @@
 - Simple components limit creativity ( DIY) ... They also save lots of time for the complex ones eg calendars.
 
 ### KEY CONCEPTS LEARNT DURING THE BUILD
+
+- Rounding things up was the missing part of the puzzle....Things look elegant.
 
 - Here is how we can pass a body to a delete request
 

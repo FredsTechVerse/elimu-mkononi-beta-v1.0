@@ -5,7 +5,6 @@ import {
   TableAlternativeSkeleton,
   DashboardUserButton,
   TableSkeleton,
-  HomeBtn,
   NavBgBtn,
   NavMenuBtn,
 } from "../../components";
@@ -67,24 +66,24 @@ const UsersPage = () => {
 
         <NavBgBtn to="/new-message" text="Message" />
       </div>
-      <div className="relative pt-12 tablet:pt-0">
+      <div className="absolute top-12 mx-auto tablet:pt-0">
         <PageTitle
           title={
             userRole === "EM-201"
               ? "Student's Summary"
               : userRole === "EM-202"
               ? "tutor's summary"
-              : "Admin's Summary"
+              : "Administrators Summary"
           }
         />
       </div>
       {usersQuery.status === "loading" ? (
-        <div className=" w-full mt-5">
+        <div className=" w-full mt-16 tablet:mt-20">
           <TableSkeleton />
           <TableAlternativeSkeleton />
         </div>
       ) : (
-        <div className=" w-full mt-5 ">
+        <div className=" w-full mt-16 ">
           <div className=" w-full relative">
             <UsersTable usersQuery={usersQuery} role={userRole} />
             <UsersGrid usersQuery={usersQuery} role={userRole} />

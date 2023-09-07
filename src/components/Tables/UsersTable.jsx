@@ -67,12 +67,12 @@ const UsersTable = ({ usersQuery, role }) => {
     <div className="py-5 phone:hidden tablet:table w-full flex flex-col items-center justify-center">
       <input
         type="text"
-        placeholder="Search"
-        className="block h-8 tablet:h-10 my-2 self-end shadow-lg shadow-slate-300 border-slate-500 border-2 ring-5 rounded-md  pl-2"
+        placeholder={`Search for user`}
+        className="block h-10 rounded-md my-2 shadow-md shadow-slate-300 border-slate-400 border-1 text-start w-48"
         value={filtering}
         onChange={(e) => setFiltering(e.target.value)}
       />
-      <table className="  w-full bg-slate-50 shadow-lg shadow-slate-200  ">
+      <table className="  w-full bg-slate-50 shadow-lg shadow-slate-200 rounded-lg overflow-hidden  ">
         <thead className=" uppercase h-12 bg-slate-600 text-white  ">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
@@ -105,7 +105,7 @@ const UsersTable = ({ usersQuery, role }) => {
             <tr
               key={row.id}
               className={`${
-                index % 2 == 0 ? "bg-slate-300  " : ""
+                index % 2 !== 0 && "bg-slate-300"
               } cursor-pointer text-center h-8 tablet:h-10`}
             >
               {row.getVisibleCells().map((cell) => (

@@ -24,7 +24,7 @@ const DoughnutChart = ({
   };
 
   return (
-    <div className="h-60 tablet:h-48 laptop:h-60 aspect-square flex-row-centered relative ">
+    <div className="h-60 tablet:h-44 laptop:h-60 aspect-square flex-row-centered relative ">
       {chartData ? (
         <Doughnut data={chartData} options={options}></Doughnut>
       ) : (
@@ -32,8 +32,12 @@ const DoughnutChart = ({
       )}
 
       <div className="absolute flex-col-centered">
-        <div className="font-extralight text-md capitalize">{doughnutName}</div>
-        <div className="text-2xl font-bold">{doughnutValue}</div>
+        <p className="font-extralight text-md tablet:text-sm laptop:text-md capitalize">
+          {doughnutName}
+        </p>
+        <p className="text-2xl tablet:text-xl laptop:text-2xl font-bold">
+          {doughnutValue}
+        </p>
       </div>
     </div>
   );

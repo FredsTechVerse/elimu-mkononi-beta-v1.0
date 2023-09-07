@@ -4,10 +4,8 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 const NavMenuBtn = ({ isNavOpen, position, toggleNavbar, isBlue = false }) => {
   return (
     <button
-      className={` text-white flex items-center justify-center uppercase gap-1  px-2 m-1 rounded-lg ${
-        position === "layout"
-          ? "relative w-full mx-auto h-10  laptop:hidden"
-          : "fixed z-50 top-0  h-[8vh] right-2 "
+      className={` text-white flex items-center justify-center uppercase gap-1  px-2 m-1 rounded-lg h-10 ${
+        position === "layout" && "relative w-full laptop:hidden"
       }  ${
         isBlue
           ? "bg-primary hover:bg-purple-500 "
