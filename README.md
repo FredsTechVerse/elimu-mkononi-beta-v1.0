@@ -43,8 +43,9 @@
 <!-- SECONDARY -->
 
 - Simplifying or separating the form CRUD logic.
-- Implement typescript with SWC and proceeding with user tracking after engaging user feedback from the transformers team.
-- Learning how to easily spot, track and serve (handle) server errors in production applications for ease of troubleshooting.
+- Implement typescript with SWC.
+- If need arises implement user tracking
+- Learn how to easily spot, track and serve (handle) server errors in production applications for ease of troubleshooting.
 
 ### USING COMPONENT LIBRARIES ( MY GOLDEN RULE )
 
