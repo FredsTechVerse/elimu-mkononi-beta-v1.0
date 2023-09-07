@@ -41,7 +41,7 @@ const LogoutBtn = ({ isBlue = false, position = "default" }) => {
       onClick={() => {
         logoutMutation.mutate();
       }}
-      className={` capitalize group w-full cursor-pointer flex-row-centered  hover:text-white h-10 gap-2   ${
+      className={` capitalize group w-full cursor-pointer flex-row-centered  hover:text-white h-8 tablet:h-10 gap-2   ${
         position === "navbar" ? "rounded-b-lg" : " text-white rounded-lg px-3"
       } ${
         isBlue

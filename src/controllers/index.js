@@ -1,5 +1,5 @@
 import { verifyAccess, renewToken, handleLogout } from "./AuthController";
-import { messageUser, fetchMessageData } from "./Communication";
+import { messageUser, fetchMessagesData } from "./Communication";
 import {
   registerUser,
   loginUser,
@@ -92,7 +92,7 @@ export {
   confirmResetToken,
   confirmUserCredentials,
   getYoutubeAuthorizationURI,
-  fetchMessageData,
+  fetchMessagesData as fetchMessageData,
   refreshYoutubeToken,
   fetchAllUsersData,
   fetchUsersAggregate,

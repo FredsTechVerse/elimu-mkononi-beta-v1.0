@@ -26,7 +26,7 @@ const TutorCard = ({ unit }) => {
           {unit.unitName}
         </h1>
         <div className=" flex-row-centered justify-evenly w-full mb-2">
-          <div className="group flex-row-centered  bg-slate-200 rounded-lg h-10 aspect-square">
+          <div className="group flex-row-centered  bg-slate-200 rounded-lg h-8 tablet:h-10 aspect-square">
             <BookOpenIcon className="icon-styling text-slate-900" />
             <span className="number font-extrabold text-md text-black">
               {unit.unitChapters.length}

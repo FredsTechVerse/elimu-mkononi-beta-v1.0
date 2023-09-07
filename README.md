@@ -28,25 +28,29 @@
 
 ### DESIGN REVIEW
 
+<!-- PRIMARY -->
+
+- To implement search functionality simply advise user to rotate phone for table view.
 - Resource CR&D working well bro.
-- Capture all outgoing messages and their status as we have done with emails for ease of categorization and troubleshooting.
+- Revert error message to what it was before.
 - Deepen delete functionality to delete fully even the children.
-- Scroll unstable in phones... Last element not visible sometimes.
+- Scroll unstable in phones... Last element not visible sometimes. Eliminating it where possible solves things quite neatly.
 - Spread admin dashboard styling to tutor dashboard.
-- The goal is now making the software functional and beautiful.
-- The best way to rectify the back btn dilemma for my forms can be to get rid of the routes i will utilize context instead to pass data to the respective forms.
+- The only way to rectify the back btn dilemma is ensuring the forms do not appear in route history
 - Page not found is quite strong when a person navigates to a form directly with a background....Look for better words... But it works well!
-- Find a better way of not going to s3 uploader without lesson or resource name.
-- Testing youtube refresh token acquisition by inversing if logic.
-- Implementing typescript with SWC and proceeding with user tracking after engaging user feedback from the transformers team.
+- Find a better way of not going to youtube uploader without lesson or resource name s3 uploader doesnt care as it generates its own random name.
+- Test youtube refresh token acquisition by inversing if logic.
+
+<!-- SECONDARY -->
+
+- Send email when sms services have been interrupted.
+- Remind user to recharge once the balance reaches a certain amount
+- Implement typescript with SWC and proceeding with user tracking after engaging user feedback from the transformers team.
 - Learning how to easily spot, track and serve (handle) server errors in production applications for ease of troubleshooting.
 
 ### USING COMPONENT LIBRARIES ( MY GOLDEN RULE )
 
-- I won't import a component if :-
-  1. It is easy to implement
-  2. Applying a personal touch ends up redoing the styling.
-- However , component libraries will be a huge time saver for building complex components eg the tables and calendar functionality.
+- Simple components limit creativity ( DIY) ... They also save lots of time for the complex ones eg calendars.
 
 ### KEY CONCEPTS LEARNT DURING THE BUILD
 

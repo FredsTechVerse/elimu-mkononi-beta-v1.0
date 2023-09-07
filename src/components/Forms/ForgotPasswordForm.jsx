@@ -154,19 +154,19 @@ const ForgotPasswordForm = () => {
             >
               <option
                 value="EM-201"
-                className="uppercase w-full h-10 rounded-lg"
+                className="uppercase w-full h-8 tablet:h-10 rounded-lg"
               >
                 Student
               </option>
               <option
                 value="EM-202"
-                className="uppercase w-full h-10 rounded-lg"
+                className="uppercase w-full h-8 tablet:h-10 rounded-lg"
               >
                 Tutor
               </option>
               <option
                 value="EM-203"
-                className="uppercase w-full h-10 rounded-lg"
+                className="uppercase w-full h-8 tablet:h-10 rounded-lg"
               >
                 Admin
               </option>

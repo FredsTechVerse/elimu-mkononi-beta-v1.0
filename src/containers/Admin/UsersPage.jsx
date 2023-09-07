@@ -53,7 +53,7 @@ const UsersPage = () => {
         />
       </div>
 
-      <div className="absolute top-2 left-2 flex-row-centered gap-2 ">
+      <div className="absolute top-2 right-2 flex-row-centered gap-2 ">
         <DashboardUserButton
           isRounded={false}
           item={
@@ -85,7 +85,7 @@ const UsersPage = () => {
         </div>
       ) : (
         <div className=" w-full mt-5 ">
-          <div className=" w-full px-3 relative">
+          <div className=" w-full relative">
             <UsersTable usersQuery={usersQuery} role={userRole} />
             <UsersGrid usersQuery={usersQuery} role={userRole} />
           </div>

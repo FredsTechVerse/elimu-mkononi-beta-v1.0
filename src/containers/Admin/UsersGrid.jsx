@@ -2,7 +2,7 @@ import React from "react";
 import { UserCard, ErrorMessage } from "../../components";
 const UsersGrid = ({ usersQuery, role }) => {
   return (
-    <div className="w-full tablet:hidden">
+    <div className="w-full  tablet:hidden">
       {usersQuery?.data?.length > 0 ? (
         <div className="grid-sm ">
           {usersQuery?.data?.map((userData, userIndex) => {

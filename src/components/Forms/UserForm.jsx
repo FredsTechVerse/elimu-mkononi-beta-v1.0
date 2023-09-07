@@ -92,9 +92,11 @@ const UserForm = () => {
   // Updates accordingly  after fetch
   useEffect(() => {
     if (userQuery?.status === "success" && userQuery?.data) {
+      const splittedContact = userQuery?.data?.contact.split("254")[1];
+      console.log({ splittedContact });
       setValue("fName", userQuery?.data?.firstName);
       setValue("surname", userQuery?.data?.surname);
-      setValue("contact", userQuery?.data?.contact);
+      setValue("contact", splittedContact);
       setValue("email", userQuery?.data?.email);
     }
   }, [userID, userQuery?.status]);
@@ -142,12 +144,14 @@ const UserForm = () => {
   const updateUserMutation = useMutation({
     mutationFn: updateUser,
     onSuccess: (data) => {
-      queryClient.setQueryData([role, data?._id], data);
+      queryClient.invalidateQueries(["user", userID], {
+        exact: true,
+      });
       queryClient.invalidateQueries([role], {
         exact: true,
       });
       updateAlertBoxData({
-        response: "User has been registered.",
+        response: "User info has been updated.",
         isResponse: true,
         status: "success",
         timeout: 4500,

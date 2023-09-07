@@ -15,7 +15,7 @@ const HomeBtn = ({ isBlue = false, icon = false, position = "default" }) => {
   };
   return (
     <button
-      className={`transition-all  duration-200 text-sm capitalize h-10 rounded-lg mx-1 flex-row-centered  ${
+      className={`transition-all  duration-200 text-sm capitalize h-8 tablet:h-10 rounded-lg mx-1 flex-row-centered  ${
         position === "dashboard"
           ? "  aspect-square  w-max  px-2 text-white "
           : "w-full hover:bg-slate-900 text-slate-900 hover:text-white rounded-none"

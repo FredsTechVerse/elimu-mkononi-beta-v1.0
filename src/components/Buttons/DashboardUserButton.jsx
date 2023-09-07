@@ -22,7 +22,7 @@ const DashboardUserButton = ({ item, isBlue = false }) => {
     <Link
       to={link}
       state={{ background: location, role: roleInformation }}
-      className={` transition-all  duration-200 text-white text-sm capitalize rounded-md w-full h-10 flex-row-centered text-center gap-2 group ${
+      className={` transition-all  duration-200 text-white text-sm capitalize rounded-md w-full h-8 tablet:h-10 flex-row-centered text-center gap-2 group ${
         isBlue
           ? "bg-primary hover:bg-purple-500 "
           : "bg-slate-700 hover:bg-slate-900  "

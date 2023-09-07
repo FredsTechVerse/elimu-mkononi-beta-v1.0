@@ -66,7 +66,7 @@ const ResourcesSection = () => {
       <button
         className={`${
           roles?.includes("EM-203")
-            ? "absolute capitalize right-2 top-2 bg-slate-600 hover:bg-slate-900 w-max px-3 flex-row-centered rounded-lg gap-2 h-10 text-slate-100 group z-10"
+            ? "absolute capitalize right-2 top-2 bg-slate-600 hover:bg-slate-900 w-max px-3 flex-row-centered rounded-lg gap-2 h-8 tablet:h-10 text-slate-100 group z-10"
             : "hidden"
         }`}
         onClick={() => {

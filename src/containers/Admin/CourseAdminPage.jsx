@@ -29,7 +29,7 @@ const CoursesAdminPage = () => {
 
   return (
     <div className="w-full laptop:w-3/4 flex flex-col gap-5 relative phone:rounded-lg justify-start  h-full overflow-auto p-3 overflow-x-hidden ">
-      <div className="absolute z-10 top-2 left-2 flex-row-centered gap-2">
+      <div className="absolute z-10 top-2 right-2 flex-row-centered gap-2">
         <NavBgBtn to="/new-course" text="Add Course" />
       </div>
 

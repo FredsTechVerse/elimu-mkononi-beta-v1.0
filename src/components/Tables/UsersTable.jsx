@@ -30,8 +30,11 @@ const UsersTable = ({ usersQuery, role }) => {
     }),
 
     columnHelper.accessor("status", {
+      header: () => (
+        <span className="hidden  laptop:flex-row-centered">Status</span>
+      ),
       cell: (info) => (
-        <div className=" flex-row-centered">
+        <div className="hidden  laptop:flex-row-centered">
           <StatusPill status={info.getValue()} />
         </div>
       ),
@@ -65,7 +68,7 @@ const UsersTable = ({ usersQuery, role }) => {
       <input
         type="text"
         placeholder="Search"
-        className="block h-10 my-2 self-end shadow-lg shadow-slate-300 border-slate-500 border-2 ring-5 rounded-md  pl-2"
+        className="block h-8 tablet:h-10 my-2 self-end shadow-lg shadow-slate-300 border-slate-500 border-2 ring-5 rounded-md  pl-2"
         value={filtering}
         onChange={(e) => setFiltering(e.target.value)}
       />
@@ -103,7 +106,7 @@ const UsersTable = ({ usersQuery, role }) => {
               key={row.id}
               className={`${
                 index % 2 == 0 ? "bg-slate-300  " : ""
-              } cursor-pointer text-center h-10`}
+              } cursor-pointer text-center h-8 tablet:h-10`}
             >
               {row.getVisibleCells().map((cell) => (
                 <td key={cell.id} className="text-center capitalize ">

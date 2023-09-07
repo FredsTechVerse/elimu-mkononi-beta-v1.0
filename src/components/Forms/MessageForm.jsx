@@ -18,11 +18,9 @@ const MessageForm = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const isMessageQueryEnabled = messageID ? true : false;
   const from = location.state?.background?.pathname;
   const messageID = location?.state?.messageID;
-  const [isMessageQueryEnabled, setIsMessageQueryEnabled] = useState(
-    messageID ? true : false
-  );
   const queryClient = useQueryClient();
 
   const {

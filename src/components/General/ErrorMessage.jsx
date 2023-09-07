@@ -1,13 +1,7 @@
 import React from "react";
 
 const ErrorMessage = ({ message }) => {
-  return (
-    <div className="flex-row-centered w-full">
-      <p className=" flex-col-centered text-center p-3 bg-rose-300 m-2 rounded-lg w-max ">
-        {message}
-      </p>
-    </div>
-  );
+  return <p className="text-start text-red-900 m-1 ">{message}</p>;
 };
 
 export default ErrorMessage;

@@ -1,41 +1,28 @@
-import axios from "axios";
-import Axios from "../axios";
-const smsConfig = {
-  headers: {
-    "Content-Type": "application/json",
-    apikey: "9d1d8bb393c14550a5dfae8a2a1d5bd3",
-  },
-};
-const fetchMessageData = async () => {};
+import axios from "../axios";
+
+const fetchMessagesData = async () => {};
 
 const messageUser = async ({ message, recipient }) => {
-  try {
-    const smsPayload = {
-      phone: "0112615416",
-      message: message,
-      recipient: [recipient],
-    };
+  console.log({ message, recipient });
+  const messagePayload = {
+    recipients: [recipient],
+    message,
+  };
 
-    const { data } = await axios.post(
-      "https://bulk-sms-production.up.railway.app/api/v1/sms/send",
-      smsPayload,
-      smsConfig
-    );
-    await Axios.post(
-      "/message",
-      { ...smsPayload, status: "success" },
-      smsConfig
-    );
+  const messageConfig = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
 
-    console.log(`SMS response data ${JSON.stringify(data)}`);
-  } catch (err) {
-    await Axios.post(
-      "/message",
-      { ...smsPayload, status: "failure" },
-      smsConfig
-    );
-    console.log(`SMS send error ${JSON.stringify(err)}`);
-  }
+  const { data: sentMessages } = await axios.post(
+    "/message",
+    messagePayload,
+    messageConfig
+  );
+
+  console.log(`SMS response data ${JSON.stringify(sentMessages)}`);
+  return sentMessages;
 };
 
-export { messageUser, fetchMessageData };
+export { messageUser, fetchMessagesData };
