@@ -11,7 +11,6 @@ import "react-pdf/dist/esm/Page/TextLayer.css";
 function ReactPdf() {
   const { resourceUrl } = useParams();
   const pdfUrl = `https://us-central1-elearning-module-a887d.cloudfunctions.net/app/file/${resourceUrl}`;
-  console.log(pdfUrl);
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   // ADDING RESPONSIVENESS

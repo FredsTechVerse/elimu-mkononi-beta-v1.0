@@ -7,7 +7,7 @@ import {
   HomeBtn,
   NavMenuBtn,
   DashboardUserButton,
-  ErrorMessage,
+  FancyMessage,
 } from "../../components";
 import { useLocation, useOutletContext } from "react-router-dom";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
@@ -62,7 +62,7 @@ const CoursesAdminPage = () => {
             })}
           </div>
         ) : (
-          <ErrorMessage message="No courses data" />
+          <FancyMessage message="No courses data" />
         )}
       </div>
     </div>

@@ -23,9 +23,6 @@ const ResourcesSection = () => {
     ["resources", chapterID],
     () => fetchChapterData({ chapterID }),
     {
-      onSuccess: (data) => {
-        console.log({ chapterData: data });
-      },
       onError: (error) => {
         handleError(error, updateAlertBoxData);
         if (error.response && error.response.data.message === "Token expired") {
@@ -117,7 +114,6 @@ const ResourcesSection = () => {
                     roles?.includes("EM-201") && "hidden"
                   }`}
                   onClick={() => {
-                    console.log({ resourceID: resource?._id });
                     setResourceToDelete(resource?._id);
                     setIsDeleteResourceQueryEnabled(true);
                   }}

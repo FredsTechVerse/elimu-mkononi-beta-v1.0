@@ -11,6 +11,7 @@ import PageTitle from "./PageTitle";
 import Heading from "./Heading";
 import ErrorMessage from "./ErrorMessage";
 import FileUpdater from "./FileUpdater";
+import FancyMessage from "./FancyMessage";
 export {
   AlertBox,
   TutorCardHome,
@@ -20,6 +21,7 @@ export {
   RequireAuth,
   UserProfile,
   Modal,
+  FancyMessage,
   ProgressBar,
   FancyLine,
   Tooltip,

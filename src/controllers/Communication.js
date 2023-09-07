@@ -3,7 +3,6 @@ import axios from "../axios";
 const fetchMessagesData = async () => {};
 
 const messageUser = async ({ message, recipient }) => {
-  console.log({ message, recipient });
   const messagePayload = {
     recipients: [recipient],
     message,
@@ -21,7 +20,6 @@ const messageUser = async ({ message, recipient }) => {
     messageConfig
   );
 
-  console.log(`SMS response data ${JSON.stringify(sentMessages)}`);
   return sentMessages;
 };
 

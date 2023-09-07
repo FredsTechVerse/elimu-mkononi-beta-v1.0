@@ -110,7 +110,6 @@ const MessageForm = () => {
 
   const saveMessage = async (data) => {
     const { recipient, message } = data;
-    console.log({ recipient, message });
     if (!isMessageQueryEnabled) {
       createMessageMutation.mutate({
         recipient: `0${recipient}`,

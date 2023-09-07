@@ -93,7 +93,6 @@ const UserForm = () => {
   useEffect(() => {
     if (userQuery?.status === "success" && userQuery?.data) {
       const splittedContact = userQuery?.data?.contact.split("254")[1];
-      console.log({ splittedContact });
       setValue("fName", userQuery?.data?.firstName);
       setValue("surname", userQuery?.data?.surname);
       setValue("contact", splittedContact);
@@ -227,6 +226,7 @@ const UserForm = () => {
             <div className="input-wrap">
               <input
                 readOnly={!isEditEnabled}
+                maxLength={15}
                 className="input-styling"
                 placeholder="First Name"
                 {...register("fName", {
@@ -240,6 +240,7 @@ const UserForm = () => {
                 readOnly={!isEditEnabled}
                 className="input-styling"
                 placeholder="Last Name"
+                maxLength={15}
                 {...register("surname", {
                   required: "This field is required ",
                 })}

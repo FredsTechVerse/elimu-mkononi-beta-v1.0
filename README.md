@@ -30,16 +30,15 @@
 
 <!-- PRIMARY -->
 
-- Deepen delete functionality to delete fully even the children
-- Report error messages to troubleshooting email eg sms services interruptions
+- Cleanup the delete functionality to delete fully even the children
+- Cleanup the console... Remaining chuncks need to be sent to email.
+- Report error messages to troubleshooting email eg sms services interruptions , good thing that they have been pulled together.
 - Remind admin to topup via sms when balance response is low.
-- Limit character length in forms especially name unit code etc
-- Apply the fancy error message where needed.
 - Spread admin dashboard styling to tutor dashboard.
-- The only way to rectify the back btn dilemma is ensuring the forms do not appear in route history
+- Rectify the back btn dilemma by ensuring the forms do not appear in route history.
 - Find a better way of not going to youtube uploader without lesson or resource name s3 uploader doesnt care as it generates its own random name.
 - Test youtube refresh token acquisition by inversing if logic.
-
+- Cleanup the console.
 <!-- SECONDARY -->
 
 - Simplifying or separating the form CRUD logic.

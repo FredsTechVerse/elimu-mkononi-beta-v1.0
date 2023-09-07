@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AccordionItem, HomeBtn, ErrorMessage } from "../../components";
+import { AccordionItem, HomeBtn, FancyMessage } from "../../components";
 import { PlusIcon, XCircleIcon } from "@heroicons/react/24/solid";
 import { useLocation, Link } from "react-router-dom";
 const Accordion = ({ unitData, closeSideBar }) => {
@@ -68,7 +68,7 @@ const Accordion = ({ unitData, closeSideBar }) => {
           ))}
         </div>
       ) : (
-        <ErrorMessage message="The unit has no chapters" />
+        <FancyMessage message="The unit has no chapters" />
       )}
     </div>
   );

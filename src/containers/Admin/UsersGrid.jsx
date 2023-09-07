@@ -1,5 +1,5 @@
 import React from "react";
-import { UserCard, ErrorMessage } from "../../components";
+import { UserCard, FancyMessage } from "../../components";
 const UsersGrid = ({ usersQuery, role }) => {
   return (
     <div className="w-full tablet:hidden">
@@ -17,7 +17,7 @@ const UsersGrid = ({ usersQuery, role }) => {
           })}
         </div>
       ) : (
-        <ErrorMessage message="No users registered" />
+        <FancyMessage message="No users registered" />
       )}
     </div>
   );

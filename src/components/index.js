@@ -67,6 +67,7 @@ import {
   UserProfile,
   PageTitle,
   FileUpdater,
+  FancyMessage,
   Heading,
 } from "./General";
 
@@ -142,6 +143,7 @@ export {
   CourseSkeleton,
   VideoComponent,
   FormNavigation,
+  FancyMessage,
   TutorCard,
   UnitCard,
   UnitNav,

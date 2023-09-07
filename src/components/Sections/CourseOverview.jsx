@@ -6,7 +6,7 @@ import {
   HomeBtn,
   BackBtn,
   Heading,
-  ErrorMessage,
+  FancyMessage,
 } from "../../components";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchCourseData, handleError } from "../../controllers";
@@ -119,7 +119,7 @@ const CourseOverview = () => {
                   })}
                 </div>
               ) : (
-                <ErrorMessage message="This course has no units " />
+                <FancyMessage message="This course has no units " />
               )}
             </div>
           )}
