@@ -112,7 +112,7 @@ const MessageForm = () => {
     const { recipient, message } = data;
     if (!isMessageQueryEnabled) {
       createMessageMutation.mutate({
-        recipient: `0${recipient}`,
+        recipient: `254${recipient}`,
         message,
       });
       return;
@@ -161,7 +161,6 @@ const MessageForm = () => {
               Message
             </label>
             <textarea
-              readOnly={!!isMessageQueryEnabled}
               placeholder="Description"
               {...register("message", {
                 required: "This field is required ",

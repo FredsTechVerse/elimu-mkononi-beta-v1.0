@@ -12,10 +12,10 @@ import { PageTitle } from "../../components";
 const ResourcesSection = () => {
   const location = useLocation();
   const { updateAlertBoxData } = useAlertBoxContext();
-  const { chapterID } = useParams();
+  const { chapterID } = location?.state;
   const [isDeleteResourceQueryEnabled, setIsDeleteResourceQueryEnabled] =
     useState(false);
-  const [resourceToDelete, setResourceToDelete] = useState("");
+  const [resourceToDelete, setResourceToDelete] = useState({});
   const navigate = useNavigate();
   const roles = localStorage.getItem("roles");
   const queryClient = useQueryClient();
@@ -32,32 +32,28 @@ const ResourcesSection = () => {
     }
   );
 
-  useQuery(
-    ["deletedResource"],
-    () => deleteResource({ resourceID: resourceToDelete }),
-    {
-      enabled: isDeleteResourceQueryEnabled,
-      staleTime: 0,
-      onSuccess: () => {
-        updateAlertBoxData({
-          response: "Deleted resource successfully",
-          isResponse: true,
-          status: "success",
-          timeout: 2500,
-        });
-        setIsDeleteResourceQueryEnabled(false);
-        queryClient.invalidateQueries(["resources", chapterID], {
-          exact: true,
-        });
-      },
-      onError: (error) => {
-        handleError(error, updateAlertBoxData);
-        if (error.response && error.response.data.message === "Token expired") {
-          queryClient.invalidateQueries(["deletedResource"]);
-        }
-      },
-    }
-  );
+  useQuery(["deletedResource"], () => deleteResource(resourceToDelete), {
+    enabled: isDeleteResourceQueryEnabled,
+    staleTime: 0,
+    onSuccess: () => {
+      updateAlertBoxData({
+        response: "Deleted resource successfully",
+        isResponse: true,
+        status: "success",
+        timeout: 2500,
+      });
+      setIsDeleteResourceQueryEnabled(false);
+      queryClient.invalidateQueries(["resources", chapterID], {
+        exact: true,
+      });
+    },
+    onError: (error) => {
+      handleError(error, updateAlertBoxData);
+      if (error.response && error.response.data.message === "Token expired") {
+        queryClient.invalidateQueries(["deletedResource"]);
+      }
+    },
+  });
   return (
     <div className="relative h-full w-full">
       <button
@@ -114,7 +110,10 @@ const ResourcesSection = () => {
                     roles?.includes("EM-201") && "hidden"
                   }`}
                   onClick={() => {
-                    setResourceToDelete(resource?._id);
+                    setResourceToDelete({
+                      resourceID: resource?._id,
+                      resourceUrl: resource?.resourceUrl,
+                    });
                     setIsDeleteResourceQueryEnabled(true);
                   }}
                 >

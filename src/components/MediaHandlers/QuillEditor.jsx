@@ -71,7 +71,6 @@ const QuillEditor = () => {
   }, [currentLesson?.lessonNotes]);
 
   useEffect(() => {
-    console.log("Notes query status changed");
     if (notesQuery.status === "success" && notesQuery?.data) {
       setOriginalContent(notesQuery?.data);
       setContent(notesQuery?.data);

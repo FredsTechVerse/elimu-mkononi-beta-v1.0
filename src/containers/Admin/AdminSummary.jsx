@@ -34,7 +34,7 @@ const AdminSummary = () => {
         />
       </div>
       <div className="w-full  flex phone:flex-col tablet:flex-row justify-between items-center gap-5">
-        <div className="phone:w-full tablet:w-3/5 order-2 laptop:w-full  bg-slate-300 bg-opacity-40 rounded-xl phone:h-36 tablet:h-full laptop:h-40 flex flex-col-centered relative ">
+        <div className="phone:w-full tablet:w-3/5 order-2 laptop:w-full  bg-blue-500 bg-opacity-10 rounded-xl phone:h-36 tablet:h-full laptop:h-40 flex flex-col-centered relative ">
           <h1 className="font-bold text-lg uppercase w-full h-12 flex-row-centered ">
             Admin Dashboard
           </h1>
@@ -95,7 +95,7 @@ const AdminSummary = () => {
                 doughnutValue={totalUnits}
               />
             </div>
-            <div className="w-full   bg-slate-300 rounded-lg h-64"></div>
+            <div className="w-full   bg-blue-500 bg-opacity-10 rounded-lg h-64"></div>
             <div className="w-full h-1/3  flex-col-centered gap-1 rounded-lg  ">
               <h1 className="text-slate-900 font-bold text-lg text-center capitalize mt-3 w-full h-12 flex-row-centered  ">
                 Quick Access Controls

@@ -3,7 +3,7 @@ import { profile } from "../../assets";
 import { ShieldCheckIcon } from "@heroicons/react/24/solid";
 const UserProfile = ({ name, role }) => {
   return (
-    <div className=" tablet:bg-slate-300  ablet:bg-opacity-60  flex-col-centered py-1 tablet:py-2 laptop:py-5  w-full rounded-xl h-max tablet:h-56 laptop:h-80   ">
+    <div className=" tablet:bg-blue-500  tablet:bg-opacity-10  flex-col-centered py-1 tablet:py-2 laptop:py-5  w-full rounded-xl h-max tablet:h-56 laptop:h-80   ">
       <img
         src={profile}
         alt="Profile Picture"

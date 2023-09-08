@@ -65,21 +65,21 @@ const ResetTokenVerificationForm = () => {
     onError: (error) => {
       handleError(error, updateAlertBoxData);
       if (error.response && error.response.data.message === "Token expired") {
-        retryPasswordMutation(error.config.data);
+        retryResetTokenConfirmationMutation(error.config.data);
       }
     },
   });
 
-  const retryPasswordMutation = (formData) => {
+  const retryResetTokenConfirmationMutation = (formData) => {
     resetTokenConfirmationMutation.mutate({
-      password: formData.password,
+      resetToken: formData.resetToken,
     });
   };
 
   const handleResetToken = async (data) => {
     const { resetToken } = data;
     resetTokenConfirmationMutation.mutate({
-      resetToken,
+      resetToken: resetToken.trim(),
     });
     return;
   };

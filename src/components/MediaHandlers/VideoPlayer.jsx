@@ -32,7 +32,7 @@ const VideoPlayer = () => {
   }, [currentLesson?.lessonUrl]);
 
   return (
-    <div className="w-full flex-row-centered pr-1  ">
+    <div className="w-full flex-col-centered pr-1  ">
       <div
         className={` ${
           videoReady ? "block" : "hidden"

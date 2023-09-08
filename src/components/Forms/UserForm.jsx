@@ -181,11 +181,11 @@ const UserForm = () => {
     if (role) {
       if (!isUserQueryEnabled) {
         createUserMutation.mutate({
-          firstName: fName,
-          surname,
-          password,
-          contact: `254${contact}`,
-          email,
+          firstName: fName.trim(),
+          surname: surname.trim(),
+          password: password.trim(),
+          contact: `254${contact.trim()}`,
+          email: email.trim(),
           role,
         });
       } else {

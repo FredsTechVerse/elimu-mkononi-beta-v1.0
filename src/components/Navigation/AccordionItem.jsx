@@ -165,9 +165,8 @@ const AccordionItem = ({
               <li
                 key={lessonIndex}
                 className=" bg-slate-300 hover:bg-slate-400 text-black w-full px-3  my-0.5 capitalize rounded-md"
-                onClick={() => navigate(`/unit/${unitID}`)}
               >
-                <div className="flex flex-row items-center  justify-between">
+                <div className="flex flex-row items-center  justify-between ">
                   {lesson.videoKind === "youtube#video" ? (
                     <PlayCircleIcon
                       className=" icon-styling text-slate-700 hover:bg-slate-700"
@@ -179,6 +178,7 @@ const AccordionItem = ({
                           chapterIndex: chapterIndex,
                         });
                         closeSideBar();
+                        navigate(`/unit/${unitID}`);
                       }}
                     />
                   ) : (
@@ -192,12 +192,14 @@ const AccordionItem = ({
                           chapterIndex: chapterIndex,
                         });
                         closeSideBar();
+                        navigate(`/unit/${unitID}`);
                       }}
                     />
                   )}
                   <p
                     className=" h-full text-center whitespace-wrap px-2 py-3   w-full capitalize text-sm"
                     onClick={() => {
+                      console.log("Lesson name clicked");
                       updateCurrentLesson({
                         ...unitData?.unitChapters[chapterIndex]?.chapterLessons[
                           lessonIndex
@@ -206,22 +208,26 @@ const AccordionItem = ({
                         chapterIndex: chapterIndex,
                       });
                       closeSideBar();
+                      navigate(`/unit/${unitID}`);
                     }}
                   >
                     {lesson.lessonName}
                   </p>
                   <div className="flex gap-1">
                     <button
-                      className={`cta-btn z-10 group ${
+                      className={`cta-btn group ${
                         roles?.includes("EM-201") && "hidden"
                       }`}
                       onClick={() => {
+                        console.log("Commence of pencil icon has been clicked");
                         navigate("/new-lesson", {
                           state: {
                             lessonID: lesson?._id,
                             background: location,
                           },
                         });
+
+                        console.log("End of pencil button click");
                       }}
                     >
                       <PencilIcon className="icon-styling h-3 laptop:h-4 text-white " />
@@ -246,9 +252,10 @@ const AccordionItem = ({
         <li
           className="hover:bg-slate-400 bg-slate-500 text-white hover:text-slate-900 text-center w-full px-3 py-2 my-0.5 capitalize rounded-md flex justify-between items-center "
           onClick={() => {
-            navigate(`resources/${chapter?._id}`, {
+            navigate(`/resources/${unitID}`, {
               state: {
                 background: location,
+                chapterID: chapter?._id,
               },
             });
           }}

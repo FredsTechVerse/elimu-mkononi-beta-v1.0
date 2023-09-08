@@ -12,6 +12,7 @@
 - Lecturers can get to recommend for their learners the best resources to use for their revision, including posting lesson notes and relevant materials for their learners to use.**_This is how we bring the lecturers on board._**
 - With the ability to monetize this product , the source code will not be let out in the public domain. However , the product will be free to use for all learners for now as we polish up on our marketing skills.
 - Using already pre-existing youtube videos , referencing authors correctly and only paying for space to store images and videos will really make the cost super low and sustainable
+- State is very slippery mehn.... Once we navigate away state clear leading to some issues.
 
 ### PRODUCT EXTENSION
 
@@ -22,16 +23,20 @@
 
 <!-- PRIMARY -->
 
-- Remove white space while confiming token inputs.
-- Cleanup the delete functionality to delete fully even the children
-- Remaining logs might need to be sent to email.
-- Remind admin to topup via sms when balance response is low.
+- The delete functionality is sparkingly clean. Kudos.Ensure resources uploaded are only of pdf type only confirm that resources are actually being deleted from the bucket.Use promise.all approach to introduce parallelism giving delete operation a nice boost.
+- Errors are also being reported to my email well.
+
+- Rectify the back btn. I don't wanna go back to the forms. Resources section on going back looses state how do i deal with this.... I might have to pass the chapterID as i go to the form and once i go back... Remember i have complete complete of my routes .... They access what i want them to access.
+- Loophole found while creating notes .... notesID is null.... Refetching uses this notes ID currently i have to refresh for the changes to kick in.
+- Limit query retries to 3 times.
 - Spread admin dashboard styling to tutor dashboard.
-- Rectify the back btn dilemma by ensuring the forms do not appear in route history.
+- Find out if it is necessary to await mongoose methods.
+
+- SHARE FOR USER FEEDBACK TO LAWRENCE & THE TRANSFORMERS TEAM - We can create a link for admin account creation which just goes to the user form with the admin role.
+
 - Find a better way of not going to youtube uploader without lesson or resource name s3 uploader doesnt care as it generates its own random name.
 - Test youtube refresh token acquisition by inversing if logic
-- In the messaging form , now that it is working we can consider using a dropdown with custom options eg all admins , all tutors etc which fetches the contacts from the database and off the message goes.
-- Loophole while creating notes .... notesID is null.... Refetching uses this notes ID currently i have to refresh for the changes to kick in.
+- Consider using a dropdown with custom options eg all admins , all tutors etc which fetches the contacts from the database and off the message goes- to be implemented in church application
 
 <!-- SECONDARY -->
 
@@ -39,6 +44,7 @@
 - Simplifying or separating the form CRUD logic.
 - Implement typescript with SWC.
 - If need arises implement user tracking
+- Comments section cann now be put .. Simple CRUD applications with database and sorting based on unit etc
 
 ### USING COMPONENT LIBRARIES ( MY GOLDEN RULE )
 
@@ -46,6 +52,7 @@
 
 ### KEY CONCEPTS LEARNT DURING THE BUILD
 
+- The routes do not just flow naturally. I have the power to control them to be exactly what i want them to be.
 - This will come in handy ` await Unit.deleteMany({ _id: { $in: unitIds } });`
 
 - Rounding things up was the missing part of the table....Things look elegant.

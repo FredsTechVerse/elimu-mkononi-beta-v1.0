@@ -1,5 +1,5 @@
 import React from "react";
-import { CourseCardV2, CourseSkeleton, PageTitle } from "..";
+import { CourseCardV2, CourseSkeleton, FancyMessage, PageTitle } from "..";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import { fetchCoursesData, handleError } from "../../controllers";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -30,20 +30,16 @@ const CoursesSection = () => {
           <CourseSkeleton />
           <CourseSkeleton />
         </div>
-      ) : coursesQuery.status === "error" ? (
-        <p className="bg-red-300 rounded-lg p-4">
-          {JSON.stringify(coursesQuery.error.message)}
-        </p>
       ) : (
-        <div className="grid-lg tablet:grid-cols-2 laptop:grid-cols-4 tablet:gap-6   ">
-          {coursesQuery?.data.length > 0 ? (
-            coursesQuery.data.map((course, courseIndex) => {
-              return <CourseCardV2 key={courseIndex} courseData={course} />;
-            })
+        <div className="w-full pt-2">
+          {coursesQuery?.data?.length > 0 ? (
+            <div className="grid-lg tablet:grid-cols-2 laptop:grid-cols-4 tablet:gap-6   ">
+              {coursesQuery.data.map((course, courseIndex) => {
+                return <CourseCardV2 key={courseIndex} courseData={course} />;
+              })}
+            </div>
           ) : (
-            <p className=" mx-auto my-auto h-full text-center bg-blue-300 bg-opacity-40">
-              No courses have been found
-            </p>
+            <FancyMessage message="Courses not found" />
           )}
         </div>
       )}

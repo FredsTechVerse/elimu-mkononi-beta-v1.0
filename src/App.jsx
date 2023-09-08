@@ -89,6 +89,7 @@ function App() {
           <Route path="/draft" element={<DraftPage />} />
           <Route path="/fetchToken" element={<TokenExchange />} />
           <Route exact path="/new-message" element={<MessageForm />} />
+
           <Route element={<UsersLayout />}>
             <Route exact path="/" element={<HomePage />}></Route>
             <Route
@@ -101,19 +102,20 @@ function App() {
                 path="/course/:courseID"
                 element={<CourseOverview />}
               ></Route>
-              <Route
-                exact
-                path="/unit-overview/:unitID"
-                element={<UnitOverview />}
-              />
-              <Route exact path="/unit/:unitID" element={<ContentPage />}>
-                <Route exact path="" element={<ContentSection />}>
+
+              <Route element={<ContentPage />}>
+                <Route
+                  exact
+                  path="/unit-overview/:unitID"
+                  element={<UnitOverview />}
+                />
+                <Route exact path="/unit/:unitID" element={<ContentSection />}>
                   <Route index element={<QuillEditor />} />
                   <Route exact path="comments" element={<CommentsSection />} />
                 </Route>
                 <Route
                   exact
-                  path="resources/:chapterID"
+                  path="/resources/:unitID"
                   element={<ResourcesSection />}
                 />
               </Route>

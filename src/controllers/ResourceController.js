@@ -27,8 +27,10 @@ const updateResource = async ({ resourceName, resourceUrl, resourceID }) => {
   return createdResource;
 };
 
-const deleteResource = async ({ resourceID }) => {
-  const { data } = await axios.delete(`/resources/${resourceID}`);
+const deleteResource = async ({ resourceID, resourceUrl }) => {
+  const { data } = await axios.delete(`/resources/${resourceID}`, {
+    data: { resourceUrl },
+  });
   return data;
 };
 
