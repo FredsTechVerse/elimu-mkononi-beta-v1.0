@@ -46,16 +46,32 @@ const QuillEditor = () => {
     ["notes", currentLesson?.lessonNotes],
     () => fetchLessonNotes({ notesID: currentLesson?.lessonNotes }),
     {
+      staleTime: 0,
+      onSuccess: () => {
+        console.log("Notes have been refetched successfully");
+      },
       onError: (error) => {
         handleError(error, updateAlertBoxData);
         if (error.response && error.response.data.message === "Token expired") {
-          queryClient.invalidateQueries(["notes"]);
+          queryClient.invalidateQueries(["notes", currentLesson?.lessonNotes], {
+            exact: true,
+          });
         }
       },
     }
   );
 
   useEffect(() => {
+    console.log(
+      `Current lesson changed refetching notes for ${JSON.stringify(
+        currentLesson?.lessonNotes
+      )}`
+    );
+    notesQuery.refetch();
+  }, [currentLesson?.lessonNotes]);
+
+  useEffect(() => {
+    console.log("Notes query status changed");
     if (notesQuery.status === "success" && notesQuery?.data) {
       setOriginalContent(notesQuery?.data);
       setContent(notesQuery?.data);
@@ -66,13 +82,13 @@ const QuillEditor = () => {
     setOriginalContent("");
     setContent("");
     return;
-  }, [notesQuery.status, currentLesson]);
+  }, [notesQuery.status, currentLesson?.lessonNotes]);
 
   const createNotesMutation = useMutation({
     mutationFn: createNotes,
     onSuccess: (data) => {
       queryClient.setQueryData(["notes", data._id], data);
-      queryClient.invalidateQueries(["notes"], { exact: true });
+      queryClient.invalidateQueries(["notes"]);
       updateAlertBoxData({
         response: "Lesson Notes have been saved",
         isResponse: true,
@@ -94,7 +110,9 @@ const QuillEditor = () => {
   const updateNotesMutation = useMutation({
     mutationFn: updateNotes,
     onSuccess: (data) => {
-      queryClient.invalidateQueries(["notes", data._id], { exact: true });
+      queryClient.invalidateQueries(["notes", currentLesson?.lessonNotes], {
+        exact: true,
+      });
       updateAlertBoxData({
         response: "Lesson Notes updated succesfully!",
         isResponse: true,
@@ -199,7 +217,7 @@ const QuillEditor = () => {
         {notesQuery.status === "loading" && <QuillEditorSkeleton />}
 
         {isEditorEnabled && isAdmin() ? (
-          <div className="debug">
+          <div>
             <ReactQuill
               value={content}
               readOnly={!isEditorEnabled}

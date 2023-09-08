@@ -18,26 +18,20 @@
 - The tutor can be renamed to a lecturer.
 - There will be need to add an account for student content creators.
 
-#### PRODUCT OPTIMIZATION
-
-### DRAFT
-
-- Messaging funcitonalities will be set in the individual admin pages for the functionalites as a CTA
-- I have to resolve the back button dilemma for the sake of browser navigation. Covering it up with the home btn will not cut it.
-- Remove white space while confiming token inputs.
-
-### DESIGN REVIEW
+### PRODUCT REVIEW
 
 <!-- PRIMARY -->
 
+- Remove white space while confiming token inputs.
 - Cleanup the delete functionality to delete fully even the children
-- Cleanup the console... Remaining chuncks need to be sent to email.
-- Report error messages to the troubleshooting email better than console logs eg sms services interruptions , good thing that they have been pulled together and its free.
+- Remaining logs might need to be sent to email.
 - Remind admin to topup via sms when balance response is low.
 - Spread admin dashboard styling to tutor dashboard.
 - Rectify the back btn dilemma by ensuring the forms do not appear in route history.
 - Find a better way of not going to youtube uploader without lesson or resource name s3 uploader doesnt care as it generates its own random name.
-- Test youtube refresh token acquisition by inversing if logic.
+- Test youtube refresh token acquisition by inversing if logic
+- In the messaging form , now that it is working we can consider using a dropdown with custom options eg all admins , all tutors etc which fetches the contacts from the database and off the message goes.
+- Loophole while creating notes .... notesID is null.... Refetching uses this notes ID currently i have to refresh for the changes to kick in.
 
 <!-- SECONDARY -->
 
@@ -45,15 +39,16 @@
 - Simplifying or separating the form CRUD logic.
 - Implement typescript with SWC.
 - If need arises implement user tracking
-- Learn how to easily spot, track and serve (handle) server errors in production applications for ease of troubleshooting.
 
 ### USING COMPONENT LIBRARIES ( MY GOLDEN RULE )
 
-- Simple components limit creativity ( DIY) ... They also save lots of time for the complex ones eg calendars.
+- Importing simple components limits flexibility (Better to DIY) ... Saves lots of time for the complex ones eg calendars (Worth importing)
 
 ### KEY CONCEPTS LEARNT DURING THE BUILD
 
-- Rounding things up was the missing part of the puzzle....Things look elegant.
+- This will come in handy ` await Unit.deleteMany({ _id: { $in: unitIds } });`
+
+- Rounding things up was the missing part of the table....Things look elegant.
 - Overflow hidden can be used to hide stubborn borders.
 - Here is how we can pass a body to a delete request
 
@@ -64,15 +59,13 @@ const requestData = { id: 123, reason: "No longer needed" };
 axios.delete("https://api.example.com/resource", { data: requestData });
 ```
 
+-
 - This data will be found in the req.body ie `const {id,reason} = req.body`
 - Once we are able to deliver value , users will gladly register.
 - Always ask the right questions while developing an elements logic eg what conditions should be met for the element to be displayed?
 - Working with smaller files grouped by functionalities makes development simpler!
 - It appears react router dom manages its states. I was able to update the chapter 4 accross rerenders.
 - A grid is responsive by nature. Do not bother constraining its children's width...
-
-- Multiple use states leads to multiple rerenders...Each state update triggers a new render cycle, and React will batch multiple state updates into a single render cycle only if they occur synchronously within the same event handler. Minimize their usage.
-- Must try luxon when i want to process actual dates data.
 - self-end class name gives a flex-item positioning independence.
 - Use overflow-x-hidden hidden helps to hide the unwanted x direction scrollbar when overflow-y-auto is activated ( Clean trick )
 - Router state has always been simply an object... You know that basic container with a key and a value which in my case was as simple as assigning a background `{ background: location }` and once present in the state activating the second set of routes.
