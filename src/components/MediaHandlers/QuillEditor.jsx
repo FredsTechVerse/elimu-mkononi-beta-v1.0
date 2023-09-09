@@ -168,49 +168,51 @@ const QuillEditor = () => {
           roles?.includes("EM-202") || roles?.includes("EM-203")
             ? "flex"
             : "hidden"
-        } w-full items-center justify-start gap-2 my-2`}
+        } w-full items-center justify-between gap-2 my-2`}
       >
-        <button
-          className="h-8 w-36 laptop:hidden bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full"
-          onClick={openSideBar}
-        >
-          Open Sidebar
-        </button>
-        <div>
-          {!isEditorEnabled ? (
-            <button
-              className="h-8 w-36 bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full"
-              onClick={() => {
-                enableEdit();
-              }}
-            >
-              {!areNotesPresent ? "Add Notes" : "Edit Notes"}
-            </button>
-          ) : (
-            <div className=" flex-row-centered gap-2">
+        <h1 className="font-bold text-lg pt-2 ml-1 ">
+          {currentLesson?.lessonName}
+        </h1>
+        <div className="flex-row-centered gap-2 ">
+          <button
+            className="h-8 w-36 laptop:hidden bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full"
+            onClick={openSideBar}
+          >
+            Open Sidebar
+          </button>
+          <div>
+            {!isEditorEnabled ? (
               <button
-                className="h-8 w-24 bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full"
+                className="h-8 w-36 bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full"
                 onClick={() => {
-                  handleSave();
+                  enableEdit();
                 }}
               >
-                Save
+                {!areNotesPresent ? "Add Notes" : "Edit Notes"}
               </button>
-              <button
-                className="h-8 w-24 bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full"
-                onClick={() => {
-                  handleCancel();
-                }}
-              >
-                Cancel
-              </button>
-            </div>
-          )}
+            ) : (
+              <div className=" flex-row-centered gap-2">
+                <button
+                  className="h-8 w-24 bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full"
+                  onClick={() => {
+                    handleSave();
+                  }}
+                >
+                  Save
+                </button>
+                <button
+                  className="h-8 w-24 bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full"
+                  onClick={() => {
+                    handleCancel();
+                  }}
+                >
+                  Cancel
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-      <h1 className="font-bold text-lg pt-2 ml-1 ">
-        {currentLesson?.lessonName}
-      </h1>
 
       <div id="unit content" className="mt-1 ">
         {notesQuery.status === "loading" && <QuillEditorSkeleton />}

@@ -36,7 +36,7 @@ const VideoPlayer = () => {
   }, [currentLesson?.lessonUrl]);
 
   return (
-    <div className="w-full flex-col-centered pr-1  ">
+    <div className="w-full flex-col-centered px-1  ">
       <div
         className={` ${
           videoReady && isVideoPresent ? "block" : "hidden"

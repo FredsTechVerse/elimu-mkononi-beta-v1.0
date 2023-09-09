@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { AccordionItem, BackBtn, FancyMessage } from "../../components";
+import {
+  AccordionItem,
+  BackBtn,
+  FancyMessage,
+  HomeBtn,
+} from "../../components";
 import { useParams } from "react-router-dom";
 import { PlusIcon, XCircleIcon } from "@heroicons/react/24/solid";
 import { useLocation, Link } from "react-router-dom";
@@ -21,6 +26,7 @@ const Accordion = ({ unitData, closeSideBar }) => {
   return (
     <div className="relative z-10 flex flex-col items-center  bg-slate-100 h-screen   ">
       <div className="flex items-center justify-between w-full  px-2 h-14  font-bold text-md text-slate-200 bg-primary text-center uppercase py-4 rounded-br-lg">
+        <HomeBtn icon={true} />
         <span className="uppercase">{unitData?.unitName}</span>
         <div className={` flex-row-centered gap-1 `}>
           <div
