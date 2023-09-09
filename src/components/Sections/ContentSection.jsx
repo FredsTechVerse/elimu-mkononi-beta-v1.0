@@ -5,12 +5,13 @@ import { Outlet, useOutletContext, useParams } from "react-router-dom";
 import { useCurrentLessonContext } from "../../context/currentLessonContext";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
-import { handleError } from "../../controllers";
+import { handleError, fetchUnitData } from "../../controllers";
 
 const ContentSection = () => {
   const { updateAlertBoxData } = useAlertBoxContext();
   const queryClient = useQueryClient();
   const { unitID } = useParams();
+  console.log(`Unit ID in content section ${JSON.stringify(unitID)}`);
   const { openSideBar, sideBarOpen } = useOutletContext();
   const { updateCurrentLesson } = useCurrentLessonContext();
   const unitDataQuery = useQuery(

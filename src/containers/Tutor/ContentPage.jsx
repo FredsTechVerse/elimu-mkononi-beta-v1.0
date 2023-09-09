@@ -32,7 +32,7 @@ const ContentPage = () => {
   };
 
   return (
-    <main className="flex relative gap-1 laptop:grid laptop:grid-cols-4 w-full h-screen  overflow-y-hidden">
+    <main className="flex relative gap-0.5 laptop:grid laptop:grid-cols-4 w-full h-screen  overflow-y-hidden">
       <article
         className={` ${
           sideBarOpen ? "block" : "hidden"

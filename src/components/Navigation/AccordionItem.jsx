@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import { deleteChapter, deleteLesson, handleError } from "../../controllers";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useCurrentLessonContext } from "../../context/currentLessonContext";
@@ -25,6 +25,7 @@ const AccordionItem = ({
   unitID,
 }) => {
   const location = useLocation();
+  const { courseID } = useParams();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const lessonTotals = chapter && chapter?.chapterLessons?.length;
@@ -208,7 +209,7 @@ const AccordionItem = ({
                         chapterIndex: chapterIndex,
                       });
                       closeSideBar();
-                      navigate(`/unit/${unitID}`);
+                      navigate(`/course/${courseID}/${unitID}/content`);
                     }}
                   >
                     {lesson.lessonName}
@@ -252,12 +253,14 @@ const AccordionItem = ({
         <li
           className="hover:bg-slate-400 bg-slate-500 text-white hover:text-slate-900 text-center w-full px-3 py-2 my-0.5 capitalize rounded-md flex justify-between items-center "
           onClick={() => {
-            navigate(`/resources/${unitID}-${chapter?._id}`, {
-              state: {
-                background: location,
-                // chapterID: chapter?._id,
-              },
-            });
+            navigate(
+              `/course/${courseID}/${unitID}/resources/${chapter?._id}`,
+              {
+                state: {
+                  background: location,
+                },
+              }
+            );
           }}
         >
           <p>Resources</p>

@@ -15,20 +15,14 @@ const HomeBtn = ({ isBlue = false, icon = false, position = "default" }) => {
   };
   return (
     <button
-      className={`transition-all  duration-200 text-sm capitalize h-8 tablet:h-10 rounded-lg mx-1 flex-row-centered  ${
-        position === "dashboard"
-          ? "  aspect-square  w-max  px-2 text-white "
-          : "w-full hover:bg-slate-900 text-slate-900 hover:text-white rounded-none"
-      }  ${
-        isBlue
-          ? "bg-primary hover:bg-purple-500 "
-          : "bg-slate-100 hover:bg-slate-900  "
-      }
+      className={`transition-all  duration-200 text-sm capitalize h-8 tablet:h-10 w-max aspect-square  mx-1 flex-row-centered rounded-lg ${
+        position === "dashboard" &&
+        "w-full hover:bg-slate-900 text-slate-900 hover:text-white "
+      }  ${isBlue && "bg-primary hover:bg-purple-500 "}
       ${
         (roles?.includes("EM-202") || roles?.includes("EM-203")) &&
-        icon === true
-          ? "flex"
-          : "hidden"
+        !icon &&
+        "hidden"
       }  text-black capitalize`}
       onClick={() => {
         navigate(homeLocation());

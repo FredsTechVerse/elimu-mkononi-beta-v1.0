@@ -12,10 +12,8 @@ import { FancyMessage, PageTitle } from "../../components";
 const ResourcesSection = () => {
   const location = useLocation();
   const { updateAlertBoxData } = useAlertBoxContext();
-  const { resourceUrl } = useParams();
-  const unitID = resourceUrl.split("-")[0].trim();
-  const chapterID = resourceUrl.split("-")[1].trim();
-  console.log({ resourceUrl, unitID, chapterID });
+  const { unitID, chapterID } = useParams();
+  console.log({ unitID, chapterID });
   const [isDeleteResourceQueryEnabled, setIsDeleteResourceQueryEnabled] =
     useState(false);
   const [resourceToDelete, setResourceToDelete] = useState({});

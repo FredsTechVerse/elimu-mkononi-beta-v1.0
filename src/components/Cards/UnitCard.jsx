@@ -77,7 +77,7 @@ const UnitCard = ({
         </button>
 
         <Link
-          to={`/unit/${unitID}`}
+          to={`/course/${courseID}/${unitID}/content`}
           state={{ previousPage: location }}
           className="flex-row-centered gap-1 px-2 laptop:w-40 bg-slate-600 hover:bg-slate-800  text-white h-8 rounded-br-md rounded-tl-md "
         >

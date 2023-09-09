@@ -103,19 +103,15 @@ function App() {
                 element={<CourseOverview />}
               ></Route>
 
-              <Route element={<ContentPage />}>
-                <Route
-                  exact
-                  path="/unit-overview/:unitID"
-                  element={<UnitOverview />}
-                />
-                <Route exact path="/unit/:unitID" element={<ContentSection />}>
+              <Route path="/course/:courseID/:unitID" element={<ContentPage />}>
+                <Route exact path="unit-overview" element={<UnitOverview />} />
+                <Route exact path="content" element={<ContentSection />}>
                   <Route index element={<QuillEditor />} />
                   <Route exact path="comments" element={<CommentsSection />} />
                 </Route>
                 <Route
                   exact
-                  path="/resources/:resourceUrl"
+                  path="resources/:chapterID"
                   element={<ResourcesSection />}
                 />
               </Route>

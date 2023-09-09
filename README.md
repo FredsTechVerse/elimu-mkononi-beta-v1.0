@@ -23,7 +23,6 @@
 
 <!-- PRIMARY -->
 
-- Rectify the back btn.Provide speedy way to go to critical points
 - Loophole found while creating notes .... notesID is null.... Refetching uses this notes ID currently i have to refresh for the changes to kick in.
 - Play around with the btns opacity with the primary color still on.. See what pops.
 - Restore dashboard button on homepage.
@@ -65,7 +64,7 @@ const requestData = { id: 123, reason: "No longer needed" };
 axios.delete("https://api.example.com/resource", { data: requestData });
 ```
 
--
+- Use params accesses all params in the current url this is actually our key to solving the back btn dilemma ie where would the user wanna go back to? I provide a short circuit with the help of params in our url
 - This data will be found in the req.body ie `const {id,reason} = req.body`
 - Once we are able to deliver value , users will gladly register.
 - Always ask the right questions while developing an elements logic eg what conditions should be met for the element to be displayed?

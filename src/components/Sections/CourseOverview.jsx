@@ -58,11 +58,7 @@ const CourseOverview = () => {
         )}
 
         <div className="absolute top-2 left-2 flex gap-1">
-          {roles?.includes("EM-202") || roles?.includes("EM-203") ? (
-            <HomeBtn isBlue={true} icon={true} position="dashboard" />
-          ) : (
-            <BackBtn to="/" />
-          )}
+          <BackBtn to="/" />
         </div>
         <div className="absolute h-7 bg-slate-100 w-full bottom-0 rounded-t-full"></div>
       </div>
