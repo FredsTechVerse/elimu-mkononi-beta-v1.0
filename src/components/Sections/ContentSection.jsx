@@ -1,12 +1,30 @@
 import React, { useEffect } from "react";
 import { ContentSectionSkeleton, FancyMessage } from "../../components";
 import { VideoPlayer, UnitNav } from "../../components";
-import { Outlet, useOutletContext } from "react-router-dom";
+import { Outlet, useOutletContext, useParams } from "react-router-dom";
 import { useCurrentLessonContext } from "../../context/currentLessonContext";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useAlertBoxContext } from "../../context/AlertBoxContext";
+import { handleError } from "../../controllers";
 
 const ContentSection = () => {
-  const { unitDataQuery, openSideBar, sideBarOpen } = useOutletContext();
+  const { updateAlertBoxData } = useAlertBoxContext();
+  const queryClient = useQueryClient();
+  const { unitID } = useParams();
+  const { openSideBar, sideBarOpen } = useOutletContext();
   const { updateCurrentLesson } = useCurrentLessonContext();
+  const unitDataQuery = useQuery(
+    ["unitData", unitID],
+    () => fetchUnitData({ unitID }),
+    {
+      onError: (error) => {
+        handleError(error, updateAlertBoxData);
+        if (error.response && error.response.data.message === "Token expired") {
+          queryClient.invalidateQueries(["unitData", unitID]);
+        }
+      },
+    }
+  );
   useEffect(() => {
     if (unitDataQuery?.status === "success") {
       updateCurrentLesson({

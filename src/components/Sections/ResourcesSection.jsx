@@ -8,17 +8,21 @@ import {
 } from "../../controllers";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { TrashIcon, DocumentTextIcon } from "@heroicons/react/24/solid";
-import { PageTitle } from "../../components";
+import { FancyMessage, PageTitle } from "../../components";
 const ResourcesSection = () => {
   const location = useLocation();
   const { updateAlertBoxData } = useAlertBoxContext();
-  const { chapterID } = location?.state;
+  const { resourceUrl } = useParams();
+  const unitID = resourceUrl.split("-")[0].trim();
+  const chapterID = resourceUrl.split("-")[1].trim();
+  console.log({ resourceUrl, unitID, chapterID });
   const [isDeleteResourceQueryEnabled, setIsDeleteResourceQueryEnabled] =
     useState(false);
   const [resourceToDelete, setResourceToDelete] = useState({});
   const navigate = useNavigate();
   const roles = localStorage.getItem("roles");
   const queryClient = useQueryClient();
+  console.log(chapterID);
   const resourcesQuery = useQuery(
     ["resources", chapterID],
     () => fetchChapterData({ chapterID }),
@@ -55,7 +59,7 @@ const ResourcesSection = () => {
     },
   });
   return (
-    <div className="relative h-full w-full">
+    <div className="relative w-full">
       <button
         className={`${
           roles?.includes("EM-203")
@@ -125,11 +129,7 @@ const ResourcesSection = () => {
       </div>
       {resourcesQuery.status === "success" &&
         resourcesQuery?.data?.chapterResources?.length === 0 && (
-          <div className="flex-row-centered w-full h-full ">
-            <p className=" p-4 rounded-lg bg-yellow-400 bg-opacity-30 text-slate-800">
-              No resources present at the moment
-            </p>
-          </div>
+          <FancyMessage message="No resources present at the moment" />
         )}
     </div>
   );

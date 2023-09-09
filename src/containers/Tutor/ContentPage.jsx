@@ -1,10 +1,5 @@
-import React, { useEffect, useState } from "react";
-import {
-  Accordion,
-  ContentSection,
-  AccordionSkeleton,
-  ContentSectionSkeleton,
-} from "../../components";
+import React, { useState } from "react";
+import { Accordion, AccordionSkeleton } from "../../components";
 import { useParams } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Outlet } from "react-router-dom";
@@ -55,7 +50,7 @@ const ContentPage = () => {
         )}
       </article>
 
-      <article className="w-full laptop:col-span-3 tablet:col-span-2 h-full overflow-y-auto overflow-x-hidden flex  flex-col  ">
+      <article className="w-full laptop:col-span-3 tablet:col-span-2 h-full overflow-y-auto flex  flex-col  ">
         <Outlet
           context={{
             unitDataQuery: unitDataQuery,

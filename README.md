@@ -23,25 +23,19 @@
 
 <!-- PRIMARY -->
 
-- The delete functionality is sparkingly clean. Kudos.Ensure resources uploaded are only of pdf type only confirm that resources are actually being deleted from the bucket.Use promise.all approach to introduce parallelism giving delete operation a nice boost.
-- Errors are also being reported to my email well.
-
-- Rectify the back btn. I don't wanna go back to the forms. Resources section on going back looses state how do i deal with this.... I might have to pass the chapterID as i go to the form and once i go back... Remember i have complete complete of my routes .... They access what i want them to access.
+- Rectify the back btn.Provide speedy way to go to critical points
 - Loophole found while creating notes .... notesID is null.... Refetching uses this notes ID currently i have to refresh for the changes to kick in.
 - Play around with the btns opacity with the primary color still on.. See what pops.
 - Restore dashboard button on homepage.
 - Time to have fun with the functionalities achieved... Create toggle button to enable / disable admin. Create direct links to user form for admin and tutor registration a home btn background is desirable while registering.
-- Limit query retries to 3 times.
 - Spread admin dashboard styling to tutor dashboard.
-- Find out if it is necessary to await mongoose methods.
 
 - SHARE FOR USER FEEDBACK TO LAWRENCE & THE TRANSFORMERS TEAM - We can create a link for admin account creation which just goes to the user form with the admin role.
 
-- Find a better way of not going to youtube uploader without lesson or resource name s3 uploader doesnt care as it generates its own random name.
 - Test youtube refresh token acquisition by inversing if logic
 - Consider using a dropdown with custom options eg all admins , all tutors etc which fetches the contacts from the database and off the message goes- to be implemented in church application
-
-<!-- SECONDARY -->
+- Can i have mutlipe params via useParams ... I suspect i can
+- <!-- SECONDARY -->
 
 - Move to portfolio backend and frontend revamp (# simplification.)
 - Simplifying or separating the form CRUD logic.

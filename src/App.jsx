@@ -115,7 +115,7 @@ function App() {
                 </Route>
                 <Route
                   exact
-                  path="/resources/:unitID"
+                  path="/resources/:resourceUrl"
                   element={<ResourcesSection />}
                 />
               </Route>
