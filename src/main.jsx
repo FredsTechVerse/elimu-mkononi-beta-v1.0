@@ -8,7 +8,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { AlertBoxContextProvider } from "./context/AlertBoxContext";
 import { CurrentLessonContextProvider } from "./context/currentLessonContext";
 const queryClient = new QueryClient({
-  defaultOptions: { queries: { staleTime: 1000 * 60 * 30 } },
+  defaultOptions: { queries: { staleTime: 1000 * 60 * 30, retry: 1 } },
 });
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import ReactPlayer from "react-player/youtube";
 import { useCurrentLessonContext } from "../../context/currentLessonContext";
-import { VideoSkeleton } from "../../components";
+import { FancyMessage, VideoSkeleton } from "../../components";
 const VideoPlayer = () => {
   const { currentLesson } = useCurrentLessonContext();
   const [videoReady, setVideoReady] = useState(false);
   const [lessonUrl, setLessonUrl] = useState("");
+  const [isVideoPresent, setIsVideoPresent] = useState(false);
   const handleVideoReady = () => {
     setVideoReady(true);
   };
@@ -27,7 +28,10 @@ const VideoPlayer = () => {
   useEffect(() => {
     if (currentLesson?.lessonUrl) {
       setLessonUrl(currentLesson.lessonUrl);
-      setVideoReady(false); // Reset videoReady when lessonUrl changes to show the VideoSkeleton until the new video is ready
+      setIsVideoPresent(true);
+      setVideoReady(false);
+    } else {
+      setIsVideoPresent(false);
     }
   }, [currentLesson?.lessonUrl]);
 
@@ -35,7 +39,7 @@ const VideoPlayer = () => {
     <div className="w-full flex-col-centered pr-1  ">
       <div
         className={` ${
-          videoReady ? "block" : "hidden"
+          videoReady && isVideoPresent ? "block" : "hidden"
         } w-full aspect-video shadow-lg `}
       >
         <ReactPlayer
@@ -50,7 +54,12 @@ const VideoPlayer = () => {
           height="100%"
         />
       </div>
-      {!videoReady && <VideoSkeleton />}
+      {!videoReady && isVideoPresent && <VideoSkeleton />}
+      {!isVideoPresent && (
+        <div className="w-full aspect-video">
+          <FancyMessage message="No video is present" />
+        </div>
+      )}
     </div>
   );
 };

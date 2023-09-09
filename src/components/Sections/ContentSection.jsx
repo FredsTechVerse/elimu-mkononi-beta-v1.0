@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { ContentSectionSkeleton } from "../../components";
+import { ContentSectionSkeleton, FancyMessage } from "../../components";
 import { VideoPlayer, UnitNav } from "../../components";
 import { Outlet, useOutletContext } from "react-router-dom";
 import { useCurrentLessonContext } from "../../context/currentLessonContext";
@@ -14,8 +14,13 @@ const ContentSection = () => {
       });
     }
   }, [unitDataQuery?.status]);
-  if (unitDataQuery?.status === "success") {
-    console.log({ unitData: unitDataQuery.data });
+
+  if (unitDataQuery.status === "loading") {
+    return <ContentSectionSkeleton />;
+  } else if (
+    unitDataQuery?.status === "success" &&
+    unitDataQuery.data?.unitChapters[0]?.chapterLessons.length > 0
+  ) {
     return (
       <div className="w-full flex flex-col gap-1">
         <UnitNav
@@ -30,7 +35,7 @@ const ContentSection = () => {
       </div>
     );
   } else {
-    return <ContentSectionSkeleton />;
+    return <FancyMessage message="No lesson present" />;
   }
 };
 

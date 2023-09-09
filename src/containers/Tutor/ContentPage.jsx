@@ -55,7 +55,7 @@ const ContentPage = () => {
         )}
       </article>
 
-      <article className="w-full laptop:col-span-3 tablet:col-span-2 h-full overflow-y-auto flex  flex-col  ">
+      <article className="w-full laptop:col-span-3 tablet:col-span-2 h-full overflow-y-auto overflow-x-hidden flex  flex-col  ">
         <Outlet
           context={{
             unitDataQuery: unitDataQuery,

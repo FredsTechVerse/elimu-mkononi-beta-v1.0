@@ -28,6 +28,9 @@
 
 - Rectify the back btn. I don't wanna go back to the forms. Resources section on going back looses state how do i deal with this.... I might have to pass the chapterID as i go to the form and once i go back... Remember i have complete complete of my routes .... They access what i want them to access.
 - Loophole found while creating notes .... notesID is null.... Refetching uses this notes ID currently i have to refresh for the changes to kick in.
+- Play around with the btns opacity with the primary color still on.. See what pops.
+- Restore dashboard button on homepage.
+- Time to have fun with the functionalities achieved... Create toggle button to enable / disable admin. Create direct links to user form for admin and tutor registration a home btn background is desirable while registering.
 - Limit query retries to 3 times.
 - Spread admin dashboard styling to tutor dashboard.
 - Find out if it is necessary to await mongoose methods.
@@ -44,7 +47,7 @@
 - Simplifying or separating the form CRUD logic.
 - Implement typescript with SWC.
 - If need arises implement user tracking
-- Comments section cann now be put .. Simple CRUD applications with database and sorting based on unit etc
+- Comments section can now be built and allocated a space on the dashboard(We go the tools ready)
 
 ### USING COMPONENT LIBRARIES ( MY GOLDEN RULE )
 
@@ -52,6 +55,8 @@
 
 ### KEY CONCEPTS LEARNT DURING THE BUILD
 
+- The currentLesson context is being updated from two points only the accordion items and the contentsection (auto-navigate to first lesson.)
+- The video player and the quill editor only read the currentLesson context and meaningful logic derived from this.
 - The routes do not just flow naturally. I have the power to control them to be exactly what i want them to be.
 - This will come in handy ` await Unit.deleteMany({ _id: { $in: unitIds } });`
 
