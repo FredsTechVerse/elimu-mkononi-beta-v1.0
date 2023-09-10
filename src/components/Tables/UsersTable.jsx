@@ -118,20 +118,20 @@ const UsersTable = ({ usersQuery, role }) => {
         </tbody>
       </table>
       <div className="flex gap-2 mt-5  justify-end">
-        {/* <TableBtn onClick={() => table.setPageIndex(0)} text=" First page" /> */}
+        {/* <TableBtn onClick={() => table.setPageIndex(0)} text=" First" /> */}
         <TableBtn
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
-          text=" Previous page"
+          text=" Previous"
         />
         <TableBtn
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
-          text=" Next page"
+          text=" Next"
         />
         {/* <TableBtn
           onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-          text="Last Page"
+          text="Last"
         /> */}
       </div>
     </div>

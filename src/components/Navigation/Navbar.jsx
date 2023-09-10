@@ -25,18 +25,18 @@ const Navbar = () => {
           isNavOpen ? "flex " : "hidden"
         }  rounded-lg  text-slate-800 fixed z-50  bottom-[55px] flex right-3  phone:flex-col  items-center justify-center phone:w-[45%] tablet:w-[30%] laptop:w-[15%]  overflow-hidden `}
       >
-        <NavBgBtn isBlue={true} to="/new-user" text="register" />
-        <HomeBtn isBlue={true} />
+        <NavBgBtn isBlue={false} to="/new-user" text="register" />
+        <HomeBtn isBlue={false} position="dashboard" />
 
         <div
           className={`w-full ${
             !roles ? "flex gap-1 tablet:flex-row" : "hidden"
           }`}
         >
-          <NavBgBtn isBlue={true} to="/log-in" text="login" />
+          <NavBgBtn isBlue={false} to="/log-in" text="login" />
         </div>
         <div className={`${!roles ? "hidden" : "flex w-full "}`}>
-          <LogoutBtn isBlue={true} position="navbar" />
+          <LogoutBtn isBlue={false} position="navbar" />
         </div>
       </section>
     </>

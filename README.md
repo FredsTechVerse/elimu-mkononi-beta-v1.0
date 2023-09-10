@@ -23,17 +23,19 @@
 
 <!-- PRIMARY -->
 
-- Loophole found while creating notes .... notesID is null.... Refetching uses this notes ID currently i have to refresh for the changes to kick in.
-- Play around with the btns opacity with the primary color still on.. See what pops.
-- Restore dashboard button on homepage.
-- Time to have fun with the functionalities achieved... Create toggle button to enable / disable admin. Create direct links to user form for admin and tutor registration a home btn background is desirable while registering.
-- Spread admin dashboard styling to tutor dashboard.
+- Build notifications tab message and emails display.
+- Add control btns to the react player.
+- Correct tutor sidebar transparency
+- Add tutor units and convert table to a tanstack one .
+- Add a dropdown with custom options eg all admins , all tutors etc
+- Add toggle button to enable / disable admin account (Replacement for status)
+- Test youtube refresh token acquisition by inversing if logic
 
+<!-- INTERESTING QUESTIONS -->
+
+- What happens mtu akinyimwa ruhusa ya kuupload custom video to youtube?
 - SHARE FOR USER FEEDBACK TO LAWRENCE & THE TRANSFORMERS TEAM - We can create a link for admin account creation which just goes to the user form with the admin role.
 
-- Test youtube refresh token acquisition by inversing if logic
-- Consider using a dropdown with custom options eg all admins , all tutors etc which fetches the contacts from the database and off the message goes- to be implemented in church application
-- Can i have mutlipe params via useParams ... I suspect i can
 - <!-- SECONDARY -->
 
 - Move to portfolio backend and frontend revamp (# simplification.)
@@ -48,6 +50,7 @@
 
 ### KEY CONCEPTS LEARNT DURING THE BUILD
 
+- Who needs a table numbers when we have the search functionality at the convenience of phone rotation?
 - The currentLesson context is being updated from two points only the accordion items and the contentsection (auto-navigate to first lesson.)
 - The video player and the quill editor only read the currentLesson context and meaningful logic derived from this.
 - The routes do not just flow naturally. I have the power to control them to be exactly what i want them to be.

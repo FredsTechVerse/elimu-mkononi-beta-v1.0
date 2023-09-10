@@ -18,13 +18,15 @@ const LogoutBtn = ({ isBlue = false, position = "default" }) => {
       localStorage.removeItem("roles");
       localStorage.removeItem("youtubeAccessToken");
       delete axios.defaults.headers.common["Authorization"];
-      window.location.href = "/";
       updateAlertBoxData({
         response: "Logged out successfully",
         isResponse: true,
         status: "success",
-        timeout: 4500,
+        timeout: 2500,
       });
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 2500);
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);
@@ -46,7 +48,7 @@ const LogoutBtn = ({ isBlue = false, position = "default" }) => {
       } ${
         isBlue
           ? "bg-primary hover:bg-purple-500 text-white "
-          : "bg-slate-100 hover:bg-slate-900  "
+          : "bg-slate-700 hover:bg-slate-900 text-white   "
       }`}
     >
       <span>Logout</span>
@@ -54,16 +56,7 @@ const LogoutBtn = ({ isBlue = false, position = "default" }) => {
         {logoutMutation?.isLoading ? (
           <SpinnerIcon />
         ) : (
-          <ArrowRightOnRectangleIcon
-            // className={`  ${
-            //   position === "navbar"
-            //     ? "text-black group-hover:text-white"
-            //     : "text-white"
-            // } icon-styling `}
-            className={`icon-styling ${
-              isBlue ? "text-white" : "text-black"
-            } group-hover:text-white `}
-          />
+          <ArrowRightOnRectangleIcon className={`icon-styling text-white"`} />
         )}
       </span>
     </button>

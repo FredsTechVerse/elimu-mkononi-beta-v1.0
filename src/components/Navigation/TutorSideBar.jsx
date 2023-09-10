@@ -1,17 +1,13 @@
-import React, { useLayoutEffect } from "react";
-import { XCircleIcon } from "@heroicons/react/24/solid";
+import React from "react";
 import {
   AdminNavItem,
-  HomeBtn,
   LogoutBtn,
-  UserProfile,
   UserProfileSkeleton,
+  UserProfile,
 } from "../../components";
-const AdminSideBar = ({ userDataQuery, isSideBarOpen, toggleSideBar }) => {
-  useLayoutEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => (document.body.style.overflow = "unset");
-  }, []);
+import { XCircleIcon } from "@heroicons/react/24/solid";
+
+const TutorSideBar = ({ isSideBarOpen, userDataQuery, toggleSideBar }) => {
   return (
     <div
       className={` overflow-auto ${
@@ -21,21 +17,19 @@ const AdminSideBar = ({ userDataQuery, isSideBarOpen, toggleSideBar }) => {
       } relative backdrop-blur-xl  phone:bg-slate-300 laptop:bg-transparent bg-opacity-40 laptop:m-1 laptop:rounded-lg laptop:relative laptop:w-1/4  flex flex-col laptop:h-full phone:justify-start laptop:justify-between gap-2 p-2`}
     >
       <div className=" flex items-center justify-between">
-        <HomeBtn icon={true} isBlue={true} />
-
-        <div className="flex-row-centered  gap-2">
-          <div>
-            <LogoutBtn isBlue={true} />
-          </div>
+        <div className="w-full flex items-center justify-between  gap-2">
           <div
-            className="text-white hover:cursor-pointer w-max h-max tablet:hidden"
+            className="text-white hover:cursor-pointer w-max h-max "
             onClick={toggleSideBar}
           >
             <XCircleIcon className="icon-styling w-8 h-8 text-black " />
           </div>
+          <div>
+            <LogoutBtn isBlue={true} />
+          </div>
         </div>
       </div>
-      <div className="tablet:hidden laptop:block ">
+      <div className="tablet:hidden laptop:block">
         {userDataQuery.status === "loading" ? (
           <UserProfileSkeleton />
         ) : (
@@ -45,20 +39,26 @@ const AdminSideBar = ({ userDataQuery, isSideBarOpen, toggleSideBar }) => {
           />
         )}
       </div>
-
-      <div className=" flex flex-col justify-end px-1 ">
-        <div
-          onClick={toggleSideBar}
-          className="controls w-full h-full flex flex-col justify-end  gap-1.5 tablet:gap-2 "
-        >
-          <AdminNavItem to="courses" text="courses" />
-          <AdminNavItem to="students" text="students" />
-          <AdminNavItem to="tutors" text="tutors" />
-          <AdminNavItem to="admins" text="admins" />
+      <div className="w-full flex-col-centered gap-1 rounded-lg  ">
+        <h1 className="text-slate-900 font-bold text-lg text-center capitalize mt-3 w-full h-12 flex-row-centered  ">
+          Quick Access Controls
+        </h1>
+        <div className="gap-2 p-2 grid grid-cols-1  h-full w-full">
+          <AdminNavItem
+            page="tutorDashboard"
+            to="/new-chapter"
+            text="chapter"
+          />
+          <AdminNavItem page="tutorDashboard" to="/new-lesson" text="lesson" />
+          <AdminNavItem
+            page="tutorDashboard"
+            to="/new-resource"
+            text="resource"
+          />
         </div>
       </div>
     </div>
   );
 };
 
-export default AdminSideBar;
+export default TutorSideBar;

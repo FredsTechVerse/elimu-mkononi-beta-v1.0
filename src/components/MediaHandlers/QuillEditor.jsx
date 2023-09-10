@@ -94,6 +94,8 @@ const QuillEditor = () => {
         status: "success",
         timeout: 4500,
       });
+
+      window.location.reload();
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);

@@ -95,6 +95,7 @@ import {
   Accordion,
   AccordionItem,
   FormNavigation,
+  TutorSideBar,
 } from "./Navigation";
 
 import { StatusPill } from "./Pills";
@@ -152,6 +153,7 @@ export {
   UserProfile,
   Footer,
   ContentSection,
+  TutorSideBar,
   FileUpdater,
   ErrorMessage,
   CourseForm,

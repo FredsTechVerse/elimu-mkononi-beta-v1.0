@@ -15,7 +15,9 @@ const handleLogout = async () => {
   localStorage.removeItem("roles");
   localStorage.removeItem("youtubeAccessToken");
   delete axios.defaults.headers.common["Authorization"];
-  window.location.href = "/";
+  setTimeout(() => {
+    window.location.href = "/";
+  }, 1500);
 };
 
 const renewToken = async ({ updateAlertBoxData }) => {
@@ -41,10 +43,10 @@ const renewToken = async ({ updateAlertBoxData }) => {
   } catch (error) {
     if (error?.response?.status === 403) {
       updateAlertBoxData({
-        response: "Your session has expired",
+        response: "Your session has expired!",
         isResponse: true,
         status: "error",
-        timeout: 4500,
+        timeout: 1500,
       });
       await handleLogout();
     } else {

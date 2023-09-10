@@ -7,6 +7,7 @@ import UnitNav from "./UnitNav";
 import Accordion from "./Accordion";
 import AccordionItem from "./AccordionItem";
 import FormNavigation from "./FormNavigation";
+import TutorSideBar from "./TutorSideBar";
 export {
   Navbar,
   Search,
@@ -17,4 +18,5 @@ export {
   Accordion,
   AccordionItem,
   FormNavigation,
+  TutorSideBar,
 };

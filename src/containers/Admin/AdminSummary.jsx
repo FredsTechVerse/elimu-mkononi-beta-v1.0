@@ -5,8 +5,6 @@ import {
   DashboardUserButton,
   DoughnutChart,
   AreaChart,
-  LogoutBtn,
-  Tooltip,
   UserProfileSkeleton,
   PageTitle,
   NavMenuBtn,
