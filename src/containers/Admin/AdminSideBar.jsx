@@ -14,11 +14,11 @@ const AdminSideBar = ({ userDataQuery, isSideBarOpen, toggleSideBar }) => {
   }, []);
   return (
     <div
-      className={` overflow-auto ${
+      className={` overflow-auto relative backdrop-blur-xl bg-slate-200/20 laptop:bg-transparent laptop:m-1 laptop:rounded-lg laptop:relative laptop:w-1/4  flex flex-col laptop:h-full phone:justify-start laptop:justify-between gap-2 p-2 ${
         isSideBarOpen
           ? "phone:absolute z-30 tablet:bottom-[55px] tablet:right-2 laptop:right-0 laptop:top-0  h-full tablet:h-max  phone:w-full tablet:w-80 rounded-lg  "
           : "phone:hidden laptop:flex h-full "
-      } relative backdrop-blur-xl  phone:bg-slate-300 laptop:bg-transparent bg-opacity-40 laptop:m-1 laptop:rounded-lg laptop:relative laptop:w-1/4  flex flex-col laptop:h-full phone:justify-start laptop:justify-between gap-2 p-2`}
+      } `}
     >
       <div className=" flex items-center justify-between">
         <HomeBtn icon={true} isBlue={true} />
