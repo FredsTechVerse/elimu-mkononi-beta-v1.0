@@ -23,11 +23,10 @@
 
 <!-- PRIMARY -->
 
-- Build notifications tab message and emails display.
+- Shelter email and message functionailites under notifications tab with a sneak peak at the dashboard.
+- Build on messaging functionality by adding dropdown with custom options eg all admins , all tutors etc These are just tags which will be processed on the backend.
 - Add control btns to the react player.
-- Correct tutor sidebar transparency
-- Add tutor units and convert table to a tanstack one .
-- Add a dropdown with custom options eg all admins , all tutors etc
+- Convert tutor table to a tanstack table.
 - Add toggle button to enable / disable admin account (Replacement for status)
 - Test youtube refresh token acquisition by inversing if logic
 
@@ -39,10 +38,10 @@
 - <!-- SECONDARY -->
 
 - Move to portfolio backend and frontend revamp (# simplification.)
-- Simplifying or separating the form CRUD logic.
+- Separate the form CRUD logic.
 - Implement typescript with SWC.
 - If need arises implement user tracking
-- Comments section can now be built and allocated a space on the dashboard(We go the tools ready)
+- Comments section can be built
 
 ### USING COMPONENT LIBRARIES ( MY GOLDEN RULE )
 
