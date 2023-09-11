@@ -19,12 +19,12 @@ const TutorSideBar = ({ isSideBarOpen, userDataQuery, toggleSideBar }) => {
       <div className=" flex items-center justify-between">
         <div className="w-full flex items-center justify-between  gap-2">
           <div
-            className="text-white hover:cursor-pointer w-max h-max "
+            className="text-white hover:cursor-pointer w-max h-max laptop:hidden "
             onClick={toggleSideBar}
           >
             <XCircleIcon className="icon-styling w-8 h-8 text-black " />
           </div>
-          <div>
+          <div className="ml-auto ">
             <LogoutBtn isBlue={true} />
           </div>
         </div>

@@ -1,7 +1,4 @@
 import axios from "../axios";
-
-const fetchMessagesData = async () => {};
-
 const messageUser = async ({
   message,
   contact = null,
@@ -72,4 +69,13 @@ const messageUser = async ({
   }
 };
 
-export { messageUser, fetchMessagesData };
+const fetchMessageData = async ({ messageID }) => {
+  return {};
+};
+
+const fetchMessages = async () => {
+  const { data: unitData } = await axios.get(`/message/all-messages`);
+  return unitData;
+};
+
+export { fetchMessages, fetchMessageData, messageUser };

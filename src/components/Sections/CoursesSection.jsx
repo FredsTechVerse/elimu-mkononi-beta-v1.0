@@ -19,7 +19,7 @@ const CoursesSection = () => {
       id="courses"
       className="courses relative  px-2 w-full text-slate-900 bg-white "
     >
-      <PageTitle title="list of courses" />
+      <PageTitle title=" courses available" />
 
       {coursesQuery.status === "loading" ? (
         <div className="grid-lg tablet:grid-cols-2 laptop:grid-cols-4 tablet:gap-6 ">

@@ -15,6 +15,7 @@ const MessageForm = () => {
   const formRef = useRef(null);
   const { updateAlertBoxData } = useAlertBoxContext();
   const { role, userID } = useParams();
+  console.log({ role, userID });
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -146,20 +147,26 @@ const MessageForm = () => {
               Recipient
             </label>
             <select
-              className="input-styling  mb-5"
+              className="input-styling capitalize mb-5"
               {...register("recipient", {
                 required: "This field is required ",
               })}
             >
-              <option className="capitalize" value="all-admins">
-                All Admins
-              </option>
-              <option className="capitalize" value="all-tutors">
-                All Tutors
-              </option>
-              <option className="capitalize" value="all-students">
-                All Students
-              </option>
+              {role === "EM-203" && (
+                <option className="capitalize" value="all-admins">
+                  All Admins
+                </option>
+              )}
+              {role === "EM-202" && (
+                <option className="capitalize" value="all-tutors">
+                  All Tutors
+                </option>
+              )}
+              {role === "EM-201" && (
+                <option className="capitalize" value="all-students">
+                  All Students
+                </option>
+              )}
               <option className="capitalize" value="other">
                 other
               </option>

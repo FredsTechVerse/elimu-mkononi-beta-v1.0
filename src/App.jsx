@@ -11,6 +11,8 @@ import {
   NotFound,
   TokenExchange,
   AdminSummary,
+  EmailSection,
+  MessagesSection,
 } from "./containers";
 import {
   RequireAuth,
@@ -132,6 +134,8 @@ function App() {
                 <Route index element={<AdminSummary />} />
                 <Route exact path=":role" element={<UsersPage />} />
                 <Route exact path="courses" element={<CourseAdminPage />} />
+                <Route exact path="emails" element={<EmailSection />} />
+                <Route exact path="messages" element={<MessagesSection />} />
               </Route>
             </Route>
           )}
@@ -149,7 +153,7 @@ function App() {
           <Route exact path="/new-chapter" element={<ChapterForm />} />
           <Route exact path="/new-lesson" element={<LessonForm />} />
           <Route exact path="/new-resource" element={<ResourceForm />} />
-          <Route exact path="/new-message" element={<MessageForm />} />
+          <Route exact path="/new-message/:role" element={<MessageForm />} />
           <Route
             exact
             path="/new-message/:role/:userID"

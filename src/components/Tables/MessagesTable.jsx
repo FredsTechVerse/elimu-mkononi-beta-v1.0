@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StatusPill, CTAButton, TableBtn } from "..";
+import { TableBtn } from "..";
 import {
   flexRender,
   getCoreRowModel,
@@ -10,46 +10,25 @@ import {
   getSortedRowModel,
 } from "@tanstack/react-table";
 
-const UsersTable = ({ usersQuery, role }) => {
+const MessagesTable = ({ messagesQuery }) => {
   const [filtering, setFiltering] = useState("");
   const [sorting, setSorting] = useState([]);
   const columnHelper = createColumnHelper();
 
   const columns = [
-    columnHelper.accessor("firstName", {
+    columnHelper.accessor("role", {
       cell: (info) => info.getValue(),
     }),
-    columnHelper.accessor("surname", {
-      header: () => <span>Last Name</span>,
+    columnHelper.accessor("message", {
       cell: (info) => info.getValue(),
     }),
-
-    columnHelper.accessor("contact", {
+    columnHelper.accessor("recipient", {
       cell: (info) => info.getValue(),
-    }),
-
-    columnHelper.accessor("status", {
-      header: () => (
-        <span className="hidden  laptop:flex-row-centered">Status</span>
-      ),
-      cell: (info) => (
-        <div className="hidden  laptop:flex-row-centered">
-          <StatusPill status={info.getValue()} />
-        </div>
-      ),
-    }),
-    columnHelper.accessor("cta button", {
-      cell: (info) => {
-        const record = info.row.original;
-        const userID = record._id;
-        const contact = record.contact;
-        return <CTAButton userID={userID} contact={contact} role={role} />;
-      },
     }),
   ];
 
   const table = useReactTable({
-    data: usersQuery.data,
+    data: messagesQuery.data,
     columns,
     state: {
       sorting: sorting,
@@ -133,4 +112,4 @@ const UsersTable = ({ usersQuery, role }) => {
   );
 };
 
-export default UsersTable;
+export default MessagesTable;

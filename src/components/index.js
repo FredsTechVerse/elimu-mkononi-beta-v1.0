@@ -131,6 +131,9 @@ import {
   UnitsAdminTable,
   UsersTable,
   TutorUnitsTable,
+  TutorTable,
+  EmailsTable,
+  MessagesTable,
   TanstackTable,
 } from "./Tables";
 
@@ -166,6 +169,9 @@ export {
   AlertBox,
   AdminCard,
   PaymentsTable,
+  TutorTable,
+  EmailsTable,
+  MessagesTable,
   TanstackTable,
   NavigateBtn,
   StatusPill,

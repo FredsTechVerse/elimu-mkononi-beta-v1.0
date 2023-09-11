@@ -63,8 +63,10 @@ const UsersPage = () => {
               : "student"
           }
         />
-
-        <NavBgBtn to="/new-message" text="Message" />
+        <NavBgBtn to={`/admin/students`} text="students" />
+        <NavBgBtn to={`/admin/tutors`} text="tutors" />
+        <NavBgBtn to={`/admin/admins`} text="admins" />
+        <NavBgBtn to={`/new-message/${userRole}`} text="Message" />
       </div>
       <div className="absolute top-12 mx-auto tablet:pt-0">
         <PageTitle

@@ -21,30 +21,32 @@
 
 ### PRODUCT REVIEW
 
-<!-- PRIMARY -->
+- THE FUNCTIONALITES ARE A GO! PREPARE FRONTEND FOR RELEASE.
+<!-- STYLING & LOGIC REFINE -->
 
-- Expose a sneak peak of either emails / messages on the dashboard.
-- Email and contacts must be verified to allow login.
+- Refine email and contacts verification b4 login.
+- Find out how to vary tanstack tables column spacing.
+- Expose a sneak peak of either emails on the dashboard.
+- Contact should autofill.We can use the userID to retrieve and display name.
 - Add control btns to the react player.
 - Add toggle button to enable / disable admin account (Replacement for status)
-- Build email , message and tutor notifications as tanstack tables.
 - Test youtube refresh token acquisition by inversing if logic
 
 <!-- INTERESTING QUESTIONS -->
 
 - What happens mtu akinyimwa ruhusa ya kuupload custom video to youtube?
+- Why am i using useEffect when i can use the query data immediately.... using the userQuery.data
+
+<!-- RELEASE PREPARATION -->
+
 - SHARE FOR USER FEEDBACK TO LAWRENCE & THE TRANSFORMERS TEAM - We can create a link for admin account creation which just goes to the user form with the admin role.
-
-<!-- GAME PLAN -->
-
-- Sidebar will contain courses , users , messages , notifications (collection of emails). A tanstack table similar to gmail
-- To the CTA button we shall add a message button that way we can message an individual user.
-- Onclicking on a message , it shall be considered as read.
+- Release the learner account to the public only selected individuals and upon user request will i expose the admin and tutor accounts. Will include the registration process for user to have a feel of the messaging and emailing functionalities. Lets wrap up this project!
 
 - <!-- SECONDARY -->
 
 - Move to portfolio backend and frontend revamp (# simplification.)
 - Separate the form CRUD logic.
+- On clicking on a message , it shall be considered as read.
 - Implement typescript with SWC.
 - If need arises implement user tracking
 - Comments section can be built

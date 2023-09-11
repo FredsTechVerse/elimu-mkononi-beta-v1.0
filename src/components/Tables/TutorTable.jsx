@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { StatusPill, CTAButton, TableBtn } from "..";
+import { TableBtn } from "..";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import {
   flexRender,
   getCoreRowModel,
@@ -9,47 +10,73 @@ import {
   getFilteredRowModel,
   getSortedRowModel,
 } from "@tanstack/react-table";
+import { PencilIcon } from "@heroicons/react/24/solid";
 
-const UsersTable = ({ usersQuery, role }) => {
+const TutorTable = ({ tutorQuery }) => {
+  console.log({ tutorQuery: tutorQuery.data });
+  const navigate = useNavigate();
   const [filtering, setFiltering] = useState("");
   const [sorting, setSorting] = useState([]);
   const columnHelper = createColumnHelper();
-
+  const roles = localStorage.getItem("roles");
+  const location = useLocation();
   const columns = [
-    columnHelper.accessor("firstName", {
+    columnHelper.accessor("unitName", {
       cell: (info) => info.getValue(),
     }),
-    columnHelper.accessor("surname", {
-      header: () => <span>Last Name</span>,
-      cell: (info) => info.getValue(),
-    }),
-
-    columnHelper.accessor("contact", {
-      cell: (info) => info.getValue(),
-    }),
-
-    columnHelper.accessor("status", {
-      header: () => (
-        <span className="hidden  laptop:flex-row-centered">Status</span>
-      ),
-      cell: (info) => (
-        <div className="hidden  laptop:flex-row-centered">
-          <StatusPill status={info.getValue()} />
-        </div>
-      ),
-    }),
-    columnHelper.accessor("cta button", {
+    columnHelper.accessor("chapters", {
+      header: () => <span>Chapters</span>,
       cell: (info) => {
         const record = info.row.original;
-        const userID = record._id;
-        const contact = record.contact;
-        return <CTAButton userID={userID} contact={contact} role={role} />;
+        console.log({ record });
+        const numberOfChapters = record?.unitChapters?.length;
+        return <span>{numberOfChapters}</span>;
+      },
+    }),
+
+    columnHelper.accessor("lessons", {
+      cell: (info) => {
+        const record = info.row.original;
+        let numberOfLessons = 0;
+        record.unitChapters.forEach((chapter) => {
+          numberOfLessons += chapter.chapterLessons.length;
+        });
+        return <span>{numberOfLessons}</span>;
+      },
+    }),
+
+    columnHelper.accessor("cta", {
+      cell: (info) => {
+        const record = info.row.original;
+        const unitID = record._id;
+        return (
+          <div className="flex-row-centered gap-2 z-10">
+            <button
+              className={`cta-btn group ${
+                roles?.includes("EM-201") && "hidden"
+              }`}
+              onClick={() => {
+                navigate("/new-unit", {
+                  state: { unitID, background: location },
+                });
+              }}
+            >
+              <PencilIcon className="icon-styling h-4  text-white" />
+            </button>
+            <Link
+              to={`/unit/${unitID}`}
+              className="bg-slate-700 text-white rounded-full px-5 py-0.5"
+            >
+              View
+            </Link>
+          </div>
+        );
       },
     }),
   ];
 
   const table = useReactTable({
-    data: usersQuery.data,
+    data: tutorQuery.data.units,
     columns,
     state: {
       sorting: sorting,
@@ -67,7 +94,7 @@ const UsersTable = ({ usersQuery, role }) => {
     <div className="py-5 phone:hidden tablet:table w-full flex flex-col items-center justify-center">
       <input
         type="text"
-        placeholder={`Search for user`}
+        placeholder={`Search for unit`}
         className="block h-10 rounded-md my-2 shadow-md shadow-slate-300 border-slate-400 border-1 text-start w-48"
         value={filtering}
         onChange={(e) => setFiltering(e.target.value)}
@@ -133,4 +160,4 @@ const UsersTable = ({ usersQuery, role }) => {
   );
 };
 
-export default UsersTable;
+export default TutorTable;

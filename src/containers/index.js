@@ -9,6 +9,8 @@ import AdminDashboard from "./Admin/AdminDashboard";
 import AdminSideBar from "./Admin/AdminSideBar";
 import AdminSummary from "./Admin/AdminSummary";
 import CourseAdminPage from "./Admin/CourseAdminPage";
+import MessagesSection from "./Admin/MessagesSection";
+import EmailSection from "./Admin/EmailSection";
 import DraftPage from "./DraftPage";
 import Forbidden from "./Forbidden";
 import UnitOverview from "./UnitOverview";
@@ -31,4 +33,6 @@ export {
   UnitOverview,
   NotFound,
   TokenExchange,
+  MessagesSection,
+  EmailSection,
 };

@@ -52,9 +52,9 @@ const AdminSideBar = ({ userDataQuery, isSideBarOpen, toggleSideBar }) => {
           className="controls w-full h-full flex flex-col justify-end  gap-1.5 tablet:gap-2 "
         >
           <AdminNavItem to="courses" text="courses" />
-          <AdminNavItem to="students" text="students" />
-          <AdminNavItem to="tutors" text="tutors" />
-          <AdminNavItem to="admins" text="admins" />
+          <AdminNavItem to="students" text="users" />
+          <AdminNavItem to="messages" text="messages" />
+          <AdminNavItem to="emails" text="emails" />
         </div>
       </div>
     </div>

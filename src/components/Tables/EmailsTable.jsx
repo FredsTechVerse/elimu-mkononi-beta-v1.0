@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StatusPill, CTAButton, TableBtn } from "..";
+import { TableBtn } from "..";
 import {
   flexRender,
   getCoreRowModel,
@@ -10,46 +10,45 @@ import {
   getSortedRowModel,
 } from "@tanstack/react-table";
 
-const UsersTable = ({ usersQuery, role }) => {
+const EmailsTable = ({ emailsQuery }) => {
   const [filtering, setFiltering] = useState("");
   const [sorting, setSorting] = useState([]);
   const columnHelper = createColumnHelper();
 
   const columns = [
-    columnHelper.accessor("firstName", {
-      cell: (info) => info.getValue(),
-    }),
-    columnHelper.accessor("surname", {
-      header: () => <span>Last Name</span>,
-      cell: (info) => info.getValue(),
-    }),
-
-    columnHelper.accessor("contact", {
-      cell: (info) => info.getValue(),
-    }),
-
-    columnHelper.accessor("status", {
-      header: () => (
-        <span className="hidden  laptop:flex-row-centered">Status</span>
-      ),
+    columnHelper.accessor("from", {
+      header: () => <div className="w-48 recipient ">Message</div>,
       cell: (info) => (
-        <div className="hidden  laptop:flex-row-centered">
-          <StatusPill status={info.getValue()} />
+        <div className="w-48 overflow-hidden">
+          {info.getValue().toLowerCase()}
         </div>
       ),
     }),
-    columnHelper.accessor("cta button", {
+    columnHelper.accessor("message", {
+      header: () => <span className=" ">Message</span>,
       cell: (info) => {
         const record = info.row.original;
-        const userID = record._id;
-        const contact = record.contact;
-        return <CTAButton userID={userID} contact={contact} role={role} />;
+        const subject = record.subject;
+        const text = record.text;
+        return (
+          <div>
+            <div className="capitalize text-sm font-extrabold">
+              {subject.toUpperCase()}
+            </div>
+            <div className="capitalize text-sm">{text.toLowerCase()}</div>
+          </div>
+        );
       },
+    }),
+
+    columnHelper.accessor("role", {
+      header: () => <div className="w-20 recipient ">Role</div>,
+      cell: (info) => info.getValue(),
     }),
   ];
 
   const table = useReactTable({
-    data: usersQuery.data,
+    data: emailsQuery.data,
     columns,
     state: {
       sorting: sorting,
@@ -64,7 +63,7 @@ const UsersTable = ({ usersQuery, role }) => {
   });
 
   return (
-    <div className="py-5 phone:hidden tablet:table w-full flex flex-col items-center justify-center">
+    <div className="py-5 phone:hidden tablet:table  flex flex-col items-center justify-center recipient overflow-scroll ">
       <input
         type="text"
         placeholder={`Search for user`}
@@ -72,7 +71,7 @@ const UsersTable = ({ usersQuery, role }) => {
         value={filtering}
         onChange={(e) => setFiltering(e.target.value)}
       />
-      <table className="  w-full bg-slate-50 shadow-lg shadow-slate-200 rounded-lg overflow-hidden  ">
+      <table className="  w-full  bg-slate-50 shadow-lg shadow-slate-200 rounded-lg overflow-hidden  ">
         <thead className=" uppercase h-12 bg-slate-600 text-white  ">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
@@ -133,4 +132,4 @@ const UsersTable = ({ usersQuery, role }) => {
   );
 };
 
-export default UsersTable;
+export default EmailsTable;

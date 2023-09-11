@@ -4,6 +4,7 @@ import {
   UserProfileSkeleton,
   TableSkeleton,
   TutorUnitsTable,
+  TutorTable,
   PageTitle,
   DoughnutChart,
 } from "../../components";
@@ -35,9 +36,10 @@ const TutorSummary = ({ userDataQuery, pieChartData, totalLessons }) => {
         {userDataQuery.status === "loading" ? (
           <TableSkeleton />
         ) : (
-          <div className="flex-col-centered gap-5">
+          <div className="flex-col-centered ">
             <PageTitle title="List of units" />
-            <TutorUnitsTable unitsData={userDataQuery?.data?.units} />
+            <TutorTable tutorQuery={userDataQuery} />
+            {/* <TutorUnitsTable unitsData={userDataQuery?.data?.units} /> */}
           </div>
         )}
       </div>
