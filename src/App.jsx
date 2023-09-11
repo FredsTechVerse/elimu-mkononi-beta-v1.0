@@ -152,6 +152,11 @@ function App() {
           <Route exact path="/new-message" element={<MessageForm />} />
           <Route
             exact
+            path="/new-message/:role/:userID"
+            element={<MessageForm />}
+          />
+          <Route
+            exact
             path="/view-resource/:resourceUrl"
             element={<ReactPdf />}
           />

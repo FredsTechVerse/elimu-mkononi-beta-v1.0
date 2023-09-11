@@ -262,7 +262,7 @@ const LessonForm = () => {
               <ErrorMessage message={errors.lessonName?.message} />
             )}
           </div>
-          <div className="flex flex-col">
+          <div className="input-wrap">
             <label
               htmlFor="id"
               className="w-full block my-2 text-sm font-medium text-gray-900"

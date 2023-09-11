@@ -23,17 +23,23 @@
 
 <!-- PRIMARY -->
 
-- Shelter email and message functionailites under notifications tab with a sneak peak at the dashboard.
-- Build on messaging functionality by adding dropdown with custom options eg all admins , all tutors etc These are just tags which will be processed on the backend.
+- Expose a sneak peak of either emails / messages on the dashboard.
+- Email and contacts must be verified to allow login.
 - Add control btns to the react player.
-- Convert tutor table to a tanstack table.
 - Add toggle button to enable / disable admin account (Replacement for status)
+- Build email , message and tutor notifications as tanstack tables.
 - Test youtube refresh token acquisition by inversing if logic
 
 <!-- INTERESTING QUESTIONS -->
 
 - What happens mtu akinyimwa ruhusa ya kuupload custom video to youtube?
 - SHARE FOR USER FEEDBACK TO LAWRENCE & THE TRANSFORMERS TEAM - We can create a link for admin account creation which just goes to the user form with the admin role.
+
+<!-- GAME PLAN -->
+
+- Sidebar will contain courses , users , messages , notifications (collection of emails). A tanstack table similar to gmail
+- To the CTA button we shall add a message button that way we can message an individual user.
+- Onclicking on a message , it shall be considered as read.
 
 - <!-- SECONDARY -->
 
@@ -42,6 +48,7 @@
 - Implement typescript with SWC.
 - If need arises implement user tracking
 - Comments section can be built
+- Instead of sending errors to email directly we can read and write to the server file system. with the format that we want. And a daily report sent to user.
 
 ### USING COMPONENT LIBRARIES ( MY GOLDEN RULE )
 
@@ -49,6 +56,7 @@
 
 ### KEY CONCEPTS LEARNT DURING THE BUILD
 
+- Passing data via url is more stable state tends to be lost making it hard to navigate back.
 - Who needs a table numbers when we have the search functionality at the convenience of phone rotation?
 - The currentLesson context is being updated from two points only the accordion items and the contentsection (auto-navigate to first lesson.)
 - The video player and the quill editor only read the currentLesson context and meaningful logic derived from this.
