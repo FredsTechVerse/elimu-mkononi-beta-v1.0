@@ -93,7 +93,7 @@ const AccordionItem = ({
   return (
     <li className="accordion_item">
       <div className="button hover:bg-slate-300 group px-2 text-sm flex items-center ">
-        <div className="w-full" onClick={onToggle}>
+        <div className="w-full h-full" onClick={onToggle}>
           {chapter?.chapterName}
         </div>
         <div className="flex gap-3 items-center justify-between w-min">
