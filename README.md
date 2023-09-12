@@ -31,7 +31,8 @@
 
 <!-- RELEASE PREPARATION -->
 
-- When SMS fails , user registration also fails .... Allow user account confirmation without credentials
+- find out why when SMS services fails , user registration also fails .... Could be a generic message if error is uknown.
+- Allow user account confirmation without credentials
 - Toggle password and text on the password input to display and hide accordingly.
 - Refine messaging by allowing contact to autofill.We can use the userID to retrieve and display name.
 - Refine queries to show the fancy message when no data is available . Ensure you handle .length properly instead of avoiding is using ?.
