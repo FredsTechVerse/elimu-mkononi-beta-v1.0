@@ -298,6 +298,7 @@ const UserForm = () => {
                 readOnly={!isEditEnabled}
                 className="input-styling"
                 placeholder="Enter Password"
+                type="password"
                 {...register("password", {
                   required: "This field is required ",
                 })}
@@ -310,6 +311,7 @@ const UserForm = () => {
                 readOnly={!isEditEnabled}
                 className="input-styling"
                 placeholder="Confirm Password"
+                type="password"
                 {...register("cPassword", {
                   required: "This field is required ",
                 })}

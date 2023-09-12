@@ -4,12 +4,10 @@ import {
   CourseCardV2,
   CourseSkeleton,
   PageTitle,
-  HomeBtn,
   NavMenuBtn,
-  DashboardUserButton,
   FancyMessage,
 } from "../../components";
-import { useLocation, useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import { fetchCoursesData, handleError } from "../../controllers";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -29,11 +27,11 @@ const CoursesAdminPage = () => {
 
   return (
     <div className="w-full laptop:w-3/4 flex flex-col gap-5 relative phone:rounded-lg justify-start  h-full overflow-auto p-3 overflow-x-hidden ">
+      <div className="relative mr-auto tablet:mx-auto   px-2">
+        <PageTitle title="list of courses" />
+      </div>
       <div className=" absolute z-10 top-2 right-1 tablet:right-2 flex-row-centered gap-2">
         <NavBgBtn to="/new-course" text="Add Course" />
-      </div>
-      <div className="absolute top-2 left-1 w-max px-2">
-        <PageTitle title="list of courses" />
       </div>
 
       <div className="flex flex-row items-center justify-evenly gap-2 fixed bottom-2 right-2 tablet:right-5 z-20">

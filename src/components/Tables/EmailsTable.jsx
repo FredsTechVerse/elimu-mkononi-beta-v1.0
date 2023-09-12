@@ -16,13 +16,17 @@ const EmailsTable = ({ emailsQuery }) => {
   const columnHelper = createColumnHelper();
 
   const columns = [
-    columnHelper.accessor("from", {
-      header: () => <div className="w-48 recipient ">Message</div>,
+    columnHelper.accessor("to", {
+      header: () => <div className="w-36 recipient ">Recipient</div>,
       cell: (info) => (
-        <div className="w-48 overflow-hidden">
-          {info.getValue().toLowerCase()}
+        <div className="w-36 overflow-hidden px-2 lowercase">
+          {info.getValue()}
         </div>
       ),
+    }),
+    columnHelper.accessor("role", {
+      header: () => <div className="w-20 recipient ">Role</div>,
+      cell: (info) => info.getValue(),
     }),
     columnHelper.accessor("message", {
       header: () => <span className=" ">Message</span>,
@@ -32,18 +36,12 @@ const EmailsTable = ({ emailsQuery }) => {
         const text = record.text;
         return (
           <div>
-            <div className="capitalize text-sm font-extrabold">
-              {subject.toUpperCase()}
+            <div className="capitalize text-sm laptop:text-start overflow-hidden whitespace-wrap text-center ">
+              {text.toLowerCase()}
             </div>
-            <div className="capitalize text-sm">{text.toLowerCase()}</div>
           </div>
         );
       },
-    }),
-
-    columnHelper.accessor("role", {
-      header: () => <div className="w-20 recipient ">Role</div>,
-      cell: (info) => info.getValue(),
     }),
   ];
 
@@ -66,7 +64,7 @@ const EmailsTable = ({ emailsQuery }) => {
     <div className="py-5 phone:hidden tablet:table  flex flex-col items-center justify-center recipient overflow-scroll ">
       <input
         type="text"
-        placeholder={`Search for user`}
+        placeholder={`Search for email`}
         className="block h-10 rounded-md my-2 shadow-md shadow-slate-300 border-slate-400 border-1 text-start w-48"
         value={filtering}
         onChange={(e) => setFiltering(e.target.value)}

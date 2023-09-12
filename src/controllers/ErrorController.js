@@ -21,6 +21,8 @@ const handleError = async (error, updateAlertBoxData) => {
   } else if (status === 401) {
     if (message === "Token expired") {
       renewToken({ updateAlertBoxData });
+    } else if (message === "Account has not been verified") {
+      response = "Account has not been verified";
     } else if (response.statusText === "Unauthorized") {
       response = ERRORS.AUTHORIZATION_ERROR;
     } else {
@@ -59,6 +61,7 @@ const handleError = async (error, updateAlertBoxData) => {
       timeout: 4500,
     });
   }
+  return response;
 };
 
 export { handleError };

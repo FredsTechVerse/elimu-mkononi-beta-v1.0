@@ -13,6 +13,11 @@ const LogInForm = () => {
   const { updateAlertBoxData } = useAlertBoxContext();
   const location = useLocation();
   const { background } = location.state;
+  const role = JSON.parse(localStorage.getItem("roles"));
+  let roleInformation = role;
+  if (!role) {
+    roleInformation = "EM-201";
+  }
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => (document.body.style.overflow = "unset");
@@ -118,6 +123,7 @@ const LogInForm = () => {
             <input
               placeholder="Password"
               className="input-styling"
+              type="password"
               {...register("password", {
                 required: "This field is required ",
               })}
@@ -142,7 +148,7 @@ const LogInForm = () => {
             <span className="mx-2 text-black">
               <Link
                 to={"/new-user"}
-                state={{ background: background }}
+                state={{ background: background, role: roleInformation }}
                 className="font-medium hover:text-slate-100 text-primary focus:outline-none focus:ring-2"
               >
                 Register

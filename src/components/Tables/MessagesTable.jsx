@@ -16,13 +16,13 @@ const MessagesTable = ({ messagesQuery }) => {
   const columnHelper = createColumnHelper();
 
   const columns = [
+    columnHelper.accessor("recipient", {
+      cell: (info) => info.getValue(),
+    }),
     columnHelper.accessor("role", {
       cell: (info) => info.getValue(),
     }),
     columnHelper.accessor("message", {
-      cell: (info) => info.getValue(),
-    }),
-    columnHelper.accessor("recipient", {
       cell: (info) => info.getValue(),
     }),
   ];
@@ -46,7 +46,7 @@ const MessagesTable = ({ messagesQuery }) => {
     <div className="py-5 phone:hidden tablet:table w-full flex flex-col items-center justify-center">
       <input
         type="text"
-        placeholder={`Search for user`}
+        placeholder={`Search for message`}
         className="block h-10 rounded-md my-2 shadow-md shadow-slate-300 border-slate-400 border-1 text-start w-48"
         value={filtering}
         onChange={(e) => setFiltering(e.target.value)}

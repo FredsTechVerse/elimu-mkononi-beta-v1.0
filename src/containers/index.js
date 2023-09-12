@@ -11,6 +11,8 @@ import AdminSummary from "./Admin/AdminSummary";
 import CourseAdminPage from "./Admin/CourseAdminPage";
 import MessagesSection from "./Admin/MessagesSection";
 import EmailSection from "./Admin/EmailSection";
+import EmailsGrid from "./Admin/EmailsGrid";
+import MessagesGrid from "./Admin/MessagesGrid";
 import DraftPage from "./DraftPage";
 import Forbidden from "./Forbidden";
 import UnitOverview from "./UnitOverview";
@@ -35,4 +37,6 @@ export {
   TokenExchange,
   MessagesSection,
   EmailSection,
+  EmailsGrid,
+  MessagesGrid,
 };

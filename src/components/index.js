@@ -26,6 +26,8 @@ import {
   UserCard,
   TestBox,
   CourseCardV2,
+  EmailsCard,
+  MessagesCard,
 } from "./Cards";
 
 import {
@@ -150,6 +152,8 @@ export {
   FancyMessage,
   TutorCard,
   UnitCard,
+  EmailsCard,
+  MessagesCard,
   UnitNav,
   QuillEditor,
   TutorCardHome,

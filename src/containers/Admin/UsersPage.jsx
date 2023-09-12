@@ -52,6 +52,11 @@ const UsersPage = () => {
         />
       </div>
 
+      <div className="absolute top-2 left-2 flex-row-centered gap-2">
+        <NavBgBtn to={`/admin/students`} text="students" />
+        <NavBgBtn to={`/admin/tutors`} text="tutors" />
+        <NavBgBtn to={`/admin/admins`} text="admins" />
+      </div>
       <div className="absolute top-2 right-2 flex-row-centered gap-2 ">
         <DashboardUserButton
           isRounded={false}
@@ -63,9 +68,7 @@ const UsersPage = () => {
               : "student"
           }
         />
-        <NavBgBtn to={`/admin/students`} text="students" />
-        <NavBgBtn to={`/admin/tutors`} text="tutors" />
-        <NavBgBtn to={`/admin/admins`} text="admins" />
+
         <NavBgBtn to={`/new-message/${userRole}`} text="Message" />
       </div>
       <div className="absolute top-12 mx-auto tablet:pt-0">

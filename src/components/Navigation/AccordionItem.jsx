@@ -92,12 +92,11 @@ const AccordionItem = ({
   );
   return (
     <li className="accordion_item">
-      <div
-        className="button hover:bg-slate-300 group px-2 text-sm flex items-center "
-        onClick={onToggle}
-      >
-        {chapter?.chapterName}
-        <div className="flex gap-3 items-center justify-between">
+      <div className="button hover:bg-slate-300 group px-2 text-sm flex items-center ">
+        <div className="w-full" onClick={onToggle}>
+          {chapter?.chapterName}
+        </div>
+        <div className="flex gap-3 items-center justify-between w-min">
           <div className="flex-row-centered gap-2">
             <button
               className={`${
@@ -142,7 +141,7 @@ const AccordionItem = ({
             </button>
           </div>
 
-          <span>
+          <span onClick={onToggle}>
             {active ? (
               <ChevronDownIcon className="icon-styling text-slate-900 group-hover:text-white" />
             ) : (

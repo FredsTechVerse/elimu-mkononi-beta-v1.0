@@ -23,15 +23,7 @@
 
 - THE FUNCTIONALITES ARE A GO! PREPARE FRONTEND FOR RELEASE.
 <!-- STYLING & LOGIC REFINE -->
-
-- Refine email and contacts verification b4 login.
-- Find out how to vary tanstack tables column spacing.
-- Expose a sneak peak of either emails on the dashboard.
-- Contact should autofill.We can use the userID to retrieve and display name.
-- Add control btns to the react player.
-- Add toggle button to enable / disable admin account (Replacement for status)
-- Test youtube refresh token acquisition by inversing if logic
-
+- Test accordion items responsiveness to clicking.
 <!-- INTERESTING QUESTIONS -->
 
 - What happens mtu akinyimwa ruhusa ya kuupload custom video to youtube?
@@ -39,11 +31,18 @@
 
 <!-- RELEASE PREPARATION -->
 
+- Refine messaging by allowing contact to autofill.We can use the userID to retrieve and display name.
+- Refine queries to show the fancy message when no data is available . Ensure you handle .length properly instead of avoiding is using ?.
 - SHARE FOR USER FEEDBACK TO LAWRENCE & THE TRANSFORMERS TEAM - We can create a link for admin account creation which just goes to the user form with the admin role.
 - Release the learner account to the public only selected individuals and upon user request will i expose the admin and tutor accounts. Will include the registration process for user to have a feel of the messaging and emailing functionalities. Lets wrap up this project!
 
 - <!-- SECONDARY -->
-
+- Invalidate course update upon deletion
+- I can add a resource count to the button
+- Ensure account verification , add toggle button to enable and disable accounts
+- Test youtube refresh token acquisition by inversing if logic
+- Add control btns to the react player.
+- Refine queries to display null when no data is available and eliminate .length when no data is available.
 - Move to portfolio backend and frontend revamp (# simplification.)
 - Separate the form CRUD logic.
 - On clicking on a message , it shall be considered as read.
