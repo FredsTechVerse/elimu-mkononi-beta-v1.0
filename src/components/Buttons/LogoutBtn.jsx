@@ -56,7 +56,9 @@ const LogoutBtn = ({ isBlue = false, position = "default" }) => {
         {logoutMutation?.isLoading ? (
           <SpinnerIcon />
         ) : (
-          <ArrowRightOnRectangleIcon className={`icon-styling text-white"`} />
+          <ArrowRightOnRectangleIcon
+            className={`icon-styling text-white group-hover:text-white`}
+          />
         )}
       </span>
     </button>

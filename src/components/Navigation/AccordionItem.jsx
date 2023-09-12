@@ -101,7 +101,13 @@ const AccordionItem = ({
             {chapter?.chapterName}
           </span>
         </p>
-        <div className=" flex-row-centered gap-1 w-[40%]  px-1 ">
+        <div
+          className={` flex items-center ${
+            roles?.includes("EM-201")
+              ? "justify-end pr-2"
+              : "justify-between  gap-1  "
+          } w-[40%]  px-1 `}
+        >
           <div className="flex-row-centered gap-1.5">
             <button
               className={`${roles?.includes("EM-203") ? " group" : "hidden"}`}

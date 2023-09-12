@@ -21,7 +21,9 @@ const NavBgBtn = ({ to, text, isBlue = false }) => {
         } `}
       >
         <span>Login</span>
-        <ArrowLeftOnRectangleIcon className={`icon-styling text-white `} />
+        <ArrowLeftOnRectangleIcon
+          className={`icon-styling text-white group-hover:text-white `}
+        />
       </Link>
     );
   } else if (text === "register") {

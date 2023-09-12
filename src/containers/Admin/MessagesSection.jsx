@@ -25,7 +25,7 @@ const MessagesSection = () => {
     },
   });
   return (
-    <div className="content p-2 m-2 rounded-xl   flex flex-col justify-start ">
+    <div className="content p-2 m-2 rounded-xl   flex flex-col justify-start  h-full overflow-auto">
       <div className="flex flex-row items-center justify-evenly gap-2 fixed bottom-2 right-2 tablet:right-5 z-20">
         <NavMenuBtn
           isNavOpen={isSideBarOpen}
@@ -36,7 +36,7 @@ const MessagesSection = () => {
       {messagesDataQuery.status === "loading" ? (
         <TableSkeleton />
       ) : (
-        <div className="flex-col-centered gap-5">
+        <div className="flex-col-centered gap-5   ">
           <PageTitle title="List of messages" />
           <MessagesTable messagesQuery={messagesDataQuery} />
           <MessagesGrid messagesQuery={messagesDataQuery} />
