@@ -15,7 +15,6 @@ const MessageForm = () => {
   const formRef = useRef(null);
   const { updateAlertBoxData } = useAlertBoxContext();
   const { role, userID } = useParams();
-  console.log({ role, userID });
   const location = useLocation();
   const navigate = useNavigate();
 

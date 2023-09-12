@@ -1,7 +1,6 @@
 import React from "react";
 
 const MessageCard = ({ message, messageKey }) => {
-  console.log(message);
   return (
     <div
       className={` ${

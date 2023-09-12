@@ -13,7 +13,6 @@ import {
 import { PencilIcon } from "@heroicons/react/24/solid";
 
 const TutorTable = ({ tutorQuery }) => {
-  console.log({ tutorQuery: tutorQuery.data });
   const navigate = useNavigate();
   const [filtering, setFiltering] = useState("");
   const [sorting, setSorting] = useState([]);
@@ -28,7 +27,6 @@ const TutorTable = ({ tutorQuery }) => {
       header: () => <span>Chapters</span>,
       cell: (info) => {
         const record = info.row.original;
-        console.log({ record });
         const numberOfChapters = record?.unitChapters?.length;
         return <span>{numberOfChapters}</span>;
       },

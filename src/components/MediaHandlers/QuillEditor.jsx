@@ -47,9 +47,7 @@ const QuillEditor = () => {
     () => fetchLessonNotes({ notesID: currentLesson?.lessonNotes }),
     {
       staleTime: 0,
-      onSuccess: () => {
-        console.log("Notes have been refetched successfully");
-      },
+
       onError: (error) => {
         handleError(error, updateAlertBoxData);
         if (error.response && error.response.data.message === "Token expired") {
@@ -62,11 +60,6 @@ const QuillEditor = () => {
   );
 
   useEffect(() => {
-    console.log(
-      `Current lesson changed refetching notes for ${JSON.stringify(
-        currentLesson?.lessonNotes
-      )}`
-    );
     notesQuery.refetch();
   }, [currentLesson?.lessonNotes]);
 

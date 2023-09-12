@@ -59,7 +59,6 @@ const LessonForm = () => {
     },
   });
 
-  console.log(watch("lessonName"));
   // Prevents the scroll behaviour of our page
   useEffect(() => {
     document.body.style.overflow = "hidden";

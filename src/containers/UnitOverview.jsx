@@ -4,7 +4,6 @@ import { useLocation, useParams } from "react-router-dom";
 
 const UnitOverview = ({ openSideBar, sideBarOpen }) => {
   const { unitID, courseID } = useParams();
-  console.log(`Unit ID in unit overview ${JSON.stringify(unitID)}`);
 
   return (
     <div className="flex-col-centered justify-start w-full h-full pt-1">

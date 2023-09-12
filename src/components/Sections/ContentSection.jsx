@@ -11,7 +11,6 @@ const ContentSection = () => {
   const { updateAlertBoxData } = useAlertBoxContext();
   const queryClient = useQueryClient();
   const { unitID } = useParams();
-  console.log(`Unit ID in content section ${JSON.stringify(unitID)}`);
   const { openSideBar, sideBarOpen } = useOutletContext();
   const { updateCurrentLesson } = useCurrentLessonContext();
   const unitDataQuery = useQuery(

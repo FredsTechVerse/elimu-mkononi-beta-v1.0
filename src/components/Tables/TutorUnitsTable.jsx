@@ -6,7 +6,6 @@ const TutorUnitsTable = ({ unitsData }) => {
   const roles = JSON.parse(localStorage.getItem("roles"));
   const navigate = useNavigate();
   const location = useLocation();
-  console.log({ unitsData });
   return (
     <div className="overflow-auto w-full laptop:px-3 ">
       <table className="w-full bg-slate-50 shadow-lg shadow-slate-200 rounded-lg overflow-hidden  ">

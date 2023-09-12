@@ -13,14 +13,12 @@ const ResourcesSection = () => {
   const location = useLocation();
   const { updateAlertBoxData } = useAlertBoxContext();
   const { unitID, chapterID } = useParams();
-  console.log({ unitID, chapterID });
   const [isDeleteResourceQueryEnabled, setIsDeleteResourceQueryEnabled] =
     useState(false);
   const [resourceToDelete, setResourceToDelete] = useState({});
   const navigate = useNavigate();
   const roles = localStorage.getItem("roles");
   const queryClient = useQueryClient();
-  console.log(chapterID);
   const resourcesQuery = useQuery(
     ["resources", chapterID],
     () => fetchChapterData({ chapterID }),

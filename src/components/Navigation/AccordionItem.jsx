@@ -206,7 +206,6 @@ const AccordionItem = ({
                   <p
                     className=" h-full text-center whitespace-nowrap py-3 text-xs  overflow-hidden text-ellipsis  w-[65%] capitalize "
                     onClick={() => {
-                      console.log("Lesson name clicked");
                       updateCurrentLesson({
                         ...unitData?.unitChapters[chapterIndex]?.chapterLessons[
                           lessonIndex
@@ -226,15 +225,12 @@ const AccordionItem = ({
                         roles?.includes("EM-201") && "hidden"
                       }`}
                       onClick={() => {
-                        console.log("Commence of pencil icon has been clicked");
                         navigate("/new-lesson", {
                           state: {
                             lessonID: lesson?._id,
                             background: location,
                           },
                         });
-
-                        console.log("End of pencil button click");
                       }}
                     >
                       <PencilIcon className="icon-styling h-3 laptop:h-4 text-slate-700 " />

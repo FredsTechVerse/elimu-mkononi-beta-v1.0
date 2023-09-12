@@ -5,12 +5,6 @@ const messageUser = async ({
   recipient = null,
   email = null,
 }) => {
-  console.log({
-    message,
-    contact,
-    recipient,
-    email,
-  });
   const messageConfig = {
     headers: {
       "Content-Type": "application/json",
