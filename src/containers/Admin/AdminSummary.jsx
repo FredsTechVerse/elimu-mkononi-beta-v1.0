@@ -93,7 +93,13 @@ const AdminSummary = () => {
                 doughnutValue={totalUnits}
               />
             </div>
-            <div className="w-full   bg-blue-500 bg-opacity-10 rounded-lg h-64"></div>
+            <div className="w-full  pt-2.5 bg-blue-500 bg-opacity-10 rounded-lg h-64 flex flex-col justify-between items-center  ">
+              <h1 className="uppercase text-sm font-bold">Notifications</h1>
+              <div className="h-[1px] w-full bg-slate-300 mt-1.5"></div>
+              <div className="h-full w-full flex-col-centered">
+                <p className="text-sm text-slate-800">No notifications </p>
+              </div>
+            </div>
             <div className="w-full h-1/3  flex-col-centered gap-1 rounded-lg  ">
               <h1 className="text-slate-900 font-bold text-lg text-center capitalize mt-3 w-full h-12 flex-row-centered  ">
                 Quick Access Controls

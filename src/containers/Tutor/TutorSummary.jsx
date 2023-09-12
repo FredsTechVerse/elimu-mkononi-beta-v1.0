@@ -32,21 +32,16 @@ const TutorSummary = ({ userDataQuery, pieChartData, totalLessons }) => {
           )}
         </div>
       </div>
-      <div className="content p-2 m-2 rounded-xl w-full   flex flex-col justify-start ">
-        {userDataQuery.status === "loading" ? (
-          <TableSkeleton />
-        ) : (
-          <div className="flex-col-centered ">
-            <PageTitle title="List of units" />
-            <TutorTable tutorQuery={userDataQuery} />
-            {/* <TutorUnitsTable unitsData={userDataQuery?.data?.units} /> */}
-          </div>
-        )}
-      </div>
       <div className="flex phone:flex-col tablet:flex-col w-full gap-5   ">
         <div className=" h-full w-full tablet:w-full gap-5  flex flex-col items-center justify-start  rounded-xl">
           <div className=" phone:w-full gap-5  flex phone:flex-col tablet:flex-row tablet:w-full tablet:justify-between  ">
-            <div className="bg-slate-300 rounded-lg phone:h-64 tablet:h-full phone:w-full tablet:w-2/3 order-2 "></div>
+            <div className="bg-slate-300 rounded-lg phone:h-64 tablet:h-full phone:w-full tablet:w-2/3 order-2 flex flex-col justify-between items-center pt-2">
+              <h1 className="uppercase text-sm font-bold">Notifications</h1>
+              <div className="h-[1px] w-full bg-slate-300 mt-1.5"></div>
+              <div className="h-full w-full flex-col-centered">
+                <p className="text-sm text-slate-800">No notifications </p>
+              </div>
+            </div>
             <div className="tablet:h-full phone:w-full tablet:w-1/3 flex-row-centered order-1">
               <DoughnutChart
                 chartData={pieChartData}
@@ -56,6 +51,16 @@ const TutorSummary = ({ userDataQuery, pieChartData, totalLessons }) => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="content p-2 m-2 rounded-xl w-full   flex flex-col justify-start ">
+        {userDataQuery.status === "loading" ? (
+          <TableSkeleton />
+        ) : (
+          <div className="flex-col-centered ">
+            <PageTitle title="List of units" />
+            <TutorTable tutorQuery={userDataQuery} />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -43,7 +43,7 @@ const TutorSideBar = ({ isSideBarOpen, userDataQuery, toggleSideBar }) => {
         <h1 className="text-slate-900 font-bold text-lg text-center capitalize mt-3 w-full h-12 flex-row-centered  ">
           Quick Access Controls
         </h1>
-        <div className="gap-2 p-2 grid grid-cols-1  h-full w-full">
+        <div className="gap-1 p-2 grid grid-cols-1  h-full w-full">
           <AdminNavItem
             page="tutorDashboard"
             to="/new-chapter"

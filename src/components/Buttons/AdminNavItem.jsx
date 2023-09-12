@@ -6,7 +6,7 @@ const AdminNavItem = ({ text, to, page = null }) => {
   if (page === "tutorDashboard") {
     return (
       <Link to={to} state={{ background: location }}>
-        <button className=" transition-all  duration-200 group h-14 w-full pointer-cursor hover:bg-purple-400  text-white rounded-lg bg-primary rounded-ms capitalize">
+        <button className=" transition-all  duration-200 group h-11 laptop:h-12 w-full pointer-cursor hover:bg-purple-400  text-white rounded-lg bg-primary rounded-ms capitalize">
           <div className="flex justify-between items-center px-4">
             Add {text}
             <span className="text-xl">
