@@ -66,7 +66,7 @@ const CourseCardV2 = ({ courseData }) => {
   }
 
   return (
-    <div className=" group relative flex flex-col items-center w-full h-full bg-opacity-20  rounded-xl m-3 bg-slate-300 shadow-slate-300 shadow-lg ">
+    <div className="  relative flex flex-col items-center w-full h-full bg-opacity-20  rounded-xl m-3 bg-slate-300 shadow-slate-300 shadow-lg ">
       <img
         src={`https://elimu-mkononi.s3.af-south-1.amazonaws.com/${courseData?.courseImage}`}
         alt="course image"
@@ -100,29 +100,25 @@ const CourseCardV2 = ({ courseData }) => {
         </div>
       </div>
 
-      <div className="absolute bottom-0 right-0 flex gap-2  items-end">
+      <div className="absolute bottom-0 right-0 flex items-center gap-2  items-end">
         <button
-          className={`${
-            roles?.includes("EM-203") ? "cta-btn group" : "hidden"
-          }`}
+          className={`${roles?.includes("EM-203") ? " group" : "hidden"}`}
           onClick={() => {
             setIsDeleteQueryEnabled(true);
           }}
         >
-          <TrashIcon className="icon-styling h-3 laptop:h-4 text-white" />
+          <TrashIcon className="icon-styling h-3 laptop:h-4 text-slate-700" />
         </button>
 
         <button
-          className={`${
-            roles?.includes("EM-203") ? "cta-btn  group " : "hidden"
-          }`}
+          className={`${roles?.includes("EM-203") ? "  group " : "hidden"}`}
           onClick={() => {
             navigate("/new-course", {
               state: { courseID: courseData?._id, background: location },
             });
           }}
         >
-          <PencilIcon className="icon-styling h-3 laptop:h-4  text-white" />
+          <PencilIcon className="icon-styling h-3 laptop:h-4  text-slate-700" />
         </button>
         <button
           onClick={handleClick}

@@ -74,7 +74,7 @@
   }
 
   .icon-styling {
-    @apply text-slate-100 m-0.5 cursor-pointer h-6 aspect-square group-hover:text-white;
+    @apply text-slate-100 m-0.5 cursor-pointer h-6 aspect-square group-hover:text-primary;
   }
 
   .card-icon-styling {
@@ -121,7 +121,7 @@
     @apply flex flex-col justify-center items-center w-full mt-4;
   }
   .cta-btn {
-    @apply rounded-full h-7 mb-0.5 aspect-square cursor-pointer flex-row-centered bg-slate-700 hover:bg-slate-900 transition-all  duration-200;
+    @apply rounded-full h-[24px] mb-0.5 aspect-square cursor-pointer flex-row-centered bg-slate-700 hover:bg-slate-900 transition-all  duration-200;
   }
 
   /* MODAL STYLING */

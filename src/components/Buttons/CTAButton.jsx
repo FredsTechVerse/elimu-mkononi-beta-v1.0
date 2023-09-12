@@ -53,14 +53,14 @@ const CTAButton = ({ userID, role = null }) => {
     return (
       <div className="flex-row-centered gap-2 ">
         <button
-          className="cta-btn group"
+          className="group"
           onClick={() => {
             navigate(`/new-message/${role}/${userID}`, {
               state: { background: location },
             });
           }}
         >
-          <EnvelopeIcon className="icon-styling h-3 laptop:h-4 text-white" />
+          <EnvelopeIcon className="icon-styling h-3 laptop:h-4 text-slate-700" />
         </button>
         <button
           className="cta-btn group capitalize text-center rounded-full w-20 text-sm text-white"
@@ -73,12 +73,12 @@ const CTAButton = ({ userID, role = null }) => {
           update
         </button>
         <button
-          className="cta-btn group"
+          className=" group"
           onClick={() => {
             setIsDeleteQueryEnabled(true);
           }}
         >
-          <TrashIcon className="icon-styling h-3 laptop:h-4 text-white" />
+          <TrashIcon className="icon-styling h-3 laptop:h-4 text-slate-700" />
         </button>
       </div>
     );

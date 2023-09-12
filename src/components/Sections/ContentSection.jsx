@@ -49,7 +49,7 @@ const ContentSection = () => {
         />
         <VideoPlayer />
         <div className="border-none border-slate-400 rounded-lg w-full">
-          <Outlet context={{ openSideBar }} />
+          <Outlet context={{ sideBarOpen, openSideBar }} />
         </div>
       </div>
     );

@@ -91,17 +91,20 @@ const AccordionItem = ({
     }
   );
   return (
-    <li className="accordion_item">
-      <div className="button hover:bg-slate-300 group px-2 text-sm flex items-center ">
-        <div className="w-full h-full" onClick={onToggle}>
-          {chapter?.chapterName}
-        </div>
-        <div className="flex gap-3 items-center justify-between w-min">
-          <div className="flex-row-centered gap-2">
+    <li className="accordion_item ">
+      <div className="button border-b-2 border-b-lg hover:bg-slate-300   p-0 h-14 flex items-center justify-between gap-0.5 w-full ">
+        <p
+          className="w-[60%] h-full flex-row-centered font-bold text-[13px] text-start pl-2  "
+          onClick={onToggle}
+        >
+          <span className="w-full overflow-hidden text-ellipsis whitespace-nowrap">
+            {chapter?.chapterName}
+          </span>
+        </p>
+        <div className=" flex-row-centered gap-1 w-[40%]  px-1 ">
+          <div className="flex-row-centered gap-1.5">
             <button
-              className={`${
-                roles?.includes("EM-203") ? "cta-btn group" : "hidden"
-              }`}
+              className={`${roles?.includes("EM-203") ? " group" : "hidden"}`}
               onClick={() => {
                 navigate("/new-lesson", {
                   state: {
@@ -112,12 +115,10 @@ const AccordionItem = ({
                 });
               }}
             >
-              <PlusIcon className="icon-styling h-3 laptop:h-4  text-white" />
+              <PlusIcon className="icon-styling h-5  text-slate-700" />
             </button>
             <button
-              className={`${
-                roles?.includes("EM-203") ? "cta-btn group" : "hidden"
-              }`}
+              className={`${roles?.includes("EM-203") ? " group" : "hidden"}`}
               onClick={() => {
                 navigate("/new-chapter", {
                   state: {
@@ -127,25 +128,25 @@ const AccordionItem = ({
                 });
               }}
             >
-              <PencilIcon className="icon-styling h-3 laptop:h-4 text-white" />
+              <PencilIcon className="icon-styling h-3 laptop:h-4 text-slate-700" />
             </button>
             <button
               className={`${
-                roles?.includes("EM-203") ? "cta-btn group" : "hidden"
-              } cta-btn group`}
+                roles?.includes("EM-203") ? " group" : "hidden"
+              } group`}
               onClick={() => {
                 setIsDeleteChapterQueryEnabled(true);
               }}
             >
-              <TrashIcon className="icon-styling h-3 laptop:h-4 text-white" />
+              <TrashIcon className="icon-styling h-3 laptop:h-4 text-slate-700" />
             </button>
           </div>
 
           <span onClick={onToggle}>
             {active ? (
-              <ChevronDownIcon className="icon-styling text-slate-900 group-hover:text-white" />
+              <ChevronDownIcon className="icon-styling h-5 text-slate-900 group-hover:text-white" />
             ) : (
-              <ChevronRightIcon className="icon-styling text-slate-900 group-hover:text-white" />
+              <ChevronRightIcon className="icon-styling h-5 text-slate-900 group-hover:text-white" />
             )}
           </span>
         </div>
@@ -164,12 +165,12 @@ const AccordionItem = ({
             return (
               <li
                 key={lessonIndex}
-                className=" bg-slate-300 hover:bg-slate-400 text-black w-full px-3  my-0.5 capitalize rounded-md"
+                className=" bg-slate-300 hover:bg-slate-400 text-black w-full  mb-0.5 capitalize rounded-md px-1.5 h-9"
               >
                 <div className="flex flex-row items-center  justify-between ">
                   {lesson.videoKind === "youtube#video" ? (
                     <PlayCircleIcon
-                      className=" icon-styling text-slate-700 hover:bg-slate-700"
+                      className=" icon-styling text-slate-700 hover:text-slate-900"
                       onClick={() => {
                         updateCurrentLesson({
                           ...unitData?.unitChapters[chapterIndex]
@@ -183,7 +184,7 @@ const AccordionItem = ({
                     />
                   ) : (
                     <WalletIcon
-                      className="icon-styling h-4 text-slate-700 hover:bg-slate-900"
+                      className="icon-styling h-4 text-slate-700 hover:text-slate-900"
                       onClick={() => {
                         updateCurrentLesson({
                           ...unitData?.unitChapters[chapterIndex]
@@ -197,7 +198,7 @@ const AccordionItem = ({
                     />
                   )}
                   <p
-                    className=" h-full text-center whitespace-wrap px-2 py-3   w-full capitalize text-sm"
+                    className=" h-full text-center whitespace-nowrap py-3 text-xs  overflow-hidden text-ellipsis  w-[65%] capitalize "
                     onClick={() => {
                       console.log("Lesson name clicked");
                       updateCurrentLesson({
@@ -215,7 +216,7 @@ const AccordionItem = ({
                   </p>
                   <div className="flex gap-1">
                     <button
-                      className={`cta-btn group ${
+                      className={` group ${
                         roles?.includes("EM-201") && "hidden"
                       }`}
                       onClick={() => {
@@ -230,10 +231,10 @@ const AccordionItem = ({
                         console.log("End of pencil button click");
                       }}
                     >
-                      <PencilIcon className="icon-styling h-3 laptop:h-4 text-white " />
+                      <PencilIcon className="icon-styling h-3 laptop:h-4 text-slate-700 " />
                     </button>
                     <button
-                      className={`cta-btn group ${
+                      className={`group ${
                         roles?.includes("EM-201") && "hidden"
                       }`}
                       onClick={() => {
@@ -241,7 +242,7 @@ const AccordionItem = ({
                         setIsDeleteLessonQueryEnabled(true);
                       }}
                     >
-                      <TrashIcon className="icon-styling h-3 laptop:h-4 text-white" />
+                      <TrashIcon className="icon-styling h-3 laptop:h-4 text-slate-700" />
                     </button>
                   </div>
                 </div>
@@ -249,7 +250,7 @@ const AccordionItem = ({
             );
           })}
 
-        <li
+        <button
           className="hover:bg-slate-400 bg-slate-500 text-white hover:text-slate-900 text-center w-full px-3 py-2 my-0.5 capitalize rounded-md flex justify-between items-center "
           onClick={() => {
             navigate(
@@ -262,8 +263,8 @@ const AccordionItem = ({
             );
           }}
         >
-          <p>Resources</p>
-        </li>
+          Resources
+        </button>
       </ul>
     </li>
   );

@@ -61,7 +61,7 @@ const ResourcesSection = () => {
       <button
         className={`${
           roles?.includes("EM-203")
-            ? "absolute capitalize right-2 top-2 bg-slate-600 hover:bg-slate-900 w-max px-3 flex-row-centered rounded-lg gap-2 h-8 tablet:h-10 text-slate-100 group z-10"
+            ? "absolute capitalize right-2 top-2 bg-slate-600 hover:bg-slate-900 w-max px-3 flex-row-centered gap-2 h-8  text-slate-100 group z-10 rounded-lg"
             : "hidden"
         }`}
         onClick={() => {
@@ -95,7 +95,7 @@ const ResourcesSection = () => {
                     });
                   }}
                 >
-                  <DocumentTextIcon className="icon-styling text-slate-800" />
+                  <DocumentTextIcon className="icon-styling h-5 text-slate-800" />
                 </span>
                 <span
                   className="text-slate-800  w-full h-full flex-row-centered"
@@ -108,7 +108,7 @@ const ResourcesSection = () => {
                   {resource.resourceName}
                 </span>
                 <button
-                  className={` cta-btn group z-10 ${
+                  className={` group z-10 ${
                     roles?.includes("EM-201") && "hidden"
                   }`}
                   onClick={() => {
@@ -119,7 +119,7 @@ const ResourcesSection = () => {
                     setIsDeleteResourceQueryEnabled(true);
                   }}
                 >
-                  <TrashIcon className="icon-styling  h-3 laptop:h-4 text-white" />
+                  <TrashIcon className="icon-styling  h-3 laptop:h-4 text-slate-700" />
                 </button>
               </div>
             );

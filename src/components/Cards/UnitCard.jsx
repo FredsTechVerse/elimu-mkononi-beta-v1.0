@@ -39,47 +39,43 @@ const UnitCard = ({
     },
   });
   return (
-    <article className="hover:cursor-pointer w-full  laptop:h-44  h-40 flex flex-col gap-2  pt-2 rounded-xl shadow-lg shadow-slate-400 ">
-      <section className="px-2 flex items-center justify-start gap-3 ">
+    <article className="hover:cursor-pointer w-full  laptop:h-44  h-40 flex flex-col justify-between   pt-2 rounded-xl shadow-lg shadow-slate-400 ">
+      <section className="px-2 flex items-center justify-start gap-3 h-[20%] ">
         <div className="ml-2 h-8 aspect-square  rounded-full bg-slate-600  flex-row-centered text-white ">
           <span className="font-extraLight">{unitNumber}</span>
         </div>
         <h1 className="uppercase text-lg font-extrabold">{unitName}</h1>
       </section>
-      <section className={` w-full h-full flex-row-centered`}>
-        <p className="text-dark text-md w-full h-full px-4 mt-3">
+      <section className={` w-full h-full flex-row-centered overflow-auto`}>
+        <p className="text-dark text-md text-ellipsis  w-full h-full px-4 mt-3">
           {unitDescription}
         </p>
       </section>
-      <section className=" flex gap-2 justify-end items-center">
+      <section className="  flex gap-2 justify-end items-center h-[20%]">
         <button
-          className={`${
-            roles?.includes("EM-203") ? "cta-btn group" : "hidden"
-          }`}
+          className={`${roles?.includes("EM-203") ? " group" : "hidden"}`}
           onClick={() => {
             setIsDeleteQueryEnabled(true);
           }}
         >
-          <TrashIcon className="icon-styling h-4 text-white" />
+          <TrashIcon className="icon-styling h-4 text-slate-700" />
         </button>
 
         <button
-          className={`${
-            roles?.includes("EM-203") ? "cta-btn group" : "hidden"
-          }`}
+          className={`${roles?.includes("EM-203") ? " group" : "hidden"}`}
           onClick={() => {
             navigate("/new-unit", {
               state: { unitID, background: location },
             });
           }}
         >
-          <PencilIcon className="icon-styling h-4  text-white" />
+          <PencilIcon className="icon-styling h-4  text-slate-700" />
         </button>
 
         <Link
           to={`/course/${courseID}/${unitID}/content`}
           state={{ previousPage: location }}
-          className="flex-row-centered gap-1 px-2 laptop:w-40 bg-slate-600 hover:bg-slate-800  text-white h-8 rounded-br-md rounded-tl-md "
+          className="flex-row-centered gap-1 px-2 laptop:w-40 bg-slate-600 hover:bg-slate-800  text-slate-100 h-8 rounded-br-md rounded-tl-md "
         >
           <p>Learn More</p>
         </Link>

@@ -6,7 +6,7 @@ import {
 } from "../../components";
 const ContentSectionSkeleton = () => {
   return (
-    <div className="w-full animate-pulse flex flex-col justify-start items-center m-2 overflow-x-hidden  ">
+    <div className="w-full animate-pulse flex flex-col gap-1 justify-start items-center overflow-x-hidden p-0.5 ">
       <UnitNavSkeleton />
       <VideoSkeleton />
       <div className="w-full bg-white flex-col-centered gap-3 mt-4 ">

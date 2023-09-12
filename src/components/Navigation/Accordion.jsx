@@ -25,7 +25,7 @@ const Accordion = ({ unitData, closeSideBar }) => {
 
   return (
     <div className="relative z-10 flex flex-col items-center  bg-slate-100 h-screen   ">
-      <div className="flex items-center justify-between w-full  px-2 h-14  font-bold text-md text-slate-200 bg-primary text-center uppercase py-4 rounded-br-lg">
+      <div className="flex items-center justify-between w-full  pr-2 h-14  font-bold text-md text-slate-200 bg-primary text-center uppercase py-4 rounded-t-lg ">
         <HomeBtn isBlue={true} icon={true} />
         <span className="uppercase">{unitData?.unitName}</span>
         <div className={` flex-row-centered gap-1 `}>
@@ -45,7 +45,7 @@ const Accordion = ({ unitData, closeSideBar }) => {
                 chapterTotals: chapterTotals,
               }}
             >
-              <PlusIcon className="text-slate-800 m-0.5 hover:cursor-pointer h-3 laptop:h-4" />
+              <PlusIcon className="text-slate-800 group-hover:text-white m-0.5 hover:cursor-pointer h-3 laptop:h-4" />
             </Link>
           </div>
           <div

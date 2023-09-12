@@ -32,7 +32,7 @@ const ContentPage = () => {
   };
 
   return (
-    <main className="flex relative gap-0.5 laptop:grid laptop:grid-cols-4 w-full h-screen  overflow-y-hidden">
+    <main className="flex relative gap-0.5 laptop:grid laptop:grid-cols-4 w-full h-screen  overflow-y-hidden p-0.5">
       <article
         className={` ${
           sideBarOpen ? "block" : "hidden"
@@ -50,7 +50,7 @@ const ContentPage = () => {
         )}
       </article>
 
-      <article className="w-full laptop:col-span-3 tablet:col-span-2 h-full overflow-y-auto flex  flex-col  ">
+      <article className="w-full laptop:col-span-3 tablet:col-span-2 h-full overflow-y-auto flex  flex-col px-0.5 ">
         <Outlet
           context={{
             unitDataQuery: unitDataQuery,

@@ -15,7 +15,7 @@ import "react-quill/dist/quill.snow.css";
 
 const QuillEditor = () => {
   const { updateAlertBoxData } = useAlertBoxContext();
-  const { openSideBar } = useOutletContext();
+  const { openSideBar, sideBarOpen } = useOutletContext();
   const queryClient = useQueryClient();
   const { currentLesson } = useCurrentLessonContext();
   const roles = JSON.parse(localStorage.getItem("roles"));
@@ -175,17 +175,19 @@ const QuillEditor = () => {
         <h1 className="font-bold text-lg pt-2 ml-1 ">
           {currentLesson?.lessonName}
         </h1>
-        <div className="flex-row-centered gap-2 ">
+        <div className={`flex-row-centered gap-2  `}>
           <button
-            className="h-8 w-36 laptop:hidden bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full"
+            className={`h-6 px-2 w-max  laptop:hidden bg-black text-white  text-sm  hover:bg-primary hover:text-white hover:cursor-pointer rounded-full ${
+              sideBarOpen && "hidden"
+            }`}
             onClick={openSideBar}
           >
-            Open Sidebar
+            Sidebar
           </button>
           <div>
             {!isEditorEnabled ? (
               <button
-                className="h-8 w-36 bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full"
+                className="h-6 px-2 w-max  bg-black text-white text-sm hover:bg-primary hover:text-white hover:cursor-pointer rounded-full"
                 onClick={() => {
                   enableEdit();
                 }}
@@ -195,7 +197,7 @@ const QuillEditor = () => {
             ) : (
               <div className=" flex-row-centered gap-2">
                 <button
-                  className="h-8 w-24 bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full"
+                  className="h-6 px-2 w-max bg-black text-white hover:bg-primary hover:text-white hover:cursor-pointer rounded-full text-sm"
                   onClick={() => {
                     handleSave();
                   }}
@@ -203,7 +205,7 @@ const QuillEditor = () => {
                   Save
                 </button>
                 <button
-                  className="h-8 w-24 bg-black text-white hover:bg-purple-500 hover:text-white hover:cursor-pointer rounded-full"
+                  className="h-6 px-2 w-max bg-black text-white hover:bg-primary hover:text-white hover:cursor-pointer rounded-full text-sm"
                   onClick={() => {
                     handleCancel();
                   }}
