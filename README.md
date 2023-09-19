@@ -35,23 +35,21 @@
 
 - Toggle password visibility by changing input type between password and text with a btn click on user and password update forms.
 - Ensure account verification before login and add toggle button to enable and disable user accounts
+- MESSAGING - Refine messaging by allowing contact to autofill.We can use the userID to retrieve and display name.- On clicking on a message , it shall be considered as read.Use africas talking api in production mainly because of asena's shortcode being flagged as a promotional message .... Sent and declined messages not defined.
 
 <!-- CHUNK TWO : UI CONCERNS -->
 
 - Add control btns to the react player.
-- Confirm queries display null message when no data is available instead of .map error
-- A modal overlay is an overkill to resource UI .... I'll shift to cards with the react pdf image instead with a ready to download button.
-- Show data is loading status on update
+- Reconstruct resource UI to cards with a ready to download button.
 - Confirm data invalidation / refetch upon update and deletion , creation working well- Pay close attention to chapter form behaviour.Invalidate course update upon deletion
-- MESSAGING - Refine messaging by allowing contact to autofill.We can use the userID to retrieve and display name.- On clicking on a message , it shall be considered as read.Use africas talking api in production mainly because of asena's shortcode being flagged as a promotional message .... Sent and declined messages not defined.
+- Find out why when SMS services fails, user registration also fails .... Could be a generic message if error is uknown.
+- Test youtube refresh token acquisition by inversing if logic
 
 <!-- CHUNK 3 : BUILD CONCERNS -->
 
-- Build comment section will be sent to email.
-- Find out why when SMS services fails, user registration also fails .... Could be a generic message if error is uknown.
-- Test youtube refresh token acquisition by inversing if logic
-- Instead of sending errors to email directly we can read and write to the server file system. with the format that we want. And a daily report sent to user.
 - Migrate to using nextjs and typescript
+- Instead of sending errors to email directly we can read and write to the server file system. with the format that we want. And a daily report sent to user.
+- Build comment section will be sent to email.
 - Implement user tracking
 
 ### USING COMPONENT LIBRARIES ( MY GOLDEN RULE )
