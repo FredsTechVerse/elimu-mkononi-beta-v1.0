@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { confirmResetToken, handleError } from "../../controllers";
 import { useMutation } from "@tanstack/react-query";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 import { useForm } from "react-hook-form";
 
-import { ErrorMessage, FormNavigation, Modal, SubmitButton } from "..";
+import { ResetTokenVerificationFormSyntax } from "../../components";
 
 const ResetTokenVerificationForm = () => {
   const formRef = useRef(null);
@@ -85,44 +85,14 @@ const ResetTokenVerificationForm = () => {
   };
 
   return (
-    <Modal>
-      <div className="form-wrap ">
-        <FormNavigation text="Reset Token" />
-        <form
-          encType="multipart/form-data"
-          className="form-styling"
-          onSubmit={handleSubmit(handleResetToken)}
-        >
-          <div className="input-wrap">
-            <label htmlFor="course">Reset Token</label>
-            <input
-              className="input-styling"
-              placeholder="Enter reset token"
-              {...register("resetToken", {
-                required: "This field is required ",
-              })}
-            />
-            {errors.resetToken && (
-              <ErrorMessage message={errors.resetToken?.message} />
-            )}
-          </div>
-          <div className="cta-wrap">
-            <div className="flex flex-row gap-5 items-center">
-              <SubmitButton
-                type="submit"
-                disabled={watch("resetToken") ? false : true}
-                isSubmitting={resetTokenConfirmationMutation.isLoading}
-                text={
-                  resetTokenConfirmationMutation.isLoading
-                    ? "Verifying"
-                    : "Verify"
-                }
-              />
-            </div>
-          </div>
-        </form>
-      </div>
-    </Modal>
+    <ResetTokenVerificationFormSyntax
+      watch={watch}
+      handleSubmit={handleSubmit}
+      handleResetToken={handleResetToken}
+      register={register}
+      errors={errors}
+      resetTokenConfirmationMutation={resetTokenConfirmationMutation}
+    />
   );
 };
 

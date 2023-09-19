@@ -31,28 +31,28 @@
 
 <!-- RELEASE PREPARATION -->
 
-- find out why when SMS services fails , user registration also fails .... Could be a generic message if error is uknown.
-- Allow user account confirmation without credentials
+- Separate form logic from syntax (Syntax only needs props.)
+- Find out why when SMS services fails, user registration also fails .... Could be a generic message if error is uknown.
+- Confirm user account confirmation without credentials
 - Toggle password and text on the password input to display and hide accordingly.
 - Refine messaging by allowing contact to autofill.We can use the userID to retrieve and display name.
-- Refine queries to show the fancy message when no data is available . Ensure you handle .length properly instead of avoiding is using ?.
-- SHARE FOR USER FEEDBACK TO LAWRENCE & THE TRANSFORMERS TEAM - We can create a link for admin account creation which just goes to the user form with the admin role.
-- Release the learner account to the public only selected individuals and upon user request will i expose the admin and tutor accounts. Will include the registration process for user to have a feel of the messaging and emailing functionalities. Lets wrap up this project!
-
-- <!-- SECONDARY -->
+- Include typescript by adding type definations.
 - Invalidate course update upon deletion
-- I can add a resource count to the button
+- Add a resource count to the button
 - Ensure account verification , add toggle button to enable and disable accounts
 - Test youtube refresh token acquisition by inversing if logic
 - Add control btns to the react player.
-- Refine queries to display null when no data is available and eliminate .length when no data is available.
-- Move to portfolio backend and frontend revamp (# simplification.)
-- Separate the form CRUD logic.
-- On clicking on a message , it shall be considered as read.
-- Implement typescript with SWC.
-- If need arises implement user tracking
-- Comments section can be built
+- Ensure queries display null when no data is available instead of .map error
 - Instead of sending errors to email directly we can read and write to the server file system. with the format that we want. And a daily report sent to user.
+- On clicking on a message , it shall be considered as read.
+- Comments section can be bu ilt
+
+- Show data is loading on update
+- Handle verification using zod two passwords must match b4 registration.
+
+<!-- TERTIARY IMPLEMENT USER TRACKING. -->
+
+- If need arises implement user tracking
 
 ### USING COMPONENT LIBRARIES ( MY GOLDEN RULE )
 

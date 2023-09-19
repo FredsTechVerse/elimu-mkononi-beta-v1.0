@@ -55,6 +55,20 @@ import {
   ResetTokenVerificationForm,
   UserCredentialsConfirmationForm,
 } from "./Forms";
+import {
+  ChapterFormSyntax,
+  CourseFormSyntax,
+  ForgotPasswordFormSyntax,
+  LessonFormSyntax,
+  LoginFormSyntax,
+  MessageFormSyntax,
+  PasswordUpdateFormSyntax,
+  ResetTokenVerificationFormSyntax,
+  ResourceFormSyntax,
+  UnitFormSyntax,
+  UserCredentialsConfirmationFormSyntax,
+  UserFormSyntax,
+} from "./FormSyntax";
 
 import {
   TutorCardHome,
@@ -142,6 +156,18 @@ import {
 import { PriceTag, DurationTag } from "./Tags";
 
 export {
+  ChapterFormSyntax,
+  CourseFormSyntax,
+  ForgotPasswordFormSyntax,
+  LessonFormSyntax,
+  LoginFormSyntax,
+  MessageFormSyntax,
+  PasswordUpdateFormSyntax,
+  ResetTokenVerificationFormSyntax,
+  ResourceFormSyntax,
+  UnitFormSyntax,
+  UserCredentialsConfirmationFormSyntax,
+  UserFormSyntax,
   AddBtn,
   LogInForm,
   HomePageCard,
