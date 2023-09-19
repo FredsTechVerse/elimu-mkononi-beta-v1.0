@@ -1,18 +1,17 @@
 import { handleLogout, renewToken } from "../controllers";
 
 const ERRORS = {
-  NETWORK_ERROR: "We're experiencing a network issue. Please try again later.",
-  SERVER_ERROR:
-    "Oops! We're encountering technical difficulties. Please try again later.",
+  NETWORK_ERROR:
+    "Oops! There seems to be an issuer with your network. Ensure you have internet connectivity",
+  SERVER_ERROR: "Oops! We're encountering some hitches.Please try again later.",
   AUTHORIZATION_ERROR:
-    "Invalid username or password. Please check your credentials.",
-  BLANK_ERROR: "The requested data does not exist.",
-  DUPLICATION_ERROR:
-    "This data already exists. Please provide unique information.",
+    "Invalid username or password.Please confirm your credentials",
+  BLANK_ERROR: "The requested data does not exist!",
+  DUPLICATION_ERROR: "This data already exists on the database",
   INVALID_TOKEN: "Your token is invalid. Please log in again.",
   INVALID_ID: "The resource identity is invalid or doesn't exist.",
   BAD_REQUEST:
-    "A malformed request was sent to the server. Please check your request.",
+    "A bad request was sent to the server. Please check your request.",
   LOGOUT:
     "You are unauthorized to perform this action. You are being logged out.",
 };
