@@ -1,13 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { LessonFormSyntax } from "../../components";
-import { XCircleIcon } from "@heroicons/react/24/solid";
-
 import { useNavigate, useLocation } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   createLesson,
   updateLesson,
-  deleteLesson,
   fetchLessonData,
   handleError,
 } from "../../controllers";
@@ -193,7 +190,6 @@ const LessonForm = () => {
           });
         } else {
           updateLessonMutation.mutate({
-            lessonNumber: `${chapterID}-${lessonNumber}`,
             lessonName,
             lessonUrl,
             lessonID,
@@ -215,7 +211,8 @@ const LessonForm = () => {
     <LessonFormSyntax
       watch={watch}
       handleSubmit={handleSubmit}
-      saveChapter={saveChapter}
+      saveLesson={saveLesson}
+      lessonUrl={lessonUrl}
       isEditEnabled={isEditEnabled}
       isLessonQueryEnabled={isLessonQueryEnabled}
       enableEdit={enableEdit}

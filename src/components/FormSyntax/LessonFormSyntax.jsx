@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  FormNavigation,
   ErrorMessage,
   Modal,
   SubmitButton,
@@ -10,6 +11,7 @@ const LessonFormSyntax = ({
   watch,
   handleSubmit,
   saveLesson,
+  lessonUrl,
   isEditEnabled,
   enableEdit,
   disableEdit,
@@ -23,15 +25,8 @@ const LessonFormSyntax = ({
   return (
     <Modal>
       <div className={`form-wrap`}>
-        <div className=" relative w-full flex justify-center items-center text-lg font-bold text-white uppercase  px-2 py-5  rounded-t-2xl ">
-          lesson form
-          <button
-            className="absolute top-4.5 right-3"
-            onClick={() => navigate(background)}
-          >
-            <XCircleIcon className="icon-styling text-slate-800 " />
-          </button>
-        </div>
+        <FormNavigation text="Lesson form" />
+
         <form
           encType="multipart/form-data"
           className="form-styling gap-4"
