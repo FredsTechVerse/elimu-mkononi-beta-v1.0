@@ -29,6 +29,7 @@ const PasswordUpdateFormSyntax = ({
             <input
               className="input-styling"
               placeholder="Enter new password"
+              type="password"
               {...register("password", {
                 required: "This field is required ",
               })}
@@ -43,6 +44,7 @@ const PasswordUpdateFormSyntax = ({
             <input
               className="input-styling"
               placeholder="Retype New Password"
+              type="password"
               {...register("cPassword", {
                 required: "This field is required ",
               })}

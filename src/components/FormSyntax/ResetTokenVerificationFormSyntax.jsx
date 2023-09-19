@@ -21,7 +21,7 @@ const ResetTokenVerificationFormSyntax = ({
             <label htmlFor="course">Reset Token</label>
             <input
               className="input-styling"
-              placeholder="Enter reset token"
+              placeholder="Enter reset token sent to email"
               {...register("resetToken", {
                 required: "This field is required ",
               })}

@@ -172,17 +172,26 @@ const UserForm = () => {
   };
 
   const saveUser = async (data) => {
-    const { fName, surname, password, contact, email } = data;
+    const { fName, surname, password, cPassword, contact, email } = data;
     if (role) {
       if (!isUserQueryEnabled) {
-        createUserMutation.mutate({
-          firstName: fName.trim(),
-          surname: surname.trim(),
-          password: password.trim(),
-          contact: `254${contact.trim()}`,
-          email: email.trim(),
-          role,
-        });
+        if (password === cPassword) {
+          createUserMutation.mutate({
+            firstName: fName.trim(),
+            surname: surname.trim(),
+            password: password.trim(),
+            contact: `254${contact.trim()}`,
+            email: email.trim(),
+            role,
+          });
+        } else {
+          updateAlertBoxData({
+            response: "Passwords do not match",
+            isResponse: true,
+            status: "failure",
+            timeout: 4500,
+          });
+        }
       } else {
         updateUserMutation.mutate({
           userID,

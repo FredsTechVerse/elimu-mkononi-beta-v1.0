@@ -30,32 +30,25 @@
 - Why am i using useEffect when i can use the query data immediately.... using the userQuery.data
 
 <!-- RELEASE PREPARATION -->
-
+- There is need to ensure form labels are matched correctly for the sake of autofilling and password save in browsers.
 - Separate form logic from syntax (Syntax only needs props.)
 - Find out why when SMS services fails, user registration also fails .... Could be a generic message if error is uknown.
-- Confirm user account confirmation without credentials
-- Toggle password and text on the password input to display and hide accordingly.
-- Refine messaging by allowing contact to autofill.We can use the userID to retrieve and display name.
-- Include typescript by adding type definations.
-- Invalidate course update upon deletion
+- Toggle password visibility by changing input type between password and text with a btn click on user and password update forms.
+- Refine messaging by allowing contact to autofill.We can use the userID to retrieve and display name.- On clicking on a message , it shall be considered as read.
 - Add a resource count to the button
-- Ensure account verification , add toggle button to enable and disable accounts
+- Ensure account verification before login and add toggle button to enable and disable user accounts
 - Test youtube refresh token acquisition by inversing if logic
 - Add control btns to the react player.
-- Ensure queries display null when no data is available instead of .map error
+- Confirm queries display null message when no data is available instead of .map error
 - Instead of sending errors to email directly we can read and write to the server file system. with the format that we want. And a daily report sent to user.
-- On clicking on a message , it shall be considered as read.
-
-<!-- TERTIARY IMPLEMENT USER TRACKING. -->
-
-- A modal overlay is an overkil to resource view .... Ill shift to cards with the react pdf image instead with a ready to download button.
+- A modal overlay is an overkill to resource UI .... I'll shift to cards with the react pdf image instead with a ready to download button.
 - Improve content section logic. Current content section no lesson / video player display is depended on where the first chapter has lesson in it.
-- Confirm data invalidation / refetch upon update - Pay close attention to chapter form behaviour
-- Build comment section.
-- Show data is loading on update
+- Confirm data invalidation / refetch upon update - Pay close attention to chapter form behaviour.Invalidate course update upon deletion
+- Build comment section will be sent to email.
+- Show data is loading status on update
 - Add open sidebar button to content section on small screens when no chapter hence lesson is present.
-- Handle verification using zod two passwords must match b4 registration.
-- If need arises implement user tracking
+- Handle verification using zod
+- Implement user tracking
 
 ### USING COMPONENT LIBRARIES ( MY GOLDEN RULE )
 
@@ -63,13 +56,13 @@
 
 ### KEY CONCEPTS LEARNT DURING THE BUILD
 
+- Test sweeps are necessary when working as a team to avoid breaking things if a team member changes some logic and uknowingly doesn't know how it affects other parts of the system.If the test fail , the build also fails which is a very good thing. We have to get the facts right b4 deployment.
 - Passing data via url is more stable state tends to be lost making it hard to navigate back.
 - Who needs a table numbers when we have the search functionality at the convenience of phone rotation?
 - The currentLesson context is being updated from two points only the accordion items and the contentsection (auto-navigate to first lesson.)
 - The video player and the quill editor only read the currentLesson context and meaningful logic derived from this.
 - The routes do not just flow naturally. I have the power to control them to be exactly what i want them to be.
 - This will come in handy ` await Unit.deleteMany({ _id: { $in: unitIds } });`
-
 - Rounding things up was the missing part of the table....Things look elegant.
 - Overflow hidden can be used to hide stubborn borders.
 - Here is how we can pass a body to a delete request
