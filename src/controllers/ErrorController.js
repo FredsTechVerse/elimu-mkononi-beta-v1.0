@@ -1,19 +1,15 @@
 import { handleLogout, renewToken } from "../controllers";
 
 const ERRORS = {
-  NETWORK_ERROR:
-    "Oops! There seems to be an issuer with your network. Ensure you have internet connectivity",
-  SERVER_ERROR: "Oops! We're encountering some hitches.Please try again later.",
-  AUTHORIZATION_ERROR:
-    "Invalid username or password.Please confirm your credentials",
+  NETWORK_ERROR: "Network issue. Ensure you have internet connectivity",
+  SERVER_ERROR: "Server issue,Please try again later.",
+  AUTHORIZATION_ERROR: "Invalid username or password.",
   BLANK_ERROR: "The requested data does not exist!",
-  DUPLICATION_ERROR: "This data already exists on the database",
+  DUPLICATION_ERROR: "This information already exists",
   INVALID_TOKEN: "Your token is invalid. Please log in again.",
   INVALID_ID: "The resource identity is invalid or doesn't exist.",
-  BAD_REQUEST:
-    "A bad request was sent to the server. Please check your request.",
-  LOGOUT:
-    "You are unauthorized to perform this action. You are being logged out.",
+  BAD_REQUEST: "Bad request, please check your request.",
+  LOGOUT: "Unauthorized action. You are being logged out.",
 };
 const handleError = async (error, updateAlertBoxData) => {
   let response = "No response specified";
