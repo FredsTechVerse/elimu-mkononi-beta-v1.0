@@ -204,6 +204,7 @@ const UnitForm = () => {
 
   return (
     <UnitFormSyntax
+      courseID={courseID}
       handleSubmit={handleSubmit}
       saveUnit={saveUnit}
       isEditEnabled={isEditEnabled}
@@ -215,6 +216,7 @@ const UnitForm = () => {
       unitQuery={unitQuery}
       createUnitMutation={createUnitMutation}
       updateUnitMutation={updateUnitMutation}
+      tutorsQuery={tutorsQuery}
     />
   );
 };

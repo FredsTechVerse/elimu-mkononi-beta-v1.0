@@ -7,6 +7,8 @@ import {
   ActionBtn,
 } from "../../components";
 const UnitFormSyntax = ({
+  courseID,
+  tutorsQuery,
   handleSubmit,
   saveUnit,
   isEditEnabled,
