@@ -22,6 +22,7 @@ const ChapterForm = () => {
   const from = location.state?.background?.pathname;
   const chapterTotals = location.state?.chapterTotals;
   const { chapterID, unitID } = location.state;
+  console.log({ chapterID });
   const isChapterQueryEnabled = chapterID ? true : false;
 
   const [isEditEnabled, setIsEditEnabled] = useState(chapterID ? false : true);
@@ -128,9 +129,7 @@ const ChapterForm = () => {
   const updateChapterMutation = useMutation({
     mutationFn: updateChapter,
     onSuccess: (data) => {
-      queryClient.setQueryData(["chapter", unitID], data);
       queryClient.invalidateQueries(["unitData"]);
-      queryClient.invalidateQueries(["chapter", chapterID], { exact: true });
       updateAlertBoxData({
         response: "Chapter has been updated",
         isResponse: true,
@@ -160,6 +159,13 @@ const ChapterForm = () => {
     const { chapterName, chapterNumber, chapterDescription } = data;
     if (!isChapterQueryEnabled) {
       if (unitID) {
+        console.log("Creating chapter");
+        console.log({
+          unitID: unitID,
+          chapterNumber: `${unitID}-${chapterNumber}`,
+          chapterName: chapterName,
+          chapterDescription: chapterDescription,
+        });
         createChapterMutation.mutate({
           unitID: unitID,
           chapterNumber: `${unitID}-${chapterNumber}`,
@@ -176,9 +182,15 @@ const ChapterForm = () => {
         });
       }
     } else {
-      updateChapterMutation.mutate({
+      console.log("Updating chapter");
+      console.log({
         chapterID,
         chapterNumber: `${unitID}-${chapterNumber}`,
+        chapterName,
+        chapterDescription,
+      });
+      updateChapterMutation.mutate({
+        chapterID,
         chapterName,
         chapterDescription,
       });
@@ -188,6 +200,7 @@ const ChapterForm = () => {
 
   return (
     <ChapterFormSyntax
+      unitID={unitID}
       handleSubmit={handleSubmit}
       saveChapter={saveChapter}
       isEditEnabled={isEditEnabled}
