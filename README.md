@@ -21,7 +21,7 @@
 
 ### PRODUCT REVIEW
 
-- THE FUNCTIONALITES ARE A GO! PREPARE FRONTEND FOR RELEASE.
+- Notes section is stable and working well which is dope!
 <!-- STYLING & LOGIC REFINE -->
 - Test accordion items responsiveness to clicking.
 <!-- INTERESTING QUESTIONS -->
@@ -45,13 +45,15 @@
 - Ensure queries display null when no data is available instead of .map error
 - Instead of sending errors to email directly we can read and write to the server file system. with the format that we want. And a daily report sent to user.
 - On clicking on a message , it shall be considered as read.
-- Comments section can be bu ilt
-
-- Show data is loading on update
-- Handle verification using zod two passwords must match b4 registration.
 
 <!-- TERTIARY IMPLEMENT USER TRACKING. -->
 
+- Improve content section logic. Current content section no lesson / video player display is depended on where the first chapter has lesson in it.
+- Confirm data invalidation / refetch upon update - Pay close attention to chapter form behaviour
+- Build comment section.
+- Show data is loading on update
+- Add open sidebar button to content section on small screens when no chapter hence lesson is present.
+- Handle verification using zod two passwords must match b4 registration.
 - If need arises implement user tracking
 
 ### USING COMPONENT LIBRARIES ( MY GOLDEN RULE )

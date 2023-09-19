@@ -206,6 +206,7 @@ const AccordionItem = ({
                   <p
                     className=" h-full text-center whitespace-nowrap py-3 text-xs  overflow-hidden text-ellipsis  w-[65%] capitalize "
                     onClick={() => {
+                      console.log("Updating current lesson");
                       updateCurrentLesson({
                         ...unitData?.unitChapters[chapterIndex]?.chapterLessons[
                           lessonIndex

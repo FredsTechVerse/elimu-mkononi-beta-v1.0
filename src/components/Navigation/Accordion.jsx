@@ -14,7 +14,6 @@ const Accordion = ({ unitData, closeSideBar }) => {
   const location = useLocation();
   // USING THE CHAPTER ID WE CAN SHOW THE LESSONS.
   const unitID = unitData && unitData._id;
-  const { courseID } = useParams();
   const [clicked, setClicked] = useState("0");
   const handleToggle = (index) => {
     if (clicked === index) {
