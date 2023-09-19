@@ -10,7 +10,6 @@ import ResetTokenVerificationForm from "./ResetTokenVerificationForm";
 import UserCredentialsConfirmationForm from "./UserCredentialsConfirmationForm";
 import MessageForm from "./MessageForm";
 import UnitForm from "./UnitForm";
-import DummyForm from "./DummyForm";
 
 export {
   ForgotPasswordForm,
@@ -24,6 +23,5 @@ export {
   ChapterForm,
   CourseForm,
   LessonForm,
-  DummyForm,
   UnitForm,
 };
