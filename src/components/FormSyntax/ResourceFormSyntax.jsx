@@ -9,9 +9,11 @@ import {
 const ResourceFormSyntax = ({
   handleSubmit,
   saveResource,
+  resourceUrl,
   register,
   errors,
   createResourceMutation,
+  chapterID,
   updateFileName,
 }) => {
   return (

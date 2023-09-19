@@ -101,6 +101,8 @@ const ResourceForm = () => {
       createResourceMutation={createResourceMutation}
       handleSubmit={handleSubmit}
       saveResource={saveResource}
+      resourceUrl={resourceUrl}
+      chapterID={chapterID}
       register={register}
       errors={errors}
       updateFileName={updateFileName}

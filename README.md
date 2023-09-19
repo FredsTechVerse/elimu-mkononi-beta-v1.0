@@ -48,6 +48,7 @@
 
 <!-- TERTIARY IMPLEMENT USER TRACKING. -->
 
+- A modal overlay is an overkil to resource view .... Ill shift to cards with the react pdf image instead with a ready to download button.
 - Improve content section logic. Current content section no lesson / video player display is depended on where the first chapter has lesson in it.
 - Confirm data invalidation / refetch upon update - Pay close attention to chapter form behaviour
 - Build comment section.
