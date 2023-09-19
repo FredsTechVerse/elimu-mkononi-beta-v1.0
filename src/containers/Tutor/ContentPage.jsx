@@ -36,7 +36,7 @@ const ContentPage = () => {
       <article
         className={` ${
           sideBarOpen ? "block" : "hidden"
-        }  phone:w-full tablet:w-80 laptop:w-full h-full absolute laptop:relative laptop:block `}
+        }  phone:w-full  tablet:w-80 laptop:w-full h-full absolute laptop:relative laptop:block `}
       >
         {unitDataQuery.status === "loading" ? (
           <AccordionSkeleton />

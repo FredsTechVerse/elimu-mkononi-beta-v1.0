@@ -38,16 +38,12 @@
 
 <!-- CHUNK TWO : UI CONCERNS -->
 
-- Add a resource count to the button
 - Add control btns to the react player.
 - Confirm queries display null message when no data is available instead of .map error
 - A modal overlay is an overkill to resource UI .... I'll shift to cards with the react pdf image instead with a ready to download button.
 - Show data is loading status on update
-- Add open sidebar button to content section on small screens when no chapter hence lesson is present.
-- Ensure form labels are matched correctly for the sake of autofilling and password save in browsers.
 - Confirm data invalidation / refetch upon update and deletion , creation working well- Pay close attention to chapter form behaviour.Invalidate course update upon deletion
 - MESSAGING - Refine messaging by allowing contact to autofill.We can use the userID to retrieve and display name.- On clicking on a message , it shall be considered as read.Use africas talking api in production mainly because of asena's shortcode being flagged as a promotional message .... Sent and declined messages not defined.
-- Improve content section logic. Current content section no lesson / video player display is depended on where the first chapter has lesson in it.
 
 <!-- CHUNK 3 : BUILD CONCERNS -->
 

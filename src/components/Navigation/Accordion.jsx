@@ -23,8 +23,8 @@ const Accordion = ({ unitData, closeSideBar }) => {
   };
 
   return (
-    <div className="relative z-10 flex flex-col items-center  bg-slate-100 h-screen   ">
-      <div className="flex items-center justify-between w-full  pr-2 h-14  font-bold text-md text-slate-200 bg-primary text-center uppercase py-4 rounded-t-lg ">
+    <div className="relative z-10 flex flex-col items-center backdrop-blur-lg bg-slate-200/40 laptop:bg-slate-100 h-full laptop:h-screen rounded-lg laptop:rounded-none  overflow-y-auto ">
+      <div className="flex items-center justify-between w-full  pr-2 h-14  font-bold text-md laptop:text-slate-200 laptop:bg-primary text-center uppercase py-4 rounded-t-lg ">
         <HomeBtn isBlue={true} icon={true} />
         <span className="uppercase">{unitData?.unitName}</span>
         <div className={` flex-row-centered gap-1 `}>
@@ -37,14 +37,14 @@ const Accordion = ({ unitData, closeSideBar }) => {
           >
             <Link
               to={`/new-chapter`}
-              className="cta-btn group bg-white h-5 "
+              className="cta-btn group bg-black laptop:bg-white h-5 "
               state={{
                 background: location,
                 unitID: unitID,
                 chapterTotals: chapterTotals,
               }}
             >
-              <PlusIcon className="text-slate-800 group-hover:text-white m-0.5 hover:cursor-pointer h-3 laptop:h-4" />
+              <PlusIcon className=" text-white laptop:text-slate-900 group-hover:text-white m-0.5 hover:cursor-pointer h-3 laptop:h-4" />
             </Link>
           </div>
           <div
@@ -53,7 +53,7 @@ const Accordion = ({ unitData, closeSideBar }) => {
               closeSideBar();
             }}
           >
-            <XCircleIcon className="icon-styling text-slate-100" />
+            <XCircleIcon className="icon-styling text-black laptop:text-slate-100" />
           </div>
         </div>
       </div>

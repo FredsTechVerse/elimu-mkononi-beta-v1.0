@@ -13,6 +13,7 @@ const ContentSection = () => {
   const { unitID } = useParams();
   const { openSideBar, sideBarOpen } = useOutletContext();
   const { updateCurrentLesson } = useCurrentLessonContext();
+  const { currentLesson } = useCurrentLessonContext();
   const unitDataQuery = useQuery(
     ["unitData", unitID],
     () => fetchUnitData({ unitID }),
@@ -35,10 +36,7 @@ const ContentSection = () => {
 
   if (unitDataQuery.status === "loading") {
     return <ContentSectionSkeleton />;
-  } else if (
-    unitDataQuery?.status === "success" &&
-    unitDataQuery.data?.unitChapters[0]?.chapterLessons.length > 0
-  ) {
+  } else if (unitDataQuery?.status === "success" && currentLesson?.lessonUrl) {
     return (
       <div className="w-full flex flex-col gap-1">
         <UnitNav
@@ -53,7 +51,19 @@ const ContentSection = () => {
       </div>
     );
   } else {
-    return <FancyMessage message="No lesson present" />;
+    return (
+      <div className="relative w-full h-full flex flex-col items-center justify-center">
+        <FancyMessage message="No lesson present" />;
+        <button
+          class={`${
+            sideBarOpen && "hidden"
+          } laptop:hidden absolute top-1 left-2 bg-primary hover:bg-purple-500 text-sm text-white h-8 rounded-lg p-2 flex flex-row items-center justify-center`}
+          onClick={openSideBar}
+        >
+          Open Sidebar
+        </button>
+      </div>
+    );
   }
 };
 

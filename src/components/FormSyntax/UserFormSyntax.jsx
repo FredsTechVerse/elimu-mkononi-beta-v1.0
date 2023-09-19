@@ -34,7 +34,7 @@ const UserFormSyntax = ({
         />
         <form className="form-styling" onSubmit={handleSubmit(saveUser)}>
           <div className="input-wrap">
-            <label htmlFor="contact">Names</label>
+            <label htmlFor="names">Names</label>
             <div className="input-wrap">
               <input
                 readOnly={!isEditEnabled}
