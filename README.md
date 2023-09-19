@@ -30,24 +30,32 @@
 - Why am i using useEffect when i can use the query data immediately.... using the userQuery.data
 
 <!-- RELEASE PREPARATION -->
-- There is need to ensure form labels are matched correctly for the sake of autofilling and password save in browsers.
-- Separate form logic from syntax (Syntax only needs props.)
-- Find out why when SMS services fails, user registration also fails .... Could be a generic message if error is uknown.
+
+<!-- CHUNK ONE : AUTHENTICATION CONCENRS -->
+
 - Toggle password visibility by changing input type between password and text with a btn click on user and password update forms.
-- Refine messaging by allowing contact to autofill.We can use the userID to retrieve and display name.- On clicking on a message , it shall be considered as read.
-- Add a resource count to the button
 - Ensure account verification before login and add toggle button to enable and disable user accounts
-- Test youtube refresh token acquisition by inversing if logic
+
+<!-- CHUNK TWO : UI CONCERNS -->
+
+- Add a resource count to the button
 - Add control btns to the react player.
 - Confirm queries display null message when no data is available instead of .map error
-- Instead of sending errors to email directly we can read and write to the server file system. with the format that we want. And a daily report sent to user.
 - A modal overlay is an overkill to resource UI .... I'll shift to cards with the react pdf image instead with a ready to download button.
-- Improve content section logic. Current content section no lesson / video player display is depended on where the first chapter has lesson in it.
-- Confirm data invalidation / refetch upon update - Pay close attention to chapter form behaviour.Invalidate course update upon deletion
-- Build comment section will be sent to email.
 - Show data is loading status on update
 - Add open sidebar button to content section on small screens when no chapter hence lesson is present.
-- Handle verification using zod
+- Ensure form labels are matched correctly for the sake of autofilling and password save in browsers.
+- Confirm data invalidation / refetch upon update and deletion , creation working well- Pay close attention to chapter form behaviour.Invalidate course update upon deletion
+- MESSAGING - Refine messaging by allowing contact to autofill.We can use the userID to retrieve and display name.- On clicking on a message , it shall be considered as read.Use africas talking api in production mainly because of asena's shortcode being flagged as a promotional message .... Sent and declined messages not defined.
+- Improve content section logic. Current content section no lesson / video player display is depended on where the first chapter has lesson in it.
+
+<!-- CHUNK 3 : BUILD CONCERNS -->
+
+- Build comment section will be sent to email.
+- Find out why when SMS services fails, user registration also fails .... Could be a generic message if error is uknown.
+- Test youtube refresh token acquisition by inversing if logic
+- Instead of sending errors to email directly we can read and write to the server file system. with the format that we want. And a daily report sent to user.
+- Migrate to using nextjs and typescript
 - Implement user tracking
 
 ### USING COMPONENT LIBRARIES ( MY GOLDEN RULE )
