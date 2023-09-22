@@ -90,7 +90,6 @@ function App() {
           <Route path="/log-in" element={<LogInForm />} />
           <Route path="/draft" element={<DraftPage />} />
           <Route path="/fetchToken" element={<TokenExchange />} />
-          <Route exact path="/new-message" element={<MessageForm />} />
 
           <Route element={<UsersLayout />}>
             <Route exact path="/" element={<HomePage />}></Route>
@@ -153,12 +152,7 @@ function App() {
           <Route exact path="/new-chapter" element={<ChapterForm />} />
           <Route exact path="/new-lesson" element={<LessonForm />} />
           <Route exact path="/new-resource" element={<ResourceForm />} />
-          <Route exact path="/new-message/:role" element={<MessageForm />} />
-          <Route
-            exact
-            path="/new-message/:role/:userID"
-            element={<MessageForm />}
-          />
+          <Route exact path="/new-message" element={<MessageForm />} />
           <Route
             exact
             path="/view-resource/:resourceUrl"

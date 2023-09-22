@@ -17,11 +17,10 @@ const UserForm = () => {
   const queryClient = useQueryClient();
   const formRef = useRef(null);
   const { updateAlertBoxData } = useAlertBoxContext();
+  const role = new URLSearchParams(location.search).get("role");
+  const userID = new URLSearchParams(location.search).get("userID");
 
-  const { role, userID, background } = location?.state;
-  // const [isUserQueryEnabled, setIsUserQueryEnabled] = useState(
-  //   userID ? true : false
-  // );
+  const { background } = location?.state;
   const isUserQueryEnabled = userID ? true : false;
   const [isEditEnabled, setIsEditEnabled] = useState(userID ? false : true);
   const enableEdit = () => {

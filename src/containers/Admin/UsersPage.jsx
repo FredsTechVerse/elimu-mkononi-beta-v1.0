@@ -5,19 +5,22 @@ import {
   TableAlternativeSkeleton,
   DashboardUserButton,
   TableSkeleton,
-  NavBgBtn,
+  NavBtn,
   NavMenuBtn,
+  ErrorMessage,
+  FancyMessage,
 } from "../../components";
 import { UsersGrid } from "../../containers";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, Link } from "react-router-dom";
 import { fetchUsersData, handleError } from "../../controllers";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { useAlertBoxContext } from "../../context/AlertBoxContext";
 const UsersPage = () => {
   const { role } = useParams();
   const { updateAlertBoxData } = useAlertBoxContext();
   const queryClient = useQueryClient();
+  const location = useLocation();
 
   const assignUserRole = () => {
     if (role === "students") {
@@ -52,35 +55,38 @@ const UsersPage = () => {
         />
       </div>
 
-      <div className="absolute top-2 left-2 flex-row-centered gap-2">
-        <NavBgBtn to={`/admin/students`} text="students" />
-        <NavBgBtn to={`/admin/tutors`} text="tutors" />
-        <NavBgBtn to={`/admin/admins`} text="admins" />
+      <div className="absolute top-2 left-2 flex-row-centered mx-auto w-full ">
+        <NavBtn to="/admin/students" text="students" />
+        <NavBtn to="/admin/tutors" text="tutors" />
+        <NavBtn to="/admin/admins" text="admins" />
       </div>
-      <div className="absolute top-2 right-2 flex-row-centered gap-2 ">
-        <DashboardUserButton
-          isRounded={false}
-          item={
-            userRole === "EM-203"
-              ? "admin"
-              : userRole === "EM-202"
-              ? "tutor"
-              : "student"
-          }
-        />
 
-        <NavBgBtn to={`/new-message/${userRole}`} text="Message" />
-      </div>
-      <div className="absolute top-12 mx-auto tablet:pt-0">
+      <div className="relative top-10 mx-auto tablet:pt-0 flex flex-row  justify-between w-full">
         <PageTitle
           title={
             userRole === "EM-201"
-              ? "Student's Summary"
+              ? "Student's "
               : userRole === "EM-202"
-              ? "tutor's summary"
-              : "Administrators Summary"
+              ? "tutor's"
+              : "Administrator's "
           }
         />
+        <div className="self-end relative flex-row-centered gap-2 ">
+          <Link
+            to={{ pathname: "/new-user", search: `?role=${userRole}` }}
+            state={{ background: location }}
+            className={`self-end capitalize navbar-link h-8 rounded-lg group 
+            bg-slate-700 hover:bg-slate-900  
+           text-white `}
+          >
+            Add{" "}
+            {userRole === "EM-203"
+              ? "admin"
+              : userRole === "EM-202"
+              ? "tutor"
+              : "student"}
+          </Link>
+        </div>
       </div>
       {usersQuery.status === "loading" ? (
         <div className=" w-full mt-16 tablet:mt-20">
@@ -89,10 +95,14 @@ const UsersPage = () => {
         </div>
       ) : (
         <div className=" w-full mt-16 ">
-          <div className=" w-full relative">
-            <UsersTable usersQuery={usersQuery} role={userRole} />
-            <UsersGrid usersQuery={usersQuery} role={userRole} />
-          </div>
+          {usersQuery.data.length > 0 ? (
+            <div className=" w-full relative">
+              <UsersTable usersQuery={usersQuery} role={userRole} />
+              <UsersGrid usersQuery={usersQuery} role={userRole} />
+            </div>
+          ) : (
+            <FancyMessage message="There are currently no users" />
+          )}
         </div>
       )}
     </div>

@@ -43,7 +43,15 @@ const UsersTable = ({ usersQuery, role }) => {
         const record = info.row.original;
         const userID = record._id;
         const contact = record.contact;
-        return <CTAButton userID={userID} contact={contact} role={role} />;
+        const email = record.email;
+        return (
+          <CTAButton
+            userID={userID}
+            contact={contact}
+            email={email}
+            role={role}
+          />
+        );
       },
     }),
   ];
@@ -64,7 +72,7 @@ const UsersTable = ({ usersQuery, role }) => {
   });
 
   return (
-    <div className="py-5 phone:hidden tablet:table w-full flex flex-col items-center justify-center">
+    <div className="phone:hidden tablet:table w-full flex flex-col items-center justify-center">
       <input
         type="text"
         placeholder={`Search for user`}

@@ -6,8 +6,8 @@ import {
   ErrorMessage,
 } from "../../components";
 const MessageFormSyntax = ({
-  role,
-  userID,
+  contact,
+  email,
   watch,
   handleSubmit,
   sendMessage,
@@ -22,7 +22,7 @@ const MessageFormSyntax = ({
         <FormNavigation text="Message Form" />
         <form className="form-styling" onSubmit={handleSubmit(sendMessage)}>
           {/* FILE */}
-          <div className="input-wrap">
+          <div className={`${contact && "hidden"} input-wrap`}>
             <label htmlFor="recipient" className="w-full ">
               Recipient
             </label>
@@ -32,69 +32,66 @@ const MessageFormSyntax = ({
                 required: "This field is required ",
               })}
             >
-              {role === "EM-203" && (
-                <option className="capitalize" value="all-admins">
-                  All Admins
-                </option>
-              )}
-              {role === "EM-202" && (
-                <option className="capitalize" value="all-tutors">
-                  All Tutors
-                </option>
-              )}
-              {role === "EM-201" && (
-                <option className="capitalize" value="all-students">
-                  All Students
-                </option>
-              )}
+              <option className="capitalize" value="all-admins">
+                All Admins
+              </option>
+              <option className="capitalize" value="all-tutors">
+                All Tutors
+              </option>
+              <option className="capitalize" value="all-students">
+                All Students
+              </option>
               <option className="capitalize" value="other">
-                other
+                Other
               </option>
             </select>
             {errors.recipient && (
               <ErrorMessage message={errors.recipient?.message} />
             )}
           </div>
-          {watch("recipient") === "other" && (
-            <>
-              <div className="input-wrap">
-                <div className="flex phone:gap-3 tablet:gap-2">
+          {watch("recipient") === "other" ||
+            (contact && (
+              <>
+                <div className="input-wrap">
+                  <div className="flex phone:gap-3 tablet:gap-2">
+                    <input
+                      className="input-styling w-16"
+                      type="Text"
+                      required
+                      value="+254"
+                      readOnly
+                    />
+                    <input
+                      className="input-styling phone:w-52  tablet:w-72"
+                      placeholder="Enter Safaricom No."
+                      readOnly={contact ? true : false}
+                      {...register("contact", {
+                        required: "This field is required ",
+                      })}
+                    />
+                  </div>
+
+                  {errors.contact && (
+                    <ErrorMessage message={errors.contact?.message} />
+                  )}
+                </div>
+                <div className="input-wrap">
+                  <label htmlFor="email">Email</label>
                   <input
-                    className="input-styling w-16"
-                    type="Text"
-                    required
-                    value="+254"
-                    readOnly
-                  />
-                  <input
-                    className="input-styling phone:w-52  tablet:w-72"
-                    placeholder="Enter Safaricom No."
-                    {...register("contact", {
+                    className="input-styling"
+                    placeholder="E-mail Address"
+                    readOnly={email ? true : false}
+                    type="email"
+                    {...register("email", {
                       required: "This field is required ",
                     })}
                   />
+                  {errors.email && (
+                    <ErrorMessage message={errors.email?.message} />
+                  )}
                 </div>
-
-                {errors.contact && (
-                  <ErrorMessage message={errors.contact?.message} />
-                )}
-              </div>
-              <div className="input-wrap">
-                <label htmlFor="email">Email</label>
-                <input
-                  className="input-styling"
-                  placeholder="E-mail Address"
-                  type="email"
-                  {...register("email", {
-                    required: "This field is required ",
-                  })}
-                />
-                {errors.email && (
-                  <ErrorMessage message={errors.email?.message} />
-                )}
-              </div>
-            </>
-          )}
+              </>
+            ))}
 
           <div className="input-wrap">
             <label htmlFor="cNumber" className="w-full ">
@@ -125,7 +122,7 @@ const MessageFormSyntax = ({
               <SubmitButton
                 type="submit"
                 disabled={
-                  watch("recipient") !== "" && watch("message") !== ""
+                  watch("contact") !== "" && watch("message") !== ""
                     ? false
                     : true
                 }

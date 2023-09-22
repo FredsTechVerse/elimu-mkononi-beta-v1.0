@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { MessageFormSyntax } from "../../components";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { fetchMessageData, messageUser, handleError } from "../../controllers";
@@ -8,11 +8,12 @@ import { useAlertBoxContext } from "../../context/AlertBoxContext";
 
 const MessageForm = () => {
   const formRef = useRef(null);
-  const { updateAlertBoxData } = useAlertBoxContext();
-  const { role, userID } = useParams();
-  const location = useLocation();
   const navigate = useNavigate();
+  const location = useLocation();
+  const contact = new URLSearchParams(location.search).get("contact");
+  const email = new URLSearchParams(location.search).get("email");
 
+  const { updateAlertBoxData } = useAlertBoxContext();
   const messageID = location?.state?.messageID;
   const isMessageQueryEnabled = messageID ? true : false;
   const from = location.state?.background?.pathname;
@@ -26,9 +27,9 @@ const MessageForm = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      recipient: "",
-      contact: "",
-      email: "",
+      recipient: contact ? "individual" : "",
+      contact: contact ? contact.split("254")[1] : "",
+      email: email ? email : "",
       message: "",
     },
   });
@@ -107,15 +108,23 @@ const MessageForm = () => {
   };
 
   const sendMessage = async (data) => {
-    const { contact, message, recipient, email } = data;
-    if (!isMessageQueryEnabled && recipient === "other") {
+    console.log("Sending message");
+    const { message, recipient, email } = data;
+    console.log({ contact, message, recipient, email });
+    if (
+      !isMessageQueryEnabled &&
+      (recipient === "other" || recipient === "individual")
+    ) {
       createMessageMutation.mutate({
-        contact: `254${contact}`,
+        contact: contact ? contact : `254${data.contact}`,
         email,
         message,
         recipient,
       });
-    } else if (!isMessageQueryEnabled && recipient !== "other") {
+    } else if (
+      !isMessageQueryEnabled &&
+      (recipient !== "other" || recipient !== "individual")
+    ) {
       createMessageMutation.mutate({
         recipient,
         message,
@@ -132,8 +141,8 @@ const MessageForm = () => {
 
   return (
     <MessageFormSyntax
-      role={role}
-      userID={userID}
+      email={email}
+      contact={contact}
       watch={watch}
       handleSubmit={handleSubmit}
       sendMessage={sendMessage}

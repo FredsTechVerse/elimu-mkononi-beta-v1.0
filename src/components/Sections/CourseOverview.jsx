@@ -3,7 +3,6 @@ import { useParams, Link, useLocation } from "react-router-dom";
 import {
   UnitCard,
   UnitSkeleton,
-  HomeBtn,
   BackBtn,
   Heading,
   FancyMessage,
@@ -17,12 +16,7 @@ const CourseOverview = () => {
   const roles = JSON.parse(localStorage.getItem("roles"));
   const queryClient = useQueryClient();
   const location = useLocation();
-  const from = () => {
-    if (location?.state?.previousPage) {
-      return location.state.previousPage;
-    }
-    return -1;
-  };
+
   const courseQuery = useQuery(
     ["courseData", courseID],
     () => fetchCourseData({ courseID }),
@@ -37,15 +31,15 @@ const CourseOverview = () => {
   );
 
   return (
-    <div className="w-full flex flex-col bg-slate-100 ">
+    <div className="w-full flex flex-col bg-slate-100 h-max  ">
       <div className="relative pattern h-60 w-full">
-        <div className="flex flex-col items-start justify-center w-full h-full flex-row-centered backdrop-blur-md bg-black bg-opacity-20">
-          <p className="mx-auto text-white  font-bold  phone:text-xl tablet:text-2xl laptop:text-4xl uppercase">
-            {courseQuery?.data?.courseTitle}
+        <div className="flex flex-col items-center justify-center w-full h-full flex-row-centered backdrop-blur-md bg-black bg-opacity-20 phone:p-2 tablet:p-0">
+          <p className="text-white max-w-full font-bold  phone:text-lg tablet:text-2xl laptop:text-4xl uppercase whitespace-nowrap text-ellipsis overflow-hidden">
+            {courseQuery?.data?.courseTitle} of daffdffafa
           </p>
         </div>
         {(roles?.includes("EM-202") || roles?.includes("EM-203")) && (
-          <div className="absolute top-2 right-2 flex gap-1">
+          <div className="absolute top-2 right-2 flex gap-1 z-10">
             <Link
               to="/new-unit"
               state={{ background: location, courseID: courseID }}
@@ -62,9 +56,9 @@ const CourseOverview = () => {
         </div>
         <div className="absolute h-7 bg-slate-100 w-full bottom-0 rounded-t-full"></div>
       </div>
-      <div className="flex flex-col items-center gap-3 justify-start w-full">
+      <div className="flex flex-col items-center gap-3 justify-start h-max w-full">
         <Heading heading="Course Description" />
-        <p className="px-5">
+        <p className="px-5 text-[16px] ">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum dolore
           odio sapiente animi sit? Adipisci odio doloribus eaque, consectetur,
           velit ducimus inventore amet quibusdam veritatis laudantium magnam

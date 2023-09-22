@@ -6,7 +6,7 @@ const UnitNav = ({ unitData }) => {
   const { courseID } = useParams();
   const navigate = useNavigate();
   return (
-    <div className="navigation flex flex-row w-full justify-between gap-10 items-center text-dark  text-sm text-white bg-primary pl-2 pr-4 h-14 rounded-t-lg ">
+    <div className="navigation flex flex-row w-full justify-between gap-10 items-center text-dark  text-sm text-white bg-primary pl-2 pr-4 h-14 rounded-t-lg shadow-slate-200 shadow-lg ">
       <div>
         <BackBtn to={`/course/${courseID}`} isBlue={true} icon={true} />
       </div>

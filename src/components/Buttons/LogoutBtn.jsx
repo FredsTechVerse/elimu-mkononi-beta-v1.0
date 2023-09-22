@@ -43,12 +43,12 @@ const LogoutBtn = ({ isBlue = false, position = "default" }) => {
       onClick={() => {
         logoutMutation.mutate();
       }}
-      className={` capitalize group w-full cursor-pointer flex-row-centered  hover:text-white h-8 tablet:h-10 gap-2   ${
-        position === "navbar" ? "rounded-b-lg" : " text-white rounded-lg px-3"
+      className={` capitalize group w-full cursor-pointer flex-row-centered  text-white h-8 tablet:h-10 gap-2   ${
+        position === "navbar" ? "rounded-b-lg" : " rounded-lg px-3"
       } ${
         isBlue
-          ? "bg-primary hover:bg-purple-500 text-white "
-          : "bg-slate-700 hover:bg-slate-900 text-white   "
+          ? "bg-primary hover:bg-purple-500 "
+          : "bg-slate-700 hover:bg-slate-900 "
       }`}
     >
       <span>Logout</span>

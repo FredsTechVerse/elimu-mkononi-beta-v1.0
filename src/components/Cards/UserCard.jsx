@@ -31,7 +31,12 @@ const UserCard = ({ user, userKey, role }) => {
           <p className="capitalize text-start  flex gap-2 font-bold text-[15px] pl-1.5">
             {user.firstName} {user.surname}
           </p>
-          <CTAButton userID={user._id} contact={user.contact} role={role} />
+          <CTAButton
+            userID={user._id}
+            email={user.email}
+            contact={user.contact}
+            role={role}
+          />
         </div>
       </div>
     </div>

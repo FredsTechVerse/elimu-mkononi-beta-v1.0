@@ -9,6 +9,7 @@ const SubmitButton = ({ text, type, disabled = false, isSubmitting }) => {
       }`}
       type={type}
       disabled={disabled}
+      onClick={() => console.log("Submit btn has been clicked")}
     >
       <p className="w-full h-full flex items-center justify-center gap-3 px-2">
         <span className="capitalize">{text}</span>

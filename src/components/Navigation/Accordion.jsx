@@ -23,10 +23,11 @@ const Accordion = ({ unitData, closeSideBar }) => {
   };
 
   return (
-    <div className="relative z-10 flex flex-col items-center backdrop-blur-lg bg-slate-200/40 laptop:bg-slate-100 h-full laptop:h-screen rounded-lg laptop:rounded-none  overflow-y-auto ">
-      <div className="flex items-center justify-between w-full  pr-2 h-14  font-bold text-md laptop:text-slate-200 laptop:bg-primary text-center uppercase py-4 rounded-t-lg ">
+    <div className="relative z-10 flex flex-col items-center  backdrop-blur-lg bg-slate-300 laptop:bg-slate-100/40 max-h-full laptop:h-full laptop:rounded-lg  overflow-y-auto  ">
+      {/* ACCORDION HEADER */}
+      <div className="flex items-center justify-between w-full  pr-2 h-14  font-bold text-md text-slate-200 bg-primary text-center uppercase py-4 laptop:rounded-t-lg ">
         <HomeBtn isBlue={true} icon={true} />
-        <span className="uppercase">{unitData?.unitName}</span>
+        <span className="uppercase">Chapters</span>
         <div className={` flex-row-centered gap-1 `}>
           <div
             className={`${
@@ -57,9 +58,9 @@ const Accordion = ({ unitData, closeSideBar }) => {
           </div>
         </div>
       </div>
-
+      {/* Accordion Body */}
       {unitData && unitData.unitChapters.length > 0 ? (
-        <div className="w-full bg-secondary h-full overflow-y-auto overflow-x-hidden  ">
+        <div className="w-full  bg-slate-200   laptop:h-full overflow-y-auto overflow-x-hidden  ">
           {unitData.unitChapters.map((chapter, chapterIndex) => (
             <AccordionItem
               unitData={unitData}

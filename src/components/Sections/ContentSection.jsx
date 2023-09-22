@@ -38,7 +38,7 @@ const ContentSection = () => {
     return <ContentSectionSkeleton />;
   } else if (unitDataQuery?.status === "success" && currentLesson?.lessonUrl) {
     return (
-      <div className="w-full flex flex-col gap-1">
+      <div className="w-full flex flex-col gap-0">
         <UnitNav
           openSideBar={openSideBar}
           sideBarOpen={sideBarOpen}

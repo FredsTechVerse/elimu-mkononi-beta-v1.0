@@ -39,15 +39,17 @@ const UnitCard = ({
     },
   });
   return (
-    <article className="hover:cursor-pointer w-full  laptop:h-44  h-40 flex flex-col justify-between   pt-2 rounded-xl shadow-lg shadow-slate-400 ">
+    <article className="  hover:cursor-pointer w-full flex flex-col justify-between   pt-2 rounded-xl shadow-lg shadow-slate-400 ">
       <section className="px-2 flex items-center justify-start gap-3 h-[20%] ">
-        <div className="ml-2 h-8 aspect-square  rounded-full bg-slate-600  flex-row-centered text-white ">
+        <div className="ml-2 h-7 aspect-square  rounded-full bg-slate-600  flex-row-centered text-white ">
           <span className="font-extraLight">{unitNumber}</span>
         </div>
-        <h1 className="uppercase text-lg font-extrabold">{unitName}</h1>
+        <h1 className="uppercase text-[15px] laptop:text-md laptop:text-lg font-extrabold text-ellipsis overflow-hidden whitespace-nowrap ">
+          {unitName}
+        </h1>
       </section>
-      <section className={` w-full h-full flex-row-centered overflow-auto`}>
-        <p className="text-dark text-md text-ellipsis  w-full h-full px-4 mt-3">
+      <section className={` w-full h-24 flex-row-centered overflow-auto`}>
+        <p className="text-dark text-[16px] text-ellipsis  w-full h-full px-4 py-2 ">
           {unitDescription}
         </p>
       </section>

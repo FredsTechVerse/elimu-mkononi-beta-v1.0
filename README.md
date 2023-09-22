@@ -33,9 +33,9 @@
 
 <!-- CHUNK ONE : AUTHENTICATION CONCENRS -->
 
-- Toggle password visibility by changing input type between password and text with a btn click on user and password update forms.
 - Ensure account verification before login and add toggle button to enable and disable user accounts
 - MESSAGING - Refine messaging by allowing contact to autofill.We can use the userID to retrieve and display name.- On clicking on a message , it shall be considered as read.Use africas talking api in production mainly because of asena's shortcode being flagged as a promotional message .... Sent and declined messages not defined.
+- Toggle password visibility by changing input type between password and text with a btn click on user and password update forms.
 
 <!-- CHUNK TWO : UI CONCERNS -->
 
@@ -58,6 +58,7 @@
 
 ### KEY CONCEPTS LEARNT DURING THE BUILD
 
+- Its text-ellipsit on overflow ellipsis... overflow should be hidden to achiveve the overflow effect the width or max-width must also be defined `text-ellipsis overflow-hidden whitespace-nowrap max-w-full`
 - Test sweeps are necessary when working as a team to avoid breaking things if a team member changes some logic and uknowingly doesn't know how it affects other parts of the system.If the test fail , the build also fails which is a very good thing. We have to get the facts right b4 deployment.
 - Passing data via url is more stable state tends to be lost making it hard to navigate back.
 - Who needs a table numbers when we have the search functionality at the convenience of phone rotation?

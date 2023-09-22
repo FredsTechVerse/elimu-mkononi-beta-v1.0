@@ -33,7 +33,7 @@ const EmailSection = () => {
     },
   });
   return (
-    <div className="content p-2 m-2 rounded-xl  flex flex-col justify-start h-full overflow-auto">
+    <div className="relative w-full laptop:w-3/4  flex flex-col justify-start items-center  h-full overflow-auto p-3 overflow-x-hidden ">
       <div className="flex flex-row items-center justify-evenly gap-2 fixed bottom-2 right-2 tablet:right-5 z-20">
         <NavMenuBtn
           isNavOpen={isSideBarOpen}

@@ -5,7 +5,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { deleteUser, handleError } from "../../controllers";
 import { EnvelopeIcon, TrashIcon } from "@heroicons/react/24/solid";
 
-const CTAButton = ({ userID, role = null }) => {
+const CTAButton = ({ userID, role = null, contact = null, email = null }) => {
   const location = useLocation();
   const queryClient = useQueryClient();
   const { updateAlertBoxData } = useAlertBoxContext();
@@ -55,9 +55,15 @@ const CTAButton = ({ userID, role = null }) => {
         <button
           className="group"
           onClick={() => {
-            navigate(`/new-message/${role}/${userID}`, {
-              state: { background: location },
-            });
+            navigate(
+              {
+                pathname: "/new-message",
+                search: `?contact=${contact}&email=${email}`,
+              },
+              {
+                state: { background: location },
+              }
+            );
           }}
         >
           <EnvelopeIcon className="icon-styling h-3 laptop:h-4 text-slate-700" />
@@ -65,9 +71,15 @@ const CTAButton = ({ userID, role = null }) => {
         <button
           className="cta-btn group capitalize text-center rounded-full w-20 text-sm text-white"
           onClick={() => {
-            navigate("/new-user", {
-              state: { userID, role, background: location },
-            });
+            navigate(
+              {
+                pathname: "/new-user",
+                search: `?role=${role}&userID=${userID}`,
+              },
+              {
+                state: { background: location },
+              }
+            );
           }}
         >
           update

@@ -15,19 +15,19 @@ const HomeBtn = ({ isBlue = false, icon = false, position = "default" }) => {
   };
   return (
     <button
-      className={`transition-all duration-200   capitalize h-8 tablet:h-10 aspect-square  mx-1 flex-row-centered  ${
+      className={`transition-all duration-200 capitalize h-8 aspect-square  mx-1 flex-row-centered  text-white text-sm ${
         position === "dashboard" ? "w-full " : " w-max rounded-lg "
       }  ${
         isBlue
-          ? "bg-primary hover:bg-purple-500 text-white "
-          : "bg-slate-700 hover:bg-slate-900 text-white"
+          ? "bg-primary hover:bg-purple-500 "
+          : "bg-slate-700 hover:bg-slate-900"
       }
       `}
       onClick={() => {
         navigate(homeLocation());
       }}
     >
-      {icon ? <HomeIcon className="icon-styling h-5 text-white" /> : "home"}
+      {icon ? <HomeIcon className="icon-styling h-5" /> : "home"}
     </button>
   );
 };

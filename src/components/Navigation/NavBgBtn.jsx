@@ -14,15 +14,15 @@ const NavBgBtn = ({ to, text, isBlue = false }) => {
       <Link
         to={to}
         state={{ background: location }}
-        className={` transition-all  duration-200 capitalize group w-full h-8  cursor-pointer flex-row-centered gap-2  ${
+        className={` transition-all  duration-200 capitalize group w-full h-8  cursor-pointer flex-row-centered gap-2 text-white text-sm ${
           isBlue
-            ? "bg-primary hover:bg-purple-500 text-white"
-            : "hover:rounded-b-lg  bg-slate-700 hover:bg-slate-900 text-white  "
+            ? "bg-primary hover:bg-purple-500 "
+            : "hover:rounded-b-lg  bg-slate-700 hover:bg-slate-900   "
         } `}
       >
         <span>Login</span>
         <ArrowLeftOnRectangleIcon
-          className={`icon-styling text-white group-hover:text-white `}
+          className={`icon-styling text-white group-hover:text-white`}
         />
       </Link>
     );
@@ -31,10 +31,10 @@ const NavBgBtn = ({ to, text, isBlue = false }) => {
       <Link
         to={to}
         state={{ background: location, role: roleInformation }}
-        className={` capitalize group w-full h-8   cursor-pointer flex-row-centered rounded-t-lg ${
+        className={` capitalize group w-full h-8 text-white  cursor-pointer flex-row-centered rounded-t-lg  text-sm ${
           isBlue
-            ? "bg-primary hover:bg-purple-500 text-white"
-            : "bg-slate-700 hover:bg-slate-900 text-white "
+            ? "bg-primary hover:bg-purple-500 "
+            : "bg-slate-700 hover:bg-slate-900"
         } `}
       >
         {text}
@@ -45,11 +45,11 @@ const NavBgBtn = ({ to, text, isBlue = false }) => {
       <Link
         to={to}
         state={{ background: location }}
-        className={`navbar-link h-8 rounded-lg group ${
+        className={`navbar-link h-8 rounded-lg group text-sm ${
           isBlue
-            ? "bg-primary hover:bg-purple-500 text-white"
+            ? "bg-primary hover:bg-purple-500"
             : "bg-slate-700 hover:bg-slate-900  "
-        } text-white `}
+        } `}
       >
         {text}
       </Link>

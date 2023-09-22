@@ -36,16 +36,20 @@ const VideoPlayer = () => {
   }, [currentLesson?.lessonUrl]);
 
   return (
-    <div className="w-full flex-col-centered px-1  ">
+    <div className="w-full flex-col-centered   ">
       <div
         className={` ${
           videoReady && isVideoPresent ? "block" : "hidden"
-        } w-full aspect-video shadow-lg `}
+        } w-full aspect-video rounded-b-lg shadow-slate-200 shadow-lg`}
       >
         <ReactPlayer
           className="react-player"
           url={lessonUrl}
-          style={{ borderRadius: "0.5rem", overflow: "hidden" }}
+          style={{
+            borderBottomRightRadius: "0.5rem",
+            borderBottomLeftRadius: "0.5rem",
+            overflow: "hidden",
+          }}
           controls={true}
           onReady={handleVideoReady}
           onError={handleVideoError}

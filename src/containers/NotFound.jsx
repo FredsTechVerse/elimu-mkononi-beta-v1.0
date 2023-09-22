@@ -12,7 +12,7 @@ const NotFound = () => {
         to="/"
         className="navbar-link bg-slate-700 hover:bg-slate-900 h-12 px-4  "
       >
-        visit homepage
+        Go back to homepage
       </Link>
     </div>
   );
