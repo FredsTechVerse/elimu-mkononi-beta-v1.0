@@ -108,9 +108,7 @@ const MessageForm = () => {
   };
 
   const sendMessage = async (data) => {
-    console.log("Sending message");
     const { message, recipient, email } = data;
-    console.log({ contact, message, recipient, email });
     if (
       !isMessageQueryEnabled &&
       (recipient === "other" || recipient === "individual")

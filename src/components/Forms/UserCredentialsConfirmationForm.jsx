@@ -14,7 +14,6 @@ const UserCredentialsConfirmationForm = () => {
   const { updateAlertBoxData } = useAlertBoxContext();
   const role = new URLSearchParams(location.search).get("role");
   const userID = new URLSearchParams(location.search).get("userID");
-  console.log({ role, userID });
   const {
     register,
     handleSubmit,

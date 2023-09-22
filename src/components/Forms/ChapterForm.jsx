@@ -22,7 +22,6 @@ const ChapterForm = () => {
   const from = location.state?.background?.pathname;
   const chapterTotals = location.state?.chapterTotals;
   const { chapterID, unitID } = location.state;
-  console.log({ chapterID });
   const isChapterQueryEnabled = chapterID ? true : false;
 
   const [isEditEnabled, setIsEditEnabled] = useState(chapterID ? false : true);
@@ -159,13 +158,6 @@ const ChapterForm = () => {
     const { chapterName, chapterNumber, chapterDescription } = data;
     if (!isChapterQueryEnabled) {
       if (unitID) {
-        console.log("Creating chapter");
-        console.log({
-          unitID: unitID,
-          chapterNumber: `${unitID}-${chapterNumber}`,
-          chapterName: chapterName,
-          chapterDescription: chapterDescription,
-        });
         createChapterMutation.mutate({
           unitID: unitID,
           chapterNumber: `${unitID}-${chapterNumber}`,
@@ -182,13 +174,6 @@ const ChapterForm = () => {
         });
       }
     } else {
-      console.log("Updating chapter");
-      console.log({
-        chapterID,
-        chapterNumber: `${unitID}-${chapterNumber}`,
-        chapterName,
-        chapterDescription,
-      });
       updateChapterMutation.mutate({
         chapterID,
         chapterName,

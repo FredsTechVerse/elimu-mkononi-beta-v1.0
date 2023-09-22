@@ -15,10 +15,6 @@ export const CurrentLessonContextProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    console.log(currentLesson);
-  }, [currentLesson]);
-
   return (
     <CurrentLessonContext.Provider
       value={{ currentLesson, updateCurrentLesson }}

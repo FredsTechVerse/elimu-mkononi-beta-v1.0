@@ -11,7 +11,6 @@ const messageUser = async ({
     },
   };
 
-  console.log({ message, recipient, contact, email });
   if (recipient === "other" || recipient === "individual") {
     const messagePayload = {
       recipients: [contact],
@@ -19,8 +18,6 @@ const messageUser = async ({
       message,
       role: "other",
     };
-
-    console.log({ messagePayload });
 
     const { data: sentMessages } = await axios.post(
       "/message",
