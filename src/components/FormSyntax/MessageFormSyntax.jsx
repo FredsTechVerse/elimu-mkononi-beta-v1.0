@@ -13,7 +13,6 @@ const MessageFormSyntax = ({
   sendMessage,
   register,
   errors,
-  messageQuery,
   createMessageMutation,
 }) => {
   return (
@@ -121,12 +120,12 @@ const MessageFormSyntax = ({
             >
               <SubmitButton
                 type="submit"
+                isSubmitting={createMessageMutation.isLoading}
                 disabled={
-                  watch("contact") !== "" && watch("message") !== ""
+                  watch("contact") !== "" || watch("message") !== ""
                     ? false
                     : true
                 }
-                isSubmitting={createMessageMutation.isLoading}
                 text={createMessageMutation.isLoading ? "Sending" : "Send"}
               />
             </div>

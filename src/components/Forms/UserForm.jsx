@@ -111,9 +111,15 @@ const UserForm = () => {
         status: "success",
         timeout: 4500,
       });
-      navigate("/account-confirmation", {
-        state: { userID: userID, background: background, role: role },
-      });
+      navigate(
+        {
+          pathname: "/account-confirmation",
+          search: `?role=${role}&userID=${userID}`,
+        },
+        {
+          state: { background: background },
+        }
+      );
     },
     onError: (error) => {
       handleError(error, updateAlertBoxData);

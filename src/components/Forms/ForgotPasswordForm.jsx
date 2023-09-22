@@ -51,8 +51,7 @@ const ForgotPasswordForm = () => {
   const contactVerificationMutation = useMutation({
     mutationFn: verifyContact,
     onSuccess: (data) => {
-      const { accessToken, userInformation } = data;
-      const { role, userID, resetToken } = userInformation;
+      const { accessToken, role, userID } = data;
       axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
       updateAlertBoxData({
         response: "Contact information has been confirmed",

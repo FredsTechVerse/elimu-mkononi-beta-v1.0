@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 const LoginFormSyntax = ({
   background,
   handleSubmit,
+  watch,
   login,
   register,
   errors,
@@ -45,10 +46,13 @@ const LoginFormSyntax = ({
           </div>
           <div className="w-full flex-row-centered">
             <SubmitButton
-              isSubmitting={createLoginMutation?.isLoading}
+              isSubmitting={createLoginMutation.isLoading}
               type="submit"
+              disabled={
+                watch("email") !== "" && watch("password") !== "" ? false : true
+              }
               text={
-                createLoginMutation?.status === "loading"
+                createLoginMutation.status === "loading"
                   ? "Logging in"
                   : "Log In"
               }

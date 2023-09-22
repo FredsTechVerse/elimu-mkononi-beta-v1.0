@@ -33,24 +33,31 @@
 
 <!-- CHUNK ONE : AUTHENTICATION CONCENRS -->
 
-- Ensure account verification before login and add toggle button to enable and disable user accounts
-- MESSAGING - Refine messaging by allowing contact to autofill.We can use the userID to retrieve and display name.- On clicking on a message , it shall be considered as read.Use africas talking api in production mainly because of asena's shortcode being flagged as a promotional message .... Sent and declined messages not defined.
-- Toggle password visibility by changing input type between password and text with a btn click on user and password update forms.
+- Message autofill does not work on submit, but message form is fine.
+- Toggle password visibility by changing input type between password and text
 
-<!-- CHUNK TWO : UI CONCERNS -->
+<!-- CHUNK TWO : UI SURVIVAL -->
 
 - Add control btns to the react player.
+- Add toggle btns to disable / enable user accounts... Can be as a status replacement. Also while at it , ensure delete operation confirmation b4 deleting.
 - Reconstruct resource UI to cards with a ready to download button.
 - Confirm data invalidation / refetch upon update and deletion , creation working well- Pay close attention to chapter form behaviour.Invalidate course update upon deletion
-- Find out why when SMS services fails, user registration also fails .... Could be a generic message if error is uknown.
-- Test youtube refresh token acquisition by inversing if logic
+<!-- CHUNK 3 : BUILD FINNESS -->
 
-<!-- CHUNK 3 : BUILD CONCERNS -->
-
-- Migrate to using nextjs and typescript
+- Confirm youtube refresh token retrieval (Inversing token retrieval might help)
+- Migrate to typescript.
 - Instead of sending errors to email directly we can read and write to the server file system. with the format that we want. And a daily report sent to user.
-- Build comment section will be sent to email.
-- Implement user tracking
+
+<!-- FANCY FINISHES -->
+
+- Comment section
+- User tracking
+
+<!-- DILEMMA -->
+
+- I want total flexibility to do things my way without so many tradeoffs eg loosing tanstack tables in nextjs , rewriting components in svelte , no routing system in astro
+- NextJS would be my next best option but , i would have to sacrifice my form overlay over background
+- Server actions only deal with forms most of my analytics do not involve forms.
 
 ### USING COMPONENT LIBRARIES ( MY GOLDEN RULE )
 

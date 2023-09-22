@@ -77,7 +77,7 @@ const PasswordUpdateForm = () => {
     const { password, cPassword } = data;
     if (password === cPassword) {
       updatePasswordMutation.mutate({
-        password,
+        password: password.trim(),
         role,
         userID,
       });

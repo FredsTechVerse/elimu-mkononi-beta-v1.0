@@ -12,7 +12,9 @@ const UserCredentialsConfirmationForm = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { updateAlertBoxData } = useAlertBoxContext();
-  const { role, userID } = location.state;
+  const role = new URLSearchParams(location.search).get("role");
+  const userID = new URLSearchParams(location.search).get("userID");
+  console.log({ role, userID });
   const {
     register,
     handleSubmit,
@@ -77,8 +79,8 @@ const UserCredentialsConfirmationForm = () => {
   const handleResetToken = async (data) => {
     const { contactVerification, emailVerification } = data;
     userCredentialsConfirmationMutation.mutate({
-      contactVerification,
-      emailVerification,
+      contactVerification: contactVerification.trim(),
+      emailVerification: emailVerification.trim(),
       role,
       userID,
     });

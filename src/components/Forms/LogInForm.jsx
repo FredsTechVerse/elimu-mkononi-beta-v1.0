@@ -25,6 +25,7 @@ const LogInForm = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -59,7 +60,7 @@ const LogInForm = () => {
       }
     },
     onError: (error) => {
-      handleError(error, updateAlertBoxData);
+      handleError(error, updateAlertBoxData, navigate, background);
       if (error.response && error.response.data.message === "Token expired") {
         retryMutation(error.config.data);
       }
@@ -84,12 +85,10 @@ const LogInForm = () => {
 
   const login = async (data) => {
     const { email, password } = data;
-    const trimmedEmail = email.trim();
-    const trimmedPassword = password.trim();
 
     createLoginMutation.mutate({
-      email: trimmedEmail,
-      password: trimmedPassword,
+      email: email.trim(),
+      password: password.trim(),
     });
   };
 
@@ -105,6 +104,7 @@ const LogInForm = () => {
       background={background}
       handleSubmit={handleSubmit}
       roleInformation={roleInformation}
+      watch={watch}
       login={login}
       register={register}
       errors={errors}

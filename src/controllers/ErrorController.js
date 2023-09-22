@@ -11,7 +11,12 @@ const ERRORS = {
   BAD_REQUEST: "Bad request, please check your request.",
   LOGOUT: "Unauthorized action. You are being logged out.",
 };
-const handleError = async (error, updateAlertBoxData) => {
+const handleError = async (
+  error,
+  updateAlertBoxData,
+  navigate = null,
+  background = null
+) => {
   let response = "No response specified";
   let status = error?.response?.status;
   let message = error?.response?.data?.message;
@@ -20,8 +25,17 @@ const handleError = async (error, updateAlertBoxData) => {
   } else if (status === 401) {
     if (message === "Token expired") {
       renewToken({ updateAlertBoxData });
-    } else if (message === "Account has not been verified") {
-      response = "Account has not been verified";
+    } else if (message === "Account not verified") {
+      let role = error?.response?.data?.role;
+      let userID = error?.response?.data?.userID;
+      navigate(
+        {
+          pathname: "/account-confirmation",
+          search: `?role=${role}&userID=${userID}`,
+        },
+        { state: { background: background }, replace: true }
+      );
+      response = message;
     } else if (response.statusText === "Unauthorized") {
       response = ERRORS.AUTHORIZATION_ERROR;
     } else {
