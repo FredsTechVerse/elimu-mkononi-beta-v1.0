@@ -93,7 +93,7 @@ const LogInForm = () => {
   };
 
   const retryMutation = (formData) => {
-    createChapterMutation.mutate({
+    createLoginMutation.mutate({
       email: formData.email,
       password: formData.password,
     });
