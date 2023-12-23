@@ -1,13 +1,28 @@
 # ELIMU HUB
 
-- Dawa sa hii ni to get my hands dirty to better and deeply hammer the concepts in! (Make perfect). I won't know if it works if i do not try it out.
+- Just like kina techbros who made it by being angular pioneers , i need to solidify an aspect of what I am doing , Tap into that which hasn't been tapped into.
 
-# WHAT CHALLENGE WE ADDRESS
+### BULB THOUGHTS
 
+- Keeping track of similar resources in each chapter can be cumbersome.Why not have them under the resources section at the end of a unit.
+- In a similar manner , we should break out the course description making it accessible from anywhere.
+- The reference material will form part of the resources at the end of the chapter.
+- By using google authentication , we swiftly discourage password sharing , google accounts are personal and private. You just do not share ovyo ovyo.Has an extra security layer.On the other hand the redirect sucks plus people can just create a dummy account to access the resources. I will only use this if there is a way i can restrict the no of accounts logged in per email. This is better done personally by keeping track of the number of devices logged in.
+- It would be beautiful to see this product being used out here. The user does not need to login , aim is to get a big user base then start monetizing some of the features with time.
+- All resources will be free as i polish / ensure authentication works well.
+- Student can sign in with registration no and a password eg their school email.
+- A student should only have access to a specific course in the module.
+
+# CHALLENGE WE ADDRESS
+
+- We simply organize youtube resources to complement what learners learn in class.
 - Revision process - We gather necessary resources in one roof helping learners carry out their revision easily by providing the necessary materials including youtube videos , exam papers , class notes and additional lesson notes , course outline (Which guides revision.)
 
 ### DOES THIS PRODUCT HAVE THE ABILITY TO BE MONETIZED ?
 
+- We take our time and arrange resources relevant to specific units which allow students to have access to all the resources presented in class.
+- For a start , it can be free , get user feedback and improve then with time we start charging access fee per course.
+- The thing is we take our time to keep track of all resources eg cats , assignments and past papers in this place. They shall be downloadable but later we should consider prohibiting this option unless users pay for them.
 - Yes , we place all resources needed to pass exams with updated materials all under one roof! Infact , we do not need to be content creators, we can just share what is out there , what is in youtube since it is our red university.
 - Lecturers can get to recommend for their learners the best resources to use for their revision, including posting lesson notes and relevant materials for their learners to use.**_This is how we bring the lecturers on board._**
 - With the ability to monetize this product , the source code will not be let out in the public domain. However , the product will be free to use for all learners for now as we polish up on our marketing skills.
@@ -31,10 +46,15 @@
 
 <!-- RELEASE PREPARATION -->
 
+- Requires a complete shift to nextjs but not before we are through with the portfolio cms and the church application.
+
 <!-- CHUNK ONE : AUTHENTICATION CONCENRS -->
 
+- Account for both confirmation codes not being valid by an else statement
+- Test authentication with the new changes to how messages are sent.
 - Message autofill does not work on submit, but message form is fine.
-- Toggle password visibility by changing input type between password and text
+- Password Toggle password visibility by changing input type between password and text
+- Image Optimizations - My images are too large.... I need to reduce or find some less than 500kb of data. And use modern .webp and .avf formats which provide better compression.
 
 <!-- CHUNK TWO : UI SURVIVAL -->
 
@@ -42,84 +62,19 @@
 - Add toggle btns to disable / enable user accounts... Can be as a status replacement. Also while at it , ensure delete operation confirmation b4 deleting.
 - Reconstruct resource UI to cards with a ready to download button.
 - Confirm data invalidation / refetch upon update and deletion , creation working well- Pay close attention to chapter form behaviour.Invalidate course update upon deletion
+
 <!-- CHUNK 3 : BUILD FINNESS -->
 
-- Confirm youtube refresh token retrieval (Inversing token retrieval might help)
-- Migrate to typescript.
-- Instead of sending errors to email directly we can read and write to the server file system. with the format that we want. And a daily report sent to user.
+- Migrate to NextJS with Typescript - Will involve minimal changes to the codebase, forms will be CSR , Routing will be simplified , speed would greatly increase.
+- Try out google analytics to keep track of all errors and give reports on perfomance
+- Configure the rate limiter to avoid abuse and CORS policy to only allow certain origins access to our backend.
+
+<!-- THE PRODUCT SHOULD BE USABLE BY THIS STAGE. -->
 
 <!-- FANCY FINISHES -->
 
-- Comment section
-- User tracking
+- Common comment section can be incrementally adopted!
+- User tracking has officially been scrapped off!
+- Youtube content upload has been scrapped off!
 
 <!-- DILEMMA -->
-
-- I want total flexibility to do things my way without so many tradeoffs eg loosing tanstack tables in nextjs , rewriting components in svelte , no routing system in astro
-- NextJS would be my next best option but , i would have to sacrifice my form overlay over background
-- Server actions only deal with forms most of my analytics do not involve forms.
-
-### USING COMPONENT LIBRARIES ( MY GOLDEN RULE )
-
-- Importing simple components limits flexibility (Better to DIY) ... Saves lots of time for the complex ones eg calendars (Worth importing)
-
-### KEY CONCEPTS LEARNT DURING THE BUILD
-
-- Its text-ellipsit on overflow ellipsis... overflow should be hidden to achiveve the overflow effect the width or max-width must also be defined `text-ellipsis overflow-hidden whitespace-nowrap max-w-full`
-- Test sweeps are necessary when working as a team to avoid breaking things if a team member changes some logic and uknowingly doesn't know how it affects other parts of the system.If the test fail , the build also fails which is a very good thing. We have to get the facts right b4 deployment.
-- Passing data via url is more stable state tends to be lost making it hard to navigate back.
-- Who needs a table numbers when we have the search functionality at the convenience of phone rotation?
-- The currentLesson context is being updated from two points only the accordion items and the contentsection (auto-navigate to first lesson.)
-- The video player and the quill editor only read the currentLesson context and meaningful logic derived from this.
-- The routes do not just flow naturally. I have the power to control them to be exactly what i want them to be.
-- This will come in handy ` await Unit.deleteMany({ _id: { $in: unitIds } });`
-- Rounding things up was the missing part of the table....Things look elegant.
-- Overflow hidden can be used to hide stubborn borders.
-- Here is how we can pass a body to a delete request
-
-```js
-const axios = require("axios");
-
-const requestData = { id: 123, reason: "No longer needed" };
-axios.delete("https://api.example.com/resource", { data: requestData });
-```
-
-- Use params accesses all params in the current url this is actually our key to solving the back btn dilemma ie where would the user wanna go back to? I provide a short circuit with the help of params in our url
-- This data will be found in the req.body ie `const {id,reason} = req.body`
-- Once we are able to deliver value , users will gladly register.
-- Always ask the right questions while developing an elements logic eg what conditions should be met for the element to be displayed?
-- Working with smaller files grouped by functionalities makes development simpler!
-- It appears react router dom manages its states. I was able to update the chapter 4 accross rerenders.
-- A grid is responsive by nature. Do not bother constraining its children's width...
-- self-end class name gives a flex-item positioning independence.
-- Use overflow-x-hidden hidden helps to hide the unwanted x direction scrollbar when overflow-y-auto is activated ( Clean trick )
-- Router state has always been simply an object... You know that basic container with a key and a value which in my case was as simple as assigning a background `{ background: location }` and once present in the state activating the second set of routes.
-- When an error occurs , the error code should be that of the error message... Not 400... Remember that axios is only successfull when a 2xx response is returned.... The rest automatically results into an error.
-- React hooks are asynchronous nature. Use them sparingly. They can take time to update no wonder the null console.log on useState
-- To handle dynamic routes correctly , set up the \_redirects file inside the public folder and add the following line : `/*    /index.html  200`. It works like magic.
-- Let the browser do the scrolling for a whole page if you only need a section that might be a different story.
-- Anything that is not in the useEffect runs twice due to react strict mode.Hence the double console.logs() and this is normal.
-- Fetching an element in an arrya using `(roles?.includes("EM-203") || roles?.includes("EM-202")` instead of `(roles[0] === "EM-203" || roles[0] === "EM-202"` is bettter
-- Never do javascript comparisons like this `(roles?.includes("EM-202" || "EM-203")) ` . Javascript excludes the second part hence causing an error interms of expected behaviour.
-- For arrays check for length. An empty array will never return false as it is alway truthy.
-- The handle logout is called because i pass the function instead of the reference. Therefore , ` onClick={() => {handleLogout()}}` should be replaced by ` onClick={handleLogout}`
-
-### HANDLING COMMUNICATION
-
-- There is no need of reinventing the wheel for technologies that are out there.
-- For comments and questions they will be send via email and a discord channel set up to handle / grow the community.
-- Email is the best and the cheapest mode of communication that i can use extensively for password reset , verification of credentials , user login , frequent updates and communication.
-- SMS can be used for crucial services eg rapid payment responses.
-
-### SENDING AND INTEPRETING STATUS AND ANY DATA FROM BACKEND
-
-- Remember there are only two major sides to requests and responses..... For requests , our crucial information is in the `req.body` whereas for responses , our crucial information is in the `res.data` eg send ` res.status(201).json({ signedUrl, Key });` intepreted as `const { signedUrl, Key } = response.data`
-- Usually i enjoy breaking out the data and status (if needed) from the response object as
-  `const { data,status } = await axios.post("/file/", formData, config);`
-- Config also comes in handly while troubleshooting ( We are able to pin down the exact request and its method)
-
-### REFERENCES
-
-1. Implementing [skeletons](https://dev.to/jobpick/how-to-create-a-skeleton-loader-in-tailwindcss-38gh)
-
-2. Using [chartJS](https://react-chartjs-2.js.org/)

@@ -1,7 +1,9 @@
 import axios, { youtubeInstance } from "../axios";
 
 const getYoutubeAuthorizationURI = async () => {
+  console.log("Fetching Authorization URI");
   const { data: authorizationUri } = await axios.get("/oAuth/authorizationUri");
+  console.log({ youtubeAuthorizationData: data });
   return authorizationUri;
 };
 
@@ -65,6 +67,8 @@ const uploadVideoToYoutube = async ({
       onUploadProgress: trackUploadProgress,
     }
   );
+
+  console.log({ videoData });
 
   const { id: videoID } = videoData;
 

@@ -36,7 +36,6 @@ const LogInForm = () => {
 
   const createLoginMutation = useMutation({
     mutationFn: loginUser,
-
     onSuccess: (data) => {
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("refreshToken", data.refreshToken);

@@ -20,6 +20,7 @@ const handleError = async (
   let response = "No response specified";
   let status = error?.response?.status;
   let message = error?.response?.data?.message;
+  console.log({ error });
   if (status === 400) {
     response = message;
   } else if (status === 401) {

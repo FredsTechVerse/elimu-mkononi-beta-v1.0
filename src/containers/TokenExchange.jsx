@@ -22,6 +22,8 @@ const TokenExchange = () => {
       const { access_token, refresh_token, scope, token_type, expiry_date } =
         youtubeAccessTokenData;
 
+      console.log({ refresh_token });
+
       if (access_token && refresh_token && expiry_date) {
         localStorage.setItem("youtubeAccessToken", access_token);
         localStorage.setItem("youtubeRefreshToken", refresh_token);

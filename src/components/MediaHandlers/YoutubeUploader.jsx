@@ -19,11 +19,11 @@ const YoutubeUploader = ({ updateFileInfo, videoTitle, lessonState }) => {
   const queryClient = useQueryClient();
   const { updateAlertBoxData } = useAlertBoxContext();
 
-  const accessToken = localStorage.getItem("youtubeAccessToken");
+  // const accessToken = localStorage.getItem("youtubeAccessToken");
+  const accessToken =
+    "ya29.a0AfB_byBBMzAUVUaoI-J8KrVwAsWWJm-kTuLct9dTiB0Xn6XZ-7Rg5wsqLv_EakuYX0ZIKkHvWhAqzrNlKL_5osOCZyBGzySQ3YTZ_dzVcrhpKxeklAa5uH5TOlkRXuubmEiI_bpNYjhCNlj25pB5FXshysCzZnOJxNCRaCgYKAakSARMSFQHGX2MieWgn8MpvAa0gTMrZRcnfMg0171";
   const [percentCompleted, setPercentCompleted] = useState(0);
-  const [isQueryEnabled, setIsQueryEnabled] = useState(
-    accessToken ? false : true
-  );
+  const isQueryEnabled = accessToken ? false : true;
 
   // Fetches the access token if not present.
   useQuery(["authorizationURI"], getYoutubeAuthorizationURI, {
@@ -31,6 +31,7 @@ const YoutubeUploader = ({ updateFileInfo, videoTitle, lessonState }) => {
     staleTime: 60 * 60 * 1000,
 
     onSuccess: (data) => {
+      // console.log({ data, lessonState });
       redirectToExternalLink({
         data,
         lessonState,
@@ -96,7 +97,15 @@ const YoutubeUploader = ({ updateFileInfo, videoTitle, lessonState }) => {
 
         updateFileInfo({ videoUrl });
       } else {
-        await refreshYoutubeToken();
+        // Sample body
+        // {
+        //   "accessToken": "ya29.a0AfB_byARaJHaUMj2w7_0tQ9ekF5J3jOpjbwtLjDOUvmOBhrIke1IZxO0lV2q-vrW171IRX-t-L39alKIeI0yZ31Fcxmmxkn2r8LmjwLHD1sQbvuqz_tg_4xExFpJa1D9y-OHd7TX1Axs6uYefPEIxeTy5TJoFbdyuIkpaCgYKAbkSARMSFQHGX2MiBudDJbJie3ownjA2qKb3gQ0171",
+        //   "expiresIn": 1701192051603
+        // }
+        const { accessToken, expiresIn } = await refreshYoutubeToken();
+        localStorage.setItem("youtubeAccessToken", accessToken);
+        localStorage.setItem("youtubeAccessTokenExpiryDate", expiresIn);
+        // We can nowa retry our request
 
         const presignedUrl = await fetchPresignedUrl({
           videoUploadUrl,

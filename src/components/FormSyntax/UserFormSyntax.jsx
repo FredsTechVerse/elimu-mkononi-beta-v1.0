@@ -25,11 +25,7 @@ const UserFormSyntax = ({
       <div className="form-wrap ">
         <FormNavigation
           text={
-            role === "EM-203"
-              ? "Admin Registration"
-              : role === "EM-202"
-              ? "Tutor Registration"
-              : "Student Registration"
+            role === "EM-203" ? "Admin Registration" : "Student Registration"
           }
         />
         <form className="form-styling" onSubmit={handleSubmit(saveUser)}>

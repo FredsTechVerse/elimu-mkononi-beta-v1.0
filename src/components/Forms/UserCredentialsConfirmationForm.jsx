@@ -51,7 +51,7 @@ const UserCredentialsConfirmationForm = () => {
     mutationFn: confirmUserCredentials,
     onSuccess: (data) => {
       updateAlertBoxData({
-        response: "Email and phone number confirmed !",
+        response: "Email confirmed !",
         isResponse: true,
         status: "success",
         timeout: 4500,

@@ -210,6 +210,8 @@ const LessonForm = () => {
   return (
     <LessonFormSyntax
       watch={watch}
+      updateFileInfo={updateFileInfo}
+      lessonState={lessonState}
       handleSubmit={handleSubmit}
       saveLesson={saveLesson}
       lessonUrl={lessonUrl}
