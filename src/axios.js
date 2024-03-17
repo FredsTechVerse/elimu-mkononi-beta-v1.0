@@ -5,9 +5,7 @@ const youtubeInstance = axios.create({
 });
 
 const serverInstance = axios.create({
-  // baseURL: "https://us-central1-elearning-module-a887d.cloudfunctions.net/app",
-  // baseURL: "http://localhost:5000/elearning-module-a887d/us-central1/app",
-  baseURL: "http://localhost:4000",
+  baseURL: "https://us-central1-elearning-module-a887d.cloudfunctions.net/app",
 });
 
 serverInstance.interceptors.request.use(
